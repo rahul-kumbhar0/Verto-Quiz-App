@@ -1,0 +1,27 @@
+{
+  "name": "verto-quiz-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "jest": "^30.2.0",
+    "mongoose": "^8.18.3",
+    "morgan": "^1.10.1",
+    "nodemo": "^1.0.0",
+    "nodemon": "^3.1.10",
+    "supertest": "^7.1.4"
+  }
+}
+
+
+
