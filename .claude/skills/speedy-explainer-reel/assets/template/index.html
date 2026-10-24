@@ -1,0 +1,152 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Reel (speedy)</title>
+<link rel="stylesheet" href="speedy.css">
+<style>
+/* reel-specific styles (demo: "Let's design a URL shortener") */
+.urlbox{position:absolute;left:90px;top:760px;width:900px;padding:30px 36px;border-radius:24px;background:var(--card);border:1.5px solid var(--line);font:500 30px/1.45 Mono;color:var(--mute);word-break:break-all;opacity:0}
+.urlbox b{color:var(--text);font-weight:500}
+.short{position:absolute;left:0;right:0;top:1010px;text-align:center;opacity:0}
+.short .pillb{display:inline-block;padding:18px 40px;border-radius:999px;background:var(--accent);color:#06281a;font:700 54px Mono;letter-spacing:1px;box-shadow:0 20px 50px rgba(62,207,142,.35)}
+.short .boxes{display:flex;justify-content:center;gap:10px;margin-top:22px}.short .boxes i{width:54px;height:62px;border-radius:10px;border:2px solid var(--line);display:grid;place-items:center;font:600 34px Mono;color:var(--text);opacity:0}
+.flow .box{position:absolute;width:420px;padding:22px 26px;border-radius:22px;background:var(--card);border:1.5px solid var(--line);font:600 27px Inter;opacity:0}
+.flow .box small{display:block;font:500 21px Mono;color:var(--mute);margin-top:8px}
+.flow .arr{position:absolute;opacity:0}
+.cachewrap{position:absolute;left:90px;top:960px;width:900px;height:300px}
+.stat2{position:absolute;right:30px;top:24px;text-align:right}.stat2 b{display:block;font:700 56px/1 Mono}.stat2 span{font:500 20px Mono;color:var(--mute)}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <!-- HOOK · the paradox shown big (no presenter yet) -->
+  <section class="scene" id="sHook">
+    <div class="urlbox" id="longurl">https://example.com/blog/2024/10/<b>how-url-shorteners-work</b>?utm_source=newsletter&amp;utm_medium=email&amp;ref=speedy</div>
+    <div class="short" id="short"><span class="pillb">s.ly/x7Kq2Pa</span><div class="boxes" id="boxes"><i>x</i><i>7</i><i>K</i><i>q</i><i>2</i><i>P</i><i>a</i></div></div>
+    <div class="note r" id="n0" style="top:1250px">Codes shortened for illustration.</div>
+  </section>
+
+  <!-- DATABASE (light) -->
+  <section class="scene" id="sDB">
+    <div class="sc" id="tbl" style="left:70px;top:690px;width:940px">
+      <div class="hdr"><span class="dots"><i></i><i></i><i></i></span>links<span class="mut">1 row</span></div>
+      <table class="tbl"><tr><th>code</th><th>long_url</th><th>clicks</th></tr>
+        <tr class="hi"><td id="c1">x7Kq2Pa</td><td id="c2">example.com/blog/2024/…</td><td id="c3">0</td></tr></table>
+      <div class="selbox" id="s1" style="left:12px;top:68px;width:180px;height:70px"></div>
+      <div class="selbox" id="s2" style="left:200px;top:68px;width:470px;height:70px"></div>
+      <div class="selbox" id="s3" style="left:680px;top:68px;width:150px;height:70px"></div>
+    </div>
+    <div class="note l" id="n1" style="top:1250px">Schema simplified for illustration.</div>
+  </section>
+
+  <!-- REDIRECT (dark) -->
+  <section class="scene flow" id="sRe">
+    <div class="box" id="b1" style="left:70px;top:700px">Browser<small>GET s.ly/x7Kq2Pa</small></div>
+    <div class="box" id="b2" style="left:590px;top:700px">Server<small>SELECT … WHERE code = 'x7Kq2Pa'</small></div>
+    <div class="box" id="b3" style="left:330px;top:1000px"><span class="pill ok">301 Moved</span><small>Location: example.com/blog/2024/…</small></div>
+    <div class="arrow" id="a1" style="left:498px;top:760px;width:80px"></div>
+    <div class="arrow" id="a2" style="left:540px;top:905px;width:80px;transform:rotate(90deg)"></div>
+  </section>
+
+  <!-- SCALE (light) -->
+  <section class="scene" id="sSc">
+    <div class="sc" id="pg" style="left:70px;top:680px;width:940px;height:300px">
+      <div class="hdr">Postgres<span class="mut"><b id="reqn" style="font:700 30px Mono;color:var(--text)">0</b> requests</span></div>
+      <div class="matrix" id="mx"></div>
+      
+    </div>
+    <div class="sc" id="cache" style="left:70px;top:1010px;width:940px;padding:26px 30px;display:flex;align-items:center;gap:22px;font:600 30px Inter">
+      <span class="pill ok">cache</span> answers most hits<span class="mut" style="margin-left:auto;font:500 22px Mono">in front of Postgres</span>
+    </div>
+    <div class="note r" id="n2" style="top:1250px">Hit rate illustrative.</div>
+  </section>
+
+  <!-- CTA (light): follow tap -> share sheet -> punchline -->
+  <section class="scene" id="sCTA">
+    <div class="ig" id="ig" style="top:660px">
+      <div class="bar">‹ <span class="bname">yourpage</span><span class="ic">🔔 ···</span></div>
+      <div class="prof"><div class="pav"></div><div class="stat"><b>246</b><span>posts</span></div><div class="stat"><b>68K</b><span>followers</span></div><div class="stat"><b>209</b><span>following</span></div></div>
+      <div class="bio"><span class="bname">yourpage</span><small>Building with AI daily</small></div>
+      <div class="btns"><div class="btn pri" id="followBtn">Follow</div><div class="btn">Message</div></div>
+      <div class="tabs"><i class="on">▦</i><i>▶</i><i>◎</i></div><div class="grid"><i></i><i></i><i></i></div>
+    </div>
+    <div class="share" id="sh" style="top:700px">
+      <div class="grab"></div><div class="srch">⌕ Search</div>
+      <div class="ppl"><div class="p"><i></i>Ava</div><div class="p sel"><i></i>Omar</div><div class="p"><i></i>Chloe</div><div class="p"><i></i>Hana</div><div class="p"><i></i>Leo</div><div class="p"><i></i>Nina</div><div class="p"><i></i>Sam</div><div class="p"><i></i>Marc</div></div>
+      <div class="msg" id="shmsg">Write a message…</div><div class="send" id="sendBtn">Send</div>
+    </div>
+    <div class="finger" id="fg"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+    <div class="wm" id="wm">◎ instagram.com/<span class="bname">yourpage</span></div>
+  </section>
+
+  <div id="rail"></div>
+  <div id="kin"></div>
+  <div id="avatar"></div>
+  <div id="grain"></div>
+</div>
+<script src="captions.js"></script>
+<script src="engine.js"></script>
+<script src="avatar.js"></script>
+<script src="speedy.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp } = R;
+const BRAND = { name: "yourpage" };                       // the user's handle (ask; never invent)
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+
+// every beat is anchored to a spoken phrase (caption display text)
+const T = { paste: at("You paste"), db: at("First"), re: at("Next"), sc: at("Then"), cta: at("Follow"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 1.8).toFixed(2);
+
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.db, enter: "none" }, { id: "sDB", s: T.db, e: T.re, enter: "blur" }, { id: "sRe", s: T.re, e: T.sc, enter: "blur" },
+  { id: "sSc", s: T.sc, e: T.cta, enter: "blur" }, { id: "sCTA", s: T.cta, e: 999, enter: "blur" } ] });
+
+R.speedy({
+  light: [[T.db, T.re], [T.sc, 999]],                     // chapters alternate dark / light
+  emph: { box: ["URL shortener", "7 characters", "database", "one row", "click counter", "redirect", "301", "scale", "viral", "10,000", "cache", "Follow", "full links"],
+          bold: ["design", "paste", "how", "short code", "long URL", "browser", "server", "row#2", "imagine", "requests", "Postgres", "breakdowns", "friend"] },
+  chapters: [{ label: "database", at: T.db }, { label: "redirect", at: T.re }, { label: "scale", at: T.sc, end: T.cta }],
+  counter: { unit: "clicks", steps: [[at("answers"), 1], [at("10,000"), 10000]] },
+  avatar: { x: 240, y: 1330, w: 600, in: T.paste },        // mode:"png", png:{dir:"avatar"} to use your own character
+  wm: at("send this"),
+  poses: [[T.paste, "explain"], [at("So how"), "shrug"], [T.db, "point_up"], [at("Every short"), "point_stage"], [at("the code,"), "one"], [at("long URL"), "two"], [at("click counter"), "pinch"],
+          [T.re, "point_up"], [at("Your browser"), "present"], [at("the server"), "point_stage"], [at("answers"), "thumbs"], [T.sc, "point_up"], [at("Now imagine"), "think"], [at("goes viral"), "hands_head"],
+          [at("10,000"), "explain"], [at("so a cache"), "point_stage"], [at("most of them"), "thumbs"], [T.cta, "point_cam"], [at("send this"), "wave"], [at("the friend"), "point_side"], [at("pastes"), "facepalm"]],
+});
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+
+  // HOOK
+  rise("longurl", t, 0.1, { dy: 30, blur: 10 });
+  const sq = ease.inOut(prog(t, at("get back"), 0.5));
+  R.$("longurl").style.transform = `translateY(${-sq * 40}px) scale(${1 - 0.1 * sq})`; R.$("longurl").style.opacity = 1 - 0.6 * sq;
+  pop("short", t, at("get back") + 0.2, { from: 0.7 });
+  [...R.$("boxes").children].forEach((b, i) => pop(b, t, at("7 characters") + i * 0.07, { from: 0.5, sfx: i === 0 }));
+  R.note("n0", t, at("get back"), T.db);
+
+  // DATABASE
+  R.card("tbl", t, { in: at("one row") - 0.1 });
+  R.sel("s1", t, at("the code,"), at("long URL")); R.sel("s2", t, at("long URL"), at("click")); R.sel("s3", t, at("click"), T.re);
+  R.note("n1", t, at("one row") + 0.5, T.re);
+
+  // REDIRECT
+  pop("b1", t, at("Your browser"), { from: 0.8 }); R.note("a1", t, at("for the code")); pop("b2", t, at("the server"), { from: 0.8 });
+  R.note("a2", t, at("answers") - 0.2); pop("b3", t, at("301") - 0.1, { from: 0.8 });
+
+  // SCALE
+  R.card("pg", t, { in: at("Now imagine") - 0.1 });
+  const k = R.matrix("mx", t, { cols: 25, rows: 6, at: at("10,000"), d: 1.4, to: 150, cap: 100 });
+  count("reqn", t, at("10,000"), 1.4, 10000);
+  R.card("cache", t, { in: at("so a cache"), y: 60 });
+  R.note("n2", t, at("most of them"), T.cta);
+
+  // CTA
+  R.card("ig", t, { in: T.cta - 0.05, out: at("send this") + 0.2 });
+  R.finger("fg", t, Object.assign([{ t: T.cta + 0.1, x: 700, y: 1500 }, { t: T.cta + 0.7, x: 300, y: 1080, press: true }, { t: at("breakdowns") + 0.2, x: 300, y: 1080 }, { t: at("send this") + 0.2, x: 900, y: 1700 }], { out: at("send this") }));
+  R.press("followBtn", t, T.cta + 0.7);
+  R.card("sh", t, { in: at("send this") + 0.25, y: 120 });
+  if (t >= at("pastes")) { R.$("shmsg").textContent = "https://example.com/blog/2024/10/how-url-…"; R.$("shmsg").style.color = "#111"; } else { R.$("shmsg").textContent = "Write a message…"; R.$("shmsg").style.color = ""; }
+  R.press("sendBtn", t, at("full links") + 0.3);
+};
+window.seek(0);
+</script>
+</body></html>
