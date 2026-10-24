@@ -6,7 +6,7 @@ const quizController = require('../controllers/quizController');
 router.post('/', quizController.createQuiz);
 //to add question on quiz
 router.post('/:quizId/questions', quizController.addQuestion);
-//to fetech the question 
+//to fetch the questions
 router.get('/:quizId/questions', quizController.getQuestionForQuiz);
 //submit the quiz
 router.post('/:quizId/submit', quizController.submitQuiz);
@@ -19,8 +19,8 @@ router.get('/', quizController.getAllQuiz);
 //to update the quiz
 router.put('/:quizId', quizController.updateQuiz);
 //to update the question
-router.put('/:quizId/:questionId', quizController.updateQuestion)
-
+router.put('/:quizId/:questionId', quizController.updateQuestion);
+//to add multiple questions on quiz
 router.post('/:quizId/questions/multiple', quizController.addMultipleQuestion);
 
 module.exports = router;

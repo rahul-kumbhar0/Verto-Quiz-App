@@ -10,7 +10,7 @@ const quizRoutes = require('./routes/quizRoutes');
 
 app.use('/api/quizzes', quizRoutes);
 
-const dbURL = process.env.NODE_ENV === 'test'? process.env.MONGO_URI_TEST : process.env.MONGO_URI;
+const dbURL = process.env.NODE_ENV === 'test' ? process.env.MONGO_URI_TEST : process.env.MONGO_URI;
 
 // Connect to MongoDB
 mongoose.connect(dbURL)

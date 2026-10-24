@@ -3,7 +3,7 @@ const app = require('../server');
 const Quiz = require('../models/Quiz');
 const Question = require('../models/Question');
 
-describe(' Quiz API testing', () => {
+describe('Quiz API testing', () => {
   beforeEach(async () => {
     await Quiz.deleteMany();
     await Question.deleteMany();
@@ -150,7 +150,7 @@ describe(' Quiz API testing', () => {
     expect(res.body.total).toBe(1);
   });
 
-    //get all quiz test
+  //get all quiz test
   it('should get all quizzes', async () => {
     await request(app)
       .post('/api/quizzes')

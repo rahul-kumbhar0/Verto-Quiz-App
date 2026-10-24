@@ -1,4 +1,3 @@
-````markdown
 # 🎯 Verto Backend Quiz App
 
 ## 🧩 Overview
@@ -42,9 +41,9 @@ This API allows users to create quizzes, add questions, take tests, and automati
 
 1. **Clone the repository**
    ```bash
-   git clone [https://github.com/yourusername/quiz-app-api.git](https://github.com/rahul-kumbhar0/Verto-Quiz-App.git)
+   git clone https://github.com/rahul-kumbhar0/Verto-Quiz-App.git
    cd Verto-Quiz-App
-````
+   ```
 
 2. **Install dependencies**
 
@@ -53,10 +52,11 @@ This API allows users to create quizzes, add questions, take tests, and automati
    ```
 
 3. **Create environment file**
-   Create a `.env` file in the root directory:
+   Copy `.env.example` to `.env` in the root directory and fill in your values:
 
    ```
    MONGO_URI=your_mongodb_connection_string_here
+   MONGO_URI_TEST=your_test_mongodb_connection_string_here
    PORT=3000
    ```
 
@@ -191,7 +191,7 @@ POST /api/quizzes/QUIZ_ID/submit
 ## 🏗️ Project Structure
 
 ```
-quiz-app/
+Verto-Quiz-App/
 ├── src/
 │   ├── models/
 │   │   ├── Quiz.js           # Quiz schema
@@ -200,9 +200,9 @@ quiz-app/
 │   │   └── quizController.js # Business logic
 │   ├── routes/
 │   │   └── quizRoutes.js     # API endpoints
+│   ├── tests/
+│   │   └── quiz.test.js      # API tests
 │   └── server.js             # Main server file
-├── tests/
-│   └── quiz.test.js     # Unit tests
 ├── .env.example              # Environment example
 ├── package.json              # Dependencies
 └── README.md                 # Documentation

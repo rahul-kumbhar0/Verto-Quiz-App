@@ -6,7 +6,7 @@ exports.createQuiz = async (req, res) => {
     try {
         const { title } = req.body;
         if (!title || title.trim().length === 0) {
-            return res.status(400).json({  // Changed from 500 to 400
+            return res.status(400).json({
                 message: 'Title is required'
             });
         }
@@ -25,8 +25,6 @@ exports.createQuiz = async (req, res) => {
     }
 };
 
-
-
 //add question to quiz
 exports.addQuestion = async (req, res) => {
     try {
@@ -36,7 +34,7 @@ exports.addQuestion = async (req, res) => {
         // Validate inputs
         if (!text || text.trim().length === 0) {
             return res.status(400).json({
-                message: 'Question text are required'
+                message: 'Question text is required'
             });
         }
 
@@ -58,8 +56,6 @@ exports.addQuestion = async (req, res) => {
                 message: "Question already exists in this quiz"
             })
         }
-
-
 
         // Validate options format
         const validOptions = options.map(option => ({
@@ -125,7 +121,7 @@ exports.submitQuiz = async (req, res) => {
 
         if (!Array.isArray(answers)) {
             return res.status(400).json({
-                message: 'Answers must be in the array'
+                message: 'Answers must be an array'
             });
         }
 
@@ -166,7 +162,7 @@ exports.submitQuiz = async (req, res) => {
     }
 };
 
-//delete the question 
+//delete the question
 exports.deleteQuestion = async (req, res) => {
     try {
         const { questionId } = req.params;
@@ -188,9 +184,7 @@ exports.deleteQuestion = async (req, res) => {
     }
 };
 
-
 //delete the quiz
-
 exports.deleteQuiz = async (req, res) => {
     try {
         const { quizId } = req.params;
@@ -216,18 +210,12 @@ exports.deleteQuiz = async (req, res) => {
     }
 };
 
-
 //get all quiz
 exports.getAllQuiz = async (req, res) => {
     try {
         const quizzes = await Quiz.find();
-        if (!quizzes) {
-            return res.status(404).json({
-                message: "Quizzes not found"
-            })
-        }
         res.status(200).json({
-            message: "Quizzed fetched successfully",
+            message: "Quizzes fetched successfully",
             quizzes
         })
     } catch (error) {
@@ -238,27 +226,24 @@ exports.getAllQuiz = async (req, res) => {
     }
 };
 
-
-
-//update the question 
+//update the question
 exports.updateQuestion = async (req, res) => {
     try {
         const { questionId } = req.params;
         const { text, options } = req.body;
-        const question = await Question.findByIdAndUpdate(questionId);
-
+        const question = await Question.findById(questionId);
 
         if (!question) {
             return res.status(404).json({
                 message: "Question not found"
             });
-        };
+        }
 
         if (!text && !options) {
             return res.status(400).json({
-                message: "Text and options are required"
+                message: "Text or options are required"
             });
-        };
+        }
 
         if (text) question.text = text.trim();
         if (options) question.options = options;
@@ -268,16 +253,13 @@ exports.updateQuestion = async (req, res) => {
             message: "Question updated successfully",
             question
         })
-
-    }
-    catch (error) {
+    } catch (error) {
         console.error(error);
         res.status(500).json({
             message: "Internal server error"
         })
     }
 }
-
 
 //update the quiz
 exports.updateQuiz = async (req, res) => {
@@ -306,7 +288,7 @@ exports.updateQuiz = async (req, res) => {
     }
 }
 
-
+//add multiple questions to quiz
 exports.addMultipleQuestion = async (req, res) => {
     try {
         const { quizId } = req.params;
@@ -321,20 +303,20 @@ exports.addMultipleQuestion = async (req, res) => {
         //check questions array
         if (!Array.isArray(questions) || questions.length === 0) {
             return res.status(400).json({
-                message: "Question must be in the array"
+                message: "Questions must be a non-empty array"
             })
         }
 
         const newQuestion = [];
         for (let questionData of questions) {
-            if (!questionData.text || questionData.options.length < 2) {
+            if (!questionData.text || !Array.isArray(questionData.options) || questionData.options.length < 2) {
                 return res.status(400).json({
                     message: "Each question must have text and at least two options"
                 })
             }
 
             let correctCount = 0;
-            const validOptions = questionData.options.filter(opt => {
+            const validOptions = questionData.options.map(opt => {
                 if (opt.isCorrect) correctCount++;
                 return {
                     text: opt.text?.trim(),
@@ -342,8 +324,8 @@ exports.addMultipleQuestion = async (req, res) => {
                 };
             });
 
-            const questionExists = await Question.findOne({quizId, text: questionData.text.trim()});
-            if(questionExists){
+            const questionExists = await Question.findOne({ quizId, text: questionData.text.trim() });
+            if (questionExists) {
                 return res.status(400).json({
                     message: "Question already exists in this quiz"
                 })
@@ -357,7 +339,7 @@ exports.addMultipleQuestion = async (req, res) => {
             //create question
             const question = new Question({
                 quizId: quizId,
-                text: questionData.text,
+                text: questionData.text.trim(),
                 options: validOptions
             })
             await question.save();
