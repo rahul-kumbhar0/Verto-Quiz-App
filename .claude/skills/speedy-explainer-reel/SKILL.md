@@ -109,11 +109,12 @@ stock puppet was used.
   presenter, themes/rail/counter, hook/credibility/CTA, rhythm, what it is NOT
 - `references/example-scripts.md` — both reference scripts word-for-word with emphasis marks and
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
+- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) and how to animate them; worked reproduction in `assets/examples/supabase-hook/`
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode
 - `references/ref-frames/` — contact sheets, key frames, pose catalogue of the references
-- `assets/template/` — index.html demo (38 s URL-shortener), speedy.css, speedy.js, avatar.js,
-  engine.js, fonts, generated captions
+- `assets/template/` — index.html demo (38 s URL-shortener), speedy.css/js, props.css/js (3D props),
+  avatar.js, engine.js, fonts, generated captions · `assets/examples/supabase-hook/` — the reference hook rebuilt
 - `scripts/` — setup.sh · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py ·
   sfx.py · music.py · mix.sh · clean_voice.sh · qa.sh

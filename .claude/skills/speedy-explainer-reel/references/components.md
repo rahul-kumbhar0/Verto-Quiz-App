@@ -24,6 +24,8 @@ R.setup/R.frame), `captions.js` (generated), `fonts/` (Inter 500–800, JetBrain
   <div id="grain"></div>
 </div>
 <script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script>
+<!-- for the 3D props (hook stack, server tray, rack bar, pooler…): -->
+<link rel="stylesheet" href="props.css"> + <script src="props.js"></script> — see references/props3d.md
 ```
 Reserved ids: `stage kin rail avatar grain wm`. z-order: stage sections (0) < rail (7) < avatar (7)
 < kinetic (8) < finger (9). The finger is the only thing allowed over the presenter.

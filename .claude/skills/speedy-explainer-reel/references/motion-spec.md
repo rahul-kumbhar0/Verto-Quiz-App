@@ -55,7 +55,7 @@ change reads as one move. The headline is the only continuity across the cut.
 - Mouth: clear viseme flaps per word; head bobs ±1.6° while talking; idle sway when silent.
 - Hidden during the hook and full-stage inserts; rises in from below over 0.5 s.
 
-## 6. Hook motion
+## 6. Hook motion (implemented by the props layer — references/props3d.md)
 - Something moves within the first 0.5 s: camera push on a magnified prop, a keycap physically
   rising out of the keyboard, or a cylinder coming into focus out of a bokeh field, floor
   shockwave rings, then the stack EXPLODES into layers and labels fly in from the sides one at a

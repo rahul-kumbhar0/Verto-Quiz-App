@@ -11,8 +11,9 @@ deliver) with these format rules. Reference: `references/example-scripts.md` §B
 
 ## Story spine (8–10 chapters, 120–160 s, ≈2.8 w/s)
 1. **Hook (0–2.5 s, no presenter, dark)**: "Let's design X." over the product's exploded stack —
-   its real components as labels rising around a 3D-ish core — plus ONE mono stat that proves
-   scale (`1,000,000 new databases / week`, sourced). Counter stat counts up.
+   build it with `R.stack` + `R.rays` + `R.rings` + `R.callout` + `R.bolt` (references/props3d.md;
+   copy assets/examples/supabase-hook/): bokeh backdrop, discs rise and SPLIT into labelled
+   layers, the brand glyph pops with a glow, ONE sourced mono stat counts up during the hook.
 2. **What it is (light, 1 sentence)**: "X gives you A, B and C without D." + "Underneath it's
    <provider>, with X's own software on top." Then the promise: "Let's build a <running example>
    on it."
@@ -39,7 +40,7 @@ chapters: [{label:"server",at:T.server},{label:"api",at:T.api},{label:"security"
 counter: {unit:"messages", steps:[[at("returns your messages"),1042],[at("sends a chat photo"),1045],[at("each new message"),1047],[at("goes viral"),183,"connections"]]},
 light: [[T.what,T.server],[T.api,T.sec],[T.live,T.backup],[T.replica,T.fn],[T.cta,999]],   // alternate; the stress test + recap stay dark
 ```
-Stage components per chapter (see `references/components.md`): server box + chip card; code card
+Stage components per chapter (3D props: `references/props3d.md` + copy `assets/examples/supabase-hook/`; flat cards: `references/components.md`): server box + chip card; code card
 "what you'd normally write" (file name + line count); translator pipe URL → SQL; sign-in phone →
 Auth card → token segments → filtered rows; bucket card + object row + signed-link pill with
 expiry; journal pad + table + fan-out to phones; globe/latency table; function cards (push /
