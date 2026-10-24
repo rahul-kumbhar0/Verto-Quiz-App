@@ -180,16 +180,22 @@
       if (a <= 0.001) continue;
       if (t >= sc.s && t < sc.e) cur = sc.id;
       const push = 1 + (C.push ?? 0.03) * prog(t, sc.s, sc.e - sc.s); // slow camera push-in
-      let tf = "", blur = (1 - pin) * 8 + pout * 8;
+      let tf = "", blur = (1 - pin) * 8 + pout * 8, outTf = ` translateY(${-70 * E.out3(pout)}px) scale(${push * (1 - 0.04 * pout)})`;
       switch (sc.enter || "up") {
         case "zoom": tf = `scale(${lerp(1.12, 1, pin)})`; break;
         case "left": tf = `translateX(${(1 - pin) * 140}px)`; break;
         case "fade": blur = pout * 6; break;
         case "blur": tf = `translateY(${(1 - pin) * 30}px) scale(${lerp(0.96, 1, pin)})`; blur = (1 - pin) * 18 + pout * 14; break;
+        // motion-blurred cross-zoom (speedy): out blurs + scales up hard, in settles from blur + scale
+        case "blurzoom": tf = `scale(${lerp(1.14, 1, pin)})`; blur = (1 - pin) * 26 + pout * 24; outTf = ` translateY(${-40 * E.out3(pout)}px) scale(${push * (1 + 0.1 * pout)})`; break;
+        // vertical slide-push with motion blur: old flies up out, new flies up in
+        case "push": tf = `translateY(${(1 - pin) * 560}px)`; blur = (1 - pin) * 24 + pout * 24; outTf = ` translateY(${-560 * E.inOut(prog(t, sc.e - 0.3, 0.3))}px) scale(${push})`; break;
+        // 3D tilt-swing: scene rotates away around X and flies up
+        case "swing": tf = `perspective(1400px) rotateX(${(1 - pin) * -24}deg) translateY(${(1 - pin) * 180}px)`; blur = (1 - pin) * 20 + pout * 22; outTf = ` perspective(1400px) rotateX(${18 * E.out3(pout)}deg) translateY(${-220 * E.out3(pout)}px) scale(${push})`; break;
         case "none": blur = 0; break;
         default: tf = `translateY(${(1 - pin) * 90}px)`;
       }
-      tf += ` translateY(${-70 * E.out3(pout)}px) scale(${push * (1 - 0.04 * pout)})`;
+      tf += outTf;
       el.style.opacity = a; el.style.transform = tf; el.style.filter = blur > 0.05 ? `blur(${blur}px)` : "";
     }
     return cur;

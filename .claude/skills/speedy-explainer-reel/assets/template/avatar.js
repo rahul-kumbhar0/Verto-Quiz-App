@@ -126,6 +126,9 @@
     }
     const P = A.POSES[prev] || A.POSES.talk, Q = A.POSES[cur] || A.POSES.talk, e = back(p);
     ["L", "R"].forEach(s => armPose(s, P, Q, e, t));
+    // motion smear while the pose cuts (the reference shows a 1-2 frame ghost trail on the moving arm)
+    const smear = p > 0 && p < 1 ? Math.sin(Math.PI * clamp(p)) : 0;
+    el.querySelector(".arms").style.filter = smear > 0.05 && prev !== cur ? `blur(${smear * 7}px)` : "";
     const lift = lerp(P.lift || 0, Q.lift || 0, e), bob = 3 * Math.sin(t * 1.4);
     parts.body.setAttribute("transform", `translate(0 ${bob - lift})`);
     const tilt = lerp(P.head || 0, Q.head || 0, e) + (mouth > 0 ? 1.6 * Math.sin(t * 2 * Math.PI * 1.7) : 0);

@@ -55,7 +55,7 @@ python3 $W/tools/captions.py words.json captions.js captions.srt display.json --
 Author `index.html` from the template (keep the skeleton, layers, script order, `R.frame(t);
 R.speedyFrame(t)`): one `<section class="scene">` per chapter, components from
 `references/components.md`, `R.speedy({light, emph, chapters, counter, avatar, poses})` with every
-time taken from `at("phrase")`. Rules that make it read as the reference:
+time taken from `at("phrase")`. Rules that make it read as the reference (motion curves and durations: `references/motion-spec.md` — read it before authoring):
 - One hero object per beat; labels/rows/pills pop ON the spoken word; nothing before it is said.
 - Chapters alternate dark/light; the rail (system design) appears with chapter 1 and leaves at
   the CTA; the counter ticks when the running example advances.
@@ -109,6 +109,7 @@ stock puppet was used.
   presenter, themes/rail/counter, hook/credibility/CTA, rhythm, what it is NOT
 - `references/example-scripts.md` — both reference scripts word-for-word with emphasis marks and
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
+- `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode
 - `references/ref-frames/` — contact sheets, key frames, pose catalogue of the references

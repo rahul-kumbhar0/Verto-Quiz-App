@@ -30,7 +30,9 @@ Reserved ids: `stage kin rail avatar grain wm`. z-order: stage sections (0) < ra
 
 ## 2. Configuration
 ```js
-R.setup({ push: 0.012, scenes: [{ id, s, e, enter: "none"|"blur"|"up"|"left"|"zoom" }] });
+R.setup({ push: 0.012, scenes: [{ id, s, e, enter: "blurzoom"|"push"|"swing"|"blur"|"none" }] });
+// blurzoom = motion-blurred cross-zoom (most chapter cuts) · push = vertical slide-push ·
+// swing = 3D tilt away/in. Pick per cut; read references/motion-spec.md before authoring.
 R.speedy({
   light: [[a, b], …],                      // light-canvas ranges (hard-ish flip, 0.2 s)
   emph: { box: ["URL shortener", "10,000", "Follow"], bold: ["design", "row#2"] },   // caption display text; #n = nth occurrence
@@ -61,6 +63,13 @@ ignored), so write `at("10,000")`, not `at("ten thousand")`.
 | `R.preview(kb,"e",t,a,b)` | letter preview popping above a key | pop |
 | `R.matrix(el,t,{cols,rows,at,d,to,cap,from})` | connection grid filling to `to`; cells ≥ `cap` go red | – |
 | `R.rack(el,t,at,{stagger})` | recap layers pop bottom-up (`at` may be an array of times) | pop |
+| `R.rows(el,t,[times])` | `.rw` rows appear one per word; the card grows with each | pop |
+| `R.bubbles(el,t,[times],{keep,row})` | chat bubbles spring in, thread scrolls up (el=`.thread` with `.scroll`>`.bub`s) | pop |
+| `R.sheet(el,t,a,{dy,out})` | iOS bottom sheet springs up from below | whoosh |
+| `R.plusone(el,t,a)` | "+1" floats up off a counter | – |
+| `R.tapmark(el,t,a,b)` | circle+crosshair at a tap point (`.tapmark`) | – |
+| `R.spark(el,t,a)` | gold particle dot rises off a pressed key (`.spark-dot`) | – |
+| `R.zone(... {press:[t,…]})` | the hit zone flashes white-cream at each press | click |
 | engine: `R.rise R.pop R.punch R.words R.count R.type R.wipe R.camera R.cursor R.draw R.marker` | see engine.js header | pop/type/click/ding |
 
 ## 4. Components (HTML)

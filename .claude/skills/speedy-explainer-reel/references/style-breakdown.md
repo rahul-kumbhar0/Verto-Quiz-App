@@ -135,7 +135,7 @@ front of him.
   specific person type tied to the topic ("who blames autocorrect for everything", "whose
   vibe-coded app has no RLS"). Watermark `instagram.com/handle` bottom-right of the stage.
 
-## 7. Motion and rhythm
+## 7. Motion and rhythm — full spec in `motion-spec.md` (READ IT before authoring scenes)
 - A visible change every 1–2 s (word, pose, label or card); a big stage change every 5–10 s.
 - Entrances: blur+rise 0.35–0.5 s ease-out; pops with a damped spring; labels on the exact word.
 - Camera: slow 1–2 % push-in on each scene; props slide in from off-screen bottom-left.

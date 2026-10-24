@@ -28,8 +28,8 @@
   <section class="scene" id="sDB">
     <div class="sc" id="tbl" style="left:70px;top:690px;width:940px">
       <div class="hdr"><span class="dots"><i></i><i></i><i></i></span>links<span class="mut">1 row</span></div>
-      <table class="tbl"><tr><th>code</th><th>long_url</th><th>clicks</th></tr>
-        <tr class="hi"><td id="c1">x7Kq2Pa</td><td id="c2">example.com/blog/2024/…</td><td id="c3">0</td></tr></table>
+      <table class="tbl"><tr class="rw"><th>code</th><th>long_url</th><th>clicks</th></tr>
+        <tr class="hi rw"><td id="c1">x7Kq2Pa</td><td id="c2">example.com/blog/2024/…</td><td id="c3">0</td></tr></table>
       <div class="selbox" id="s1" style="left:12px;top:68px;width:180px;height:70px"></div>
       <div class="selbox" id="s2" style="left:200px;top:68px;width:470px;height:70px"></div>
       <div class="selbox" id="s3" style="left:680px;top:68px;width:150px;height:70px"></div>
@@ -66,6 +66,7 @@
       <div class="prof"><div class="pav"></div><div class="stat"><b>246</b><span>posts</span></div><div class="stat"><b>68K</b><span>followers</span></div><div class="stat"><b>209</b><span>following</span></div></div>
       <div class="bio"><span class="bname">yourpage</span><small>Building with AI daily</small></div>
       <div class="btns"><div class="btn pri" id="followBtn">Follow</div><div class="btn">Message</div></div>
+      <div id="plus1" style="position:absolute;right:120px;top:120px;font:700 34px Inter;color:#3ECF8E;opacity:0">+1</div>
       <div class="tabs"><i class="on">▦</i><i>▶</i><i>◎</i></div><div class="grid"><i></i><i></i><i></i></div>
     </div>
     <div class="share" id="sh" style="top:700px">
@@ -96,8 +97,8 @@ const T = { paste: at("You paste"), db: at("First"), re: at("Next"), sc: at("The
 window.REEL_DURATION = +(T.stop + 1.8).toFixed(2);
 
 R.setup({ push: 0.012, scenes: [
-  { id: "sHook", s: 0, e: T.db, enter: "none" }, { id: "sDB", s: T.db, e: T.re, enter: "blur" }, { id: "sRe", s: T.re, e: T.sc, enter: "blur" },
-  { id: "sSc", s: T.sc, e: T.cta, enter: "blur" }, { id: "sCTA", s: T.cta, e: 999, enter: "blur" } ] });
+  { id: "sHook", s: 0, e: T.db, enter: "none" }, { id: "sDB", s: T.db, e: T.re, enter: "blurzoom" }, { id: "sRe", s: T.re, e: T.sc, enter: "swing" },
+  { id: "sSc", s: T.sc, e: T.cta, enter: "push" }, { id: "sCTA", s: T.cta, e: 999, enter: "blurzoom" } ] });
 
 R.speedy({
   light: [[T.db, T.re], [T.sc, 999]],                     // chapters alternate dark / light
@@ -125,6 +126,7 @@ window.seek = t => {
 
   // DATABASE
   R.card("tbl", t, { in: T.db + 0.15 });
+  R.rows("tbl", t, [at("short code"), at("one row")]);
   R.sel("s1", t, at("the code,"), at("long URL")); R.sel("s2", t, at("long URL"), at("click")); R.sel("s3", t, at("click"), T.re);
   R.note("n1", t, at("one row") + 0.5, T.re);
 
@@ -143,7 +145,10 @@ window.seek = t => {
   R.card("ig", t, { in: T.cta - 0.05, out: at("send this") + 0.2 });
   R.finger("fg", t, Object.assign([{ t: T.cta + 0.1, x: 700, y: 1500 }, { t: T.cta + 0.7, x: 300, y: 1080, press: true }, { t: at("breakdowns") + 0.2, x: 300, y: 1080 }, { t: at("send this") + 0.2, x: 900, y: 1700 }], { out: at("send this") }));
   R.press("followBtn", t, T.cta + 0.7);
-  R.card("sh", t, { in: at("send this") + 0.25, y: 120 });
+  R.sheet("sh", t, at("send this") + 0.25, { dy: 560 });
+  const followed = t >= T.cta + 0.95;
+  const fb = R.$("followBtn"); fb.textContent = followed ? "Following ▾" : "Follow"; fb.style.background = followed ? "#2a2a2e" : "";
+  R.plusone("plus1", t, T.cta + 0.95);
   if (t >= at("pastes")) { R.$("shmsg").textContent = "https://example.com/blog/2024/10/how-url-…"; R.$("shmsg").style.color = "#111"; } else { R.$("shmsg").textContent = "Write a message…"; R.$("shmsg").style.color = ""; }
   R.press("sendBtn", t, at("full links") + 0.3);
 };

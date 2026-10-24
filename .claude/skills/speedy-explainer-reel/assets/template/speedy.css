@@ -39,9 +39,12 @@ body.is-light{color:var(--l-text)}
 
 /* ---------- zone 1: kinetic headline = the captions (y 300-470) ---------- */
 #kin{position:absolute;left:70px;right:70px;top:var(--cap-top);text-align:center;font:500 var(--cap-size)/1.2 Inter;letter-spacing:-1.4px;z-index:8}
-#kin .w{display:inline-block;color:var(--mute);margin:0 .13em;white-space:pre}
-#kin .w.b,#kin .sel .w{color:#fff;font-weight:700}
-.is-light #kin .w{color:var(--l-mute)}.is-light #kin .w.b,.is-light #kin .sel .w{color:var(--l-text)}
+#kin .w{display:inline-block;margin:0 .13em;white-space:pre;font-weight:700;color:#fff;transition:none}
+/* a word is "hot" (white bold) while being spoken, then relaxes to grey regular via --relax (0..1) */
+#kin .w:not(.hot):not(.b){color:color-mix(in srgb, #fff calc(100% - var(--relax,0)*100%), var(--mute));font-weight:500}
+#kin .w.b,#kin .sel .w,#kin .w.hot{color:#fff;font-weight:700}
+.is-light #kin .w:not(.hot):not(.b){color:color-mix(in srgb, var(--l-text) calc(100% - var(--relax,0)*100%), var(--l-mute))}
+.is-light #kin .w.b,.is-light #kin .sel .w,.is-light #kin .w.hot{color:var(--l-text)}
 #kin .sel{position:relative;display:inline-block;padding:0 .12em;margin:0 .05em}
 #kin .sel .box{position:absolute;inset:0 -1px 3px -1px;border:2.5px solid var(--sel);background:var(--sel-fill);border-radius:3px}
 #kin .sel .hd{position:absolute;width:12px;height:12px;border-radius:50%;background:var(--sel)}
@@ -112,6 +115,9 @@ body.is-light{color:var(--l-text)}
 .phone .top{position:absolute;left:0;right:0;top:70px;height:120px;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;font:500 20px Inter;color:#fff;border-bottom:1px solid #222}
 .phone .av{width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,#7B5BD6,#E8775A)}
 .phone .bub{position:absolute;max-width:360px;padding:14px 20px;border-radius:24px;font:500 25px/1.3 Inter;color:#fff}
+.thread{position:absolute;overflow:hidden}.thread .scroll{position:absolute;inset:0}
+.thread .bub{position:relative;display:table;margin:10px 24px;opacity:0}
+.thread .bub.me{margin-left:auto}
 .phone .bub.me{right:24px;background:#2A7BFF;border-bottom-right-radius:6px}.phone .bub.them{left:24px;background:#26262A;border-bottom-left-radius:6px}
 .phone .inp{position:absolute;left:22px;right:22px;height:64px;border-radius:32px;border:1.5px solid #333;padding:0 22px;display:flex;align-items:center;font:500 25px Inter;color:#fff;background:#0b0b0b}
 .phone .inp .cur{display:inline-block;width:2px;height:30px;background:#2A7BFF;margin-left:2px}
@@ -124,6 +130,12 @@ body.is-light{color:var(--l-text)}
 .kb.light{background:#D1D3D9}.kb.light .k{background:#fff;color:#000;box-shadow:0 1px 0 #898A8D}.kb.light .k.fn{background:#ADB3BC}
 .kb .zone{position:absolute;border-radius:12px;background:radial-gradient(circle,rgba(243,178,58,.55),rgba(243,178,58,.12) 70%,transparent);z-index:1;opacity:0;filter:blur(1px)}
 .kb .pv{position:absolute;width:72px;height:96px;border-radius:12px 12px 4px 4px;background:#6B6B70;color:#fff;font:400 54px Inter;display:grid;place-items:center;z-index:5;opacity:0;box-shadow:0 8px 20px rgba(0,0,0,.5)}
+/* tap mark (circle + crosshair) and the particle dot that rises off a pressed key */
+.tapmark{position:absolute;width:56px;height:56px;border:2.5px solid rgba(255,255,255,.85);border-radius:50%;opacity:0;pointer-events:none;z-index:6}
+.tapmark::before,.tapmark::after{content:"";position:absolute;background:rgba(255,255,255,.85)}
+.tapmark::before{left:50%;top:-10px;width:2px;height:76px;margin-left:-1px}
+.tapmark::after{top:50%;left:-10px;height:2px;width:76px;margin-top:-1px}
+.spark-dot{position:absolute;width:12px;height:12px;border-radius:50%;background:#FFE9B0;box-shadow:0 0 14px 4px rgba(243,178,58,.8);opacity:0;pointer-events:none;z-index:6}
 /* the giant finger prop (CSS drawn; R.finger animates) */
 .finger{position:absolute;left:0;top:0;width:330px;height:1000px;z-index:9;opacity:0;pointer-events:none;transform-origin:50% 90%}
 .finger .skin{position:absolute;inset:0;border-radius:165px 165px 60px 60px;background:linear-gradient(90deg,#E9B48F 0%,#F5CBA8 42%,#F0BF98 70%,#D79A74 100%);box-shadow:inset -26px 0 40px rgba(120,60,30,.25),0 30px 60px rgba(0,0,0,.5)}

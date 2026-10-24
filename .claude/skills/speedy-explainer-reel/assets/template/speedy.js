@@ -74,9 +74,17 @@
       if (open) html += "</span>";
       el.innerHTML = html; el.dataset.page = pi;
     }
-    el.querySelectorAll(".w").forEach(s => {
-      const w = page[+s.dataset.k], p = E.out3(prog(t, w.s - 0.08, 0.24));
+    const ws = el.querySelectorAll(".w");
+    ws.forEach(s => {
+      const k = +s.dataset.k, w = page[k], p = E.out3(prog(t, w.s - 0.08, 0.24));
       s.style.opacity = p; s.style.filter = p < 1 ? `blur(${(1 - p) * 14}px)` : ""; s.style.transform = `translateY(${(1 - p) * 6}px)`;
+      // the just-spoken word is white+bold; it relaxes to grey/regular once the next word lands,
+      // unless it is a marked bold or boxed word (those stay white+bold)
+      if (w.k || (w.g != null)) { s.classList.add("hot"); s.style.removeProperty("--relax"); return; }
+      const nx = page[k + 1];
+      const relax = nx ? E.out3(prog(t, nx.s - 0.02, 0.18)) : 0;
+      s.classList.toggle("hot", relax < 0.5);
+      s.style.setProperty("--relax", relax.toFixed(3));
     });
     el.querySelectorAll(".sel").forEach(g => {
       const first = page[+g.querySelector(".w").dataset.k], p = E.out3(prog(t, first.s, 0.26));
@@ -127,7 +135,7 @@
   function avatar(t) {
     if (!window.Avatar || !$("avatar")) return;
     let i = 0; for (let k = 0; k < N.poses.length; k++) if (t >= N.poses[k][0]) i = k;
-    const cur = N.poses[i][1], prev = N.poses[Math.max(0, i - 1)][1], p = prog(t, N.poses[i][0], 0.3);
+    const cur = N.poses[i][1], prev = N.poses[Math.max(0, i - 1)][1], p = prog(t, N.poses[i][0], 0.18);
     const av = $("avatar"), a = N.avatar, show = a.hide ? !a.hide.some(([x, y]) => t >= x && t < y) : true;
     const inT = a.in ?? 0, pin = E.out3(prog(t, inT, 0.5));
     av.style.opacity = show ? pin : 0; av.style.transform = `translateY(${(1 - pin) * 120}px)`;
@@ -153,13 +161,32 @@
   R.meas = (el, t, a) => { el = $(el); const p = E.inOut(prog(t, a, 0.5)); el.style.opacity = clamp(p * 3); el.style.transform = `scaleX(${p})`; el.style.transformOrigin = "0 50%"; const b = el.querySelector("b"); if (b) { b.style.opacity = prog(t, a + 0.3, 0.3); b.style.transform = `translateX(-50%) scaleX(${1 / Math.max(p, 0.01)})`; } };
   /** giant finger: keys [{t,x,y,press}] (x,y = fingertip position); it slides between keys, dips on press */
   R.finger = (el, t, keys) => {
-    el = $(el); let x = keys[0].x, y = keys[0].y;
-    for (let i = 0; i < keys.length - 1; i++) { const k0 = keys[i], k1 = keys[i + 1]; if (t >= k0.t) { const p = E.inOut(prog(t, k0.t, k1.t - k0.t)); x = lerp(k0.x, k1.x, p); y = lerp(k0.y, k1.y, p); } }
+    el = $(el);
+    const posAt = tt => {
+      let x = keys[0].x, y = keys[0].y;
+      for (let i = 0; i < keys.length - 1; i++) { const k0 = keys[i], k1 = keys[i + 1]; if (tt >= k0.t) { const p = E.inOut(prog(tt, k0.t, k1.t - k0.t)); x = lerp(k0.x, k1.x, p); y = lerp(k0.y, k1.y, p); } }
+      return [x, y];
+    };
+    const [x, y] = posAt(t), [px, py] = posAt(t - 1 / 30);
+    const speed = Math.hypot(x - px, y - py);                 // px per frame -> motion blur while sliding
     let press = 0; keys.forEach(k => { if (!k.press) return; R.cue("click", k.t); const p = prog(t, k.t, 0.5); if (p > 0 && p < 1) press = Math.sin(Math.PI * clamp(p * 2)); });
     const pin = E.out3(prog(t, keys[0].t - 0.4, 0.5)), pout = keys.out != null ? prog(t, keys.out, 0.4) : 0;
     el.style.opacity = pin * (1 - pout);
     el.style.transform = `translate(${x - 165 + (1 - pin) * 300}px, ${y - 60 + (1 - pin) * 500 + pout * 500}px) rotate(${-22 + 4 * press}deg) scale(${1 - 0.04 * press})`;
+    el.style.filter = speed > 6 ? `blur(${Math.min(10, (speed - 6) * 0.45)}px)` : "";
     const sh = el.querySelector(".shadow"); if (sh) sh.style.opacity = 0.35 + 0.4 * press;
+  };
+  /** tap mark: small circle + crosshair where a tap landed (el positioned absolute), visible a..b */
+  R.tapmark = (el, t, a, b = a + 1.2) => {
+    el = $(el); const p = E.spring(prog(t, a, 0.3));
+    el.style.opacity = clamp(p * 2) * (1 - prog(t, b, 0.25));
+    el.style.transform = `scale(${lerp(1.6, 1, p)})`;
+  };
+  /** a tiny particle dot rising off a pressed key (el = .spark-dot) */
+  R.spark = (el, t, a) => {
+    el = $(el); const p = prog(t, a, 0.7);
+    el.style.opacity = p > 0 && p < 1 ? Math.sin(Math.PI * p) : 0;
+    el.style.transform = `translateY(${-90 * E.out3(p)}px) scale(${lerp(1, 0.4, p)})`;
   };
   /** iOS keyboard. layout rows; returns map key->element */
   R.keyboard = (el, o = {}) => {
@@ -178,6 +205,11 @@
     const p = E.spring(prog(t, o.at, 0.5)), g = lerp(1, o.grow ?? 1.6, p), w = k.offsetWidth * g, h = k.offsetHeight * (1 + (g - 1) * 0.5);
     z.style.width = w + "px"; z.style.height = h + "px"; z.style.left = k.offsetLeft + k.offsetWidth / 2 - w / 2 + "px"; z.style.top = k.offsetTop + k.offsetHeight / 2 - h / 2 + "px";
     z.style.opacity = (o.glow ?? 1) * E.out3(prog(t, o.show ?? o.at - 0.3, 0.4)) * (1 - prog(t, o.hide ?? 1e9, 0.3));
+    let flash = 0;                                         // zone flashes white at each press time
+    (o.press || []).forEach(a => { const p = prog(t, a, 0.5); if (p > 0 && p < 1) flash = Math.max(flash, Math.sin(Math.PI * p)); R.cue("click", a); });
+    z.style.background = flash > 0.03
+      ? `radial-gradient(circle, rgba(255,250,235,${0.35 + 0.55 * flash}), rgba(243,178,58,.25) 70%, transparent)`
+      : "";
   };
   /** letter preview popping above a key a..b */
   R.preview = (kb, key, t, a, b = 1e9) => {
@@ -196,6 +228,46 @@
     const k = Math.round(lerp(o.from ?? 0, o.to, E.out3(prog(t, o.at, o.d ?? 1.2))));
     el.querySelectorAll("i").forEach((c, i) => (c.className = i < k ? (o.cap != null && i >= o.cap ? "hot" : "on") : ""));
     return k;
+  };
+  /** schema/table rows appearing one per word: el contains .rw children; counter ticks live via R.speedy counter steps */
+  R.rows = (el, t, times, o = {}) => {
+    el = $(el); const rows = el.querySelectorAll(".rw");
+    rows.forEach((r, i) => {
+      const a = times[Math.min(i, times.length - 1)], p = E.out3(prog(t, a, 0.3));
+      r.style.display = p <= 0 ? "none" : "";               // the card grows taller with each row
+      r.style.opacity = p; r.style.filter = p < 1 ? `blur(${(1 - p) * 8}px)` : "";
+      r.style.transform = `translateY(${(1 - p) * 14}px)`;
+      if (p > 0 && p < 1) R.cue("pop", a, { soft: true });
+    });
+  };
+  /** chat bubbles popping in in sequence; the thread scrolls up to keep the newest visible.
+      el = container with .bub children (position:relative flow), times[i] = bubble i's time */
+  R.bubbles = (el, t, times, o = {}) => {
+    el = $(el); const bs = el.querySelectorAll(".bub"); let scroll = 0;
+    bs.forEach((b, i) => {
+      const a = times[Math.min(i, times.length - 1)], p = E.spring(prog(t, a, 0.4));
+      b.style.opacity = clamp(prog(t, a, 0.15) * 2);
+      b.style.transform = `translateY(${(1 - E.out3(prog(t, a, 0.35))) * 26}px) scale(${lerp(0.82, 1, p)})`;
+      b.style.transformOrigin = b.classList.contains("me") ? "100% 100%" : "0 100%";
+      if (i >= (o.keep ?? 3)) scroll += (o.row ?? 92) * E.out3(prog(t, a, 0.35));
+      R.cue("pop", a, { soft: true });
+    });
+    const inner = el.querySelector(".scroll") || el;
+    inner.style.transform = `translateY(${-scroll}px)`;
+  };
+  /** iOS bottom sheet: slides up from below with a spring (el positioned at its final place) */
+  R.sheet = (el, t, a, o = {}) => {
+    el = $(el); const p = prog(t, a, o.d ?? 0.55), e = E.spring(p);
+    const pout = o.out != null ? prog(t, o.out, 0.3) : 0;
+    el.style.opacity = p <= 0 ? 0 : 1 - pout;
+    el.style.transform = `translateY(${(1 - e) * (o.dy ?? 520) + pout * 200}px)`;
+    if (p > 0) R.cue("whoosh", a);
+  };
+  /** "+1" floating up off a counter (el = small absolute element) */
+  R.plusone = (el, t, a) => {
+    el = $(el); const p = prog(t, a, 0.9);
+    el.style.opacity = p > 0 && p < 1 ? Math.sin(Math.PI * clamp(p * 1.6)) : 0;
+    el.style.transform = `translateY(${-46 * E.out3(p)}px)`;
   };
   /** recap rack: layers pop in bottom-up */
   R.rack = (el, t, at, o = {}) => {
