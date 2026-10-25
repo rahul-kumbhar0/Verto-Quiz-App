@@ -1,0 +1,21 @@
+Your coding interview is recording more than your code.
+So when someone pastes an answer from ChatGPT, how do companies actually catch it?
+First, the paste.
+Platforms like HackerRank log every paste and every time you switch tabs.
+Forty clean lines appearing in one frame is not how humans type.
+Next, your typing rhythm.
+Real coders type, pause, delete and fix.
+AI answers show a long pause, then a sudden burst of perfect code.
+HackerRank's model even flags deleting a big block and retyping it in an odd rhythm.
+Then, the comparison.
+CodeSignal checks your answer against every submission on its platform and solutions posted online,
+and rolls it all into one suspicion score. A human reviewer still makes the final call.
+And it's rising. CodeSignal says cheating attempts jumped from sixteen percent to thirty-five percent in one year.
+But what about live interviews, where the AI hides in an invisible overlay that screen share never sees?
+That's where humans take over. Interviewers watch your eyes drift to the same spot, the glow in your glasses, and the long hmm while the answer loads.
+In one survey, eighty-one percent of Big Tech interviewers had suspected AI cheating, and thirty-one percent had caught someone.
+Their best trick is simple. One follow-up question. Why this approach? What breaks if the input doubles?
+The AI wrote the code, but it can't explain it for you in real time.
+That's why Google brought back an in-person round, and Amazon asks candidates to promise they won't use AI.
+So use AI to prepare, not to perform. Think out loud, even when you're stuck.
+Follow for more breakdowns, and send this to the friend who keeps ChatGPT open in the other tab.

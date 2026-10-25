@@ -1,0 +1,15 @@
+Your coding interview records way more than your code. 👀
+
+What platforms & interviewers actually check:
+1. Pastes and tab switches (logged)
+2. Typing rhythm: long pause → burst of perfect code
+3. Your answer vs every submission + the web → one suspicion score
+4. Live calls: eyes drifting, glow in your glasses, the long "hmm"
+5. The killer: one follow-up question you can't answer
+
+Use AI to prepare, not to perform.
+
+Follow for more breakdowns, and send this to the friend who keeps ChatGPT open in the other tab.
+
+Sources: HackerRank & CodeSignal docs, CodeSignal 2026 release (vendor data), interviewing.io survey (2025).
+#codinginterview #placements #softwareengineer #developersindia #interviewtips #chatgpt #ai #techjobs #freshers #leetcode #hackerrank #tech

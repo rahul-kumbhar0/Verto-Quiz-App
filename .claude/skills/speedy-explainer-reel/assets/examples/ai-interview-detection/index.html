@@ -1,0 +1,372 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>How companies catch AI in interviews</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>
+/* ---- interview platform window ---- */
+.plat{position:absolute;left:60px;top:560px;width:960px;height:700px;border-radius:24px;background:#0E1013;border:1.5px solid #262A30;box-shadow:0 40px 90px rgba(0,0,0,.6);overflow:hidden;opacity:0}
+.plat .top{height:58px;display:flex;align-items:center;gap:14px;padding:0 22px;background:#15181C;border-bottom:1px solid #262A30;font:600 22px Inter;color:#C9CDD2}
+.plat .top .rec{margin-left:auto;display:flex;align-items:center;gap:8px;font:700 20px Mono;color:#FF5A5F}
+.plat .top .rec i{width:14px;height:14px;border-radius:50%;background:#FF5A5F}
+.plat .ed{position:absolute;left:0;top:58px;width:610px;bottom:0;padding:18px 20px;font:500 21px/1.65 Mono;color:#D7DAE0;white-space:pre;border-right:1px solid #262A30}
+.plat .ed .ln{color:#4A5059;display:inline-block;width:34px}
+.ed .k{color:#C792EA}.ed .s{color:#C3E88D}.ed .n{color:#82AAFF}.ed .c{color:#5C6370}
+.plat .cam{position:absolute;right:18px;top:76px;width:316px;height:220px;border-radius:16px;background:radial-gradient(circle at 50% 38%,#2A3038,#14171B);overflow:hidden}
+.cam .hd{position:absolute;left:50%;top:44px;width:96px;height:110px;margin-left:-48px;border-radius:50% 50% 46% 46%;background:#C99A78}
+.cam .bd{position:absolute;left:50%;top:150px;width:200px;height:120px;margin-left:-100px;border-radius:90px 90px 0 0;background:#23252B}
+.cam .gl{position:absolute;left:50%;top:84px;width:86px;height:24px;margin-left:-43px;border-radius:10px;background:#1B1D22;border:2px solid #111}
+.cam .glint{position:absolute;left:50%;top:86px;width:38px;height:18px;margin-left:-38px;border-radius:8px;background:radial-gradient(circle,rgba(130,200,255,.95),rgba(130,200,255,0) 70%);opacity:0}
+.cam .tag{position:absolute;left:10px;bottom:8px;font:600 16px Inter;color:#fff;background:rgba(0,0,0,.45);padding:3px 10px;border-radius:8px}
+.cam .gaze{position:absolute;width:22px;height:22px;border-radius:50%;border:3px solid #FFB340;box-shadow:0 0 12px #FFB340;opacity:0}
+.plat .log{position:absolute;right:18px;top:312px;width:316px;bottom:18px;border-radius:14px;background:#13161A;border:1px solid #262A30;padding:12px 14px;overflow:hidden}
+.plat .log .lh{font:700 15px Mono;color:#6B717B;letter-spacing:1px;margin-bottom:8px}
+.plat .log .rw{display:flex;gap:10px;font:500 17px/1.25 Mono;color:#C9CDD2;padding:7px 0;border-top:1px solid #1F2329}
+.plat .log .rw b{color:#FFB340;font-weight:600}.plat .log .rw.red b{color:#FF5A5F}
+.plat .log .rw span{margin-left:auto;color:#5C6370}
+/* ---- light editor (paste) ---- */
+.led{position:absolute;left:60px;top:650px;width:610px;height:560px;border-radius:22px;background:#FFFFFF;border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);overflow:hidden;opacity:0}
+.led .bar{height:50px;display:flex;align-items:center;gap:10px;padding:0 18px;border-bottom:1px solid #EEE;font:600 19px Mono;color:#777}
+.led .code{padding:14px 18px;font:500 17px/1.55 Mono;color:#24292F;white-space:pre}
+.led .code .k{color:#8E3AC7}.led .code .n{color:#2F62D6}.led .code .s{color:#2E8B57}
+.led .blk{background:rgba(62,207,142,.0)}
+.flash{position:absolute;left:0;right:0;top:50px;bottom:0;background:rgba(62,207,142,.35);opacity:0;pointer-events:none}
+.cnt40{position:absolute;right:16px;top:64px;padding:8px 16px;border-radius:999px;background:#111;color:#fff;font:700 22px Mono;opacity:0}
+.lev{position:absolute;left:690px;top:650px;width:330px;border-radius:22px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);padding:14px 16px;opacity:0}
+.lev .lh{font:700 16px Mono;color:#999;letter-spacing:1px;margin-bottom:6px}
+.lev .rw{display:flex;align-items:center;gap:10px;padding:12px 4px;border-top:1px solid #F0F0F0;font:600 21px Mono;color:#222;position:relative}
+.lev .rw .dot{width:12px;height:12px;border-radius:50%;background:#FFB340;flex:none}.lev .rw.red .dot{background:#FF5A5F}
+.lev .rw span{margin-left:auto;font:500 17px Mono;color:#999}
+.tabsw{position:absolute;left:690px;top:1060px;width:330px;padding:16px 20px;border-radius:18px;background:#111;color:#fff;font:700 28px Inter;display:flex;align-items:center;gap:14px;opacity:0}
+.tabsw b{margin-left:auto;font:700 40px Mono;color:#FFB340}
+/* ---- rhythm timeline ---- */
+.tl{position:absolute;left:60px;top:650px;width:960px;padding:24px 26px;border-radius:24px;background:var(--card);border:1.5px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.45);opacity:0}
+.tl .lane{position:relative;height:150px;margin:6px 0 18px;border-bottom:1.5px solid var(--line)}
+.tl .lb{font:700 22px Mono;color:var(--mute);letter-spacing:1px;margin-top:6px}
+.tl .lane i{position:absolute;bottom:0;width:7px;border-radius:3px 3px 0 0;background:#3ECF8E;opacity:0}
+.tl .lane i.del{background:#FF5A5F}
+.tl .lane.ai i{background:#FFB340}
+.tl .pause{position:absolute;bottom:20px;height:2px;border-top:2px dashed var(--mute);opacity:0}
+.tl .pause span{position:absolute;left:50%;top:-34px;transform:translateX(-50%);font:600 18px Mono;color:var(--mute);white-space:nowrap}
+.reset{position:absolute;left:60px;top:1100px;width:960px;padding:16px 24px;border-radius:20px;background:var(--card);border:1.5px solid rgba(255,90,95,.5);display:flex;align-items:center;gap:18px;font:600 24px Mono;color:var(--text);opacity:0}
+.reset s{color:#FF5A5F}.reset .pill{margin-left:auto}
+/* ---- comparison ---- */
+.mine{position:absolute;left:60px;top:700px;width:300px;padding:18px;border-radius:20px;background:#fff;border:2px solid #3B82F6;box-shadow:0 20px 50px rgba(0,0,0,.12);font:500 15px/1.5 Mono;color:#333;white-space:pre;opacity:0}
+.mine b{display:block;font:700 20px Inter;color:#111;margin-bottom:8px}
+.subs{position:absolute;left:500px;top:660px;width:520px;display:grid;grid-template-columns:repeat(6,1fr);gap:8px;opacity:0}
+.subs i{display:block;height:58px;border-radius:8px;background:#fff;border:1.5px solid #E2E4E8;box-shadow:0 4px 10px rgba(0,0,0,.05);background-image:linear-gradient(#E5E7EB 3px,transparent 3px),linear-gradient(#E5E7EB 3px,transparent 3px),linear-gradient(#E5E7EB 3px,transparent 3px);background-size:70% 3px,50% 3px,62% 3px;background-position:8px 12px,8px 24px,8px 36px;background-repeat:no-repeat}
+.subs i.hit{border-color:#FF5A5F;box-shadow:0 0 0 4px rgba(255,90,95,.18)}
+.subs .cap,.web .cap{grid-column:1/-1;font:700 18px Mono;color:#888;letter-spacing:1px}
+.web{position:absolute;left:500px;top:900px;width:520px;display:flex;align-items:center;gap:16px;opacity:0;font:600 22px Inter;color:#333}
+.gauge{position:absolute;left:290px;top:950px;width:500px;height:300px;opacity:0}
+.gauge svg{width:100%;height:100%;overflow:visible}
+.gauge .lbl{position:absolute;left:0;right:0;top:282px;text-align:center;font:700 34px Inter;color:#111}
+.gauge .lbl small{display:block;font:600 20px Mono;color:#888;letter-spacing:1px}
+.human{position:absolute;left:0;right:0;top:1318px;text-align:center;opacity:0}
+.human span{display:inline-block;padding:10px 22px;border-radius:999px;background:#111;color:#fff;font:700 24px Inter}
+/* ---- rising bars ---- */
+.rise{position:absolute;left:140px;top:640px;width:800px;height:620px;display:flex;align-items:flex-end;justify-content:center;gap:120px;opacity:0}
+.rise .col{display:flex;flex-direction:column;align-items:center;gap:14px;width:220px}
+.rise .bar{width:220px;border-radius:20px 20px 6px 6px;background:linear-gradient(180deg,#FF8A8E,#FF5A5F);box-shadow:0 0 40px rgba(255,90,95,.35);height:0}
+.rise .bar.old{background:linear-gradient(180deg,#6B717B,#40454D);box-shadow:none}
+.rise .v{font:800 64px Inter;color:#fff}.rise .y{font:700 26px Mono;color:var(--mute)}
+/* ---- live: two screens ---- */
+.scr{position:absolute;top:640px;width:460px;height:340px;border-radius:18px;background:#0E1013;border:1.5px solid #262A30;overflow:hidden;opacity:0}
+.scr .t{height:40px;display:flex;align-items:center;padding:0 14px;background:#15181C;font:700 17px Mono;color:#9AA0A8;letter-spacing:1px}
+.scr .c{padding:12px 14px;font:500 15px/1.6 Mono;color:#7F868F;white-space:pre}
+.ovl{position:absolute;right:14px;top:62px;width:200px;padding:12px;border-radius:12px;background:rgba(62,207,142,.14);border:1.5px solid rgba(62,207,142,.7);font:500 14px/1.45 Mono;color:#BFF5DA;box-shadow:0 0 24px rgba(62,207,142,.35)}
+.ovl b{display:block;font:700 15px Inter;color:#3ECF8E;margin-bottom:4px}
+.nosee{position:absolute;right:14px;top:62px;width:200px;height:120px;border-radius:12px;border:2px dashed rgba(255,255,255,.18);display:grid;place-items:center;font:600 16px Mono;color:#5C6370}
+.camL{position:absolute;left:240px;top:1010px;width:600px;height:300px;border-radius:22px;overflow:hidden;opacity:0}
+.camL.cam .hd{top:50px;width:120px;height:140px;margin-left:-60px}.camL.cam .gl{top:100px;width:110px;height:30px;margin-left:-55px}
+.camL.cam .glint{top:102px;width:48px;height:24px;margin-left:-50px}.camL.cam .bd{top:180px;width:260px;height:160px;margin-left:-130px}
+.hmm{position:absolute;left:740px;top:1030px;padding:16px 24px;border-radius:22px 22px 22px 6px;background:#fff;color:#111;font:700 34px Inter;opacity:0;box-shadow:0 14px 30px rgba(0,0,0,.4)}
+/* ---- survey donuts ---- */
+.dn{position:absolute;top:660px;width:420px;text-align:center;opacity:0}
+.dn svg{width:340px;height:340px}
+.dn .num{position:absolute;left:0;right:0;top:120px;font:800 84px Inter;color:#111}
+.dn .cap{font:700 28px Inter;color:#222;margin-top:10px}
+.dn circle{fill:none;stroke-width:34}
+/* ---- follow-up chat ---- */
+.call{position:absolute;left:60px;top:640px;width:960px;height:620px;border-radius:24px;background:var(--card);border:1.5px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.45);opacity:0;overflow:hidden}
+.call .h{height:60px;display:flex;align-items:center;gap:12px;padding:0 24px;border-bottom:1px solid var(--line);font:700 22px Inter;color:var(--text)}
+.call .h i{width:12px;height:12px;border-radius:50%;background:#3ECF8E}
+.q{position:absolute;left:30px;max-width:620px;padding:18px 24px;border-radius:24px 24px 24px 6px;background:#2A7BFF;color:#fff;font:600 32px Inter;opacity:0}
+.typing{position:absolute;right:30px;padding:18px 26px;border-radius:24px 24px 6px 24px;background:#2A2D33;color:#fff;font:700 40px Inter;letter-spacing:6px;opacity:0}
+.nochip{position:absolute;right:40px;top:440px;display:flex;align-items:center;gap:14px;font:700 24px Mono;color:#FF5A5F;opacity:0}
+.pol{position:absolute;top:1060px;width:450px;padding:22px 26px;border-radius:20px;background:#fff;color:#111;box-shadow:0 20px 50px rgba(0,0,0,.45);opacity:0;font:600 24px Inter}
+.pol b{display:block;font:800 30px Inter;margin-bottom:6px}
+/* ---- advice ---- */
+.adv{position:absolute;left:0;right:0;top:650px;display:flex;justify-content:center;gap:24px}
+.adv span{padding:18px 34px;border-radius:999px;font:800 40px Inter;opacity:0}
+.adv .ok{background:rgba(62,207,142,.18);color:#1E7F55}.adv .no{background:rgba(255,90,95,.14);color:#C23B40}
+.tips{position:absolute;left:70px;top:800px;width:940px;padding:18px 0 10px;border-radius:26px;background:var(--l-card);border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0}
+.tips .lbl{padding:0 30px 10px;font:600 20px Mono;color:var(--l-mute);letter-spacing:1px}
+.tips .rw{display:flex;align-items:center;gap:22px;padding:20px 30px;border-top:1.5px solid var(--l-line);font:700 34px Inter;color:var(--l-text)}
+.tips .rw .ic{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-size:34px;background:#F1F3F5}
+.tips .rw small{display:block;font:500 24px Mono;color:var(--l-mute);margin-top:4px}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <!-- HOOK: everything is recorded -->
+  <section class="scene" id="sHook">
+    <div class="plat" id="plat">
+      <div class="top">● ● ●&nbsp;&nbsp; Live coding round · two_sum.py<span class="rec"><i id="recdot"></i>REC</span></div>
+      <div class="ed" id="ed0"></div>
+      <div class="cam" style="position:absolute"><i class="bd"></i><i class="hd"></i><i class="gl"></i><span class="tag">You</span></div>
+      <div class="log" id="log0"><div class="lh">SESSION LOG</div>
+        <div class="rw"><b>keystroke</b> · d e f<span>00:03</span></div>
+        <div class="rw"><b>focus</b> · editor<span>00:09</span></div>
+        <div class="rw red"><b>tab_switch</b> · out<span>00:41</span></div>
+        <div class="rw red"><b>paste</b> · 40 lines<span>00:42</span></div>
+        <div class="rw"><b>run</b> · tests 12/12<span>00:44</span></div>
+      </div>
+    </div>
+    <div class="note r" id="n0" style="top:1290px">Illustration of a typical proctored session log.</div>
+  </section>
+
+  <!-- 1 · PASTE (light) -->
+  <section class="scene" id="sPaste">
+    <div class="led" id="led"><div class="bar">two_sum.py</div><div class="code" id="code1"></div><div class="flash" id="fl1"></div><div class="cnt40" id="c40">+40 lines · 1 frame</div></div>
+    <div class="lev" id="lev"><div class="lh">EVENTS</div>
+      <div class="rw red rr"><i class="dot"></i>paste<span>40 lines</span><div class="selbox" id="ps" style="inset:2px -4px"></div></div>
+      <div class="rw rr"><i class="dot"></i>tab_switch<span>out</span></div>
+      <div class="rw rr"><i class="dot"></i>tab_switch<span>in</span></div>
+    </div>
+    <div class="tabsw" id="tsw">tab switches<b id="tswn">0</b></div>
+    <div class="note l" id="n1" style="top:1260px">HackerRank: model reads copy-paste + tab-switch activity.</div>
+  </section>
+
+  <!-- 2 · RHYTHM (dark) -->
+  <section class="scene" id="sRhy">
+    <div class="tl" id="tl">
+      <div class="lb">HUMAN · type, pause, delete, fix</div><div class="lane" id="lnH"></div>
+      <div class="lb">AI-ASSISTED · pause … burst</div><div class="lane ai" id="lnA"><div class="pause" id="pz" style="left:0;width:560px"><span>long pause</span></div></div>
+    </div>
+    <div class="reset" id="rst"><s>▇▇▇ 18 lines deleted</s> → retyped in an odd rhythm<span class="pill bad">Suspicious Code Resetting</span></div>
+    <div class="note r" id="n2" style="top:1300px">Pattern names from HackerRank's own docs.</div>
+  </section>
+
+  <!-- 3 · COMPARISON (light) -->
+  <section class="scene" id="sMatch">
+    <div class="mine" id="mine"><b>your answer</b>def two_sum(nums, t):
+  seen = {}
+  for i, x in enumerate(nums):
+    if t - x in seen:
+      return [seen[t-x], i]
+    seen[x] = i</div>
+    <div class="subs" id="subs"><span class="cap">EVERY SUBMISSION ON THE PLATFORM</span></div>
+    <div class="web" id="web"><span style="font-size:40px">🌐</span>+ solutions posted online</div>
+    <div class="flow" id="fw1" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="gauge" id="gauge"><svg viewBox="0 0 500 300"><path d="M 50 250 A 200 200 0 0 1 450 250" stroke="#E5E7EB" stroke-width="34" fill="none" stroke-linecap="round"/>
+      <path id="garc" d="M 50 250 A 200 200 0 0 1 450 250" stroke="url(#gg)" stroke-width="34" fill="none" stroke-linecap="round"/>
+      <defs><linearGradient id="gg" x1="0" x2="1"><stop offset="0" stop-color="#3ECF8E"/><stop offset=".55" stop-color="#FFB340"/><stop offset="1" stop-color="#FF5A5F"/></linearGradient></defs>
+      <line id="needle" x1="250" y1="250" x2="250" y2="80" stroke="#111" stroke-width="8" stroke-linecap="round"/><circle cx="250" cy="250" r="16" fill="#111"/></svg>
+      <div class="lbl"><small>SUSPICION SCORE</small><span id="glbl">—</span></div></div>
+    <div class="human" id="hum"><span>👤 human reviewer makes the final call</span></div>
+    <div class="note r" id="n3" style="top:1372px">How CodeSignal describes its Suspicion Score.</div>
+  </section>
+
+  <!-- 4 · RISING (dark) -->
+  <section class="scene" id="sRise">
+    <div class="rise" id="rise">
+      <div class="col"><div class="v" id="v16">0%</div><div class="bar old" id="b16"></div><div class="y">2024</div></div>
+      <div class="col"><div class="v" id="v35">0%</div><div class="bar" id="b35"></div><div class="y">2025</div></div>
+    </div>
+    <div class="note l" id="n4" style="top:1290px">CodeSignal's own data: cheating attempts on proctored tests.</div>
+  </section>
+
+  <!-- 5 · LIVE (dark) -->
+  <section class="scene" id="sLive">
+    <div class="scr" id="sc1" style="left:60px"><div class="t">WHAT YOU SEE</div><div class="c">def solve(a):
+  # ...</div><div class="ovl"><b>✦ AI overlay</b>use a hashmap,
+O(n) time…</div></div>
+    <div class="scr" id="sc2" style="left:560px"><div class="t">WHAT SCREEN SHARE SEES</div><div class="c">def solve(a):
+  # ...</div><div class="nosee">nothing here</div></div>
+    <div class="camL cam" id="camL" style="background:radial-gradient(circle at 50% 40%,#2A3038,#101317)"><i class="bd"></i><i class="hd"></i><i class="gl"></i><i class="glint" id="glint"></i><i class="gaze" id="gz"></i><span class="tag">candidate</span></div>
+    <div class="hmm" id="hmm">hmm…</div>
+    <div class="note r" id="n5" style="top:1330px">Overlay tools claim to be invisible to screen share.</div>
+  </section>
+
+  <!-- 6 · SURVEY (light) -->
+  <section class="scene" id="sSurv">
+    <div class="dn" id="d1" style="left:90px"><svg viewBox="0 0 340 340"><circle cx="170" cy="170" r="130" stroke="#EEF0F2"/><circle id="dc1" cx="170" cy="170" r="130" stroke="#FFB340" transform="rotate(-90 170 170)"/></svg><div class="num" id="dv1">0%</div><div class="cap">suspected AI cheating</div></div>
+    <div class="dn" id="d2" style="left:570px"><svg viewBox="0 0 340 340"><circle cx="170" cy="170" r="130" stroke="#EEF0F2"/><circle id="dc2" cx="170" cy="170" r="130" stroke="#FF5A5F" transform="rotate(-90 170 170)"/></svg><div class="num" id="dv2">0%</div><div class="cap">caught someone</div></div>
+    <div class="note l" id="n6" style="top:1250px">interviewing.io survey of Big Tech interviewers, 63 responses (2025).</div>
+  </section>
+
+  <!-- 7 · FOLLOW-UP (dark) -->
+  <section class="scene" id="sFol">
+    <div class="call" id="call"><div class="h"><i></i>Interview · live</div>
+      <div class="q" id="q1" style="top:100px">Why this approach?</div>
+      <div class="q" id="q2" style="top:210px">What breaks if the input doubles?</div>
+      <div class="typing" id="typ" style="top:330px">• • •</div>
+      <div class="chip3d" id="ch2" style="left:405px;top:330px"></div><div class="nochip" id="noc" style="top:530px">✗ AI can't explain it live</div>
+    </div>
+    <div class="pol" id="pg" style="left:60px"><b>Google</b>brought back an in-person round</div>
+    <div class="pol" id="pa" style="left:570px"><b>Amazon</b>asks candidates to declare no AI</div>
+  </section>
+
+  <!-- 8 · ADVICE (light) -->
+  <section class="scene" id="sAdv">
+    <div class="adv"><span class="ok" id="a1">AI to prepare ✓</span><span class="no" id="a2">AI to perform ✗</span></div>
+    <div class="tips" id="tips"><div class="lbl">BEFORE YOUR NEXT ROUND</div>
+      <div class="rw"><span class="ic">🧠</span><div>Practise with AI, interview without it<small>mock rounds, explain-back drills</small></div></div>
+      <div class="rw"><span class="ic">🗣️</span><div>Think out loud<small>even when you're stuck</small></div></div>
+    </div>
+  </section>
+
+  <!-- CTA (light) -->
+  <section class="scene" id="sCTA">
+    <div class="ig" id="ig" style="top:660px">
+      <div class="bar">‹ <span class="bname"></span><span class="ic">🔔 ···</span></div>
+      <div class="prof"><div class="pav"></div><div class="stat"><b>246</b><span>posts</span></div><div class="stat"><b>68K</b><span>followers</span></div><div class="stat"><b>209</b><span>following</span></div></div>
+      <div class="bio"><span class="bname"></span><small>How tech actually works</small></div>
+      <div class="btns"><div class="btn pri" id="followBtn">Follow</div><div class="btn">Message</div></div>
+      <div id="plus1" style="position:absolute;right:120px;top:120px;font:700 34px Inter;color:#3ECF8E;opacity:0">+1</div>
+      <div class="tabs"><i class="on">▦</i><i>▶</i><i>◎</i></div><div class="grid"><i></i><i></i><i></i></div>
+    </div>
+    <div class="share" id="sh" style="top:700px">
+      <div class="grab"></div><div class="srch">⌕ Search</div>
+      <div class="ppl"><div class="p"><i></i>Aarav</div><div class="p sel"><i></i>Rohan</div><div class="p"><i></i>Priya</div><div class="p"><i></i>Ishaan</div><div class="p"><i></i>Neha</div><div class="p"><i></i>Kabir</div><div class="p"><i></i>Ananya</div><div class="p"><i></i>Dev</div></div>
+      <div class="msg" id="shmsg">Write a message…</div><div class="send" id="sendBtn">Send</div>
+    </div>
+    <div class="finger" id="fg"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+    <div class="wm" id="wm">◎ instagram.com/<span class="bname"></span></div>
+  </section>
+
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+const T = { so: at("So when someone"), paste: at("First, the paste"), rhy: at("Next, your typing"), cmp: at("Then, the comparison"), rise: at("And it's rising"),
+  live: at("But what about"), humans: at("That's where humans"), surv: at("In one survey"), trick: at("Their best trick"), adv: at("So use AI"), cta: at("Follow"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.0).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.paste, enter: "none" }, { id: "sPaste", s: T.paste, e: T.rhy, enter: "blurzoom" },
+  { id: "sRhy", s: T.rhy, e: T.cmp, enter: "push" }, { id: "sMatch", s: T.cmp, e: T.rise, enter: "blurzoom" },
+  { id: "sRise", s: T.rise, e: T.live, enter: "swing" }, { id: "sLive", s: T.live, e: T.surv, enter: "blurzoom" },
+  { id: "sSurv", s: T.surv, e: T.trick, enter: "push" }, { id: "sFol", s: T.trick, e: T.adv, enter: "blurzoom" },
+  { id: "sAdv", s: T.adv, e: T.cta, enter: "swing" }, { id: "sCTA", s: T.cta, e: 999, enter: "blurzoom" } ] });
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.paste, T.rhy], [T.cmp, T.rise], [T.surv, T.trick], [T.adv, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "paste", at: T.paste }, { label: "rhythm", at: T.rhy }, { label: "match", at: T.cmp }, { label: "eyes", at: T.humans }, { label: "follow-up", at: T.trick, end: T.adv }],
+  counter: { unit: "signals caught", steps: [[at("every paste"), 1], [at("sudden burst"), 2], [at("suspicion"), 3], [at("eyes drift"), 4], [at("follow-up"), 5]] },
+  avatar: { x: 240, y: 1330, w: 600, in: T.so },
+  wm: at("send this"), poses: P,
+});
+
+// builders
+const ED0 = [["k","def "],["n","two_sum"],["","(nums, target):"]];
+const L1 = ['<span class="ln">1</span><span class="k">def</span> <span class="n">two_sum</span>(nums, target):', '<span class="ln">2</span>  <span class="c"># brute force first?</span>', '<span class="ln">3</span>  for i in range(len(nums)):'];
+R.$("ed0").innerHTML = L1.map((l, i) => `<div class="el" style="opacity:0">${l}</div>`).join("");
+const CODE = ["def two_sum(nums, target):", "  seen = {}", "  for i, x in enumerate(nums):", "    need = target - x", "    if need in seen:", "      return [seen[need], i]", "    seen[x] = i", "  return []", "", "def three_sum(nums):", "  nums.sort()", "  res = []", "  for i in range(len(nums) - 2):", "    if i and nums[i] == nums[i-1]:", "      continue", "    l, r = i + 1, len(nums) - 1", "    while l < r:", "      s = nums[i] + nums[l] + nums[r]", "      if s == 0:", "        res.append([nums[i], nums[l], nums[r]])", "        l += 1; r -= 1", "        while l < r and nums[l] == nums[l-1]:", "          l += 1", "      elif s < 0: l += 1", "      else: r -= 1", "  return res"];
+R.$("code1").innerHTML = CODE.map((l, i) => `<div class="cl" style="opacity:0">${l.replace(/^(\s*)(def|return|for|if|while|elif|else|continue)\b/, '$1<span class="k">$2</span>') || " "}</div>`).join("");
+let sd = 3; const rnd = () => (sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+// human lane: 70 irregular bars with some deletes
+R.$("lnH").innerHTML = Array.from({ length: 64 }, (_, i) => { const del = rnd() < 0.14; const h = 20 + rnd() * 70; const gap = rnd() < 0.18 ? 9 : 0; return `<i class="${del ? "del" : ""}" style="left:${i * 14 + gap}px;height:${h}px"></i>`; }).join("");
+R.$("lnA").innerHTML += Array.from({ length: 40 }, (_, i) => `<i style="left:${590 + i * 8}px;height:${110 + rnd() * 30}px"></i>`).join("");
+R.$("subs").innerHTML += Array.from({ length: 24 }, (_, i) => `<i class="${[7, 15, 20].includes(i) ? "hit" : ""}"></i>`).join("");
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK
+  R.card("plat", t, { in: 0.05 });
+  R.$("recdot").style.opacity = Math.floor(t * 2) % 2 ? 0.25 : 1;
+  [...R.$("ed0").children].forEach((l, i) => { l.style.opacity = ease.out3(prog(t, 0.3 + i * 0.5, 0.25)); });
+  R.rows("log0", t, [0.5, 1.2, 1.9, 2.4, 3.0]);
+  R.note("n0", t, 0.8, T.paste);
+
+  // PASTE
+  R.card("led", t, { in: T.paste + 0.1 });
+  const cls = R.$("code1").children, burstAt = at("Forty clean");
+  [...cls].forEach((l, i) => { const a = i < 3 ? T.paste + 0.4 + i * 0.6 : burstAt; l.style.opacity = t >= a ? 1 : 0; });
+  const fp = prog(t, burstAt, 0.5); R.$("fl1").style.opacity = fp > 0 && fp < 1 ? (1 - fp) * 0.9 : 0;
+  pop("c40", t, burstAt + 0.1, { from: 0.6 });
+  R.card("lev", t, { in: at("Platforms like") });
+  R.rows("lev", t, [at("every paste"), at("switch tabs") - 0.2, at("switch tabs") + 0.1].map(x => x));
+  R.sel("ps", t, burstAt + 0.2);
+  R.card("tsw", t, { in: at("switch tabs"), y: 40 }); count("tswn", t, at("switch tabs"), 1.2, 7);
+  R.note("n1", t, at("Platforms like") + 0.5, T.rhy);
+
+  // RHYTHM
+  R.card("tl", t, { in: T.rhy + 0.1 });
+  [...R.$("lnH").querySelectorAll("i")].forEach((b, i) => { const a = at("Real coders") + i * 0.045; const p = ease.out3(prog(t, a, 0.2)); b.style.opacity = p; b.style.transform = `scaleY(${p})`; b.style.transformOrigin = "bottom"; });
+  R.note("pz", t, at("long pause"));
+  [...R.$("lnA").querySelectorAll("i")].forEach((b, i) => { const a = at("sudden burst") + i * 0.012; const p = ease.out3(prog(t, a, 0.15)); b.style.opacity = p; b.style.transform = `scaleY(${p})`; b.style.transformOrigin = "bottom"; });
+  R.card("rst", t, { in: at("deleting a big"), y: 40 });
+  R.note("n2", t, at("deleting a big") + 0.5, T.cmp);
+
+  // MATCH
+  R.card("mine", t, { in: T.cmp + 0.1 });
+  R.note("subs", t, at("every submission") - 0.2);
+  [...R.$("subs").querySelectorAll("i")].forEach((c, i) => { const p = E2(prog(t, at("every submission") + i * 0.03, 0.3)); c.style.opacity = p; c.style.transform = `scale(${lerp(0.6, 1, p)})`; });
+  R.note("web", t, at("solutions posted"));
+  R.flow("fw1", t, { at: at("every submission"), path: "M 360 800 C 420 800, 440 760, 500 740", n: 4, speed: 0.9, hide: at("rolls it") });
+  R.card("gauge", t, { in: at("rolls it"), y: 50 });
+  const g = ease.inOut(prog(t, at("suspicion"), 1.2)), ang = lerp(-90, 52, g);
+  R.$("needle").setAttribute("transform", `rotate(${ang} 250 250)`);
+  const ga = R.$("garc"); if (!ga.dataset.len) { ga.dataset.len = ga.getTotalLength(); ga.style.strokeDasharray = ga.dataset.len; }
+  ga.style.strokeDashoffset = ga.dataset.len * (1 - g * 0.79);
+  R.$("glbl").textContent = g > 0.95 ? "Needs review" : "…";
+  pop("hum", t, at("human reviewer"), { from: 0.7 });
+  R.note("n3", t, at("rolls it") + 0.4, T.rise);
+
+  // RISE
+  R.note("rise", t, T.rise + 0.05);
+  const r1 = ease.out3(prog(t, at("16%"), 0.8)), r2 = ease.out3(prog(t, at("35%"), 1.0));
+  R.$("b16").style.height = (16 / 35 * 420 * r1) + "px"; R.$("b35").style.height = (420 * r2) + "px";
+  R.$("v16").textContent = Math.round(16 * r1) + "%"; R.$("v35").textContent = Math.round(35 * r2) + "%";
+  if (r2 > 0) R.cue("ding", at("35%") + 1.0);
+  R.note("n4", t, at("16%"), T.live);
+
+  // LIVE
+  R.card("sc1", t, { in: T.live + 0.1 }); R.card("sc2", t, { in: at("screen share") - 0.1 });
+  R.card("camL", t, { in: T.humans, y: 60 });
+  const gzA = at("eyes drift"), gz = R.$("gz");
+  const gx = lerp(300, 470, ease.inOut(prog(t, gzA, 0.6))), gy = lerp(120, 96, ease.inOut(prog(t, gzA, 0.6)));
+  gz.style.left = gx + "px"; gz.style.top = gy + "px"; gz.style.opacity = ease.out3(prog(t, gzA - 0.1, 0.3)) * (0.7 + 0.3 * Math.sin(t * 8));
+  const gl = prog(t, at("glow in"), 1.2); R.$("glint").style.opacity = gl > 0 ? 0.4 + 0.6 * Math.abs(Math.sin(t * 5)) : 0;
+  pop("hmm", t, at("long hmm") - 0.1, { from: 0.5 });
+  R.$("hmm").textContent = "hmm" + ".".repeat(1 + (Math.floor(t * 3) % 3));
+  R.note("n5", t, T.live + 0.6, T.humans + 0.5);
+
+  // SURVEY
+  [["d1", "dc1", "dv1", 81, at("81%")], ["d2", "dc2", "dv2", 31, at("31%")]].forEach(([d, c, v, val, a]) => {
+    R.card(d, t, { in: a - 0.3, y: 40 });
+    const p = ease.out3(prog(t, a, 1.1)), C = 2 * Math.PI * 130, ci = R.$(c);
+    ci.style.strokeDasharray = C; ci.style.strokeDashoffset = C * (1 - val / 100 * p); R.$(v).textContent = Math.round(val * p) + "%";
+  });
+  R.note("n6", t, at("81%"), T.trick);
+
+  // FOLLOW-UP
+  R.card("call", t, { in: T.trick + 0.1 });
+  pop("q1", t, at("Why this approach"), { from: 0.7 }); pop("q2", t, at("What breaks"), { from: 0.7 });
+  R.note("typ", t, at("What breaks") + 0.6, at("That's why"));
+  R.$("typ").textContent = ["•", "• •", "• • •"][Math.floor(t * 3) % 3];
+  R.note("noc", t, at("can't explain"), at("That's why") + 0.2);
+  R.chip("ch2", t, { at: at("can't explain"), size: 150, label: "AI", pins: 5 }); R.$("ch2").style.opacity = parseFloat(R.$("ch2").style.opacity || 0) * (1 - prog(t, at("That's why"), 0.3)); R.$("ch2").style.filter = "grayscale(.7)";
+  R.card("pg", t, { in: at("Google brought"), y: 50 }); R.card("pa", t, { in: at("Amazon asks"), y: 50 });
+
+  // ADVICE
+  pop("a1", t, at("to prepare"), { from: 0.6 }); pop("a2", t, at("not to perform"), { from: 0.6 });
+  R.card("tips", t, { in: at("Think out") - 0.2 });
+  R.rows("tips", t, [at("Think out") - 0.1, at("Think out") + 0.5]);
+
+  // CTA
+  R.card("ig", t, { in: T.cta - 0.05, out: at("send this") + 0.2 });
+  R.finger("fg", t, Object.assign([{ t: T.cta + 0.1, x: 700, y: 1500 }, { t: T.cta + 0.7, x: 300, y: 1080, press: true }, { t: at("breakdowns") + 0.2, x: 300, y: 1080 }, { t: at("send this") + 0.2, x: 900, y: 1700 }], { out: at("send this") }));
+  R.press("followBtn", t, T.cta + 0.7);
+  const followed = t >= T.cta + 0.95; const fb = R.$("followBtn"); fb.textContent = followed ? "Following ▾" : "Follow"; fb.style.background = followed ? "#2a2a2e" : "";
+  R.plusone("plus1", t, T.cta + 0.95);
+  R.sheet("sh", t, at("send this") + 0.25, { dy: 560 });
+  const typed = t >= at("keeps ChatGPT"); R.$("shmsg").textContent = typed ? "bro close the other tab 😭" : "Write a message…"; R.$("shmsg").style.color = typed ? "#111" : "";
+  R.press("sendBtn", t, R.end("tab.") + 0.3);
+};
+function E2(p) { return ease.out3(p); }
+window.seek(0);
+</script></body></html>
