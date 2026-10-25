@@ -21,7 +21,7 @@ DM automation text (keyword: JOBS):
 Hey {name}! 👋 Here's everything from the reel:
 ⭐ Repo: github.com/strelov1/freehire
 🔎 Search: freehire.me
-🛠 My Claude setup + 3 copy-paste prompts: [GUIDE LINK]
+🛠 My Claude setup + 3 copy-paste prompts: https://canwe-guides.vercel.app/freehire/
 Follow @canwe.ai so you don't miss the next job-hunt tool 🙌
 
 Public auto-replies (rotate):
@@ -45,11 +45,11 @@ What it does:
 
 Repo (by Ilya Strelov, MIT): https://github.com/strelov1/freehire
 Website: https://freehire.me
-My full Claude setup + 3 prompts: [GUIDE LINK]
+My full Claude setup + 3 prompts: https://canwe-guides.vercel.app/freehire/
 
 Not sponsored. India job count from freehire's own data, 25 Oct 2026.
 
 #shorts #jobsearch #internship #freshers #claudeai #github
 
 Pinned comment (YouTube has no DM automation, so put the links here):
-📌 Repo: github.com/strelov1/freehire · Setup guide: [GUIDE LINK]
+📌 Repo: github.com/strelov1/freehire · Setup guide: https://canwe-guides.vercel.app/freehire/
