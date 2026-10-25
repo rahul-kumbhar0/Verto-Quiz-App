@@ -1,0 +1,16 @@
+Your coding interview is recording more than your code.
+So how do companies catch ChatGPT answers?
+First, the paste.
+Platforms log every paste and every tab switch.
+Forty clean lines in one frame is not how humans type.
+Next, your typing rhythm.
+Real coders type, pause and fix.
+AI answers show a long pause, then a sudden burst of perfect code.
+Then, the comparison.
+CodeSignal checks your answer against every submission and solutions posted online, then gives you one suspicion score.
+On a live call, interviewers watch your eyes drift to the same spot, and the long hmm while the answer loads.
+But their best trick is one follow-up question.
+Why this approach? What breaks if the input doubles?
+The AI wrote the code, but it can't explain it for you.
+So use AI to prepare, not to perform.
+Follow, and send this to the friend who keeps ChatGPT open in the other tab.
