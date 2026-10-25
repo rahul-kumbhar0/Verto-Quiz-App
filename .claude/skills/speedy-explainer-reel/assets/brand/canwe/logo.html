@@ -1,0 +1,49 @@
+<!doctype html><html><head><meta charset="utf-8"><base href="../../template/">
+<style>
+@font-face{font-family:Inter;font-weight:800;src:url(fonts/inter-latin-800-normal.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(fonts/inter-latin-900-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(fonts/inter-latin-600-normal.woff2)}
+@font-face{font-family:Mono;font-weight:700;src:url(fonts/jetbrains-mono-latin-700-normal.woff2)}
+body{margin:0;background:#000;display:flex;flex-wrap:wrap;gap:20px;padding:20px;width:3400px}
+.L{position:relative;width:1080px;height:1080px;overflow:hidden;font-family:Inter}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.05) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.05) 2px,transparent 2px);background-size:90px 90px;background-position:-1px -1px}
+.sb{position:absolute;border:12px solid #3B82F6;background:rgba(59,130,246,.16);border-radius:10px}
+.sb i{position:absolute;width:56px;height:56px;border-radius:50%;background:#3B82F6;border:9px solid #fff}
+.sb .tl{left:-34px;top:-34px}.sb .br{right:-34px;bottom:-34px}
+/* A: cw in the selection box */
+#A{background:radial-gradient(circle at 50% 42%,#1B1E26,#0B0B0D 70%)}
+#A .sb{left:215px;top:345px;width:650px;height:390px}
+#A .t{position:absolute;left:0;right:0;top:300px;text-align:center;font:900 400px/1 Inter;letter-spacing:-26px;color:#fff;padding-right:26px}
+#A .spark{position:absolute;right:150px;top:215px;width:120px}
+/* B: mascot head framed by the selection box */
+#B{background:radial-gradient(circle at 50% 38%,#4C8DF8,#1E4FD8 75%)}
+#B #av{position:absolute;left:120px;top:150px;width:840px;height:950px}
+#B #av svg{width:100%;height:100%}
+#B .sb{left:180px;top:150px;width:720px;height:700px;background:transparent;border-color:#fff;border-width:10px}
+#B .sb i{background:#fff;border-color:#3B82F6}
+/* C: terminal prompt */
+#C{background:#0B0B0D}
+#C .t{position:absolute;left:120px;top:360px;font:700 330px/1 Mono;color:#fff;letter-spacing:-12px}
+#C .t b{color:#3ECF8E}
+#C .cur{position:absolute;left:740px;top:405px;width:120px;height:265px;background:#3B82F6;border-radius:8px}
+#C .ai{position:absolute;left:0;right:0;bottom:205px;text-align:center;font:700 92px Mono;color:#8E8E93;letter-spacing:6px}
+/* wordmark */
+.W{position:relative;width:1600px;height:520px;background:#0F0F11;display:flex;align-items:center;justify-content:center;font:900 230px Inter;letter-spacing:-10px;color:#fff}
+.W .w2{position:relative;display:inline-block;line-height:1;margin-left:56px;padding:0 30px;color:#fff}
+.W .w2 .sb{inset:-14px 0 -6px 0;border-width:9px}.W .w2 .sb i{width:40px;height:40px;border-width:7px}.W .w2 .tl{left:-26px;top:-26px}.W .w2 .br{right:-26px;bottom:-26px}
+.W .w2 > span:last-child{position:relative}
+.W.light{background:#F7F7F8;color:#111113}.W.light .w2{color:#111113}
+</style><link rel="preload" href="fonts/inter-latin-900-normal.woff2" as="font"></head><body>
+<div class="L" id="A"><div class="grid"></div><div class="sb"><i class="tl"></i><i class="br"></i></div><div class="t">cw</div>
+<svg class="spark" viewBox="0 0 24 24"><path d="M12 0c1 7 5 11 12 12-7 1-11 5-12 12-1-7-5-11-12-12 7-1 11-5 12-12z" fill="#3ECF8E"/></svg></div>
+<div class="L" id="B"><div id="av"></div><div class="sb"><i class="tl"></i><i class="br"></i></div></div>
+<div class="L" id="C"><div class="grid"></div><div class="t"><b>&gt;</b>cw</div><div class="cur"></div></div>
+<div class="W" id="W1">canwe<span class="w2"><span class="sb"><i class="tl"></i><i class="br"></i></span><span>.ai</span></span></div>
+<div class="W light" id="W2">canwe<span class="w2"><span class="sb"><i class="tl"></i><i class="br"></i></span><span>.ai</span></span></div>
+<script src="avatar.js"></script>
+<script>
+Avatar.init('av',{look:'street'});
+const s=document.querySelector('#av svg'); s.setAttribute('viewBox','120 80 360 400');
+s.querySelector('.arms').style.display='none';
+
+</script></body></html>
