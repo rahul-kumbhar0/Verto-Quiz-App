@@ -31,10 +31,31 @@ SAMPLE = {"en-us": "Every answer ChatGPT gives you is written one piece at a tim
           "en-gb": "Every answer ChatGPT gives you is written one piece at a time, and each piece is a guess.",
           "hi": "चैटजीपीटी का हर जवाब एक-एक टुकड़ा करके लिखा जाता है, और हर टुकड़ा एक अनुमान होता है।"}
 
+# ---------------------------------------------------------------- private environment
+# Everything installs into ~/voice-studio/venv, never into the system Python (which Ubuntu and
+# Homebrew lock against pip). Any command run with another Python re-launches itself in the venv.
+VENV = os.path.join(HOME, "venv")
+VENV_PY = os.path.join(VENV, "Scripts", "python.exe") if os.name == "nt" else os.path.join(VENV, "bin", "python")
+def in_venv(): return os.path.abspath(sys.prefix) == os.path.abspath(VENV)
+def relaunch_in_venv():
+    if not in_venv() and os.path.exists(VENV_PY):
+        r = subprocess.call([VENV_PY, os.path.abspath(__file__), *sys.argv[1:]]); sys.exit(r)
+
 # ---------------------------------------------------------------- setup
 def cmd_setup(a):
+    if not ((3, 10) <= sys.version_info[:2] <= (3, 13)):
+        sys.exit(f"Python {sys.version.split()[0]} found, but the voice engine needs Python 3.10–3.13.\n"
+                 "Install Python 3.12 from https://www.python.org/downloads/release/python-3128/ and run this again.")
+    if not in_venv():
+        if not os.path.exists(VENV_PY):
+            print("creating private Python environment:", VENV)
+            r = subprocess.run([sys.executable, "-m", "venv", VENV])
+            if r.returncode != 0 or not os.path.exists(VENV_PY):
+                sys.exit("could not create the environment. Ubuntu/Debian: sudo apt install python3-venv  — then run setup again.")
+        r = subprocess.call([VENV_PY, os.path.abspath(__file__), "setup"]); sys.exit(r)
     pkgs = ["kokoro-onnx", "soundfile", "numpy", "pocketsphinx"]
-    print("installing:", " ".join(pkgs))
+    print("installing into", VENV, ":", " ".join(pkgs))
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "--upgrade", "pip"], check=False)
     subprocess.run([sys.executable, "-m", "pip", "install", "-q", *pkgs], check=True)
     os.makedirs(MODELS, exist_ok=True); os.makedirs(VOICES_DIRS[1], exist_ok=True)
     for f in MODEL_FILES:
@@ -293,7 +314,9 @@ def main():
     x = s.add_parser("narrate"); x.add_argument("script"); x.add_argument("-v", "--voice", default="house"); x.add_argument("-o", "--out", default="voice.wav")
     x.add_argument("--words", help="also write per-word timings (English) for captions"); x.add_argument("--pause", type=float, default=0.42); tune(x); x.set_defaults(f=cmd_narrate)
     x = s.add_parser("serve"); x.add_argument("--port", type=int, default=7860); x.add_argument("--no-browser", action="store_true"); x.set_defaults(f=cmd_serve)
-    a = p.parse_args(); a.f(a)
+    a = p.parse_args()
+    if a.cmd != "setup": relaunch_in_venv()
+    a.f(a)
 
 if __name__ == "__main__":
     main()

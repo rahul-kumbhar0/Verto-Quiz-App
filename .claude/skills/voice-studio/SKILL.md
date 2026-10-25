@@ -14,9 +14,12 @@ on CPU, about real-time or faster. One tool, `scripts/studio.py`; voices are tin
 VS=<this skill's folder>
 python3 $VS/scripts/studio.py setup      # pip installs kokoro-onnx soundfile numpy pocketsphinx + downloads the model to ~/voice-studio/models
 ```
-User-facing one-click: `start-studio.sh` (Mac/Linux) or `start-studio.bat` (Windows) installs on first
-run and opens the browser studio at http://localhost:7860. Needs Python 3.10+; ffmpeg only for
-`--pitch` and `.mp3` output. In Claude cloud sessions the model downloads from GitHub releases,
+Setup creates a private environment `~/voice-studio/venv` (system Pythons on Ubuntu/Homebrew refuse
+pip installs); every later command re-launches itself inside it, so `python3 studio.py …` always works.
+Needs Python **3.10–3.13** (3.14 not supported by the engine yet); ffmpeg only for `--pitch`/`.mp3`.
+User-facing one-click: `start-studio.bat` (Windows), `start-studio.command` (Mac double-click) or
+`start-studio.sh`; first run installs, then opens http://localhost:7860. Walk a user through
+`SETUP.md` step by step when they set it up on their own machine. In Claude cloud sessions the model downloads from GitHub releases,
 which is allowed; Hugging Face is not needed.
 
 ## The house voices (in `voices/`, shared through the repo)
