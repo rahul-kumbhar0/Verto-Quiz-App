@@ -89,8 +89,9 @@
 <script src="speedy.js"></script>
 <script>
 const R = Reel, { at, end, rise, pop, count, prog, ease, lerp } = R;
-const BRAND = { name: "yourpage" };                       // the user's handle (ask; never invent)
+const BRAND = { name: "yourpage", logo: "" };             // handle (ask; never invent) + logo file next to this page; canwe.ai = { name:"canwe.ai", logo:"canwe-logo.svg" }
 document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+if (BRAND.logo) document.querySelectorAll(".pav,.blogo").forEach(e => (e.style.background = `#1E4FD8 url(${BRAND.logo}) center/cover`));
 
 // every beat is anchored to a spoken phrase (caption display text)
 const T = { paste: at("You paste"), db: at("First"), re: at("Next"), sc: at("Then"), cta: at("Follow"), stop: R.voiceEnd() };

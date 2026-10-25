@@ -4,15 +4,17 @@
 //   {"kicker":"CODING INTERVIEWS", "accent":"#FF5A5F",          small pill above the headline + its colour
 //    "line1":"How they {catch}", "line2":"you using AI",        {word} = the word in the blue selection box
 //    "stamp":"⚠ FLAGGED", "stampAt":[120,1080],                 rotated stamp (omit or "" for none)
-//    "brand":"@canwe.ai", "light":false,                         light = dark text for a light frame
+//    "brand":"@canwe.ai", "logo":"canwe-logo.svg",              handle + round logo beside it (path relative to cwd)
+//    "light":false,                                              light = dark text for a light frame
 //    "hide":["#rail"], "shift":{".plat":"0 110px"}}             CSS selectors to hide / translate
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
 const [,, html, t, out, cfgPath] = process.argv;
-const C = Object.assign({ kicker: "CODING INTERVIEWS", accent: "#FF5A5F", line1: "How they {catch}", line2: "you using AI",
+const C = Object.assign({ logo: "", kicker: "CODING INTERVIEWS", accent: "#FF5A5F", line1: "How they {catch}", line2: "you using AI",
   stamp: "⚠ FLAGGED", stampAt: [120, 1080], brand: "@canwe.ai", light: false, hide: [], shift: { ".plat": "0 110px" } },
   cfgPath ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : {});
+if (C.logo) C.logoData = 'data:' + (C.logo.endsWith('.svg') ? 'image/svg+xml' : 'image/png') + ';base64,' + fs.readFileSync(C.logo).toString('base64');
 const b = await chromium.launch();
 const p = await b.newPage({ viewport: { width: 1080, height: 1920 } });
 await p.goto('file://' + path.resolve(html));
@@ -37,12 +39,13 @@ await p.evaluate(C => {
   #cv h1 .sel .tl{left:-14px;top:-4px}#cv h1 .sel .br{right:-14px;bottom:-8px}
   #cv h1 .sel b{position:relative;font-weight:800}
   #cv .stamp{position:absolute;left:${C.stampAt[0]}px;top:${C.stampAt[1]}px;transform:rotate(-8deg);font:800 64px Inter;letter-spacing:2px;color:${a};border:6px solid ${a};border-radius:18px;padding:6px 26px;background:${C.light ? 'rgba(255,255,255,.95)' : 'rgba(14,16,19,.92)'};box-shadow:0 0 50px ${a}73}
-  #cv .brand{position:absolute;right:66px;top:1392px;font:600 30px Inter;color:${C.light ? 'rgba(0,0,0,.45)' : 'rgba(255,255,255,.55)'}}`;
+  #cv .brand{position:absolute;right:66px;top:1384px;display:flex;align-items:center;gap:12px;font:600 30px Inter;color:${C.light ? 'rgba(0,0,0,.55)' : 'rgba(255,255,255,.7)'}}
+  #cv .brand img{width:56px;height:56px;border-radius:50%;box-shadow:0 0 0 3px ${C.light ? '#fff' : '#0F0F11'},0 6px 18px rgba(0,0,0,.35)}`;
   document.head.appendChild(s);
   const sel = l => l.replace(/\{([^}]+)\}/, '<span class="sel"><span class="box"></span><i class="hd tl"></i><i class="hd br"></i><b>$1</b></span>');
   const d = document.createElement('div'); d.id = 'cv';
   d.innerHTML = (C.kicker ? `<div class="kick"><span>${C.kicker}</span></div>` : '') +
-    `<h1>${sel(C.line1)}<br>${sel(C.line2)}</h1>` + (C.stamp ? `<div class="stamp">${C.stamp}</div>` : '') + (C.brand ? `<div class="brand">${C.brand}</div>` : '');
+    `<h1>${sel(C.line1)}<br>${sel(C.line2)}</h1>` + (C.stamp ? `<div class="stamp">${C.stamp}</div>` : '') + (C.brand ? `<div class="brand">${C.logoData ? `<img src="${C.logoData}">` : ''}${C.brand}</div>` : '');
   document.body.appendChild(d);
 }, C);
 await p.screenshot({ path: out });

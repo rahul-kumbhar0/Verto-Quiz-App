@@ -52,3 +52,6 @@ charge / AI) with sandbox labels; matrix + pooler ring + user scatter; rack; IG 
 - The product's own terms are used exactly (PostgREST, RLS, write-ahead log, isolate, pooler);
   each gets its gloss the first time only.
 - Footnote when a limit is a default, not a hard cap ("500 = Postgres default max_connections").
+
+## Brand
+For the canwe.ai account, follow "House brand: canwe.ai" in `speedy-explainer-reel/SKILL.md` (mascot logo everywhere).

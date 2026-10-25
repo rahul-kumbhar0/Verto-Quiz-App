@@ -130,3 +130,10 @@ stock puppet was used.
 
 ## Cover
 `node scripts/cover.mjs index.html <t> cover.png` freezes the reel at t (pick a frame with the hero object and a clean presenter pose), hides captions and adds a 2-line headline with the keyword in the selection box plus a stamp. Keep text inside y 240-1680 (Instagram 3:4 grid crop).
+
+## House brand: canwe.ai (always)
+Reels made for the owner's account use `BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" }`. Copy
+`assets/brand/canwe/canwe-logo.svg` into the reel folder. The **mascot logo (option B)** is the only canwe.ai logo:
+use it for every profile picture or DM-sender avatar shown in a reel, the cover brand mark (`"logo"` in cover.json),
+and the header and favicon of any page made for the account. Never use the old purple "CW" logo or a plain "cw" text
+circle. Details: `assets/brand/canwe/README.md`.

@@ -46,3 +46,6 @@ year tag, patent `.sc`, `.note` footnotes, `.dm` CTA block.
   say where they come from ("Zone sizes from English word counts, not Apple's own model").
 - The credibility chapter is the only light section; it names a real person, artefact and year.
 - The recap sentence answers the hook literally; the CTA punchline blames the mechanism.
+
+## Brand
+For the canwe.ai account, follow "House brand: canwe.ai" in `speedy-explainer-reel/SKILL.md` (mascot logo everywhere).
