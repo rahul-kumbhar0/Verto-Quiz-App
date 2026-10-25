@@ -73,13 +73,26 @@ missing, a rail label wrapping, a pose that points at nothing, a `phrase not fou
 (→ fix spelling/display.json). Fix, re-still, repeat; two passes is normal.
 
 ## 4. Voice → real timings
-Decision order, no questions: (A) the user's cloned voice if a tool for it is available in the
-session; (B) ElevenLabs MCP `creative_generate_speech` (one take, calm explainer delivery) and
-`creative_transcribe_audio` for word timings — save as `words.json` `{"words":[{text,start,end}]}`;
-(C) any local TTS + `tools/align.py voice16k.wav narration.txt words.json` (pocketsphinx forced
-alignment); (D) if no voice route works, deliver the silent animatic + `narration.txt` and say so.
-Then re-run `captions.py` and re-still 4 frames: `at()` anchors re-time themselves, but a
-paraphrased word or a merged token can throw `phrase not found`.
+Write `narration_spoken.txt`: ONE SENTENCE PER LINE, numbers and acronyms spelled the way they
+are said ("twelve thousand two hundred eighty-eight", "G P T three"); `display.json` merges them
+back to "12,288" / "GPT-3" on screen. Decision order, no questions:
+(A) ElevenLabs MCP `creative_generate_speech` (calm explainer voice from `creative_list_voices`)
+    → download → align with (C)'s aligner. Check credits first with `estimate_only`; a failed run
+    is not charged.
+(B) the user's cloned voice if a tool for it exists in the session.
+(C) **offline, always works** — Kokoro neural TTS (tested, natural): 
+```bash
+mkdir -p ~/tts && cd ~/tts && for f in kokoro-v1.0.int8.onnx voices-v1.0.bin; do curl -sSLO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done
+pip install -q kokoro-onnx soundfile pocketsphinx
+python3 -I $W/tools/tts_kokoro.py ~/tts $P/narration_spoken.txt $P/audio/voice.wav am_michael 1.1
+ffmpeg -y -v error -i $P/audio/voice.wav -ar 16000 -ac 1 $P/audio/voice16k.wav
+python3 -I $W/tools/align_lines.py $P/audio/voice16k.wav $P/audio/voice_lines.json $W/tools/align.py $P/words.json
+```
+`align_lines.py` force-aligns each sentence inside its known span (pocketsphinx), so one odd word
+can't derail the rest; it prints `N/N lines force-aligned`. Male voices: am_michael (default),
+am_fenrir, am_puck; female: af_heart, af_bella. Speed 1.1 ≈ the reference's 2.6–2.8 words/s.
+Then re-run `captions.py` and re-still 4 frames: `at()` anchors re-time themselves, but a merged
+token can throw `phrase not found` (fix `display.json`).
 
 ## 5. Render, sound, mix, QA
 ```bash
@@ -116,5 +129,5 @@ stock puppet was used.
 - `references/ref-frames/` — contact sheets, key frames, pose catalogue of the references
 - `assets/template/` — index.html demo (38 s URL-shortener), speedy.css/js, props.css/js (3D props),
   avatar.js, engine.js, fonts, generated captions · `assets/examples/supabase-hook/` — the reference hook rebuilt
-- `scripts/` — setup.sh · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py ·
+- `scripts/` — setup.sh · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py · align_lines.py · tts_kokoro.py ·
   sfx.py · music.py · mix.sh · clean_voice.sh · qa.sh

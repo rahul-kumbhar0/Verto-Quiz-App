@@ -1,0 +1,22 @@
+Every answer ChatGPT gives you is written one piece at a time, and each piece is a guess.
+So how does a guess sound so smart?
+First, tokens.
+Your message is chopped into tokens, small chunks of text.
+A token is about three-quarters of a word.
+Next, every token becomes a vector, a long list of numbers.
+In G P T three, that list is twelve thousand two hundred eighty-eight numbers long.
+Then, attention.
+Each token looks back at every token before it and decides which ones matter.
+In the river bank, bank pays attention to river, not money.
+And that happens in ninety-six layers, one after another.
+At the end, the model scores every token it knows, all fifty thousand two hundred fifty-seven of them, and picks a likely next one.
+Then it adds that token to your message and runs the whole thing again.
+For every single word.
+So where do the numbers come from?
+G P T three read three hundred billion tokens and learned by guessing the next one, nudging a hundred seventy-five billion weights to make the right guess more likely.
+The idea came from an eight-author Google paper in twenty seventeen: Attention Is All You Need.
+So here's how to use it.
+It predicts what sounds right, not what is right.
+So give it the facts, show it an example, and ask it to check its work.
+Your chatbot is quietly guessing the next token, over and over, really well.
+Follow for more breakdowns, and send this to the friend who thinks the AI is alive.

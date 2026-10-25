@@ -1,0 +1,10 @@
+ChatGPT never knows the full answer. It writes one token at a time, and every token is a guess. 🧠
+
+Tokens → vectors → attention × 96 layers → score 50,257 options → pick one → repeat.
+GPT-3 learned this by reading 300 billion tokens (Brown et al., 2020). The idea: "Attention Is All You Need" (2017).
+
+Use it better: give it the facts, show an example, ask it to check its work.
+
+Follow for more breakdowns, and send this to the friend who thinks the AI is alive.
+
+#ai #llm #chatgpt #machinelearning #artificialintelligence #howitworks #techexplained #promptengineering #transformers #deeplearning #coding #tech

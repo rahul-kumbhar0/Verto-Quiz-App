@@ -14,14 +14,14 @@
   const rnd = (seed => () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff)(42);
 
   // ---------- database stack ----------
-  /** o: {discs:5, dh:86, overlap:58, coreH:120, at, explode, spin:12} — builds once, then:
+  /** o: {discs:5, dh:86, overlap:58, coreH:120, at, explode, spin:12, core:"🐘" (icon on the core)} — builds once, then:
       discs rise in bottom-up at `at`, split apart at `explode` (gap grows), slats slowly scroll */
   R.stack = (el, t, o = {}) => {
     el = $(el);
     const n = o.discs ?? 5, dh = o.dh ?? 96, ov = o.overlap ?? 50, coreH = o.coreH ?? 130, baseH = o.baseH ?? 100;
     if (!el.dataset.built) {
       let html = `<div class="base"><i class="side"></i><i class="top"></i></div>`;
-      html += `<div class="core"><i class="side"></i><i class="top"></i><span class="pg">🐘</span></div>`;
+      html += `<div class="core"><i class="side"></i><i class="top"></i><span class="pg">${o.core ?? "🐘"}</span></div>`;
       for (let i = 0; i < n; i++) {
         let leds = "";
         for (let k = 0; k < 4; k++) leds += `<i class="led" style="left:${12 + rnd() * 76}%;top:${58 + rnd() * 30}%"></i>`;

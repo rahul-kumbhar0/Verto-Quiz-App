@@ -63,7 +63,7 @@
     const page = P[pi], nx = P[pi + 1];
     const endAt = nx ? nx[0].s - 0.14 : page[page.length - 1].e + 1.3;
     const out = prog(t, endAt - 0.14, 0.14);
-    if (el.dataset.page != pi) {
+    if (el.dataset.page !== String(pi)) {
       let html = "", open = null;
       page.forEach((w, k) => {
         if (w.g !== open && open) { html += `</span>`; open = null; }
