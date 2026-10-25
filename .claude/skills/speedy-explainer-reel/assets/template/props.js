@@ -180,3 +180,109 @@
     if (o.cnt != null) el.querySelector(".cnt").textContent = o.cnt(t);
   };
 })();
+
+/* ---------- generic any-topic primitives (appended) ---------- */
+(function () {
+  const R = window.Reel, { clamp, prog, lerp, ease: E, $ } = R;
+
+  /** 3D box. o:{at, w,h,d (px), label, icon, side, spin}. Assembles with a spring, idles with a slow sway. */
+  R.box = (el, t, o) => {
+    el = $(el);
+    if (!el.dataset.built) {
+      const s0 = o.w ?? o.size ?? 230;                      // a true cube: one size for every face
+      el.style.width = s0 + "px"; el.style.height = s0 + "px";
+      el.innerHTML = `<div class="cube">
+        <div class="f front">${o.icon ? `<span class="ic">${o.icon}</span>` : o.label ?? ""}</div>
+        <div class="f top"></div><div class="f side">${o.side ?? ""}</div></div>`;
+      const c = el.querySelector(".cube");
+      c.querySelector(".front").style.transform = `translateZ(${s0 / 2}px)`;
+      c.querySelector(".top").style.transform = `rotateX(90deg) translateZ(${s0 / 2}px)`;
+      c.querySelector(".side").style.transform = `rotateY(-90deg) translateZ(${s0 / 2}px)`;
+      el.dataset.built = 1;
+    }
+    const p = E.spring(prog(t, o.at, 0.55));
+    el.style.opacity = clamp(p * 1.6);
+    el.querySelector(".cube").style.transform =
+      `rotateX(${-24 + 2 * Math.sin(t * 0.7)}deg) rotateY(${32 + (o.spin ? t * o.spin : 3 * Math.sin(t * 0.5))}deg) scale(${lerp(0.5, 1, p)}) translateY(${(1 - p) * 60}px)`;
+    if (p > 0) R.cue("pop", o.at);
+  };
+
+  /** chip (CPU/GPU/model). o:{at, size, label, pins} */
+  R.chip = (el, t, o) => {
+    el = $(el);
+    if (!el.dataset.built) {
+      const s = o.size ?? 260, n = o.pins ?? 7; el.style.width = s + "px"; el.style.height = s + "px";
+      let pins = "";
+      for (let i = 0; i < n; i++) {
+        const u = 18 + (i * (s - 36 - 8)) / (n - 1);
+        pins += `<i class="pin" style="left:${u}px;top:-14px"></i><i class="pin" style="left:${u}px;bottom:-14px"></i>` +
+                `<i class="pin" style="top:${u}px;left:-14px;width:16px;height:8px"></i><i class="pin" style="top:${u}px;right:-14px;width:16px;height:8px"></i>`;
+      }
+      el.innerHTML = pins + `<div class="body"><div class="die">${o.label ?? ""}</div></div>`;
+      el.dataset.built = 1;
+    }
+    const p = E.spring(prog(t, o.at, 0.5));
+    el.style.opacity = clamp(p * 1.6);
+    el.style.transform = `scale(${lerp(0.6, 1, p)}) rotate(${(1 - p) * -8}deg)`;
+    const die = el.querySelector(".die");
+    die.style.boxShadow = `0 0 ${26 + 10 * Math.sin(t * 3)}px rgba(62,207,142,.45), inset 0 0 18px rgba(62,207,142,.3)`;
+    if (p > 0) R.cue("pop", o.at);
+  };
+
+  /** globe. o:{at, size, pins:[{x,y,alt,at}], arc:{from:i,to:j,at}, spinBg} — x,y in % of the globe */
+  R.globe = (el, t, o) => {
+    el = $(el);
+    if (!el.dataset.built) {
+      const s = o.size ?? 480; el.style.width = s + "px"; el.style.height = s + "px";
+      el.innerHTML = `<i class="dots"></i><i class="shade"></i>` +
+        (o.pins || []).map((p, i) => `<i class="pin ${p.alt ? "alt" : ""}" data-i="${i}" style="left:${p.x}%;top:${p.y}%"></i>`).join("") +
+        `<svg viewBox="0 0 100 100" preserveAspectRatio="none"><path id="${el.id}_arc" d=""/><circle r="2.2" opacity="0"/></svg>`;
+      el.dataset.built = 1;
+    }
+    const pin = E.out3(prog(t, o.at, 0.6));
+    el.style.opacity = pin;
+    el.style.transform = `scale(${lerp(0.92, 1, pin)})`;
+    el.querySelector(".dots").style.backgroundPosition = `${(t * (o.spinBg ?? 6)) % 17}px 0`;
+    (o.pins || []).forEach((p, i) => {
+      const e = E.spring(prog(t, p.at ?? o.at + 0.3 + i * 0.15, 0.4));
+      const n = el.querySelector(`.pin[data-i="${i}"]`);
+      n.style.opacity = clamp(e * 2); n.style.transform = `translate(-50%,-50%) scale(${lerp(0.3, 1, e)})`;
+      if (e > 0) R.cue("pop", p.at ?? o.at + 0.3 + i * 0.15, { soft: true });
+    });
+    if (o.arc) {
+      const A = o.pins[o.arc.from], B = o.pins[o.arc.to];
+      const path = el.querySelector("path");
+      const mx = (A.x + B.x) / 2, my = Math.min(A.y, B.y) - (o.arc.lift ?? 26);
+      path.setAttribute("d", `M${A.x} ${A.y} Q ${mx} ${my}, ${B.x} ${B.y}`);
+      path.setAttribute("vector-effect", "non-scaling-stroke");
+      if (!path.dataset.len) path.dataset.len = path.getTotalLength();
+      const L = +path.dataset.len, dp = E.inOut(prog(t, o.arc.at, o.arc.d ?? 0.9));
+      path.style.strokeDasharray = L; path.style.strokeDashoffset = L * (1 - dp);
+      path.style.strokeWidth = 1.6;                       // viewBox units
+      const dot = el.querySelector("circle");
+      const u = clamp(dp) * 0.999, pt = L ? path.getPointAtLength(u * L) : { x: 0, y: 0 };
+      dot.setAttribute("cx", pt.x); dot.setAttribute("cy", pt.y);
+      dot.setAttribute("opacity", dp > 0 && dp < 1 ? 1 : 0);
+    }
+  };
+
+  /** packets flowing along an arbitrary SVG path. o:{at, path:"M…", n, speed, doc, size, hide} */
+  R.flow = (el, t, o) => {
+    el = $(el);
+    if (!el.dataset.built) {
+      el.innerHTML = `<svg style="position:absolute;inset:0;overflow:visible" width="100%" height="100%"><path class="track" d="${o.path}"/></svg>` +
+        Array.from({ length: o.n ?? 5 }, () => `<i class="pk ${o.doc ? "doc" : ""}"></i>`).join("");
+      const p = el.querySelector("path"); el.dataset.len = p.getTotalLength(); el.dataset.built = 1;
+    }
+    const pin = E.out3(prog(t, o.at, 0.5)) * (1 - prog(t, o.hide ?? 1e9, 0.3));
+    const path = el.querySelector("path"), L = +el.dataset.len;
+    path.style.opacity = pin;
+    el.querySelectorAll(".pk").forEach((k, i) => {
+      const u = ((t * (o.speed ?? 0.35) + i / (o.n ?? 5)) % 1);
+      const pt = path.getPointAtLength(u * L), pt2 = path.getPointAtLength(Math.min(L, u * L + 2));
+      const ang = Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180 / Math.PI;
+      k.style.opacity = pin * (u < 0.06 || u > 0.94 ? 0 : 1);
+      k.style.transform = `translate(${pt.x - 13}px, ${pt.y - 9}px) rotate(${ang}deg) scale(${o.size ?? 1})`;
+    });
+  };
+})();

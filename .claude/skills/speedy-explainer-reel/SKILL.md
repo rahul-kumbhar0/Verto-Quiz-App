@@ -109,7 +109,7 @@ stock puppet was used.
   presenter, themes/rail/counter, hook/credibility/CTA, rhythm, what it is NOT
 - `references/example-scripts.md` — both reference scripts word-for-word with emphasis marks and
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
-- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) and how to animate them; worked reproduction in `assets/examples/supabase-hook/`
+- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow) and a topic→prop recipe table; worked reproduction in `assets/examples/supabase-hook/`
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode

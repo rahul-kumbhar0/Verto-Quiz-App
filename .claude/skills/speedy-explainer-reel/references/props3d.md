@@ -72,3 +72,27 @@ not told. Generalises to any fan-in/fan-out: requests → load balancer, events 
 - The floor anchors everything: rays + glow pool under the hero, shock rings only at birth.
 - Swap the palette per product via `--accent` (rim/ray/ring colours inherit from it where set);
   keep the blue core for "the database" whatever the product.
+
+## The any-topic kit (generic primitives)
+Four primitives cover concepts that are not a database company. All in props.css/js:
+| Prop | Call | Use for |
+|---|---|---|
+| **3D box** | `R.box(el,t,{at,size,icon,label,side,spin})` — a closed cube with glowing green edges, icon/label on the front, mono label on the side; assembles with a spring, idles with a slow sway | any service, node, container, package, app, server |
+| **Chip** | `R.chip(el,t,{at,size,label,pins})` — CPU package with pins and a pulsing green die | an AI model, CPU/GPU, the "brain", firmware, an algorithm |
+| **Globe** | `R.globe(el,t,{at,size,pins:[{x,y,alt,at}],arc:{from,to,at,lift}})` — dotted sphere, popping region pins (green / orange `alt`), a glowing arc with a travelling dot drawn between two pins | regions, distance, latency, CDN, sync, "a user across the world" |
+| **Packet flow** | `R.flow(el,t,{at,path:"M…C…",n,speed,doc,hide})` — packets travelling along ANY svg path between props, rotated to the path's direction; `doc:true` = paper-coloured documents | requests, messages, events, queues, pipelines, replication |
+HTML: `<div class="box3d" id=…>` / `<div class="chip3d">` / `<div class="globe">` /
+`<div class="flow" style="left:0;top:0;width:1080px;height:1920px">`.
+
+## Topic → prop recipes (so ANY topic gets the 3D treatment)
+| Topic family | Hook object | Chapter props |
+|---|---|---|
+| database / BaaS / storage | `R.stack` exploding into layers | tray, rack bar, WAL card, bucket, lanes |
+| networking / CDN / DNS / replication | `R.globe` with pins + arc | `R.box` nodes + `R.flow` packets, latency card |
+| AI / LLM / GPU / inference | `R.chip` with pulsing die | box (the app) → flow (prompts) → chip, matrix for tokens/batches |
+| queues / events / pipelines | two `R.box` + `R.flow` | lanes (consumers), matrix (backlog), dial (retry timer) |
+| auth / security | token card + `.selbox` | rack bar (the checker), lanes (sessions), box with a lock icon |
+| scaling / load / caching | `R.matrix` to the cap | pooler fibers + ring, box (cache) answering flow before the DB |
+| client / app mechanics | `.phone` + keyboard + finger | zones, previews, meas callouts |
+Rule: the hook gets ONE 3D hero built from these; each chapter re-dresses or feeds it, never
+replaces the metaphor mid-reel.

@@ -1,9 +1,16 @@
 # The presenter: poses, timing, and using your own character
 
 The bottom third of every frame is a cartoon presenter who reacts to the line being spoken.
-`assets/template/avatar.js` ships a generic flat-vector presenter (SVG, recoloured through
-`style`) so the pipeline works with zero assets; swap in your own character with PNG pose sheets
-when you have them (recommended for a real account — the character IS the brand).
+`assets/template/avatar.js` ships TWO flat-vector looks, selected with `avatar:{look:…}`:
+- **`"street"` (default — the house character)**: oversized boxy tee (charcoal, drop-shoulder
+  seams, wide draping sleeves with cuff folds, ribbed collar, hem fold), green bolt chest print,
+  gold chain with pendant + earring, messy dark mop hair with choppy fringe and side chunks,
+  rounded shades with a green→cyan gradient. Recolour via `style`: `shirt`, `print` (brand
+  accent; `"none"` removes it), `chain` (`"none"` removes chain + earring), `hair`, `skin`,
+  `lens1/lens2`.
+- **`"classic"`**: the fitted red tee + sport sunglasses of the reference reels.
+Both share the same rig, poses, mouth and timing, so a reel switches look with one word.
+Swap in your own character with PNG pose sheets when you have them (the character IS the brand).
 
 ## Pose library (`Avatar.POSES`, 20 poses)
 | Pose | Reads as | Use on |

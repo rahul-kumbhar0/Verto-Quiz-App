@@ -110,3 +110,41 @@
 .lanes .lane b{position:absolute;right:12px;width:12px;height:12px;border-radius:50%;background:#2A2E30}
 .lanes .lane.busy b{background:#3ECF8E;box-shadow:0 0 10px rgba(62,207,142,.9)}
 .lanes .lane .pulse{position:absolute;left:0;top:0;bottom:0;width:60px;background:linear-gradient(90deg,transparent,rgba(62,207,142,.35),transparent);opacity:0}
+
+/* ---------- generic 3D primitives (any-topic kit) ---------- */
+/* 3D box: a service, container, package, node. Faces built by R.box */
+.box3d{position:absolute;perspective:1500px;pointer-events:none;opacity:0}
+.box3d .cube{position:absolute;inset:0;transform-style:preserve-3d;transform:rotateX(-24deg) rotateY(32deg)}
+.box3d .f{position:absolute;left:0;top:0;width:100%;height:100%;border:2.5px solid rgba(62,207,142,.75);border-radius:14px;backface-visibility:hidden;
+  background:linear-gradient(135deg,#25292C,#15181A);display:grid;place-items:center;font:700 36px Inter;color:#EDEDED;
+  box-shadow:inset 0 0 44px rgba(62,207,142,.12),0 0 24px rgba(62,207,142,.15)}
+.box3d .f.top{background:linear-gradient(135deg,#31363A,#1E2225)}
+.box3d .f.side{background:linear-gradient(180deg,#15181A,#0D0F10);font:500 24px Mono;color:var(--mute)}
+.box3d .f .ic{font-size:72px;filter:drop-shadow(0 0 14px rgba(62,207,142,.5))}
+
+/* chip: CPU / GPU / AI model. Pins + die + glow */
+.chip3d{position:absolute;opacity:0;filter:drop-shadow(0 20px 30px rgba(0,0,0,.5))}
+.chip3d .body{position:absolute;inset:14px;border-radius:18px;background:linear-gradient(135deg,#1B1E20,#101214);border:2px solid #34393C;display:grid;place-items:center}
+.chip3d .die{width:46%;height:46%;border-radius:10px;background:linear-gradient(135deg,rgba(62,207,142,.5),rgba(32,120,90,.35));border:1.5px solid rgba(62,207,142,.8);
+  box-shadow:0 0 26px rgba(62,207,142,.45),inset 0 0 18px rgba(62,207,142,.3);display:grid;place-items:center;font:700 26px Mono;color:#D9FFEC}
+.chip3d .pin{position:absolute;background:linear-gradient(180deg,#9aa0a6,#5e6368);width:8px;height:16px;border-radius:2px}
+
+/* globe: regions / distance / CDN. Dotted sphere + pins + arcs (svg child for arcs) */
+.globe{position:absolute;border-radius:50%;opacity:0;
+  background:radial-gradient(circle at 34% 30%,#2E3A44,#17202A 55%,#0B1016 85%);
+  box-shadow:inset -24px -30px 60px rgba(0,0,0,.7),inset 10px 12px 40px rgba(120,180,220,.12),0 30px 70px rgba(0,0,0,.5);overflow:hidden}
+.globe .dots{position:absolute;inset:-4%;border-radius:50%;
+  background-image:radial-gradient(rgba(170,230,205,.65) 1.8px,transparent 2.1px);background-size:17px 17px}
+.globe .shade{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 36% 32%,transparent 42%,rgba(0,0,0,.55) 78%)}
+.globe .pin{position:absolute;width:24px;height:24px;border-radius:50%;background:#3ECF8E;border:3px solid #0B1016;box-shadow:0 0 0 3px rgba(62,207,142,.5),0 0 16px rgba(62,207,142,.8);opacity:0}
+.globe .pin.alt{background:#E8740C;box-shadow:0 0 0 3px rgba(232,116,12,.45),0 0 16px rgba(232,116,12,.8)}
+.globe svg{position:absolute;inset:0;overflow:visible}
+.globe svg path{fill:none;stroke:#3ECF8E;stroke-width:3.5;stroke-linecap:round;filter:drop-shadow(0 0 6px rgba(62,207,142,.8))}
+.globe svg circle{fill:#C8FFE6}
+
+/* conveyor flow: packets travelling along any path (svg built by R.flow) */
+.flow{position:absolute;pointer-events:none}
+.flow path.track{fill:none;stroke:rgba(255,255,255,.14);stroke-width:3;stroke-dasharray:4 10}
+.is-light .flow path.track{stroke:rgba(0,0,0,.18)}
+.flow .pk{position:absolute;width:26px;height:18px;border-radius:5px;background:linear-gradient(135deg,#59E3A7,#2FA671);box-shadow:0 0 12px rgba(62,207,142,.7);opacity:0}
+.flow .pk.doc{background:linear-gradient(135deg,#F5F2E8,#D9D4C0);box-shadow:0 2px 8px rgba(0,0,0,.4)}
