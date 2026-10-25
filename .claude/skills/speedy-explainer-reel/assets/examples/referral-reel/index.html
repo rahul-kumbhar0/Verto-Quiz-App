@@ -1,0 +1,215 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Referral from a stranger</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>
+/* ---- hook: 7x ---- */
+.apps{position:absolute;left:0;right:0;top:660px;text-align:center;opacity:0}
+.apps b{display:block;font:900 120px/1 Inter;letter-spacing:-4px;color:#fff}
+.apps span{font:700 24px Mono;letter-spacing:3px;color:#9AA0A8}
+.hb{position:absolute;left:110px;width:860px;height:150px;border-radius:24px;background:#17191D;border:1.5px solid #2A2D33;overflow:hidden;opacity:0;font-family:Inter}
+.hb .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:24px}
+.hb .t{position:absolute;left:28px;top:30px;font:800 32px Inter;color:#fff}
+.hb .t small{display:block;font:600 20px Mono;color:#C9CDD2;margin-top:4px}
+.hb .x{position:absolute;right:30px;top:36px;font:900 70px/1 Inter;color:#fff;letter-spacing:-2px}
+/* ---- stranger ---- */
+.prof{position:absolute;left:160px;top:700px;width:760px;border-radius:28px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);opacity:0;overflow:hidden;font-family:Inter}
+.prof .cov{height:130px;background:linear-gradient(135deg,#3B82F6,#1E4FD8)}
+.prof .av{position:absolute;left:40px;top:62px;width:140px;height:140px;border-radius:50%;background:#F59E0B;border:6px solid #fff;display:grid;place-items:center;font:800 54px Inter;color:#fff}
+.prof .bd{padding:84px 40px 30px}
+.prof .bd b{display:block;font:800 38px Inter;color:#111}
+.prof .bd span{display:block;font:500 24px Inter;color:#555;margin-top:4px}
+.prof .bd small{display:block;font:600 20px Inter;color:#999;margin-top:10px}
+.prof .btns{display:flex;gap:14px;margin-top:22px}
+.prof .btns i{font-style:normal;flex:1;height:64px;border-radius:32px;display:grid;place-items:center;font:700 24px Inter}
+.prof .btns .p{background:#0A66C2;color:#fff}.prof .btns .s{border:2px solid #0A66C2;color:#0A66C2}
+.zero{position:absolute;left:0;right:0;top:1230px;text-align:center;opacity:0;z-index:4}
+.zero span{display:inline-block;font:700 28px Mono;color:#B91C1C;background:#FFE8E8;border-radius:999px;padding:10px 22px}
+/* ---- step 1: careers page ---- */
+.cp{position:absolute;left:80px;top:680px;width:920px;height:580px;border-radius:26px;background:#14161A;border:1.5px solid #2A2D33;box-shadow:0 40px 90px rgba(0,0,0,.6);opacity:0;overflow:hidden;font-family:Inter}
+.cp .bar{height:60px;display:flex;align-items:center;gap:12px;padding:0 20px;background:#1C1F24;border-bottom:1px solid #2A2D33}
+.cp .bar i{width:14px;height:14px;border-radius:50%;background:#3A3D44}
+.cp .url{position:relative;margin-left:10px;flex:1;height:40px;border-radius:12px;background:#0D0F12;display:flex;align-items:center;padding:0 16px;font:600 21px Mono;color:#C9CDD2}
+.cp .pg{padding:30px 34px}
+.cp h3{margin:0;font:800 42px Inter;color:#fff}
+.cp .m{margin-top:8px;font:500 24px Inter;color:#9AA0A8}
+.cp .id{display:inline-block;margin-top:22px;font:700 24px Mono;color:#FFB340;background:rgba(255,179,64,.12);border-radius:10px;padding:8px 16px}
+.cp .ap{margin-top:30px;width:260px;height:68px;border-radius:16px;background:#3B82F6;display:grid;place-items:center;font:800 26px Inter;color:#fff}
+.copied{position:absolute;right:30px;top:76px;font:700 22px Mono;color:#06210f;background:#3ECF8E;border-radius:999px;padding:8px 18px;opacity:0}
+/* ---- step 2: LinkedIn search ---- */
+.li{position:absolute;left:80px;top:670px;width:920px;height:620px;border-radius:26px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);opacity:0;overflow:hidden;font-family:Inter}
+.li .sb{margin:22px;height:70px;border-radius:14px;background:#EEF3F8;display:flex;align-items:center;gap:12px;padding:0 20px;font:600 28px Inter;color:#111}
+.li .sb i{font-style:normal;color:#666}
+.li .ch{display:flex;gap:12px;margin:0 22px 14px}
+.li .ch span{font:700 21px Inter;border-radius:999px;padding:8px 18px;border:2px solid #0A66C2;color:#0A66C2;opacity:0}
+.li .ch span.on{background:#0A66C2;color:#fff}
+.li .r{display:flex;align-items:center;gap:16px;margin:10px 22px;padding:14px 18px;border-radius:16px;border:1.5px solid #E6E6EA;opacity:0}
+.li .r .a{width:64px;height:64px;border-radius:50%;flex:none}
+.li .r b{display:block;font:800 25px Inter;color:#111}.li .r span{font:500 20px Inter;color:#666}
+.li .r em{margin-left:auto;font:700 18px Mono;color:#15803D;background:#E8F7EF;border-radius:999px;padding:6px 14px;font-style:normal;white-space:nowrap}
+/* ---- step 3: the message ---- */
+.msg{position:absolute;left:80px;top:670px;width:920px;height:560px;border-radius:26px;background:#14161A;border:1.5px solid #2A2D33;box-shadow:0 40px 90px rgba(0,0,0,.6);opacity:0;overflow:hidden;font-family:Inter}
+.msg .hd{height:76px;display:flex;align-items:center;gap:14px;padding:0 22px;border-bottom:1px solid #2A2D33;font:700 26px Inter;color:#fff}
+.msg .hd i{width:46px;height:46px;border-radius:50%;background:#F59E0B}
+.ln3{margin:18px 24px 0 auto;max-width:760px;padding:16px 22px;border-radius:22px 22px 6px 22px;background:#2A7BFF;color:#fff;font:500 25px/1.35 Inter;opacity:0;position:relative}
+.ln3 b{position:absolute;left:-44px;top:14px;width:32px;height:32px;border-radius:50%;background:#3ECF8E;color:#06210f;font:800 18px/32px Inter;text-align:center}
+.bad{position:absolute;left:150px;top:1250px;width:780px;padding:16px 24px;border-radius:20px;background:#2A2D33;color:#C9CDD2;font:500 26px Inter;opacity:0;z-index:4}
+.bad s{position:absolute;left:18px;right:18px;top:50%;height:5px;background:#FF5A5F;border-radius:3px;transform-origin:0 50%;transform:scaleX(0)}
+.bad em{position:absolute;right:-18px;top:-18px;width:52px;height:52px;border-radius:50%;background:#FF5A5F;color:#fff;font:900 30px/52px Inter;text-align:center;font-style:normal}
+/* ---- secret ---- */
+.bonus{position:absolute;left:150px;top:700px;width:780px;border-radius:28px;background:#fff;border:2px solid #3ECF8E;box-shadow:0 30px 70px rgba(62,207,142,.18);padding:30px 36px;opacity:0;font-family:Inter}
+.bonus small{display:block;font:700 20px Mono;letter-spacing:2px;color:#15803D}
+.bonus b{display:block;margin-top:8px;font:900 54px/1.1 Inter;color:#111;letter-spacing:-1px}
+.bonus span{display:block;margin-top:10px;font:500 24px Inter;color:#555}
+.flip{position:absolute;left:0;right:0;top:1060px;display:flex;justify-content:center;gap:20px}
+.flip div{font:800 34px Inter;border-radius:18px;padding:14px 26px;opacity:0;position:relative}
+.flip .no{background:#fff;border:2px solid #E2E2E6;color:#999}
+.flip .no s{position:absolute;left:14px;right:14px;top:50%;height:5px;background:#FF5A5F;border-radius:3px;transform-origin:0 50%;transform:scaleX(0)}
+.flip .yes{background:#3ECF8E;color:#06210f}
+/* ---- CTA ---- */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <!-- HOOK (dark) -->
+  <section class="scene" id="sHook">
+    <div class="apps" id="apps"><b id="appn">0</b><span>APPLICATIONS ANALYSED</span></div>
+    <div class="hb" id="h1" style="top:880px"><i class="fill" id="hf1" style="background:#3A3D44"></i><div class="t">Job board<small>apply cold</small></div><div class="x">1×</div></div>
+    <div class="hb" id="h2" style="top:1060px"><i class="fill" id="hf2" style="background:#15803D"></i><div class="t">Referral<small>someone vouches</small></div><div class="x" id="hx2">7×</div></div>
+    <div class="note r" id="n0" style="top:1240px">Pinpoint hiring data, 4.5M applications · likelihood of being hired</div>
+  </section>
+  <!-- STRANGER (light) -->
+  <section class="scene" id="sStr">
+    <div class="prof" id="prof"><div class="cov"></div><div class="av">P</div>
+      <div class="bd"><b>Priya S.</b><span>Software Engineer at DreamCo</span><small>Bengaluru · 3rd degree</small><div class="btns"><i class="p">Message</i><i class="s">Connect</i></div></div></div>
+    <div class="zero" id="zero"><span>mutual connections: 0</span></div>
+  </section>
+  <!-- STEP 1 (dark) -->
+  <section class="scene" id="s1">
+    <div class="cp" id="cp"><div class="bar"><i></i><i></i><i></i><span class="url" id="url">dreamco.com/careers/sde-intern-R1234<span class="selbox" id="usel" style="inset:-4px -6px"></span></span></div>
+      <div class="pg"><h3>Software Engineer Intern</h3><div class="m">DreamCo · Bengaluru · 2026 grads</div><div class="id">Job ID: R1234</div><div class="ap">Apply</div></div>
+      <div class="copied" id="copied">link copied ✓</div></div>
+  </section>
+  <!-- STEP 2 (light) -->
+  <section class="scene" id="s2">
+    <div class="li" id="li"><div class="sb"><i>🔍</i><span id="lq"></span></div>
+      <div class="ch"><span id="f1">People</span><span id="f2" class="on">Current company: DreamCo</span><span id="f3" class="on">School: your college</span></div>
+      <div class="r" id="lr1"><i class="a" style="background:#F59E0B"></i><div><b>Priya S.</b><span>SDE · DreamCo</span></div><em>🎓 same college</em></div>
+      <div class="r" id="lr2"><i class="a" style="background:#10B981"></i><div><b>Karan M.</b><span>Data Engineer · DreamCo</span></div><em>🎓 same college</em></div>
+      <div class="r" id="lr3"><i class="a" style="background:#8B5CF6"></i><div><b>Ananya R.</b><span>SDE II · DreamCo</span></div><em>🎓 same college</em></div>
+    </div>
+  </section>
+  <!-- STEP 3 (dark) -->
+  <section class="scene" id="s3">
+    <div class="msg" id="msg"><div class="hd"><i></i>Priya S.</div>
+      <div class="ln3" id="m1"><b>1</b>Hi Priya! I'm Aarav, final-year CSE at your college 👋</div>
+      <div class="ln3" id="m2"><b>2</b>I'm applying for SDE Intern: dreamco.com/careers/R1234</div>
+      <div class="ln3" id="m3"><b>3</b>I built a job tracker in Python + SQL, which matches the role. Resume attached. Would you be open to referring me? No pressure at all 🙏</div>
+    </div>
+    <div class="bad" id="bad">"hi sir, any openings?"<s id="bads"></s><em>✕</em></div>
+  </section>
+  <!-- SECRET (light) -->
+  <section class="scene" id="sSec">
+    <div class="bonus" id="bonus"><small>HOW REFERRALS WORK AT MANY COMPANIES</small><b>💸 Referral bonus</b><span>paid to the employee when their referral gets hired</span></div>
+    <div class="flip"><div class="no" id="fl1">🙏 begging<s id="fls"></s></div><div class="yes" id="fl2">🤝 helping them</div></div>
+  </section>
+  <!-- CTA (light) -->
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Vikram · 2m</small><b>REFER</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#10B981"></i><div><small>Pooja · 1m</small><b>REFER</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#8B5CF6"></i><div><small>Rahul · 40s</small><b>REFER</b> the bonus part 🤯</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#8B5CF6,#3B82F6)"></i><div><small>you · now</small><b>REFER</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="../../brand/canwe/canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>my exact referral message templates 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>REFER</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "../../brand/canwe/canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+if (BRAND.logo) document.querySelectorAll(".pav,.blogo").forEach(e => (e.style.background = `#1E4FD8 url(${BRAND.logo}) center/cover`));
+const T = { str: at("But you don't"), s1: at("One. Find"), s2: at("Two. On"), s3: at("Three. Send"), sec: at("And here's the secret"), cta: at("Comment REFER"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.str, enter: "none" }, { id: "sStr", s: T.str, e: T.s1, enter: "blurzoom" },
+  { id: "s1", s: T.s1, e: T.s2, enter: "push" }, { id: "s2", s: T.s2, e: T.s3, enter: "blurzoom" },
+  { id: "s3", s: T.s3, e: T.sec, enter: "swing" }, { id: "sSec", s: T.sec, e: T.cta, enter: "push" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.str, T.s1], [T.s2, T.s3], [T.sec, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "the job", at: T.s1 }, { label: "find", at: T.s2 }, { label: "message", at: T.s3 }, { label: "why yes", at: T.sec, end: T.cta }],
+  counter: { unit: "steps done", steps: [[T.s1, 1], [T.s2, 2], [T.s3, 3]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15 },
+  poses: P,
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK
+  R.card("apps", t, { in: 0.1, y: 30 }); count("appn", t, 0.2, 2.6, 4500000, { ding: true });
+  R.card("h1", t, { in: at("Referred") - 0.1, y: 30 }); R.card("h2", t, { in: at("Referred") + 0.15, y: 30 });
+  R.$("hf1").style.width = 13 * ease.out3(prog(t, at("7x") - 0.2, 0.6)) + "%";
+  R.$("hf2").style.width = 92 * ease.out3(prog(t, at("7x"), 0.9)) + "%";
+  pop("hx2", t, at("7x") + 0.3, { from: 0.5 });
+  R.note("n0", t, at("hired") + 0.2, T.str);
+  // STRANGER
+  R.card("prof", t, { in: T.str + 0.05, y: 50 });
+  pop("zero", t, at("dream company") - 0.05, { from: 0.6 });
+  // STEP 1
+  R.card("cp", t, { in: T.s1 + 0.05, y: 50 });
+  R.sel("usel", t, at("copy the job"));
+  pop("copied", t, at("job link") + 0.1, { from: 0.6 });
+  // STEP 2
+  R.card("li", t, { in: T.s2 + 0.05, y: 50 });
+  R.type("lq", "DreamCo", t, at("search that") , 14);
+  pop("f1", t, at("search that") + 0.3, { from: 0.7 }); pop("f2", t, at("company plus") + 0.1, { from: 0.7 }); pop("f3", t, at("your college") , { from: 0.7 });
+  ["lr1", "lr2", "lr3"].forEach((id, i) => R.rise(id, t, at("Start with") + i * 0.15, { dy: 20 }));
+  // STEP 3
+  R.card("msg", t, { in: T.s3 + 0.05, y: 50 });
+  [["m1", at("Who you are")], ["m2", at("the job link", 1)], ["m3", at("one line on")]].forEach(([id, a]) => {
+    const el = R.$(id), p = R.ease.spring(prog(t, a, 0.4)); el.style.opacity = clamp(prog(t, a, 0.15) * 3);
+    el.style.transform = `translateY(${(1 - ease.out3(prog(t, a, 0.35))) * 24}px) scale(${lerp(0.85, 1, p)})`; el.style.transformOrigin = "100% 100%";
+    if (prog(t, a, 0.4) > 0 && prog(t, a, 0.4) < 0.2) R.cue("pop", a, { soft: true }); });
+  pop("bad", t, at("No hi") - 0.05, { from: 0.7 });
+  R.$("bads").style.transform = `scaleX(${ease.out3(prog(t, at("any openings") + 0.2, 0.3))})`;
+  // SECRET
+  R.card("bonus", t, { in: at("Many companies") - 0.1, y: 40 });
+  pop("fl1", t, at("not begging") - 0.05, { from: 0.6 });
+  R.$("fls").style.transform = `scaleX(${ease.out3(prog(t, R.end("not begging") , 0.3))})`;
+  pop("fl2", t, at("helping them") - 0.05, { from: 0.6 });
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "REFER", tyA = at("Comment REFER") + 0.3, posted = R.end("Comment REFER") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 14); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("message templates") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

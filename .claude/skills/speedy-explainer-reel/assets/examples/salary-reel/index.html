@@ -1,0 +1,212 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Fresher salary bands</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>
+/* ---- hook: two freshers ---- */
+.stu{position:absolute;top:690px;width:430px;height:470px;border-radius:28px;background:#17191D;border:1.5px solid #2A2D33;box-shadow:0 40px 90px rgba(0,0,0,.55);opacity:0;font-family:Inter;text-align:center}
+.stu .face{margin:34px auto 10px;width:130px;height:130px;border-radius:50%;background:#23262C;display:grid;place-items:center;font-size:76px}
+.stu .nm{font:800 32px Inter;color:#fff}
+.stu .meta{margin-top:10px;font:600 21px Mono;color:#9AA0A8;line-height:1.6}
+.pay{position:absolute;left:50%;bottom:-34px;transform:translateX(-50%);font:900 64px Inter;letter-spacing:-2px;padding:6px 26px;border-radius:20px;white-space:nowrap;opacity:0}
+.pay.lo{background:#2A2D33;color:#E8EAED}
+.pay.hi{background:#3ECF8E;color:#06210f;box-shadow:0 0 50px rgba(62,207,142,.55)}
+.same{position:absolute;left:0;right:0;top:1250px;text-align:center;opacity:0;z-index:4}
+.same span{display:inline-block;font:800 40px Inter;color:#fff;background:#3B82F6;border-radius:18px;padding:12px 30px;transform:rotate(-3deg);box-shadow:0 14px 40px rgba(59,130,246,.45)}
+/* ---- bands ladder ---- */
+.ladder{position:absolute;left:120px;top:700px;width:840px}
+.rung{height:150px;border-radius:24px;margin-bottom:22px;display:flex;align-items:center;gap:22px;padding:0 34px;font-family:Inter;opacity:0;box-shadow:0 18px 44px rgba(0,0,0,.08)}
+.rung b{font:900 54px Inter;letter-spacing:-1px}.rung span{font:700 26px Inter;color:#555}
+.rung em{margin-left:auto;font:700 22px Mono;font-style:normal;color:#777}
+.r3{background:#E8F7EF;border:2px solid #3ECF8E}.r3 b{color:#15803D}
+.r2{background:#EEF4FF;border:2px solid #3B82F6}.r2 b{color:#1E4FD8}
+.r1{background:#fff;border:2px solid #E2E2E6}.r1 b{color:#111}
+/* ---- TCS ---- */
+.test{position:absolute;left:70px;top:690px;width:360px;height:250px;border-radius:24px;background:#17191D;border:1.5px solid #2A2D33;padding:24px;opacity:0;font-family:Inter}
+.test small{display:block;font:700 20px Mono;letter-spacing:2px;color:#9AA0A8}
+.test b{display:block;margin-top:6px;font:900 64px Inter;color:#fff;letter-spacing:-2px}
+.test .sc{margin-top:16px;height:16px;border-radius:8px;background:#2A2D33;overflow:hidden}
+.test .sc i{display:block;height:100%;width:0;background:linear-gradient(90deg,#FFB340,#3ECF8E);border-radius:8px}
+.test .lbl{margin-top:8px;font:700 20px Mono;color:#3ECF8E}
+.bars{position:absolute;left:470px;top:690px;width:540px}
+.bar{position:relative;height:150px;margin-bottom:22px;border-radius:22px;background:#17191D;border:1.5px solid #2A2D33;overflow:hidden;opacity:0;font-family:Inter}
+.bar .fill{position:absolute;left:0;top:0;bottom:0;width:0;border-radius:22px}
+.bar .t{position:absolute;left:26px;top:24px;font:800 34px Inter;color:#fff}
+.bar .v{position:absolute;left:26px;top:78px;font:900 42px Inter;color:#fff;letter-spacing:-1px}
+.bar .v small{font:600 20px Inter;color:#C9CDD2;margin-left:8px}
+.wire{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+.wire path{fill:none;stroke:#3ECF8E;stroke-width:5;stroke-linecap:round;stroke-dasharray:10 12}
+/* ---- Infosys ---- */
+.infy{position:absolute;left:90px;top:680px;width:900px;height:600px;border-radius:28px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);opacity:0;font-family:Inter;padding:26px 32px}
+.infy h3{margin:0;font:800 30px Inter;color:#111}.infy p{margin:2px 0 14px;font:500 20px Inter;color:#888}
+.ib{display:flex;align-items:flex-end;gap:26px;height:410px;padding:0 10px;border-bottom:2px solid #EEE}
+.ib .c{flex:1;text-align:center;opacity:0}
+.ib .col{margin:0 auto;width:110px;border-radius:14px 14px 0 0;background:linear-gradient(180deg,#3B82F6,#1E4FD8);transform-origin:50% 100%}
+.ib .c.top .col{background:linear-gradient(180deg,#3ECF8E,#15803D)}
+.ib .val{font:900 34px Inter;color:#111;margin-bottom:8px}
+.ib .nm{position:absolute;margin-top:10px;width:150px;margin-left:-20px;font:700 17px Mono;color:#666}
+.hard{position:absolute;right:120px;top:700px;font:700 22px Mono;color:#B91C1C;background:#FFE8E8;border-radius:999px;padding:8px 18px;opacity:0;z-index:3}
+/* ---- others ---- */
+.pair{position:absolute;left:90px;width:900px;height:250px;border-radius:26px;background:#17191D;border:1.5px solid #2A2D33;opacity:0;font-family:Inter;display:flex;align-items:center;padding:0 30px;gap:20px}
+.pair .co{width:220px;font:900 38px Inter;color:#fff}
+.pair .tk{flex:1;height:170px;border-radius:20px;background:#22252B;display:flex;flex-direction:column;justify-content:center;padding:0 22px}
+.pair .tk b{font:800 26px Inter;color:#C9CDD2}.pair .tk span{font:900 46px Inter;color:#fff;letter-spacing:-1px}
+.pair .tk.up{background:rgba(62,207,142,.14);border:2px solid #3ECF8E}.pair .tk.up span{color:#3ECF8E}
+.pair .ar{font:900 50px Inter;color:#3ECF8E}
+/* ---- key ---- */
+.vs{position:absolute;left:90px;top:720px;width:900px;display:flex;flex-direction:column;gap:28px}
+.vs div{height:200px;border-radius:28px;display:flex;align-items:center;gap:28px;padding:0 40px;font:900 64px Inter;letter-spacing:-2px;opacity:0;position:relative}
+.vs .no{background:#fff;border:2px solid #E2E2E6;color:#999}
+.vs .yes{background:#E8F7EF;border:3px solid #3ECF8E;color:#111}
+.vs .no s{position:absolute;left:30px;right:30px;top:50%;height:8px;background:#FF5A5F;border-radius:4px;transform-origin:0 50%;transform:scaleX(0)}
+.vs .yes em{margin-left:auto;font:900 70px Inter;color:#15803D;font-style:normal}
+/* ---- CTA ---- */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#10B981,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <!-- HOOK (dark) -->
+  <section class="scene" id="sHook">
+    <div class="stu" id="st1" style="left:70px"><div class="face">🎓</div><div class="nm">Fresher A</div><div class="meta">Same college<br>B.Tech CSE</div><div class="pay lo" id="p1">₹3.5L</div></div>
+    <div class="stu" id="st2" style="left:580px"><div class="face">🎓</div><div class="nm">Fresher B</div><div class="meta">Same college<br>B.Tech CSE</div><div class="pay hi" id="p2">₹21L</div></div>
+    <div class="same" id="same"><span>🏢 Same company</span></div>
+  </section>
+  <!-- BANDS (light) -->
+  <section class="scene" id="sBands">
+    <div class="ladder">
+      <div class="rung r3" id="g3"><b>₹9–21L</b><span>Top track</span><em>harder test</em></div>
+      <div class="rung r2" id="g2"><b>₹6–7L</b><span>Middle track</span><em>harder round</em></div>
+      <div class="rung r1" id="g1"><b>₹3.5–4L</b><span>Base track</span><em>aptitude + basics</em></div>
+    </div>
+    <div class="note r" id="n0" style="top:1260px">Approx. fresher CTC, 2026</div>
+  </section>
+  <!-- TCS (dark) -->
+  <section class="scene" id="sTcs">
+    <div class="test" id="test"><small>ONE TEST</small><b>TCS NQT</b><div class="sc"><i id="scf"></i></div><div class="lbl" id="scl">your score → your track</div></div>
+    <div class="bars">
+      <div class="bar" id="b1"><i class="fill" id="bf1" style="background:#3A3D44"></i><div class="t">Ninja</div><div class="v">≈ ₹3.4L<small>CTC</small></div></div>
+      <div class="bar" id="b2"><i class="fill" id="bf2" style="background:#1E4FD8"></i><div class="t">Digital</div><div class="v">≈ ₹7L<small>CTC</small></div></div>
+      <div class="bar" id="b3"><i class="fill" id="bf3" style="background:#15803D"></i><div class="t">Prime</div><div class="v">₹9–11.5L<small>CTC</small></div></div>
+    </div>
+    <svg class="wire" id="wr"><path id="w1" d="M 430 820 C 450 820, 450 765, 470 765"/><path id="w2" d="M 430 840 C 450 840, 450 937, 470 937"/><path id="w3" d="M 430 860 C 450 860, 450 1109, 470 1109"/></svg>
+    <div class="note l" id="n1" style="top:1300px">Approx. CTC from 2026 TCS NQT guides · check official notice</div>
+  </section>
+  <!-- INFOSYS (light) -->
+  <section class="scene" id="sInfy">
+    <div class="infy" id="infy"><h3>Infosys fresher roles</h3><p>trainee packages, per year</p>
+      <div class="ib">
+        <div class="c" id="i1"><div class="val">₹7L</div><div class="col" style="height:120px"></div><div class="nm">Digital Spec. Eng.</div></div>
+        <div class="c" id="i2"><div class="val">₹11L</div><div class="col" style="height:190px"></div><div class="nm">Spec. Prog. L1</div></div>
+        <div class="c" id="i3"><div class="val">₹16L</div><div class="col" style="height:270px"></div><div class="nm">Spec. Prog. L2</div></div>
+        <div class="c top" id="i4"><div class="val">₹21L</div><div class="col" style="height:350px"></div><div class="nm">Spec. Prog. L3</div></div>
+      </div></div>
+    <div class="hard" id="hard">⚡ much harder coding test</div>
+    <div class="note r" id="n2" style="top:1300px">Business Standard, Dec 2025</div>
+  </section>
+  <!-- OTHERS (dark) -->
+  <section class="scene" id="sOth">
+    <div class="pair" id="pw" style="top:720px"><div class="co">Wipro</div><div class="tk"><b>Elite</b><span>≈ ₹3.5L</span></div><div class="ar">→</div><div class="tk up"><b>Turbo</b><span>≈ ₹6.5L</span></div></div>
+    <div class="pair" id="pc" style="top:1000px"><div class="co">Cognizant</div><div class="tk"><b>GenC</b><span>≈ ₹4L</span></div><div class="ar">→</div><div class="tk up"><b>GenC Next</b><span>≈ ₹6.5L</span></div></div>
+    <div class="note r" id="n3" style="top:1290px">Approx. CTC from 2026 hiring guides</div>
+  </section>
+  <!-- KEY (light) -->
+  <section class="scene" id="sKey">
+    <div class="vs"><div class="no" id="k1">🎓 Your college<s id="ks"></s></div><div class="yes" id="k2">💻 Coding round<em>✓</em></div></div>
+  </section>
+  <!-- CTA (light) -->
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Rohit · 2m</small><b>SALARY</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Sneha · 1m</small><b>SALARY</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Arjun · 40s</small><b>SALARY</b> nobody told us this 😭</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#10B981,#3B82F6)"></i><div><small>you · now</small><b>SALARY</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="../../brand/canwe/canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>your full band map + what each round tests 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>SALARY</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "../../brand/canwe/canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+if (BRAND.logo) document.querySelectorAll(".pav,.blogo").forEach(e => (e.style.background = `#1E4FD8 url(${BRAND.logo}) center/cover`));
+const T = { bands: at("Here's what nobody"), tcs: at("At TCS"), infy: at("Infosys goes"), oth: at("And Wipro"), key: at("So most of"), cta: at("Comment SALARY"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.bands, enter: "none" }, { id: "sBands", s: T.bands, e: T.tcs, enter: "blurzoom" },
+  { id: "sTcs", s: T.tcs, e: T.infy, enter: "push" }, { id: "sInfy", s: T.infy, e: T.oth, enter: "blurzoom" },
+  { id: "sOth", s: T.oth, e: T.key, enter: "swing" }, { id: "sKey", s: T.key, e: T.cta, enter: "push" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.bands, T.tcs], [T.infy, T.oth], [T.key, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "TCS", at: T.tcs }, { label: "Infosys", at: T.infy }, { label: "others", at: T.oth }, { label: "the key", at: T.key, end: T.cta }],
+  counter: { unit: "pay tracks", steps: [[at("Ninja"), 1], [at("Digital"), 2], [at("Prime"), 3], [at("Specialist"), 7], [at("Cognizant"), 11]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15 },
+  poses: P,
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK
+  R.card("st1", t, { in: at("two freshers"), y: 50 }); R.card("st2", t, { in: at("two freshers") + 0.25, y: 50 });
+  pop("p1", t, at("One gets") + 0.3, { from: 0.5 }); pop("p2", t, at("other gets") + 0.4, { from: 0.4 });
+  const sh = R.ease.spring(prog(t, at("other gets") + 0.4, 0.6)); R.$("st2").style.boxShadow = sh > 0 ? `0 0 ${80 * clamp(sh)}px rgba(62,207,142,.35),0 40px 90px rgba(0,0,0,.55)` : "";
+  pop("same", t, at("Same company") - 0.05, { from: 0.5, rot: -3 });
+  // BANDS
+  [["g1", T.bands + 0.25], ["g2", T.bands + 0.6], ["g3", T.bands + 0.95]].forEach(([id, a]) => R.card(id, t, { in: a, y: 40 }));
+  R.note("n0", t, at("bands") + 0.2, T.tcs);
+  // TCS
+  R.card("test", t, { in: T.tcs + 0.05, y: 40 });
+  R.$("scf").style.width = 100 * ease.inOut(prog(t, at("your score"), 0.8)) + "%";
+  [["b1", "bf1", at("Ninja"), 32], ["b2", "bf2", at("Digital"), 64], ["b3", "bf3", at("Prime"), 100]].forEach(([b, f, a, w], i) => {
+    R.card(b, t, { in: a - 0.15, y: 20 }); R.$(f).style.width = w * ease.out3(prog(t, a, 0.6)) + "%"; R.draw("w" + (i + 1), t, a - 0.2, 0.4); });
+  R.note("n1", t, at("Ninja") + 0.6, T.infy);
+  // INFOSYS
+  R.card("infy", t, { in: T.infy + 0.05, y: 50 });
+  [["i1", T.infy + 0.35], ["i2", T.infy + 0.75], ["i3", at("Specialist")], ["i4", at("up to")]].forEach(([id, a]) => {
+    const el = R.$(id), p = R.ease.spring(prog(t, a, 0.5)); el.style.opacity = clamp(prog(t, a, 0.15) * 3);
+    el.querySelector(".col").style.transform = `scaleY(${clamp(p, 0, 1.2)})`; if (prog(t, a, 0.5) > 0 && prog(t, a, 0.5) < 0.2) R.cue("pop", a, { soft: true }); });
+  pop("hard", t, at("much harder") - 0.05, { from: 0.6, rot: 2 });
+  R.note("n2", t, at("up to") + 0.4, T.oth);
+  // OTHERS
+  R.card("pw", t, { in: at("Wipro") - 0.1, y: 40 }); R.card("pc", t, { in: at("Cognizant") - 0.1, y: 40 });
+  R.note("n3", t, at("separate") + 0.2, T.key);
+  // KEY
+  R.card("k1", t, { in: T.key + 0.1, y: 30 });
+  R.$("ks").style.transform = `scaleX(${ease.out3(prog(t, at("isn't your college") + 0.3, 0.35))})`;
+  pop("k2", t, at("It's how") - 0.05, { from: 0.8 });
+  if (t >= at("coding round")) R.punch("k2", t, at("coding round") + 0.05, 0.06);
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "SALARY", tyA = at("Comment SALARY") + 0.3, posted = R.end("Comment SALARY") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 14); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("actually tests") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

@@ -1,0 +1,28 @@
+=== INSTAGRAM REEL ===
+Caption:
+Comment AGENT and I'll DM you 3 agent setups you can try this week 👇
+
+Every AI company is launching "agents". OpenAI just gave its agents their own computer and browser.
+So what IS an agent?
+🧠 AI that uses tools, in a loop, until a goal is done.
+💬 A chatbot answers once and stops.
+🤖 An agent keeps going: think → act → observe → repeat.
+
+Save this, and send it to the friend who keeps saying "agentic" 😄
+#aiagents #ai #chatgpt #claudeai #openai #artificialintelligence #techexplained #aitools #coding #developersindia #machinelearning #automation
+
+Pinned comment:
+Sending the 3 setups to everyone who comments AGENT 📩
+
+DM automation: #21 on @canwe.ai (keyword agent) → https://canwe-guides.vercel.app/agent/
+
+=== YOUTUBE SHORTS ===
+Title:
+What Is an AI Agent? Explained in 45 Seconds #shorts
+Description:
+An agent is AI that uses tools, in a loop, until a goal is done: think, act, observe, repeat. Here's how it differs from a chatbot, with a real example.
+3 agent setups to try (job hunt, research, coding): https://canwe-guides.vercel.app/agent/
+Sources: TechCrunch / CNBC on OpenAI's DevDay agents (29 Sep 2026).
+#shorts #aiagents #ai #chatgpt #claudeai
+Pinned comment:
+📌 3 agent setups with copy-paste prompts: https://canwe-guides.vercel.app/agent/
