@@ -1,0 +1,260 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Do bots reject your resume</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>
+/* ---- hook: the myth ---- */
+.myth{position:absolute;left:90px;top:690px;width:900px;height:420px;border-radius:28px;background:#17191D;border:1.5px solid #2A2D33;box-shadow:0 40px 90px rgba(0,0,0,.6);opacity:0;overflow:hidden;font-family:Inter}
+.myth .tag{position:absolute;left:34px;top:30px;font:700 22px Mono;letter-spacing:3px;color:#FF5A5F}
+.myth .big{position:absolute;left:34px;top:76px;font:900 170px/1 Inter;letter-spacing:-6px;color:#fff}
+.myth .sub{position:absolute;left:38px;top:262px;font:700 44px/1.15 Inter;color:#E8EAED;width:820px}
+.myth .bot{position:absolute;right:40px;top:40px;font-size:120px;opacity:0}
+.crack{position:absolute;inset:0;pointer-events:none}
+.crack path{fill:none;stroke:#FF5A5F;stroke-width:6;stroke-linecap:round}
+.src{position:absolute;left:150px;top:1150px;width:780px;padding:18px 24px;border-radius:18px;background:#FFF7D6;color:#3A2E00;font:600 27px/1.35 Inter;box-shadow:0 20px 50px rgba(0,0,0,.4);opacity:0;transform-origin:50% 0}
+.src b{display:block;font:700 18px Mono;letter-spacing:2px;color:#8A6D00;margin-bottom:4px}
+.src s{color:#B91C1C;text-decoration:none;font-weight:800}
+/* ---- survey grid ---- */
+.grid25{position:absolute;left:220px;top:700px;width:640px;display:grid;grid-template-columns:repeat(5,1fr);gap:18px;justify-items:center;opacity:0}
+.rc{width:96px;height:96px;border-radius:50%;background:#E8F7EF;border:4px solid #3ECF8E;display:grid;place-items:center;font-size:46px;opacity:0}
+.rc.bad{background:#FFE8E8;border-color:#FF5A5F}
+.tally{position:absolute;left:0;right:0;top:1275px;text-align:center;opacity:0;z-index:4}
+.tally span{display:inline-block;font:800 34px Inter;color:#111;background:#fff;border:1.5px solid var(--l-line);border-radius:18px;padding:12px 26px;box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.tally b{color:#FF5A5F}
+/* ---- kills ---- */
+.kq{position:absolute;left:0;right:0;top:760px;text-align:center;font:900 96px/1.05 Inter;letter-spacing:-3px;color:#fff;opacity:0}
+.kq em{font-style:normal;color:#FF5A5F}
+.chips4{position:absolute;left:0;right:0;top:1030px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap;padding:0 60px}
+.chips4 .pill{font-size:28px;padding:12px 24px;opacity:0}
+/* ---- questions form ---- */
+.form{position:absolute;left:110px;top:670px;width:860px;border-radius:26px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);padding:28px 32px;opacity:0;font-family:Inter}
+.form h3{margin:0 0 4px;font:800 32px Inter;color:#111}.form p{margin:0 0 18px;font:500 21px Inter;color:#888}
+.fq{border:1.5px solid #E6E6EA;border-radius:18px;padding:16px 20px;margin-bottom:14px;opacity:0}
+.fq .q{font:700 26px Inter;color:#111;margin-bottom:12px}
+.fq .opts{display:flex;gap:14px}
+.fq .o{flex:1;height:58px;border-radius:14px;border:2px solid #E2E2E6;display:flex;align-items:center;justify-content:center;font:700 24px Inter;color:#333}
+.fq .o.on{border-color:#3B82F6;background:rgba(59,130,246,.1);color:#1E4FD8}
+.fq .o.bad{border-color:#FF5A5F;background:rgba(255,90,95,.1);color:#B91C1C}
+.rule{position:absolute;right:46px;top:30px;font:700 17px Mono;color:#B91C1C;background:#FFE8E8;border-radius:999px;padding:6px 14px;opacity:0}
+.mail{position:absolute;left:150px;top:1155px;width:780px;border-radius:22px;background:#111;color:#fff;padding:18px 24px;box-shadow:0 20px 50px rgba(0,0,0,.3);opacity:0;z-index:5;font-family:Inter}
+.mail b{display:block;font:700 23px Inter}.mail span{font:500 21px Inter;color:#C9C9CE}
+.mail em{position:absolute;right:22px;top:16px;font:700 17px Mono;color:#FF5A5F;font-style:normal}
+/* ---- search ---- */
+.ats{position:absolute;left:70px;top:670px;width:940px;height:620px;border-radius:26px;background:#14161A;border:1.5px solid #2A2D33;box-shadow:0 40px 90px rgba(0,0,0,.6);opacity:0;overflow:hidden;font-family:Inter}
+.ats .bar{margin:24px;height:72px;border-radius:16px;background:#0D0F12;border:1.5px solid #30343B;display:flex;align-items:center;gap:14px;padding:0 22px;font:600 28px Mono;color:#E8EAED}
+.ats .bar i{font-style:normal;color:#8E8E93}
+.ats .bar .cur{display:inline-block;width:3px;height:34px;background:#3B82F6}
+.ats .cnt{margin:0 26px 10px;font:600 20px Mono;color:#3ECF8E;opacity:0}
+.cand{margin:10px 24px;height:84px;border-radius:16px;background:#1C1F24;border:1.5px solid #2A2D33;display:flex;align-items:center;gap:16px;padding:0 18px;opacity:0}
+.cand .av{width:52px;height:52px;border-radius:50%;flex:none}
+.cand b{font:700 24px Inter;color:#fff}.cand span{display:block;font:500 19px Mono;color:#9AA0A8}
+.cand mark{background:rgba(59,130,246,.25);color:#7FB0FF;border-radius:4px;padding:0 4px}
+.you{position:absolute;left:150px;top:1180px;width:780px;height:100px;border-radius:18px;background:#1C1F24;border:2px dashed #FF5A5F;display:flex;align-items:center;gap:16px;padding:0 20px;opacity:0;font-family:Inter}
+.you b{font:700 25px Inter;color:#fff}.you span{display:block;font:500 19px Mono;color:#9AA0A8}
+.you em{margin-left:auto;font:700 18px Mono;color:#FF5A5F;font-style:normal}
+/* ---- layout ---- */
+.cv{position:absolute;top:690px;width:440px;height:560px;border-radius:20px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0;overflow:hidden;font-family:Inter}
+.cv .side{position:absolute;left:0;top:0;bottom:0;width:150px;background:#1E4FD8;padding:22px 14px;color:#fff;font:600 15px/1.6 Inter}
+.cv .side b{display:block;font:800 14px Mono;letter-spacing:1px;color:#BFD3FF;margin-top:10px}
+.cv .main{position:absolute;left:170px;right:18px;top:22px;font:500 15px/1.5 Inter;color:#333}
+.cv .main h4{margin:0 0 2px;font:800 22px Inter;color:#111}
+.cv .main b{display:block;font:800 13px Mono;letter-spacing:1px;color:#1E4FD8;margin-top:12px}
+.parsed{position:absolute;left:580px;top:690px;width:440px;height:560px;border-radius:20px;background:#0F1012;padding:20px 22px;font:500 18px/1.55 Mono;color:#E6E6E9;opacity:0;overflow:hidden}
+.parsed .h{font:700 15px Mono;letter-spacing:2px;color:#FF5A5F;margin-bottom:8px}
+.parsed .ln{opacity:0}
+.parsed .bad{color:#FF8A8D}
+.arrow{position:absolute;left:520px;top:940px;font:900 60px Inter;color:#3B82F6;opacity:0}
+/* ---- volume ---- */
+.vol{position:absolute;left:0;right:0;top:665px;text-align:center;opacity:0}
+.vol b{display:block;font:900 150px/1 Inter;letter-spacing:-6px;color:#fff}
+.vol span{font:700 26px Mono;letter-spacing:3px;color:#FFB340}
+.pile{position:absolute;left:290px;top:930px;width:500px;height:300px}
+.pile i{position:absolute;width:250px;height:150px;border-radius:14px;background:#F2F2F3;border:2px solid #D6D6DA;box-shadow:0 6px 16px rgba(0,0,0,.35);opacity:0}
+.pile i::before{content:"";position:absolute;left:18px;top:20px;width:120px;height:12px;border-radius:6px;background:#C4C4C8;box-shadow:0 26px 0 #DADADE,0 52px 0 #DADADE,0 78px 0 #DADADE}
+.one{position:absolute;left:0;right:0;top:1265px;text-align:center;opacity:0;z-index:4}
+.one span{display:inline-block;font:700 28px Inter;color:#fff;background:#17191D;border:1.5px solid #2A2D33;border-radius:999px;padding:12px 26px}
+/* ---- CTA ---- */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#F59E0B,#EF4444);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <!-- HOOK (dark): the 75% myth cracks -->
+  <section class="scene" id="sHook">
+    <div class="myth" id="myth"><div class="tag">VIRAL STAT</div><div class="big" id="mbig">75%</div><div class="sub">of resumes get rejected by bots</div><div class="bot" id="bot">🤖</div>
+      <svg class="crack" viewBox="0 0 900 420"><path id="ck" d="M 470 0 L 430 90 L 500 150 L 410 240 L 470 300 L 420 420"/></svg></div>
+    <div class="src" id="src1"><b>SOURCE</b>A 2012 sales pitch from a resume-optimisation company</div>
+    <div class="src" id="src2" style="top:1270px;background:#FFE8E8;color:#7F1D1D"><b style="color:#B91C1C">STUDY</b><s>None. Ever.</s></div>
+  </section>
+  <!-- SURVEY (light): 2 of 25 -->
+  <section class="scene" id="sSurvey">
+    <div class="grid25" id="g25"></div>
+    <div class="tally" id="tally"><span><b>2</b> of 25 let software reject on content</span></div>
+    <div class="note r" id="n1" style="top:650px">Enhancv survey of 25 US recruiters, 2025</div>
+  </section>
+  <!-- KILLS (dark) -->
+  <section class="scene" id="sKills">
+    <div class="kq" id="kq">So what <em>actually</em><br>kills it?</div>
+    <div class="chips4"><span class="pill blue" id="c1">1 · Questions</span><span class="pill blue" id="c2">2 · Search</span><span class="pill blue" id="c3">3 · Layout</span><span class="pill blue" id="c4">4 · Volume</span></div>
+  </section>
+  <!-- 1 · SCREENING QUESTIONS (light) -->
+  <section class="scene" id="sQ">
+    <div class="form" id="form"><h3>Software Engineer Intern</h3><p>Acme Labs · Bangalore · application form</p>
+      <div class="fq" id="q1"><div class="q">Graduating in 2026?</div><div class="opts"><div class="o" id="q1y">Yes</div><div class="o">No</div></div></div>
+      <div class="fq" id="q2"><div class="q">Need visa sponsorship?</div><div class="opts"><div class="o" id="q2y">Yes</div><div class="o">No</div></div></div>
+      <div class="rule" id="rule">auto-reject rule</div></div>
+    <div class="mail" id="mail"><em>0 min later</em><b>Update on your application</b><span>"…we've decided not to move forward."</span></div>
+    <div class="note r" id="n2" style="top:1300px">Greenhouse &amp; Workday support auto-reject rules on application answers</div>
+  </section>
+  <!-- 2 · SEARCH (dark) -->
+  <section class="scene" id="sSearch">
+    <div class="ats" id="ats"><div class="bar"><i>⌕</i><span id="qtxt"></span><i class="cur" id="qcur"></i></div>
+      <div class="cnt" id="qcnt">3 matches</div>
+      <div class="cand" id="r1"><i class="av" style="background:#10B981"></i><div><b>Candidate 1</b><span><mark>Python</mark> · <mark>SQL</mark> · Django</span></div></div>
+      <div class="cand" id="r2"><i class="av" style="background:#8B5CF6"></i><div><b>Candidate 2</b><span><mark>SQL</mark> · <mark>Python</mark> · Tableau</span></div></div>
+      <div class="cand" id="r3"><i class="av" style="background:#F59E0B"></i><div><b>Candidate 3</b><span><mark>Python</mark> · pandas · <mark>SQL</mark></span></div></div>
+    </div>
+    <div class="you" id="you"><div><b>You</b><span>"data wrangling" · "databases" · scripting</span></div><em>not in results</em></div>
+    <div class="note r" id="n3" style="top:1300px">Greenhouse help center: full-text resume search</div>
+  </section>
+  <!-- 3 · LAYOUT (light) -->
+  <section class="scene" id="sLay">
+    <div class="cv" id="cv" style="left:60px"><div class="side"><b>SKILLS</b>Python<br>SQL<br>React<b>EDUCATION</b>B.Tech CSE<br>2026<b>CONTACT</b>aarav@mail.com</div>
+      <div class="main"><h4>Aarav Sharma</h4>Software Engineer<b>EXPERIENCE</b>Intern · Acme Labs<br>Built APIs in Python<b>PROJECTS</b>Job tracker app<br>Chat bot with RAG</div></div>
+    <div class="arrow" id="arr">→</div>
+    <div class="parsed" id="prs"><div class="h">WHAT THE PARSER READ</div>
+      <div class="ln">SKILLS Aarav Sharma</div><div class="ln bad">Python Software Engineer</div><div class="ln bad">SQL EXPERIENCE React</div><div class="ln bad">Intern · EDUCATION Acme</div><div class="ln bad">B.Tech Built APIs CSE</div><div class="ln bad">2026 PROJECTS in Python</div><div class="ln bad">CONTACT Job tracker</div></div>
+    <div class="note l" id="n4" style="top:1290px">Resume-parser guides: columns and tables can scramble</div>
+  </section>
+  <!-- 4 · VOLUME (dark) -->
+  <section class="scene" id="sVol">
+    <div class="vol" id="vol"><b id="voln">0</b><span>APPLICATIONS · ONE FRESHER ROLE · A FEW DAYS</span></div>
+    <div class="pile" id="pile"></div>
+    <div class="one" id="one"><span>👤 1 recruiter · ☕ 1 coffee</span></div>
+  </section>
+  <!-- CTA (light) -->
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#10B981"></i><div><small>Neha · 2m</small><b>RESUME</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Kabir · 1m</small><b>RESUME</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#F59E0B"></i><div><small>Dev · 40s</small><b>RESUME</b> wait the 75% was fake??</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#F59E0B,#EF4444)"></i><div><small>you · now</small><b>RESUME</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="../../brand/canwe/canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>your ATS-safe template + Claude prompt 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>RESUME</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "../../brand/canwe/canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+if (BRAND.logo) document.querySelectorAll(".pav,.blogo").forEach(e => (e.style.background = `#1E4FD8 url(${BRAND.logo}) center/cover`));
+const T = { survey: at("In a survey"), kills: at("So what actually"), q: at("One. Screening"), s: at("Two. Search"), lay: at("Three. Fancy"),
+  vol: at("And honestly"), cta: at("Comment RESUME"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.survey, enter: "none" }, { id: "sSurvey", s: T.survey, e: T.kills, enter: "blurzoom" },
+  { id: "sKills", s: T.kills, e: T.q, enter: "push" }, { id: "sQ", s: T.q, e: T.s, enter: "blurzoom" },
+  { id: "sSearch", s: T.s, e: T.lay, enter: "swing" }, { id: "sLay", s: T.lay, e: T.vol, enter: "push" },
+  { id: "sVol", s: T.vol, e: T.cta, enter: "blurzoom" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.survey, T.kills], [T.q, T.s], [T.lay, T.vol], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "questions", at: T.q }, { label: "search", at: T.s }, { label: "layout", at: T.lay }, { label: "volume", at: T.vol, end: T.cta }],
+  counter: { unit: "real reasons", steps: [[T.q, 1], [T.s, 2], [T.lay, 3], [T.vol, 4]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15 },
+  poses: P,
+});
+// builders
+const ICON = ["🧑‍💼", "👩‍💼", "👨‍💻", "👩‍💻", "🧑‍💻"];
+R.$("g25").innerHTML = Array.from({ length: 25 }, (_, i) => `<div class="rc ${[6, 18].includes(i) ? "bad" : ""}" id="rc${i}">${ICON[i % 5]}</div>`).join("");
+let sd = 5; const rnd = () => (sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+const PILE = Array.from({ length: 16 }, (_, i) => ({ x: 120 + (rnd() - 0.5) * 220, y: 140 - i * 9 + (rnd() - 0.5) * 30, r: (rnd() - 0.5) * 30 }));
+R.$("pile").innerHTML = PILE.map((p, i) => `<i id="pl${i}" style="left:${p.x}px;top:${p.y}px"></i>`).join("");
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK
+  R.card("myth", t, { in: 0.05, y: 50 });
+  pop("bot", t, at("bots?") - 0.1, { from: 0.3, rot: -10 });
+  R.draw("ck", t, at("It came from") - 0.05, 0.35);
+  if (t >= at("It came from")) R.cue("whoosh", at("It came from"));
+  const fade = ease.out3(prog(t, at("It came from"), 0.6)); R.$("mbig").style.opacity = 1 - 0.55 * fade; R.$("mbig").style.textDecoration = fade > 0.5 ? "line-through" : "";
+  R.card("src1", t, { in: at("2012") - 0.1, y: -30 });
+  pop("src2", t, at("never") - 0.05, { from: 0.6 });
+  // SURVEY
+  R.$("g25").style.opacity = 1;
+  for (let i = 0; i < 25; i++) { const a = T.survey + 0.15 + i * 0.04, p = R.ease.spring(prog(t, a, 0.4)), el = R.$("rc" + i);
+    el.style.opacity = clamp(prog(t, a, 0.15) * 3); el.style.transform = `scale(${lerp(0.4, 1, p)})`;
+    const bad = el.classList.contains("bad"), hl = prog(t, at("only two"), 0.3);
+    el.style.filter = !bad && hl > 0 ? `grayscale(${0.8 * hl}) opacity(${1 - 0.5 * hl})` : "";
+    if (bad && hl > 0) el.style.transform = `scale(${lerp(0.4, 1, p) * (1 + 0.15 * Math.sin(Math.PI * clamp(hl)))})`; }
+  pop("tally", t, at("only two") + 0.2, { from: 0.7 });
+  R.note("n1", t, at("only two") + 0.5, T.kills);
+  // KILLS
+  R.card("kq", t, { in: T.kills + 0.05, y: 40 });
+  ["c1", "c2", "c3", "c4"].forEach((id, i) => pop(id, t, at("kills") + 0.1 + i * 0.12, { from: 0.6 }));
+  // QUESTIONS
+  R.card("form", t, { in: T.q + 0.05, y: 50 });
+  R.rise("q1", t, at("Graduating") - 0.1, { dy: 20 }); R.rise("q2", t, at("Need sponsorship") - 0.1, { dy: 20 });
+  R.$("q1y").classList.toggle("on", t >= at("Graduating") + 0.5);
+  const pk = at("Pick the wrong"); R.$("q2y").classList.toggle("bad", t >= pk + 0.2);
+  if (t >= pk + 0.2) R.cue("click", pk + 0.2);
+  pop("rule", t, pk + 0.4, { from: 0.6 });
+  R.sheet("mail", t, at("out before") - 0.05, { dy: 260, d: 0.5 });
+  R.note("n2", t, at("out before") + 0.4, T.s);
+  // SEARCH
+  R.card("ats", t, { in: T.s + 0.05, y: 50 });
+  const qA = at("type keywords"), qs = "Python AND SQL", done = R.type("qtxt", qs, t, qA, 9);
+  R.$("qcur").style.opacity = Math.floor(t * 2.5) % 2 ? 1 : 0.2;
+  const rA = qA + qs.length / 9 + 0.1;
+  R.note("qcnt", t, rA, T.lay);
+  ["r1", "r2", "r3"].forEach((id, i) => R.rise(id, t, rA + 0.1 + i * 0.15, { dy: 20 }));
+  R.card("you", t, { in: at("If those words") - 0.1, y: 30 });
+  R.$("you").style.filter = t >= at("show up") ? "grayscale(.6)" : "";
+  R.note("n3", t, rA + 0.6, T.lay);
+  // LAYOUT
+  R.card("cv", t, { in: T.lay + 0.05, y: 50 });
+  pop("arr", t, at("Two columns") + 0.1, { from: 0.4 });
+  R.card("prs", t, { in: at("can come out") - 0.1, y: 30 });
+  [...R.$("prs").querySelectorAll(".ln")].forEach((l, i) => { const a = at("can come out") + 0.05 + i * 0.12; l.style.opacity = ease.out3(prog(t, a, 0.2));
+    l.style.transform = `translateX(${(1 - ease.out3(prog(t, a, 0.2))) * 20}px)`; });
+  R.note("n4", t, at("scrambled") + 0.3, T.vol);
+  // VOLUME
+  R.card("vol", t, { in: T.vol + 0.05, y: 30 });
+  count("voln", t, at("around") - 0.1, 1.4, 500, { ding: true });
+  PILE.forEach((p, i) => { const a = at("around") - 0.1 + i * 0.09, e = R.ease.spring(prog(t, a, 0.35)), el = R.$("pl" + i);
+    el.style.opacity = clamp(prog(t, a, 0.1) * 3); el.style.transform = `translateY(${(1 - e) * -260}px) rotate(${p.r * e}deg)`; });
+  pop("one", t, at("few days") - 0.1, { from: 0.6 });
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "RESUME", tyA = at("Comment RESUME") + 0.3, posted = R.end("Comment RESUME") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 14); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("any job") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

@@ -1,0 +1,39 @@
+=== INSTAGRAM REEL ===
+Caption:
+Comment RESUME and I'll DM you my ATS-safe template + the Claude prompt 👇
+
+"75% of resumes get rejected by bots" → traced to a 2012 sales pitch. No study, ever.
+What actually kills your application:
+1️⃣ Screening questions with auto-reject rules (grad year, sponsorship, location)
+2️⃣ Keyword search: recruiters type "Python AND SQL". No exact words = you don't show up
+3️⃣ Fancy layouts: two columns and tables can come out scrambled
+4️⃣ Volume: one fresher role can get ~500 applications in a few days
+
+🔖 Save this before your next application.
+Sources: Enhancv survey of 25 US recruiters (2025), Greenhouse help center.
+#resume #ats #placements #freshers #jobsearch #internship #resumetips #softwareengineer #developersindia #careeradvice #claudeai #hiring
+
+Pinned comment:
+Sending the template + prompt to everyone who comments RESUME 📩 (check message requests if you don't see it)
+
+DM automation: #18 on @canwe.ai (keywords resume / cv, follow gate) → https://canwe-guides.vercel.app/resume/
+
+=== YOUTUBE SHORTS ===
+Title:
+Do Bots Really Reject Your Resume? (The 75% Myth) #shorts
+
+Description:
+That viral "75% of resumes are rejected by bots" stat came from a 2012 sales pitch. Here's what actually happens after you apply:
+- screening questions with auto-reject rules
+- recruiters keyword-searching the candidate database
+- two-column layouts and tables that scramble when parsed
+- ~500 applications for one fresher role in a few days
+
+Free ATS-safe template + Claude tailoring prompt: https://canwe-guides.vercel.app/resume/
+
+Sources: Enhancv survey of 25 US recruiters (2025); Greenhouse help center (keyword search); auto-reject rules on application answers (Greenhouse / Workday).
+
+#shorts #resume #ats #placements #freshers #jobsearch
+
+Pinned comment:
+📌 Free ATS-safe template + Claude prompt: https://canwe-guides.vercel.app/resume/
