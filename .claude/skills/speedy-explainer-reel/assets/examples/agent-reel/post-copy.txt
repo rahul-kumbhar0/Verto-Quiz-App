@@ -2,7 +2,9 @@
 Caption:
 Comment AGENT and I'll DM you 3 agent setups you can try this week 👇
 
-Every AI company is launching "agents". OpenAI just gave its agents their own computer and browser.
+One sentence: "find me 3 internships and save them in a sheet."
+The AI opened a browser, searched, read the results and filled the sheet. By itself.
+That's not a chatbot. That's an agent. And right now every AI company is launching one.
 So what IS an agent?
 🧠 AI that uses tools, in a loop, until a goal is done.
 💬 A chatbot answers once and stops.
@@ -18,9 +20,9 @@ DM automation: #21 on @canwe.ai (keyword agent) → https://canwe-guides.vercel.
 
 === YOUTUBE SHORTS ===
 Title:
-What Is an AI Agent? Explained in 45 Seconds #shorts
+I Gave AI One Sentence. It Did the Rest. (What an AI Agent Is) #shorts
 Description:
-An agent is AI that uses tools, in a loop, until a goal is done: think, act, observe, repeat. Here's how it differs from a chatbot, with a real example.
+An agent is AI that uses tools, in a loop, until a goal is done: think, act, observe, repeat. Watch one find internships and fill a sheet by itself, then see the loop behind it.
 3 agent setups to try (job hunt, research, coding): https://canwe-guides.vercel.app/agent/
 Sources: TechCrunch / CNBC on OpenAI's DevDay agents (29 Sep 2026).
 #shorts #aiagents #ai #chatgpt #claudeai

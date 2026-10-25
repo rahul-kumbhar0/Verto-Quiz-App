@@ -1,6 +1,6 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><title>What an AI agent is</title>
-<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<html><head><meta charset="utf-8"><title>What an AI agent is (v2)</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
 <style>
 /* ---- hook ---- */
 .launch{position:absolute;width:290px;height:100px;border-radius:20px;background:#17191D;border:1.5px solid #2A2D33;display:flex;align-items:center;gap:10px;padding:0 16px;font:800 24px Inter;white-space:nowrap;color:#fff;opacity:0;box-shadow:0 18px 40px rgba(0,0,0,.5)}
@@ -76,36 +76,66 @@
 .endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
 .endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
 .endcta b{color:#3B82F6}
+
+/* ---- demo-first opening ---- */
+.task{position:absolute;left:90px;top:650px;width:900px;border-radius:24px;background:#17191D;border:1.5px solid #2A2D33;padding:20px 26px;opacity:0;font-family:Inter;z-index:3}
+.task small{display:block;font:700 18px Mono;letter-spacing:2px;color:#9AA0A8}
+.task .tx{margin-top:6px;font:700 34px/1.25 Inter;color:#fff;min-height:44px}
+.task .cur{display:inline-block;width:3px;height:36px;background:#3B82F6;vertical-align:middle;margin-left:3px}
+.bw{position:absolute;left:60px;top:830px;width:600px;height:340px;border-radius:22px;background:#fff;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.bw .bar{height:50px;background:#EEF0F3;display:flex;align-items:center;gap:8px;padding:0 14px}
+.bw .bar i{width:11px;height:11px;border-radius:50%;background:#C9CDD2}
+.bw .url{margin-left:8px;flex:1;height:32px;border-radius:9px;background:#fff;display:flex;align-items:center;padding:0 12px;font:600 17px Mono;color:#333}
+.bw .res{margin:12px 16px;padding:12px 14px;border-radius:12px;border:1.5px solid #E6E6EA;opacity:0}
+.bw .res b{display:block;font:700 19px Inter;color:#1A0DAB}.bw .res span{font:500 15px Inter;color:#555}
+.bw .res.pick{border-color:#3ECF8E;background:#F0FBF5}
+.cursor{position:absolute;width:52px;height:52px;opacity:0;z-index:6;font-size:52px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));line-height:1}
+.sh2{position:absolute;left:680px;top:830px;width:340px;border-radius:18px;background:#fff;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.sh2 .h{background:#15803D;color:#fff;font:700 20px Inter;padding:10px 14px}
+.sh2 .row{display:flex;font:600 17px Inter;color:#111;border-top:1px solid #E6E6EA;opacity:0}
+.sh2 .row span{padding:11px 12px}.sh2 .row span+span{margin-left:auto;color:#15803D;font-weight:800}
+.self{position:absolute;left:0;right:0;top:1210px;text-align:center;opacity:0;z-index:7}
+.self span{display:inline-block;font:800 34px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 28px;box-shadow:0 12px 40px rgba(62,207,142,.45)}
+.vs2{position:absolute;left:90px;right:90px;top:740px;display:flex;flex-direction:column;gap:26px}
+.vs2 div{height:210px;border-radius:28px;display:flex;align-items:center;gap:24px;padding:0 40px;font:900 62px Inter;letter-spacing:-2px;opacity:0;position:relative}
+.vs2 .no{background:#fff;border:2px solid #E2E2E6;color:#999}
+.vs2 .no s{position:absolute;left:30px;right:30px;top:50%;height:8px;background:#FF5A5F;border-radius:4px;transform-origin:0 50%;transform:scaleX(0)}
+.vs2 .yes{background:#F3EEFF;border:3px solid #7C3AED;color:#111}
+.vs2 .yes em{margin-left:auto;font:900 70px Inter;color:#7C3AED;font-style:normal}
 </style></head>
 <body><div id="stage">
   <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
-  <!-- HOOK (dark) -->
-  <section class="scene" id="sHook">
+  <!-- DEMO (dark): one sentence -> the agent does it -->
+  <section class="scene" id="sDemo">
+    <div class="task" id="task"><small>ONE SENTENCE</small><div class="tx"><span id="ttx"></span><i class="cur" id="tcur"></i></div></div>
+    <div class="bw" id="bw"><div class="bar"><i></i><i></i><i></i><span class="url" id="burl"></span></div>
+      <div class="res" id="r1"><b>SDE Intern · Acme Labs</b><span>Bangalore · fresher-friendly</span></div>
+      <div class="res" id="r2"><b>Data Intern · Zeta</b><span>Remote · India</span></div>
+      <div class="res" id="r3"><b>ML Intern · Nova</b><span>Bangalore · 2026 grads</span></div></div>
+    <div class="cursor" id="cur"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M4 2l15 10-7 1.5L8.5 21z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+    <div class="sh2" id="sh2"><div class="h">📊 internships</div>
+      <div class="row" id="w1"><span>Acme · SDE Intern</span><span>✓</span></div><div class="row" id="w2"><span>Zeta · Data Intern</span><span>✓</span></div><div class="row" id="w3"><span>Nova · ML Intern</span><span>✓</span></div></div>
+    <div class="self" id="self"><span>🤖 by itself · 0 clicks from you</span></div>
+  </section>
+  <!-- NOT A CHATBOT (light) -->
+  <section class="scene" id="sNot">
+    <div class="vs2"><div class="no" id="v1">💬 Chatbot<s id="vs"></s></div><div class="yes" id="v2">🤖 Agent<em>✓</em></div></div>
+  </section>
+  <!-- NEWS (dark) -->
+  <section class="scene" id="sNews">
     <div class="launch" id="l1" style="left:50px;top:700px">🤖 Agent<i>NEW</i></div>
     <div class="launch" id="l2" style="left:395px;top:745px">⚡ Agents API<i>BETA</i></div>
     <div class="launch" id="l3" style="left:740px;top:700px">🧩 Agent mode<i>NEW</i></div>
     <div class="dots" id="dots"><small>OPENAI · DEVDAY · SEP 29</small><b>Always-on agents</b>
       <div class="kit"><div id="k1"><span>💻</span>own computer</div><div id="k2"><span>🌐</span>own browser</div></div></div>
-    <div class="qq" id="qq">?</div>
-    <div class="note r" id="n0" style="top:650px">TechCrunch / CNBC, 29 Sep 2026</div>
+    <div class="note r" id="n0" style="top:1250px">TechCrunch / CNBC, 29 Sep 2026</div>
   </section>
   <!-- DEFINITION (light) -->
   <section class="scene" id="sDef">
     <div class="eq"><div class="t ai" id="e1"><span>🧠</span>AI</div><div class="op" id="o1">+</div><div class="t" id="e2"><span>🛠️</span>tools</div><div class="op" id="o2">+</div><div class="t" id="e3"><span>🔁</span>loop</div><div class="op" id="o3">→</div><div class="t goal" id="e4"><span>🎯</span>goal</div></div>
     <div class="defl" id="defl"><span>"runs tools in a loop to reach a goal"</span></div>
   </section>
-  <!-- CHATBOT vs AGENT (dark) -->
-  <section class="scene" id="sVs">
-    <div class="side" id="sv1" style="left:60px"><h4>💬 Chatbot</h4><div class="b me" id="c1">find me internships</div><div class="b ai" id="c2">Here are some sites you could check…</div><div class="stop" id="cs">■ stops</div></div>
-    <div class="side" id="sv2" style="left:580px"><h4>🤖 Agent</h4><div class="spin" id="spin">🔁</div>
-      <div class="step" id="a1"><b>✓</b> search jobs</div><div class="step" id="a2"><b>✓</b> open 5 pages</div><div class="step" id="a3"><b>✓</b> filter freshers</div><div class="step" id="a4"><b>✓</b> write to sheet</div><div class="step" id="a5"><b>…</b> keeps going</div></div>
-  </section>
-  <!-- TASK (light) -->
-  <section class="scene" id="sTask">
-    <div class="ask" id="ask"><small>YOUR GOAL</small><div class="txt"><span id="atx"></span><i class="cur" id="acur"></i></div></div>
-    <div class="goalpin" id="gp"><span>🎯 goal: 3 internships in a sheet</span></div>
-  </section>
-  <!-- LOOP (dark) -->
+  <!-- LOOP REPLAY (dark) -->
   <section class="scene" id="sLoop">
     <div class="loop" id="loop"><svg viewBox="0 0 640 640"><circle class="ring" cx="320" cy="320" r="230"/><circle class="arc" id="arc" cx="320" cy="320" r="230" transform="rotate(-90 320 320)"/></svg>
       <div class="node" id="nThink" style="left:320px;top:90px">💭 THINK</div>
@@ -113,9 +143,9 @@
       <div class="node" id="nObs" style="left:320px;top:550px">👀 OBSERVE</div>
       <div class="node" id="nRep" style="left:90px;top:320px">🔁 DECIDE</div>
       <div class="runner" id="run"></div>
-      <div class="mid"><small id="mtag">STEP</small><span id="mtx"></span></div></div>
+      <div class="mid"><small id="mtag">REPLAY</small><span id="mtx"></span></div></div>
     <div class="sheet" id="sheet"><div class="h">📊 internships</div>
-      <div class="row" id="w1"><span>Acme · SDE Intern</span><span>✓</span></div><div class="row" id="w2"><span>Zeta · Data Intern</span><span>✓</span></div><div class="row" id="w3"><span>Nova · ML Intern</span><span>✓</span></div></div>
+      <div class="row" id="x1"><span>Acme · SDE Intern</span><span>✓</span></div><div class="row" id="x2"><span>Zeta · Data Intern</span><span>✓</span></div><div class="row" id="x3"><span>Nova · ML Intern</span><span>✓</span></div></div>
     <div class="lc" id="lc">loop #1</div>
   </section>
   <!-- TRICK (light) -->
@@ -127,82 +157,84 @@
     <div class="cmts" id="cmts"><div class="h">Comments</div>
       <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Aditya · 2m</small><b>AGENT</b></div><span class="hrt">♡</span></div>
       <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Meera · 1m</small><b>AGENT</b> 🤖</div><span class="hrt">♡</span></div>
-      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Sahil · 40s</small><b>AGENT</b> finally understood it</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Sahil · 40s</small><b>AGENT</b> that demo was crazy</div><span class="hrt">♡</span></div>
       <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>AGENT</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
       <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
     </div>
-    <div class="dm" id="dm"><div class="av"><img src="../../brand/canwe/canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>3 agent setups you can try this week 📩</span></div><em>now</em></div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>3 agent setups you can try this week 📩</span></div><em>now</em></div>
     <div class="endcta" id="endcta"><span>Comment <b>AGENT</b> 👇</span></div>
   </section>
   <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
 </div>
-<script src="captions.js"></script><script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script><script src="emph.js"></script>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
 <script>
 const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
-const BRAND = { name: "canwe.ai", logo: "../../brand/canwe/canwe-logo.svg" };
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
 document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
 if (BRAND.logo) document.querySelectorAll(".pav,.blogo").forEach(e => (e.style.background = `#1E4FD8 url(${BRAND.logo}) center/cover`));
-const T = { def: at("Here's the simplest"), vs: at("A chatbot"), task: at("Say you tell"), loop: at("It thinks"), trick: at("That's the whole"), cta: at("Comment AGENT"), stop: R.voiceEnd() };
+const T = { not: at("That's not"), news: at("And right now"), def: at("So what is"), loop: at("Here's what really"), trick: at("Think, act"), cta: at("Comment AGENT"), stop: R.voiceEnd() };
 window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
 R.setup({ push: 0.012, scenes: [
-  { id: "sHook", s: 0, e: T.def, enter: "none" }, { id: "sDef", s: T.def, e: T.vs, enter: "blurzoom" },
-  { id: "sVs", s: T.vs, e: T.task, enter: "push" }, { id: "sTask", s: T.task, e: T.loop, enter: "blurzoom" },
+  { id: "sDemo", s: 0, e: T.not, enter: "none" }, { id: "sNot", s: T.not, e: T.news, enter: "blurzoom" },
+  { id: "sNews", s: T.news, e: T.def, enter: "push" }, { id: "sDef", s: T.def, e: T.loop, enter: "blurzoom" },
   { id: "sLoop", s: T.loop, e: T.trick, enter: "swing" }, { id: "sTrick", s: T.trick, e: T.cta, enter: "push" },
   { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
 const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
 R.speedy({
-  light: [[T.def, T.vs], [T.task, T.loop], [T.trick, 999]],
+  light: [[T.not, T.news], [T.def, T.loop], [T.trick, 999]],
   emph: window.EMPH,
-  chapters: [{ label: "definition", at: T.def }, { label: "vs chatbot", at: T.vs }, { label: "the loop", at: T.loop }, { label: "the trick", at: T.trick, end: T.cta }],
-  counter: { unit: "loops run", steps: [[at("It thinks"), 1], [at("Search again"), 2], [at("Again and again"), 3]] },
-  avatar: { x: 240, y: 1330, w: 600, in: 0.15 },
+  chapters: [{ label: "the news", at: T.news }, { label: "definition", at: T.def }, { label: "the loop", at: T.loop }, { label: "the trick", at: T.trick, end: T.cta }],
+  counter: { unit: "loops run", steps: [[at("It thought"), 1], [at("Then it decided"), 2], [at("Again and again"), 3]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie" },
   poses: P,
 });
-// loop geometry (node centres around a circle, clockwise from the top)
 const NODES = ["nThink", "nAct", "nObs", "nRep"], CX = 320, CY = 320, RR = 230;
-const STEPS = [ // [time, node, tag, text]
-  [at("It thinks"), 0, "THINK", "\"I need to search\""], [at("It acts"), 1, "ACT", "🌐 opens the browser"],
-  [at("It looks"), 2, "OBSERVE", "📄 reads the results"], [at("Then it decides"), 3, "DECIDE", "➡️ picks the next step"],
-  [at("Search again"), 0, "THINK", "search again"], [at("open a page"), 1, "ACT", "open a page"],
-  [at("write to the sheet"), 2, "OBSERVE", "write to the sheet ✓"], [at("Again and again"), 3, "REPEAT", "again… and again…"],
-  [at("until the goal"), 0, "DONE", "🎯 goal reached"]];
+const STEPS = [[at("It thought"), 0, "THINK", "\"I need to search\""], [at("It acted"), 1, "ACT", "🌐 opened the browser"],
+  [at("It looked"), 2, "OBSERVE", "📄 read the results"], [at("Then it decided"), 3, "DECIDE", "➡️ picked the next step"],
+  [at("Again and again"), 0, "REPEAT", "again… and again…"], [at("until the sheet"), 2, "DONE", "🎯 sheet is full"]];
 window.seek = t => {
   R.frame(t); R.speedyFrame(t);
-  // HOOK
-  [["l1", 0.2], ["l2", 0.6], ["l3", 1.0]].forEach(([id, a]) => pop(id, t, a, { from: 0.5, rot: [-3, 2, -2][+id[1] - 1] }));
+  // DEMO: type the goal, then the agent works on its own
+  R.card("task", t, { in: 0.05, y: 30 });
+  R.type("ttx", "find me 3 internships and save them in a sheet", t, at("find me") - 0.15, 21);
+  R.$("tcur").style.opacity = t < at("The AI") && Math.floor(t * 2.5) % 2 ? 1 : 0;
+  R.card("bw", t, { in: at("opens a browser") - 0.1, y: 40 });
+  R.type("burl", "🔍 internships india fresher", t, at("searches") - 0.05, 30);
+  [["r1", at("reads")], ["r2", at("reads") + 0.15], ["r3", at("reads") + 0.3]].forEach(([id, a]) => R.rise(id, t, a, { dy: 14 }));
+  ["r1", "r2", "r3"].forEach((id, i) => R.$(id).classList.toggle("pick", t >= at("fills") + i * 0.2));
+  const cu = R.$("cur"), ck = [[at("opens a browser"), 330, 860], [at("searches"), 380, 860], [at("reads"), 300, 960], [at("fills"), 560, 960], [at("fills") + 0.3, 850, 920], [at("By itself"), 850, 1030]];
+  let ci = -1; ck.forEach((k, i) => { if (t >= k[0]) ci = i; });
+  if (ci >= 0) { const a = ck[Math.max(0, ci - 1)], b = ck[ci], p = ease.inOut(prog(t, b[0], 0.35)); cu.style.left = lerp(a[1], b[1], p) + "px"; cu.style.top = lerp(a[2], b[2], p) + "px"; cu.style.opacity = 1; R.cue("click", b[0] + 0.3); } else cu.style.opacity = 0;
+  R.card("sh2", t, { in: at("fills") - 0.15, y: 30 });
+  [["w1", at("fills") + 0.05], ["w2", at("fills") + 0.3], ["w3", at("fills") + 0.55]].forEach(([id, a]) => R.rise(id, t, a, { dy: 10 }));
+  pop("self", t, at("By itself") - 0.05, { from: 0.6 });
+  // NOT A CHATBOT
+  pop("v1", t, T.not + 0.05, { from: 0.8 });
+  R.$("vs").style.transform = `scaleX(${ease.out3(prog(t, at("chatbot") + 0.3, 0.3))})`;
+  pop("v2", t, at("That's an agent") - 0.05, { from: 0.7 });
+  // NEWS
+  [["l1", T.news + 0.1], ["l2", T.news + 0.4], ["l3", T.news + 0.7]].forEach(([id, a], i) => pop(id, t, a, { from: 0.5, rot: [-3, 2, -2][i] }));
   R.card("dots", t, { in: at("OpenAI") - 0.1, y: 40 });
-  pop("k1", t, at("computer") - 0.05, { from: 0.6 }); pop("k2", t, at("browser") - 0.05, { from: 0.6 });
-  pop("qq", t, at("what even") - 0.05, { from: 0.3, rot: 8 });
+  pop("k1", t, at("computer") - 0.05, { from: 0.6 }); pop("k2", t, at("browser", 1) - 0.05, { from: 0.6 });
   R.note("n0", t, at("OpenAI") + 0.4, T.def);
   // DEFINITION
-  [["e1", at("is AI")], ["o1", at("uses tools") - 0.1], ["e2", at("tools")], ["o2", at("in a loop") - 0.1], ["e3", at("loop")], ["o3", at("until a goal") - 0.1], ["e4", at("goal")]]
+  [["e1", at("AI that")], ["o1", at("uses tools") - 0.1], ["e2", at("tools")], ["o2", at("in a loop") - 0.1], ["e3", at("loop")], ["o3", at("until a goal") - 0.1], ["e4", at("goal")]]
     .forEach(([id, a]) => pop(id, t, a, { from: 0.5 }));
   R.card("defl", t, { in: at("goal") + 0.4, y: 20 });
-  // VS
-  R.card("sv1", t, { in: T.vs + 0.05, y: 40 }); R.card("sv2", t, { in: at("An agent keeps") - 0.15, y: 40 });
-  R.rise("c1", t, at("chatbot") + 0.1, { dy: 16 }); R.rise("c2", t, at("answers once"), { dy: 16 }); pop("cs", t, at("and stops"), { from: 0.6 });
-  ["a1", "a2", "a3", "a4", "a5"].forEach((id, i) => R.rise(id, t, at("keeps going") - 0.1 + i * 0.12, { dy: 12 }));
-  R.$("spin").style.transform = `rotate(${Math.max(0, t - at("An agent keeps")) * 300}deg)`;
-  // TASK
-  R.card("ask", t, { in: T.task + 0.05, y: 40 });
-  R.type("atx", "find me 3 internships and save them in a sheet", t, at("find me") - 0.1, 22);
-  R.$("acur").style.opacity = Math.floor(t * 2.5) % 2 ? 1 : 0.2;
-  pop("gp", t, at("sheet") + 0.1, { from: 0.6 });
-  // LOOP
+  // LOOP REPLAY
   R.card("loop", t, { in: T.loop - 0.1, y: 30 });
   NODES.forEach((id, i) => pop(id, t, T.loop + i * 0.1, { from: 0.6, sfx: false }));
   let cur = -1; STEPS.forEach((s, i) => { if (t >= s[0]) cur = i; });
   NODES.forEach((id, i) => R.$(id).classList.toggle("on", cur >= 0 && STEPS[cur][1] === i));
-  if (cur >= 0) { R.$("mtag").textContent = STEPS[cur][2]; R.$("mtx").textContent = STEPS[cur][3]; R.cue("click", STEPS[cur][0]); }
-  // runner travels from previous node to current node along the circle
+  if (cur >= 0) { R.$("mtag").textContent = STEPS[cur][2]; R.$("mtx").textContent = STEPS[cur][3]; R.cue("click", STEPS[cur][0]); } else { R.$("mtx").textContent = "what happened?"; }
   let ang = -90;
-  if (cur >= 0) { const from = cur > 0 ? STEPS[cur - 1][1] : 0, to = STEPS[cur][1]; let a0 = -90 + from * 90, a1 = -90 + to * 90; if (a1 < a0 || cur === 0) a1 += cur === 0 ? 0 : 360;
-    const p = ease.inOut(prog(t, STEPS[cur][0], 0.5)); ang = lerp(a0, a1 > a0 + 360 ? a1 - 360 : a1, p); }
+  if (cur >= 0) { const from = cur > 0 ? STEPS[cur - 1][1] : 0, to = STEPS[cur][1]; let a0 = -90 + from * 90, a1 = -90 + to * 90; if (a1 <= a0 && cur > 0) a1 += 360;
+    ang = lerp(a0, a1, ease.inOut(prog(t, STEPS[cur][0], 0.5))); }
   const rn = R.$("run"), rad = ang * Math.PI / 180; rn.style.left = CX + RR * Math.cos(rad) + "px"; rn.style.top = CY + RR * Math.sin(rad) + "px"; rn.style.opacity = cur >= 0 ? 1 : 0;
-  const arc = R.$("arc"), L = 2 * Math.PI * RR; arc.style.strokeDasharray = L; arc.style.strokeDashoffset = L * (1 - clamp((ang + 90) / 360));
-  R.card("sheet", t, { in: at("Search again") - 0.2, y: 30 });
-  [["w1", at("write to the sheet")], ["w2", at("Again and again")], ["w3", at("until the goal") - 0.2]].forEach(([id, a]) => R.rise(id, t, a, { dy: 10 }));
-  pop("lc", t, at("Search again"), { from: 0.7 });
+  const arc = R.$("arc"), L = 2 * Math.PI * RR; arc.style.strokeDasharray = L; arc.style.strokeDashoffset = L * (1 - clamp(((ang + 90) % 360 + 360) % 360 / 360 || (cur >= 4 ? 1 : 0)));
+  R.card("sheet", t, { in: at("Then it decided") - 0.2, y: 30 });
+  [["x1", at("Then it decided")], ["x2", at("Again and again")], ["x3", at("until the sheet")]].forEach(([id, a]) => R.rise(id, t, a, { dy: 10 }));
+  pop("lc", t, at("Then it decided"), { from: 0.7 });
   R.$("lc").textContent = "loop #" + (t >= at("Again and again") ? 3 : 2);
   // TRICK
   [["t1", at("Think")], ["t2", at("act,")], ["t3", at("observe")], ["t4", at("repeat")]].forEach(([id, a]) => pop(id, t, a - 0.05, { from: 0.5 }));

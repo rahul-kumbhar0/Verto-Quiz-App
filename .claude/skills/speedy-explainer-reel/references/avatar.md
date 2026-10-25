@@ -1,7 +1,7 @@
 # The presenter: poses, timing, and using your own character
 
 The bottom third of every frame is a cartoon presenter who reacts to the line being spoken.
-`assets/template/avatar.js` ships TWO flat-vector looks, selected with `avatar:{look:…}`:
+`assets/template/avatar.js` ships THREE flat-vector looks, selected with `avatar:{look:…}`:
 - **`"street"` (default — the house character)**: oversized boxy tee (charcoal, drop-shoulder
   seams, wide draping sleeves with cuff folds, ribbed collar, hem fold), green bolt chest print,
   gold chain with pendant + earring, messy dark mop hair with choppy fringe and side chunks,
@@ -9,7 +9,13 @@ The bottom third of every frame is a cartoon presenter who reacts to the line be
   accent; `"none"` removes it), `chain` (`"none"` removes chain + earring), `hair`, `skin`,
   `lens1/lens2`.
 - **`"classic"`**: the fitted red tee + sport sunglasses of the reference reels.
-Both share the same rig, poses, mouth and timing, so a reel switches look with one word.
+- **`"hoodie"`**: purple pullover hoodie (hood folded behind the neck, white drawstrings,
+  kangaroo pocket, long sleeves with cuffs) and pink→purple shades. Recolour via `style`:
+  `shirt`/`shirtLine`/`under` (hoodie body, outline, inner hood), `string`, `lens1/lens2`, `hair`.
+All share the same rig, poses, mouth and timing, so a reel switches look with one word.
+Vary the look/colour between consecutive reels on one page so the feed doesn't feel like
+reruns, e.g. `look:"classic", style:{shirt:"#0A66C2", shirtLine:"#06427E", lens1:"#93C5FD", lens2:"#3B82F6"}`
+(LinkedIn-blue tee, used on the referral reel).
 Swap in your own character with PNG pose sheets when you have them (the character IS the brand).
 
 ## Pose library (`Avatar.POSES`, 20 poses)

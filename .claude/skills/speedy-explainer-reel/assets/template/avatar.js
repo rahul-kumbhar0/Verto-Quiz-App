@@ -8,6 +8,7 @@
  *   look:"street"  (default) — oversized drop-shoulder tee, chest print, chain, messy hair,
  *                   rounded shades. The house character.
  *   look:"classic" — fitted red tee + sport sunglasses (the first-generation puppet).
+ *   look:"hoodie"  — the street head (mop hair, rounded shades) in a hoodie with drawstrings + front pocket.
  * Both recolour through `style` tokens. PNG mode shows your own character instead:
  * one PNG per pose in png.dir (e.g. avatar/point_up.png), optional <pose>_open.png for lip flap. */
 (function () {
@@ -46,6 +47,9 @@
     street:  { skin: "#F0BE97", skinLine: "#B07F58", hair: "#26211E", hairHi: "#4A4138", shirt: "#23252B", shirtLine: "#101115",
                print: "#3ECF8E", chain: "#F2C14E", lens1: "#36E2A0", lens2: "#27C4E8", frame: "#17181B", under: "#15161A",
                mouth: "#5A1A1A", teeth: "#FFFFFF", tongue: "#D9534F" },
+    hoodie:  { skin: "#F0BE97", skinLine: "#B07F58", hair: "#26211E", hairHi: "#4A4138", shirt: "#6D28D9", shirtLine: "#3B0F80",
+               print: "none", chain: "none", lens1: "#F472B6", lens2: "#A855F7", frame: "#17181B", under: "#5B21B6",
+               mouth: "#5A1A1A", teeth: "#FFFFFF", tongue: "#D9534F", string: "#F5F3FF" },
     classic: { skin: "#F2C19C", skinLine: "#B9825C", hair: "#7B4A2D", hairHi: "#9C6238", shirt: "#E53935", shirtLine: "#B71C1C",
                print: "none", chain: "none", lens1: "#2ECC71", lens2: "#26C6DA", frame: "#161616", under: "#B71C1C",
                mouth: "#5A1A1A", teeth: "#FFFFFF", tongue: "#D9534F" },
@@ -70,17 +74,23 @@
   }
   function arm(side) {
     const x = SX[side], sgn = side === "R" ? 1 : -1;
-    const sleeve = LOOK === "street"
+    const longSleeve = LOOK === "hoodie";
+    const sleeve = LOOK === "street" || longSleeve
       // oversized drop sleeve: rounded shoulder cap draping to a wide cuff above the elbow
       ? `<path d="M${x - 54} ${SY - 6} q-4 -36 32 -44 q22 -4 44 0 q36 8 32 44 l9 102 q-63 30 -126 0z"
            fill="${S.shirt}" stroke="${S.shirtLine}" stroke-width="3" stroke-linejoin="round"/>
          <path d="M${x - 58} ${SY + 92} q58 26 116 0" fill="none" stroke="${S.shirtLine}" stroke-width="4" opacity=".65"/>
          <path d="M${x - 34} ${SY + 10} q-8 40 -4 66 M${x + 30} ${SY + 10} q8 40 4 66" fill="none" stroke="${S.shirtLine}" stroke-width="2.5" opacity=".3"/>`
       : `<path d="M${x - 44} ${SY - 20} h88 l6 96 h-100z" fill="${S.shirt}" stroke="${S.shirtLine}" stroke-width="3" stroke-linejoin="round"/>`;
+    // hoodie: the sleeve runs to the wrist (shirt-coloured upper arm + forearm, ribbed cuff above the hand)
+    const upper = longSleeve ? capsule(x, SY, SY + UP, 58, S.shirt, S.shirtLine) : capsule(x, SY, SY + UP, LOOK === "street" ? 50 : 58, S.skin, S.skinLine);
+    const fore = longSleeve
+      ? capsule(x, SY + UP, SY + UP + FO, 54, S.shirt, S.shirtLine) + `<rect x="${x - 27}" y="${SY + UP + FO - 34}" width="54" height="20" rx="8" fill="${S.under}" stroke="${S.shirtLine}" stroke-width="3"/>`
+      : capsule(x, SY + UP, SY + UP + FO, 46, S.skin, S.skinLine);
     return `<g class="up" data-side="${side}">
-      ${capsule(x, SY, SY + UP, LOOK === "street" ? 50 : 58, S.skin, S.skinLine)}
+      ${upper}
       ${sleeve}
-      <g class="fo">${capsule(x, SY + UP, SY + UP + FO, 46, S.skin, S.skinLine)}<g class="hand"><g class="hg"></g></g></g></g>`;
+      <g class="fo">${fore}<g class="hand"><g class="hg"></g></g></g></g>`;
   }
   function bodyStreet() {
     return `
@@ -95,6 +105,18 @@
       ${S.print === "none" ? "" : `<g class="print" transform="translate(272 520) scale(0.52)" opacity=".92">
         <path d="M63.7 110.3c-2.8 3.6-8.6 1.6-8.7-3l-1-67h45.1c8.2 0 12.7 9.4 7.7 15.9z" fill="${S.print}"/>
         <path d="M45.3 2.1c2.9-3.6 8.7-1.6 8.7 3l.5 67H9.8C1.6 72.1-3 62.7 2.1 56.2z" fill="${S.print}" opacity=".85"/></g>`}`;
+  }
+  function bodyHoodie() {
+    return `
+      <path d="M86 640 V560 q0-86 86-114 l66-24 h124 l66 24 q86 28 86 114 V640z"
+        fill="${S.shirt}" stroke="${S.shirtLine}" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M196 448 l-16 60 M404 448 l16 60" stroke="${S.shirtLine}" stroke-width="3.5" opacity=".55"/>
+      <path d="M262 356 h76 v64 q-38 36 -76 0z" fill="${S.skin}" stroke="${S.skinLine}" stroke-width="3"/>
+      <path d="M188 452 q112 -110 224 0 q-22 52 -112 56 q-90 -4 -112 -56z" fill="${S.under}" stroke="${S.shirtLine}" stroke-width="3" stroke-linejoin="round"/>  <!-- hood folded behind the neck -->
+      <path d="M236 432 q64 50 128 0 q-10 30 -64 34 q-54 -4 -64 -34z" fill="${S.shirt}" stroke="${S.shirtLine}" stroke-width="3"/>  <!-- neck opening -->
+      <path d="M282 466 q-4 40 -8 74 M318 466 q4 40 8 74" stroke="${S.string ?? "#fff"}" stroke-width="5" stroke-linecap="round" fill="none"/>
+      <circle cx="274" cy="544" r="6" fill="${S.string ?? "#fff"}"/><circle cx="326" cy="544" r="6" fill="${S.string ?? "#fff"}"/>
+      <path d="M212 640 v-34 q88 -26 176 0 v34" fill="none" stroke="${S.shirtLine}" stroke-width="3" opacity=".55"/>  <!-- front pocket -->`;
   }
   function bodyClassic() {
     return `
@@ -144,8 +166,8 @@
   function svg() {
     return `<svg viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg">
     <g class="body">
-      ${LOOK === "street" ? bodyStreet() : bodyClassic()}
-      <g class="head">${LOOK === "street" ? headStreet() : headClassic()}</g>
+      ${LOOK === "street" ? bodyStreet() : LOOK === "hoodie" ? bodyHoodie() : bodyClassic()}
+      <g class="head">${LOOK === "classic" ? headClassic() : headStreet()}</g>
     </g>
     <defs><linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${S.lens1}"/><stop offset=".55" stop-color="${S.lens2}"/><stop offset="1" stop-color="#1DE9B6"/></linearGradient></defs>
     <g class="arms">${arm("L")}${arm("R")}</g>
