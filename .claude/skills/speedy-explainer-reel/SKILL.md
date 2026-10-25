@@ -127,3 +127,6 @@ stock puppet was used.
   avatar.js, engine.js, fonts, generated captions · `assets/examples/supabase-hook/` — the reference hook rebuilt
 - `scripts/` — setup.sh · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py · align_lines.py · tts_kokoro.py ·
   sfx.py · music.py · mix.sh · clean_voice.sh · qa.sh
+
+## Cover
+`node scripts/cover.mjs index.html <t> cover.png` freezes the reel at t (pick a frame with the hero object and a clean presenter pose), hides captions and adds a 2-line headline with the keyword in the selection box plus a stamp. Keep text inside y 240-1680 (Instagram 3:4 grid crop).
