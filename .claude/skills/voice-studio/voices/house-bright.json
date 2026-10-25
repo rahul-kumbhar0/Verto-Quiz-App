@@ -1,0 +1,16 @@
+{
+ "mix": [
+  [
+   "am_michael",
+   0.6
+  ],
+  [
+   "am_puck",
+   0.4
+  ]
+ ],
+ "speed": 1.12,
+ "pitch": 0,
+ "lang": "en-us",
+ "note": "brighter, more energetic narrator"
+}

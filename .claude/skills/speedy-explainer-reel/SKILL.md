@@ -75,22 +75,18 @@ missing, a rail label wrapping, a pose that points at nothing, a `phrase not fou
 ## 4. Voice → real timings
 Write `narration_spoken.txt`: ONE SENTENCE PER LINE, numbers and acronyms spelled the way they
 are said ("twelve thousand two hundred eighty-eight", "G P T three"); `display.json` merges them
-back to "12,288" / "GPT-3" on screen. Decision order, no questions:
-(A) ElevenLabs MCP `creative_generate_speech` (calm explainer voice from `creative_list_voices`)
-    → download → align with (C)'s aligner. Check credits first with `estimate_only`; a failed run
-    is not charged.
-(B) the user's cloned voice if a tool for it exists in the session.
-(C) **offline, always works** — Kokoro neural TTS (tested, natural): 
+back to "12,288" / "GPT-3" on screen. Default route, no questions — the **voice-studio** skill
+(local, offline, no credits; voice `house` = the brand narrator):
 ```bash
-mkdir -p ~/tts && cd ~/tts && for f in kokoro-v1.0.int8.onnx voices-v1.0.bin; do curl -sSLO https://github.com/thewh1teagle/kokoro-onnx/releases/download/model-files-v1.0/$f; done
-pip install -q kokoro-onnx soundfile pocketsphinx
-python3 -I $W/tools/tts_kokoro.py ~/tts $P/narration_spoken.txt $P/audio/voice.wav am_michael 1.1
-ffmpeg -y -v error -i $P/audio/voice.wav -ar 16000 -ac 1 $P/audio/voice16k.wav
-python3 -I $W/tools/align_lines.py $P/audio/voice16k.wav $P/audio/voice_lines.json $W/tools/align.py $P/words.json
+VS=<voice-studio skill folder>
+python3 $VS/scripts/studio.py setup                      # once per machine/session
+python3 $VS/scripts/studio.py narrate $P/narration_spoken.txt -v house -o $P/audio/voice.wav --words $P/words.json
 ```
-`align_lines.py` force-aligns each sentence inside its known span (pocketsphinx), so one odd word
-can't derail the rest; it prints `N/N lines force-aligned`. Male voices: am_michael (default),
-am_fenrir, am_puck; female: af_heart, af_bella. Speed 1.1 ≈ the reference's 2.6–2.8 words/s.
+It prints `N/N lines force-aligned`; fix a fallback line by adding the missing word to
+`voices/dict.txt`. Other voices: `house-bright`, `house-uk`, `house-female`, `house-hindi`, any
+built-in, or an inline blend (`-v "am_michael:0.6,am_puck:0.4"`). Use ElevenLabs only if the user
+asks for a specific ElevenLabs voice; check credits with `estimate_only` first, then align its audio
+the same way (`studio.py narrate` needs the text; for external audio use `tools/align_lines.py`).
 Then re-run `captions.py` and re-still 4 frames: `at()` anchors re-time themselves, but a merged
 token can throw `phrase not found` (fix `display.json`).
 

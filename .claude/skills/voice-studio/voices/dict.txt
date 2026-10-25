@@ -1,0 +1,3 @@
+# Extra pronunciations for word timings (ARPAbet, CMU style). One per line: word  PH ON EM ES
+# Find phonemes for a word: look up a similar word at http://www.speech.cs.cmu.edu/cgi-bin/cmudict
+canwe  K AE N W IY

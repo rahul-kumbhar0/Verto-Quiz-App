@@ -1,0 +1,16 @@
+{
+ "mix": [
+  [
+   "hm_omega",
+   0.7
+  ],
+  [
+   "hm_psi",
+   0.3
+  ]
+ ],
+ "speed": 1.0,
+ "pitch": 0,
+ "lang": "hi",
+ "note": "Hindi / Hinglish narrator"
+}

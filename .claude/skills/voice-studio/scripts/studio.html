@@ -1,0 +1,76 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Voice Studio</title>
+<style>
+:root{--bg:#0F0F11;--card:#17181B;--line:#2A2C31;--text:#EDEDED;--mute:#8E8E93;--acc:#3ECF8E;--sel:#3B82F6}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 Inter,system-ui,sans-serif}
+.wrap{max-width:980px;margin:0 auto;padding:28px 16px 60px}
+h1{font-size:26px;margin:0 0 4px}h1 b{color:var(--acc)}.sub{color:var(--mute);margin:0 0 22px}
+.grid{display:grid;grid-template-columns:1.4fr 1fr;gap:16px}@media(max-width:760px){.grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px}
+label{display:block;font:600 12px ui-monospace,monospace;letter-spacing:.06em;color:var(--mute);text-transform:uppercase;margin:12px 0 6px}
+textarea,select,input[type=text]{width:100%;background:#0d0e10;color:var(--text);border:1px solid var(--line);border-radius:10px;padding:10px 12px;font:inherit}
+textarea{min-height:170px;resize:vertical}
+.row{display:flex;gap:10px;align-items:center}.row>*{flex:1}
+input[type=range]{width:100%;accent-color:var(--acc)}
+.val{font:600 13px ui-monospace,monospace;color:var(--acc);min-width:64px;text-align:right;flex:0 0 auto}
+button{background:var(--acc);color:#06281a;border:0;border-radius:10px;padding:11px 16px;font:700 15px inherit;cursor:pointer}
+button.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}button:disabled{opacity:.5;cursor:wait}
+audio{width:100%;margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{padding:6px 12px;border-radius:999px;border:1px solid var(--line);cursor:pointer;font:600 13px inherit}
+.chip:hover{border-color:var(--acc)}.chip small{color:var(--mute);font-weight:500}
+.status{color:var(--mute);font-size:13px;margin-top:10px;min-height:20px}.err{color:#FF6B6B}
+.mixline{font:600 13px ui-monospace,monospace;color:var(--mute);margin-top:8px;word-break:break-all}
+</style></head><body><div class="wrap">
+<h1>Voice <b>Studio</b></h1><p class="sub">Local, offline text-to-speech. Nothing leaves this computer.</p>
+<div class="grid">
+  <div class="card">
+    <label for="txt">Script</label>
+    <textarea id="txt">Every answer ChatGPT gives you is written one piece at a time, and each piece is a guess.</textarea>
+    <div class="row" style="margin-top:14px"><button id="go">▶ Generate</button><button class="ghost" id="dl" disabled>⬇ Download WAV</button></div>
+    <audio id="player" controls></audio>
+    <div class="status" id="st"></div>
+  </div>
+  <div class="card">
+    <label>Voice A</label><select id="va"></select>
+    <label>Voice B (optional blend)</label><select id="vb"><option value="">— none —</option></select>
+    <label>Blend</label><div class="row"><input type="range" id="mx" min="0" max="100" value="35"><span class="val" id="mxv">35% B</span></div>
+    <label>Speed</label><div class="row"><input type="range" id="sp" min="0.7" max="1.4" step="0.05" value="1.1"><span class="val" id="spv">1.10×</span></div>
+    <label>Pitch</label><div class="row"><input type="range" id="pt" min="-4" max="4" step="0.5" value="0"><span class="val" id="ptv">0 st</span></div>
+    <div class="mixline" id="mixline"></div>
+    <label>Save this voice as</label><div class="row"><input type="text" id="nm" placeholder="e.g. house"><button class="ghost" id="save" style="flex:0 0 auto">Save</button></div>
+  </div>
+</div>
+<div class="card" style="margin-top:16px"><label style="margin-top:0">Your designed voices</label><div class="chips" id="mine"></div></div>
+</div>
+<script>
+const $ = id => document.getElementById(id); let lastUrl = null, data = null;
+const LANG = {a:"American",b:"British",h:"Hindi",e:"Spanish",f:"French",i:"Italian",p:"Portuguese",j:"Japanese",z:"Mandarin"};
+function voiceSpec(){ const a=$("va").value,b=$("vb").value,w=+$("mx").value/100; return b&&w>0?`${a}:${(1-w).toFixed(2)},${b}:${w.toFixed(2)}`:a; }
+function upd(){ $("mxv").textContent=`${$("mx").value}% B`; $("spv").textContent=(+$("sp").value).toFixed(2)+"×"; $("ptv").textContent=$("pt").value+" st"; $("mixline").textContent="mix: "+voiceSpec(); }
+["va","vb","mx","sp","pt"].forEach(i=>$(i).addEventListener("input",upd));
+async function load(){
+  data = await (await fetch("/api/voices")).json();
+  const groups = {}; data.builtin.forEach(v=>{ (groups[v[0]] ||= []).push(v); });
+  const opts = Object.entries(groups).map(([p,vs])=>`<optgroup label="${LANG[p]||p}">${vs.map(v=>`<option>${v}</option>`).join("")}</optgroup>`).join("");
+  $("va").innerHTML = opts; $("vb").innerHTML = `<option value="">— none —</option>` + opts; $("va").value = "am_michael";
+  $("mine").innerHTML = Object.entries(data.designed).map(([n,r])=>`<span class="chip" data-n="${n}">${n} <small>${r.mix.map(m=>m[0]+" "+Math.round(m[1]*100)+"%").join(" + ")} · ${r.speed}×</small></span>`).join("") || "<span class='status'>none yet — blend two voices and press Save</span>";
+  document.querySelectorAll(".chip").forEach(c=>c.onclick=()=>{ const r=data.designed[c.dataset.n]; $("va").value=r.mix[0][0]; $("vb").value=r.mix[1]?r.mix[1][0]:""; $("mx").value=r.mix[1]?Math.round(r.mix[1][1]*100):0; $("sp").value=r.speed; $("pt").value=r.pitch||0; $("nm").value=c.dataset.n; upd(); });
+  upd();
+}
+$("go").onclick = async () => {
+  $("go").disabled = true; $("st").className="status"; $("st").textContent = "Generating…"; const t0 = performance.now();
+  const r = await fetch("/api/say",{method:"POST",body:JSON.stringify({text:$("txt").value,voice:voiceSpec(),speed:$("sp").value,pitch:$("pt").value})});
+  $("go").disabled = false;
+  if(!r.ok){ $("st").className="status err"; $("st").textContent=(await r.json()).error; return; }
+  const b = await r.blob(); if(lastUrl) URL.revokeObjectURL(lastUrl); lastUrl = URL.createObjectURL(b);
+  $("player").src = lastUrl; $("player").play(); $("dl").disabled = false;
+  $("st").textContent = `Done in ${((performance.now()-t0)/1000).toFixed(1)}s · ${voiceSpec()}`;
+};
+$("dl").onclick = () => { const a=document.createElement("a"); a.href=lastUrl; a.download=($("nm").value||"voice")+".wav"; a.click(); };
+$("save").onclick = async () => {
+  const name=$("nm").value.trim(); if(!name){ $("st").textContent="Type a name first."; return; }
+  const r = await fetch("/api/save",{method:"POST",body:JSON.stringify({name,voice:voiceSpec(),speed:$("sp").value,pitch:$("pt").value})});
+  $("st").textContent = r.ok ? `Saved “${name}”. Use it anywhere: -v ${name}` : "Save failed"; load();
+};
+load();
+</script></body></html>
