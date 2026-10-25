@@ -1,0 +1,8 @@
+Okay so, I basically automated my entire job search. With one free GitHub repo.
+I just hooked it up to Claude, and now I literally type, find me Python internships in Bangalore.
+That's it. It goes through like three million live jobs, straight from company career pages. So no reposts, no dead links.
+Same job on three sites? Shows up once. Ghost jobs? It flags them.
+I saved that search, so new ones just pop up on my Telegram every day.
+And when I open one, its Chrome extension fills the form for me. Honestly, crazy.
+It's called freehire. Fully open source.
+Comment JOBS, and I'll DM you the repo, and exactly how I set it up with Claude.

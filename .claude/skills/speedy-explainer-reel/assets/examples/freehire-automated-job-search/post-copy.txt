@@ -1,0 +1,55 @@
+=== INSTAGRAM REEL ===
+Caption:
+Comment JOBS and I'll DM you the repo + my exact Claude setup 👇
+
+I automated my job search with one free GitHub repo:
+1️⃣ I ask Claude in plain English ("find me Python internships in Bangalore")
+2️⃣ It searches 3.3M+ live jobs straight from company career pages
+3️⃣ Duplicates merged, ghost jobs flagged
+4️⃣ New matches land on Telegram every day
+5️⃣ Its Chrome extension fills the application form (I still review + submit)
+
+The repo: freehire by Ilya Strelov (open source, MIT). Not sponsored, I just use it.
+
+🔖 Save this for your next job hunt.
+#jobsearch #internship #freshers #placements #claudeai #aitools #github #opensource #softwareengineer #developersindia #techjobs #automation
+
+Pinned comment:
+Sending the repo + setup to everyone who comments JOBS 📩 (check your message requests if you don't see it)
+
+DM automation text (keyword: JOBS):
+Hey {name}! 👋 Here's everything from the reel:
+⭐ Repo: github.com/strelov1/freehire
+🔎 Search: freehire.me
+🛠 My Claude setup + 3 copy-paste prompts: [GUIDE LINK]
+Follow @canwe.ai so you don't miss the next job-hunt tool 🙌
+
+Public auto-replies (rotate):
+- Sent! Check your DMs 📩
+- Done ✅ check your inbox
+- Sent you the setup 🙌 good luck with the hunt!
+- In your DMs now 🚀
+
+=== YOUTUBE SHORTS ===
+Title:
+I Automated My Job Search With One Free GitHub Repo #shorts
+
+Description:
+I connected Claude to freehire, a free open-source job search, and now I just ask for jobs in plain English.
+
+What it does:
+- searches 3.3M+ live jobs pulled straight from company career pages
+- merges duplicate postings and flags ghost jobs
+- daily Telegram alerts for saved searches
+- a Chrome extension that fills application forms (you review and submit)
+
+Repo (by Ilya Strelov, MIT): https://github.com/strelov1/freehire
+Website: https://freehire.me
+My full Claude setup + 3 prompts: [GUIDE LINK]
+
+Not sponsored. India job count from freehire's own data, 25 Oct 2026.
+
+#shorts #jobsearch #internship #freshers #claudeai #github
+
+Pinned comment (YouTube has no DM automation, so put the links here):
+📌 Repo: github.com/strelov1/freehire · Setup guide: [GUIDE LINK]

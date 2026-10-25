@@ -1,0 +1,370 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>freehire job search</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>
+/* ---- hook: tab chaos ---- */
+.tabc{position:absolute;width:300px;height:118px;border-radius:16px;background:#17191D;border:1.5px solid #2A2D33;box-shadow:0 18px 40px rgba(0,0,0,.5);opacity:0;overflow:hidden}
+.tabc .tb{height:34px;display:flex;align-items:center;gap:8px;padding:0 12px;background:#202328;font:600 15px Inter;color:#9AA0A8;white-space:nowrap;overflow:hidden}
+.tabc .tb i{width:14px;height:14px;border-radius:4px;flex:none}
+.tabc .bd{padding:12px 14px;font:700 21px/1.25 Inter;color:#E8EAED}
+.tabc .bd small{display:block;font:500 15px Mono;color:#FF5A5F;margin-top:4px}
+.tabc.ok .bd small{color:#8E8E93}
+.tcount{position:absolute;left:0;right:0;top:640px;text-align:center;opacity:0}
+.tcount span{display:inline-block;font:700 30px Mono;color:#FFB340;padding:10px 24px;border-radius:999px;background:rgba(255,179,64,.1);border:1.5px solid rgba(255,179,64,.4)}
+/* ---- github repo card ---- */
+.gh{position:absolute;left:120px;width:840px;border-radius:24px;background:#0D1117;border:1.5px solid #30363D;box-shadow:0 40px 90px rgba(0,0,0,.6);padding:30px 34px;opacity:0;font-family:Inter}
+.gh .hd{display:flex;align-items:center;gap:16px;font:600 40px Inter;color:#58A6FF}
+.gh .hd svg{width:42px;height:42px;flex:none}
+.gh .rd{display:inline-block;height:34px;border-radius:8px;background:#30363D;vertical-align:middle}
+.gh .nm{white-space:nowrap}
+.gh .pub{margin-left:auto;font:600 20px Inter;color:#8B949E;border:1.5px solid #30363D;border-radius:999px;padding:4px 14px}
+.gh .ds{margin:18px 0 22px;font:500 28px/1.35 Inter;color:#C9D1D9}
+.gh .mt{display:flex;gap:26px;align-items:center;font:500 22px Inter;color:#8B949E}
+.gh .mt .go{width:16px;height:16px;border-radius:50%;background:#00ADD8;display:inline-block;margin-right:8px}
+.gh .mt .bt{margin-left:auto;display:flex;gap:12px}
+.gh .mt .bt span{border:1.5px solid #30363D;border-radius:10px;padding:6px 14px;color:#C9D1D9;font-weight:600}
+.gh .qm{position:absolute;right:-26px;top:-30px;width:76px;height:76px;border-radius:50%;background:#3B82F6;color:#fff;font:800 46px/76px Inter;text-align:center;box-shadow:0 10px 30px rgba(59,130,246,.5);opacity:0}
+/* ---- claude + repo connect ---- */
+.app{position:absolute;top:670px;width:400px;height:170px;border-radius:24px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0;display:flex;align-items:center;gap:18px;padding:0 28px;font:700 36px Inter;color:#111}
+.app small{display:block;font:500 20px Inter;color:#8A8A8E;margin-top:4px}
+.app .lg{width:78px;height:78px;border-radius:20px;display:grid;place-items:center;flex:none;font:800 46px Inter}
+.app.cl .lg{background:#F4EDE4;color:#D97757}
+.app.fh .lg{background:#0D1117;color:#fff}
+.app .rd{display:inline-block;width:170px;height:28px;border-radius:7px;background:#E3E5E8;vertical-align:middle}
+.plug{position:absolute;left:470px;top:735px;width:140px;height:40px;opacity:0}
+.plug i{position:absolute;top:18px;height:5px;background:#3ECF8E;border-radius:3px}
+.mcp{position:absolute;left:0;right:0;top:860px;text-align:center;opacity:0}
+.mcp span{display:inline-flex;align-items:center;gap:10px;font:700 22px Mono;color:#15803D;background:rgba(62,207,142,.15);border-radius:999px;padding:8px 20px}
+.mcp span i{width:12px;height:12px;border-radius:50%;background:#3ECF8E;box-shadow:0 0 10px #3ECF8E}
+.chat{position:absolute;left:90px;top:930px;width:900px;height:360px;border-radius:26px;background:#FAF9F7;border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0;overflow:hidden}
+.chat .me{position:absolute;right:26px;top:26px;max-width:640px;padding:16px 22px;border-radius:22px;background:#EDE7DF;font:500 28px/1.35 Inter;color:#1F1F1F;opacity:0}
+.chat .ai{position:absolute;left:26px;top:120px;display:flex;align-items:center;gap:12px;font:500 26px Inter;color:#555;opacity:0}
+.chat .ai b{color:#D97757;font-size:32px}
+.chat .inp{position:absolute;left:22px;right:22px;bottom:22px;height:76px;border-radius:20px;background:#fff;border:1.5px solid #E2DED8;display:flex;align-items:center;padding:0 24px;font:500 27px Inter;color:#1F1F1F}
+.chat .inp .ph{color:#A3A3A3}
+.chat .inp .cur{display:inline-block;width:3px;height:32px;background:#D97757;margin-left:3px}
+.chat .send{position:absolute;right:36px;bottom:34px;width:52px;height:52px;border-radius:14px;background:#D97757;color:#fff;font:700 28px/52px Inter;text-align:center}
+/* ---- search: ATS sources -> index ---- */
+.big{position:absolute;left:0;right:0;top:660px;text-align:center;opacity:0}
+.big b{display:block;font:800 92px Inter;letter-spacing:-3px;color:#fff}
+.big span{font:600 26px Mono;color:#3ECF8E;letter-spacing:2px}
+.src{position:absolute;padding:12px 20px;border-radius:14px;background:#17191D;border:1.5px solid #2A2D33;font:600 24px Inter;color:#E8EAED;opacity:0;white-space:nowrap}
+.src small{display:block;font:500 15px Mono;color:#8E8E93;margin-top:2px}
+.nos{position:absolute;left:0;right:0;top:1230px;display:flex;justify-content:center;gap:26px}
+.nos .pill{font-size:28px;padding:12px 26px;opacity:0;position:relative}
+.nos .pill s{text-decoration:none}
+.nos .pill .strike{position:absolute;left:14px;right:14px;top:50%;height:4px;background:#FF5A5F;transform-origin:0 50%;transform:scaleX(0)}
+/* ---- clean: dedupe + ghost ---- */
+.job{position:absolute;left:150px;width:780px;height:150px;border-radius:22px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 18px 44px rgba(0,0,0,.09);padding:22px 28px;opacity:0;font-family:Inter}
+.job .t{font:700 32px Inter;color:#111}
+.job .m{font:500 22px Inter;color:#777;margin-top:6px}
+.job .tag{position:absolute;right:24px;top:24px;font:600 18px Mono;color:#8A8A8E;background:#F1F1F3;border-radius:999px;padding:6px 14px}
+.job .lg{position:absolute;right:26px;bottom:24px;width:54px;height:54px;border-radius:14px;background:#111;color:#fff;font:800 28px/54px Inter;text-align:center}
+.dd{position:absolute;left:150px;top:880px;opacity:0}
+.badge{position:absolute;font:700 24px Inter;border-radius:999px;padding:8px 18px;opacity:0;white-space:nowrap}
+.badge.ok{background:rgba(62,207,142,.16);color:#15803D}
+.badge.bad{background:#FF5A5F;color:#fff;box-shadow:0 8px 24px rgba(255,90,95,.4)}
+.ghost{position:absolute;font-size:70px;opacity:0}
+/* ---- alert: saved search + telegram ---- */
+.saved{position:absolute;left:0;right:0;top:660px;text-align:center;opacity:0}
+.saved span{display:inline-flex;align-items:center;gap:12px;font:600 27px Inter;color:#E8EAED;background:#17191D;border:1.5px solid #2A2D33;border-radius:18px;padding:16px 26px}
+.saved .tg{width:64px;height:36px;border-radius:18px;background:#3A3D44;position:relative;margin-left:10px}
+.saved .tg i{position:absolute;left:4px;top:4px;width:28px;height:28px;border-radius:50%;background:#fff}
+.lock{position:absolute;left:270px;top:760px;width:540px;height:540px;border-radius:44px;background:linear-gradient(160deg,#1E2A44,#0F1424 70%);border:1.5px solid #2A3550;overflow:hidden;opacity:0}
+.lock .tm{text-align:center;margin-top:26px;font:300 92px Inter;color:#fff;letter-spacing:-2px}
+.lock .dt{text-align:center;font:500 22px Inter;color:#B8C2D9;margin-top:-6px}
+.nt{position:absolute;left:22px;right:22px;height:104px;border-radius:24px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px);display:flex;align-items:center;gap:16px;padding:0 18px;opacity:0}
+.nt .ic{width:58px;height:58px;border-radius:50%;background:#2AABEE;display:grid;place-items:center;flex:none}
+.nt .ic svg{width:30px;height:30px}
+.nt div b{display:block;font:700 21px Inter;color:#fff}
+.nt div span{font:500 20px/1.25 Inter;color:#D5DBE8}
+.nt em{position:absolute;right:18px;top:14px;font:500 16px Inter;color:#B8C2D9;font-style:normal}
+/* ---- apply: browser + extension ---- */
+.brw{position:absolute;left:50px;top:660px;width:980px;height:640px;border-radius:24px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0}
+.brw .bar{height:52px;display:flex;align-items:center;gap:10px;padding:0 20px;background:#F1F1F3;font:500 19px Mono;color:#777}
+.brw .bar i{width:13px;height:13px;border-radius:50%;background:#D0D0D4}
+.brw .url{margin-left:14px;background:#fff;border-radius:10px;padding:5px 16px;flex:1}
+.brw .pg{position:absolute;left:0;top:52px;width:620px;bottom:0;padding:24px 30px}
+.brw .pg h3{margin:0;font:800 32px Inter;color:#111}.brw .pg p{margin:4px 0 16px;font:500 20px Inter;color:#888}
+.fld{margin-bottom:12px}
+.fld label{display:block;font:600 16px Inter;color:#888;margin-bottom:4px}
+.fld div{height:50px;border-radius:12px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 16px;font:500 21px Inter;color:#111;position:relative}
+.fld div .ck{position:absolute;right:14px;color:#3ECF8E;font-weight:800;opacity:0}
+.fld.on div{border-color:#3ECF8E;background:rgba(62,207,142,.06)}
+.ext{position:absolute;right:0;top:52px;width:360px;bottom:0;background:#0F0F11;padding:22px;font-family:Inter}
+.ext .eh{display:flex;align-items:center;gap:10px;font:700 24px Inter;color:#fff}
+.ext .eh i{width:34px;height:34px;border-radius:9px;background:#fff;color:#0D1117;font:800 20px/34px Inter;text-align:center;font-style:normal}
+.ext .mt{margin-top:20px;font:500 19px/1.4 Inter;color:#9AA0A8}
+.ext .mt b{color:#3ECF8E}
+.ext .btn{position:absolute;left:22px;right:22px;bottom:26px;height:70px;border-radius:16px;background:#3B82F6;color:#fff;font:700 26px/70px Inter;text-align:center}
+.toast{position:absolute;left:0;right:0;top:1318px;text-align:center;opacity:0;z-index:5}
+.toast span{display:inline-block;font:700 26px Inter;color:#fff;background:#111;border-radius:999px;padding:14px 28px;box-shadow:0 14px 40px rgba(0,0,0,.25)}
+.toast b{color:#3ECF8E}
+/* ---- reveal ---- */
+.pills{position:absolute;left:0;right:0;top:1150px;display:flex;justify-content:center;gap:18px}
+.pills .pill{font-size:26px;padding:10px 24px;opacity:0}
+.india{position:absolute;left:0;right:0;top:665px;text-align:center;opacity:0}
+.india b{font:800 64px Inter;color:#fff;letter-spacing:-2px}
+.india span{display:block;font:600 22px Mono;color:#8E8E93;margin-top:2px}
+/* ---- CTA ---- */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3B82F6,#1E4FD8);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;display:grid;place-items:center;font:800 26px Inter;color:#fff;flex:none;border:3px solid #fff}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <!-- HOOK (dark): 12 job tabs pile up, collapse into one repo -->
+  <section class="scene" id="sHook">
+    <div class="tcount" id="tc"><span><b id="tcn">0</b> job tabs open</span></div>
+    <div id="tabs"></div>
+    <div class="gh" id="gh0" style="top:760px">
+      <div class="hd"><svg viewBox="0 0 16 16" fill="#8B949E"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.5 2.5 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.5 2.5 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+        <span class="nm"><i class="rd" style="width:150px"></i> / <i class="rd" style="width:190px"></i></span><span class="pub">Public</span></div>
+      <div class="ds">Every IT job, straight from the source.</div>
+      <div class="mt"><span><i class="go"></i>Go</span><span>MIT license</span><span class="bt"><span>★ Star</span><span>⑂ Fork</span></span></div>
+      <div class="qm" id="qm">?</div>
+    </div>
+  </section>
+  <!-- 1 · FIND (light): hook Claude up, ask in plain English -->
+  <section class="scene" id="sClaude">
+    <div class="app cl" id="apC" style="left:60px"><div class="lg">✳</div><div>Claude<small>your AI assistant</small></div></div>
+    <div class="app fh" id="apF" style="left:620px"><div class="lg">▣</div><div><i class="rd"></i><small>GitHub repo</small></div></div>
+    <div class="plug" id="plug"><i id="pl1" style="left:0;width:70px"></i><i id="pl2" style="right:0;width:70px"></i></div>
+    <div class="mcp" id="mcp"><span><i></i>connected · MCP server</span></div>
+    <div class="chat" id="chat">
+      <div class="me" id="cme">find me Python internships in Bangalore</div>
+      <div class="ai" id="cai"><b>✳</b><span id="caiT">Searching every live job…</span></div>
+      <div class="inp" id="cinp"><span id="ctyp"></span><i class="cur" id="ccur"></i><span class="ph" id="cph">Ask anything…</span></div><div class="send">↑</div>
+    </div>
+  </section>
+  <!-- 1b · SEARCH (dark): career pages -> one index -->
+  <section class="scene" id="sSearch">
+    <div class="big" id="big"><b id="bign">0</b><span>LIVE JOBS · STRAIGHT FROM THE SOURCE</span></div>
+    <div class="stack" id="st" style="left:390px;top:930px;width:300px;height:340px"></div>
+    <div class="src" id="s1" style="left:50px;top:860px">Workday<small>career pages</small></div>
+    <div class="src" id="s2" style="left:50px;top:990px">Greenhouse<small>career pages</small></div>
+    <div class="src" id="s3" style="left:50px;top:1120px">Lever<small>career pages</small></div>
+    <div class="src" id="s4" style="right:50px;top:860px;text-align:right">Ashby<small>career pages</small></div>
+    <div class="src" id="s5" style="right:50px;top:990px;text-align:right">iCIMS<small>career pages</small></div>
+    <div class="src" id="s6" style="right:50px;top:1120px;text-align:right">100+ more<small>hiring systems</small></div>
+    <div class="flow" id="f1" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="f2" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="f3" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="f4" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="f5" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="f6" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="nos"><span class="pill bad" id="no1">Reposts<i class="strike" id="sk1"></i></span><span class="pill bad" id="no2">Dead links<i class="strike" id="sk2"></i></span></div>
+    <div class="note r" id="n3" style="top:1300px">freehire README snapshot, 20 Oct 2026</div>
+  </section>
+  <!-- 2 · CLEAN (light): 3 copies -> 1, ghost job flagged -->
+  <section class="scene" id="sClean">
+    <div class="job" id="j1" style="top:680px"><div class="t">Python Intern</div><div class="m">Acme Labs · Bangalore · Hybrid</div><span class="tag" id="jt1">via job board A</span><span class="lg">A</span></div>
+    <div class="job" id="j2" style="top:850px"><div class="t">Python Intern</div><div class="m">Acme Labs · Bangalore · Hybrid</div><span class="tag">via job board B</span><span class="lg">A</span></div>
+    <div class="job" id="j3" style="top:1020px"><div class="t">Python Intern</div><div class="m">Acme Labs · Bangalore · Hybrid</div><span class="tag">via job board C</span><span class="lg">A</span></div>
+    <div class="badge ok" id="b1" style="left:150px;top:850px">✓ 1 listing · links to acme.com/careers</div>
+    <div class="job" id="j4" style="top:960px"><div class="t">Backend Intern</div><div class="m">Some Corp · posted 94 days ago · "always hiring"</div><span class="tag">via job board D</span><span class="lg" style="background:#999">S</span></div>
+    <div class="ghost" id="gst" style="left:860px;top:900px">👻</div>
+    <div class="badge bad" id="b2" style="left:150px;top:1130px">⚑ Flagged: likely not really hiring</div>
+  </section>
+  <!-- 3 · ALERT (dark): saved search -> Telegram -->
+  <section class="scene" id="sAlert">
+    <div class="saved" id="sv"><span>🔖 Python · Internship · Bangalore<span class="tg" id="tgl"><i id="tgk"></i></span></span></div>
+    <div class="lock" id="lock"><div class="tm">9:00</div><div class="dt">Monday, 26 October</div>
+      <div class="nt" id="nt1" style="top:200px"><div class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3 18.7 19.6c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.1 13.3 1.3 11.8c-1-.3-1.1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3Z"/></svg></div><div><b>freehire digest</b><span>3 new: Python Intern · Bangalore</span></div><em>now</em></div>
+      <div class="nt" id="nt2" style="top:318px"><div class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3 18.7 19.6c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.1 13.3 1.3 11.8c-1-.3-1.1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3Z"/></svg></div><div><b>freehire digest</b><span>Data Intern · Remote · India</span></div><em>1d</em></div>
+      <div class="nt" id="nt3" style="top:436px"><div class="ic"><svg viewBox="0 0 24 24" fill="#fff"><path d="M21.9 4.3 18.7 19.6c-.2 1-.9 1.3-1.8.8l-4.9-3.6-2.4 2.3c-.3.3-.5.5-1 .5l.3-5 9.1-8.2c.4-.4-.1-.6-.6-.2L6.1 13.3 1.3 11.8c-1-.3-1.1-1 .2-1.5L20.6 3c.9-.3 1.6.2 1.3 1.3Z"/></svg></div><div><b>freehire digest</b><span>ML Intern · Bangalore</span></div><em>2d</em></div>
+    </div>
+  </section>
+  <!-- 4 · APPLY (light): extension fills the form -->
+  <section class="scene" id="sApply">
+    <div class="brw" id="brw">
+      <div class="bar"><i></i><i></i><i></i><span class="url">acme.com/careers/python-intern</span></div>
+      <div class="pg"><h3>Python Intern</h3><p>Acme Labs · Bangalore</p>
+        <div class="fld" id="fd1"><label>Full name</label><div><span></span><b class="ck">✓</b></div></div>
+        <div class="fld" id="fd2"><label>Email</label><div><span></span><b class="ck">✓</b></div></div>
+        <div class="fld" id="fd3"><label>Phone</label><div><span></span><b class="ck">✓</b></div></div>
+        <div class="fld" id="fd4"><label>Resume</label><div><span></span><b class="ck">✓</b></div></div>
+        <div class="fld" id="fd5"><label>LinkedIn</label><div><span></span><b class="ck">✓</b></div></div>
+      </div>
+      <div class="ext"><div class="eh"><i>f</i>freehire</div>
+        <div class="mt">Skill match <b>8 / 10</b><br>Python ✓ · SQL ✓ · APIs ✓</div>
+        <div class="btn" id="fillBtn">Fill this form</div></div>
+    </div>
+    <div class="toast" id="toast"><span><b>✓</b> Filled. You just review &amp; submit.</span></div>
+  </section>
+  <!-- REVEAL (dark) -->
+  <section class="scene" id="sReveal">
+    <div class="india" id="ind"><b id="indn">0</b><span>JOBS IN INDIA · LAST 30 DAYS</span></div>
+    <div class="gh" id="gh1" style="top:820px">
+      <div class="hd"><svg viewBox="0 0 16 16" fill="#8B949E"><path d="M2 2.5A2.5 2.5 0 0 1 4.5 0h8.75a.75.75 0 0 1 .75.75v12.5a.75.75 0 0 1-.75.75h-2.5a.75.75 0 0 1 0-1.5h1.75v-2h-8a1 1 0 0 0-.714 1.7.75.75 0 1 1-1.072 1.05A2.5 2.5 0 0 1 2 11.5Zm10.5-1h-8a1 1 0 0 0-1 1v6.708A2.5 2.5 0 0 1 4.5 9h8ZM5 12.25a.25.25 0 0 1 .25-.25h3.5a.25.25 0 0 1 .25.25v3.25a.25.25 0 0 1-.4.2l-1.45-1.087a.25.25 0 0 0-.3 0L5.4 15.7a.25.25 0 0 1-.4-.2Z"/></svg>
+        <span class="nm" id="ghn">strelov1 / <b style="color:#58A6FF">freehire</b></span><span class="pub">Public</span></div>
+      <div class="ds">Every IT job, straight from the source.</div>
+      <div class="mt"><span><i class="go"></i>Go</span><span>MIT license</span><span class="bt"><span>★ Star</span><span>⑂ Fork</span></span></div>
+    </div>
+    <div class="pills"><span class="pill ok" id="pp1">Free</span><span class="pill ok" id="pp2">Open source</span><span class="pill blue" id="pp3">Works with Claude</span></div>
+    <div class="note r" id="n6" style="top:1235px">Count: freehire job data, 25 Oct 2026</div>
+  </section>
+  <!-- CTA (light): comment JOBS -> DM -->
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Rohan · 2m</small><b>JOBS</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#10B981"></i><div><small>Priya · 1m</small><b>JOBS</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#8B5CF6"></i><div><small>Ishaan · 40s</small><b>JOBS</b> bro this is crazy</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3B82F6,#1E4FD8)"></i><div><small>you · now</small><b>JOBS</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av">cw</div><div><b class="bname"></b><span>here's the repo + my exact Claude setup 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>JOBS</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+const T = { claude: at("I just hooked"), search: at("It goes through"), clean: at("Same job on"), alert: at("I saved that"),
+  apply: at("And when I open"), reveal: at("It's called"), cta: at("Comment JOBS"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.claude, enter: "none" }, { id: "sClaude", s: T.claude, e: T.search, enter: "blurzoom" },
+  { id: "sSearch", s: T.search, e: T.clean, enter: "push" }, { id: "sClean", s: T.clean, e: T.alert, enter: "blurzoom" },
+  { id: "sAlert", s: T.alert, e: T.apply, enter: "swing" }, { id: "sApply", s: T.apply, e: T.reveal, enter: "push" },
+  { id: "sReveal", s: T.reveal, e: T.cta, enter: "blurzoom" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.claude, T.search], [T.clean, T.alert], [T.apply, T.reveal], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "find", at: T.claude }, { label: "clean", at: T.clean }, { label: "alert", at: T.alert }, { label: "apply", at: T.apply, end: T.reveal }],
+  counter: { unit: "steps automated", steps: [[at("find me"), 1], [at("Shows up once"), 2], [at("pop up"), 3], [at("fills the form"), 4]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15 },
+  poses: P,
+});
+// ---------- builders ----------
+const TABS = [["Naukri-style board", "SDE Intern · Apply now", "reposted 3x"], ["Job portal", "Hiring!! Freshers", "job expired"], ["LinkedIn-style feed", "Python Intern", "404 · not found"],
+  ["Job board", "Walk-in drive", "posted 61d ago"], ["Careers page", "Graduate Engineer", "login to view"], ["Job portal", "Urgent hiring", "via recruiter"],
+  ["Job board", "Backend Intern", "applications closed"], ["Job portal", "Data Intern", "reposted"], ["Startup jobs", "ML Intern", "still open?"],
+  ["Job board", "Software Trainee", "dead link"], ["Job portal", "Remote Intern", "via 3rd party"], ["Careers page", "Analyst Intern", "no reply"]];
+const COL = ["#4F8EF7", "#F59E0B", "#10B981", "#EF4444", "#8B5CF6", "#06B6D4"];
+let sd = 7; const rnd = () => (sd = (sd * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+const TP = TABS.map((_, i) => ({ x: 70 + (i % 3) * 320 + (rnd() - 0.5) * 40, y: 720 + Math.floor(i / 3) * 140 + (rnd() - 0.5) * 30, r: (rnd() - 0.5) * 9 }));
+R.$("tabs").innerHTML = TABS.map(([site, title, warn], i) =>
+  `<div class="tabc ${i % 4 === 3 ? "ok" : ""}" id="tb${i}" style="left:${TP[i].x}px;top:${TP[i].y}px"><div class="tb"><i style="background:${COL[i % 6]}"></i>${site}</div><div class="bd">${title}<small>${warn}</small></div></div>`).join("");
+const FILL = [["fd1", "Aarav Sharma"], ["fd2", "aarav.sharma@gmail.com"], ["fd3", "+91 98765 43210"], ["fd4", "📄 Aarav_Resume.pdf"], ["fd5", "linkedin.com/in/aarav"]];
+// ---------- frame ----------
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: tabs pile up, then collapse into one repo
+  const colA = at("With one");
+  R.note("tc", t, 0.2, colA + 0.4);
+  count("tcn", t, 0.2, 2.6, 47);
+  TABS.forEach((_, i) => {
+    const el = R.$("tb" + i), a = 0.15 + i * 0.22, p = R.ease.spring(prog(t, a, 0.45)), c = ease.inOut(prog(t, colA + i * 0.025, 0.6));
+    if (prog(t, a, 0.45) > 0 && prog(t, a, 0.45) < 0.2) R.cue("pop", a, { soft: true });
+    const x = lerp(0, 540 - 150 - TP[i].x, c), y = lerp(0, 960 - 59 - TP[i].y, c);
+    el.style.opacity = clamp(prog(t, a, 0.15) * 3) * (1 - c);
+    el.style.transform = `translate(${x}px,${y}px) rotate(${TP[i].r * (1 - c)}deg) scale(${lerp(0.6, 1, p) * lerp(1, 0.2, c)})`;
+  });
+  R.card("gh0", t, { in: at("GitHub") - 0.1, y: 60 });
+  pop("qm", t, at("repo.") + 0.1);
+  // FIND: connect Claude, ask
+  R.card("apC", t, { in: T.claude + 0.05, back: [at("and now"), null], dz: 30 }); R.card("apF", t, { in: T.claude + 0.2, back: [at("and now"), null], dz: 30 });
+  const cn = ease.inOut(prog(t, at("hooked"), 0.6));
+  R.$("apC").style.left = lerp(60, 70, cn) + "px"; R.$("apF").style.left = lerp(620, 610, cn) + "px";
+  R.$("plug").style.opacity = clamp(prog(t, at("hooked"), 0.2) * 3);
+  R.$("pl1").style.width = lerp(0, 70, cn) + "px"; R.$("pl2").style.width = lerp(0, 70, cn) + "px";
+  pop("mcp", t, at("to Claude") + 0.15, { from: 0.7 });
+  R.card("chat", t, { in: at("and now") + 0.05, y: 60 });
+  const askA = at("find me"), ask = "find me Python internships in Bangalore", sent = R.end("Bangalore.") + 0.15;
+  if (t < sent) { R.type("ctyp", ask, t, askA - 0.1, 20); R.$("cme").style.opacity = 0; }
+  else R.$("ctyp").textContent = "";
+  R.$("cph").style.display = t < askA - 0.1 || t >= sent ? "" : "none";
+  R.$("ccur").style.opacity = t < sent && Math.floor(t * 2.5) % 2 ? 1 : 0;
+  if (t >= sent) pop("cme", t, sent, { from: 0.85 });
+  R.rise("cai", t, at("That's it") + 0.1, { dy: 20 });
+  R.$("caiT").textContent = "Searching every live job" + ".".repeat(1 + (Math.floor(t * 3) % 3));
+  // SEARCH: sources -> index, count
+  R.card("big", t, { in: at("three million") - 0.2, y: 30 });
+  count("bign", t, at("three million") - 0.2, 1.4, 3371563, { ding: true });
+  R.stack("st", t, { at: T.search + 0.1, discs: 3, core: "🔎", gap: 14 });
+  ["s1", "s2", "s3", "s4", "s5", "s6"].forEach((id, i) => R.card(id, t, { in: at("company career") - 0.3 + i * 0.1, y: 20 }));
+  const FL = ["M 250 895 C 330 900, 360 960, 420 990", "M 250 1025 C 330 1025, 360 1025, 410 1040", "M 210 1155 C 300 1160, 360 1110, 420 1090",
+    "M 830 895 C 750 900, 720 960, 660 990", "M 830 1025 C 750 1025, 720 1025, 670 1040", "M 830 1155 C 760 1160, 720 1110, 660 1090"];
+  FL.forEach((d, i) => R.flow("f" + (i + 1), t, { at: at("company career") + i * 0.08, path: d, n: 3, speed: 0.8, hide: T.clean }));
+  pop("no1", t, at("reposts,"), { from: 0.7 }); pop("no2", t, at("dead"), { from: 0.7 });
+  R.$("sk1").style.transform = `scaleX(${ease.out3(prog(t, at("reposts,") + 0.35, 0.3))})`;
+  R.$("sk2").style.transform = `scaleX(${ease.out3(prog(t, R.end("links.") - 0.1, 0.3))})`;
+  R.note("n3", t, at("three million") + 0.6, T.clean);
+  // CLEAN: 3 copies merge to 1, ghost flagged
+  const mg = ease.inOut(prog(t, at("Shows up once"), 0.6)), gA = at("Ghost");
+  [["j1", at("Same")], ["j2", at("three", 1)], ["j3", at("sites?")]].forEach(([id, a], i) => {
+    const el = R.$(id), p = ease.out3(prog(t, a, 0.4)), y0 = [680, 850, 1020][i], yT = 680;
+    el.style.opacity = p * (i === 0 ? 1 : 1 - mg); el.style.transform = `translateY(${(1 - p) * 30 + (yT - y0) * mg}px) scale(${lerp(0.95, 1, p)})`;
+    if (p > 0 && p < 0.3) R.cue("pop", a, { soft: true });
+  });
+  R.$("jt1").textContent = mg > 0.6 ? "company page ✓" : "via job board A";
+  R.$("j1").style.borderColor = mg > 0.6 ? "#3ECF8E" : ""; R.$("j1").style.boxShadow = mg > 0.6 ? "0 0 0 4px rgba(62,207,142,.18),0 18px 44px rgba(0,0,0,.09)" : "";
+  pop("b1", t, at("once.") + 0.2, { from: 0.7 });
+  R.card("j4", t, { in: gA - 0.1, y: 40 });
+  pop("gst", t, gA + 0.1, { from: 0.3, rot: -12 });
+  const gf = prog(t, at("flags"), 0.3); R.$("j4").style.filter = gf > 0 ? `grayscale(${gf})` : R.$("j4").style.filter;
+  if (gf > 0) R.$("j4").style.opacity = parseFloat(R.$("j4").style.opacity) * (1 - 0.35 * gf);
+  pop("b2", t, at("flags") + 0.05, { from: 0.6 });
+  // ALERT: saved search toggles on, Telegram digests stack
+  R.card("sv", t, { in: at("saved") - 0.05, y: 30 });
+  const tg = ease.inOut(prog(t, at("search", 1) + 0.1, 0.3));
+  R.$("tgk").style.left = lerp(4, 32, tg) + "px"; R.$("tgl").style.background = tg > 0.5 ? "#3ECF8E" : "#3A3D44";
+  if (tg > 0 && tg < 1) R.cue("click", at("search", 1) + 0.1);
+  R.card("lock", t, { in: at("so new") - 0.1, y: 60 });
+  [["nt1", at("pop up")], ["nt2", at("Telegram") + 0.05], ["nt3", at("every day") + 0.05]].forEach(([id, a]) => {
+    const p = R.ease.spring(prog(t, a, 0.5)); const el = R.$(id);
+    el.style.opacity = clamp(prog(t, a, 0.15) * 3); el.style.transform = `translateY(${(1 - p) * -40}px) scale(${lerp(0.9, 1, p)})`;
+    R.cue("ding", a);
+  });
+  // APPLY: extension fills the form
+  R.card("brw", t, { in: T.apply + 0.05, y: 50 });
+  const fA = at("fills");
+  R.press("fillBtn", t, fA - 0.15);
+  FILL.forEach(([id, v], i) => {
+    const a = fA + 0.05 + i * 0.22, el = R.$(id);
+    el.querySelector("span").textContent = t >= a ? v.slice(0, Math.floor(clamp((t - a) / 0.2) * v.length)) : "";
+    el.classList.toggle("on", t >= a + 0.2);
+    el.querySelector(".ck").style.opacity = ease.out3(prog(t, a + 0.2, 0.2));
+    if (t >= a) R.cue("type", a, { t2: a + 0.2 });
+  });
+  pop("toast", t, at("Honestly") - 0.05, { from: 0.7 });
+  // REVEAL
+  R.card("gh1", t, { in: T.reveal + 0.05, y: 50 });
+  R.wipe("ghn", t, at("freehire.") - 0.05, 0.45, "right");
+  pop("pp1", t, at("Fully") - 0.05, { from: 0.6 }); pop("pp2", t, at("open source"), { from: 0.6 }); pop("pp3", t, at("source.") + 0.25, { from: 0.6 });
+  R.card("ind", t, { in: T.reveal + 0.3, y: 20 }); count("indn", t, T.reveal + 0.3, 1.2, 40947);
+  R.note("n6", t, T.reveal + 0.8, T.cta);
+  // CTA: you comment JOBS -> DM arrives
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "JOBS", tyA = at("Comment JOBS") - 0.1, posted = R.end("Comment JOBS") + 0.25;
+  if (t < posted) { R.type("ctx", kw, t, tyA, 10); } else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("with Claude") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>
