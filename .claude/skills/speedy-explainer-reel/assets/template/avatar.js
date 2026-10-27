@@ -50,6 +50,8 @@
     typing:      { L: [12, -92, "relax", -10], R: [12, -92, "relax", 10], head: 6, expr: "think", typing: true },
     clap:        { L: [34, -108, "palm", -75], R: [34, -108, "palm", 75], head: -2, expr: "excited", clap: true },
     wave:        { L: [10, 18, "relax"], R: [150, 28, "palm", 10], head: -4, wave: true, expr: "happy" },
+    hold:        { L: [10, 18, "relax"], R: [52, 92, "fist", -10], head: 3, expr: "happy" },          // shows a prop at chest height
+    double_thumbs: { L: [28, 150, "thumb", -10], R: [28, 150, "thumb", 10], head: 3, lift: 6, expr: "excited" },   // signature sign-off
     shh:         { L: [10, 18, "relax"], R: [-4, 166, "point", 30], head: 4, expr: "think" },
     cross:       { L: [-14, 112, "fist", 60], R: [-14, 112, "fist", -60], head: 2, expr: "serious" },
   };
@@ -78,6 +80,33 @@
                mouth: "#5A1A1A", teeth: "#FFFFFF", tongue: "#D9534F" },
   };
   let el, cfg, S, LOOK, parts = {}, mode = "svg";
+
+  // ---------- accessories (avatar:{accessory:"grad"|"headset"|"detective"}), reaction FX, hand props ----------
+  const ACC = {
+    grad: `<g><path d="M300 92 l150 52 -150 52 -150 -52z" fill="#1F2937" stroke="#0B0F19" stroke-width="4"/><path d="M220 160 v40 q80 40 160 0 v-40" fill="#111827" stroke="#0B0F19" stroke-width="4"/>
+           <path d="M430 150 v62" stroke="#F2C14E" stroke-width="6"/><circle cx="430" cy="218" r="10" fill="#F2C14E"/></g>`,
+    headset: `<g><path d="M186 250 q-6 -170 114 -176 q120 6 114 176" fill="none" stroke="#1F2937" stroke-width="16" stroke-linecap="round"/>
+           <rect x="164" y="230" width="34" height="64" rx="14" fill="#374151"/><rect x="402" y="230" width="34" height="64" rx="14" fill="#374151"/>
+           <path d="M180 292 q10 60 92 66" fill="none" stroke="#374151" stroke-width="7"/><circle cx="276" cy="358" r="10" fill="#111827"/></g>`,
+    detective: `<g><ellipse cx="300" cy="150" rx="176" ry="30" fill="#7C5A3A" stroke="#4A3422" stroke-width="4"/><path d="M196 150 q-4 -90 104 -96 q108 6 104 96z" fill="#8B6844" stroke="#4A3422" stroke-width="4"/>
+           <path d="M200 138 q100 18 200 0" fill="none" stroke="#3B2A1A" stroke-width="12"/></g>`,
+  };
+  const FX_SVG = `
+    <g class="fx-bulb" opacity="0"><circle cx="300" cy="10" r="46" fill="#FDE68A" opacity=".35"/><text x="300" y="34" font-size="72" text-anchor="middle">💡</text></g>
+    <g class="fx-q" opacity="0"><text x="300" y="40" font-size="80" font-weight="900" text-anchor="middle" fill="#60A5FA" font-family="Inter" stroke="#1E3A8A" stroke-width="3">???</text></g>
+    <g class="fx-sweat" opacity="0"><path d="M430 170 q-20 34 0 46 q20 -12 0 -46z" fill="#7DD3FC" stroke="#0369A1" stroke-width="3"/></g>
+    <g class="fx-spark" opacity="0"><text x="150" y="120" font-size="56">✨</text><text x="420" y="80" font-size="44">✨</text><text x="470" y="200" font-size="36">✨</text></g>
+    <g class="fx-steam" opacity="0"><text x="150" y="250" font-size="54" text-anchor="middle">💨</text><text x="455" y="250" font-size="54" text-anchor="middle" transform="scale(-1 1) translate(-910 0)">💨</text></g>`;
+  const PROP = {
+    paper: `<g transform="translate(-60 -110) rotate(-6)"><rect width="120" height="158" rx="8" fill="#fff" stroke="#9CA3AF" stroke-width="3"/><rect x="14" y="14" width="60" height="12" rx="4" fill="#1F2937"/>
+            <rect x="14" y="40" width="92" height="7" rx="3" fill="#D1D5DB"/><rect x="14" y="56" width="80" height="7" rx="3" fill="#D1D5DB"/><rect x="14" y="78" width="92" height="7" rx="3" fill="#BDEBD4"/><rect x="14" y="94" width="70" height="7" rx="3" fill="#D1D5DB"/><rect x="14" y="116" width="86" height="7" rx="3" fill="#D1D5DB"/>
+            <text x="60" y="150" font-family="Inter" font-weight="800" font-size="14" text-anchor="middle" fill="#6B7280">RESUME</text></g>`,
+    phone: `<g transform="translate(-40 -120)"><rect width="80" height="150" rx="16" fill="#111827" stroke="#374151" stroke-width="4"/><rect x="7" y="12" width="66" height="122" rx="9" fill="#3B82F6"/>
+            <rect x="16" y="26" width="48" height="10" rx="5" fill="#fff" opacity=".9"/><rect x="16" y="44" width="40" height="10" rx="5" fill="#fff" opacity=".6"/></g>`,
+    chai: `<g transform="translate(-44 -96)"><path d="M0 20 h78 l-8 70 q-2 10 -12 10 h-38 q-10 0 -12 -10z" fill="#FDF6E3" stroke="#92400E" stroke-width="4"/><path d="M78 36 q24 4 18 26 q-4 14 -22 12" fill="none" stroke="#92400E" stroke-width="6"/>
+            <path d="M6 26 h66" stroke="#B45309" stroke-width="8"/><path d="M22 10 q-8 -12 2 -22 M44 10 q-8 -12 2 -22" fill="none" stroke="#D1D5DB" stroke-width="5" stroke-linecap="round" class="steam"/></g>`,
+    magnifier: `<g transform="translate(-20 -120)"><circle cx="40" cy="40" r="38" fill="#BFDBFE" fill-opacity=".45" stroke="#1F2937" stroke-width="10"/><path d="M64 68 l34 40" stroke="#1F2937" stroke-width="16" stroke-linecap="round"/></g>`,
+  };
 
   // ---------- SVG puppet ----------
   const SX = { L: 168, R: 432 }, SY = 452, UP = 150, FO = 148;
@@ -166,8 +195,10 @@
       <path d="M356 124 q40 18 54 60 q-26 -30 -60 -40z" fill="${S.hairHi}" opacity=".6"/>
       <g class="brows"><path class="brow" data-s="L" d="M204 214 q36 -14 74 -2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/>
         <path class="brow" data-s="R" d="M322 212 q38 -12 74 2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/></g>
+      <g class="eyes" opacity="0"><ellipse cx="242" cy="256" rx="34" ry="40" fill="#fff" stroke="#15120F" stroke-width="4"/><ellipse cx="358" cy="256" rx="34" ry="40" fill="#fff" stroke="#15120F" stroke-width="4"/>
+        <circle class="pup" cx="246" cy="262" r="15" fill="#15120F"/><circle class="pup" cx="354" cy="262" r="15" fill="#15120F"/><circle cx="251" cy="255" r="5" fill="#fff"/><circle cx="359" cy="255" r="5" fill="#fff"/></g>
       <!-- rounded shades -->
-      <g>
+      <g class="shades">
         <rect x="192" y="226" width="100" height="62" rx="30" fill="url(#lens)" stroke="${S.frame}" stroke-width="7"/>
         <rect x="308" y="226" width="100" height="62" rx="30" fill="url(#lens)" stroke="${S.frame}" stroke-width="7"/>
         <path d="M292 252 h16" stroke="${S.frame}" stroke-width="8" stroke-linecap="round"/>
@@ -187,7 +218,9 @@
       <path d="M228 154 q40-44 108-40 q-54 6 -92 50z" fill="${S.hairHi}" opacity=".8"/>
       <g class="brows"><path class="brow" data-s="L" d="M204 220 q36 -14 74 -2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/>
         <path class="brow" data-s="R" d="M322 218 q38 -12 74 2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/></g>
-      <path d="M190 236 q110 -22 220 0 l-8 40 q-22 24 -64 20 q-28 -4 -42 -36 q-14 32 -42 36 q-42 4 -64 -20z" fill="url(#lens)" stroke="${S.frame}" stroke-width="6" stroke-linejoin="round"/>
+      <g class="eyes" opacity="0"><ellipse cx="242" cy="256" rx="34" ry="40" fill="#fff" stroke="#15120F" stroke-width="4"/><ellipse cx="358" cy="256" rx="34" ry="40" fill="#fff" stroke="#15120F" stroke-width="4"/>
+        <circle class="pup" cx="246" cy="262" r="15" fill="#15120F"/><circle class="pup" cx="354" cy="262" r="15" fill="#15120F"/><circle cx="251" cy="255" r="5" fill="#fff"/><circle cx="359" cy="255" r="5" fill="#fff"/></g>
+      <path class="shades" d="M190 236 q110 -22 220 0 l-8 40 q-22 24 -64 20 q-28 -4 -42 -36 q-14 32 -42 36 q-42 4 -64 -20z" fill="url(#lens)" stroke="${S.frame}" stroke-width="6" stroke-linejoin="round"/>
       <path d="M208 248 q36 -12 62 -6" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>
       <path d="M330 248 q36 -12 62 -6" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>`;
   }
@@ -195,10 +228,12 @@
     return `<svg viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="overflow:visible">
     <g class="body">
       ${LOOK === "street" ? bodyStreet() : LOOK === "hoodie" ? bodyHoodie() : bodyClassic()}
-      <g class="head">${LOOK === "classic" ? headClassic() : headStreet()}</g>
+      <g class="head">${LOOK === "classic" ? headClassic() : headStreet()}${ACC[cfg.accessory] || ""}</g>
     </g>
     <defs><linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${S.lens1}"/><stop offset=".55" stop-color="${S.lens2}"/><stop offset="1" stop-color="#1DE9B6"/></linearGradient></defs>
     <g class="arms">${arm("L")}${arm("R")}</g>
+    <g class="prop"></g>
+    <g class="fx">${FX_SVG}</g>
   </svg>`;
   }
 
@@ -213,7 +248,8 @@
     el.innerHTML = svg();
     parts = { body: el.querySelector(".body"), head: el.querySelector(".head"), mc: el.querySelector(".mouthClosed"), mo: el.querySelector(".mouthOpen"),
               moE: el.querySelector(".mo"), tg: el.querySelector(".tg"), teeth: el.querySelector(".teeth"),
-              bL: el.querySelector('.brow[data-s="L"]'), bR: el.querySelector('.brow[data-s="R"]') };
+              bL: el.querySelector('.brow[data-s="L"]'), bR: el.querySelector('.brow[data-s="R"]'),
+              shades: el.querySelector(".shades"), eyes: el.querySelector(".eyes"), prop: el.querySelector(".prop"), fx: el.querySelector(".fx") };
     ["L", "R"].forEach(s => { const up = el.querySelector(`.up[data-side=${s}]`); parts[s] = { up, fo: up.querySelector(".fo"), hand: up.querySelector(".hand"), hg: up.querySelector(".hg"), type: null }; });
   };
 
@@ -234,6 +270,9 @@
     g.hand.setAttribute("transform", `translate(${x} ${SY + UP + FO - 4}) rotate(${sgn * tilt}) scale(${sc * (side === "L" ? -1 : 1)} ${sc})`);
     const type = p < 0.5 ? a[2] : b[2];
     if (g.type !== type) { g.hg.innerHTML = hand(type); g.type = type; }
+    const r = Math.PI / 180, t1 = sgn * a1 * r, t2 = sgn * (a1 + a2) * r;
+    const ex = x - UP * Math.sin(t1), ey = SY + UP * Math.cos(t1), wx = ex - (FO - 4) * Math.sin(t2), wy = ey + (FO - 4) * Math.cos(t2);
+    return [wx - 30 * Math.sin(t2), wy + 30 * Math.cos(t2)];
   }
 
   /** t, cur pose name, p = eased progress of the switch (0..1), prev pose name, mouth 0..1 */
@@ -247,7 +286,7 @@
       return;
     }
     const P = A.POSES[prev] || A.POSES.talk, Q = A.POSES[cur] || A.POSES.talk, e = back(p), beat = clamp(o.beat || 0);
-    ["L", "R"].forEach(s => armPose(s, P, Q, e, t, beat));
+    const handR = armPose("R", P, Q, e, t, beat); armPose("L", P, Q, e, t, beat);
     // motion smear while the pose cuts (the reference shows a 1-2 frame ghost trail on the moving arm)
     const smear = p > 0 && p < 1 ? Math.sin(Math.PI * clamp(p)) : 0;
     el.querySelector(".arms").style.filter = smear > 0.05 && prev !== cur ? `blur(${smear * 7}px)` : "";
@@ -271,5 +310,32 @@
     parts.moE.setAttribute("ry", 6 + 16 * m); parts.moE.setAttribute("cy", 336 + 8 * m);
     parts.tg.setAttribute("cy", 342 + 14 * m); parts.tg.setAttribute("opacity", m > 0.4 ? 1 : 0);
     parts.teeth.setAttribute("opacity", m > 0.25 ? 1 : 0);
+    // shades-slide gag: shades drop to the chin, cartoon eyes pop (o.shades 0..1)
+    const sh = clamp(o.shades || 0);
+    if (parts.shades) {
+      const fl = clamp(o.flip || 0), up = Math.sin(Math.PI * fl);          // signature flip: shades lift and drop back
+      parts.shades.setAttribute("transform", `translate(0 ${86 * back(sh) - 58 * up}) rotate(${-6 * sh + 8 * up} 300 256)`);
+      parts.shades.style.filter = fl > 0.55 && fl < 0.95 ? `drop-shadow(0 0 ${14 * Math.sin(Math.PI * (fl - 0.55) / 0.4)}px #fff)` : "";
+      parts.eyes.setAttribute("opacity", sh > 0.05 || up > 0.25 ? 1 : 0);
+      parts.eyes.setAttribute("transform", `translate(300 256) scale(${sh > 0.05 ? lerp(0.6, 1.18, back(sh)) : 0.62}) translate(-300 -256)`);
+    }
+    // reaction FX above the head (o.fx = [[name, p 0..1]]): bulb ??? sweat spark steam
+    if (parts.fx) {
+      ["bulb", "q", "sweat", "spark", "steam"].forEach(n => {
+        const g = parts.fx.querySelector(".fx-" + n), f = (o.fx || []).find(x => x[0] === n), q = f ? f[1] : 0;
+        const vis = q <= 0 || q >= 1 ? 0 : Math.min(1, q * 5, (1 - q) * 4), pop = back(clamp(q * 3));
+        g.setAttribute("opacity", vis);
+        const dy = n === "sweat" ? 40 * q : n === "steam" ? -14 * Math.sin(q * 20) : -8 * Math.sin(q * 12), sc = lerp(0.5, 1, pop);
+        g.setAttribute("transform", `translate(300 120) scale(${sc}) translate(-300 -120) translate(0 ${dy})`);
+      });
+    }
+    // prop in the right hand (o.prop = [name, p]): drawn upright at the hand position
+    if (parts.prop) {
+      const pr = o.prop && o.prop[0], pp = o.prop ? clamp(o.prop[1]) : 0;
+      if (parts.prop.dataset.n !== (pr || "")) { parts.prop.innerHTML = pr ? PROP[pr] || "" : ""; parts.prop.dataset.n = pr || ""; }
+      parts.prop.setAttribute("opacity", pr ? Math.min(1, pp * 4) : 0);
+      parts.prop.setAttribute("transform", `translate(${handR[0]} ${handR[1]}) scale(${lerp(0.4, 1, back(clamp(pp * 2.5)))}) rotate(${4 * Math.sin(t * 2)})`);
+      const st = parts.prop.querySelector(".steam"); if (st) st.setAttribute("transform", `translate(0 ${-6 * ((t * 1.5) % 1)})`);
+    }
   };
 })();

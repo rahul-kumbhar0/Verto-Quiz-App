@@ -51,6 +51,27 @@ a head nod + arm bump on every boxed word (the beat), per-pose body lean, slow b
 gestures (wave, wag, clap, typing). Demo: `assets/examples/presenter-auto-demo/` (career-ops voice,
 zero manual poses, chip shows word → move · expression).
 
+## Reactions, gags, props, outfits, signature (automatic with `poses: "auto"`)
+`R.autoReactions` (speedy.js) reads the words too; turn it off with `reactions: false`, tune with
+`reactions: { maxGags, gagGap, signature: false }`. `window.AUTO_REACTIONS` lists what it picked.
+| Trigger | What happens |
+|---|---|
+| idea, trick, secret, smart, hack | 💡 bulb pops over the head |
+| a sentence ending in "?" | ??? floats over the head |
+| placement, deadline, stress, rejected, exam | 💧 sweat drop slides down |
+| free, best, offer, hired, easy | ✨ sparkles |
+| scam, fake, ghosted, spam | 💨 steam from the ears |
+| a shocking number (₹, lakh, 1,000+, 10K, 21L) or crazy / insane / wow | **shades-slide gag**: shades drop to the chin, cartoon eyes pop, face goes "surprised" (max 2 per reel, ≥ 8 s apart) |
+| resume / CV · phone / app · chai / coffee · search / find | **prop in hand** (paper · phone · cup with steam · magnifier), held at shoulder height until the sentence ends (pose `hold`) |
+| first word of the reel | **signature flip**: shades lift and drop back with a glint |
+| the last line after a "Comment …" CTA | sign-off `double_thumbs` (excited) |
+Outfits: `avatar: { accessory: "grad" | "headset" | "detective" }` (graduation cap for students/
+placements, headset for interviews, detective hat for myth-busting). Never use single-index-finger
+poses on covers or held still: an upright lone finger can read as a rude gesture (removed
+`shades_push`/`finger_guns` for this reason).
+Demo: `assets/examples/prompt-reel/` (the "which jobs do you fit" reel: flip, paper prop, ???,
+eyes-pop gag on "crazy", 💡 on "smart", magnifier on "search", ✨ on "Free", double thumbs).
+
 ## Pose library (`Avatar.POSES`, 28 poses; new: three, big, small, typing, celebrate, wag, clap, lean_in)
 | Pose | Reads as | Use on |
 |---|---|---|

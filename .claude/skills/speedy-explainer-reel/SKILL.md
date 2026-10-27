@@ -74,6 +74,9 @@ time taken from `at("phrase")`. Rules that make it read as the reference (motion
 - Presenter: use `poses: "auto"` (it moves and changes expression with the words: numbers on fingers,
   "never" stop, "million" arms wide, "type" typing, "offer" celebrate, questions think, CTA point + wave)
   and pin only the moments you want different with `{pose}` (`references/avatar.md`); never covered by a card.
+  Auto mode also adds reactions from the words (💡 ??? 💧 ✨ 💨), the shades-slide gag on a shocking
+  number, props in hand (resume, phone, chai, magnifier) and the signature flip / double-thumbs sign-off;
+  pick an outfit per topic with `avatar.accessory` (grad, headset, detective).
 - Footnote on every exaggerated visual; exact numbers via `R.count`/`R.meas`, never typed static.
 - CTA ≥ 5 s: profile card + finger tap on Follow → share sheet or DM with the punchline → watermark.
 ```bash

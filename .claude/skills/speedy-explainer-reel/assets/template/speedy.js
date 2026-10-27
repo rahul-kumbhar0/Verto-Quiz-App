@@ -45,6 +45,16 @@
       N.poses = auto.filter(a => !manual.some(m => Math.abs(+m[0] - a[0]) < 1.2)).concat(manual.map(m => [+m[0], m[1], m[2]]));
     }
     N.poses = (N.poses || []).map(([t, n, x]) => [+t, n, x]).sort((a, b) => a[0] - b[0]);
+    // reactions (FX, gags, props, signature flip): on by default with auto poses; props force the "hold" pose
+    if (N.reactions !== false && (N.reactions || cfg.poses === "auto" || cfg.autoPoses)) {
+      N.R = R.autoReactions(N.reactions || {});
+      N.R.props.forEach(([a, b]) => {
+        N.poses = N.poses.filter(p => !(p[0] > a - 0.3 && p[0] < b));
+        const after = N.poses.find(p => p[0] >= b); N.poses.push([a - 0.1, "hold", "happy"]);
+        if (!after || after[0] > b + 0.8) N.poses.push([b, "explain", null]);
+      });
+      N.poses.sort((x, y) => x[0] - y[0]);
+    }
     // beats: every boxed (stressed) word gives the presenter a small nod + arm bump
     N.beats = (window.CAPTION_PAGES || []).flat().filter(w => w.k === "box").map(w => w.s);
     if (!N.poses.length || N.poses[0][0] > 0) N.poses.unshift([-1, "talk"]);
@@ -150,7 +160,17 @@
     const inT = a.in ?? 0, pin = E.out3(prog(t, inT, 0.5));
     av.style.opacity = show ? pin : 0; av.style.transform = `translateY(${(1 - pin) * 120}px)`;
     let beat = 0; (N.beats || []).forEach(s => { const d = t - s + 0.04; if (d >= 0 && d < 0.42) beat = Math.max(beat, Math.sin(Math.PI * d / 0.42)); });
-    Avatar.frame(t, cur, p, prev, mouthAt(t), { beat, expr: N.poses[i][2], exprPrev: N.poses[Math.max(0, i - 1)][2], exprP: p });
+    const X = { beat, expr: N.poses[i][2], exprPrev: N.poses[Math.max(0, i - 1)][2], exprP: p };
+    if (N.R) {
+      const env = (a, d) => { const q = (t - a) / d; return q <= 0 || q >= 1 ? 0 : q < 0.18 ? q / 0.18 : q > 0.8 ? (1 - q) / 0.2 : 1; };
+      X.shades = Math.max(0, ...N.R.gags.map(([a, d]) => env(a, d)));
+      X.fx = N.R.fx.map(([a, k, d]) => [k, (t - a) / d]).filter(([, q]) => q > 0 && q < 1);
+      if (X.shades > 0.3) X.expr = "surprised";
+      const pr = N.R.props.find(([a, b]) => t >= a - 0.1 && t < b + 0.35);
+      if (pr) X.prop = [pr[2], Math.min(1, (t - pr[0] + 0.1) / 0.4) * (t < pr[1] ? 1 : Math.max(0, 1 - (t - pr[1]) / 0.35))];
+      if (N.R.flip != null) X.flip = prog(t, N.R.flip, 1.0) < 1 ? prog(t, N.R.flip, 1.0) : 0;
+    }
+    Avatar.frame(t, cur, p, prev, mouthAt(t), X);
   }
 
   // ---------- auto-direction: pick poses + expressions from the words being said ----------
@@ -166,7 +186,7 @@
     ["think", 4, "think", "think thought why how decide decided idea guess catch smart smartest"],
     ["present", 4, "happy", "called meet introducing"],
     ["point_stage", 3, null, "this these here look watch see screen link below"],
-    ["shrug", 3, "unsure", "maybe actually honestly"],
+    ["shrug", 3, "unsure", "maybe honestly"],
   ].map(([pose, pr, expr, w]) => ({ pose, pr, expr, words: new Set(w.split(" ")) }));
   const COMEDY = new Set(["hands_head", "facepalm", "celebrate", "shrug"]);
   R.autoPoses = (o = {}) => {
@@ -196,7 +216,7 @@
       LEX.forEach(L => { if (L.words.has(w)) C.push({ t: at, pose: L.pose, pr: L.pr, expr: L.expr, word: tok.t }); });
     });
     // last sentence of the reel ends on a wave if it is a CTA
-    const last = T[T.length - 1]; if (C.some(c => c.pr === 9)) C.push({ t: Math.max(from, last.s - 0.2), pose: "wave", pr: 8, expr: "happy", word: "(sign-off)" });
+    const last = T[T.length - 1]; if (C.some(c => c.pr === 9)) C.push({ t: Math.max(from, last.s - 0.2), pose: o.signOff ?? "double_thumbs", pr: 8, expr: "excited", word: "(sign-off)" });
     C.sort((a, b) => a.t - b.t || b.pr - a.pr);
     const out = [], used = {};
     C.forEach(c => {
@@ -211,6 +231,39 @@
     });
     window.AUTO_POSES = out;                                       // inspect / show in a debug overlay
     return out.map(c => [c.t, c.pose, c.expr || undefined]);
+  };
+
+  // ---------- auto reactions: FX over the head, shades-slide gag, props in hand, signature flip ----------
+  const FXW = { bulb: "idea ideas trick tricks secret realised realized smart smartest hack insight",
+                sweat: "placement placements deadline deadlines stress stressed scary rejected rejection exam exams pressure",
+                spark: "free best offer offers perfect hired easy bonus", steam: "scam scams fake ghost ghosted spam annoying angry" };
+  const PROPW = { paper: "resume resumes cv cvs", phone: "phone phones app apps whatsapp telegram instagram",
+                  chai: "chai coffee tea break", magnifier: "search searches searching find finds scan scans hunt" };
+  const sets = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, new Set(v.split(" "))]));
+  const FXS = sets(FXW), PROPS = sets(PROPW);
+  R.autoReactions = (o = {}) => {
+    const T = (window.CAPTION_PAGES || []).flat(), from = o.from ?? 0, out = { fx: [], gags: [], props: [], flip: null };
+    if (!T.length) return out;
+    const W = x => x.toLowerCase().replace(/[“”"(),.!?:;]/g, "").replace(/’/g, "'");
+    if (o.signature !== false) out.flip = Math.max(from, T[0].s) + 0.15;
+    let lastFx = -9, lastGag = -99, gags = 0, propUntil = -1;
+    T.forEach((tok, i) => {
+      const w = W(tok.t), t0 = Math.max(from, tok.s - 0.08);
+      if (t0 < (o.reactFrom ?? from)) return;
+      // shades-slide gag on a shocking number or a "crazy/insane" word
+      const shock = /₹|lakh|crore|\d{1,3},\d{3}|\d+(\.\d+)?[kKlL]\b/.test(tok.t) || /^(crazy|insane|unbelievable|wow)$/.test(w) || (/^\d+$/.test(w) && +w >= 1000);
+      if (shock && gags < (o.maxGags ?? 2) && t0 - lastGag > (o.gagGap ?? 8)) { out.gags.push([t0, 1.4]); lastGag = t0; gags++; R.cue("whoosh", t0); return; }
+      // reaction FX
+      for (const [k, set] of Object.entries(FXS)) if (set.has(w) && t0 - lastFx > 1.6) { out.fx.push([t0, k, 1.5]); lastFx = t0; R.cue("pop", t0, { soft: true }); break; }
+      if (/\?$/.test(tok.t) && t0 - lastFx > 1.6) { out.fx.push([t0 - 0.2, "q", 1.4]); lastFx = t0; }
+      // props: hold until the end of the sentence (1.6–4 s)
+      if (t0 > propUntil) for (const [k, set] of Object.entries(PROPS)) if (set.has(w)) {
+        let j = i; while (j < T.length - 1 && !/[.!?]$/.test(T[j].t)) j++;
+        const t1 = Math.min(t0 + 4, Math.max(t0 + 1.6, T[j].e)); out.props.push([t0, t1, k]); propUntil = t1 + 0.6; break;
+      }
+    });
+    window.AUTO_REACTIONS = out;
+    return out;
   };
 
   R.speedyFrame = t => { theme(t); kinetic(t); rail(t); avatar(t); const wm = $("wm"); if (wm) wm.style.opacity = N.wm ? prog(t, N.wm, 0.4) : 0; };

@@ -1,0 +1,277 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>One prompt: which jobs you actually fit</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- hook ---- */
+.launch{position:absolute;width:290px;height:100px;border-radius:20px;background:#17191D;border:1.5px solid #2A2D33;display:flex;align-items:center;gap:10px;padding:0 16px;font:800 24px Inter;white-space:nowrap;color:#fff;opacity:0;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.launch i{font-style:normal;font:700 15px Mono;color:#06210f;background:#3ECF8E;border-radius:999px;padding:4px 10px;margin-left:auto}
+.dots{position:absolute;left:150px;top:900px;width:780px;height:330px;border-radius:28px;background:#14161A;border:2px solid #3B82F6;box-shadow:0 0 60px rgba(59,130,246,.35);opacity:0;font-family:Inter;padding:24px 30px}
+.dots small{display:block;font:700 20px Mono;letter-spacing:2px;color:#7FB0FF}
+.dots b{display:block;margin-top:6px;font:900 44px Inter;color:#fff}
+.dots .kit{display:flex;gap:18px;margin-top:22px}
+.dots .kit div{flex:1;height:120px;border-radius:18px;background:#1E2128;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 22px Inter;color:#C9CDD2;opacity:0}
+.dots .kit div span{font-size:52px}
+.qq{position:absolute;left:0;right:0;top:1250px;text-align:center;font:900 120px/1 Inter;color:#FFB340;opacity:0;z-index:4}
+/* ---- definition ---- */
+.eq{position:absolute;left:30px;right:30px;top:800px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:nowrap}
+.eq .t{width:170px;height:170px;border-radius:30px;background:#fff;border:2px solid #E2E2E6;box-shadow:0 18px 44px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 30px Inter;color:#111;opacity:0}
+.eq .t span{font-size:58px;margin-bottom:4px}
+.eq .t.ai{border-color:#3B82F6}.eq .t.goal{border-color:#3ECF8E}
+.eq .op{font:900 54px Inter;color:#BBB;opacity:0}
+.defl{position:absolute;left:0;right:0;top:1230px;text-align:center;opacity:0}
+.defl span{display:inline-block;font:700 30px Inter;color:#111;background:#fff;border:1.5px solid var(--l-line);border-radius:18px;padding:12px 26px}
+/* ---- chatbot vs agent ---- */
+.side{position:absolute;top:690px;width:440px;height:560px;border-radius:26px;background:#17191D;border:1.5px solid #2A2D33;opacity:0;font-family:Inter;padding:24px;overflow:hidden}
+.side h4{margin:0 0 16px;font:800 30px Inter;color:#fff}
+.side .b{padding:12px 16px;border-radius:16px;font:500 22px/1.3 Inter;margin-bottom:10px;opacity:0}
+.side .me{background:#2A7BFF;color:#fff;margin-left:60px}
+.side .ai{background:#2A2D33;color:#E8EAED;margin-right:40px}
+.side .stop{font:800 26px Mono;color:#FF5A5F;opacity:0;margin-top:14px}
+.side .step{display:flex;align-items:center;gap:10px;font:600 22px Mono;color:#C9CDD2;padding:9px 0;border-top:1px solid #2A2D33;opacity:0}
+.side .step b{color:#3ECF8E}
+.side .spin{position:absolute;right:24px;top:20px;font-size:40px}
+/* ---- task ---- */
+.ask{position:absolute;left:90px;top:760px;width:900px;border-radius:28px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:28px 32px;opacity:0;font-family:Inter}
+.ask small{display:block;font:700 20px Mono;letter-spacing:2px;color:#999}
+.ask .txt{margin-top:12px;font:700 44px/1.25 Inter;color:#111;min-height:120px}
+.ask .cur{display:inline-block;width:4px;height:46px;background:#3B82F6;vertical-align:middle;margin-left:4px}
+.goalpin{position:absolute;left:0;right:0;top:1100px;text-align:center;opacity:0}
+.goalpin span{display:inline-block;font:800 30px Inter;color:#15803D;background:#E8F7EF;border:2px solid #3ECF8E;border-radius:999px;padding:10px 26px}
+/* ---- loop ---- */
+.loop{position:absolute;left:90px;top:660px;width:640px;height:640px}
+.loop svg{position:absolute;inset:0}
+.loop .ring{fill:none;stroke:#2A2D33;stroke-width:8}
+.loop .arc{fill:none;stroke:#3ECF8E;stroke-width:8;stroke-linecap:round}
+.node{position:absolute;width:190px;height:96px;margin:-48px 0 0 -95px;border-radius:22px;background:#17191D;border:2px solid #2A2D33;display:flex;align-items:center;justify-content:center;gap:8px;font:800 26px Inter;color:#9AA0A8;opacity:0}
+.node.on{border-color:#3ECF8E;color:#fff;box-shadow:0 0 34px rgba(62,207,142,.45);background:#13261D}
+.runner{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#3ECF8E;box-shadow:0 0 22px #3ECF8E;opacity:0}
+.mid{position:absolute;left:200px;top:270px;width:240px;text-align:center;font:700 23px/1.3 Inter;color:#E8EAED}
+.mid small{display:block;font:700 18px Mono;letter-spacing:2px;color:#3ECF8E;margin-bottom:6px}
+.sheet{position:absolute;left:750px;top:700px;width:280px;border-radius:18px;background:#fff;overflow:hidden;opacity:0;font-family:Inter}
+.sheet .h{background:#15803D;color:#fff;font:700 20px Inter;padding:10px 14px}
+.sheet .row{display:flex;font:600 17px Inter;color:#111;border-top:1px solid #E6E6EA;opacity:0}
+.sheet .row span{padding:10px 12px}.sheet .row span+span{margin-left:auto;color:#15803D;font-weight:800}
+.lc{position:absolute;left:750px;top:1140px;width:280px;text-align:center;font:800 26px Mono;color:#3ECF8E;opacity:0}
+/* ---- trick ---- */
+.cyc{position:absolute;left:90px;right:90px;top:760px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cyc div{height:190px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:14px;font:900 52px Inter;letter-spacing:-1px;opacity:0;box-shadow:0 18px 44px rgba(0,0,0,.08)}
+.cyc .c1{background:#EEF4FF;color:#1E4FD8}.cyc .c2{background:#E8F7EF;color:#15803D}.cyc .c3{background:#FFF6E5;color:#B45309}.cyc .c4{background:#F3EEFF;color:#6D28D9}
+/* ---- CTA ---- */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+
+/* ---- demo-first opening ---- */
+.task{position:absolute;left:90px;top:650px;width:900px;border-radius:24px;background:#17191D;border:1.5px solid #2A2D33;padding:20px 26px;opacity:0;font-family:Inter;z-index:3}
+.task small{display:block;font:700 18px Mono;letter-spacing:2px;color:#9AA0A8}
+.task .tx{margin-top:6px;font:700 34px/1.25 Inter;color:#fff;min-height:44px}
+.task .cur{display:inline-block;width:3px;height:36px;background:#3B82F6;vertical-align:middle;margin-left:3px}
+.bw{position:absolute;left:60px;top:830px;width:600px;height:340px;border-radius:22px;background:#fff;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.bw .bar{height:50px;background:#EEF0F3;display:flex;align-items:center;gap:8px;padding:0 14px}
+.bw .bar i{width:11px;height:11px;border-radius:50%;background:#C9CDD2}
+.bw .url{margin-left:8px;flex:1;height:32px;border-radius:9px;background:#fff;display:flex;align-items:center;padding:0 12px;font:600 17px Mono;color:#333}
+.bw .res{margin:12px 16px;padding:12px 14px;border-radius:12px;border:1.5px solid #E6E6EA;opacity:0}
+.bw .res b{display:block;font:700 19px Inter;color:#1A0DAB}.bw .res span{font:500 15px Inter;color:#555}
+.bw .res.pick{border-color:#3ECF8E;background:#F0FBF5}
+.cursor{position:absolute;width:52px;height:52px;opacity:0;z-index:6;font-size:52px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));line-height:1}
+.sh2{position:absolute;left:680px;top:830px;width:340px;border-radius:18px;background:#fff;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.sh2 .h{background:#15803D;color:#fff;font:700 20px Inter;padding:10px 14px}
+.sh2 .row{display:flex;font:600 17px Inter;color:#111;border-top:1px solid #E6E6EA;opacity:0}
+.sh2 .row span{padding:11px 12px}.sh2 .row span+span{margin-left:auto;color:#15803D;font-weight:800}
+.self{position:absolute;left:0;right:0;top:1210px;text-align:center;opacity:0;z-index:7}
+.self span{display:inline-block;font:800 34px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 28px;box-shadow:0 12px 40px rgba(62,207,142,.45)}
+.vs2{position:absolute;left:90px;right:90px;top:740px;display:flex;flex-direction:column;gap:26px}
+.vs2 div{height:210px;border-radius:28px;display:flex;align-items:center;gap:24px;padding:0 40px;font:900 62px Inter;letter-spacing:-2px;opacity:0;position:relative}
+.vs2 .no{background:#fff;border:2px solid #E2E2E6;color:#999}
+.vs2 .no s{position:absolute;left:30px;right:30px;top:50%;height:8px;background:#FF5A5F;border-radius:4px;transform-origin:0 50%;transform:scaleX(0)}
+.vs2 .yes{background:#F3EEFF;border:3px solid #7C3AED;color:#111}
+.vs2 .yes em{margin-left:auto;font:900 70px Inter;color:#7C3AED;font-style:normal}
+
+
+/* ---- prompt reel (classes prefixed pr-) ---- */
+.pr-chat{position:absolute;left:80px;right:80px;top:660px;border-radius:30px;background:#17191D;border:1.5px solid #2A2D33;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.pr-chat .bar{height:78px;display:flex;align-items:center;gap:14px;padding:0 22px;border-bottom:1px solid #2A2D33;font:800 28px Inter;color:#fff}
+.pr-chat .bar .lgo{--s:48px}
+.pr-chat .body{padding:22px;min-height:440px;position:relative}
+.pr-att{display:inline-flex;align-items:center;gap:14px;background:#22262B;border:1.5px solid #3A3F46;border-radius:18px;padding:14px 18px;font:700 26px Inter;color:#E6E6E8;opacity:0}
+.pr-att i{font-style:normal;font-size:34px}
+.pr-msg{margin:18px 0 0 auto;max-width:86%;background:#2B5FD9;color:#fff;border-radius:24px 24px 6px 24px;padding:18px 22px;font:600 30px/1.35 Inter;opacity:0;width:fit-content}
+.pr-msg .cur{display:inline-block;width:3px;height:32px;background:#fff;vertical-align:middle;margin-left:2px}
+.pr-q{position:absolute;right:30px;bottom:24px;font:900 120px Inter;color:#60A5FA;opacity:0}
+.pr-ans{position:absolute;left:80px;right:80px;top:640px;border-radius:30px;background:#17191D;border:1.5px solid #2A2D33;padding:26px 28px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.pr-ans .hd{display:flex;align-items:center;gap:14px;font:800 30px Inter;color:#fff;margin-bottom:14px}
+.pr-ans .hd .lgo{--s:46px}
+.pr-ans .hd small{margin-left:auto;font:700 20px Mono;color:#3ECF8E}
+.pr-job{display:flex;align-items:center;gap:16px;height:84px;border-radius:18px;background:#1E2126;border:1.5px solid #2A2D33;margin-top:12px;padding:0 20px;font:800 32px Inter;color:#fff;opacity:0}
+.pr-job b{width:44px;height:44px;border-radius:50%;background:#3ECF8E;color:#06210f;font:900 24px/44px Inter;text-align:center;flex:none}
+.pr-job.more{font:700 26px Inter;color:#AEB4BC;height:70px}
+.pr-note{position:absolute;left:0;right:0;top:1340px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+.pr-skills{position:absolute;left:90px;right:90px;top:690px;display:flex;flex-direction:column;gap:22px}
+.pr-skills .hd{font:800 34px Inter;color:#111;text-align:center;opacity:0}
+.pr-skill{height:150px;border-radius:28px;background:#fff;border:2px solid var(--l-line);display:flex;align-items:center;gap:22px;padding:0 30px;opacity:0;box-shadow:0 18px 40px rgba(0,0,0,.08);font-family:Inter}
+.pr-skill i{font-style:normal;width:76px;height:76px;border-radius:20px;display:grid;place-items:center;font:900 36px Inter;color:#fff;flex:none}
+.pr-skill b{display:block;font:900 40px Inter;color:#111;letter-spacing:-1px}.pr-skill span{display:block;font:500 22px Inter;color:#777;margin-top:4px}
+.pr-res{position:absolute;left:150px;top:660px;width:560px;height:700px;border-radius:22px;background:#FBFBF8;opacity:0;font-family:Inter;padding:34px 36px;box-shadow:0 30px 70px rgba(0,0,0,.5);transform-origin:50% 50%}
+.pr-res .nm{font:900 34px Inter;color:#111}.pr-res .sub{font:600 18px Inter;color:#666;margin-top:4px}
+.pr-res h4{margin:22px 0 8px;font:800 17px Mono;letter-spacing:2px;color:#1E4FD8}
+.pr-res p{margin:0;font:500 19px/1.5 Inter;color:#333}
+.pr-miss{position:absolute;left:740px;top:700px;width:300px;display:flex;flex-direction:column;gap:14px}
+.pr-miss .hd{font:800 24px Inter;color:#FF6B6B;opacity:0}
+.pr-miss span{display:block;font:800 26px Inter;color:#fff;background:#2A1416;border:2px solid #FF5A5F;border-radius:14px;padding:12px 16px;opacity:0}
+.pr-grid{position:absolute;left:90px;right:90px;top:680px;display:grid;grid-template-columns:repeat(6,1fr);gap:14px}
+.pr-grid i{height:96px;border-radius:16px;background:#fff;border:2px solid var(--l-line);display:grid;place-items:center;font:700 16px Inter;color:#999;opacity:0;box-shadow:0 8px 20px rgba(0,0,0,.06)}
+.pr-grid i.fit{color:#06210f}
+.pr-gap{position:absolute;left:150px;right:150px;top:1250px;height:70px;border-radius:999px;background:#E5E7EB;overflow:hidden;opacity:0}
+.pr-gap b{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#1FA971,#3ECF8E);border-radius:999px}
+.pr-gap span{position:absolute;inset:0;display:grid;place-items:center;font:800 26px Inter;color:#111}
+.pr-prompt{position:absolute;left:80px;right:80px;top:660px;border-radius:28px;background:#0B0C0E;border:1.5px solid #2A2D33;padding:28px 30px;opacity:0;font:600 25px/1.55 Mono;color:#E6E6E8;white-space:pre-wrap;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.pr-prompt small{display:block;font:700 18px Mono;letter-spacing:2px;color:#3ECF8E;margin-bottom:10px}
+.pr-free{position:absolute;left:640px;top:600px;padding:10px 24px;border:6px solid #3ECF8E;border-radius:16px;color:#3ECF8E;font:900 60px Inter;letter-spacing:3px;opacity:0;background:rgba(6,33,15,.85);transform:rotate(8deg)}
+.pr-works{position:absolute;left:0;right:0;top:1260px;display:flex;justify-content:center;gap:16px;opacity:0}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="pr-chat" id="chat"><div class="bar" id="cbar"></div><div class="body">
+      <div class="pr-att" id="att"><i>📄</i>Aarav_Resume.pdf</div>
+      <div class="pr-msg" id="msg1">One question 👇</div><div class="pr-q" id="q1">?</div></div></div>
+  </section>
+  <section class="scene" id="sAsk">
+    <div class="pr-chat" id="chat2" style="opacity:1"><div class="bar" id="cbar2"></div><div class="body">
+      <div class="pr-att" style="opacity:1"><i>📄</i>Aarav_Resume.pdf</div>
+      <div class="pr-msg" id="msg2"><span id="mtx"></span><i class="cur" id="mcur"></i></div></div></div>
+  </section>
+  <section class="scene" id="sJobs">
+    <div class="pr-ans" id="ans"><div class="hd" id="ahd"></div>
+      <div class="pr-job" id="j1"><b>1</b>Data Analyst</div><div class="pr-job" id="j2"><b>2</b>Business Analyst Trainee</div>
+      <div class="pr-job" id="j3"><b>3</b>Junior Python Developer</div><div class="pr-job more" id="j4"><b>4</b>MIS / Reporting Analyst</div><div class="pr-job more" id="j5"><b>5</b>Power BI Developer (entry)</div></div>
+    <div class="pr-note" id="fn">Sample fresher resume · real Claude answer</div>
+  </section>
+  <section class="scene" id="sSkills">
+    <div class="pr-skills"><div class="hd" id="shd">The 3 skills stopping him</div>
+      <div class="pr-skill" id="k1"><i style="background:#2B5FD9">1</i><div><b>Advanced SQL</b><span>joins, window functions</span></div></div>
+      <div class="pr-skill" id="k2"><i style="background:#15803D">2</i><div><b>Excel</b><span>pivot tables, XLOOKUP</span></div></div>
+      <div class="pr-skill" id="k3"><i style="background:#B45309">3</i><div><b>Basic stats</b><span>averages, A/B tests</span></div></div></div>
+  </section>
+  <section class="scene" id="sKeys">
+    <div class="pr-res" id="res"><div class="nm">Aarav Sharma</div><div class="sub">B.Tech CSE · 2026 · Pune</div>
+      <h4>SKILLS</h4><p>Python, SQL (basic), Pandas, Power BI, HTML/CSS, Git</p>
+      <h4>INTERNSHIP</h4><p>Data Intern · cleaned sales data in Pandas, built a weekly Power BI report</p>
+      <h4>PROJECTS</h4><p>Expense tracker (Django) · Sales dashboard (Power BI) · Movie recommender (Python)</p></div>
+    <div class="pr-miss"><div class="hd" id="mhd">Missing keywords</div><span id="w1">data cleaning</span><span id="w2">dashboards</span><span id="w3">KPIs</span><span id="w4">ETL</span><span id="w5">stakeholder reporting</span></div>
+  </section>
+  <section class="scene" id="sFit">
+    <div class="pr-grid" id="grid"></div>
+    <div class="pr-gap" id="gap"><b id="gapb"></b><span>fix the gap: SQL · Excel · stats</span></div>
+  </section>
+  <section class="scene" id="sFree">
+    <div class="pr-prompt" id="pp"><small>THE PROMPT</small>Here is my resume. Answer in 3 parts:
+1) 5 job titles I'm qualified for RIGHT NOW
+2) 3 skills stopping me from the next level
+3) recruiter keywords MISSING from my resume
+Don't invent experience.</div>
+    <div class="pr-free" id="free">FREE</div>
+    <div class="pr-works" id="works"></div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Ishita · 2m</small><b>PROMPT</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Rohan · 1m</small><b>PROMPT</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Sneha · 40s</small><b>PROMPT</b> trying this tonight</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>PROMPT</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>the exact prompt, ready to copy 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>PROMPT</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+["cbar", "cbar2"].forEach(id => R.$(id).innerHTML = R.lg("claude", { s: 48 }) + "Claude");
+R.$("ahd").innerHTML = R.lg("claude", { s: 46 }) + "5 jobs you fit right now<small>CLAUDE</small>";
+R.$("works").innerHTML = `<span class="brandchip">${R.lg("claude")}Claude</span><span class="brandchip">${R.lg("openai")}ChatGPT</span>`;
+R.$("grid").innerHTML = Array.from({ length: 24 }, (_, i) => `<i data-i="${i}">job</i>`).join("");
+const FIT = [3, 8, 13, 17, 22];
+const T = { ask: at("Which jobs"), jobs: at("It named"), skills: at("Then the smart"), keys: at("And the exact"), fit: at("So you stop"), free: at("It's one prompt"), cta: at("Comment PROMPT"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.ask, enter: "none" }, { id: "sAsk", s: T.ask, e: T.jobs, enter: "push" },
+  { id: "sJobs", s: T.jobs, e: T.skills, enter: "blurzoom" }, { id: "sSkills", s: T.skills, e: T.keys, enter: "swing" },
+  { id: "sKeys", s: T.keys, e: T.fit, enter: "blurzoom" }, { id: "sFit", s: T.fit, e: T.free, enter: "push" },
+  { id: "sFree", s: T.free, e: T.cta, enter: "blurzoom" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.skills, T.keys], [T.fit, T.free], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "the question", at: T.ask }, { label: "the jobs", at: T.jobs }, { label: "the gaps", at: T.skills }, { label: "the prompt", at: T.free, end: T.cta }],
+  counter: { unit: "jobs found", steps: [[at("Data"), 1], [at("trainee"), 2], [at("Junior"), 3], [at("Honestly") - 0.4, 5]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", accessory: "grad", style: { shirt: "#0F766E", shirtLine: "#064E3B", under: "#115E59", lens1: "#FDE68A", lens2: "#F59E0B" } },
+  poses: "auto",
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: resume lands in Claude, one question
+  R.card("chat", t, { in: 0.1, y: 40 });
+  pop("att", t, at("resume") - 0.1, { from: 0.6 });
+  R.rise("msg1", t, at("one question"), { dy: 20 }); pop("q1", t, at("question") + 0.1, { from: 0.4 });
+  // ASK: the question types out
+  R.type("mtx", "Which jobs am I actually qualified for, right now?", t, T.ask + 0.1, 24);
+  R.$("msg2").style.opacity = t >= T.ask ? 1 : 0; R.$("mcur").style.opacity = Math.floor(t * 2.5) % 2;
+  // JOBS
+  R.card("ans", t, { in: T.jobs - 0.05, y: 40 });
+  [["j1", at("Data")], ["j2", at("Business")], ["j3", at("Junior")], ["j4", at("Honestly") - 0.5], ["j5", at("Honestly") - 0.3]].forEach(([id, a]) => R.rise(id, t, a - 0.08, { dy: 18 }));
+  R.note("fn", t, at("Data") + 0.3, T.skills);
+  // SKILLS
+  R.rise("shd", t, T.skills + 0.2, { dy: 16 });
+  [["k1", at("Advanced")], ["k2", at("Excel")], ["k3", at("Basic")]].forEach(([id, a]) => pop(id, t, a - 0.1, { from: 0.7 }));
+  // KEYWORDS
+  R.card("res", t, { in: T.keys - 0.05, y: 40 });
+  R.rise("mhd", t, at("keywords") - 0.1, { dy: 12 });
+  ["w1", "w2", "w3", "w4", "w5"].forEach((id, i) => pop(id, t, at("keywords") + 0.25 + i * 0.32, { from: 0.6 }));
+  R.$("res").style.transform += t > at("missing") ? ` rotate(${-2 * ease.out3(prog(t, at("missing"), 0.4))}deg)` : "";
+  // FIT
+  document.querySelectorAll("#grid i").forEach((g, i) => {
+    const a = T.fit + 0.1 + i * 0.03; g.style.opacity = clamp(prog(t, a, 0.2));
+    const spray = t >= at("everywhere") && t < at("You apply"), fit = FIT.includes(i) && t >= at("fit,") - 0.1;
+    g.style.background = fit ? "#3ECF8E" : spray ? "#FFE4E4" : "#fff"; g.style.borderColor = fit ? "#1FA971" : spray ? "#FF8A8D" : "";
+    g.className = fit ? "fit" : ""; g.textContent = fit ? "✓ fit" : spray ? "✗" : "job";
+    g.style.transform = `scale(${fit ? 1 + 0.08 * Math.sin(Math.PI * clamp(prog(t, at("fit,") - 0.1, 0.4))) : 1})`;
+    g.style.filter = !fit && t >= at("fit,") ? "opacity(.35)" : "";
+  });
+  R.card("gap", t, { in: at("fix the gap") - 0.1, y: 20 }); R.$("gapb").style.width = 92 * ease.out3(prog(t, at("fix the gap"), 0.9)) + "%";
+  // FREE
+  R.card("pp", t, { in: T.free - 0.05, y: 40 });
+  const fp = ease.spring(prog(t, at("Free") - 0.05, 0.45)); R.$("free").style.opacity = clamp(fp * 3); R.$("free").style.transform = `rotate(8deg) scale(${lerp(2, 1, fp)})`; if (fp > 0) R.cue("pop", at("Free") - 0.05);
+  R.rise("works", t, at("Works in") - 0.1, { dy: 20 });
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "PROMPT", tyA = at("Comment PROMPT") + 0.3, posted = R.end("Comment PROMPT") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 14); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("ready to copy") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

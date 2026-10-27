@@ -11,6 +11,7 @@ Page: @canwe.ai (Instagram) + YouTube Shorts. Format: speedy explainer, voice Sh
 | (queued) | Referral from a stranger (REFER) | F/E · method | ~56 s | | | | | |
 | (queued) | What is an AI agent v2 (AGENT) | A+B · "Watch this. One sentence:" demo-first | ~44 s | | | | | |
 | 27 Oct 2026 | Resume ATS myth (RESUME) | E · myth flip (old hook: 15 words, "Okay so, you know that viral stat…") | ~46 s | (ask) | | | | published before this skill; hook failed lint (too slow) — compare its retention with the others |
+| (draft) | One prompt → which jobs you fit (PROMPT) | A · "I gave Claude a fresher's resume and asked one question." (sample resume, real Claude answer) | ~42 s | | | | | eyes-pop gag on "crazy" as the cover frame |
 | (draft) | career-ops Claude job hunter (OFFER) | F+D · result in numbers "740 jobs. 68 applications. 12 interviews. 1 offer." | ~41 s | | | | | worked example in examples/career-ops |
 
 ## Scripts that worked (verbatim, for tone)

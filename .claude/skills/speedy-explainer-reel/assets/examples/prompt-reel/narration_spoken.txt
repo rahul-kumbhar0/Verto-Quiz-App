@@ -1,0 +1,8 @@
+I gave Claude a fresher's resume, and asked one question.
+Which jobs is he actually qualified for, right now?
+It named five jobs. Data analyst. Business analyst trainee. Junior Python developer. Honestly? Kind of crazy.
+Then the smart part. It listed the three skills stopping him. Advanced S Q L. Excel. Basic stats.
+And the exact keywords recruiters search for, that his resume was missing.
+So you stop applying everywhere. You apply where you fit, and fix the gap.
+It's one prompt. Free. Works in Claude or Chat G P T.
+Comment PROMPT, and I'll DM you the exact prompt, ready to copy.
