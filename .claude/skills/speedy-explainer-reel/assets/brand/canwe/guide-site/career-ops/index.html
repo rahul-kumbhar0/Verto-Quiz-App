@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>career-ops + Claude setup · canwe.ai</title>
+<meta name="description" content="career-ops: the free, open-source Claude job hunter that scores every job 1-5 against your resume. Setup in 10 minutes, how to read the score, and the rules to use it well.">
+<meta property="og:title" content="740 jobs. 1 offer. The career-ops setup">
+<meta property="og:description" content="Free open-source job search agent for Claude Code. Step-by-step setup.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>740 jobs. 1 <span class="sel"><i></i><b>offer.</b></span> The career-ops setup.</h1>
+  <p class="lead"><b>career-ops</b> is a free, open-source job search agent that runs inside Claude Code. It scores every job against your resume before you apply, then drafts the resume, cover letter and form answers for the ones worth it. You still press Submit.</p>
+  <div class="chips"><span class="chip">77.8K ⭐ on GitHub</span><span class="chip">scores jobs 1–5</span><span class="chip">free · MIT licence</span></div>
+
+  <nav class="toc">
+    <a href="#what"><small>01</small>What it does</a>
+    <a href="#need"><small>02</small>What you need</a>
+    <a href="#install"><small>03</small>Install (1 command)</a>
+    <a href="#use"><small>04</small>Score your first job</a>
+    <a href="#score"><small>05</small>Reading the score</a>
+    <a href="#rules"><small>06</small>Rules + good to know</a>
+  </nav>
+
+  <section id="what">
+    <div class="step">STEP 01</div><h2>What it does</h2>
+    <p>Its creator ran his own job hunt through it: <b>740 listings evaluated, 68 applied, 12 interviews, 1 offer</b> (a Head of Applied AI role). Those are his results from the project README, not a promise.</p>
+    <div class="feat">
+      <div><span>🎯</span><div><b>Scores each job 1–5</b> against your CV, and pushes you <b>not to apply below 4.0</b>. Fewer, better applications.</div></div>
+      <div><span>📄</span><div><b>Tailored resume PDF</b> for each job worth applying to. It rewords your CV for the role; it must never invent experience.</div></div>
+      <div><span>✉️</span><div><b>Cover letter + form answers</b> drafted for you to review.</div></div>
+      <div><span>🗂️</span><div><b>Tracker</b> of every application, plus interview prep and follow-up modes.</div></div>
+    </div>
+    <a class="btn pri" href="https://github.com/career-ops-hq/career-ops" target="_blank" rel="noopener">⭐ Open the repo on GitHub</a>
+  </section>
+
+  <section id="need">
+    <div class="step">STEP 02</div><h2>What you need</h2>
+    <ol>
+      <li><b>Node.js</b> on your laptop (<a href="https://nodejs.org" target="_blank" rel="noopener">nodejs.org</a>, the LTS version is fine).</li>
+      <li>An AI coding CLI. <b>Claude Code</b> is what I use; it needs a paid Claude plan. It also works with <b>Codex</b>, OpenCode, Qwen and others.</li>
+      <li>Your resume (any format you can paste) and the roles you want.</li>
+    </ol>
+    <p class="warn">💻 It runs on your own computer, not on a website. Your CV and data stay in the folder on your laptop.</p>
+  </section>
+
+  <section id="install">
+    <div class="step">STEP 03</div><h2>Install (one command)</h2>
+    <p>Open a terminal and run:</p>
+    <div class="code pad"><button class="cp">Copy</button>npx @santifer/career-ops init
+cd career-ops
+claude</div>
+    <p style="color:var(--mute);font-size:15px;margin-top:10px">Use <code>codex</code> (or your CLI) instead of <code>claude</code> if that's what you have.</p>
+    <p><b>First launch sets everything up by chat:</b> it asks for your CV, your profile and your target roles. You don't edit any files by hand.</p>
+    <details class="card"><summary><b>Prefer git?</b> Manual install</summary>
+      <div class="code pad" style="margin-top:12px"><button class="cp">Copy</button>git clone https://github.com/career-ops-hq/career-ops.git
+cd career-ops && npm install
+npx playwright install chromium
+claude</div>
+      <p style="color:var(--mute);font-size:15px">The Playwright step is only needed for PDF generation.</p>
+    </details>
+  </section>
+
+  <section id="use">
+    <div class="step">STEP 04</div><h2>Score your first job</h2>
+    <p>Inside Claude Code, just <b>paste a job link</b> (or the job description text). That runs the full pipeline: score, report, tailored PDF.</p>
+    <p>Or use the commands:</p>
+    <div class="code pad"><button class="cp">Copy</button>/career-ops oferta</div>
+    <p style="color:var(--mute);font-size:15px;margin-top:6px">Evaluation only (score + report, no PDF). Paste the job after it.</p>
+    <div class="code pad"><button class="cp">Copy</button>/career-ops</div>
+    <p style="color:var(--mute);font-size:15px;margin-top:6px">Shows every command: <code>pdf</code>, <code>cover</code>, <code>tracker</code>, <code>scan</code>, <code>interview-prep</code> and more.</p>
+    <p>Where things are saved: reports in <code>reports/</code>, PDFs in <code>output/</code>, your tracker in <code>data/applications.md</code>.</p>
+  </section>
+
+  <section id="score">
+    <div class="step">STEP 05</div><h2>Reading the score</h2>
+    <div class="feat">
+      <div><span>🟢</span><div><b>4.0 and above:</b> worth applying. Generate the PDF, read it fully, fix anything wrong, then apply yourself.</div></div>
+      <div><span>🔴</span><div><b>Below 4.0:</b> it recommends skipping. You can override it, but that's the point: stop spending applications on roles you're unlikely to get.</div></div>
+      <div><span>🧭</span><div><b>Read the report,</b> not just the number. It tells you what's missing, which is your learning list.</div></div>
+    </div>
+  </section>
+
+  <section id="rules">
+    <div class="step">STEP 06</div><h2>Rules + good to know</h2>
+    <div class="feat">
+      <div><span>✋</span><div><b>It never submits.</b> It drafts; you review every CV and answer and press Submit. That's by design.</div></div>
+      <div><span>🚫</span><div><b>No fake experience.</b> AI can hallucinate skills. Delete anything that isn't true before you send.</div></div>
+      <div><span>📨</span><div><b>Don't spam.</b> The README itself says not to use it to flood employers. Quality over volume.</div></div>
+      <div><span>🇮🇳</span><div><b>Indian companies?</b> Its scanner comes set up for 100+ mostly global tech companies. For Indian roles, paste links from LinkedIn, Naukri or company career pages directly; the scoring works on any job you paste.</div></div>
+      <div><span>🤝</span><div><b>Not sponsored.</b> career-ops is built by <a href="https://github.com/santifer" target="_blank" rel="noopener">Santiago Fernández de Valderrama</a> and contributors, MIT-licensed. If it helps you, give the repo a ⭐.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>I share tools like this every week: AI, coding interviews and job-hunt hacks, explained in 60 seconds.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Numbers, commands and rules from the career-ops README (github.com/career-ops-hq/career-ops), read 27 Oct 2026.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
