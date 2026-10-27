@@ -39,6 +39,9 @@ publication shown on screen uses its official logo, never an emoji or a letter c
 schema simplified), note the footnote now.
 
 ## 2. Script — `references/script-formula.md`, examples in `references/example-scripts.md`
+**Write the script with the `reel-script-writer` skill first** (hooks scored, archetype by goal,
+lint, caption/cover/DM package); then apply the speedy-specific rules below (beat sheet visuals,
+glosses, markup).
 Pick the format (hidden mechanism / system design), fill the beat sheet (every row has a line, a
 stage object and a pose), then write `script.md` with the emphasis markup: `[box]` on the one
 keyword per phrase, `*bold*` on 1–2 structure words, optional `{pose}` pins. Pace ≈2.6 w/s.
