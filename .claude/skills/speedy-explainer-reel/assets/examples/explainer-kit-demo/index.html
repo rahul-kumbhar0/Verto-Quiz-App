@@ -1,0 +1,98 @@
+<!doctype html>
+<!-- Demo of the explanation kit: R.steps (process) · R.analogy · R.zoom (zoom-through) · R.bars (chart).
+     No voice: times are hard-coded. Copy the template files + fonts next to this page to render it. -->
+<html><head><meta charset="utf-8"><title>explanation kit demo</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+#stage{position:absolute;inset:0;background:var(--bg)}
+.lightbg{position:absolute;inset:0;background:var(--l-bg);opacity:0;
+  background-image:linear-gradient(var(--l-grid) 1px,transparent 1px),linear-gradient(90deg,var(--l-grid) 1px,transparent 1px);background-size:60px 60px}
+.grid{position:absolute;inset:0;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:60px 60px}
+.scn{position:absolute;inset:0;opacity:0}
+.kick{position:absolute;left:0;right:0;top:250px;text-align:center;font:700 22px Mono;letter-spacing:4px;color:var(--accent)}
+.ttl{position:absolute;left:60px;right:60px;top:290px;text-align:center;font:800 64px/1.08 Inter;letter-spacing:-2px;color:#fff}
+.lt .ttl{color:#111}.lt .kick{color:#1E4FD8}
+.ttl em{font-style:normal;color:var(--accent)}.lt .ttl em{color:#1E4FD8}
+.foot{position:absolute;left:0;right:0;top:1640px;text-align:center;font:600 22px Inter;color:#8E8E93}
+.apps{position:absolute;left:0;right:0;top:1540px;display:flex;justify-content:center;gap:14px}
+/* zoom art */
+.phn{width:300px;height:600px;border-radius:52px;background:#1B1D21;border:10px solid #3A3F46;position:relative;box-shadow:0 30px 70px rgba(0,0,0,.6)}
+.phn .scr{position:absolute;inset:14px;border-radius:38px;background:radial-gradient(120% 90% at 30% 20%,#3B2A7A,#0B0B12 65%)}
+.phn .xr{position:absolute;left:50%;top:44%;width:84px;height:72px;margin:-36px 0 0 -42px;border-radius:10px;border:2px dashed rgba(124,244,190,.8);background:rgba(62,207,142,.12)}
+.chipA{width:520px;height:440px;border-radius:30px;background:linear-gradient(135deg,#2B2F33,#15181B);border:3px solid #3A3F46;position:relative;
+  box-shadow:0 0 0 14px #1A1C1F,0 0 0 18px #3A3F46}
+.chipA .die{position:absolute;inset:60px 70px;border-radius:14px;background:linear-gradient(135deg,rgba(62,207,142,.25),rgba(32,120,90,.15));border:2px solid rgba(62,207,142,.8);display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:16px}
+.chipA .die i{border-radius:8px;background:#1F6B4B;border:1px solid rgba(124,244,190,.4)}.chipA .die i.c{background:#2B5FD9}
+.chipA .lbl{position:absolute;left:0;right:0;bottom:-70px;text-align:center;font:700 22px Mono;color:#9AA0A8}
+.core{width:640px;height:540px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr 1fr;gap:16px}
+.core div{border-radius:20px;display:grid;place-items:center;font:800 32px Inter;color:#fff;border:2px solid rgba(255,255,255,.15)}
+.tr{width:640px;height:520px;position:relative}
+</style></head><body><div id="stage">
+  <div class="grid"></div><div class="lightbg" id="lb"></div>
+  <section class="scn" id="s1"><div class="kick">EXPLAINER KIT · 1 · PROCESS</div><div class="ttl">How <em>UPI</em> sends your money</div>
+    <div class="stp" id="stp" style="left:90px;top:520px;width:900px;height:980px"></div>
+    <div class="apps" id="apps"></div></section>
+  <section class="scn lt" id="s2"><div class="kick">2 · ANALOGY</div><div class="ttl" style="color:#111">An <em>API</em> is a waiter</div>
+    <div class="ana" id="ana" style="left:70px;top:480px;width:940px;height:900px"></div></section>
+  <section class="scn" id="s3"><div class="kick">3 · ZOOM-THROUGH</div><div class="ttl">What's <em>inside</em> your phone</div>
+    <div class="zm" id="zm" style="left:90px;top:470px;width:900px;height:1060px"></div></section>
+  <section class="scn" id="s4"><div class="kick">4 · ANIMATED CHART</div><div class="ttl">Same degree. <em>6×</em> the pay.</div>
+    <div class="bars" id="bars" style="left:70px;top:560px;width:900px;height:620px"></div>
+    <div class="apps" id="inf" style="top:470px"></div><div class="foot" id="ft4">Infosys fresher tracks, approx. CTC per year · Business Standard</div></section>
+</div>
+<script src="engine.js"></script><script src="props.js"></script>
+<script>
+const R = Reel, { prog, ease: E, clamp } = R;
+R.$("inf").innerHTML = `<span class="brandchip">${R.lg("infosys")}Infosys fresher tracks</span>`;
+R.$("apps").innerHTML = ["googlepay", "phonepe", "paytm"].map((s, i) => `<span class="brandchip">${R.lg(s)}${["Google Pay", "PhonePe", "Paytm"][i]}</span>`).join("");
+const SC = [["s1", 0, 8.2, 0], ["s2", 8.2, 16.2, 1], ["s3", 16.2, 26.4, 0], ["s4", 26.4, 99, 0]];
+window.REEL_DURATION = 33.5;
+const core = `<div class="core">${[["CPU core", "#2B5FD9"], ["GPU", "#7C3AED"], ["AI engine", "#B45309"], ["Cache", "#0F766E"], ["Memory ctrl", "#334155"], ["Modem", "#9F1239"]]
+  .map(([n, c]) => `<div style="background:${c}">${n}</div>`).join("")}</div>`;
+const trn = `<svg class="tr" viewBox="0 0 640 520"><rect x="40" y="300" width="560" height="160" rx="16" fill="#3A2F1E"/><text x="320" y="430" fill="#C9A86B" font-family="Inter" font-weight="800" font-size="26" text-anchor="middle">silicon</text>
+  <rect x="70" y="250" width="150" height="80" rx="10" fill="#2B5FD9"/><text x="145" y="300" fill="#fff" font-family="Inter" font-weight="800" font-size="26" text-anchor="middle">source</text>
+  <rect x="420" y="250" width="150" height="80" rx="10" fill="#2B5FD9"/><text x="495" y="300" fill="#fff" font-family="Inter" font-weight="800" font-size="26" text-anchor="middle">drain</text>
+  <rect x="250" y="150" width="140" height="110" rx="10" fill="#3ECF8E"/><text x="320" y="215" fill="#06210f" font-family="Inter" font-weight="900" font-size="28" text-anchor="middle">gate</text>
+  <g id="el">${[0, 1, 2, 3, 4, 5].map(i => `<circle r="9" cy="318" fill="#FDE68A"/>`).join("")}</g>
+  <text x="320" y="70" fill="#fff" font-family="Inter" font-weight="800" font-size="30" text-anchor="middle">gate ON → current flows → "1"</text></svg>`;
+window.seek = t => {
+  SC.forEach(([id, a, b, light]) => {
+    const pin = a === 0 ? 1 : E.out3(prog(t, a - 0.1, 0.4)), pout = prog(t, b - 0.25, 0.35);
+    const el = R.$(id); el.style.opacity = pin * (1 - pout);
+    el.style.filter = (pin < 1 || pout > 0) ? `blur(${(1 - pin) * 14 + pout * 14}px)` : "";
+    el.style.transform = `scale(${1.04 - 0.04 * pin})`;
+    if (pin > 0 && a > 0) R.cue("whoosh", a - 0.1);
+  });
+  R.$("lb").style.opacity = E.out3(prog(t, 8.1, 0.4)) * (1 - prog(t, 16.0, 0.4));
+  // 1 · PROCESS
+  R.steps("stp", t, { at: 0.6, steps: [
+    { icon: "📱", title: "You tap Pay", gloss: "and enter your UPI PIN", at: 0.6 },
+    { icon: "🔀", title: "Your app → NPCI", gloss: "the national UPI switch routes it", at: 2.0 },
+    { icon: "🏦", title: "Your bank debits you", gloss: "checks the PIN and balance", at: 3.4 },
+    { icon: "🏦", title: "Their bank credits them", gloss: "money lands in their account", at: 4.8 },
+    { icon: "✅", title: "Both get a ✓", gloss: "usually in a few seconds", at: 6.2 } ] });
+  R.rise("apps", t, 6.6, { dy: 20 });
+  // 2 · ANALOGY
+  R.analogy("ana", t, { at: 8.6, left: { title: "Restaurant" }, right: { title: "Your app" }, rows: [
+    { l: { icon: "🙋", title: "You", gloss: "ordering food" }, r: { icon: "📱", title: "The app", gloss: "asking for data" }, at: 9.2 },
+    { l: { icon: "🤵", title: "Waiter", gloss: "carries the order" }, r: { icon: "🔌", title: "API", gloss: "carries the request" }, at: 10.8 },
+    { l: { icon: "👨‍🍳", title: "Kitchen", gloss: "makes the food" }, r: { icon: "🖥️", title: "Server", gloss: "does the work" }, at: 12.4 },
+    { l: { icon: "🍛", title: "Your plate", gloss: "comes back to you" }, r: { icon: "📦", title: "Response", gloss: "data comes back" }, at: 14.0 } ] });
+  // 3 · ZOOM-THROUGH
+  R.zoom("zm", t, { at: 16.4, levels: [
+    { label: "Phone", cap: "Your phone", gloss: "the brain sits on one tiny chip", html: `<div class="phn"><div class="scr"></div><div class="xr"></div></div>`, focus: [0.5, 0.455], box: 0.1 },
+    { label: "Chip", cap: "The chip", gloss: "a whole computer on one piece of silicon", html: `<div class="chipA"><div class="die">${'<i class="c"></i><i class="c"></i><i></i><i></i>'.repeat(3)}</div><div class="lbl">SoC</div></div>`, focus: [0.36, 0.38], box: 0.16, at: 19.0 },
+    { label: "Core", cap: "Inside the chip", gloss: "CPU, GPU, AI engine, cache, modem", html: core, focus: [0.33, 0.28], box: 0.16, at: 21.6 },
+    { label: "Transistor", cap: "A transistor", gloss: "a tiny on/off switch. Phone chips have billions.", html: trn, at: 24.2 } ] });
+  const T4 = 24.2; document.querySelectorAll("#el circle").forEach((c, i) => { const x = 160 + ((t - T4) * 160 + i * 60) % 330; c.setAttribute("cx", x); c.style.opacity = t > T4 + 0.6 ? 1 : 0; });
+  // 4 · CHART
+  R.bars("bars", t, { at: 27.0, max: 22, fmt: x => "₹" + x.toFixed(1) + "L", bars: [
+    { label: "Systems Eng.", sub: "base track", value: 3.6, show: "≈ ₹3.6L", at: 27.0 },
+    { label: "Digital Spec.", sub: "harder test", value: 7, show: "₹7L", at: 27.6 },
+    { label: "Spec. Prog. L1", value: 11, show: "₹11L", at: 28.2 },
+    { label: "Spec. Prog. L2", value: 16, show: "₹16L", at: 28.8 },
+    { label: "Spec. Prog. L3", value: 21, show: "₹21L", hi: true, at: 29.6 } ] });
+  R.rise("ft4", t, 30.4, { dy: 10 });
+};
+window.seek(0);
+</script></body></html>

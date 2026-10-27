@@ -148,3 +148,37 @@ Topic → exploded-view recipes: phone/laptop/earbuds/smartwatch (device teardow
 your app (UI → API → database → infra as slabs with the real tool logos on their faces), an AI
 model (input → layers → output), a resume (header → skills → projects → education) for a
 "what recruiters read first" teardown.
+
+## Explanation kit: process · analogy · zoom-through · chart
+Four tools so every kind of explanation gets a visual, not a flat card. Working demo of all four
+(UPI steps, "an API is a waiter", phone → chip → core → transistor, Infosys pay tracks):
+`assets/examples/explainer-kit-demo/`.
+| Tool | Call | Use for |
+|---|---|---|
+| **Process steps** | `R.steps(el,t,{steps:[{icon,title,gloss,at}],layout:"zig"\|"col",w})` — numbered cards light up on their word, a glowing token travels the S-curve from the previous step, earlier steps turn done, the current one shows its gloss. `icon:"logo:phonepe"` puts a real logo in. | "how X works": UPI payment, login, ChatGPT answering, hiring pipeline, DNS |
+| **Analogy split** | `R.analogy(el,t,{left:{title},right:{title},rows:[{l:{icon,title,gloss},r:{…},at}]})` — warm everyday card ↔ blue tech card, joined by a dashed line and "=" | "X is like Y": API = waiter, cache = fridge, token = word piece, RAM = desk |
+| **Zoom-through** | `R.zoom(el,t,{levels:[{html,label,cap,gloss,focus:[fx,fy],box,at}]})` — a glowing target appears where the next level lives, then the camera dives (level k scales up around it while k+1 grows out of it); breadcrumb shows the path | scale and "inside of inside": phone → chip → core → transistor, internet → data centre → server → GPU, company → team → role |
+| **Bar chart** | `R.bars(el,t,{max,bars:[{label,sub,value,show,logo,at,hi}],fmt})` — bars grow on their spoken number, values count up, `hi` bar glows green | salaries, stats, before/after, comparisons; real logos via `logo` |
+Rules: every step/row/level/bar lands on its spoken word (`at`); one tool per beat; numbers only from
+facts.md (never invent magnifications or stats for a zoom tag); put the brand's real logo where a
+brand is named.
+
+## Topic → which visual (pick per beat, not per reel)
+| The line is explaining… | Use |
+|---|---|
+| what something is made of / what's inside | exploded view `R.xview` (+ pull-out per part) |
+| one tiny detail of a part | lens `R.lens` |
+| how something works, step by step | process `R.steps` |
+| an abstract idea for beginners | analogy `R.analogy` |
+| something very small / nested / scale | zoom-through `R.zoom` |
+| numbers, comparisons, growth | chart `R.bars` (or `R.count` for one number) |
+| data moving between things | `R.flow` packets between `R.box` nodes |
+| where in the world / latency | `R.globe` |
+| a UI or app feature | phone/screen mock + `.selbox`/hotspots |
+
+## Reserved class names (do not reuse in a reel's own CSS)
+The template already styles these, so a reel's custom element with the same class inherits
+surprises (dark card backgrounds, opacity 0, wrong sizes): `.sc` (card), `.phone`, `.dial`, `.hl`,
+`.stack`, `.box3d`, `.chip3d`, `.globe`, `.flow`, `.lens`, `.xv`, `.stp`, `.ana`, `.zm`, `.bars`,
+`.callout`, `.floor`, `.ring`, `.launch`, `.cmts`, `.dm`, `.sheet`. Prefix custom classes with the
+reel slug (e.g. `.co-score`) — three demo bugs on 27 Oct came from `.sc`, `.phone` and `.dial`.

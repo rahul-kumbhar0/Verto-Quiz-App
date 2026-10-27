@@ -20,7 +20,7 @@ of every session (reels posted, automation changes, results, decisions). Last up
 - **Tone:** casual, spoken, human ("like telling a friend"), short; say "I connected Claude" style.
 - **Every reel ends with** "Comment KEYWORD" → DM automation → a guide page.
 - **Real logos** for every brand named on screen (`scripts/brand_logos.mjs`), never emojis.
-- **3D exploded view + lens** for any "what's inside / what it makes" beat.
+- **3D exploded view + lens** for any "what's inside / what it makes" beat; **process steps, analogy split, zoom-through, bar chart** for how-it-works / beginner ideas / scale / numbers (table in speedy-explainer-reel references/props3d.md).
 - **Presenter look changes per reel** (street default, classic blue for referral, purple hoodie for
   agent, orange tee for career-ops). Avoid the single-finger "one" pose on covers (reads as rude).
 - **Posting:** ONE reel a day, 7–9 pm IST. Wait ~24 h after a reel that is taking off. Trial reels

@@ -11,6 +11,10 @@
  *   R.lg(slugOrFile,{s,cls})                         html for a REAL brand logo tile (logos/<slug>.svg)
  *   R.xview(el,t,{parts,at,explode,focus,…})         exploded view: layers split, a part pulls out, leader-line labels
  *   R.xpoint(el,i,fx,fy) · R.lens(el,t,{…})          point on a part (for arrows) · magnified detail circle + cone
+ *   R.steps(el,t,{steps,…})                          "how X works": numbered steps light up, a token travels the path
+ *   R.analogy(el,t,{left,right,rows})                everyday analogy (left) = the tech (right), row by row
+ *   R.zoom(el,t,{levels})                            camera dives through nested levels (phone → chip → core …)
+ *   R.bars(el,t,{bars,max})                          bar chart that grows on the spoken numbers, with a highlight
  */
 (function () {
   const R = window.Reel, { clamp, prog, lerp, ease: E, $ } = R;
@@ -432,5 +436,130 @@
     el.querySelector("polygon").style.opacity = pc;
     const cap = el.querySelector(".cap");
     Object.assign(cap.style, { left: cx0 - 210 + "px", top: cy0 + r + 22 + "px", opacity: pt, transform: `translateY(${(1 - pt) * 24}px)` });
+  };
+})();
+
+// ---------- explanation kit: process steps · analogy split · zoom-through · bar chart ----------
+(function () {
+  const R = window.Reel, { clamp, prog, lerp, ease: E, $ } = R;
+  const icon = x => !x ? "" : /^logo:/.test(x) ? R.lg(x.slice(5), { s: 54 }) : x;
+
+  /** "How X works" in steps. o: { at, steps:[{icon ("🔒" or "logo:phonepe"), title, gloss, at}], w (card width 420),
+      layout: "zig" (default, alternating sides) | "col" }. Each step lights up on its `at` (its spoken word): the token
+      travels the path from the previous step, earlier steps turn ✓ done, the current one glows and shows its gloss. */
+  R.steps = (el, t, o) => {
+    el = $(el); const S = o.steps, n = S.length, W = el.offsetWidth, H = el.offsetHeight, cw = o.w ?? 420;
+    if (!el.dataset.built) {
+      const rowH = n > 1 ? (H - 130) / (n - 1) : 0;
+      const pos = S.map((_, i) => ({ x: o.layout === "col" ? (W - cw) / 2 : (i % 2 ? W - cw : 0), y: i * rowH }));
+      el._pos = pos;
+      let h = `<svg width="${W}" height="${H}">` + S.slice(1).map((_, i) => `<path data-i="${i + 1}" pathLength="1"/>`).join("") + `</svg><i class="tok"></i>`;
+      h += S.map((s, i) => `<div class="st" data-i="${i}" style="left:${pos[i].x}px;top:${pos[i].y}px;width:${cw}px"><i class="no">${i + 1}</i>` +
+        `<div class="ic">${icon(s.icon)}</div><b>${s.title}</b>${s.gloss ? `<span>${s.gloss}</span>` : ""}</div>`).join("");
+      el.innerHTML = h; el.dataset.built = 1;
+      // connectors from card i to card i+1 (bottom-centre → top-centre, smooth S-curve)
+      const cards = el.querySelectorAll(".st");
+      el.querySelectorAll("svg path").forEach(pa => {
+        const i = +pa.dataset.i, a = pos[i - 1], b = pos[i], ha = cards[i - 1].offsetHeight;
+        const x1 = a.x + cw / 2, y1 = a.y + ha, x2 = b.x + cw / 2, y2 = b.y, my = (y1 + y2) / 2;
+        pa.setAttribute("d", `M${x1} ${y1} C${x1} ${my}, ${x2} ${my}, ${x2} ${y2}`);
+      });
+    }
+    let cur = -1; S.forEach((s, i) => { if (t >= (s.at ?? o.at + i)) cur = i; });
+    el.querySelectorAll(".st").forEach(c => {
+      const i = +c.dataset.i, a = S[i].at ?? o.at + i, p = E.spring(prog(t, a - 0.12, 0.45));
+      c.style.opacity = clamp(p * 2) * (cur >= 0 && i > cur ? 0 : 1);
+      c.style.transform = `scale(${lerp(0.8, i === cur ? 1.04 : 1, p)})`;
+      c.classList.toggle("on", i === cur); c.classList.toggle("done", i < cur);
+      if (p > 0) R.cue("pop", a - 0.12, { soft: i > 0 });
+    });
+    const tok = el.querySelector(".tok"); tok.style.opacity = 0;
+    el.querySelectorAll("svg path").forEach(pa => {
+      const i = +pa.dataset.i, a = S[i].at ?? o.at + i, p = E.inOut(prog(t, a - 0.55, 0.5));
+      pa.style.strokeDasharray = 1; pa.style.strokeDashoffset = 1 - p; pa.classList.toggle("on", p > 0);
+      if (p > 0 && p < 1) { const L = pa.getTotalLength(), pt = pa.getPointAtLength(p * L); tok.style.opacity = 1; tok.style.left = pt.x + "px"; tok.style.top = pt.y + "px"; R.cue("whoosh", a - 0.55, { soft: true }); }
+    });
+  };
+
+  /** Analogy split. o: { at, left:{title, sub}, right:{title, sub}, rows:[{l:{icon,title,gloss}, r:{icon,title,gloss}, at}], rowH }
+      Left = the everyday thing (warm), right = the tech (blue); each row: left pops → dashed line + "=" → right pops. */
+  R.analogy = (el, t, o) => {
+    el = $(el); const rows = o.rows, rh = o.rowH ?? 136;
+    if (!el.dataset.built) {
+      const card = (c, side) => `<div class="c ${side}">${c.icon ? `<i>${icon(c.icon)}</i>` : ""}<div><b>${c.title}</b>${c.gloss ? `<span>${c.gloss}</span>` : ""}</div></div>`;
+      el.innerHTML = `<div class="hd l"><small>${o.left.sub ?? "THINK OF IT AS"}</small>${o.left.title}</div><div class="hd r"><small>${o.right.sub ?? "IN TECH"}</small>${o.right.title}</div>` +
+        rows.map((r, i) => `<div class="row" data-i="${i}" style="top:${90 + i * rh}px">${card(r.l, "l")}<i class="ln"></i><i class="eq">=</i>${card(r.r, "r")}</div>`).join("");
+      el.dataset.built = 1;
+    }
+    el.querySelectorAll(".hd").forEach((h, k) => R.rise(h, t, o.at + k * 0.15, { dy: 20 }));
+    el.querySelectorAll(".row").forEach(rw => {
+      const i = +rw.dataset.i, a = rows[i].at ?? o.at + 0.6 + i;
+      R.pop(rw.querySelector(".c.l"), t, a, { from: 0.7 });
+      rw.querySelector(".ln").style.transform = `scaleX(${E.out3(prog(t, a + 0.25, 0.3))})`;
+      R.pop(rw.querySelector(".eq"), t, a + 0.4, { from: 0.4, sfx: false });
+      R.pop(rw.querySelector(".c.r"), t, a + 0.5, { from: 0.7 });
+    });
+  };
+
+  /** Zoom-through. o: { at, levels:[{ html, label, cap, gloss, scale ("×10"), focus:[fx,fy], box (fraction 0.1–0.3), at }] }
+      Level k's `focus`/`box` mark where level k+1 lives inside it (a glowing target shows first); on level k+1's `at`
+      the camera dives: k scales up around the target while k+1 grows out of it to fill the frame. */
+  R.zoom = (el, t, o) => {
+    el = $(el); const L = o.levels, n = L.length, W = el.offsetWidth, H = el.offsetHeight;
+    if (!el.dataset.built) {
+      el.innerHTML = L.map((l, i) => `<div class="lv" data-i="${i}">${l.html}</div>`).join("") +
+        L.map((l, i) => i < n - 1 ? `<i class="tgt" data-i="${i}"></i>` : "").join("") +
+        `<div class="cap"></div><div class="tag"></div><div class="crumb">${L.map(l => `<span>${l.label}</span>`).join("")}</div>`;
+      el.dataset.built = 1;
+    }
+    const D = 1.0;                                            // dive duration (s)
+    let k = 0, p = 0;                                         // transition from level k to k+1 at progress p
+    for (let i = 1; i < n; i++) { const T = L[i].at ?? o.at + i * 3; if (t >= T - D) { k = i - 1; p = E.inOut(prog(t, T - D, D)); } }
+    const lv = [...el.querySelectorAll(".lv")], C = [W / 2, H / 2];
+    lv.forEach((d, i) => { d.style.opacity = 0; d.style.transform = ""; });
+    const pin = E.out3(prog(t, o.at, 0.5));
+    const A = L[k], box = A.box ?? 0.18, Z = 1 / box, F = [A.focus[0] * W, A.focus[1] * H], S = Math.pow(Z, p), u = p;
+    const a = lv[k]; a.style.transformOrigin = `${F[0]}px ${F[1]}px`;
+    a.style.transform = `translate(${u * (C[0] - F[0])}px,${u * (C[1] - F[1])}px) scale(${S})`;
+    a.style.opacity = pin * (1 - prog(p, 0.75, 0.25));
+    if (k + 1 < n) {
+      const b = lv[k + 1], cx = F[0] + u * (C[0] - F[0]), cy = F[1] + u * (C[1] - F[1]);
+      b.style.transformOrigin = "50% 50%"; b.style.transform = `translate(${cx - C[0]}px,${cy - C[1]}px) scale(${box * S})`;
+      b.style.opacity = prog(p, 0.12, 0.4);
+      if (p >= 1) { b.style.transform = ""; b.style.opacity = 1; a.style.opacity = 0; }
+    }
+    const cur = p >= 0.6 ? k + 1 : k;
+    // target box on the current level, pulsing before the dive
+    el.querySelectorAll(".tgt").forEach(g => {
+      const i = +g.dataset.i, l = L[i], bx = l.box ?? 0.18, T = L[i + 1].at ?? o.at + (i + 1) * 3, show = i === k && p === 0 ? E.out3(prog(t, T - D - 0.9, 0.3)) : 0;
+      Object.assign(g.style, { left: l.focus[0] * W - bx * W / 2 + "px", top: l.focus[1] * H - bx * H / 2 + "px", width: bx * W + "px", height: bx * H + "px",
+        opacity: show * (0.7 + 0.3 * Math.sin(t * 9)) });
+      if (show > 0) R.cue("ding", T - D - 0.9);
+      if (i === k && p > 0) R.cue("whoosh", T - D);
+    });
+    const cap = el.querySelector(".cap"), lc = L[cur];
+    cap.innerHTML = `${lc.cap ?? lc.label}${lc.gloss ? `<small>${lc.gloss}</small>` : ""}`; cap.style.opacity = pin * (p > 0 && p < 1 ? 1 - Math.sin(Math.PI * p) : 1);
+    const tag = el.querySelector(".tag"); tag.textContent = lc.scale ?? ""; tag.style.opacity = lc.scale ? pin : 0;
+    el.querySelectorAll(".crumb span").forEach((c, i) => { c.className = i === cur ? "on" : i < cur ? "done" : ""; });
+    el.style.opacity = pin;
+  };
+
+  /** Bar chart. o: { at, max, bars:[{label, sub, value, show (text, default value), logo, at, hi}], rowH, fmt, ticks:[…] }
+      Each bar grows on its `at` and its number counts up; `hi:true` bars glow green (the point you're making). */
+  R.bars = (el, t, o) => {
+    el = $(el); const B = o.bars, rh = o.rowH ?? 104, fmt = o.fmt ?? (x => Math.round(x));
+    if (!el.dataset.built) {
+      el.innerHTML = B.map((b, i) => `<div class="br ${b.hi ? "hi" : ""}" data-i="${i}" style="top:${i * rh}px"><div class="lb">${b.logo ? R.lg(b.logo, { s: 40 }) + " " : ""}${b.label}${b.sub ? `<small>${b.sub}</small>` : ""}</div>` +
+        `<div class="tr"><i class="fl"></i><span class="v"></span></div></div>`).join("") +
+        (o.ticks ? `<div class="ax" style="top:${B.length * rh - 10}px">${o.ticks.map(x => `<span>${x}</span>`).join("")}</div>` : "");
+      el.dataset.built = 1;
+    }
+    el.querySelectorAll(".br").forEach(r => {
+      const i = +r.dataset.i, b = B[i], a = b.at ?? o.at + i * 0.4, p = E.out3(prog(t, a, 0.8));
+      r.style.opacity = clamp(prog(t, a - 0.15, 0.25)); r.style.transform = `translateX(${(1 - E.out3(prog(t, a - 0.15, 0.4))) * -30}px)`;
+      const w = (b.value / o.max) * 100 * p; r.querySelector(".fl").style.width = w + "%";
+      const v = r.querySelector(".v"); v.style.left = `calc(${w}% )`; v.textContent = p > 0 ? (b.show && p >= 1 ? b.show : fmt(b.value * p)) : "";
+      if (p > 0) R.cue("pop", a, { soft: true });
+    });
   };
 })();

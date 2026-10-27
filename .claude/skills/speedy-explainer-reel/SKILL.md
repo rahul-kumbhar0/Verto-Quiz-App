@@ -66,6 +66,9 @@ time taken from `at("phrase")`. Rules that make it read as the reference (motion
 - Any named real brand on screen = its real logo (`R.lg`), never an emoji. Any "what's inside /
   how it's built / which part does what" beat = an exploded view with a pull-out per explained
   part and a lens for the smallest detail (`references/props3d.md`), not a flat list.
+- Every explanation beat gets the matching visual from the table "Topic → which visual" in
+  `references/props3d.md`: process → `R.steps`, analogy → `R.analogy`, scale → `R.zoom`,
+  numbers → `R.bars`. Prefix custom CSS classes with the reel slug (reserved names listed there).
 - Chapters alternate dark/light; the rail (system design) appears with chapter 1 and leaves at
   the CTA; the counter ticks when the running example advances.
 - Presenter hidden during the hook, then a pose per phrase (`references/avatar.md`); comedy poses
@@ -127,7 +130,7 @@ stock puppet was used.
   presenter, themes/rail/counter, hook/credibility/CTA, rhythm, what it is NOT
 - `references/example-scripts.md` — both reference scripts word-for-word with emphasis marks and
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
-- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/` and `assets/examples/exploded-view-demo/`
+- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/`, `assets/examples/exploded-view-demo/` and `assets/examples/explainer-kit-demo/` (process steps, analogy split, zoom-through, bar chart)
 - `references/logos.md` — real-logo rule, `scripts/brand_logos.mjs` (offline official marks + contact sheet), `R.lg` tiles/brand chips
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
