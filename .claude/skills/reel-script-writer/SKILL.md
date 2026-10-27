@@ -116,3 +116,4 @@ writing the next script, read that table: repeat what beat the page average, dro
 - `references/voice.md` — canwe.ai voice, gloss rule, banned AI-isms, Hinglish notes
 - `references/our-reels.md` — our scripts and results (the learning loop)
 - `scripts/script_lint.py` — the linter (no dependencies)
+- `examples/career-ops/` — a complete worked run (brief, 10 scored hooks, script, caption, YouTube, DM)

@@ -10,7 +10,8 @@ Page: @canwe.ai (Instagram) + YouTube Shorts. Format: speedy explainer, voice Sh
 | (queued) | Salary bands (SALARY) | E · myth/same degree ₹3.5L vs ₹21L | ~55 s | | | | | |
 | (queued) | Referral from a stranger (REFER) | F/E · method | ~56 s | | | | | |
 | (queued) | What is an AI agent v2 (AGENT) | A+B · "Watch this. One sentence:" demo-first | ~44 s | | | | | |
-| (queued) | Resume ATS myth (RESUME) | E · myth flip | | | | | | |
+| 27 Oct 2026 | Resume ATS myth (RESUME) | E · myth flip (old hook: 15 words, "Okay so, you know that viral stat…") | ~46 s | (ask) | | | | published before this skill; hook failed lint (too slow) — compare its retention with the others |
+| (draft) | career-ops Claude job hunter (OFFER) | F+D · result in numbers "740 jobs. 68 applications. 12 interviews. 1 offer." | ~41 s | | | | | worked example in examples/career-ops |
 
 ## Scripts that worked (verbatim, for tone)
 freehire (A):
