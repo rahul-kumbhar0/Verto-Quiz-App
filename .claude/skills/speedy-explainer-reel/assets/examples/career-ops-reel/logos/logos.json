@@ -1,0 +1,38 @@
+{
+ "Claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "GitHub": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ },
+ "Instagram": {
+  "file": "logos/instagram.svg",
+  "white": "logos/instagram-white.svg",
+  "word": null,
+  "title": "Instagram",
+  "hex": "#FF0069",
+  "dark": false,
+  "source": "iconify-logos:instagram-icon"
+ },
+ "OpenAI": {
+  "file": "logos/openai.svg",
+  "white": "logos/openai-white.svg",
+  "word": null,
+  "title": "OpenAI",
+  "hex": null,
+  "dark": false,
+  "source": "iconify-logos:openai-icon"
+ }
+}

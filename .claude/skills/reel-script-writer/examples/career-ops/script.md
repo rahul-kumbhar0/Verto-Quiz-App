@@ -1,4 +1,4 @@
-*Seven* *hundred* *forty* [jobs.] {point_cam} *Sixty-eight* [applications.] *Twelve* [interviews.] {two} *One* [offer.] {one}
+*Seven* *hundred* *forty* [jobs.] {point_cam} *Sixty-eight* [applications.] *Twelve* [interviews.] {two} *One* [offer.] {thumbs}
 That's *one* guy's job hunt, run by [Claude.] {point_up} And the *smartest* part? What it tells you *not* to [apply] to. {think}
 You *paste* a job [link.] {point_stage} It *reads* the job, and *scores* it against your [resume,] *one* to [five.] {explain}
 *Below* [four?] {stop} It tells you to *skip* it. {stop} No more *wasted* [applications.] {shrug}

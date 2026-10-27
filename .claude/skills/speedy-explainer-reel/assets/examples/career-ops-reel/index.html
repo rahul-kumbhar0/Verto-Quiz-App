@@ -1,0 +1,311 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>career-ops: 740 jobs, 1 offer</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- hook ---- */
+.launch{position:absolute;width:290px;height:100px;border-radius:20px;background:#17191D;border:1.5px solid #2A2D33;display:flex;align-items:center;gap:10px;padding:0 16px;font:800 24px Inter;white-space:nowrap;color:#fff;opacity:0;box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.launch i{font-style:normal;font:700 15px Mono;color:#06210f;background:#3ECF8E;border-radius:999px;padding:4px 10px;margin-left:auto}
+.dots{position:absolute;left:150px;top:900px;width:780px;height:330px;border-radius:28px;background:#14161A;border:2px solid #3B82F6;box-shadow:0 0 60px rgba(59,130,246,.35);opacity:0;font-family:Inter;padding:24px 30px}
+.dots small{display:block;font:700 20px Mono;letter-spacing:2px;color:#7FB0FF}
+.dots b{display:block;margin-top:6px;font:900 44px Inter;color:#fff}
+.dots .kit{display:flex;gap:18px;margin-top:22px}
+.dots .kit div{flex:1;height:120px;border-radius:18px;background:#1E2128;display:flex;flex-direction:column;align-items:center;justify-content:center;font:700 22px Inter;color:#C9CDD2;opacity:0}
+.dots .kit div span{font-size:52px}
+.qq{position:absolute;left:0;right:0;top:1250px;text-align:center;font:900 120px/1 Inter;color:#FFB340;opacity:0;z-index:4}
+/* ---- definition ---- */
+.eq{position:absolute;left:30px;right:30px;top:800px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:nowrap}
+.eq .t{width:170px;height:170px;border-radius:30px;background:#fff;border:2px solid #E2E2E6;box-shadow:0 18px 44px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 30px Inter;color:#111;opacity:0}
+.eq .t span{font-size:58px;margin-bottom:4px}
+.eq .t.ai{border-color:#3B82F6}.eq .t.goal{border-color:#3ECF8E}
+.eq .op{font:900 54px Inter;color:#BBB;opacity:0}
+.defl{position:absolute;left:0;right:0;top:1230px;text-align:center;opacity:0}
+.defl span{display:inline-block;font:700 30px Inter;color:#111;background:#fff;border:1.5px solid var(--l-line);border-radius:18px;padding:12px 26px}
+/* ---- chatbot vs agent ---- */
+.side{position:absolute;top:690px;width:440px;height:560px;border-radius:26px;background:#17191D;border:1.5px solid #2A2D33;opacity:0;font-family:Inter;padding:24px;overflow:hidden}
+.side h4{margin:0 0 16px;font:800 30px Inter;color:#fff}
+.side .b{padding:12px 16px;border-radius:16px;font:500 22px/1.3 Inter;margin-bottom:10px;opacity:0}
+.side .me{background:#2A7BFF;color:#fff;margin-left:60px}
+.side .ai{background:#2A2D33;color:#E8EAED;margin-right:40px}
+.side .stop{font:800 26px Mono;color:#FF5A5F;opacity:0;margin-top:14px}
+.side .step{display:flex;align-items:center;gap:10px;font:600 22px Mono;color:#C9CDD2;padding:9px 0;border-top:1px solid #2A2D33;opacity:0}
+.side .step b{color:#3ECF8E}
+.side .spin{position:absolute;right:24px;top:20px;font-size:40px}
+/* ---- task ---- */
+.ask{position:absolute;left:90px;top:760px;width:900px;border-radius:28px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:28px 32px;opacity:0;font-family:Inter}
+.ask small{display:block;font:700 20px Mono;letter-spacing:2px;color:#999}
+.ask .txt{margin-top:12px;font:700 44px/1.25 Inter;color:#111;min-height:120px}
+.ask .cur{display:inline-block;width:4px;height:46px;background:#3B82F6;vertical-align:middle;margin-left:4px}
+.goalpin{position:absolute;left:0;right:0;top:1100px;text-align:center;opacity:0}
+.goalpin span{display:inline-block;font:800 30px Inter;color:#15803D;background:#E8F7EF;border:2px solid #3ECF8E;border-radius:999px;padding:10px 26px}
+/* ---- loop ---- */
+.loop{position:absolute;left:90px;top:660px;width:640px;height:640px}
+.loop svg{position:absolute;inset:0}
+.loop .ring{fill:none;stroke:#2A2D33;stroke-width:8}
+.loop .arc{fill:none;stroke:#3ECF8E;stroke-width:8;stroke-linecap:round}
+.node{position:absolute;width:190px;height:96px;margin:-48px 0 0 -95px;border-radius:22px;background:#17191D;border:2px solid #2A2D33;display:flex;align-items:center;justify-content:center;gap:8px;font:800 26px Inter;color:#9AA0A8;opacity:0}
+.node.on{border-color:#3ECF8E;color:#fff;box-shadow:0 0 34px rgba(62,207,142,.45);background:#13261D}
+.runner{position:absolute;width:30px;height:30px;margin:-15px 0 0 -15px;border-radius:50%;background:#3ECF8E;box-shadow:0 0 22px #3ECF8E;opacity:0}
+.mid{position:absolute;left:200px;top:270px;width:240px;text-align:center;font:700 23px/1.3 Inter;color:#E8EAED}
+.mid small{display:block;font:700 18px Mono;letter-spacing:2px;color:#3ECF8E;margin-bottom:6px}
+.sheet{position:absolute;left:750px;top:700px;width:280px;border-radius:18px;background:#fff;overflow:hidden;opacity:0;font-family:Inter}
+.sheet .h{background:#15803D;color:#fff;font:700 20px Inter;padding:10px 14px}
+.sheet .row{display:flex;font:600 17px Inter;color:#111;border-top:1px solid #E6E6EA;opacity:0}
+.sheet .row span{padding:10px 12px}.sheet .row span+span{margin-left:auto;color:#15803D;font-weight:800}
+.lc{position:absolute;left:750px;top:1140px;width:280px;text-align:center;font:800 26px Mono;color:#3ECF8E;opacity:0}
+/* ---- trick ---- */
+.cyc{position:absolute;left:90px;right:90px;top:760px;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.cyc div{height:190px;border-radius:28px;display:flex;align-items:center;justify-content:center;gap:14px;font:900 52px Inter;letter-spacing:-1px;opacity:0;box-shadow:0 18px 44px rgba(0,0,0,.08)}
+.cyc .c1{background:#EEF4FF;color:#1E4FD8}.cyc .c2{background:#E8F7EF;color:#15803D}.cyc .c3{background:#FFF6E5;color:#B45309}.cyc .c4{background:#F3EEFF;color:#6D28D9}
+/* ---- CTA ---- */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+
+/* ---- demo-first opening ---- */
+.task{position:absolute;left:90px;top:650px;width:900px;border-radius:24px;background:#17191D;border:1.5px solid #2A2D33;padding:20px 26px;opacity:0;font-family:Inter;z-index:3}
+.task small{display:block;font:700 18px Mono;letter-spacing:2px;color:#9AA0A8}
+.task .tx{margin-top:6px;font:700 34px/1.25 Inter;color:#fff;min-height:44px}
+.task .cur{display:inline-block;width:3px;height:36px;background:#3B82F6;vertical-align:middle;margin-left:3px}
+.bw{position:absolute;left:60px;top:830px;width:600px;height:340px;border-radius:22px;background:#fff;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.bw .bar{height:50px;background:#EEF0F3;display:flex;align-items:center;gap:8px;padding:0 14px}
+.bw .bar i{width:11px;height:11px;border-radius:50%;background:#C9CDD2}
+.bw .url{margin-left:8px;flex:1;height:32px;border-radius:9px;background:#fff;display:flex;align-items:center;padding:0 12px;font:600 17px Mono;color:#333}
+.bw .res{margin:12px 16px;padding:12px 14px;border-radius:12px;border:1.5px solid #E6E6EA;opacity:0}
+.bw .res b{display:block;font:700 19px Inter;color:#1A0DAB}.bw .res span{font:500 15px Inter;color:#555}
+.bw .res.pick{border-color:#3ECF8E;background:#F0FBF5}
+.cursor{position:absolute;width:52px;height:52px;opacity:0;z-index:6;font-size:52px;filter:drop-shadow(0 4px 8px rgba(0,0,0,.6));line-height:1}
+.sh2{position:absolute;left:680px;top:830px;width:340px;border-radius:18px;background:#fff;overflow:hidden;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.sh2 .h{background:#15803D;color:#fff;font:700 20px Inter;padding:10px 14px}
+.sh2 .row{display:flex;font:600 17px Inter;color:#111;border-top:1px solid #E6E6EA;opacity:0}
+.sh2 .row span{padding:11px 12px}.sh2 .row span+span{margin-left:auto;color:#15803D;font-weight:800}
+.self{position:absolute;left:0;right:0;top:1210px;text-align:center;opacity:0;z-index:7}
+.self span{display:inline-block;font:800 34px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 28px;box-shadow:0 12px 40px rgba(62,207,142,.45)}
+.vs2{position:absolute;left:90px;right:90px;top:740px;display:flex;flex-direction:column;gap:26px}
+.vs2 div{height:210px;border-radius:28px;display:flex;align-items:center;gap:24px;padding:0 40px;font:900 62px Inter;letter-spacing:-2px;opacity:0;position:relative}
+.vs2 .no{background:#fff;border:2px solid #E2E2E6;color:#999}
+.vs2 .no s{position:absolute;left:30px;right:30px;top:50%;height:8px;background:#FF5A5F;border-radius:4px;transform-origin:0 50%;transform:scaleX(0)}
+.vs2 .yes{background:#F3EEFF;border:3px solid #7C3AED;color:#111}
+.vs2 .yes em{margin-left:auto;font:900 70px Inter;color:#7C3AED;font-style:normal}
+
+/* ---- career-ops ---- */
+.fun{position:absolute;left:90px;right:90px;top:660px;display:flex;flex-direction:column;gap:22px}
+.fun .row{height:128px;border-radius:26px;display:flex;align-items:center;gap:22px;padding:0 34px;opacity:0;
+  background:#17191D;border:1.5px solid #2A2D33;font-family:Inter;box-shadow:0 18px 40px rgba(0,0,0,.45);margin:0 auto}
+.fun .row b{font:900 66px Inter;color:#fff;letter-spacing:-2px;min-width:150px}
+.fun .row span{font:700 32px Inter;color:#AEB4BC}
+.fun .row.win{background:linear-gradient(135deg,#3ECF8E,#1FA971);border:none;box-shadow:0 0 70px rgba(62,207,142,.55)}
+.fun .row.win b,.fun .row.win span{color:#06210f}
+.term{position:absolute;left:300px;top:690px;width:700px;border-radius:24px;background:#0E1013;border:1.5px solid #2A2D33;opacity:0;font-family:Mono;overflow:hidden;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.term .bar{height:52px;background:#1A1D22;display:flex;align-items:center;gap:10px;padding:0 18px;font:700 20px Mono;color:#9AA0A8}
+.term .bar i{width:12px;height:12px;border-radius:50%;background:#3A3F46}
+.term .ln{padding:10px 24px;font:600 24px/1.4 Mono;color:#D6DAE0;opacity:0}
+.term .ln.g{color:#3ECF8E}.term .ln.r{color:#FF6B6B}
+.cl{position:absolute;left:70px;top:720px;opacity:0}
+.notcard{position:absolute;left:150px;right:150px;top:1080px;height:140px;border-radius:26px;background:#2A1416;border:2px solid #FF5A5F;
+  display:flex;align-items:center;justify-content:center;gap:18px;font:900 46px Inter;color:#fff;opacity:0}
+.notcard em{font-style:normal;color:#FF5A5F}
+.paste{position:absolute;left:90px;right:90px;top:660px;height:96px;border-radius:24px;background:#fff;border:2px solid var(--l-line);
+  display:flex;align-items:center;gap:16px;padding:0 26px;font:600 28px Mono;color:#222;opacity:0;box-shadow:0 18px 40px rgba(0,0,0,.08)}
+.paste small{font:700 20px Inter;color:#888}
+.vs3{position:absolute;left:90px;right:90px;top:800px;display:flex;gap:24px}
+.vs3>div{flex:1;height:250px;border-radius:26px;background:#fff;border:1.5px solid var(--l-line);padding:22px 24px;opacity:0;font-family:Inter;box-shadow:0 18px 40px rgba(0,0,0,.08);position:relative}
+.vs3 small{display:block;font:700 18px Mono;letter-spacing:2px;color:#888}
+.vs3 b{display:block;font:800 32px Inter;color:#111;margin-top:6px}
+.vs3 p{font:500 22px/1.45 Inter;color:#555;margin-top:8px}
+.stamp{position:absolute;left:50%;top:50%;padding:10px 26px;border:6px solid #E5484D;border-radius:16px;color:#E5484D;font:900 64px Inter;letter-spacing:3px;opacity:0;background:rgba(255,255,255,.85)}
+.scr{position:absolute;left:90px;right:90px;top:1080px;height:200px;border-radius:26px;background:#fff;border:1.5px solid var(--l-line);opacity:0;font-family:Inter;box-shadow:0 18px 40px rgba(0,0,0,.08)}
+.scr .snum{position:absolute;left:34px;top:30px;font:900 92px Inter;color:#111;letter-spacing:-3px}
+.scr .snum small{font:800 40px Inter;color:#999}
+.scr .scale{position:absolute;left:330px;right:40px;top:96px;height:22px;border-radius:11px;background:linear-gradient(90deg,#FF6B6B,#FFB340 55%,#3ECF8E 75%)}
+.scr .mk{position:absolute;top:-16px;width:8px;height:54px;border-radius:4px;background:#111;margin-left:-4px}
+.scr .th{position:absolute;top:-30px;width:3px;height:82px;background:#111;opacity:.35}
+.scr .th b{position:absolute;top:-30px;left:-40px;width:80px;text-align:center;font:800 20px Inter;color:#111}
+.scr .nums{position:absolute;left:330px;right:40px;top:132px;display:flex;justify-content:space-between;font:700 20px Mono;color:#999}
+.waste{position:absolute;left:0;right:0;top:1300px;text-align:center;opacity:0}
+.waste span{display:inline-block;font:800 32px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 28px}
+.apply{position:absolute;left:90px;right:90px;top:640px;height:96px;border-radius:24px;background:#12261C;border:2px solid #3ECF8E;display:flex;align-items:center;gap:18px;padding:0 26px;font:800 30px Inter;color:#fff;opacity:0}
+.apply em{margin-left:auto;font-style:normal;font:900 34px Inter;color:#3ECF8E}
+.sk-paper{--topbg:#FBFBF8;--side:#D9D9D2;--edge:rgba(0,0,0,.12)}
+.doc{position:absolute;inset:0;padding:26px 28px;font-family:Inter;color:#222}
+.doc .h{font:800 26px Inter;color:#111}.doc .bdg{position:absolute;right:20px;top:20px;font:800 18px Inter;color:#fff;background:#E5484D;border-radius:8px;padding:4px 10px}
+.doc i{display:block;height:12px;border-radius:6px;background:#E3E3DD;margin-top:14px}
+.doc i.k{background:#BDEBD4}.doc .fld{height:40px;border-radius:8px;border:2px solid #D5D5CE;margin-top:14px;font:600 17px Inter;color:#555;padding:8px 10px}
+.kw{display:flex;flex-wrap:wrap;gap:10px;padding:26px;justify-content:center;align-content:center;height:100%}
+.kw span{font:800 24px Inter;color:#06210f;background:#3ECF8E;border-radius:10px;padding:8px 14px}
+.form2{position:absolute;left:150px;right:150px;top:690px;border-radius:28px;background:#fff;border:1.5px solid var(--l-line);padding:30px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.12)}
+.form2 .f{height:58px;border-radius:12px;border:2px solid #E2E2E6;margin-bottom:16px;padding:14px 18px;font:600 22px Inter;color:#444}
+.form2 .sub{height:86px;border-radius:18px;background:#111;color:#fff;font:800 34px/86px Inter;text-align:center;margin-top:10px;transition:none}
+.form2 .sub.ok{background:#1FA971}
+.aihand{position:absolute;left:720px;top:1010px;font-size:76px;opacity:0;z-index:5}
+.stop2{position:absolute;left:0;right:0;top:1230px;text-align:center;opacity:0}
+.stop2 span{display:inline-block;font:800 34px Inter;color:#fff;background:#E5484D;border-radius:999px;padding:12px 28px}
+.you{position:absolute;left:0;top:0;width:52px;height:52px;opacity:0;z-index:6}
+.repo{position:absolute;left:110px;right:110px;top:680px;border-radius:30px;background:#0D1117;border:2px solid #30363D;padding:30px 34px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.repo .t{display:flex;align-items:center;gap:18px;font:700 36px Inter;color:#58A6FF}
+.repo .t b{color:#E6EDF3}
+.repo p{font:500 26px/1.4 Inter;color:#8B949E;margin-top:16px}
+.repo .st{display:flex;gap:16px;margin-top:24px}
+.repo .st div{border:1.5px solid #30363D;border-radius:14px;padding:12px 20px;font:800 34px Inter;color:#E6EDF3;opacity:0}
+.repo .st div em{font-style:normal;color:#E3B341}
+.with{position:absolute;left:0;right:0;top:1150px;display:flex;justify-content:center;gap:16px;opacity:0}
+.note2{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="fun">
+      <div class="row" id="f1" style="width:100%"><b id="n1">740</b><span>jobs evaluated</span></div>
+      <div class="row" id="f2" style="width:84%"><b id="n2">68</b><span>applications</span></div>
+      <div class="row" id="f3" style="width:66%"><b id="n3">12</b><span>interviews</span></div>
+      <div class="row win" id="f4" style="width:50%"><b>1</b><span>offer 🎉</span></div>
+    </div>
+    <div class="note2" id="fn" style="top:1250px">Author's own results · career-ops README</div>
+  </section>
+  <section class="scene" id="sWho">
+    <div class="cl" id="cl"></div>
+    <div class="term" id="term"><div class="bar"><i></i><i></i><i></i>&nbsp;career-ops</div>
+      <div class="ln" id="t1">&gt; evaluate 740 jobs</div><div class="ln g" id="t2">✓ 4.6/5 · apply</div><div class="ln r" id="t3">✗ 2.9/5 · skip</div><div class="ln r" id="t4">✗ 3.1/5 · skip</div></div>
+    <div class="notcard" id="nc">⛔ What <em>NOT</em> to apply to</div>
+  </section>
+  <section class="scene" id="sScore">
+    <div class="paste" id="pst"><small>JOB LINK</small><span id="pt"></span></div>
+    <div class="vs3"><div id="jb"><small>THE JOB</small><b>SDE Intern · Acme</b><p>Go · Kubernetes · 2 yrs exp</p><div class="stamp" id="skip">SKIP</div></div>
+      <div id="rs"><small>YOUR RESUME</small><b>Python · SQL</b><p>React · 1 internship</p></div></div>
+    <div class="scr" id="dl"><div class="snum"><span id="scn">0.0</span><small>/5</small></div>
+      <div class="scale"><div class="th" style="left:75%"><b>4.0</b></div><div class="mk" id="mk" style="left:0%"></div></div>
+      <div class="nums"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div></div>
+    <div class="waste" id="ws"><span>Wasted applications: 0</span></div>
+  </section>
+  <section class="scene" id="sMake">
+    <div class="apply" id="ap">Data Intern · Nova<em>4.6/5 ✓</em></div>
+    <div class="xv" id="xv" style="left:20px;top:770px;width:1040px;height:620px"></div>
+    <div class="lens" id="ln" style="left:0;top:0;width:1080px;height:1920px"></div>
+  </section>
+  <section class="scene" id="sCatch">
+    <div class="form2" id="fm"><div class="f">Why do you want this role? ✍️ drafted</div><div class="f">Notice period: Immediate ✍️</div><div class="f">Expected stipend: as per policy ✍️</div>
+      <div class="sub" id="sb">Submit application</div></div>
+    <div class="aihand" id="ah">🤖</div>
+    <div class="stop2" id="st2"><span>✋ The AI stops here</span></div>
+    <div class="you" id="you"><svg viewBox="0 0 24 24" width="52" height="52"><path d="M4 2l15 10-7 1.5L8.5 21z" fill="#111" stroke="#fff" stroke-width="1.6" stroke-linejoin="round"/></svg></div>
+  </section>
+  <section class="scene" id="sRepo">
+    <div class="repo" id="rp"><div class="t" id="rpt"></div><p>Open-source AI job search agent. Scores each job 1–5 against your CV before you apply.</p>
+      <div class="st"><div id="s1"><em>★</em> <span id="stars">0</span></div><div id="s2">MIT</div><div id="s3">Free</div></div></div>
+    <div class="with" id="wt"></div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Riya · 2m</small><b>OFFER</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Arjun · 1m</small><b>OFFER</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Neha · 40s</small><b>OFFER</b> need this for placements</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>OFFER</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>career-ops repo + my setup with Claude 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>OFFER</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+// real logos
+R.$("cl").innerHTML = R.lg("claude", { s: 190 });
+R.$("rpt").innerHTML = R.lg("github", { s: 64 }) + `<span>career-ops-hq / <b>career-ops</b></span>`;
+R.$("wt").innerHTML = `<span class="brandchip">${R.lg("claude")}Claude Code</span><span class="brandchip">${R.lg("openai")}Codex</span><span class="brandchip">+ more</span>`;
+const T = { who: at("That's one"), paste: at("You paste"), above: at("Above"), catch: at("But here's"), repo: at("It's called"), cta: at("Comment OFFER"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.who, enter: "none" }, { id: "sWho", s: T.who, e: T.paste, enter: "push" },
+  { id: "sScore", s: T.paste, e: T.above, enter: "blurzoom" }, { id: "sMake", s: T.above, e: T.catch, enter: "swing" },
+  { id: "sCatch", s: T.catch, e: T.repo, enter: "blurzoom" }, { id: "sRepo", s: T.repo, e: T.cta, enter: "push" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.paste, T.above], [T.catch, T.repo], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "the score", at: T.paste }, { label: "what it makes", at: T.above }, { label: "the catch", at: T.catch }, { label: "the repo", at: T.repo, end: T.cta }],
+  counter: { unit: "jobs scored", steps: [[at("scores"), 1], [at("Above"), 2]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "street", style: { shirt: "#C2410C", shirtLine: "#7C2D12", print: "#FDE68A", lens1: "#2DD4BF", lens2: "#0EA5E9" } },
+  poses: P,
+});
+const PARTS = [
+  { name: "Tailored resume", gloss: "PDF, rewritten for this job", skin: "paper", th: 8, more: "Pulls the job's own keywords into your bullets, so screening software finds them.",
+    html: `<div class="doc"><div class="h">Aarav S.</div><span class="bdg">PDF</span><i></i><i class="k"></i><i></i><i class="k" style="width:70%"></i><i></i><i class="k" style="width:55%"></i></div>`, at: at("PDF") },
+  { name: "Cover letter", gloss: "written for this company", skin: "paper", th: 8, more: "Mentions the team and the role, not a copy-paste template.",
+    html: `<div class="doc"><div class="h">Dear Hiring Team,</div><i></i><i></i><i style="width:80%"></i><i></i><i style="width:60%"></i></div>`, at: at("cover") },
+  { name: "Form answers", gloss: "every field, drafted", skin: "paper", th: 8, more: "Notice period, stipend, 'why us': drafted for you to check.",
+    html: `<div class="doc"><div class="h">Application</div><div class="fld">Why this role?</div><div class="fld">Notice period</div><div class="fld">Expected stipend</div></div>`, at: at("Drafts") },
+];
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: funnel
+  [["f1", 0.0], ["f2", at("68")], ["f3", at("12")], ["f4", at("One offer") - 0.05]].forEach(([id, a]) => pop(id, t, a, { from: 0.7 }));
+  count("n1", t, 0.05, 0.7, 740); count("n2", t, at("68"), 0.5, 68); count("n3", t, at("12"), 0.4, 12);
+  R.note("fn", t, at("One offer") + 0.2, T.who);
+  // WHO: Claude runs it
+  pop("cl", t, at("Claude.") - 0.15, { from: 0.5 });
+  R.card("term", t, { in: T.who + 0.2, y: 30 });
+  [["t1", T.who + 0.5], ["t2", at("Claude.") + 0.1], ["t3", at("smartest") ], ["t4", at("smartest") + 0.25]].forEach(([id, a]) => R.rise(id, t, a, { dy: 10 }));
+  pop("nc", t, at("not to apply") - 0.1, { from: 0.6 });
+  // SCORE
+  R.card("pst", t, { in: T.paste - 0.05, y: 30 });
+  R.type("pt", "jobs.lever.co/acme/sde-intern", t, at("paste") + 0.1, 34);
+  R.card("jb", t, { in: at("reads") - 0.1, y: 30 }); R.card("rs", t, { in: at("resume,") - 0.15, y: 30 });
+  R.card("dl", t, { in: at("scores") - 0.1, y: 40 });
+  const sp = ease.out3(prog(t, at("scores"), 1.2)); R.$("scn").textContent = (3.2 * sp).toFixed(1); R.$("mk").style.left = (55 * sp) + "%";
+  R.$("dl").querySelector(".th").style.opacity = t >= at("Below") ? 1 : 0.35;
+  const sk = R.$("skip"), skp = ease.spring(prog(t, at("skip") - 0.05, 0.4));
+  sk.style.opacity = clamp(skp * 3); sk.style.transform = `translate(-50%,-50%) rotate(-14deg) scale(${lerp(2, 1, skp)})`; if (skp > 0) R.cue("pop", at("skip") - 0.05);
+  pop("ws", t, at("wasted") - 0.1, { from: 0.7 });
+  // MAKE: exploded application pack
+  R.card("ap", t, { in: T.above + 0.1, y: 30 });
+  R.xview("xv", t, { at: T.above + 0.4, w: 300, d: 390, parts: PARTS, explode: at("tailors") + 0.2, gap: 56, tilt: [56, -28], cy: 400, pull: [-110, 30, 70],
+    labels: { x: 640, y0: 40, y1: 400, w: 370 }, focus: [[at("PDF"), 0], [at("cover"), 1], [at("Drafts"), 2], [T.catch - 0.6, -1]] });
+  R.lens("ln", t, { at: at("screening"), out: at("cover") - 0.1, from: () => R.xpoint("xv", 0, 0.45, 0.55), c: [870, 1330], r: 105, r0: 16,
+    html: `<div class="kw"><span>Python</span><span>SQL</span><span>React</span></div>`, title: "Job's keywords ✓" });
+  // CATCH
+  R.card("fm", t, { in: T.catch - 0.05, y: 50 });
+  const ah = R.$("ah"), ap2 = ease.out3(prog(t, at("never") - 0.3, 0.5)); ah.style.opacity = ap2 * (1 - prog(t, at("You read"), 0.3));
+  ah.style.transform = `translate(${(1 - ap2) * 120}px, ${(1 - ap2) * 60}px)` + (t > at("submit.") ? ` translateX(${30 * Math.sin(Math.min(1, (t - at("submit.")) * 3) * Math.PI)}px)` : "");
+  pop("st2", t, at("submit.") - 0.05, { from: 0.6 }); R.$("st2").style.opacity *= 1 - prog(t, at("You read"), 0.3);
+  const yu = R.$("you"), ya = at("you send"), yp = ease.inOut(prog(t, at("You read"), 0.8));
+  yu.style.opacity = clamp(prog(t, at("You read"), 0.2)); yu.style.left = lerp(900, 560, yp) + "px"; yu.style.top = lerp(1300, 1060, yp) + "px";
+  R.press("sb", t, ya); const ok = t >= ya + 0.1; R.$("sb").classList.toggle("ok", ok); R.$("sb").textContent = ok ? "✓ Sent, by you" : "Submit application";
+  // REPO
+  R.card("rp", t, { in: T.repo + 0.05, y: 40 });
+  pop("s1", t, at("77,000") - 0.1, { from: 0.6 });
+  count("stars", t, at("77,000"), 1.3, 77.8, { fmt: x => x.toFixed(1) + "k", ding: true });
+  pop("s2", t, at("Free") - 0.05, { from: 0.6 }); pop("s3", t, at("open source") - 0.05, { from: 0.6 });
+  R.rise("wt", t, at("Free") + 0.2, { dy: 20 });
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "OFFER", tyA = at("Comment OFFER") + 0.3, posted = R.end("Comment OFFER") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 14); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("with Claude.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

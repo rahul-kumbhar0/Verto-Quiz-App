@@ -4,9 +4,9 @@
 - Takeaway: an open-source Claude agent that scores every job against your resume and tells you which ones to skip, so you send fewer, better applications.
 - Audience: Indian students / freshers / early-career techies (same lane as our freehire winner).
 - Archetype: F (result story) + D (open-sourced tool) body, A ending (keyword → DM).
-- Freebie: DM → guide page canwe-guides.vercel.app/career-ops/ (repo link, 5-minute setup with Claude, the commands, how to read the score). TO BUILD before posting.
+- Freebie: DM → guide page canwe-guides.vercel.app/career-ops/ (repo link, 5-minute setup with Claude, the commands, how to read the score). LIVE.
 - Proof on screen: the README numbers (740 → 68 → 12 → 1 funnel), the 1–5 score card, the skip stamp, the drafted PDF/cover letter, the GitHub card with stars (real GitHub + Claude logos).
-- Facts (source: github.com/santifer/career-ops README, read 27 Oct 2026): 77.8k stars, MIT · "740 listings evaluated. 68 applied. 12 interviews. 1 offer." (author's own claim, Head of Applied AI role) · scores jobs 1–5, pushes you not to apply below 4.0/5 · ATS PDF generation, cover letter generator, drafts every form field · "you review and click Submit", never auto-submits · works with Claude Code, Codex and other AI CLIs · setup `npx @santifer/career-ops init`.
+- Facts (source: github.com/career-ops-hq/career-ops README, read 27 Oct 2026): 77.8k stars, MIT · "740 listings evaluated. 68 applied. 12 interviews. 1 offer." (author's own claim, Head of Applied AI role) · scores jobs 1–5, pushes you not to apply below 4.0/5 · ATS PDF generation, cover letter generator, drafts every form field · "you review and click Submit", never auto-submits · works with Claude Code, Codex and other AI CLIs · setup `npx @santifer/career-ops init`.
 
 ## Hook lab (score /12: specific · stakes · curiosity · fast · showable · true)
 | # | Formula | Spoken | Frame-1 text | S | St | C | F | Sh | T | Total |
@@ -62,9 +62,9 @@ Save this for your next application spree, and send it to the friend who's appli
 #claudeai #jobsearch #aitools #freshers #claudecode
 
 Pinned comment: Sending the repo + setup to everyone who comments OFFER 📩 (check Requests if you don't see it)
-DM automation: NEW (keyword offer / offers, follow gate, once per user) → https://canwe-guides.vercel.app/career-ops/
+DM automation: #23 on @canwe.ai (keywords offer / offers, follow gate, once per user, created OFF) → https://canwe-guides.vercel.app/career-ops/
 
 ## YouTube Shorts
 Title: 740 Jobs, 1 Offer: The Free Claude Job Hunter #shorts
-Description: career-ops scores every job against your resume (1–5), tells you to skip below 4, and drafts your PDF, cover letter and form answers. You still hit Submit. Results are the author's own (project README). Setup guide: https://canwe-guides.vercel.app/career-ops/  Source: github.com/santifer/career-ops
+Description: career-ops scores every job against your resume (1–5), tells you to skip below 4, and drafts your PDF, cover letter and form answers. You still hit Submit. Results are the author's own (project README). Setup guide: https://canwe-guides.vercel.app/career-ops/  Source: github.com/career-ops-hq/career-ops
 Pinned comment: 📌 Repo + setup: https://canwe-guides.vercel.app/career-ops/
