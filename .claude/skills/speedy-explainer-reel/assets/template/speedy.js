@@ -1,7 +1,10 @@
 /* SPEEDY style layer for engine.js (load after engine.js and avatar.js).
  *
  *   R.speedy({ light:[[a,b]], emph:{box,bold}, chapters:[{label,at}], counter:{unit,steps:[[t,value,unit?]]},
- *              poses:[[t,"name"],...], avatar:{x,y,w,mode,png,style}, rail:true })     once, after R.setup
+ *              poses:[[t,"name"],...] | "auto", autoPoses:{…}, avatar:{x,y,w,mode,png,style}, rail:true })   once, after R.setup
+ *   R.autoPoses(o)        direct the presenter from the words: numbers count on fingers, "never/myth" wag, "million"
+ *                         arms wide, "type/paste" typing, "offer/hired" celebrate, questions think, CTA point + wave…
+ *                         poses:"auto" uses it alone; poses:[…] + autoPoses:{} merges (your pins win within 1.2 s)
  *   R.speedyFrame(t)      right after R.frame(t) in seek: theme flip, kinetic captions, rail+counter, avatar, watermark
  *   R.card(el,t,{in,out,y,d,blur,back})   focus-pull card (same API as the noir pack)
  *   R.note(el,t,a,b)      footnote fades in a..b           R.sel(el,t,a,b)   selection box on UI
@@ -36,7 +39,14 @@
   R.speedy = cfg => {
     N = { ...N, ...cfg };
     mark(N.emph.bold, "b"); mark(N.emph.box, "box");
-    N.poses = (N.poses || []).map(([t, n]) => [+t, n]).sort((a, b) => a[0] - b[0]);
+    const manual = Array.isArray(N.poses) ? N.poses : [];
+    if (N.poses === "auto" || N.autoPoses) {
+      const auto = R.autoPoses(N.autoPoses || {});
+      N.poses = auto.filter(a => !manual.some(m => Math.abs(+m[0] - a[0]) < 1.2)).concat(manual.map(m => [+m[0], m[1], m[2]]));
+    }
+    N.poses = (N.poses || []).map(([t, n, x]) => [+t, n, x]).sort((a, b) => a[0] - b[0]);
+    // beats: every boxed (stressed) word gives the presenter a small nod + arm bump
+    N.beats = (window.CAPTION_PAGES || []).flat().filter(w => w.k === "box").map(w => w.s);
     if (!N.poses.length || N.poses[0][0] > 0) N.poses.unshift([-1, "talk"]);
     N.poses.forEach(p => R.cue("pop", p[0], { soft: true }));
     const av = $("avatar");
@@ -139,8 +149,69 @@
     const av = $("avatar"), a = N.avatar, show = a.hide ? !a.hide.some(([x, y]) => t >= x && t < y) : true;
     const inT = a.in ?? 0, pin = E.out3(prog(t, inT, 0.5));
     av.style.opacity = show ? pin : 0; av.style.transform = `translateY(${(1 - pin) * 120}px)`;
-    Avatar.frame(t, cur, p, prev, mouthAt(t));
+    let beat = 0; (N.beats || []).forEach(s => { const d = t - s + 0.04; if (d >= 0 && d < 0.42) beat = Math.max(beat, Math.sin(Math.PI * d / 0.42)); });
+    Avatar.frame(t, cur, p, prev, mouthAt(t), { beat, expr: N.poses[i][2], exprPrev: N.poses[Math.max(0, i - 1)][2], exprP: p });
   }
+
+  // ---------- auto-direction: pick poses + expressions from the words being said ----------
+  const LEX = [   // [pose, priority, expr?, words]
+    ["wag", 6, "serious", "myth myths fake wrong mistake lie lies scam"],
+    ["celebrate", 7, "excited", "offer offers hired won win success finally"],
+    ["stop", 5, "serious", "never no not don't dont stop skip nobody nothing zero without can't won't isn't doesn't"],
+    ["big", 5, "surprised", "million millions billion billions thousand thousands lakh crore huge massive entire whole every everything"],
+    ["small", 5, "think", "tiny small little micro nano"],
+    ["hands_head", 5, "surprised", "crazy wow insane unbelievable seriously imagine"],
+    ["typing", 5, "think", "type typed typing paste pasted write writes code coding prompt drafts fills search searches tailors"],
+    ["thumbs", 4, "happy", "free done works easy best perfect safe yes"],
+    ["think", 4, "think", "think thought why how decide decided idea guess catch smart smartest"],
+    ["present", 4, "happy", "called meet introducing"],
+    ["point_stage", 3, null, "this these here look watch see screen link below"],
+    ["shrug", 3, "unsure", "maybe actually honestly"],
+  ].map(([pose, pr, expr, w]) => ({ pose, pr, expr, words: new Set(w.split(" ")) }));
+  const COMEDY = new Set(["hands_head", "facepalm", "celebrate", "shrug"]);
+  R.autoPoses = (o = {}) => {
+    const T = (window.CAPTION_PAGES || []).flat(); if (!T.length) return [];
+    const gap = o.gap ?? 1.5, from = o.from ?? 0, lead = o.lead ?? 0.12, DEF = o.defaults ?? ["explain", "present", "point_stage", "explain", "talk"];
+    const C = []; let sStart = 0, defI = 0;
+    const W = x => x.toLowerCase().replace(/[“”"(),.!?:;]/g, "").replace(/’/g, "'");
+    T.forEach((tok, i) => {
+      const w = W(tok.t), at = Math.max(from, tok.s - lead), startOfSentence = i === 0 || /[.!?]$/.test(T[i - 1].t);
+      if (startOfSentence) {
+        sStart = i;
+        let j = i; while (j < T.length - 1 && !/[.!?]$/.test(T[j].t)) j++;
+        if (/\?$/.test(T[j].t)) C.push({ t: at, pose: /^(why|how|what)/.test(w) || /why|how/.test(T.slice(i, j + 1).map(x => W(x.t)).join(" ")) ? "think" : "shrug", pr: 3, expr: "think", word: tok.t + "…?" });
+        else if (/^(you|your|you're|youre)$/.test(w)) C.push({ t: at, pose: "point_cam", pr: 3, expr: "happy", word: tok.t });
+        else C.push({ t: at, pose: DEF[defI++ % DEF.length], pr: 0, expr: null, word: "(new sentence)" });
+      }
+      if (w === "comment") { C.push({ t: at, pose: "point_cam", pr: 9, expr: "happy", word: tok.t }); return; }
+      const num = /\d/.test(w) ? parseFloat(w.replace(/[^\d.]/g, "")) : null, big = /k$|l$|lakh|million|billion|,\d{3}/i.test(tok.t);
+      if (num !== null) {
+        if (num === 1) C.push({ t: at, pose: "one", pr: 7, word: tok.t }); else if (num === 2) C.push({ t: at, pose: "two", pr: 7, word: tok.t });
+        else if (num === 3) C.push({ t: at, pose: "three", pr: 7, word: tok.t }); else if (num >= 100 || big) C.push({ t: at, pose: "big", pr: 6, expr: "surprised", word: tok.t });
+        return;
+      }
+      if (/^(one|first)$/.test(w)) C.push({ t: at, pose: "one", pr: 5, word: tok.t });
+      else if (/^(two|second|both|twice)$/.test(w)) C.push({ t: at, pose: "two", pr: 5, word: tok.t });
+      else if (/^(three|third)$/.test(w)) C.push({ t: at, pose: "three", pr: 5, word: tok.t });
+      LEX.forEach(L => { if (L.words.has(w)) C.push({ t: at, pose: L.pose, pr: L.pr, expr: L.expr, word: tok.t }); });
+    });
+    // last sentence of the reel ends on a wave if it is a CTA
+    const last = T[T.length - 1]; if (C.some(c => c.pr === 9)) C.push({ t: Math.max(from, last.s - 0.2), pose: "wave", pr: 8, expr: "happy", word: "(sign-off)" });
+    C.sort((a, b) => a.t - b.t || b.pr - a.pr);
+    const out = [], used = {};
+    C.forEach(c => {
+      if (COMEDY.has(c.pose) && (used[c.pose] || 0) >= (o.maxComedy ?? 2)) return;
+      const prev = out[out.length - 1];
+      if (prev && c.pose === prev.pose) return;
+      if (!prev || c.t - prev.t >= gap) { out.push(c); used[c.pose] = (used[c.pose] || 0) + 1; return; }
+      if (c.pr >= prev.pr + 2) {                                  // a stronger cue: follow quickly if there is room, else replace
+        if (c.t - prev.t >= (o.minGap ?? 0.9)) out.push(c); else { used[prev.pose]--; out[out.length - 1] = c; }
+        used[c.pose] = (used[c.pose] || 0) + 1;
+      }
+    });
+    window.AUTO_POSES = out;                                       // inspect / show in a debug overlay
+    return out.map(c => [c.t, c.pose, c.expr || undefined]);
+  };
 
   R.speedyFrame = t => { theme(t); kinetic(t); rail(t); avatar(t); const wm = $("wm"); if (wm) wm.style.opacity = N.wm ? prog(t, N.wm, 0.4) : 0; };
 

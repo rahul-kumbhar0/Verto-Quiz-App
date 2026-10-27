@@ -18,7 +18,40 @@ reruns, e.g. `look:"classic", style:{shirt:"#0A66C2", shirtLine:"#06427E", lens1
 (LinkedIn-blue tee, used on the referral reel).
 Swap in your own character with PNG pose sheets when you have them (the character IS the brand).
 
-## Pose library (`Avatar.POSES`, 20 poses)
+## Auto-direction (default since 27 Oct 2026): the presenter moves with the words
+`R.speedy({ …, poses: "auto" })` makes the presenter direct itself from the caption words + timings
+(`R.autoPoses` in speedy.js). Your `{pose}` pins still win: pass them as `poses:[…]` together with
+`autoPoses:{}` and every auto move within 1.2 s of a pin is dropped. What it reacts to:
+| Words / idea | Move · expression |
+|---|---|
+| 1 / one / first · 2 / two / both · 3 / three | count on fingers: `one` · `two` · `three` |
+| numbers ≥ 100, "10K", "₹21L", million, thousand, lakh, every, entire | `big` (arms wide) · surprised |
+| tiny, small, little | `small` (pinch in front) · think |
+| never, no, not, don't, skip, nobody, without | `stop` (palm out) · serious |
+| myth, fake, wrong, mistake, scam | `wag` (finger wag) · serious |
+| type, paste, write, code, prompt, search, drafts, fills, tailors | `typing` · think |
+| free, done, works, easy, best, perfect, safe | `thumbs` · happy |
+| offer, hired, win, success, finally | `celebrate` (V arms) · excited |
+| crazy, wow, insane, imagine | `hands_head` · surprised (max 2 per reel) |
+| think, why, how, decide, idea, catch, smart | `think` · think |
+| a sentence ending in "?" | `think` (why/how) or `shrug` · unsure |
+| a sentence starting with "you/your" | `point_cam` · happy |
+| this, here, look, watch, see, screen, link | `point_stage` |
+| called, meet, introducing | `present` · happy |
+| "Comment" (CTA) → last line | `point_cam` → `wave` sign-off |
+| any other sentence start | rotates explain / present / point_stage / talk |
+Rules built in: ≥ 1.5 s between moves (`gap`), a stronger cue may follow after 0.9 s (`minGap`),
+never the same pose twice in a row, comedy poses capped at 2 (`maxComedy`). `window.AUTO_POSES` lists
+every choice with the word that triggered it (show it in a debug chip, as the demo does). Tune the
+word lists in `LEX` (speedy.js) per niche.
+
+**Life on top of the poses** (automatic): brows + resting mouth follow each pose's expression
+(`Avatar.EXPR`: neutral happy excited surprised think serious unsure; a surprised mouth stays an "o"),
+a head nod + arm bump on every boxed word (the beat), per-pose body lean, slow breathing, animated
+gestures (wave, wag, clap, typing). Demo: `assets/examples/presenter-auto-demo/` (career-ops voice,
+zero manual poses, chip shows word → move · expression).
+
+## Pose library (`Avatar.POSES`, 28 poses; new: three, big, small, typing, celebrate, wag, clap, lean_in)
 | Pose | Reads as | Use on |
 |---|---|---|
 | `talk` | neutral, hands low | default between gestures (rarely needed; the tween does it) |

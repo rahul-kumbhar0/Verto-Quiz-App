@@ -1,8 +1,12 @@
 /* Cartoon presenter puppet for the SPEEDY style. Pure function of t, like everything in engine.js.
  *
  *   Avatar.init(el, {look, style, mode, png})           build once (svg puppet, or png pose sheets)
- *   Avatar.frame(t, poseName, p, prevPose, mouth)       driven by speedy.js every seek
+ *   Avatar.frame(t, poseName, p, prevPose, mouth, o)    driven by speedy.js every seek; o = {beat, expr}
  *   Avatar.POSES                                        the pose library (edit / extend freely)
+ *   Avatar.EXPR                                         facial expressions (brows + mouth): neutral happy
+ *                                                       excited surprised think serious unsure
+ * Life: breathing, per-pose body lean, a head nod + arm beat on stressed words (o.beat 0..1), expression
+ * per pose (pose.expr) unless o.expr overrides. Animated poses: wave, wag, clap, typing.
  *
  * Two built-in SVG looks:
  *   look:"street"  (default) — oversized drop-shoulder tee, chest print, chain, messy hair,
@@ -22,24 +26,43 @@
   A.POSES = {
     talk:        { L: [10, 18, "relax"], R: [10, 18, "relax"], head: 0 },
     explain:     { L: [38, 95, "palm", -40], R: [38, 95, "palm", 40], head: 0 },
-    present:     { L: [70, 40, "palm", -60], R: [10, 18, "relax"], head: -3 },
+    present:     { L: [70, 40, "palm", -60], R: [10, 18, "relax"], head: -3, lean: -2, expr: "happy" },
     point_up:    { L: [10, 18, "relax"], R: [155, 10, "point"], head: -4 },
     one:         { L: [10, 18, "relax"], R: [20, 160, "point"], head: -2 },
     two:         { L: [10, 18, "relax"], R: [25, 158, "peace"], head: -2 },
-    point_stage: { L: [10, 18, "relax"], R: [118, 22, "point", 10], head: -5 },
-    point_side:  { L: [10, 18, "relax"], R: [85, 6, "point", 15], head: -3 },
-    point_cam:   { L: [10, 18, "relax"], R: [58, 118, "point", -30, 1.55], head: 2 },
-    thumbs:      { L: [10, 18, "relax"], R: [28, 150, "thumb", 10], head: 3 },
-    fist_pump:   { L: [10, 18, "relax"], R: [160, 45, "fist"], head: -6, lift: 8 },
-    shrug:       { L: [44, 118, "palm", -70], R: [44, 118, "palm", 70], head: 7, lift: 10 },
-    facepalm:    { L: [10, 18, "relax"], R: [-16, 172, "palm", 20], head: 8 },
-    hands_head:  { L: [-8, 176, "palm", -20], R: [-8, 176, "palm", 20], head: 0, lift: 4 },
-    stop:        { L: [10, 18, "relax"], R: [68, 86, "palm", -95], head: -2 },
-    think:       { L: [10, 18, "relax"], R: [-6, 158, "fist"], head: 6 },
+    three:       { L: [10, 18, "relax"], R: [25, 158, "three"], head: -2 },
+    point_stage: { L: [10, 18, "relax"], R: [118, 22, "point", 10], head: -5, lean: 2 },
+    point_side:  { L: [10, 18, "relax"], R: [85, 6, "point", 15], head: -3, lean: 2 },
+    point_cam:   { L: [10, 18, "relax"], R: [58, 118, "point", -30, 1.55], head: 2, expr: "happy" },
+    lean_in:     { L: [10, 18, "relax"], R: [58, 118, "point", -30, 1.6], head: 4, lean: 0, scale: 1.05, expr: "excited" },
+    thumbs:      { L: [10, 18, "relax"], R: [28, 150, "thumb", 10], head: 3, expr: "happy" },
+    fist_pump:   { L: [10, 18, "relax"], R: [160, 45, "fist"], head: -6, lift: 8, expr: "excited" },
+    celebrate:   { L: [138, 4, "fist"], R: [138, 4, "fist"], head: -6, lift: 12, expr: "excited" },
+    shrug:       { L: [44, 118, "palm", -70], R: [44, 118, "palm", 70], head: 7, lift: 10, expr: "unsure" },
+    facepalm:    { L: [10, 18, "relax"], R: [-16, 172, "palm", 20], head: 8, expr: "serious" },
+    hands_head:  { L: [-8, 176, "palm", -20], R: [-8, 176, "palm", 20], head: 0, lift: 4, expr: "surprised" },
+    big:         { L: [36, 108, "palm", -55], R: [36, 108, "palm", 55], head: -3, lift: 6, expr: "surprised" },
+    small:       { L: [14, -122, "pinch", -20], R: [14, -122, "pinch", 20], head: 5, expr: "think" },
+    stop:        { L: [10, 18, "relax"], R: [68, 86, "palm", -95], head: -2, expr: "serious" },
+    wag:         { L: [10, 18, "relax"], R: [140, 30, "point", 0], head: 4, expr: "serious", wag: true },
+    think:       { L: [10, 18, "relax"], R: [-6, 158, "fist"], head: 6, expr: "think" },
     pinch:       { L: [10, 18, "relax"], R: [40, 128, "pinch", 20], head: -3 },
-    wave:        { L: [10, 18, "relax"], R: [150, 28, "palm", 10], head: -4, wave: true },
-    shh:         { L: [10, 18, "relax"], R: [-4, 166, "point", 30], head: 4 },
-    cross:       { L: [-14, 112, "fist", 60], R: [-14, 112, "fist", -60], head: 2 },
+    typing:      { L: [12, -92, "relax", -10], R: [12, -92, "relax", 10], head: 6, expr: "think", typing: true },
+    clap:        { L: [34, -108, "palm", -75], R: [34, -108, "palm", 75], head: -2, expr: "excited", clap: true },
+    wave:        { L: [10, 18, "relax"], R: [150, 28, "palm", 10], head: -4, wave: true, expr: "happy" },
+    shh:         { L: [10, 18, "relax"], R: [-4, 166, "point", 30], head: 4, expr: "think" },
+    cross:       { L: [-14, 112, "fist", 60], R: [-14, 112, "fist", -60], head: 2, expr: "serious" },
+  };
+  /* Expressions: brow lift (px, negative = up), brow angle (deg, positive = inner ends down = frown),
+     per-side extra lift for one raised brow, and the closed-mouth shape. */
+  A.EXPR = {
+    neutral:   { by: 0, ba: 0, mouth: "M266 338 q34 24 68 0" },
+    happy:     { by: -5, ba: -4, mouth: "M260 332 q40 42 80 0" },
+    excited:   { by: -12, ba: -6, mouth: "M258 330 q42 48 84 0" },
+    surprised: { by: -16, ba: -8, mouth: "o" },
+    think:     { by: 2, ba: 4, byL: -9, mouth: "M270 344 q26 4 54 -8" },
+    serious:   { by: 5, ba: 12, mouth: "M270 344 q30 0 60 0" },
+    unsure:    { by: -8, ba: -10, mouth: "M268 344 q32 -8 64 0" },
   };
   A.names = () => Object.keys(A.POSES);
 
@@ -65,6 +88,7 @@
     switch (type) {
       case "point": return fist + f(0, 40, 104, 18);
       case "peace": return fist + f(-15, 40, 104, 17) + f(13, 40, 104, 17);
+      case "three": return fist + f(-18, 40, 98, 15) + f(0, 40, 106, 15) + f(18, 40, 98, 15);
       case "thumb": return fist + f(24, 30, 98, 19);
       case "palm":  return `<rect x="-31" y="-6" width="62" height="64" rx="20" fill="${sk}" stroke="${ln}" stroke-width="3"/>` + f(-23, 44, 96, 15) + f(-8, 44, 108, 15) + f(8, 44, 106, 15) + f(23, 44, 92, 15) + `<rect x="24" y="2" width="16" height="48" rx="8" transform="rotate(-40 32 2)" fill="${sk}" stroke="${ln}" stroke-width="3"/>`;
       case "pinch": return fist + `<circle cx="0" cy="64" r="16" fill="none" stroke="${sk}" stroke-width="11"/><circle cx="0" cy="64" r="21" fill="none" stroke="${ln}" stroke-width="3"/><circle cx="0" cy="64" r="11" fill="none" stroke="${ln}" stroke-width="3"/>`;
@@ -140,6 +164,8 @@
       <path d="M414 234 q14 34 -2 62 q20 -10 26 -40z" fill="${S.hair}" stroke="#15120F" stroke-width="3" stroke-linejoin="round"/>
       <path d="M210 150 q48 -46 126 -40 q-66 4 -108 48z" fill="${S.hairHi}" opacity=".85"/>
       <path d="M356 124 q40 18 54 60 q-26 -30 -60 -40z" fill="${S.hairHi}" opacity=".6"/>
+      <g class="brows"><path class="brow" data-s="L" d="M204 214 q36 -14 74 -2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/>
+        <path class="brow" data-s="R" d="M322 212 q38 -12 74 2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/></g>
       <!-- rounded shades -->
       <g>
         <rect x="192" y="226" width="100" height="62" rx="30" fill="url(#lens)" stroke="${S.frame}" stroke-width="7"/>
@@ -159,12 +185,14 @@
       <g class="mouthOpen" opacity="0"><ellipse class="mo" cx="300" cy="340" rx="32" ry="18" fill="${S.mouth}"/><rect class="teeth" x="272" y="324" width="56" height="12" rx="4" fill="${S.teeth}"/><ellipse class="tg" cx="300" cy="354" rx="17" ry="9" fill="${S.tongue}"/></g>
       <path d="M194 232 q-14-112 110-124 q126 -6 112 134 q-10 -62 -62 -76 q-10 30 -40 26 q-48 -4 -68 -32 q-46 20 -52 72z" fill="${S.hair}" stroke="${S.skinLine}" stroke-width="3" stroke-linejoin="round"/>
       <path d="M228 154 q40-44 108-40 q-54 6 -92 50z" fill="${S.hairHi}" opacity=".8"/>
+      <g class="brows"><path class="brow" data-s="L" d="M204 220 q36 -14 74 -2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/>
+        <path class="brow" data-s="R" d="M322 218 q38 -12 74 2" fill="none" stroke="#15120F" stroke-width="11" stroke-linecap="round"/></g>
       <path d="M190 236 q110 -22 220 0 l-8 40 q-22 24 -64 20 q-28 -4 -42 -36 q-14 32 -42 36 q-42 4 -64 -20z" fill="url(#lens)" stroke="${S.frame}" stroke-width="6" stroke-linejoin="round"/>
       <path d="M208 248 q36 -12 62 -6" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>
       <path d="M330 248 q36 -12 62 -6" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>`;
   }
   function svg() {
-    return `<svg viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg">
+    return `<svg viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="overflow:visible">
     <g class="body">
       ${LOOK === "street" ? bodyStreet() : LOOK === "hoodie" ? bodyHoodie() : bodyClassic()}
       <g class="head">${LOOK === "classic" ? headClassic() : headStreet()}</g>
@@ -184,14 +212,22 @@
     }
     el.innerHTML = svg();
     parts = { body: el.querySelector(".body"), head: el.querySelector(".head"), mc: el.querySelector(".mouthClosed"), mo: el.querySelector(".mouthOpen"),
-              moE: el.querySelector(".mo"), tg: el.querySelector(".tg"), teeth: el.querySelector(".teeth") };
+              moE: el.querySelector(".mo"), tg: el.querySelector(".tg"), teeth: el.querySelector(".teeth"),
+              bL: el.querySelector('.brow[data-s="L"]'), bR: el.querySelector('.brow[data-s="R"]') };
     ["L", "R"].forEach(s => { const up = el.querySelector(`.up[data-side=${s}]`); parts[s] = { up, fo: up.querySelector(".fo"), hand: up.querySelector(".hand"), hg: up.querySelector(".hg"), type: null }; });
   };
 
-  function armPose(side, P, Q, p, t) {
+  function armPose(side, P, Q, p, t, beat) {
     const a = P[side], b = Q[side], sgn = side === "R" ? -1 : 1, x = SX[side];
     let a1 = lerp(a[0], b[0], p), a2 = lerp(a[1], b[1], p), tilt = lerp(a[3] || 0, b[3] || 0, p), sc = lerp(a[4] || 1, b[4] || 1, p);
-    if (Q.wave && side === "R" && p > 0.6) a2 += 14 * Math.sin(t * 2 * Math.PI * 3);
+    const live = p > 0.6 ? 1 : 0;
+    if (Q.wave && side === "R") a2 += live * 14 * Math.sin(t * 2 * Math.PI * 3);
+    if (Q.wag && side === "R") tilt += live * 22 * Math.sin(t * 2 * Math.PI * 3.2);              // "no no" finger wag
+    if (Q.clap) a1 -= live * 9 * (0.5 + 0.5 * Math.sin(t * 2 * Math.PI * 3.4));                 // hands meet and part
+    if (Q.typing) a2 += live * 7 * Math.sin(t * 2 * Math.PI * (side === "R" ? 5.3 : 4.7) + (side === "R" ? 1 : 0));
+    // beat: the gesturing arm (the one away from rest) bumps on stressed words
+    const active = b[0] > 20 || b[1] > 60;
+    if (active) { a1 += 7 * beat; a2 -= 5 * beat; }
     const g = parts[side];
     g.up.setAttribute("transform", `rotate(${sgn * a1} ${x} ${SY})`);
     g.fo.setAttribute("transform", `rotate(${sgn * a2} ${x} ${SY + UP})`);
@@ -201,7 +237,7 @@
   }
 
   /** t, cur pose name, p = eased progress of the switch (0..1), prev pose name, mouth 0..1 */
-  A.frame = (t, cur, p, prev, mouth) => {
+  A.frame = (t, cur, p, prev, mouth, o = {}) => {
     if (!el) return;
     if (mode === "png") {
       el.querySelectorAll("img").forEach(im => {
@@ -210,16 +246,27 @@
       });
       return;
     }
-    const P = A.POSES[prev] || A.POSES.talk, Q = A.POSES[cur] || A.POSES.talk, e = back(p);
-    ["L", "R"].forEach(s => armPose(s, P, Q, e, t));
+    const P = A.POSES[prev] || A.POSES.talk, Q = A.POSES[cur] || A.POSES.talk, e = back(p), beat = clamp(o.beat || 0);
+    ["L", "R"].forEach(s => armPose(s, P, Q, e, t, beat));
     // motion smear while the pose cuts (the reference shows a 1-2 frame ghost trail on the moving arm)
     const smear = p > 0 && p < 1 ? Math.sin(Math.PI * clamp(p)) : 0;
     el.querySelector(".arms").style.filter = smear > 0.05 && prev !== cur ? `blur(${smear * 7}px)` : "";
-    const lift = lerp(P.lift || 0, Q.lift || 0, e), bob = 3 * Math.sin(t * 1.4);
-    parts.body.setAttribute("transform", `translate(0 ${bob - lift})`);
-    const tilt = lerp(P.head || 0, Q.head || 0, e) + (mouth > 0 ? 1.6 * Math.sin(t * 2 * Math.PI * 1.7) : 0);
+    const lift = lerp(P.lift || 0, Q.lift || 0, e), bob = 3 * Math.sin(t * 1.4) + 4 * beat;
+    const lean = lerp(P.lean || 0, Q.lean || 0, e), sc = lerp(P.scale || 1, Q.scale || 1, e), breathe = 1 + 0.008 * Math.sin(t * 2 * Math.PI * 0.25);
+    parts.body.setAttribute("transform", `translate(0 ${bob - lift}) rotate(${lean} 300 640) translate(300 640) scale(${sc} ${sc * breathe}) translate(-300 -640)`);
+    const tilt = lerp(P.head || 0, Q.head || 0, e) + (mouth > 0 ? 1.6 * Math.sin(t * 2 * Math.PI * 1.7) : 0) + 3.5 * beat;   // nod on stressed words
     parts.head.setAttribute("transform", `rotate(${tilt} 300 340)`);
-    const m = clamp(mouth);
+    // expression: brows + resting mouth (talking mouth still flaps over it)
+    const XP = A.EXPR[o.exprPrev || P.expr || "neutral"] || A.EXPR.neutral, XQ = A.EXPR[o.expr || Q.expr || "neutral"] || A.EXPR.neutral, xe = o.expr ? clamp(o.exprP ?? e) : e;
+    if (parts.bL) {
+      const by = lerp(XP.by, XQ.by, xe) - 3 * beat, ba = lerp(XP.ba, XQ.ba, xe);
+      parts.bL.setAttribute("transform", `translate(0 ${by + lerp(XP.byL || 0, XQ.byL || 0, xe)}) rotate(${ba} 241 207)`);
+      parts.bR.setAttribute("transform", `translate(0 ${by + lerp(XP.byR || 0, XQ.byR || 0, xe)}) rotate(${-ba} 359 207)`);
+    }
+    const XM = xe < 0.5 ? XP : XQ;
+    let m = clamp(mouth);
+    if (XM.mouth === "o") m = Math.max(m, 0.55);                      // surprised: mouth stays an "o" between words
+    else parts.mc.setAttribute("d", XM.mouth);
     parts.mo.setAttribute("opacity", m > 0.08 ? 1 : 0); parts.mc.setAttribute("opacity", m > 0.08 ? 0 : 1);
     parts.moE.setAttribute("ry", 6 + 16 * m); parts.moE.setAttribute("cy", 336 + 8 * m);
     parts.tg.setAttribute("cy", 342 + 14 * m); parts.tg.setAttribute("opacity", m > 0.4 ? 1 : 0);
