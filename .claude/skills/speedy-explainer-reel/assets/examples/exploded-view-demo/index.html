@@ -1,0 +1,48 @@
+<!doctype html>
+<!-- Demo of the exploded-view kit (R.xview + R.lens) and real logos (R.lg). No voice: times are hard-coded.
+     Copy the template's speedy.css/props.css/engine.js/props.js/fonts next to this file (or run from a reel folder).
+     Stills: node render.mjs index.html --stills st 1 2.2 4 5.6 7 8.4 10 -->
+<html><head><meta charset="utf-8"><title>exploded view demo</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+#stage{position:absolute;inset:0;background:var(--bg)}
+.h1{position:absolute;left:0;right:0;top:330px;text-align:center;font:800 64px Inter;color:#fff;letter-spacing:-1.5px}
+.h1 em{font-style:normal;color:var(--accent)}
+.brands{position:absolute;left:0;right:0;top:1500px;display:flex;justify-content:center;gap:18px;opacity:0}
+.cells{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;padding:26px;width:100%;height:100%}
+.cells i{border-radius:6px;background:linear-gradient(135deg,#1F6B4B,#0F3D2B);border:1px solid rgba(124,244,190,.35)}
+.cells i.cpu{background:linear-gradient(135deg,#3B82F6,#1E3A8A)}.cells i.npu{background:linear-gradient(135deg,#A855F7,#5B21B6)}
+.die-lbl{position:absolute;inset:0;display:grid;place-items:center;font:800 26px Mono;color:#fff;text-shadow:0 2px 8px #000}
+</style></head><body><div id="stage">
+  <div class="h1" id="h1">What's <em>inside</em> a phone</div>
+  <div class="xv" id="xv" style="left:20px;top:480px;width:1040px;height:860px"></div>
+  <div class="lens" id="ln" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div class="brands" id="br"></div>
+</div>
+<script src="engine.js"></script><script src="props.js"></script>
+<script>
+const R = Reel;
+R.$("br").innerHTML = ["claude", "openai", "gemini"].map((s, i) => `<span class="brandchip">${R.lg(s)}${["Claude", "ChatGPT", "Gemini"][i]}</span>`).join("");
+const chip = `<div style="position:absolute;left:28%;top:30%;width:44%;height:22%;border-radius:8px;background:linear-gradient(135deg,#2B2F33,#15181B);box-shadow:inset 0 0 0 2px #3ECF8E,0 0 18px rgba(62,207,142,.6)"></div>`;
+const PARTS = [
+  { name: "Cover glass", gloss: "scratch-resistant front", skin: "glass", th: 6, more: "Takes the drops and scratches so the screen under it survives." },
+  { name: "OLED display", gloss: "each pixel makes its own light", skin: "screen", th: 8, more: "No backlight: black pixels are simply OFF, which saves battery." },
+  { name: "Frame", gloss: "holds everything together", skin: "frame", th: 22 },
+  { name: "Battery", gloss: "lithium-ion cells", skin: "battery", th: 18, w: 170, d: 360, x: 26, y: 150, html: `<div class="lbl">Li-ion</div>`,
+    more: "The biggest part inside. Its size is why phones can't get much thinner." },
+  { name: "Logic board", gloss: "the chip + memory + modem", skin: "pcb", th: 10, w: 98, d: 420, x: 210, y: 120, html: chip,
+    more: "The whole computer: processor, RAM, storage and radios on one small board." },
+  { name: "Back glass", gloss: "lets wireless charging through", skin: "back", th: 6 },
+];
+window.REEL_DURATION = 11;
+window.seek = t => {
+  R.rise("h1", t, 0.1, { dy: 30 });
+  R.xview("xv", t, { at: 0.2, w: 330, d: 660, parts: PARTS, explode: 1.5, gap: 64, tilt: [56, -30], labels: { x: 700, y0: 20, y1: 700, w: 330 },
+    focus: [[4.6, 3], [6.6, 4], [9.4, -1]] });
+  R.lens("ln", t, { at: 7.5, out: 9.3, from: () => R.xpoint("xv", 4, 0.5, 0.42), c: [330, 1240], r: 150,
+    html: `<div class="cells"><i class="cpu"></i><i class="cpu"></i><i></i><i></i><i class="cpu"></i><i class="cpu"></i><i></i><i></i><i class="npu"></i><i class="npu"></i><i></i><i></i><i class="npu"></i><i class="npu"></i><i></i><i></i></div>`,
+    title: "The chip, zoomed in", text: "CPU cores · GPU · AI engine on one piece of silicon" });
+  R.rise("br", t, 9.6, { dy: 30 });
+};
+window.seek(0);
+</script></body></html>

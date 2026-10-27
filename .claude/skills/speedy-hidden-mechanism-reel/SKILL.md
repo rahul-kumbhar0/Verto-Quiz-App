@@ -17,6 +17,10 @@ Load and follow `speedy-explainer-reel` with these format rules. Reference:
 2. **Pivot**: "So how is that possible?" (presenter rises in, shrug).
 3. **Mechanism (dark)**: the rule in two sentences ("the keys you see are not the keys you
    touch…"), then the mechanism drawn on the prop (`R.zone` grow/shrink, `R.sel` on the thing).
+   When the mechanism is a physical part, show it as an exploded view (`R.xview`): the device
+   splits into layers, the part that does the trick pulls out and explains itself, and a
+   `R.lens` zooms into the smallest detail (props3d.md "Exploded view"). The device's and every
+   named brand's real logo via `R.lg` (references/logos.md).
 4. **Running example (dark)**: a named everyday moment ("texting a friend: dinner tonight? →
    what ti…"); walk one step at a time (T, I → the E zone grows, the W shrinks → a tap halfway
    goes to E → every letter, every zone changes again). Each step is one phrase and one visual

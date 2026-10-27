@@ -9,6 +9,8 @@ cp "$SK"/scripts/*.mjs "$SK"/scripts/*.py "$SK"/scripts/*.sh "$W/tools/"
 if ! node -e "require.resolve('playwright')" >/dev/null 2>&1; then (cd "$W" && npm i --silent playwright@1.49.1) ; fi
 PW=$(node -e "console.log(require('path').dirname(require.resolve('playwright/package.json')))" 2>/dev/null || true)
 [ -n "$PW" ] && ln -sfn "$PW" "$W/node_modules/playwright"
+# real brand logos (offline icon sets) for brand_logos.mjs
+[ -d "$W/logo-src/node_modules/simple-icons" ] || (mkdir -p "$W/logo-src" && cd "$W/logo-src" && npm init -y >/dev/null && npm i --silent simple-icons@16.36.0 @iconify-json/logos@1.2.18 @iconify-json/simple-icons@1.2.101 @lobehub/icons-static-svg@1.101.0) || echo "logo packages unavailable: brand_logos.mjs disabled"
 python3 -c "import numpy, scipy" 2>/dev/null || pip install -q numpy scipy
 python3 -c "import pocketsphinx" 2>/dev/null || pip install -q pocketsphinx || echo "pocketsphinx unavailable: align.py (forced alignment) disabled; use fake_timings.py or a words.json from ElevenLabs/Whisper"
 command -v ffmpeg >/dev/null || { echo "ffmpeg missing"; exit 1; }

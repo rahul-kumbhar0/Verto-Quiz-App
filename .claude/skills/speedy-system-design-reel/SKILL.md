@@ -40,7 +40,7 @@ chapters: [{label:"server",at:T.server},{label:"api",at:T.api},{label:"security"
 counter: {unit:"messages", steps:[[at("returns your messages"),1042],[at("sends a chat photo"),1045],[at("each new message"),1047],[at("goes viral"),183,"connections"]]},
 light: [[T.what,T.server],[T.api,T.sec],[T.live,T.backup],[T.replica,T.fn],[T.cta,999]],   // alternate; the stress test + recap stay dark
 ```
-Stage components per chapter (3D props: `references/props3d.md` + copy `assets/examples/supabase-hook/`; flat cards: `references/components.md`): server box + chip card; code card
+Real logos for the product and every named tool/vendor on cards, boxes and footnotes (`R.lg`, `references/logos.md`); an exploded view (`R.xview` + `R.lens`) whenever a chapter shows what a component is made of. Stage components per chapter (3D props: `references/props3d.md` + copy `assets/examples/supabase-hook/`; flat cards: `references/components.md`): server box + chip card; code card
 "what you'd normally write" (file name + line count); translator pipe URL → SQL; sign-in phone →
 Auth card → token segments → filtered rows; bucket card + object row + signed-link pill with
 expiry; journal pad + table + fan-out to phones; globe/latency table; function cards (push /

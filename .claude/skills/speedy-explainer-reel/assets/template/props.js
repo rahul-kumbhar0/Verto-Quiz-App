@@ -8,6 +8,9 @@
  *   R.rack(el... )  (rackbar uses R.card)            —
  *   R.fibers(svg,t,{at,n,x1,y1,x2,y2,sweep})         fiber stream with flowing particles
  *   R.lanes(el,t,{at,busy:[[lane,a,b],…]})           connection lanes light up while borrowed
+ *   R.lg(slugOrFile,{s,cls})                         html for a REAL brand logo tile (logos/<slug>.svg)
+ *   R.xview(el,t,{parts,at,explode,focus,…})         exploded view: layers split, a part pulls out, leader-line labels
+ *   R.xpoint(el,i,fx,fy) · R.lens(el,t,{…})          point on a part (for arrows) · magnified detail circle + cone
  */
 (function () {
   const R = window.Reel, { clamp, prog, lerp, ease: E, $ } = R;
@@ -192,7 +195,7 @@
       const s0 = o.w ?? o.size ?? 230;                      // a true cube: one size for every face
       el.style.width = s0 + "px"; el.style.height = s0 + "px";
       el.innerHTML = `<div class="cube">
-        <div class="f front">${o.icon ? `<span class="ic">${o.icon}</span>` : o.label ?? ""}</div>
+        <div class="f front">${o.icon ? (/\.(svg|png|webp)$/.test(o.icon) ? R.lg(o.icon, { s: s0 * 0.42 }) : `<span class="ic">${o.icon}</span>`) : o.label ?? ""}</div>
         <div class="f top"></div><div class="f side">${o.side ?? ""}</div></div>`;
       const c = el.querySelector(".cube");
       c.querySelector(".front").style.transform = `translateZ(${s0 / 2}px)`;
@@ -284,5 +287,150 @@
       k.style.opacity = pin * (u < 0.06 || u > 0.94 ? 0 : 1);
       k.style.transform = `translate(${pt.x - 13}px, ${pt.y - 9}px) rotate(${ang}deg) scale(${o.size ?? 1})`;
     });
+  };
+})();
+
+// ---------- real logos · exploded view · detail lens ----------
+(function () {
+  const R = window.Reel, { clamp, prog, lerp, ease: E, $ } = R;
+
+  /** html for a real brand logo tile. slug "openai" → logos/openai.svg (from scripts/brand_logos.mjs), or a file path.
+      o:{s: px size, cls: "round"|"bare"|"dk", white: true → logos/<slug>-white.svg (pair with cls "dk")} */
+  R.lg = (slug, o = {}) => {
+    const src = /\.(svg|png|webp)$/.test(slug) ? slug : `logos/${slug}${o.white ? "-white" : ""}.svg`;
+    return `<span class="lgo ${o.cls ?? ""}" style="--s:${o.s ?? 72}px"><img src="${src}" alt=""></span>`;
+  };
+
+  // local coords of a client-space point inside `host` (survives scene scale/blur transforms)
+  const toLocal = (host, x, y) => { const r = host.getBoundingClientRect(), k = r.width / host.offsetWidth || 1; return [(x - r.left) / k, (y - r.top) / k]; };
+  const env = (t, on, off, din = 0.5, dout = 0.45) => E.inOut(prog(t, on, din)) * (1 - E.inOut(prog(t, off, dout)));
+
+  /** Exploded view of a layered product (phone, laptop, chip, server, battery, your app's stack…).
+      o: { at, w, d (footprint px), tilt:[rx,rz] (default [58,-36]), sway (deg),
+           parts: [{ name, gloss, more, th, skin, html, w, d, x, y, r, at }]   ← parts[0] = TOP layer
+                 name/gloss = label text, more = the explanation shown while that part is pulled out,
+                 skin = glass|screen|metal|frame|battery|pcb|chip|back|plastic (or your own .sk-x), html = art on its top face,
+                 at = when its label lands (its spoken word)
+           explode: time the layers split apart (gap px between layers, default 70), axis: true (dashed assembly axis),
+           focus: [[t, i], [t2, j], [t3, -1]]  ← part i PULLS OUT of the stack (pull:[dx,dy,dz]) and lights up, others dim,
+           labels: { x, y0, y1, w } label column inside el (default: right side), cx, cy: model centre inside el
+           (default: middle of the space left of the labels), orbit: {at, d, to} turn the model }
+      Call every frame. Labels + leader lines are drawn from the projected position of each part, so they
+      follow the explode / pull-out / sway exactly. */
+  R.xview = (el, t, o) => {
+    el = $(el); const P = o.parts, n = P.length, W = o.w ?? 420, D = o.d ?? 300;
+    const L = Object.assign({ x: el.offsetWidth - 310, y0: 20, y1: el.offsetHeight - 120, w: 300 }, o.labels || {});
+    if (!el.dataset.built) {
+      let h = `<svg class="xlines" width="${el.offsetWidth}" height="${el.offsetHeight}"><path class="axis" d=""/>` +
+        P.map((_, i) => `<path data-i="${i}" pathLength="1" d=""/><circle data-i="${i}" r="7"/>`).join("") + `</svg>` +
+        `<div class="xs" style="left:${o.cx ?? L.x / 2}px;top:${o.cy ?? el.offsetHeight / 2}px;width:${W}px;height:${D}px;margin:${-D / 2}px 0 0 ${-W / 2}px"><div class="xfloor"></div><div class="xglow"></div>`;
+      P.forEach((p, i) => {
+        const w = p.w ?? W, d = p.d ?? D, th = p.th ?? 14, x = p.x ?? (W - w) / 2, y = p.y ?? (D - d) / 2;
+        const f = (st) => `<div class="xf sd" style="${st}"></div>`;
+        h += `<div class="xp sk-${p.skin ?? "plastic"}" data-i="${i}" style="width:${w}px;height:${d}px;left:${x}px;top:${y}px;--r:${p.r ?? 18}px">` +
+          f(`width:${w}px;height:${th}px;top:${d - th}px;transform-origin:0 100%;transform:rotateX(-90deg)`) +      // front (+y)
+          f(`width:${w}px;height:${th}px;top:0;transform-origin:0 0;transform:rotateX(90deg)`) +                   // back (-y)
+          f(`width:${th}px;height:${d}px;left:${w - th}px;transform-origin:100% 0;transform:rotateY(90deg)`) +     // right (+x)
+          f(`width:${th}px;height:${d}px;left:0;transform-origin:0 0;transform:rotateY(-90deg)`) +                  // left (-x)
+          `<div class="xf top" style="width:${w}px;height:${d}px;transform:translateZ(${th}px)">${p.html ?? ""}</div></div>`;
+      });
+      h += `</div>` + P.map((p, i) => `<div class="xlab" data-i="${i}" style="left:${L.x}px;width:${L.w}px"><i class="n">${i + 1}</i><b>${p.name}</b>` +
+        `${p.gloss ? `<span>${p.gloss}</span>` : ""}${p.more ? `<div class="more">${p.more}</div>` : ""}</div>`).join("");
+      el.innerHTML = h; el.dataset.built = 1;
+    }
+    const a = o.at ?? 0, ex = o.explode != null ? E.inOut(prog(t, o.explode, 0.8)) : 0, gap = (o.gap ?? 70) * ex;
+    if (o.explode != null) R.cue("whoosh", o.explode);
+    // stage rotation: tilt + gentle sway (+ optional orbit turn)
+    const [rx, rz0] = o.tilt ?? [58, -36];
+    const rz = rz0 + (o.orbit ? (o.orbit.to - rz0) * E.inOut(prog(t, o.orbit.at, o.orbit.d ?? 1.2)) : 0) + (o.sway ?? 2.5) * Math.sin(t * 0.45);
+    const pin0 = E.out3(prog(t, a, 0.5));
+    el.querySelector(".xs").style.transform = `rotateX(${rx}deg) rotateZ(${rz}deg) scale(${lerp(0.86, 1, pin0)})`;
+    el.querySelector(".xfloor").style.opacity = pin0 * (1 - 0.5 * ex);
+    // focus segments → per-part pull-out envelope and dimming of the others
+    const F = o.focus || [], pull = o.pull ?? [-W * 0.28, -D * 0.12, 170];
+    const fp = new Array(n).fill(0); let dim = 0;
+    F.forEach(([ft, fi], k) => {
+      const nxt = F[k + 1] ? F[k + 1][0] : 1e9; if (fi < 0) return;
+      const e = env(t, ft, nxt - 0.05); fp[fi] = Math.max(fp[fi], e); dim = Math.max(dim, e);
+      R.cue("whoosh", ft, { soft: true });
+    });
+    el.querySelector(".xglow").style.opacity = dim * 0.9;
+    // stack bottom-up: assembled z = sum of thicknesses below; exploded adds gap per rank
+    let zAcc = 0; const z = new Array(n);
+    for (let i = n - 1; i >= 0; i--) { z[i] = P[i].z ?? zAcc; zAcc = z[i] + (P[i].th ?? 14); }
+    el.querySelectorAll(".xp").forEach(node => {
+      const i = +node.dataset.i, rank = n - 1 - i, pin = E.spring(prog(t, a + 0.1 + rank * 0.09, 0.55));
+      const zz = z[i] + gap * rank + (1 - pin) * 260 + fp[i] * pull[2];
+      node.style.transform = `translate3d(${fp[i] * pull[0]}px,${fp[i] * pull[1]}px,${zz}px)`;
+      node.style.setProperty("--o", clamp(pin * 2) * lerp(1, 0.3, dim * (1 - fp[i])));
+      node.classList.toggle("on", fp[i] > 0.5);
+    });
+    // labels + leader lines from each part's projected top face
+    const svg = el.querySelector("svg.xlines"), tops = [...el.querySelectorAll(".xf.top")], labs = [...el.querySelectorAll(".xlab")];
+    // the pulled-out part's label opens its explanation; the column re-flows so nothing overlaps
+    labs.forEach((lab, i) => { const m = lab.querySelector(".more"); if (m) { m.style.maxHeight = fp[i] * 220 + "px"; m.style.marginTop = fp[i] * 8 + "px"; m.style.opacity = fp[i]; } });
+    const hs = labs.map(l => l.offsetHeight), sum = hs.reduce((x, y) => x + y, 0);
+    const lgap = n > 1 ? Math.max(12, (L.y1 + (hs[n - 1] || 0) - L.y0 - sum) / (n - 1)) : 0;
+    let yAcc = L.y0;
+    P.forEach((p, i) => {
+      const la = p.at ?? (o.explode ?? a) + 0.9 + i * 0.25, lp = E.out3(prog(t, la, 0.45));
+      const lab = labs[i], path = svg.querySelector(`path[data-i="${i}"]`), dot = svg.querySelector(`circle[data-i="${i}"]`);
+      const ly = yAcc; yAcc += hs[i] + lgap;
+      lab.style.top = ly + "px"; lab.style.opacity = lp * lerp(1, 0.4, dim * (1 - fp[i]));
+      lab.style.transform = `translateX(${(1 - lp) * 50}px)`; lab.classList.toggle("on", fp[i] > 0.5);
+      if (lp > 0) R.cue("pop", la, { soft: true });
+      const r = tops[i].getBoundingClientRect(), [ax, ay] = toLocal(el, r.left + r.width * 0.8, r.top + r.height * 0.5);
+      const tx = L.x, ty = ly + lab.offsetHeight / 2;
+      path.setAttribute("d", `M${ax} ${ay} L${tx - 46} ${ty} L${tx} ${ty}`);
+      path.style.strokeDasharray = 1; path.style.strokeDashoffset = 1 - lp;
+      path.style.opacity = lab.style.opacity; path.classList.toggle("on", fp[i] > 0.5);
+      dot.setAttribute("cx", ax); dot.setAttribute("cy", ay); dot.style.opacity = lp > 0.05 ? lab.style.opacity : 0; dot.classList.toggle("on", fp[i] > 0.5);
+    });
+    // dashed assembly axis through the stack while it is exploded
+    const ax = svg.querySelector("path.axis");
+    if (o.axis !== false && n > 1) {
+      const c = node => { const r = node.getBoundingClientRect(); return toLocal(el, r.left + r.width / 2, r.top + r.height / 2); };
+      const [x1, y1] = c(tops[0]), [x2, y2] = c(tops[n - 1]);
+      ax.setAttribute("d", `M${x1} ${y1 - 60} L${x2} ${y2 + 60}`); ax.style.opacity = ex * (1 - dim) * 0.9;
+    }
+  };
+
+  /** point (in el's PARENT coordinates) on part i's top face; fx,fy = fractions of its projected box. Use as R.lens `from`. */
+  R.xpoint = (el, i, fx = 0.5, fy = 0.5) => {
+    el = $(el); const r = el.querySelectorAll(".xf.top")[i].getBoundingClientRect();
+    return toLocal(el.parentElement, r.left + r.width * fx, r.top + r.height * fy);
+  };
+
+  /** Detail lens: a magnified circle tied to a spot by a light cone (technical-illustration callout).
+      el = <div class="lens" style="left:0;top:0;width:1080px;height:1920px"> in the same scene.
+      o: { at, out, from:[x,y] (or a function returning it, e.g. () => R.xpoint("xv", 3, .4, .5)),
+           c:[x,y] lens centre, r: lens radius (150), r0: spot radius (20), html: the magnified art (authored),
+           title, text: the explanation under the lens, zoom: start scale of the art (1.6 → 1) } */
+  R.lens = (el, t, o) => {
+    el = $(el); const r = o.r ?? 150, r0 = o.r0 ?? 20;
+    if (!el.dataset.built) {
+      el.innerHTML = `<svg width="${el.offsetWidth}" height="${el.offsetHeight}"><polygon points=""/></svg><i class="dot"></i>` +
+        `<div class="ring" style="width:${2 * r}px;height:${2 * r}px"><div class="in">${o.html ?? ""}</div></div>` +
+        `<div class="cap">${o.title ? `<b>${o.title}</b>` : ""}${o.text ? `<span>${o.text}</span>` : ""}</div>`;
+      el.dataset.built = 1;
+    }
+    const vis = 1 - E.out3(prog(t, o.out ?? 1e9, 0.35));
+    const pd = E.spring(prog(t, o.at, 0.4)), pc = E.out3(prog(t, o.at + 0.12, 0.45)), pr = E.spring(prog(t, o.at + 0.18, 0.55)), pt = E.out3(prog(t, o.at + 0.5, 0.45));
+    el.style.opacity = vis * clamp(pd * 3);
+    if (pd > 0) { R.cue("pop", o.at); R.cue("whoosh", o.at + 0.18, { soft: true }); }
+    const [px, py] = typeof o.from === "function" ? o.from() : o.from, [cx0, cy0] = o.c;
+    // the lens grows out of the spot along the cone
+    const cx = lerp(px, cx0, pc), cy = lerp(py, cy0, pc), R2 = lerp(r0, r, pr);
+    const dot = el.querySelector(".dot"), ring = el.querySelector(".ring");
+    Object.assign(dot.style, { left: px - r0 + "px", top: py - r0 + "px", width: 2 * r0 + "px", height: 2 * r0 + "px", transform: `scale(${lerp(0.3, 1, pd)})` });
+    Object.assign(ring.style, { left: cx - r + "px", top: cy - r + "px", transform: `scale(${R2 / r})` });
+    ring.querySelector(".in").style.transform = `scale(${lerp(o.zoom ?? 1.6, 1, E.out3(prog(t, o.at + 0.18, 0.9)))})`;
+    const dx = cx - px, dy = cy - py, d = Math.hypot(dx, dy) || 1, th = Math.atan2(dy, dx), b = Math.acos(clamp((r0 - R2) / d, -1, 1));
+    const P = (x, y, rr, s) => [x + rr * Math.cos(th + s * b), y + rr * Math.sin(th + s * b)];
+    const pts = [P(px, py, r0, 1), P(cx, cy, R2, 1), P(cx, cy, R2, -1), P(px, py, r0, -1)];
+    el.querySelector("polygon").setAttribute("points", pts.map(p => p.join(",")).join(" "));
+    el.querySelector("polygon").style.opacity = pc;
+    const cap = el.querySelector(".cap");
+    Object.assign(cap.style, { left: cx0 - 210 + "px", top: cy0 + r + 22 + "px", opacity: pt, transform: `translateY(${(1 - pt) * 24}px)` });
   };
 })();

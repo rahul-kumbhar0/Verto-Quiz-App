@@ -32,7 +32,10 @@ source you read (official docs, the repo, a book, a patent, a published post). C
 the product's real components and what each one is (for the glosses), 4+ exact numbers with
 units, one credibility artefact (named engineer + role, book + year, patent number, launch year),
 and real UI details for the mocks (field names, table columns, error strings). Write
-`facts.md` with a source per claim. If a visual will exaggerate (magnified, zones drawn visible,
+`facts.md` with a source per claim. **Real logos (always):** every real company/product/tool/
+publication shown on screen uses its official logo, never an emoji or a letter circle:
+`node $W/tools/brand_logos.mjs $P/logos --scan $P/script.md <extra names>` then READ
+`logos/sheet.png`; render them with `R.lg(slug)` (`references/logos.md`). If a visual will exaggerate (magnified, zones drawn visible,
 schema simplified), note the footnote now.
 
 ## 2. Script — `references/script-formula.md`, examples in `references/example-scripts.md`
@@ -57,6 +60,9 @@ R.speedyFrame(t)`): one `<section class="scene">` per chapter, components from
 `references/components.md`, `R.speedy({light, emph, chapters, counter, avatar, poses})` with every
 time taken from `at("phrase")`. Rules that make it read as the reference (motion curves and durations: `references/motion-spec.md` — read it before authoring):
 - One hero object per beat; labels/rows/pills pop ON the spoken word; nothing before it is said.
+- Any named real brand on screen = its real logo (`R.lg`), never an emoji. Any "what's inside /
+  how it's built / which part does what" beat = an exploded view with a pull-out per explained
+  part and a lens for the smallest detail (`references/props3d.md`), not a flat list.
 - Chapters alternate dark/light; the rail (system design) appears with chapter 1 and leaves at
   the CTA; the counter ticks when the running example advances.
 - Presenter hidden during the hook, then a pose per phrase (`references/avatar.md`); comedy poses
@@ -118,14 +124,15 @@ stock puppet was used.
   presenter, themes/rail/counter, hook/credibility/CTA, rhythm, what it is NOT
 - `references/example-scripts.md` — both reference scripts word-for-word with emphasis marks and
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
-- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow) and a topic→prop recipe table; worked reproduction in `assets/examples/supabase-hook/`
+- `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/` and `assets/examples/exploded-view-demo/`
+- `references/logos.md` — real-logo rule, `scripts/brand_logos.mjs` (offline official marks + contact sheet), `R.lg` tiles/brand chips
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode
 - `references/ref-frames/` — contact sheets, key frames, pose catalogue of the references
 - `assets/template/` — index.html demo (38 s URL-shortener), speedy.css/js, props.css/js (3D props),
   avatar.js, engine.js, fonts, generated captions · `assets/examples/supabase-hook/` — the reference hook rebuilt
-- `scripts/` — setup.sh · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py · align_lines.py · tts_kokoro.py ·
+- `scripts/` — setup.sh · brand_logos.mjs · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py · align_lines.py · tts_kokoro.py ·
   sfx.py · music.py · mix.sh · clean_voice.sh · qa.sh
 
 ## Cover

@@ -1,4 +1,4 @@
-# The 3D props (database stack, server tray, rack bar, pooler…) and their animations
+# The 3D props (database stack, server tray, rack bar, pooler, exploded view, detail lens…) and their animations
 
 The reference reel's hero objects look like 3D renders; they are reproduced here in pure
 CSS/SVG so any concept (a database, a queue, a cache, a load balancer, your own app's parts)
@@ -96,3 +96,55 @@ HTML: `<div class="box3d" id=…>` / `<div class="chip3d">` / `<div class="globe
 | client / app mechanics | `.phone` + keyboard + finger | zones, previews, meas callouts |
 Rule: the hook gets ONE 3D hero built from these; each chapter re-dresses or feeds it, never
 replaces the metaphor mid-reel.
+
+## Exploded view, part pull-out and detail lens ("what's inside X")
+The premium "product teardown" look: the object floats in 3D, its layers separate along a dashed
+assembly axis, every part gets a numbered leader-line label, then ONE part slides out of the stack
+and lights up while its label opens to explain it, and a magnifier lens zooms into a detail.
+Working demo (phone teardown + chip lens + logo chips): `assets/examples/exploded-view-demo/`.
+```html
+<div class="xv" id="xv" style="left:20px;top:480px;width:1040px;height:860px"></div>
+<div class="lens" id="ln" style="left:0;top:0;width:1080px;height:1920px"></div>
+```
+```js
+const PARTS = [                                   // parts[0] = TOP layer, listed like a parts list
+  { name: "Cover glass", gloss: "scratch-resistant front", skin: "glass", th: 6, at: at("glass") },
+  { name: "Battery", gloss: "lithium-ion cells", skin: "battery", th: 18, w: 170, d: 360, x: 26, y: 150,
+    html: `<div class="lbl">Li-ion</div>`, more: "The biggest part inside…", at: at("battery") },
+  { name: "Logic board", skin: "pcb", th: 10, w: 98, d: 420, x: 210, y: 120, html: chipArt, at: at("board") },
+  …];
+R.xview("xv", t, { at: T.inside, w: 330, d: 660, parts: PARTS, explode: at("inside") + 0.3, gap: 64,
+  tilt: [56, -30], labels: { x: 700, y0: 20, y1: 700, w: 330 },
+  focus: [[at("biggest part"), 1], [at("the board"), 2], [T.next - 0.4, -1]] });   // pull out → explain → put back
+R.lens("ln", t, { at: at("zoom in"), out: T.next, from: () => R.xpoint("xv", 2, 0.5, 0.42), c: [330, 1240], r: 150,
+  html: dieArt, title: "The chip, zoomed in", text: "CPU · GPU · AI engine on one piece of silicon" });
+```
+- **Parts**: `w,d,x,y` place a smaller part inside the footprint (battery left, board right);
+  `th` = thickness; `skin` = glass · screen · metal · frame (hollow ring) · battery · pcb · chip ·
+  back · plastic, or your own `.sk-name{--topbg:…;--side:…;--edge:…}`; `html` = art on its top face
+  (a logo via `R.lg`, a label, chip art). A real product's own logo goes on its back/lid part.
+- **Explode**: layers rise in bottom-up with a spring at `at`, split at `explode` (`gap` px per
+  layer) with ease-in-out; the dashed axis shows while exploded; the model sways slowly forever
+  (`sway` deg) and can turn (`orbit:{at,d,to}`) for a reveal.
+- **Labels**: one per part, numbered, landing on the part's spoken word (`at`); leader lines are
+  drawn from each part's projected position every frame, so they follow the explode/pull-out.
+- **Pull-out (focus)**: `focus:[[t,i],…,[t,-1]]`. Part `i` slides out (`pull:[dx,dy,dz]`, default
+  left-up), gets the accent edge + glow, its label opens the `more` explanation (the column
+  re-flows), everything else dims to 30%. One part per sentence; put it back (`-1`) before the
+  next chapter.
+- **Lens**: spot ring on the detail → a light cone → a magnified circle with authored art (draw
+  the detail bigger: cells, cores, wires, a key's dome switch) + title + one-line explanation
+  under it. `from` can track a moving part with `R.xpoint(xv, i, fx, fy)`. Put the lens in empty
+  space, never over the label column or the presenter.
+- **Light chapters**: add class `lt` to the `.xv` for dark lines/white labels.
+
+Beat pattern that reads best (≈2.6 w/s): "Here's what's actually inside." (assemble + explode) →
+name the parts top to bottom, one label per word → "The biggest part is the battery…" (pull-out +
+`more`) → "and the brain is this tiny board" (pull-out) → "zoom in on the chip" (lens) → put
+back, recap. Footnote "Simplified illustration, not to scale" on every teardown.
+
+Topic → exploded-view recipes: phone/laptop/earbuds/smartwatch (device teardown), a chip (package
+→ die → cores), a server (case → board → CPU/RAM/disks), an EV battery (pack → modules → cells),
+your app (UI → API → database → infra as slabs with the real tool logos on their faces), an AI
+model (input → layers → output), a resume (header → skills → projects → education) for a
+"what recruiters read first" teardown.
