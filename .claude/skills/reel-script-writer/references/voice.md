@@ -20,6 +20,16 @@ connected my Claude".
   makes it noise.
 - Humour: one line max, usually the reaction or the CTA's friend line.
 
+## Pacing: fast, with hard stops (the "stop and speak" delivery)
+Viral delivery = dense speech + sudden silence, not uniform speed. The winners talk fast and then
+STOP for half a second on the turn. Write for it, then build it (`pace.py` in speedy-explainer-reel):
+- **Burst sentences.** 3-8 words each around the stops. The line before a stop must land a punch
+  ("One offer." / "$1,200 worth." / "Real fixes, not spam."), never trail off.
+- **Where the stops go (4-6 per reel):** after the hook's twist / before every "But..." or "Then..."
+  turn / after the biggest number / after the punchline / never inside an explanation.
+- **Mark them in the package:** list the stop phrases in post-copy.md (they become `stops.json`).
+- The voice take itself is sped ~6% and de-breathed in the build; don't write slower to compensate.
+
 ## Banned (the linter flags these)
 AI-isms and presenter clichés: delve, unlock, unleash, elevate, harness, leverage, game-changer,
 game changer, revolutionize, cutting-edge, seamless, robust, in today's video, in this video,

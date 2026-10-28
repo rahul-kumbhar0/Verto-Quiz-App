@@ -21,6 +21,10 @@ of every session (reels posted, automation changes, results, decisions). Last up
 - **Every reel ends with** "Comment KEYWORD" → DM automation → a guide page.
 - **Real logos** for every brand named on screen (`scripts/brand_logos.mjs`), never emojis.
 - **3D exploded view + lens** for any "what's inside / what it makes" beat; **process steps, analogy split, zoom-through, bar chart** for how-it-works / beginner ideas / scale / numbers (table in speedy-explainer-reel references/props3d.md).
+- **Pacing (always, from 28 Oct):** `tools/pace.py` after align: 4-6 hard stops (~0.55 s) + speech
+  sped 1.06x; stops after the hook twist / before "But..." / after the punchline; music break over the
+  biggest stop. Topic picking: CHORE x CLAUDE x FREE scored 0-6 (reel-script-writer research.md).
+  Queued next: cleanyourtv TV reel (keyword TV), WhatsApp+Claude (lharries/whatsapp-mcp, 6.8k stars).
 - **Presenter is auto-directed** + auto reactions (💡 ??? 💧 ✨ 💨), shades-slide gag on shocking numbers, props in hand, signature flip / double-thumbs, outfit per topic.
 - **Presenter (detail)** (`poses: "auto"`): moves + expressions follow the words; pin with `{pose}` only where needed.
 - **Presenter look changes per reel** (street default, classic blue for referral, purple hoodie for
@@ -64,7 +68,7 @@ build a buyer list).
 | What is an AI agent v2 (hoodie, demo-first) | AGENT | ready, not posted | |
 | career-ops: 740 jobs, 1 offer (orange tee, v2 auto presenter) | OFFER | posted (automation #23 is ON and locked) | (ask) |
 | One prompt: which jobs you fit (green hoodie + grad cap, eyes-pop gag) | PROMPT | ready, not posted | |
-| Claude Max free for open source (GitHub-dark hoodie + headset, 48 s, 779 credits) | OSS | ready, not posted (made 28 Oct; post next, news decays) | |
+| Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (post TODAY, news decays; use the v2 files) | |
 Scripts/scenes for each: `.claude/skills/speedy-explainer-reel/assets/examples/<reel>/`.
 
 ## Stories

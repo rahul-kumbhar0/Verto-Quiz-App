@@ -103,6 +103,18 @@ It prints `N/N lines force-aligned`; fix a fallback line by adding the missing w
 built-in, or an inline blend (`-v "am_michael:0.6,am_puck:0.4"`). Use ElevenLabs only if the user
 asks for a specific ElevenLabs voice; check credits with `estimate_only` first, then align its audio
 the same way (`studio.py narrate` needs the text; for external audio use `tools/align_lines.py`).
+**Pace the take (stop-and-go delivery, always):** Shlok v3 speaks wall-to-wall (zero pauses >= 0.3 s),
+which reads as one long breath. Write `stops.json` (`{"stops":["phrase whose LAST word gets the stop",...]}`,
+RAW spoken tokens): 4-6 hard stops per reel -- after the hook's twist line, before every "But..." turn,
+after the big number, after the punchline ("Real fixes, not spam."). Then:
+```bash
+cp words.json words_raw.json
+python3 $W/tools/pace.py audio/voice.wav words_raw.json stops.json audio/voice_paced.wav words.json --pause 0.18 --stop 0.55 --tempo 1.06
+```
+It finds real silences by energy (aligner word gaps lie), trims them, injects ~0.55 s of dead air at
+each stop and speeds the speech 6% (pitch kept). Mix with `voice_paced.wav`. Captions, `at()` anchors,
+cues, sfx and music all re-time from the new words.json: re-run captions.py, re-export cues, re-render.
+Put a music `break` across the biggest stop (the question beat) for full-silence drama.
 Then re-run `captions.py` and re-still 4 frames: `at()` anchors re-time themselves, but a merged
 token can throw `phrase not found` (fix `display.json`).
 
@@ -143,7 +155,7 @@ stock puppet was used.
 - `assets/template/` — index.html demo (38 s URL-shortener), speedy.css/js, props.css/js (3D props),
   avatar.js, engine.js, fonts, generated captions · `assets/examples/supabase-hook/` — the reference hook rebuilt
 - `scripts/` — setup.sh · brand_logos.mjs · mark_script.py · fake_timings.py · captions.py · render.mjs · align.py · align_lines.py · tts_kokoro.py ·
-  sfx.py · music.py · mix.sh · clean_voice.sh · qa.sh
+  sfx.py · music.py · pace.py (stop-and-go pacing) · mix.sh · clean_voice.sh · qa.sh
 
 ## Cover
 `node scripts/cover.mjs index.html <t> cover.png` freezes the reel at t (pick a frame with the hero object and a clean presenter pose), hides captions and adds a 2-line headline with the keyword in the selection box plus a stamp. Keep text inside y 240-1680 (Instagram 3:4 grid crop).

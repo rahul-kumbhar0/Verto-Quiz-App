@@ -92,3 +92,18 @@ kaamkibaatein_ DWD-9yOStRb · nocodealex DefJ-WnE7iZ
 Det_3TmTAsF · rick.theengineer DdrHAI1MrFb, DcBhby3sl7_, Ddt-a1Ys8jd · techbabecodes DeUiWJZInhq ·
 vishakha.sadhwani DewyFUGzXuy · techwithvidhi DbLmpKWPxsv
 (URLs: https://www.instagram.com/p/<id>/)
+
+## The always-viral formula (validated 28 Oct 2026, fresh scans + our own results)
+**CHORE x CLAUDE x FREE**: a chore/pain nearly everyone in the audience has -> "I/someone automated
+it with Claude" -> named FREE tool (a GitHub repo = trust) -> exact result numbers -> comment keyword.
+Evidence (views): TV-ads chore 2.9M in 4 days (cleanyourtv, 43.1k stars) / job search 275K + our 40K
+(freehire) / token limits 675K Hinglish with 59K comments / trading 1.4M / Instagram posting 430K.
+Score a topic 0-6 before writing (build only 5+):
+1. Universal pain: >= 80% of OUR audience fights it this month (TV ads, job hunt, WhatsApp overload, fees)
+2. Automation arc: "I gave Claude X and it did my chore" (first person beats listicle)
+3. Free + named: a real repo/tool with stars; "free" said early
+4. Showable in 5 s: a before/after or live demo frame 1 can show
+5. Numbers as proof: stars, counts, money, days ("740 jobs. 1 offer.")
+6. Fresh (<= 7 days old news) OR evergreen pain; median winner age in scans = 3 days
+Delivery that goes with it: original voiceover (100% of winners), comment-keyword CTA, caption
+~100+ words with a [keywords:...] block, and stop-and-go pacing (voice.md, Pacing section).
