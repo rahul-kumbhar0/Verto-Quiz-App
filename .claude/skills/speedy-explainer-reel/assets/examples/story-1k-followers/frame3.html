@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1K story · frame 3</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="common.css"></head>
+<body><div id="stage"><div class="grid"></div><div class="glow" id="glow" style="top:50%"></div>
+  <div class="brand" id="brand"><img src="canwe-logo.svg" alt="">canwe.ai</div>
+  <div class="kick" id="k1" style="top:360px">REEL #10 IS YOUR CALL</div>
+  <div class="ttl" id="ty" style="top:405px">You <span class="sel"><i></i><b>pick</b></span> the<br>next reel 🗳️</div>
+  <div class="sub" id="s1" style="top:625px">Vote below. The top pick gets made first.</div>
+  <div class="k1-zone" id="zone" style="top:720px;height:520px"></div>
+  <div class="k1-hint" id="h1" style="top:1268px;color:#3ECF8E">Results in 24 hours ⏳</div>
+  <div id="avatar" style="left:240px;top:1330px;width:600px;height:500px"></div>
+</div>
+<script src="engine.js"></script><script src="avatar.js"></script><script src="props.js"></script><script src="k1.js"></script>
+<script>
+const R = Reel, { prog, ease: E } = R;
+window.REEL_DURATION = 8;
+Avatar.init(document.getElementById("avatar"), { look: "street" });
+const drive = K1([[0, "think", "think"], [2.6, "lean_in", "excited"], [4.4, "present", "happy"], [6.2, "double_thumbs", "happy"]],
+  [[0.5, "q", 1.8], [2.7, "bulb", 1.4]], [0.6, 2.6, 4.4, 6.2]);
+window.seek = t => {
+  R.pop("brand", t, 0.05, { from: 0.8 });
+  R.rise("k1", t, 0.25, { dy: 16 });
+  R.pop("ty", t, 0.6, { from: 0.6 }); R.cue("whoosh", 0.6, { soft: true });
+  R.rise("s1", t, 1.6, { dy: 20 });
+  const z = document.getElementById("zone"); z.style.opacity = E.out3(prog(t, 2.6, 0.6)) * (0.75 + 0.25 * Math.sin(t * 3));
+  document.getElementById("glow").style.opacity = 0.5 * E.out3(prog(t, 2.6, 0.8));
+  R.cue("ding", 2.6, { soft: true });
+  R.rise("h1", t, 4.4, { dy: 20 }); R.cue("pop", 4.4);
+  drive(t);
+  document.getElementById("avatar").style.transform = `translateY(${(1 - E.out3(prog(t, 0, 0.5))) * 120}px)`;
+};
+window.seek(0);
+</script></body></html>

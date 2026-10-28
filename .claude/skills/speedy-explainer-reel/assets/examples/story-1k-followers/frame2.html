@@ -1,0 +1,43 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1K story · frame 2</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="common.css"></head>
+<body><div id="stage"><div class="grid"></div>
+  <div class="brand" id="brand"><img src="canwe-logo.svg" alt="">canwe.ai</div>
+  <div class="kick" id="k1" style="top:360px">FOR THE 1,000 OF YOU</div>
+  <div class="ttl" id="ty" style="top:405px;font-size:84px">Coming this <span class="sel"><i></i><b>week</b></span> 👀</div>
+  <div class="k1-card" id="c1" style="top:560px"><div class="k1-num">1</div><div class="k1-ico"><img src="logos/claude.svg"></div><div class="k1-txt"><b>740 jobs. 1 offer.</b><span>The Claude job hunter</span></div><div class="k1-chip">OFFER</div></div>
+  <div class="k1-card" id="c2" style="top:735px"><div class="k1-num">2</div><div class="k1-ico">🎯</div><div class="k1-txt"><b>Which jobs fit you?</b><span>One prompt + your resume</span></div><div class="k1-chip">PROMPT</div></div>
+  <div class="k1-card" id="c3" style="top:910px"><div class="k1-num">3</div><div class="k1-ico"><img src="logos/linkedin.svg"></div><div class="k1-txt"><b>Referral from a stranger</b><span>The exact message</span></div><div class="k1-chip">REFER</div></div>
+  <div class="k1-card" id="c4" style="top:1085px"><div class="k1-num">4</div><div class="k1-ico">🤖</div><div class="k1-txt"><b>What is an AI agent?</b><span>Shown, not lectured</span></div><div class="k1-chip">AGENT</div></div>
+  <div class="k1-hint" id="h1" style="top:1268px;left:470px;right:40px">Free guides here 👇</div>
+  <div id="avatar" style="left:20px;top:1330px;width:440px;height:470px"></div>
+</div>
+<script src="engine.js"></script><script src="avatar.js"></script><script src="props.js"></script><script src="k1.js"></script>
+<script>
+const R = Reel, { prog, ease: E } = R;
+window.REEL_DURATION = 10;
+Avatar.init(document.getElementById("avatar"), { look: "street" });
+const CARDS = [1.3, 2.3, 3.3, 4.3];
+const drive = K1([[0, "wave", "happy"], [1.1, "point_side", "excited"], [5.4, "hold", "serious"], [6.6, "thumbs", "happy"], [8.4, "point_side", "happy"]],
+  [[4.6, "spark", 1.4]], [...CARDS, 5.4], t => ({ flip: 0, shades: 0 }));
+window.seek = t => {
+  R.pop("brand", t, 0.05, { from: 0.8 });
+  R.rise("k1", t, 0.25, { dy: 16 });
+  R.pop("ty", t, 0.55, { from: 0.7 });
+  R.cue("whoosh", 0.55, { soft: true });
+  CARDS.forEach((a, i) => {
+    const el = document.getElementById("c" + (i + 1)), p = E.out3(prog(t, a, 0.45));
+    el.style.opacity = p; el.style.transform = `translateX(${(1 - p) * (i % 2 ? 140 : -140)}px)`;
+    R.cue("pop", a);
+  });
+  // keyword chips pulse in turn once all cards are in
+  document.querySelectorAll(".k1-chip").forEach((c, i) => {
+    const d = t - (5.4 + i * 0.35); c.style.transform = `scale(${d > 0 && d < 0.3 ? 1 + 0.18 * Math.sin(Math.PI * d / 0.3) : 1})`;
+    R.cue("click", 5.4 + i * 0.35, { soft: true });
+  });
+  R.rise("h1", t, 7.0, { dy: 20 }); R.cue("ding", 7.0, { soft: true });
+  document.getElementById("h1").style.transform += ` translateY(${Math.sin(Math.max(0, t - 7.4) * 5) * 6}px)`;
+  drive(t);
+  document.getElementById("avatar").style.transform = `translateY(${(1 - E.out3(prog(t, 0, 0.5))) * 120}px)`;
+};
+window.seek(0);
+</script></body></html>

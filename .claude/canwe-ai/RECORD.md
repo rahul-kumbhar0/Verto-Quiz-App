@@ -64,6 +64,11 @@ build a buyer list).
 | career-ops: 740 jobs, 1 offer (orange tee, v2 auto presenter) | OFFER | ready, not posted (post v2) | |
 | One prompt: which jobs you fit (green hoodie + grad cap, eyes-pop gag) | PROMPT | ready, not posted | |
 Scripts/scenes for each: `.claude/skills/speedy-explainer-reel/assets/examples/<reel>/`.
+
+## Stories
+| Story | Status | Notes |
+|---|---|---|
+| 1,000 followers (28 Oct): thank-you counter · 4 reels coming (keywords) · "you pick the next reel" poll | made, sent to owner | link sticker → canwe-guides.vercel.app; poll: free AI tools for placements / coding interview hacks / how ChatGPT actually works / side income with AI. Files: `assets/examples/story-1k-followers/` |
 Results log for learning: `.claude/skills/reel-script-writer/references/our-reels.md`.
 **Rendered MP4s are NOT in git** (too big): they live in the session container and were sent to the
 owner in chat. Rebuild from the example folder + a new voice take if needed.
@@ -78,3 +83,5 @@ test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid 
 - Ask the owner for Insights numbers (views, follows, saves) for every posted reel → our-reels.md.
 - Enable Vercel Web Analytics (owner click) → add the tracking script to the guide pages.
 - Decide on the first paid product.
+- 1K story poll: after 24 h ask the owner for the winner → it becomes the next reel (run reel-script-writer);
+  post a result slide ("You picked X. Dropping <day>.").
