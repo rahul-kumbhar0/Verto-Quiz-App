@@ -1,0 +1,65 @@
+{
+ "claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "anthropic": {
+  "file": "logos/anthropic.svg",
+  "white": "logos/anthropic-white.svg",
+  "word": null,
+  "title": "Anthropic",
+  "hex": "#191919",
+  "dark": true,
+  "source": "iconify-logos:anthropic-icon"
+ },
+ "github": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ },
+ "npm": {
+  "file": "logos/npm.svg",
+  "white": "logos/npm-white.svg",
+  "word": null,
+  "title": "npm",
+  "hex": "#CB3837",
+  "dark": false,
+  "source": "iconify-logos:npm-icon"
+ },
+ "pypi": {
+  "file": "logos/pypi.svg",
+  "white": "logos/pypi-white.svg",
+  "word": null,
+  "title": "PyPI",
+  "hex": "#3775A9",
+  "dark": false,
+  "source": "iconify-logos:pypi"
+ },
+ "python": {
+  "file": "logos/python.svg",
+  "white": "logos/python-white.svg",
+  "word": null,
+  "title": "Python",
+  "hex": "#3776AB",
+  "dark": false,
+  "source": "iconify-logos:python"
+ },
+ "kubernetes": {
+  "file": "logos/kubernetes.svg",
+  "white": "logos/kubernetes-white.svg",
+  "word": null,
+  "title": "Kubernetes",
+  "hex": "#326CE5",
+  "dark": false,
+  "source": "iconify-logos:kubernetes"
+ }
+}

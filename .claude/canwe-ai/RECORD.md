@@ -1,7 +1,7 @@
 # canwe.ai: the running record (read this first)
 
 Everything a new Claude session needs to continue the @canwe.ai content work. Update it at the end
-of every session (reels posted, automation changes, results, decisions). Last updated: 27 Oct 2026.
+of every session (reels posted, automation changes, results, decisions). Last updated: 28 Oct 2026.
 
 ## The brand
 - **Instagram:** @canwe.ai (account id 17841462296118299). Also posts to YouTube Shorts.
@@ -39,14 +39,15 @@ media_id (`list_reels`), dry-run test, turn ON. All use follow gate + once per u
 | 19 | SALARY | salary bands (media 18120356209948673) | /salary/ | ON, locked |
 | 20 | REFER | referral from a stranger | /refer/ | OFF (not posted yet) |
 | 21 | AGENT | what is an AI agent v2 | /agent/ | OFF (not posted yet) |
-| 23 | OFFER / offers | career-ops (740 jobs, 1 offer) | /career-ops/ | OFF (not posted yet) |
+| 23 | OFFER / offers | career-ops (740 jobs, 1 offer) (media 18082004081378019) | /career-ops/ | ON, locked (seen 28 Oct) |
 | 24 | PROMPT / prompts | one prompt → which jobs you fit | /prompt/ | OFF (not posted yet) |
-(#22 does not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
+| 26 | OSS (exact) | Claude Max free for open source | /oss/ | OFF (not posted yet; on lock switch match to "any" like #17–#19) |
+(#22 and #25 do not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
 build a buyer list).
 
 ## Guide site (Vercel)
 - Live: **https://canwe-guides.vercel.app** (project `canwe-guides`, team `team_6Xaw8O6MfjFggwU7zLunNZOO`,
-  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/.
+  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/.
 - Source: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/guide-site/`.
 - Deploy gotcha: every deploy must send ALL files inline (utf-8). SHA references fail with
   `missing_files`, and a redeploy via `deploymentId` drops unsent files. Verify with `web_fetch_vercel_url`.
@@ -61,8 +62,9 @@ build a buyer list).
 | Salary bands | SALARY | posted ~27 Oct | (ask) |
 | Referral from a stranger (blue look) | REFER | ready, not posted | |
 | What is an AI agent v2 (hoodie, demo-first) | AGENT | ready, not posted | |
-| career-ops: 740 jobs, 1 offer (orange tee, v2 auto presenter) | OFFER | ready, not posted (post v2) | |
+| career-ops: 740 jobs, 1 offer (orange tee, v2 auto presenter) | OFFER | posted (automation #23 is ON and locked) | (ask) |
 | One prompt: which jobs you fit (green hoodie + grad cap, eyes-pop gag) | PROMPT | ready, not posted | |
+| Claude Max free for open source (GitHub-dark hoodie + headset, 48 s, 779 credits) | OSS | ready, not posted (made 28 Oct; post next, news decays) | |
 Scripts/scenes for each: `.claude/skills/speedy-explainer-reel/assets/examples/<reel>/`.
 
 ## Stories
@@ -79,7 +81,7 @@ test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid 
 (privacy law risk). Full list in the chat of 27 Oct.
 
 ## Open to-dos
-- Post referral / agent / career-ops / prompt; on "uploaded" lock #20 / #21 / #23 / #24.
+- Post OSS (first: time-sensitive), referral, agent, prompt; on "uploaded" lock #26 / #20 / #21 / #24.
 - Ask the owner for Insights numbers (views, follows, saves) for every posted reel → our-reels.md.
 - Enable Vercel Web Analytics (owner click) → add the tracking script to the guide pages.
 - Decide on the first paid product.
