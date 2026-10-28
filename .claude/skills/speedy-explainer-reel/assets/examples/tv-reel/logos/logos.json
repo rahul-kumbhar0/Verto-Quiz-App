@@ -1,0 +1,74 @@
+{
+ "claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "github": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ },
+ "android": {
+  "file": "logos/android.svg",
+  "white": "logos/android-white.svg",
+  "word": null,
+  "title": "Android",
+  "hex": "#3DDC84",
+  "dark": false,
+  "source": "iconify-logos:android-icon"
+ },
+ "sony": {
+  "file": "logos/sony.svg",
+  "white": "logos/sony-white.svg",
+  "word": null,
+  "title": "Sony",
+  "hex": "#FFFFFF",
+  "dark": false,
+  "source": "simple-icons:sony"
+ },
+ "xiaomi": {
+  "file": "logos/xiaomi.svg",
+  "white": "logos/xiaomi-white.svg",
+  "word": null,
+  "title": "Xiaomi",
+  "hex": "#FF6900",
+  "dark": false,
+  "source": "simple-icons:xiaomi"
+ },
+ "samsung": {
+  "file": "logos/samsung.svg",
+  "white": "logos/samsung-white.svg",
+  "word": null,
+  "title": "Samsung",
+  "hex": "#1428A0",
+  "dark": true,
+  "source": "simple-icons:samsung"
+ },
+ "lg": {
+  "file": "logos/lg.svg",
+  "white": "logos/lg-white.svg",
+  "word": null,
+  "title": "LG",
+  "hex": "#A50034",
+  "dark": false,
+  "source": "lobehub:lg-color"
+ },
+ "google": {
+  "file": "logos/google.svg",
+  "white": "logos/google-white.svg",
+  "word": null,
+  "title": "Google",
+  "hex": "#4285F4",
+  "dark": false,
+  "source": "lobehub:google-color"
+ }
+}

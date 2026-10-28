@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Delete your TV's ads with Claude · canwe.ai</title>
+<meta name="description" content="The cleanyourtv setup, done safely: check your TV type, the one prompt, what gets disabled (never deleted), the restore command, and the security steps.">
+<meta property="og:title" content="Delete the ads from your TV with Claude: the safe setup">
+<meta property="og:description" content="cleanyourtv (43k★, free): one prompt, ~15 minutes, fully reversible. Works on Android/Google TV.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>Delete your TV's <span class="sel"><i></i><b>ads.</b></span> Safely.</h1>
+  <p class="lead"><b>cleanyourtv</b> is the free, open-source project from the reel: a coding agent like Claude Code connects to your TV over Wi-Fi, switches off the ad apps, sponsored rows and trackers, and installs a clean home screen. Nothing is uninstalled, and one command restores everything.</p>
+  <div class="chips"><span class="chip">free · MIT</span><span class="chip">~15 minutes</span><span class="chip">fully reversible</span></div>
+
+  <nav class="toc">
+    <a href="#check"><small>01</small>Check your TV first</a>
+    <a href="#need"><small>02</small>What you need</a>
+    <a href="#run"><small>03</small>The one prompt</a>
+    <a href="#safety"><small>04</small>The safety rules</a>
+  </nav>
+
+  <section id="check">
+    <div class="step">STEP 01</div><h2>Check your TV first</h2>
+    <div class="feat">
+      <div><span>✅</span><div><b>Works:</b> Android TV and Google TV (the clean launcher needs Android 8.0+). Most-tested brands in the repo: TCL (76 models), Sony (40), Xiaomi (32).</div></div>
+      <div><span>🟡</span><div><b>Fire TV:</b> only the debloat half works; Fire OS won't let a third-party launcher take over Home.</div></div>
+      <div><span>❌</span><div><b>Samsung (Tizen), LG (webOS), Roku, Vizio, Hisense VIDAA:</b> not supported, there's no ADB. For these, the project's site has a page on turning off tracking with just the remote: <a href="https://cleanyour.tv/not-android" target="_blank" rel="noopener">cleanyour.tv/not-android</a>.</div></div>
+    </div>
+    <p>Not sure which system your TV runs? Settings → About usually says "Android TV" or "Google TV".</p>
+  </section>
+
+  <section id="need">
+    <div class="step">STEP 02</div><h2>What you need</h2>
+    <ol>
+      <li>A computer <b>on the same Wi-Fi</b> as the TV.</li>
+      <li>A coding agent: <b>Claude Code</b> (what I use), or Codex / Gemini CLI. No agent? The repo's commands can be run by hand with just Python 3.</li>
+      <li>On the TV: Settings → About → tap <b>Build 7 times</b> (unlocks developer options), then turn on <b>USB debugging</b> (and the network/ADB debugging toggle if your TV has one).</li>
+      <li>No laptop at all? The community-built <b>Clean Your TV phone app</b> does the same job from your phone, linked in the repo's README.</li>
+    </ol>
+    <a class="btn pri" href="https://github.com/Gathin23/cleanyourtv" target="_blank" rel="noopener">⭐ Open the repo on GitHub</a>
+  </section>
+
+  <section id="run">
+    <div class="step">STEP 03</div><h2>The one prompt (~15 minutes)</h2>
+    <ol>
+      <li>Clone the repo and open the folder in Claude Code:</li>
+    </ol>
+    <div class="code pad"><button class="cp">Copy</button>git clone https://github.com/Gathin23/cleanyourtv.git
+cd cleanyourtv
+claude</div>
+    <ol start="2">
+      <li>Open the repo's <code>PROMPT.md</code>, paste it into the agent, and fill in your TV model. Add what you want to keep:</li>
+    </ol>
+    <div class="code prompt pad"><button class="cp">Copy</button>My TV is a [brand + model, e.g. TCL 55C645]. Follow PROMPT.md: back up first, then debloat, then install the clean launcher. Keep Netflix, Prime Video and Hotstar. Ask me before disabling anything you're not sure about.</div>
+    <p>The agent backs up your TV's current state, switches the junk off in small batches, installs the clean launcher and sets it as Home. Your model's exact list lives in the repo's <code>examples/</code> folder (170+ TV models from 200+ contributors).</p>
+  </section>
+
+  <section id="safety">
+    <div class="step">STEP 04</div><h2>The safety rules (please read)</h2>
+    <div class="feat">
+      <div><span>🔁</span><div><b>Nothing is uninstalled.</b> Apps are disabled with <code>pm disable-user</code>. Undo everything with <code>tools/restore.sh</code>; a backup record is written to <code>~/.cleanyourtv/</code> before any change.</div></div>
+      <div><span>🏠</span><div><b>Order matters:</b> disable the stock launcher only AFTER the new home screen is installed and working, or Home can land somewhere broken.</div></div>
+      <div><span>🔐</span><div><b>Turn debugging OFF when you're done.</b> Network ADB is unencrypted on port 5555; on some TVs anyone on your Wi-Fi could connect while it's on.</div></div>
+      <div><span>🔄</span><div><b>Firmware updates can bring the junk back.</b> Re-run the check afterwards.</div></div>
+      <div><span>⚠️</span><div><b>Know the risks:</b> disabling the wrong package can break a feature you use (that's why it goes in small batches with restore ready), and changing a TV's software may affect its warranty or support. Your TV, your call.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>I share free tools that automate boring chores every week: AI, coding and job-hunt hacks, in 60 seconds.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Every step, number and warning is from the cleanyourtv README (github.com/Gathin23/cleanyourtv), read 28 Oct 2026. Not sponsored, not affiliated with the project, Anthropic, or any TV brand.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

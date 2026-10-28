@@ -1,0 +1,280 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Delete the ads from your TV with Claude</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- CleanYourTV reel (classes prefixed cy-) ---- */
+.cy-tv{position:absolute;left:90px;right:90px;top:680px;border-radius:26px;background:#0A0B0D;border:10px solid #1C1E22;box-shadow:0 34px 80px rgba(0,0,0,.6);padding:26px;opacity:0}
+.cy-tv .bar{display:flex;align-items:center;gap:12px;font:700 24px Inter;color:#9AA0A8;margin-bottom:18px}
+.cy-tv .bar i{font-style:normal;margin-left:auto;font:600 20px Mono;color:#6B7079}
+.cy-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.cy-app{height:110px;border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font:700 19px Inter;color:#C9CDD2;background:#1A1C21;position:relative}
+.cy-app span{font-size:34px}
+.cy-app.ad{background:#2A1416;border:2px solid #7F2328;color:#FF9A9E}
+.cy-app.ad em{position:absolute;right:8px;top:6px;font:700 13px Mono;color:#FF5A5F;font-style:normal}
+.cy-app .x{position:absolute;inset:0;display:grid;place-items:center;font:900 64px Inter;color:#FF5A5F;opacity:0;text-shadow:0 2px 14px rgba(0,0,0,.6)}
+.cy-spon{margin-top:14px;height:84px;border-radius:14px;background:#241A10;border:2px solid #6B4A1B;display:flex;align-items:center;gap:14px;padding:0 18px;font:700 22px Inter;color:#F5C76B;position:relative}
+.cy-spon .x{position:absolute;inset:0;display:grid;place-items:center;font:900 54px Inter;color:#FF5A5F;opacity:0}
+.cy-claude{position:absolute;left:0;right:0;top:1280px;text-align:center;opacity:0;z-index:4}
+.cy-claude span{display:inline-flex;align-items:center;gap:14px;font:800 40px Inter;color:#fff;background:#17191D;border:2px solid #D97757;border-radius:999px;padding:14px 30px;box-shadow:0 16px 44px rgba(217,119,87,.3)}
+/* story: the post + repo */
+.cy-post{position:absolute;left:110px;right:110px;top:650px;border-radius:26px;background:#17191D;border:1.5px solid #2A2D33;padding:24px 28px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.cy-post .hd{display:flex;align-items:center;gap:14px}
+.cy-post .hd i{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#444,#222);font-style:normal;display:grid;place-items:center;font-size:30px}
+.cy-post .hd b{display:block;font:800 26px Inter;color:#fff}.cy-post .hd span{font:600 20px Inter;color:#9AA0A8}
+.cy-post p{margin:16px 0 0;font:600 28px/1.35 Inter;color:#E8EAED}
+.cy-ba{display:flex;gap:16px;margin-top:18px}
+.cy-ba div{flex:1;height:150px;border-radius:14px;padding:10px;font:700 17px Mono;letter-spacing:1px}
+.cy-ba .b4{background:#241012;border:2px solid #7F2328;color:#FF9A9E}
+.cy-ba .af{background:#0F2318;border:2px solid #1FA971;color:#3ECF8E}
+.cy-ba .mini{display:grid;grid-template-columns:repeat(4,1fr);gap:5px;margin-top:8px}
+.cy-ba .mini i{height:24px;border-radius:5px;background:#5A2A2E}
+.cy-ba .af .mini i{background:#1A4433}
+.cy-ba .af .mini i:nth-child(n+5){opacity:0}
+.cy-views{position:absolute;right:130px;top:620px;padding:10px 24px;border:5px solid #3ECF8E;border-radius:16px;color:#3ECF8E;font:900 54px Inter;background:rgba(6,33,15,.9);transform:rotate(7deg);opacity:0;z-index:5}
+.cy-repo{position:absolute;left:110px;right:110px;top:1140px;border-radius:24px;background:#0D1117;border:1.5px solid #2A2D33;padding:22px 28px;opacity:0;font-family:Inter;display:flex;align-items:center;gap:18px}
+.cy-repo .nm b{display:block;font:800 32px Mono;color:#fff}.cy-repo .nm span{font:600 22px Inter;color:#9AA0A8}
+.cy-repo .st{margin-left:auto;text-align:right}
+.cy-repo .st b{display:block;font:900 46px Inter;color:#F5C76B}.cy-repo .st span{font:700 20px Inter;color:#9AA0A8}
+/* junk inside */
+.cy-junk{position:absolute;left:90px;right:90px;top:700px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px}
+.cy-junk div{height:210px;border-radius:24px;background:#fff;border:2px solid var(--l-line);box-shadow:0 18px 40px rgba(0,0,0,.08);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font:800 28px Inter;color:#111;opacity:0;text-align:center}
+.cy-junk div span{font-size:54px}
+.cy-junk div small{font:600 19px Inter;color:#999}
+/* switch-off rows */
+.cy-rows{position:absolute;left:110px;right:110px;top:830px;display:flex;flex-direction:column;gap:16px}
+.cy-row{height:104px;border-radius:20px;background:#17191D;border:2px solid #2A2D33;display:flex;align-items:center;gap:18px;padding:0 24px;font:800 30px Inter;color:#fff;opacity:0}
+.cy-row span{font-size:36px}
+.cy-row small{font:600 20px Inter;color:#9AA0A8;margin-left:4px}
+.cy-sw{margin-left:auto;width:96px;height:52px;border-radius:999px;background:#3ECF8E;position:relative;flex:none}
+.cy-sw i{position:absolute;top:5px;left:49px;width:42px;height:42px;border-radius:50%;background:#fff}
+.cy-row.off{color:#6B7079;border-color:#232528}
+.cy-row.off .cy-sw{background:#3A3E45}.cy-row.off .cy-sw i{left:5px}
+.cy-wifi{position:absolute;left:0;right:0;top:680px;display:flex;justify-content:center;gap:26px;align-items:center;opacity:0}
+.cy-wifi .nd{width:150px;height:110px;border-radius:20px;background:#17191D;border:2px solid #2A2D33;display:grid;place-items:center;font-size:52px}
+.cy-wifi .arc{font:900 40px Mono;color:#3ECF8E;letter-spacing:4px;min-width:170px;text-align:center}
+/* safe */
+.cy-safe{position:absolute;left:0;right:0;top:700px;text-align:center;opacity:0}
+.cy-safe span{display:inline-block;font:900 58px Inter;color:#3ECF8E;border:6px solid #3ECF8E;border-radius:20px;padding:10px 34px;background:rgba(6,33,15,.9);transform:rotate(-4deg)}
+.cy-restore{position:absolute;left:190px;right:190px;top:880px;border-radius:28px;background:#17191D;border:2px solid #2A2D33;opacity:0;font-family:Inter;padding:28px;text-align:center}
+.cy-restore .cmd{font:700 30px Mono;color:#3ECF8E;background:#0D1117;border-radius:14px;padding:18px}
+.cy-restore .arr{font:900 54px Inter;color:#9AA0A8;margin:10px 0}
+.cy-restore .bk{font:800 32px Inter;color:#fff}
+/* clean home (light) */
+.cy-home{position:absolute;left:90px;right:90px;top:700px;border-radius:26px;background:#0A0B0D;border:10px solid #D9D9DE;box-shadow:0 34px 80px rgba(0,0,0,.18);padding:30px;opacity:0}
+.cy-home .row{display:flex;gap:16px}
+.cy-home .row div{flex:1;height:150px;border-radius:18px;background:linear-gradient(160deg,#2A2D35,#17191D);display:grid;place-items:center;font-size:52px;opacity:0}
+.cy-home .hint{margin-top:20px;text-align:center;font:700 24px Inter;color:#9AA0A8}
+/* setup */
+.cy-prompt{position:absolute;left:100px;right:100px;top:700px;border-radius:28px;background:#0B0C0E;border:1.5px solid #2A2D33;padding:28px 32px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.cy-prompt small{display:block;font:700 20px Mono;letter-spacing:2px;color:#D97757}
+.cy-prompt .tx{margin-top:14px;font:600 34px/1.4 Mono;color:#E6E6E8;min-height:140px}
+.cy-prompt .cur{display:inline-block;width:4px;height:36px;background:#D97757;vertical-align:middle;margin-left:4px}
+.cy-min{position:absolute;left:0;right:0;top:1140px;text-align:center;opacity:0}
+.cy-min span{display:inline-block;font:900 54px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 40px}
+/* works-on (light) */
+.cy-os{position:absolute;left:0;right:0;top:680px;display:flex;justify-content:center;gap:20px}
+.cy-os div{display:flex;align-items:center;gap:14px;background:#fff;border:2px solid var(--l-line);border-radius:999px;padding:16px 28px;font:800 32px Inter;color:#111;opacity:0;box-shadow:0 14px 34px rgba(0,0,0,.08)}
+.cy-lock{position:absolute;left:0;right:0;top:1200px;display:flex;justify-content:center;gap:22px}
+.cy-lock div{display:flex;align-items:center;gap:14px;background:#F3F3F5;border:2px dashed #C9C9CE;border-radius:20px;padding:16px 26px;font:800 30px Inter;color:#9A9AA0;opacity:0;filter:grayscale(1)}
+.cy-lock div em{font-style:normal;font-size:34px}
+/* warn */
+.cy-port{position:absolute;left:120px;right:120px;top:700px;border-radius:28px;background:#2A1416;border:3px solid #FF5A5F;padding:30px 34px;opacity:0;font-family:Inter;text-align:center}
+.cy-port b{display:block;font:900 56px Mono;color:#FF9A9E;letter-spacing:2px}
+.cy-port span{display:block;margin-top:10px;font:700 28px Inter;color:#fff}
+.cy-dbg{position:absolute;left:0;right:0;top:1020px;display:flex;justify-content:center;opacity:0}
+.cy-dbg div{display:flex;align-items:center;gap:20px;background:#17191D;border:2px solid #2A2D33;border-radius:20px;padding:20px 30px;font:800 32px Inter;color:#fff}
+/* CTA (house pattern) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+.cy-fn{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="cy-tv" id="tv1"><div class="bar">📺 Living Room TV<i>HOME</i></div>
+      <div class="cy-grid">
+        <div class="cy-app"><span>🎬</span>Movies</div>
+        <div class="cy-app ad"><em>AD</em><span>🛒</span>Shop Live<i class="x">✕</i></div>
+        <div class="cy-app"><span>📺</span>Stream</div>
+        <div class="cy-app ad"><em>AD</em><span>🎰</span>Spin Win<i class="x">✕</i></div>
+        <div class="cy-app ad"><em>AD</em><span>📊</span>Tracker<i class="x">✕</i></div>
+        <div class="cy-app"><span>🎵</span>Music</div>
+        <div class="cy-app ad"><em>AD</em><span>🧲</span>Promo Hub<i class="x">✕</i></div>
+        <div class="cy-app"><span>⚙️</span>Settings</div>
+      </div>
+      <div class="cy-spon" id="spon">⭐ Sponsored: watch this now!<i class="x" id="sponx">✕</i></div></div>
+    <div class="cy-claude" id="clch"><span><span id="clchin"></span>Claude Code</span></div>
+  </section>
+  <section class="scene" id="sStory">
+    <div class="cy-post" id="post"><div class="hd"><i>👨‍💻</i><div><b>the repo's owner</b><span>17 Oct · X</span></div></div>
+      <p>Cleaned my parents' TV with Claude Code. Over Wi-Fi. Before / after:</p>
+      <div class="cy-ba"><div class="b4">BEFORE · full of junk<div class="mini"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="af">AFTER · just yours<div class="mini"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div></div></div>
+    <div class="cy-views" id="views">7M views</div>
+    <div class="cy-repo" id="repo"><span id="ghl"></span><div class="nm"><b>cleanyourtv</b><span>free · open source · MIT</span></div><div class="st"><b id="stars">0</b><span>GitHub stars ⭐</span></div></div>
+    <div class="cy-fn" id="fn1">Story + numbers from the repo's README and GitHub, 28 Oct 2026</div>
+  </section>
+  <section class="scene" id="sJunk">
+    <div class="cy-junk">
+      <div id="j1"><span>🛒</span>Ad apps<small>preinstalled</small></div>
+      <div id="j2"><span>⭐</span>Sponsored rows<small>on your home</small></div>
+      <div id="j3"><span>📡</span>Trackers<small>watching you watch</small></div></div>
+  </section>
+  <section class="scene" id="sSwitch">
+    <div class="cy-wifi" id="wifi"><div class="nd" id="wnd1"></div><div class="arc" id="arc">···</div><div class="nd">📺</div></div>
+    <div class="cy-rows">
+      <div class="cy-row" id="r1"><span>🛒</span>Shop Live<small>ad app</small><div class="cy-sw"><i></i></div></div>
+      <div class="cy-row" id="r2"><span>📡</span>Telemetry<small>tracker</small><div class="cy-sw"><i></i></div></div>
+      <div class="cy-row" id="r3"><span>⭐</span>Sponsored row<div class="cy-sw"><i></i></div></div>
+      <div class="cy-row" id="r4"><span>🧲</span>Promo Hub<small>preload</small><div class="cy-sw"><i></i></div></div></div>
+  </section>
+  <section class="scene" id="sSafe">
+    <div class="cy-safe" id="safe"><span>Disabled. NOT deleted.</span></div>
+    <div class="cy-restore" id="rest"><div class="cmd">tools/restore.sh</div><div class="arr">↓</div><div class="bk">Everything back. One command.</div></div>
+    <div class="cy-fn" id="fn2">It uses "pm disable-user": apps are switched off, never uninstalled.</div>
+  </section>
+  <section class="scene" id="sHome">
+    <div class="cy-home" id="home"><div class="row"><div id="h1">🎬</div><div id="h2">📺</div><div id="h3">🎵</div><div id="h4">⚽</div><div id="h5">⚙️</div></div>
+      <div class="hint">your apps · nothing else</div></div>
+  </section>
+  <section class="scene" id="sSetup">
+    <div class="cy-prompt" id="pp"><small>ONE PROMPT (the repo's PROMPT.md)</small><div class="tx"><span id="ptx"></span><i class="cur" id="pcur"></i></div></div>
+    <div class="cy-min" id="mins"><span>⏱ about 15 minutes</span></div>
+  </section>
+  <section class="scene" id="sWorks">
+    <div class="cy-os"><div id="os1"><span id="andl"></span>Android TV</div><div id="os2"><span id="ggl"></span>Google TV</div></div>
+    <div class="bars" id="cybars" style="left:120px;top:850px;width:840px;height:320px"></div>
+    <div class="cy-lock"><div id="lk1"><span id="ssl"></span>Samsung<em>🔒</em></div><div id="lk2"><span id="lgl"></span>LG<em>🔒</em></div></div>
+    <div class="cy-fn" id="fn3" style="color:#777">Samsung (Tizen) and LG (webOS) have no ADB · models tested per the repo</div>
+  </section>
+  <section class="scene" id="sWarn">
+    <div class="cy-port" id="port"><b>ADB · port 5555</b><span>unencrypted — anyone on your Wi-Fi could connect</span></div>
+    <div class="cy-dbg" id="dbg"><div>USB debugging <div class="cy-sw" id="dsw"><i></i></div></div></div>
+    <div class="cy-fn" id="fn4">From the repo's own safety notes. Turn debugging off when you're done.</div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Aarav · 2m</small><b>TV</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Sana · 1m</small><b>TV</b> 🙏 my TCL needs this</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Dev · 40s</small><b>TV</b> doing the hostel TV</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>TV</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>the repo + the safe step-by-step 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>TV</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+R.$("clchin").outerHTML = R.lg("claude", { s: 54 });
+R.$("ghl").outerHTML = R.lg("github", { s: 60 });
+R.$("andl").outerHTML = R.lg("android", { s: 48 });
+R.$("ggl").outerHTML = R.lg("google", { s: 48 });
+R.$("ssl").outerHTML = R.lg("samsung", { s: 48 });
+R.$("lgl").outerHTML = R.lg("lg", { s: 48 });
+R.$("wnd1").innerHTML = R.lg("claude", { s: 58 });
+const T = { story: at("One guy"), repo: at("Now it's"), junk: at("So, your TV"), sw: at("Claude connects"),
+  safe: at("Nothing gets"), home: at("Then it installs"), setup: at("You paste one"), works: at("Works on"),
+  warn: at("And switch debugging"), cta: at("Comment TV"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.story, enter: "none" }, { id: "sStory", s: T.story, e: T.junk, enter: "push" },
+  { id: "sJunk", s: T.junk, e: T.sw, enter: "blurzoom" }, { id: "sSwitch", s: T.sw, e: T.safe, enter: "push" },
+  { id: "sSafe", s: T.safe, e: T.home, enter: "blurzoom" }, { id: "sHome", s: T.home, e: T.setup, enter: "swing" },
+  { id: "sSetup", s: T.setup, e: T.works, enter: "push" }, { id: "sWorks", s: T.works, e: T.warn, enter: "blurzoom" },
+  { id: "sWarn", s: T.warn, e: T.cta, enter: "push" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.junk, T.sw], [T.home, T.setup], [T.works, T.warn], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "the hack", at: 0.2 }, { label: "how", at: T.junk }, { label: "safe?", at: T.safe }, { label: "setup", at: T.setup }, { label: "your TV", at: T.works, end: T.cta }],
+  counter: { unit: "views", steps: [[at("7M") - 0.1, 7000000, "views"], [at("Forty-three") - 0.1, 43000, "GitHub stars"], [at("by one.") + 0.3, 4, "junk apps off"], [at("15") - 0.1, 15, "min setup"], [at("Sony,") - 0.2, 170, "TV models"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "street", style: { shirt: "#7F1D1D", shirtLine: "#450A0A", print: "none", lens1: "#FCA5A5", lens2: "#EF4444" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {},
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: TV with junk; ads get X'd on "deleting"; Claude chip
+  R.card("tv1", t, { in: 0.1, y: 40 });
+  document.querySelectorAll("#tv1 .cy-app.ad .x").forEach((x, i) => {
+    const a = at("deleting") + 0.05 + i * 0.14, p = ease.spring(prog(t, a, 0.35));
+    x.style.opacity = clamp(p * 3); x.style.transform = `scale(${lerp(2.2, 1, p)})`; if (i === 0) R.cue("pop", a);
+    x.parentElement.style.opacity = t >= a + 0.3 ? 0.35 : 1;
+  });
+  const sx = ease.spring(prog(t, at("ads") + 0.3, 0.35)); R.$("sponx").style.opacity = clamp(sx * 3);
+  R.rise("clch", t, at("Claude.") - 0.25, { dy: 24 }); R.cue("ding", at("Claude.") - 0.25, { soft: true });
+  // STORY
+  R.card("post", t, { in: T.story + 0.05, y: 40 });
+  const vp = ease.spring(prog(t, at("7M") - 0.1, 0.45)); R.$("views").style.opacity = clamp(vp * 3); R.$("views").style.transform = `rotate(7deg) scale(${lerp(2, 1, vp)})`; if (vp > 0) R.cue("pop", at("7M") - 0.1);
+  R.card("repo", t, { in: T.repo + 0.05, y: 30 });
+  R.count("stars", t, at("Forty-three") - 0.15, 0.9, 43100, { fmt: x => Math.round(x).toLocaleString("en-US") });
+  R.note("fn1", t, at("stars.") + 0.2, T.junk);
+  // JUNK
+  [["j1", at("ad apps,")], ["j2", at("sponsored")], ["j3", at("trackers.")]].forEach(([id, a]) => pop(id, t, a - 0.15, { from: 0.6 }));
+  // SWITCH: wifi then toggles off
+  R.rise("wifi", t, T.sw + 0.05, { dy: 20 });
+  R.$("arc").textContent = t < T.sw ? "···" : ["▸ ··", "▸▸ ·", "▸▸▸", "· ▸▸", "·· ▸", "···"][Math.floor((t - T.sw) * 5) % 6];
+  const offs = [["r1", at("switches them off.")], ["r2", at("off. One,") + 0.35], ["r3", at("One, by") + 0.35], ["r4", at("by one.") + 0.3]];
+  offs.forEach(([id, a], i) => {
+    R.rise(id, t, T.sw + 0.4 + i * 0.12, { dy: 16 });
+    R.$(id).classList.toggle("off", t >= a); R.cue("click", a);
+  });
+  // SAFE
+  const sp = ease.spring(prog(t, T.safe + 0.05, 0.4)); R.$("safe").style.opacity = clamp(sp * 3); R.$("safe").style.transform = `scale(${lerp(1.7, 1, sp)})`; if (sp > 0) R.cue("pop", T.safe + 0.05);
+  R.card("rest", t, { in: at("restores") - 0.3, y: 30 });
+  R.note("fn2", t, at("everything.") + 0.1, T.home);
+  // HOME (light)
+  R.card("home", t, { in: T.home + 0.05, y: 40 });
+  ["h1", "h2", "h3", "h4", "h5"].forEach((id, i) => pop(id, t, at("clean") + 0.1 + i * 0.1, { from: 0.5 }));
+  // SETUP
+  R.card("pp", t, { in: T.setup + 0.05, y: 40 });
+  R.type("ptx", "My TV is a TCL 55C645. Clean it. Keep Netflix and Hotstar.", t, at("prompt,") - 0.2, 26);
+  R.$("pcur").style.opacity = Math.floor(t * 2.5) % 2;
+  R.card("mins", t, { in: at("15") - 0.15, y: 20 }); R.cue("ding", at("15") - 0.15, { soft: true });
+  // WORKS
+  [["os1", at("Android")], ["os2", at("Google")]].forEach(([id, a]) => pop(id, t, a - 0.12, { from: 0.6 }));
+  R.bars("cybars", t, { at: at("TCL,") - 0.2, max: 85, rowH: 100, fmt: x => Math.round(x), bars: [
+    { label: "TCL", value: 76, show: "76 models", hi: true, at: at("TCL,") - 0.1 },
+    { label: "Sony", logo: "sony", value: 40, show: "40", at: at("Sony,") },
+    { label: "Xiaomi", logo: "xiaomi", value: 32, show: "32", at: at("Xiaomi,") } ] });
+  [["lk1", at("Samsung")], ["lk2", at("LG?")]].forEach(([id, a]) => pop(id, t, a - 0.1, { from: 0.7 }));
+  R.note("fn3", t, at("locked.") - 0.4, T.warn);
+  // WARN
+  R.card("port", t, { in: T.warn + 0.05, y: 40 });
+  R.rise("dbg", t, T.warn + 0.3, { dy: 20 });
+  const dOff = t >= at("off after.") - 0.15;
+  R.$("dsw").style.background = dOff ? "#3A3E45" : "#3ECF8E"; R.$("dsw").querySelector("i").style.left = dOff ? "5px" : "49px"; R.cue("click", at("off after.") - 0.15);
+  R.note("fn4", t, at("port") + 0.2, T.cta);
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "TV", tyA = at("Comment TV") + 0.3, posted = R.end("Comment TV") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 8); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("step-by-step.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>
