@@ -1,0 +1,207 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>I automated my Instagram with Claude</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- grow reel (classes prefixed gr-) ---- */
+.gr-prof{position:absolute;left:110px;right:110px;top:650px;border-radius:30px;background:#17191D;border:1.5px solid #2A2D33;padding:26px 30px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.gr-prof .hd{display:flex;align-items:center;gap:20px}
+.gr-prof .hd img{width:96px;height:96px;border-radius:50%;box-shadow:0 0 0 3px #fff}
+.gr-prof .hd b{display:block;font:800 34px Inter;color:#fff}
+.gr-prof .hd span{display:block;font:600 22px Inter;color:#9AA0A8;margin-top:4px}
+.gr-stats{display:flex;gap:12px;margin-top:22px}
+.gr-stats div{flex:1;text-align:center;background:#1E2126;border-radius:16px;padding:14px 6px}
+.gr-stats b{display:block;font:900 38px Inter;color:#fff}
+.gr-stats span{font:600 19px Inter;color:#9AA0A8}
+.gr-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}
+.gr-grid i{aspect-ratio:3/4;border-radius:10px;background:linear-gradient(160deg,#2A2D35,#17191D);display:grid;place-items:center;font-size:30px;opacity:0}
+.gr-claude{position:absolute;left:0;right:0;top:1300px;text-align:center;opacity:0;z-index:4}
+.gr-claude span{display:inline-flex;align-items:center;gap:14px;font:800 36px Inter;color:#fff;background:#17191D;border:2px solid #D97757;border-radius:999px;padding:14px 30px;box-shadow:0 16px 44px rgba(217,119,87,.3)}
+/* meta: made-by cards */
+.gr-made{position:absolute;left:90px;right:90px;top:680px;display:flex;flex-direction:column;gap:18px}
+.gr-mc{border-radius:24px;background:#17191D;border:2px solid #2A2D33;padding:20px 26px;opacity:0;font-family:Inter;position:relative}
+.gr-mc .t{display:flex;align-items:center;gap:14px;font:800 30px Inter;color:#fff}
+.gr-mc .t i{font-style:normal;font-size:36px}
+.gr-mc .body{margin-top:12px;font:600 22px/1.5 Mono;color:#9AA0A8;min-height:34px}
+.gr-mc .wave{display:flex;align-items:flex-end;gap:5px;height:44px;margin-top:10px}
+.gr-mc .wave i{width:10px;border-radius:4px;background:#3ECF8E}
+.gr-badge{position:absolute;right:18px;top:16px;display:flex;align-items:center;gap:8px;font:800 20px Inter;color:#D97757;border:2px solid #D97757;border-radius:999px;padding:6px 14px;opacity:0;background:rgba(43,22,14,.8)}
+/* numbers (light) */
+.gr-tiles{position:absolute;left:80px;right:80px;top:740px;display:flex;gap:18px}
+.gr-tiles div{flex:1;border-radius:26px;background:#fff;border:2px solid var(--l-line);box-shadow:0 18px 44px rgba(0,0,0,.08);padding:26px 10px;text-align:center;opacity:0;font-family:Inter}
+.gr-tiles b{display:block;font:900 64px Inter;letter-spacing:-2px;color:#111}
+.gr-tiles span{display:block;margin-top:6px;font:700 22px Inter;color:#777}
+.gr-fn{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+/* rule */
+.gr-rule{position:absolute;left:0;right:0;top:700px;text-align:center;opacity:0}
+.gr-rule span{display:inline-block;font:900 56px Inter;color:#FF9A9E;border:6px solid #FF5A5F;border-radius:20px;padding:12px 34px;background:rgba(42,20,22,.92);transform:rotate(-3deg)}
+.gr-post{position:absolute;left:0;right:0;top:960px;display:flex;justify-content:center;opacity:0}
+.gr-post div{display:flex;align-items:center;gap:22px;background:#17191D;border:2px solid #2A2D33;border-radius:24px;padding:22px 30px;font:800 30px Inter;color:#fff}
+.gr-post .btn{background:#2A7BFF;border-radius:14px;padding:12px 34px;font:800 28px Inter}
+.gr-post em{font-style:normal;font-size:40px}
+/* pack (light) */
+.gr-repo{position:absolute;left:100px;right:100px;top:670px;border-radius:26px;background:#fff;border:2px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);padding:22px 28px;opacity:0;font-family:Inter;display:flex;align-items:center;gap:18px}
+.gr-repo .nm b{display:block;font:800 29px Mono;color:#111}.gr-repo .nm span{font:600 21px Inter;color:#777}
+.gr-repo .st{margin-left:auto;text-align:right}
+.gr-repo .st b{display:block;font:900 44px Inter;color:#B45309}.gr-repo .st span{font:700 19px Inter;color:#999}
+.gr-skills{position:absolute;left:90px;right:90px;top:850px;display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.gr-skills i{font-style:normal;font:700 24px Mono;color:#111;background:#fff;border:2px solid var(--l-line);border-radius:999px;padding:12px 20px;opacity:0;box-shadow:0 10px 24px rgba(0,0,0,.06)}
+.gr-skills i.hi{color:#fff;background:#7C3AED;border-color:#5B21B6}
+.gr-26{position:absolute;left:0;right:0;top:1130px;text-align:center;opacity:0}
+.gr-26 span{display:inline-block;font:900 48px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 38px}
+.gr-free{position:absolute;left:0;right:0;top:1250px;display:flex;justify-content:center;gap:14px;opacity:0}
+.gr-free i{font-style:normal;font:800 26px Inter;color:#111;background:#fff;border:2px solid var(--l-line);border-radius:999px;padding:10px 22px}
+/* honesty */
+.gr-hon{position:absolute;left:0;right:0;top:760px;text-align:center;opacity:0}
+.gr-hon .card{display:inline-block;width:700px;border-radius:30px;background:#fff;border:2px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);padding:34px;font-family:Inter}
+.gr-hon .card b{display:block;font:900 52px Inter;color:#111;letter-spacing:-1px}
+.gr-hon .card span{display:block;margin-top:12px;font:600 28px Inter;color:#777}
+/* CTA (house pattern) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="gr-prof" id="prof"><div class="hd"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>AI, tech & job-hunt hacks · 60 sec</span></div></div>
+      <div class="gr-stats"><div><b id="pn">9</b><span>reels</span></div><div><b id="pf">0</b><span>followers</span></div><div><b id="pv">40K</b><span>best reel</span></div></div>
+      <div class="gr-grid" id="pgrid"></div></div>
+    <div class="gr-claude" id="clch"><span><span id="clchin"></span>run with Claude</span></div>
+  </section>
+  <section class="scene" id="sMeta">
+    <div class="gr-made">
+      <div class="gr-mc" id="m1"><div class="t"><i>📝</i>script.md</div><div class="body" id="m1t"></div><div class="gr-badge" id="b1"><span id="cl1"></span>Claude</div></div>
+      <div class="gr-mc" id="m2"><div class="t"><i>🎙️</i>voice take</div><div class="wave" id="wave"></div><div class="gr-badge" id="b2"><span id="cl2"></span>Claude</div></div>
+      <div class="gr-mc" id="m3"><div class="t"><i>🎬</i>scenes.html</div><div class="body" style="color:#79C0FF">R.speedy({ poses: "auto" })</div><div class="gr-badge" id="b3"><span id="cl3"></span>Claude</div></div></div>
+  </section>
+  <section class="scene" id="sNum">
+    <div class="gr-tiles">
+      <div id="t1"><b id="t1n">4</b><span>days of posting</span></div>
+      <div id="t2"><b id="t2n">0</b><span>followers</span></div>
+      <div id="t3"><b id="t3n">0</b><span>best reel views</span></div></div>
+    <div class="gr-fn" id="fn1">This account's real numbers, Oct 2026. Results vary.</div>
+  </section>
+  <section class="scene" id="sSys">
+    <div class="stp" id="stp" style="left:90px;top:640px;width:900px;height:700px"></div>
+  </section>
+  <section class="scene" id="sRule">
+    <div class="gr-rule" id="rule"><span>Claude NEVER presses post.</span></div>
+    <div class="gr-post" id="pbar"><div>I read everything → <span class="btn" id="pbtn">Post</span><em>👆</em></div></div>
+  </section>
+  <section class="scene" id="sPack">
+    <div class="gr-repo" id="repo"><span id="ghl"></span><div class="nm"><b>instagram-agent-skill</b><span>13 Claude skills · MIT</span></div><div class="st"><b id="stars">0</b><span>GitHub stars ⭐</span></div></div>
+    <div class="gr-skills" id="chips"></div>
+    <div class="gr-26" id="f26"><span>26 hook formulas inside</span></div>
+    <div class="gr-free" id="freeb"><i>✅ free</i><i>✅ open source</i><i>✅ no signup</i></div>
+    <div class="gr-fn" id="fn2">By Jake Schincariol · "These skills write. You post."</div>
+  </section>
+  <section class="scene" id="sHon">
+    <div class="gr-hon" id="hon"><div class="card"><b>My numbers. Not a promise.</b><span>Yours depend on your topics and consistency.</span></div></div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Riya · 2m</small><b>GROW</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Ankit · 1m</small><b>GROW</b> 🙏 starting my page</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Tara · 40s</small><b>GROW</b> this is so meta 😂</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>GROW</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>the free pack + my exact workflow 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>GROW</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+["clchin", "cl1", "cl2", "cl3"].forEach(id => R.$(id).outerHTML = R.lg("claude", { s: id === "clchin" ? 48 : 30 }));
+R.$("ghl").outerHTML = R.lg("github", { s: 58 });
+R.$("pgrid").innerHTML = ["🧲", "📄", "💰", "✉️", "🤖", "💼", "🎁", "📺"].map(e => `<i>${e}</i>`).join("");
+R.$("wave").innerHTML = Array.from({ length: 24 }, () => "<i></i>").join("");
+const CHIPS = ["/ig-reel", "/ig-caption", "/ig-comment", "/ig-plan", "/ig-viral", "/ig-profile", "+ 7 more"];
+R.$("chips").innerHTML = CHIPS.map((c, i) => `<i class="${i === 0 ? "hi" : ""}">${c}</i>`).join("");
+const T = { meta: at("This reel?"), num: at("4 days"), sys: at("Here's the system."), rule: at("But here's the rule."),
+  pack: at("Want this?"), hon: at("My numbers,"), cta: at("Comment GROW"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.meta, enter: "none" }, { id: "sMeta", s: T.meta, e: T.num, enter: "push" },
+  { id: "sNum", s: T.num, e: T.sys, enter: "blurzoom" }, { id: "sSys", s: T.sys, e: T.rule, enter: "push" },
+  { id: "sRule", s: T.rule, e: T.pack, enter: "blurzoom" }, { id: "sPack", s: T.pack, e: T.hon, enter: "swing" },
+  { id: "sHon", s: T.hon, e: T.cta, enter: "blurzoom" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.num, T.sys], [T.pack, T.cta]],
+  emph: window.EMPH,
+  chapters: [{ label: "the proof", at: 0.2 }, { label: "the system", at: T.sys }, { label: "the rule", at: T.rule }, { label: "free pack", at: T.pack, end: T.cta }],
+  counter: { unit: "followers", steps: [[at("thousand followers.") - 0.2, 1000, "followers"], [at("40,000") - 0.1, 40000, "best reel views"], [at("13") - 0.1, 13, "free skills"], [at("26") - 0.1, 26, "hook formulas"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "classic", style: { shirt: "#C13584", shirtLine: "#8E2466", lens1: "#F9CE34", lens2: "#EE2A7B" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {},
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: our profile, follower counter rolls, Claude chip on "Claude."
+  R.card("prof", t, { in: 0.1, y: 40 });
+  R.count("pf", t, at("automated") - 0.1, 1.6, 1000);
+  document.querySelectorAll("#pgrid i").forEach((g, i) => pop(g, t, 0.3 + i * 0.08, { from: 0.5 }));
+  R.rise("clch", t, at("Claude.") - 0.2, { dy: 24 }); R.cue("ding", at("Claude.") - 0.2, { soft: true });
+  // META: the three made-by cards; badges snap on their words
+  [["m1", T.meta + 0.05], ["m2", at("voice?") - 0.25], ["m3", at("animation?") - 0.25]].forEach(([id, a]) => R.card(id, t, { in: a, y: 30 }));
+  R.type("m1t", "I automated my Instagram. With Claude…", t, T.meta + 0.3, 24);
+  document.querySelectorAll("#wave i").forEach((w, i) => {
+    const on = t >= at("voice?"); w.style.height = on ? 8 + 34 * Math.abs(Math.sin(i * 1.7 + t * 7)) + "px" : "8px";
+  });
+  [["b1", at("wrote") + 0.1], ["b2", at("voice?") + 0.5], ["b3", at("Also") + 0.1]].forEach(([id, a]) => { pop(id, t, a, { from: 0.5 }); R.cue("click", a, { soft: true }); });
+  // NUMBERS
+  [["t1", T.num + 0.05], ["t2", at("thousand followers.") - 0.45], ["t3", at("40,000") - 0.45]].forEach(([id, a]) => pop(id, t, a, { from: 0.7 }));
+  R.count("t2n", t, at("thousand followers.") - 0.35, 0.8, 1000);
+  R.count("t3n", t, at("40,000") - 0.35, 0.9, 40000, { fmt: x => Math.round(x / 1000) + "K" });
+  R.note("fn1", t, at("views.") + 0.2, T.sys);
+  // SYSTEM
+  R.steps("stp", t, { at: T.sys + 0.1, steps: [
+    { icon: "🔍", title: "Finds the topic", gloss: "what people already search", at: at("topic") - 0.1 },
+    { icon: "📝", title: "Writes the script", gloss: "hook scored before anything is made", at: at("Writes") - 0.1 },
+    { icon: "🎬", title: "Builds the scenes", gloss: "animation + captions", at: at("Builds") - 0.1 },
+    { icon: "📩", title: "Writes the DMs", gloss: "keyword → guide, automatically", at: at("DMs") - 0.1 } ] });
+  // RULE
+  const rp = ease.spring(prog(t, T.rule + 0.4, 0.45)); R.$("rule").style.opacity = clamp(rp * 3); R.$("rule").style.transform = `scale(${lerp(1.7, 1, rp)})`; if (rp > 0) R.cue("pop", T.rule + 0.4);
+  R.rise("pbar", t, at("I read") - 0.1, { dy: 20 });
+  R.press("pbtn", t, at("Then I post.") + 0.25);
+  // PACK
+  R.card("repo", t, { in: T.pack + 0.05, y: 30 });
+  R.count("stars", t, at("13") - 0.1, 0.8, 3600, { fmt: x => Math.round(x).toLocaleString("en-US") });
+  document.querySelectorAll("#chips i").forEach((c, i) => pop(c, t, at("Reel writer,") - 0.2 + i * 0.1, { from: 0.6 }));
+  R.card("f26", t, { in: at("26") - 0.15, y: 20 }); R.cue("ding", at("26") - 0.15, { soft: true });
+  R.rise("freeb", t, at("Free,") - 0.1, { dy: 18 });
+  R.note("fn2", t, at("signup.") + 0.1, T.hon);
+  // HONESTY
+  pop("hon", t, T.hon + 0.05, { from: 0.75 });
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "GROW", tyA = at("Comment GROW") + 0.3, posted = R.end("Comment GROW") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 10); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("exact workflow.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

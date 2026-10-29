@@ -12,6 +12,7 @@ Page: @canwe.ai (Instagram) + YouTube Shorts. Format: speedy explainer, voice Sh
 | (queued) | What is an AI agent v2 (AGENT) | A+B · "Watch this. One sentence:" demo-first | ~44 s | | | | | |
 | 27 Oct 2026 | Resume ATS myth (RESUME) | E · myth flip (old hook: 15 words, "Okay so, you know that viral stat…") | ~46 s | (ask) | | | | published before this skill; hook failed lint (too slow) — compare its retention with the others |
 | (draft) | One prompt → which jobs you fit (PROMPT) | A · "I gave Claude a fresher's resume and asked one question." (sample resume, real Claude answer) | ~42 s | | | | | eyes-pop gag on "crazy" as the cover frame |
+| (draft) | Claude runs my Instagram (GROW) | F/A meta · "I automated my Instagram. With Claude. And you're watching the proof." | ~49 s paced | | | | | only-we-can-say-it hook; honesty: never presses post / numbers not a promise |
 | (draft) | cleanyourtv TV ads (TV) | D/A newsjack · "People are deleting the ads from their TVs. With Claude." | ~46 s paced | | | | | topic-bank #1; honesty: Samsung/LG locked + port-5555 warning |
 | (draft) | Claude Max free for open source (OSS) | D+E · free + price "Anthropic is giving away Claude's $200 plan. Free, for 6 months." | ~48 s v2 paced (5 hard stops, 1.06x) | | | | | honesty beat: "impossible for a student? one path you can hit" |
 | (posted ~28 Oct) | career-ops Claude job hunter (OFFER) | F+D · result in numbers "740 jobs. 68 applications. 12 interviews. 1 offer." | ~41 s | | | | | worked example in examples/career-ops |

@@ -7,7 +7,7 @@ Formula + scoring: reel-script-writer references/research.md. Tick off as posted
 | 3 | queued | "I gave Claude hands" browser agent | browser-use/browser-use 119k★ | HANDS |
 | 4 | queued | Claude reads my WhatsApp groups | lharries/whatsapp-mcp 6.8k★ (honesty: unofficial, local) | CHAT |
 | 5 | queued | A robot refreshes the results/price page | dgtlmoon/changedetection.io 35.3k★ | WATCH |
-| 6 | queued | "This page is run by Claude" (our own story) | — | reach play |
+| 6 | BUILT 29 Oct | "Claude runs my Instagram" (our story + pack) | Jakeschincariol/instagram-agent-skill 3.6k★ | GROW (#29) |
 | 7 | queued | Lecture → notes | openai/whisper + Claude (verify at build) | NOTES |
 | 8 | bench | AI inbox zero | elie222/inbox-zero 12.8k★ | MAIL |
 | 9 | bench | AI cleans the Downloads folder, offline | QiuYannnn/Local-File-Organizer 3.4k★ | FILES |

@@ -47,12 +47,13 @@ media_id (`list_reels`), dry-run test, turn ON. All use follow gate + once per u
 | 24 | PROMPT / prompts | one prompt → which jobs you fit | /prompt/ | OFF (not posted yet) |
 | 26 | OSS (exact) | Claude Max free for open source | /oss/ | OFF (not posted yet; on lock switch match to "any" like #17–#19) |
 | 27 | TV (exact) | cleanyourtv: delete your TV's ads | /tv/ | OFF (not posted yet; same lock flow) |
-(#22 and #25 do not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
+| 29 | GROW (exact) | Claude runs my Instagram (skills pack) | /grow/ | OFF (not posted yet; same lock flow) |
+(#22, #25 and #28 do not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
 build a buyer list).
 
 ## Guide site (Vercel)
 - Live: **https://canwe-guides.vercel.app** (project `canwe-guides`, team `team_6Xaw8O6MfjFggwU7zLunNZOO`,
-  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/.
+  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/.
 - Source: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/guide-site/`.
 - Deploy gotcha: every deploy must send ALL files inline (utf-8). SHA references fail with
   `missing_files`, and a redeploy via `deploymentId` drops unsent files. Verify with `web_fetch_vercel_url`.
@@ -70,7 +71,8 @@ build a buyer list).
 | career-ops: 740 jobs, 1 offer (orange tee, v2 auto presenter) | OFFER | posted (automation #23 is ON and locked) | (ask) |
 | One prompt: which jobs you fit (green hoodie + grad cap, eyes-pop gag) | PROMPT | ready, not posted | |
 | Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (use the v2 files) | |
-| cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: 4-day-old wave) | |
+| cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: wave decays) | |
+| Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) | GROW | ready, not posted | |
 Scripts/scenes for each: `.claude/skills/speedy-explainer-reel/assets/examples/<reel>/`.
 
 ## Stories
@@ -87,7 +89,8 @@ test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid 
 (privacy law risk). Full list in the chat of 27 Oct.
 
 ## Open to-dos
-- Posting order: TV (hottest wave) -> OSS -> referral / agent / prompt; on "uploaded" lock #27 / #26 / #20 / #21 / #24.
+- Posting order: TV (hottest wave) -> GROW (meta reel) -> OSS -> referral / agent / prompt; on "uploaded" lock #27 / #29 / #26 / #20 / #21 / #24.
+- Jiocoder sponsorship DM (29 Oct): holding reply sent; no hackathon found anywhere, jiocoder.com NOT Reliance-affiliated; price only if they verify (anchor Rs 10-12K incl. ad rights, 50% advance, ASCI label). Policy: verify organizer, free entry, disclosure, we keep creative control.
 - Topic bank with verified repos: `.claude/canwe-ai/TOPICS.md` (CHORE x CLAUDE x FREE, scored).
 - Ask the owner for Insights numbers (views, follows, saves) for every posted reel → our-reels.md.
 - Enable Vercel Web Analytics (owner click) → add the tracking script to the guide pages.

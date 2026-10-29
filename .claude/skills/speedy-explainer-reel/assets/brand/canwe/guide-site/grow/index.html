@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>How Claude runs this Instagram · canwe.ai</title>
+<meta name="description" content="The free 13-skill Claude pack for Instagram, plus the exact workflow this account uses: topic research, scripts, DM automations, and the rules that keep it honest.">
+<meta property="og:title" content="I automated my Instagram with Claude: the pack + my workflow">
+<meta property="og:description" content="instagram-agent-skill (free, MIT, 13 skills) + how canwe.ai actually runs.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>Claude runs this <span class="sel"><i></i><b>Instagram.</b></span> Here's how.</h1>
+  <p class="lead">Every reel on this page is researched, written, voiced and animated with Claude; I review everything and press post myself. Below: the free skills pack from the reel, and the exact workflow this account uses. My numbers (1,000 followers in the first 4 days of posting, best reel ~40K views) are real but not a promise — yours depend on your topics and consistency.</p>
+  <div class="chips"><span class="chip">free · MIT</span><span class="chip">13 skills</span><span class="chip">nothing auto-posts</span></div>
+
+  <nav class="toc">
+    <a href="#pack"><small>01</small>The free pack</a>
+    <a href="#skills"><small>02</small>What's inside</a>
+    <a href="#flow"><small>03</small>My exact workflow</a>
+    <a href="#rules"><small>04</small>The honest rules</a>
+  </nav>
+
+  <section id="pack">
+    <div class="step">STEP 01</div><h2>The free pack (2-minute install)</h2>
+    <p><b>instagram-agent-skill</b> by Jake Schincariol: 13 Claude skills for running an Instagram account. Free, MIT-licensed, "no signup, no API key, nothing to connect."</p>
+    <ol>
+      <li><b>Easiest:</b> paste this repo link into Claude and say "Install this skill, then confirm /ig-reel works":</li>
+    </ol>
+    <div class="code pad"><button class="cp">Copy</button>https://github.com/Jakeschincariol/instagram-agent-skill</div>
+    <ol start="2">
+      <li><b>Claude Code:</b></li>
+    </ol>
+    <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add Jakeschincariol/instagram-agent-skill
+/plugin install instagram-agent</div>
+    <a class="btn pri" href="https://github.com/Jakeschincariol/instagram-agent-skill" target="_blank" rel="noopener">⭐ Open the repo on GitHub</a>
+  </section>
+
+  <section id="skills">
+    <div class="step">STEP 02</div><h2>What's inside (the 5 I'd start with)</h2>
+    <div class="feat">
+      <div><span>🎬</span><div><b>/ig-reel</b> — one idea in, a full Reel script out: 3 hooks scored against 26 hook formulas, on-screen text and a timed beat sheet.</div></div>
+      <div><span>📈</span><div><b>/ig-viral</b> — finds the top reels in your niche and ranks them by how far they beat each account's average, so you copy patterns, not luck.</div></div>
+      <div><span>👤</span><div><b>/ig-profile</b> — scores your profile out of 100 and rewrites it, worst problems first.</div></div>
+      <div><span>🗓️</span><div><b>/ig-plan</b> — plans your week: what to post, when, and 10 accounts to engage with.</div></div>
+      <div><span>💬</span><div><b>/ig-reply</b> — sorts the replies on your post and drafts answers in priority order.</div></div>
+    </div>
+    <p style="color:var(--mute);font-size:15px">The other 8: /ig-caption, /ig-carousel, /ig-story, /ig-human, /ig-comment, /ig-dm, /ig-repurpose, /ig-audit. Key design rule from its README: <b>"Nothing gets posted until you say yes."</b></p>
+  </section>
+
+  <section id="flow">
+    <div class="step">STEP 03</div><h2>My exact workflow (what made this account)</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Pick the topic with a scorecard, not a mood.</strong> A topic must hit 5 of 6: a chore everyone has · "someone automated it" story · a free named tool · showable in 5 seconds · exact numbers · fresh news or evergreen pain.</div></li>
+      <li><b>2</b><div><strong>Script before anything.</strong> Write 10 hooks, score them, keep the best. One idea per sentence, 6–14 words. Every number must have a source you actually read.</div></li>
+      <li><b>3</b><div><strong>Fast delivery with hard stops.</strong> Dense speech, then half a second of full silence right on the twist line. 4–6 stops per reel.</div></li>
+      <li><b>4</b><div><strong>One keyword per reel.</strong> "Comment WORD" → an auto-DM with a link to a free guide page like this one. The DM must deliver exactly what the reel promised.</div></li>
+      <li><b>5</b><div><strong>Log every result.</strong> Views, comments, follows per reel go into a table; the next topic copies what beat the average.</div></li>
+    </ul>
+    <p>Prompt to steal — paste into Claude with the pack installed:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>My niche is [your niche]. Use /ig-viral to find what's winning this week, pick ONE topic a beginner can post today, then /ig-reel it: score 3 hooks, write the script at 3 words/second, and end with a comment-keyword CTA that promises something you can actually deliver for free.</div>
+  </section>
+
+  <section id="rules">
+    <div class="step">STEP 04</div><h2>The honest rules (why this works)</h2>
+    <div class="feat">
+      <div><span>✋</span><div><b>AI never presses post.</b> Read every word before it goes up. You're responsible for what your account says.</div></div>
+      <div><span>📏</span><div><b>Never invent numbers.</b> Every stat on screen needs a source. One made-up number costs more followers than ten good reels gain.</div></div>
+      <div><span>🚫</span><div><b>No comment spam, no engagement bait.</b> Skills that write comments are for genuine replies, not mass flattery on strangers' posts.</div></div>
+      <div><span>🏷️</span><div><b>Disclose paid posts.</b> In India, ASCI rules require a clear "paid partnership" label on sponsored content.</div></div>
+      <div><span>⏳</span><div><b>Results take reps.</b> This account posted daily with keyword CTAs from day one. The pack writes; the consistency is still on you.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow to watch this experiment live: an Instagram account run with Claude, in the open.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Pack details from the instagram-agent-skill README (github.com/Jakeschincariol/instagram-agent-skill, 3.6k★, read 29 Oct 2026). Our numbers from this account's own Insights, Oct 2026. Not affiliated with the pack's author or Anthropic.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
