@@ -1,0 +1,226 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>I connected Claude to my LinkedIn</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- LinkedIn MCP reel (classes prefixed lk-) ---- */
+.lk-plug{position:absolute;left:0;right:0;top:720px;display:flex;justify-content:center;align-items:center;gap:0;opacity:0}
+.lk-plug .nd{width:200px;height:200px;border-radius:44px;background:#17191D;border:2px solid #2A2D33;display:grid;place-items:center;box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.lk-cable{width:220px;height:10px;background:#2A2D33;position:relative;overflow:visible}
+.lk-cable i{position:absolute;top:-5px;width:26px;height:20px;border-radius:10px;background:#3ECF8E;box-shadow:0 0 18px #3ECF8E}
+.lk-warnchip{position:absolute;left:0;right:0;top:1040px;text-align:center;opacity:0}
+.lk-warnchip span{display:inline-block;font:800 34px Inter;color:#FFB340;border:3px solid #FFB340;border-radius:999px;padding:12px 30px;background:rgba(42,31,10,.9)}
+/* repo + terminal */
+.lk-repo{position:absolute;left:100px;right:100px;top:660px;border-radius:26px;background:#0D1117;border:1.5px solid #2A2D33;padding:24px 28px;opacity:0;font-family:Inter;display:flex;align-items:center;gap:18px}
+.lk-repo .nm b{display:block;font:800 30px Mono;color:#fff}.lk-repo .nm span{font:600 21px Inter;color:#9AA0A8}
+.lk-repo .st{margin-left:auto;text-align:right}
+.lk-repo .st b{display:block;font:900 46px Inter;color:#F5C76B}.lk-repo .st span{font:700 19px Inter;color:#9AA0A8}
+.lk-term{position:absolute;left:100px;right:100px;top:880px;border-radius:22px;background:#0B0C0E;border:1.5px solid #2A2D33;padding:22px 26px;opacity:0;font:600 30px/1.5 Mono;color:#3ECF8E}
+.lk-term small{display:block;font:700 18px Mono;letter-spacing:2px;color:#6B7079;margin-bottom:8px}
+.lk-term .cur{display:inline-block;width:4px;height:32px;background:#3ECF8E;vertical-align:middle;margin-left:3px}
+.lk-inside{position:absolute;left:0;right:0;top:1130px;text-align:center;opacity:0}
+.lk-inside span{display:inline-flex;align-items:center;gap:14px;font:800 36px Inter;color:#fff;background:#17191D;border:2px solid #0A66C2;border-radius:999px;padding:14px 30px;box-shadow:0 16px 44px rgba(10,102,194,.35)}
+/* chat ask + jobs */
+.lk-chat{position:absolute;left:90px;right:90px;top:660px;border-radius:28px;background:#17191D;border:1.5px solid #2A2D33;padding:24px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.lk-msg{margin-left:auto;max-width:88%;background:#2B5FD9;color:#fff;border-radius:22px 22px 6px 22px;padding:16px 20px;font:600 29px/1.35 Inter;width:fit-content}
+.lk-msg .cur{display:inline-block;width:3px;height:30px;background:#fff;vertical-align:middle;margin-left:2px}
+.lk-job{display:flex;align-items:center;gap:16px;height:92px;border-radius:18px;background:#1E2126;border:1.5px solid #2A2D33;margin-top:14px;padding:0 20px;opacity:0}
+.lk-job b{display:block;font:800 27px Inter;color:#fff}.lk-job span{display:block;font:600 20px Inter;color:#9AA0A8;margin-top:2px}
+.lk-job em{margin-left:auto;font-style:normal;font:700 20px Inter;color:#3ECF8E}
+/* draft message (light) */
+.lk-dm{position:absolute;left:110px;right:110px;top:680px;border-radius:28px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:26px 30px;opacity:0;font-family:Inter}
+.lk-dm .to{display:flex;align-items:center;gap:14px;font:800 28px Inter;color:#111}
+.lk-dm .to i{width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,#8B5CF6,#EC4899);font-style:normal;display:grid;place-items:center;font-size:30px}
+.lk-dm .to span{display:block;font:600 20px Inter;color:#777}
+.lk-dm p{margin:18px 0 0;font:500 27px/1.5 Inter;color:#333;background:#F5F6F8;border-radius:18px;padding:18px 22px;min-height:120px}
+.lk-draft{position:absolute;right:80px;top:640px;padding:10px 26px;border:5px solid #B45309;border-radius:16px;color:#B45309;font:900 40px Inter;background:#FFF7E8;transform:rotate(6deg);opacity:0;z-index:5}
+/* easy apply form (light) */
+.lk-form{position:absolute;left:150px;right:150px;top:680px;border-radius:26px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:26px 30px;opacity:0;font-family:Inter}
+.lk-form .hd{display:flex;align-items:center;gap:14px;font:800 30px Inter;color:#111;margin-bottom:8px}
+.lk-form .fld{display:flex;align-items:center;gap:14px;border-top:1px solid #EEE;padding:16px 4px;font:600 26px Inter;color:#333;opacity:0}
+.lk-form .fld em{font-style:normal;margin-left:auto;font:700 22px Inter;color:#15803D}
+.lk-readit{position:absolute;left:0;right:0;top:1220px;text-align:center;opacity:0}
+.lk-readit span{display:inline-block;font:800 32px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 32px}
+/* the catch (dark red) */
+.lk-quote{position:absolute;left:100px;right:100px;top:690px;border-radius:28px;background:#2A1416;border:3px solid #FF5A5F;padding:34px 36px;opacity:0;font-family:Inter}
+.lk-quote small{display:block;font:700 20px Mono;letter-spacing:2px;color:#FF9A9E}
+.lk-quote p{margin:14px 0 0;font:700 34px/1.45 Inter;color:#fff}
+.lk-quote p b{color:#FF9A9E}
+.lk-ban{position:absolute;right:90px;top:620px;padding:10px 26px;border:6px solid #FF5A5F;border-radius:16px;color:#FF5A5F;font:900 52px Inter;background:rgba(42,20,22,.95);transform:rotate(7deg);opacity:0;z-index:5}
+.lk-fn{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+/* rules (light) */
+.lk-rules{position:absolute;left:100px;right:100px;top:680px;display:flex;flex-direction:column;gap:16px}
+.lk-rule{height:112px;border-radius:22px;background:#fff;border:2px solid var(--l-line);display:flex;align-items:center;gap:20px;padding:0 26px;opacity:0;font-family:Inter;box-shadow:0 14px 34px rgba(0,0,0,.07)}
+.lk-rule i{font-style:normal;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;font-size:30px;flex:none;background:#E8F7EF}
+.lk-rule b{font:800 32px Inter;color:#111}
+.lk-rule.no i{background:#FFE4E4}
+.lk-rule.no{border-color:#FF8A8D}
+.lk-rule.no b{color:#B91C1C;text-decoration:line-through;text-decoration-thickness:4px}
+/* zero risk (light) */
+.lk-safe{position:absolute;left:120px;right:120px;top:720px;border-radius:28px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:30px 34px;opacity:0;font-family:Inter;text-align:center}
+.lk-safe small{display:block;font:700 22px Mono;letter-spacing:2px;color:#15803D}
+.lk-safe b{display:block;margin-top:10px;font:900 44px Inter;color:#111;letter-spacing:-1px}
+.lk-safe .row{display:flex;justify-content:center;align-items:center;gap:18px;margin-top:22px;font-size:46px}
+.lk-safe .row em{font-style:normal;font:900 36px Inter;color:#9AA0A8}
+.lk-safe span{display:block;margin-top:16px;font:600 25px Inter;color:#777}
+/* CTA (house pattern) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="lk-plug" id="plug"><div class="nd" id="nd1"></div><div class="lk-cable"><i id="pkt"></i></div><div class="nd" id="nd2"></div></div>
+    <div class="lk-warnchip" id="wchip"><span>⚠️ the catch is at the end — wait for it</span></div>
+  </section>
+  <section class="scene" id="sRepo">
+    <div class="lk-repo" id="repo"><span id="ghl"></span><div class="nm"><b>linkedin-mcp-server</b><span>free · open source · Apache-2.0</span></div><div class="st"><b id="stars">0</b><span>GitHub stars ⭐</span></div></div>
+    <div class="lk-term" id="term"><small>ONE COMMAND</small><span id="ttx"></span><i class="cur" id="tcur"></i></div>
+    <div class="lk-inside" id="inside"><span><span id="cl1"></span>Claude ↔ <span id="li1"></span> your LinkedIn</span></div>
+    <div class="lk-fn" id="fn0" style="color:#8E8E93">Independent project · not affiliated with LinkedIn or Microsoft</div>
+  </section>
+  <section class="scene" id="sAsk">
+    <div class="lk-chat" id="chat"><div class="lk-msg"><span id="mtx"></span><i class="cur" id="mcur"></i></div>
+      <div class="lk-job" id="j1"><span id="lij1"></span><div><b>Junior Python Developer</b><span>Pune · posted 2d ago</span></div><em>reads it ✓</em></div>
+      <div class="lk-job" id="j2"><span id="lij2"></span><div><b>Python Intern</b><span>Remote (India) · posted 1d ago</span></div><em>reads it ✓</em></div>
+      <div class="lk-job" id="j3"><span id="lij3"></span><div><b>SDE Fresher</b><span>Pune · Easy Apply</span></div><em>reads it ✓</em></div></div>
+  </section>
+  <section class="scene" id="sDraft">
+    <div class="lk-dm" id="dmc"><div class="to"><i>👩‍💻</i><div>Priya S.<span>SDE · your college senior</span></div></div>
+      <p id="dtx"></p></div>
+    <div class="lk-draft" id="draft">DRAFT</div>
+    <div class="lk-fn" id="fn2" style="color:#777">It drafts. Sending is your finger, not its API.</div>
+  </section>
+  <section class="scene" id="sForm">
+    <div class="lk-form" id="form"><div class="hd"><span id="lif"></span>Easy Apply · SDE Fresher</div>
+      <div class="fld" id="f1">Name + contact<em>read ✓</em></div>
+      <div class="fld" id="f2">Resume required<em>read ✓</em></div>
+      <div class="fld" id="f3">"Why this company?" · 200 words<em>read ✓</em></div>
+      <div class="fld" id="f4">Notice period question<em>read ✓</em></div></div>
+    <div class="lk-readit" id="readit"><span>knows the form before you waste a click</span></div>
+  </section>
+  <section class="scene" id="sCatch">
+    <div class="lk-quote" id="quote"><small>FROM THE REPO'S OWN README</small>
+      <p>"LinkedIn's User Agreement <b>prohibits automated access</b>, and accounts using automated tools can be <b>restricted or banned</b>."</p></div>
+    <div class="lk-ban" id="ban">⚠ BANNED</div>
+    <div class="lk-fn" id="fn3">Their platform, their rules. Respect them.</div>
+  </section>
+  <section class="scene" id="sRules">
+    <div class="lk-rules">
+      <div class="lk-rule" id="r1"><i>📖</i><b>Claude reads & drafts</b></div>
+      <div class="lk-rule" id="r2"><i>👆</i><b>YOU press send. Always.</b></div>
+      <div class="lk-rule" id="r3"><i>🐢</i><b>Low volume, human pace</b></div>
+      <div class="lk-rule no" id="r4"><i>🚫</i><b>Mass connecting / spam</b></div></div>
+  </section>
+  <section class="scene" id="sSafe">
+    <div class="lk-safe" id="safe"><small>TOO RISKY? ZERO-RISK OPTION</small><b>Your LinkedIn data export + Claude</b>
+      <div class="row"><span id="li2"></span><em>→</em>📁<em>→</em><span id="cl2"></span></div>
+      <span>No connection, no automation, nothing to ban. Full steps in the guide.</span></div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Aditi · 2m</small><b>LINK</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Rahul · 1m</small><b>LINK</b> 🙏 need the safe rules</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Zoya · 40s</small><b>LINK</b> placement szn 😭</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>LINK</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>the setup + the safety rules 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>LINK</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+R.$("nd1").innerHTML = R.lg("claude", { s: 110 });
+R.$("nd2").innerHTML = R.lg("linkedin", { s: 110 });
+R.$("ghl").outerHTML = R.lg("github", { s: 58 });
+["cl1", "cl2"].forEach(id => R.$(id).outerHTML = R.lg("claude", { s: id === "cl2" ? 64 : 40 }));
+["li1", "li2"].forEach(id => R.$(id).outerHTML = R.lg("linkedin", { s: id === "li2" ? 64 : 40 }));
+["lij1", "lij2", "lij3"].forEach(id => R.$(id).outerHTML = R.lg("linkedin", { s: 44 }));
+R.$("lif").outerHTML = R.lg("linkedin", { s: 44 });
+const T = { repo: at("One free repo."), ask: at("Now I just"), draft: at("Someone to ask"), form: at("It even reads"),
+  catch_: at("But here's the"), rules: at("So, my rules."), safe: at("Too risky?"), cta: at("Comment LINK"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.repo, enter: "none" }, { id: "sRepo", s: T.repo, e: T.ask, enter: "push" },
+  { id: "sAsk", s: T.ask, e: T.draft, enter: "blurzoom" }, { id: "sDraft", s: T.draft, e: T.form, enter: "swing" },
+  { id: "sForm", s: T.form, e: T.catch_, enter: "push" }, { id: "sCatch", s: T.catch_, e: T.rules, enter: "blurzoom" },
+  { id: "sRules", s: T.rules, e: T.safe, enter: "push" }, { id: "sSafe", s: T.safe, e: T.cta, enter: "blurzoom" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.draft, T.catch_], [T.rules, T.cta]],
+  emph: window.EMPH,
+  chapters: [{ label: "the hookup", at: 0.2 }, { label: "what it does", at: T.ask }, { label: "THE CATCH", at: T.catch_ }, { label: "my rules", at: T.rules, end: T.cta }],
+  counter: { unit: "GitHub stars", steps: [[at("4,000") - 0.1, 4100, "GitHub stars"], [at("my rules.") - 0.2, 0, "sent by AI"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "street", style: { shirt: "#0A66C2", shirtLine: "#064a8f", print: "none", lens1: "#93C5FD", lens2: "#0A66C2" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {},
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: plug Claude into LinkedIn; packet travels on "connected"
+  R.rise("plug", t, 0.1, { dy: 30 });
+  const pk = prog(t, at("connected") - 0.1, 1.2) % 1; R.$("pkt").style.left = (pk * 194) + "px"; R.$("pkt").style.opacity = t >= at("connected") - 0.1 ? 1 : 0;
+  R.rise("wchip", t, at("catch") - 0.15, { dy: 20 }); R.cue("ding", at("catch") - 0.15, { soft: true });
+  // REPO
+  R.card("repo", t, { in: T.repo + 0.05, y: 30 });
+  R.count("stars", t, at("4,000") - 0.1, 0.9, 4100, { fmt: x => Math.round(x).toLocaleString("en-US") });
+  R.card("term", t, { in: at("One command,") - 0.2, y: 24 });
+  R.type("ttx", "uvx mcp-server-linkedin@latest", t, at("One command,") - 0.1, 26);
+  R.$("tcur").style.opacity = Math.floor(t * 2.5) % 2;
+  R.rise("inside", t, at("inside") - 0.1, { dy: 20 }); R.cue("pop", at("inside") - 0.1);
+  R.note("fn0", t, at("stars.") + 0.2, T.ask);
+  // ASK: typed question + job rows
+  R.card("chat", t, { in: T.ask + 0.05, y: 40 });
+  R.type("mtx", "Find me fresher Python jobs in Pune", t, at("talk") + 0.1, 24);
+  R.$("mcur").style.opacity = Math.floor(t * 2.5) % 2;
+  [["j1", at("searches,")], ["j2", at("reads") - 0.05], ["j3", at("posting.") - 0.15]].forEach(([id, a]) => { R.rise(id, t, a, { dy: 18 }); R.cue("click", a, { soft: true }); });
+  // DRAFT
+  R.card("dmc", t, { in: T.draft + 0.05, y: 36 });
+  R.type("dtx", "Hi Priya! Final-year CSE from your college. I'm applying for the SDE Fresher role at your company (job #4821). Would you be open to referring me? Resume attached — no pressure at all!", t, at("drafts") - 0.1, 42);
+  const dp = ease.spring(prog(t, at("tone.") - 0.1, 0.4)); R.$("draft").style.opacity = clamp(dp * 3); R.$("draft").style.transform = `rotate(6deg) scale(${lerp(1.8, 1, dp)})`; if (dp > 0) R.cue("pop", at("tone.") - 0.1);
+  R.note("fn2", t, at("tone.") + 0.15, T.form);
+  // FORM
+  R.card("form", t, { in: T.form + 0.05, y: 30 });
+  [["f1", at("Easy Apply")], ["f2", at("Easy Apply") + 0.2], ["f3", at("form,")], ["f4", at("form,") + 0.25]].forEach(([id, a]) => R.rise(id, t, a, { dy: 12 }));
+  R.rise("readit", t, at("click.") - 0.25, { dy: 16 });
+  // CATCH
+  R.card("quote", t, { in: T.catch_ + 0.1, y: 40 });
+  const bp = ease.spring(prog(t, at("restricted.") - 0.2, 0.45)); R.$("ban").style.opacity = clamp(bp * 3); R.$("ban").style.transform = `rotate(7deg) scale(${lerp(2.2, 1, bp)})`; if (bp > 0) R.cue("pop", at("restricted.") - 0.2);
+  R.note("fn3", t, at("restricted.") + 0.3, T.rules);
+  // RULES
+  [["r1", at("reads")], ["r2", at("I press") - 0.1], ["r3", at("Low") - 0.1], ["r4", at("mass") - 0.15]].forEach(([id, a], i) => { R.rise(id, t, a, { dy: 18 }); R.cue("click", a, { soft: true }); });
+  // SAFE
+  pop("safe", t, T.safe + 0.1, { from: 0.7 });
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "LINK", tyA = at("Comment LINK") + 0.3, posted = R.end("Comment LINK") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 9); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("safety rules.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

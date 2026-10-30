@@ -6,6 +6,7 @@ Formula + scoring: reel-script-writer references/research.md. Tick off as posted
 | 2 | queued | Every PDF chore, free + private | Stirling-Tools/Stirling-PDF 95.2k★ | PDF |
 | 3 | queued | "I gave Claude hands" browser agent | browser-use/browser-use 119k★ | HANDS |
 | 4 | queued | Claude reads my WhatsApp groups | lharries/whatsapp-mcp 6.8k★ (honesty: unofficial, local) | CHAT |
+| 13 | BUILT 30 Oct | Claude connected to LinkedIn (+ ban-risk honesty) | stickerdaniel/linkedin-mcp-server 4.1k★ | LINK (#35) |
 | 5 | queued | A robot refreshes the results/price page | dgtlmoon/changedetection.io 35.3k★ | WATCH |
 | 6 | BUILT 29 Oct | "Claude runs my Instagram" (our story + pack) | Jakeschincariol/instagram-agent-skill 3.6k★ | GROW (#29) |
 | 7 | queued | Lecture → notes | openai/whisper + Claude (verify at build) | NOTES |

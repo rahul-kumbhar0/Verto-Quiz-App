@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude + LinkedIn, safely · canwe.ai</title>
+<meta name="description" content="The linkedin-mcp-server setup from the reel, the ban risk explained honestly, the safety rules, and the zero-risk alternative using your LinkedIn data export.">
+<meta property="og:title" content="I connected Claude to my LinkedIn: setup + safety rules">
+<meta property="og:description" content="4.1k★ free repo, one command — and the catch nobody tells you. Plus a zero-risk option.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>Claude + <span class="sel"><i></i><b>LinkedIn.</b></span> The setup, and the catch.</h1>
+  <p class="lead"><b>linkedin-mcp-server</b> connects Claude to your own LinkedIn session: it can search jobs, read postings and Easy Apply forms, read your inbox and draft messages. It's free and open source — and it comes with a real risk that this page explains before anything else.</p>
+  <div class="chips"><span class="chip">free · Apache-2.0</span><span class="chip">one command</span><span class="chip">⚠️ read the catch first</span></div>
+
+  <nav class="toc">
+    <a href="#catch"><small>00</small>THE CATCH (read first)</a>
+    <a href="#setup"><small>01</small>The setup</a>
+    <a href="#rules"><small>02</small>The safety rules</a>
+    <a href="#safe"><small>03</small>Zero-risk option</a>
+  </nav>
+
+  <section id="catch">
+    <div class="step">STEP 00</div><h2>The catch — in the repo's own words</h2>
+    <p class="warn">⚠️ From the README: <b>"LinkedIn's User Agreement prohibits automated access, and accounts using automated tools can be restricted or banned."</b> And: "Use at your own risk; there is no guarantee of account safety." If your LinkedIn is your job-hunt lifeline (it is), weigh this seriously — or use the zero-risk option in step 03 instead.</p>
+    <p>This matters more for freshers than anyone: a restricted account mid-placement-season is a real loss. We're showing you the tool because it exists and you'll see it hyped elsewhere — but with the full picture.</p>
+  </section>
+
+  <section id="setup">
+    <div class="step">STEP 01</div><h2>The setup (if you accept the risk)</h2>
+    <p>One command in your MCP client config (Claude Desktop → Settings → Developer, or Claude Code):</p>
+    <div class="code pad"><button class="cp">Copy</button>{
+  "mcpServers": {
+    "linkedin": {
+      "command": "uvx",
+      "args": ["mcp-server-linkedin@latest"]
+    }
+  }
+}</div>
+    <p>First run opens a login window (or imports your browser cookies); the session is saved locally in <code>~/.linkedin-mcp/profile/</code>. Then ask Claude things like:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Search LinkedIn for fresher Python jobs in Pune posted this week. Read the top 5 postings and tell me which two fit my resume best, and what each Easy Apply form will ask me.</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>Draft (don't send) a short, polite referral request to [name], a senior from my college at [company], for job [link/ID]. My background: [2 lines]. Keep it under 5 lines, my tone, no flattery.</div>
+    <a class="btn pri" href="https://github.com/stickerdaniel/linkedin-mcp-server" target="_blank" rel="noopener">⭐ Open the repo on GitHub</a>
+  </section>
+
+  <section id="rules">
+    <div class="step">STEP 02</div><h2>The safety rules (how I use it)</h2>
+    <ul class="chk">
+      <li><b>✓</b><div><b>Claude reads and drafts. YOU press send.</b> Every message, every connection request, every application — your finger, after reading it.</div></li>
+      <li><b>✓</b><div><b>Low volume, human pace.</b> A handful of searches and reads in a sitting, not hundreds. Automation gets caught by volume patterns.</div></li>
+      <li><b>✓</b><div><b>Personal use only</b> — your account, your job hunt. Never run it on someone else's account or for scraping lists.</div></li>
+      <li><b>✗</b><div><b>No mass connecting, no auto-sent messages, no spray campaigns.</b> That's what gets accounts flagged — and it's also just spam.</div></li>
+      <li><b>✗</b><div><b>Don't leave it running unattended.</b> Use it in sessions where you're reviewing what it does.</div></li>
+    </ul>
+    <p style="color:var(--mute);font-size:15px">Even with all this, the risk is never zero. The repo says so; so do we.</p>
+  </section>
+
+  <section id="safe">
+    <div class="step">STEP 03</div><h2>The zero-risk option (no connection at all)</h2>
+    <p>You can get most of the career value with <b>LinkedIn's own official data export</b> — no automation, nothing to ban:</p>
+    <ol>
+      <li>LinkedIn → <b>Settings & Privacy → Data privacy → Get a copy of your data</b>. Pick connections, messages, profile. The archive arrives by email.</li>
+      <li>Give Claude the files and ask:</li>
+    </ol>
+    <div class="code prompt pad"><button class="cp">Copy</button>Here's my LinkedIn data export. 1) From my connections, list the 15 people most worth asking for a referral for [role] (company + how I know them). 2) Rewrite my headline and About section for recruiter keyword search in [field]. 3) Draft a 4-line referral message template in my tone.</div>
+    <p>Same brain, zero risk. This is the version I'd tell my younger sibling to use.</p>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Free tools that automate boring chores, with the catches included — every week, in 60 seconds.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Tool details and warnings from the linkedin-mcp-server README (github.com/stickerdaniel/linkedin-mcp-server, 4.1k★, read 30 Oct 2026). Independent project; we're not affiliated with it, LinkedIn, Microsoft or Anthropic. Use at your own risk.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
