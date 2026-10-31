@@ -182,3 +182,16 @@ surprises (dark card backgrounds, opacity 0, wrong sizes): `.sc` (card), `.phone
 `.stack`, `.box3d`, `.chip3d`, `.globe`, `.flow`, `.lens`, `.xv`, `.stp`, `.ana`, `.zm`, `.bars`,
 `.callout`, `.floor`, `.ring`, `.launch`, `.cmts`, `.dm`, `.sheet`. Prefix custom classes with the
 reel slug (e.g. `.co-score`) — three demo bugs on 27 Oct came from `.sc`, `.phone` and `.dial`.
+
+## Software-mechanism 3D kit (Learn AI Engineering, Day 1 final)
+Worked example: `assets/examples/ai-day1-3d-reel/` (index.html + day1.css). Pure CSS 3D, no library:
+- `box({w,h,d,c,html})` → `.q3-bx` with front/top/side faces from `--w --h --d --c` (top = brightness 1.35, side = .62);
+  put boxes in a `.q3-g` group inside a `.q3-wrap` (perspective 1700) and turn the group `rotateX(-18..-28deg) rotateY(-24..-30deg)`
+  so the top and right faces show. Animate a bar's height by setting both `height` and `--h` (and `top:-h`).
+- **Laser split:** a sentence = adjacent grey blocks (one slab); white `.q3-laser` lines flash at the seams, then blocks take
+  their colours and fan out in x/z with a small rotateZ — "chopped into tokens".
+- **Running-example strip:** small 3D blocks of the example pinned under the rail across steps; new tokens drop in from above.
+- **Number skyline:** 6×N boxes on a `.q3-floor` grid (rotateX 90deg), positive = blue up, negative = orange down — "a list of numbers".
+- **Isometric score bars:** 4 boxes on a floor, labels on the floor in front, % floating above; winner glows, loop shuffles labels.
+- **Rotating point space:** points `translate3d(x,y,z)` inside a group that yaws slowly; each label counter-rotates to face camera.
+- Keep flat text (pills, counters) OUT of the 3D group: put them as normal absolute elements so they never collide with the strip.

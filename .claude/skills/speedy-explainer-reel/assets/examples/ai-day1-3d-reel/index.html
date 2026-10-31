@@ -1,0 +1,202 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Learn AI Engineering · Day 1 — every word is a guess (3D)</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="day1.css">
+</head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <section class="scene" id="sHook">
+    <div class="q3-chat" id="chat"><div class="hd"><span id="cl1"></span><span style="margin:0;color:#fff;font:800 26px Inter;letter-spacing:0">Claude</span><span>STREAMING</span></div>
+      <div class="q4-u">Why is the sky blue?</div>
+      <div class="q4-reply" id="reply"></div></div>
+    <div class="q4-pop" id="pop"><small>NEXT TOKEN · CANDIDATES</small>
+      <div class="q4-pb top"><span>" light"</span><b style="width:230px"></b><em>71%</em></div>
+      <div class="q4-pb"><span>" rays"</span><b style="width:60px"></b><em>12%</em></div>
+      <div class="q4-pb"><span>" waves"</span><b style="width:30px"></b><em>6%</em></div></div>
+    <div class="q3-fn" id="fnH" style="top:1290px">Illustration · probabilities are made up for this example</div>
+  </section>
+
+  <section class="scene" id="sDay">
+    <div class="q3-pill" id="pill"><span>LEARN AI ENGINEERING</span></div>
+    <div class="q3-day" id="day">DAY <b>1</b></div>
+    <div class="q3-trk" id="trk"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+    <div class="q4-key" id="key"><div class="cap" id="kcap">Enter ⏎</div></div>
+  </section>
+
+  <section class="scene" id="sTok">
+    <div class="q3-wrap" style="top:660px;height:440px"><div class="q3-g" id="tokG"></div></div>
+    <div class="q4-q34" id="q34"><span>1 token ≈ <b>¾</b> of a word</span></div>
+    <div class="q3-fn" id="fn1" style="top:1200px">Split shown is illustrative · every model has its own tokenizer</div>
+  </section>
+
+  <section class="scene" id="sVec">
+    <div class="q3-wrap" style="top:800px;height:520px"><div class="q3-g" id="skyG"></div></div>
+    <div class="q4-q34" id="v768" style="top:800px"><span>GPT-2: <b>768</b> numbers per token</span></div>
+    <div class="q3-fn" id="fn3" style="top:1290px">Values illustrative · real ones are learned in training · 768 = GPT-2 small</div>
+  </section>
+
+  <section class="scene" id="sPick">
+    <div class="q3-wrap" style="top:800px;height:520px"><div class="q3-g" id="barG"></div></div>
+    <div class="q4-q34" id="opts" style="top:800px;text-align:right;left:auto;right:90px"><span style="font-size:30px"><b id="optn" style="color:#fff">0</b> possible next tokens</span></div>
+    <div class="q3-loop" id="loop" style="top:790px">↻ again ×<span id="lpn">1</span></div>
+    <div class="q3-fn" id="fn4" style="top:1290px">Probabilities illustrative · vocabulary size from the GPT-2 release</div>
+  </section>
+
+  <section class="scene" id="sStream">
+    <div class="q4-two">
+      <div class="q4-ans" id="a1"><small>ASK #1</small><div class="q2">Why is the sky blue?</div><p id="p1"></p></div>
+      <div class="q4-ans" id="a2"><small>ASK #2 · SAME QUESTION</small><div class="q2">Why is the sky blue?</div><p id="p2"></p></div>
+    </div>
+    <div class="q4-pred" id="pred"><span>predicting ✅ <s>looking it up</s></span></div>
+  </section>
+
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Kavya · 2m</small><b>TOKENS</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Aditya · 1m</small><b>TOKENS</b> finally it makes sense 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#D97757,#3B82F6)"></i><div><small>you · now</small><b>TOKENS</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx2"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname">canwe.ai</b><span>your Day 1 exercise 🧠📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>TOKENS</b> 👇</span></div>
+  </section>
+
+  <div class="q3-strip" id="strip"><div class="q3-g" id="stripG"></div></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const $ = R.$, IO = ease.inOut, SP = ease.spring || ease.inOut;
+R.$("cl1").outerHTML = R.lg("claude", { s: 40 });
+const TOK = ["Why", "is", "the", "sky", "blue", "?"];
+const COL = ["#E11D48", "#F59E0B", "#10B981", "#3B82F6", "#8B5CF6", "#0EA5E9"];
+const box = (o) => `<div class="q3-bx ${o.cls || ""}" id="${o.id || ""}" style="--w:${o.w}px;--h:${o.h}px;--d:${o.d}px;--c:${o.c};${o.fs ? `--fs:${o.fs}px;` : ""}${o.st || ""}"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr">${o.html || ""}</div></div>`;
+const tw = (w, k = 27, pad = 40) => pad + k * w.length;
+// hook reply (streams token by token)
+const REPLY = ["The", " sky", " looks", " blue", " because", " sunlight", " scatters", " off", " air", " molecules", " and", " blue", " light", " scatters", " most", "."];
+$("reply").innerHTML = REPLY.map(w => `<i>${w}</i>`).join("") + `<span class="q4-cur" id="cur"></span>`;
+// TOKENS: one grey slab made of 6 blocks + laser seams
+const TW = TOK.map(w => tw(w)); const TOT = TW.reduce((a, b) => a + b, 0);
+{ let x = -TOT / 2, html = "";
+  TOK.forEach((w, i) => { html += box({ id: "tb" + i, w: TW[i], h: 110, d: 54, fs: 50, c: "#2A2D33", html: w, st: `left:${x}px;top:-55px` }); x += TW[i]; if (i < TOK.length - 1) html += `<div class="q3-laser" id="lz${i}" style="left:${x}px"></div>`; });
+  $("tokG").innerHTML = html; }
+// STRIP (running example on top): question blocks, then "The sky is …" for prediction
+function stripHTML(words, cols, hot) {
+  const ws = words.map(w => tw(w, 17, 26)), gap = 10, tot = ws.reduce((a, b) => a + b, 0) + gap * (words.length - 1); let x = -tot / 2, html = "";
+  words.forEach((w, i) => { html += box({ w: ws[i], h: 62, d: 30, fs: 28, c: cols[i], html: w, st: `left:${x}px;top:-31px`, id: i === words.length - 1 && hot ? "snew" : "" }); x += ws[i] + gap; });
+  return html;
+}
+// NUMBERS skyline: 6 columns x 6 bars
+const VAL = (i, k) => Math.sin(i * 7.3 + k * 3.1) * 0.9;
+{ let html = `<div class="q3-floor" style="left:-400px;top:-200px;width:800px;height:400px;transform:rotateX(90deg)"></div>`;
+  TOK.forEach((w, i) => { for (let k = 0; k < 6; k++) { const v = VAL(i, k); html += `<div class="q3-bx" id="vb${i}${k}" data-v="${v}" style="--w:56px;--h:10px;--d:56px;--c:${v >= 0 ? "#3B82F6" : "#D97757"};left:${-350 + i * 130}px;top:0;transform:translate3d(0,0,${150 - k * 62}px)"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr"></div></div>`; } });
+  $("skyG").innerHTML = html; }
+// PREDICT bars (isometric)
+$("barG").innerHTML = `<div class="q3-floor" style="left:-380px;top:-200px;width:760px;height:400px;transform:rotateX(90deg)"></div>` + [0, 1, 2, 3].map(i => `<div class="q3-bx" id="sb${i}" style="--w:120px;--h:10px;--d:120px;--c:${i ? "#3A3F49" : "#D97757"};left:${-300 + i * 170}px;top:0"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr"></div></div><div class="q3-bl" id="sl${i}" style="left:${-240 + i * 170}px;top:20px;transform:translateZ(90px)"></div><div class="q3-bp" id="sp${i}" style="left:${-240 + i * 170}px;transform:translateZ(60px);color:${i ? "#9CA3AF" : "#F5B49C"}"></div>`).join("") +
+  "";
+const LOOPW = [" blue", " because", " sunlight", " scatters", " off", " air", " molecules"];
+const ALT = [[" clear", " dark", " falling"], [" since", " and", " of"], [" light", " rays", " waves"], [" off", " through", " in"], [" across", " from", " around"], [" particles", " dust", " water"], [" molecules", " atoms", " gas"]];
+const SETS = [[62, 14, 9, 2], [48, 21, 11, 5], [55, 17, 8, 4], [71, 9, 6, 3]];
+
+const T = { day: at("learn AI"), s1: at("step one"), s2: at("step two"), s3: at("step three"), stream: at("that's why"), cta: at("comment tokens"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.day, enter: "none" }, { id: "sDay", s: T.day, e: T.s1, enter: "blurzoom" },
+  { id: "sTok", s: T.s1, e: T.s2, enter: "blur" }, { id: "sVec", s: T.s2, e: T.s3, enter: "blur" },
+  { id: "sPick", s: T.s3, e: T.stream, enter: "blurzoom" }, { id: "sStream", s: T.stream, e: T.cta, enter: "push" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.stream, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "THE HOOK", at: 0.2 }, { label: "TOKENS", at: T.s1 }, { label: "NUMBERS", at: T.s2 }, { label: "PREDICT", at: T.s3, end: T.cta }],
+  counter: { unit: "tokens", steps: [[T.s1 + 0.5, 6, "tokens"], [T.s2 + 0.5, 768, "numbers / token"], [at("50,257") - 0.1, 50257, "options"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", accessory: "grad", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } },
+  poses: [[0.15, "surprised"], ...window.PINS.map(([p, n]) => [at(p), n])], autoPoses: {},
+});
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // ---------- HOOK: tilted 3D chat streams token by token; candidates pop on "guess" ----------
+  R.card("chat", t, { in: 0.05, y: 40 });
+  $("chat").style.transform += ` perspective(1600px) rotateX(${10 - 4 * Math.sin(t * 0.9)}deg) rotateY(${-12 + 6 * Math.sin(t * 0.7)}deg)`;
+  const n = Math.max(0, Math.min(REPLY.length, Math.floor((t - 0.5) / 0.19) + 1));
+  $("reply").querySelectorAll("i").forEach((e, i) => { e.style.opacity = i < n ? 1 : 0; e.classList.toggle("new", i === n - 1 && t < T.day - 0.2); });
+  $("cur").style.opacity = Math.floor(t * 3) % 2;
+  const pp = prog(t, at("guess") - 0.1, 0.5); $("pop").style.opacity = clamp(pp * 3);
+  $("pop").style.transform = `perspective(1200px) translateZ(${(1 - SP(pp)) * -300 + 60}px) rotateX(${(1 - SP(pp)) * 50 + 8}deg) rotateY(${10 * Math.sin(t)}deg)`;
+  $("pop").querySelectorAll("b").forEach((b, i) => b.style.transform = `scaleX(${IO(prog(t, at("guess") + 0.1 + i * 0.1, 0.4))})`), $("pop").querySelectorAll("b").forEach(b => b.style.transformOrigin = "0 50%");
+  if (pp > 0) R.cue("pop", at("guess") - 0.1);
+  R.note("fnH", t, at("guess") + 0.3, T.day);
+  // ---------- DAY: pill + DAY 1 + 3D tracker + Enter key press ----------
+  R.rise("pill", t, T.day + 0.05, { dy: 20 }); pop("day", t, T.day + 0.2, { from: 0.6 });
+  [...$("trk").children].forEach((c, i) => { const p = IO(prog(t, T.day + 0.35 + i * 0.05, 0.4)); c.style.opacity = p; c.style.transform = `rotateX(${30 - 30 * p}deg) translateY(${(1 - p) * 30}px)`;
+    const on = i === 0 && t >= at("day one"); c.className = on ? "on" : ""; if (on) c.style.transform += ` scale(${1 + 0.1 * Math.sin(Math.PI * prog(t, at("day one"), 0.4))})`; });
+  if (t >= at("day one")) R.cue("ding", at("day one"), { soft: true });
+  R.rise("key", t, at("what actually") - 0.2, { dy: 40 });
+  const kp = prog(t, at("enter") - 0.05, 0.35), press = Math.sin(Math.PI * kp);
+  $("kcap").style.transform = `rotateX(28deg) translateY(${press * 16}px)`; $("kcap").style.boxShadow = `0 ${18 - press * 14}px 0 #111317,0 30px 60px rgba(0,0,0,.6),inset 0 2px 0 #565D6B`;
+  if (kp > 0) R.cue("click", at("enter") - 0.05);
+  // ---------- TOKENS: grey slab → laser cuts → 6 coloured 3D blocks fan out ----------
+  const cutA = at("chopped") - 0.3, split = IO(prog(t, at("chopped") + 0.05, 0.6));
+  $("tokG").style.transform = `rotateX(${-18 - 4 * split}deg) rotateY(${-26 + 18 * IO(prog(t, T.s1, 1.4)) + 3 * Math.sin(t * 0.7)}deg) scale(${lerp(0.9, 1, IO(prog(t, T.s1, 0.6)))})`;
+  TOK.forEach((w, i) => {
+    const e = $("tb" + i), mid = i - 2.5;
+    e.style.setProperty("--c", split > 0.4 ? COL[i] : "#2A2D33");
+    e.style.transform = `translate3d(${mid * 26 * split}px, ${Math.sin(Math.PI * clamp(split * 1.3 - Math.abs(mid) * 0.05)) * -44 + Math.sin(t * 2 + i) * 6 * split}px, ${split * (i % 2 ? 44 : -20)}px) rotateZ(${mid * 3 * split}deg)`;
+    if (i < 5) { const lp = prog(t, cutA + i * 0.04, 0.35); $("lz" + i).style.opacity = Math.sin(Math.PI * lp); }
+    if (split > 0) R.cue("pop", at("chopped") + 0.05 + i * 0.05, { soft: true });
+  });
+  if (t > cutA) R.cue("whoosh", cutA, { soft: true });
+  R.rise("q34", t, at("one token") - 0.1, { dy: 18 });
+  R.note("fn1", t, at("chopped") + 0.6, T.s2);
+  // ---------- running-example strip: question blocks over NUMBERS; "The sky is …" over PREDICT ----------
+  const again = at("all again"), loopA = at("picks one") - 0.05;
+  let added = 0; if (t >= loopA + 0.3) added = 1;
+  if (t >= again) added = Math.min(LOOPW.length, 1 + Math.floor((t - again) / Math.max(0.14, 0.42 - (t - again) * 0.12)));
+  const inPick = t >= T.s3 - 0.2;
+  const words = inPick ? ["The", "sky", "is"].concat(LOOPW.slice(0, added).map(s => s.trim())) : TOK;
+  const cols = inPick ? words.map((w, i) => i < 3 ? "#3A3F49" : "#D97757") : COL;
+  const key = (inPick ? "p" : "q") + added; if ($("stripG").dataset.k !== key) { $("stripG").innerHTML = stripHTML(words, cols, inPick && added > 0); $("stripG").dataset.k = key; }
+  const sIn = Math.max(IO(prog(t, T.s2, 0.4)) * (1 - prog(t, T.s3 - 0.3, 0.25)), IO(prog(t, T.s3 + 0.05, 0.4)) * (1 - prog(t, T.stream - 0.25, 0.3)));
+  $("strip").style.opacity = sIn; $("strip").style.filter = sIn < 1 ? `blur(${(1 - sIn) * 14}px)` : "";
+  $("stripG").style.transform = `rotateX(-16deg) rotateY(${-10 + 3 * Math.sin(t * 0.7)}deg) scale(${words.length > 7 ? 0.8 : 1})`;
+  // "AI never reads words": the word faces fade on the question blocks
+  if (!inPick) { const fw = 1 - 0.9 * IO(prog(t, at("AI never") + 0.2, 0.5)); $("stripG").querySelectorAll(".fr").forEach(f => f.style.color = `rgba(255,255,255,${fw})`); }
+  const nw = $("snew"); if (nw) { const p0 = added === 1 ? loopA + 0.3 : again + 0.05; const pq = IO(prog(t, p0 + (added > 1 ? (added - 1) * 0.0 : 0), 0.3)); nw.style.transform = `translateY(${(1 - pq) * 200}px) translateZ(${(1 - pq) * 160}px) rotateX(${(1 - pq) * -50}deg)`; }
+  // ---------- NUMBERS: each token grows a row of 3D bars ----------
+  $("skyG").style.transform = `rotateX(-28deg) rotateY(${-30 + 8 * Math.sin(t * 0.5)}deg) translateY(-10px) scale(0.86)`;
+  TOK.forEach((w, i) => { for (let k = 0; k < 6; k++) { const e = $(`vb${i}${k}`), v = +e.dataset.v, g = IO(prog(t, at("list of numbers") - 0.15 + i * 0.05 + k * 0.04, 0.5)); const pulse = 1 + 0.12 * Math.sin(t * 3 + i + k) * prog(t, at("only numbers"), 0.4); const hgt = Math.max(6, (Math.abs(v) * 220 + 6) * g * pulse);
+    e.style.setProperty("--h", hgt + "px"); e.style.height = hgt + "px"; e.style.top = (v >= 0 ? -hgt : 0) + "px"; e.style.opacity = g > 0 ? 1 : 0; } });
+  R.rise("v768", t, at("AI never") - 0.1, { dy: 16 });
+  R.note("fn3", t, at("list of numbers") + 0.8, T.s3);
+  // ---------- PREDICT: isometric score bars, " blue" wins, loop runs faster ----------
+  $("barG").style.transform = `rotateX(-24deg) rotateY(${-28 + 6 * Math.sin(t * 0.5)}deg) translateY(90px)`;
+  const A = at("scores"), step = added;
+  const set = SETS[t >= again ? step % SETS.length : 0], alt = ALT[t >= again ? Math.min(step, ALT.length - 1) : 0];
+  const top = t >= again && step < LOOPW.length ? LOOPW[step] : " blue";
+  [0, 1, 2, 3].forEach(i => { const e = $("sb" + i), g = IO(prog(t, A + i * 0.12, 0.6)), jit = t >= again && i ? 0.75 + 0.25 * Math.abs(Math.sin((t - again) * 9 + i)) : 1; const v = set[i] * jit * g;
+    const hgt = Math.max(4, v * 4.4); e.style.setProperty("--h", hgt + "px"); e.style.height = hgt + "px"; e.style.top = -hgt + "px"; e.style.opacity = g > 0 ? 1 : 0;
+    $("sl" + i).textContent = `"${i ? alt[i - 1] : top}"`; $("sp" + i).textContent = g > 0 ? Math.round(v) + "%" : ""; $("sp" + i).style.top = (-hgt - 50) + "px"; });
+  const pk = prog(t, loopA, 0.45); $("sb0").style.transform = `scale(${1 + 0.08 * Math.sin(Math.PI * pk)})`; if (pk > 0) R.cue("ding", loopA, { soft: true });
+  R.rise("opts", t, at("50,257") - 0.2, { dy: 14 }); $("opts").style.opacity *= 1 - prog(t, again - 0.2, 0.3); R.count("optn", t, at("50,257") - 0.1, 1.0, 50257);
+  R.rise("loop", t, again, { dy: 10 }); $("lpn").textContent = Math.max(1, added);
+  R.note("fn4", t, at("choose from"), T.stream);
+  // ---------- STREAM + DIFFERENT (light): two tilted answer cards ----------
+  ["a1", "a2"].forEach((id, k) => { R.card(id, t, { in: k ? at("same question") - 0.15 : T.stream + 0.05, y: 30 }); $(id).style.transform += ` rotateY(${(k ? -1 : 1) * (8 + 3 * Math.sin(t * 0.8))}deg) rotateX(6deg)`; });
+  R.type("p1", "Sunlight scatters off tiny air molecules, and blue light scatters the most.", t, at("stream") - 0.05, 30);
+  R.type("p2", "Blue light has a shorter wavelength, so the atmosphere bounces it around more.", t, at("different") - 0.1, 30);
+  const pd = prog(t, at("predicting") - 0.1, 0.55); $("pred").style.opacity = clamp(pd * 3); $("pred").style.transform = `perspective(1000px) rotateX(${(1 - SP(pd)) * 80}deg) scale(${lerp(0.7, 1, SP(pd))})`; if (pd > 0) R.cue("pop", at("predicting") - 0.1);
+  // ---------- CTA (house) ----------
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const tyA = at("comment tokens") + 0.3, posted = R.end("comment tokens") + 0.4;
+  if (t < posted) R.type("ctx2", "TOKENS", t, tyA, 16); else $("ctx2").textContent = "";
+  $("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  $("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, at("follow") - 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

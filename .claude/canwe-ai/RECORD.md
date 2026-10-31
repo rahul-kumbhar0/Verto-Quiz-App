@@ -48,7 +48,7 @@ media_id (`list_reels`), dry-run test, turn ON. All use follow gate + once per u
 | 26 | OSS (exact) | Claude Max free for open source | /oss/ | OFF (not posted yet; on lock switch match to "any" like #17–#19) |
 | 27 | TV (exact) | cleanyourtv: delete your TV's ads | /tv/ | OFF (not posted yet; same lock flow) |
 | 29 | GROW (exact) | Claude runs my Instagram (skills pack) | /grow/ | OFF (not posted yet; same lock flow) |
-| 35 | LINK (exact) | Learn AI Engineering · Day 1: every word AI writes is a guess (Claude-orange hoodie + grad cap, 47 s, 785 credits) | TOKENS | ready, not posted — SERIES pilot | |
+| 35 | LINK (exact) | Learn AI Engineering · Day 1: every word AI writes is a guess — FINAL = 3D rebuild (reels/ai01v4: v1 voice + script, 3D token slab/laser split, number skyline, isometric next-token bars, pulse music; 47 s, no new credits) | TOKENS | ready, not posted — SERIES pilot | |
 | Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
 | Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
 | Claude + LinkedIn (linkedin-mcp) | /link/ | OFF (not posted yet; same lock flow) |
@@ -95,7 +95,7 @@ build a buyer list).
 | Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (use the v2 files) | |
 | cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: wave decays) | |
 | Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) | GROW | ready, not posted (post next) | |
-| Learn AI Engineering · Day 1: every word AI writes is a guess (Claude-orange hoodie + grad cap, 47 s, 785 credits) | TOKENS | ready, not posted — SERIES pilot | |
+| Learn AI Engineering · Day 1: every word AI writes is a guess — FINAL = 3D rebuild (reels/ai01v4: v1 voice + script, 3D token slab/laser split, number skyline, isometric next-token bars, pulse music; 47 s, no new credits) | TOKENS | ready, not posted — SERIES pilot | |
 | Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
 | Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
 | Claude + LinkedIn (LinkedIn-blue street look, 46 s paced, 710 credits; linkedin-mcp-server 4.1k ⭐; honesty = ban warning + zero-risk export option) | LINK | ready, not posted | |
@@ -134,6 +134,7 @@ Owner's idea: a daily explainer series so the audience AND the owner learn AI en
   example prompt through every step, 3D props per step, word-synced changes, blur dissolves, step rail ticks,
   music `"style":"pulse"`. Owner, 31 Oct: "keep our style as it is, just improve the 3D explanation and
   animation" — a no-presenter "premium UI" build copying princegupta.ai was REJECTED (only borrow techniques).
+  Worked example of the approved look: `speedy-explainer-reel/assets/examples/ai-day1-3d-reel/` (3D box helper, laser split, skyline, isometric bars).
 - Each day: own keyword (topic word, e.g. TOKENS) → DM → /ai/day-N/ page = plain-words idea + 15-min exercise
   (+ a "for builders" code snippet) + vocabulary. Hub page /ai/ lists all days (add a row per day).
 - Owner's CTA rule: comment KEYWORD + "follow for the full series". Do NOT tease the next day's topic.
@@ -141,6 +142,6 @@ Owner's idea: a daily explainer series so the audience AND the owner learn AI en
   tool reels earn comments).
 - Accuracy: every number sourced; illustrative probabilities/vectors footnoted; never show unverifiable
   token IDs (tiktoken/npm tokenizer downloads are blocked in-session).
-- Season 1 plan: Day 1 tokens/next-token (v1 built, v2 premium rebuild in progress) · hallucinations · context window · temperature ·
+- Season 1 plan: Day 1 tokens/next-token (FINAL = 3D rebuild ai01v4 on the v1 voice; a 70 s 'France' script v3 exists, voice not generated — ElevenLabs call was denied) · hallucinations · context window · temperature ·
   embeddings · training vs fine-tuning vs prompting. Season 2: prompting, first API call, RAG, vector DBs,
   tool use, MCP, agents, evals, cost. Season 3: careers (AI eng vs ML eng vs DS, roadmap, portfolio, salaries).
