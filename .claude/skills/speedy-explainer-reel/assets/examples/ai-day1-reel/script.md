@@ -1,0 +1,10 @@
+{surprised} Every word Claude writes is a [guess]. Here's how it picks.
+{explain} Learn AI engineering, *day one*. What actually happens when you hit [Enter]?
+Step one. Your sentence gets chopped into [tokens]. Small pieces of words.
+One token is about *three quarters* of a word.
+Step two. Every token becomes a [list of numbers]. AI never reads words. Only *numbers*.
+Step three. The model scores every possible next token. GPT-2 had [50,257] to choose from.
+It picks one. Adds it to your text. Then does it *all again*. For every single token.
+That's why answers [stream] in, piece by piece.
+And why the same question gets a *different* answer. It's [predicting], not looking things up.
+{point_cam} Comment [TOKENS] and I'll DM you a 15-minute exercise to see it yourself. And *follow* for the full series.

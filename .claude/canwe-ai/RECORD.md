@@ -48,17 +48,19 @@ media_id (`list_reels`), dry-run test, turn ON. All use follow gate + once per u
 | 26 | OSS (exact) | Claude Max free for open source | /oss/ | OFF (not posted yet; on lock switch match to "any" like #17–#19) |
 | 27 | TV (exact) | cleanyourtv: delete your TV's ads | /tv/ | OFF (not posted yet; same lock flow) |
 | 29 | GROW (exact) | Claude runs my Instagram (skills pack) | /grow/ | OFF (not posted yet; same lock flow) |
-| 35 | LINK (exact) | Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
+| 35 | LINK (exact) | Learn AI Engineering · Day 1: every word AI writes is a guess (Claude-orange hoodie + grad cap, 47 s, 785 credits) | TOKENS | ready, not posted — SERIES pilot | |
+| Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
 | Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
 | Claude + LinkedIn (linkedin-mcp) | /link/ | OFF (not posted yet; same lock flow) |
 | 38 | PDF (exact) | Docxify — OUR OWN app (exam sizes + resume <200 KB) | /pdf/ | OFF (not posted yet; same lock flow) |
+| 42 | TOKENS (exact) | Learn AI Engineering · Day 1 (tokens → numbers → next-token prediction) | /ai/day-1/ | OFF (not posted yet; same lock flow) |
 | 41 | MCP (exact) | "Claude can now order Zomato" — 5 apps on MCP (Zomato, Swiggy, Zerodha, MoSPI, Gmail) | /mcp/ | OFF (not posted yet; same lock flow) |
 (#22, #25, #28 and #30-34 do not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
 build a buyer list).
 
 ## Guide site (Vercel)
 - Live: **https://canwe-guides.vercel.app** (project `canwe-guides`, team `team_6Xaw8O6MfjFggwU7zLunNZOO`,
-  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/, /link/, /pdf/, /mcp/.
+  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/, /link/, /pdf/, /mcp/, /ai/ (series hub), /ai/day-1/.
 - Source: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/guide-site/`.
 - **Our-apps promo (live 31 Oct, all pages):** a block injected by `copy.js` above the follow card
   (styles: `.apps` in `style.css`), promoting the owner's own Android apps by CanWe.tech:
@@ -75,7 +77,7 @@ build a buyer list).
   `upload_file` (base64 + `xVercelDigest` sha1 + `contentLength`; server VERIFIES the sha, so corruption
   is caught) then reference `{"file","sha","size"}` in create_deployment. Both forms can be mixed in one
   deploy. Files sent inline in an earlier deploy are NOT reusable by sha (missing_files); only
-  upload_file'd blobs are. Uploaded so far (reusable by sha): style.css, copy.js, logo.svg, apps/*.png, index, pdf, prompt, mcp, link, grow, tv. Still inline each deploy: oss, freehire, resume, salary, refer, agent, career-ops. A redeploy via `deploymentId` drops unsent files. vercel.app is
+  upload_file'd blobs are. Uploaded so far (reusable by sha): style.css, copy.js, logo.svg, apps/*.png, index, pdf, prompt, mcp, link, grow, tv, ai, ai/day-1 (always re-upload index.html after editing it; its sha changes). Still inline each deploy: oss, freehire, resume, salary, refer, agent, career-ops. A redeploy via `deploymentId` drops unsent files. vercel.app is
   network-blocked for curl in-session; verify with `web_fetch_vercel_url`.
 - Web Analytics is NOT enabled (owner must click Enable in the dashboard; then add the script).
 
@@ -93,6 +95,7 @@ build a buyer list).
 | Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (use the v2 files) | |
 | cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: wave decays) | |
 | Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) | GROW | ready, not posted (post next) | |
+| Learn AI Engineering · Day 1: every word AI writes is a guess (Claude-orange hoodie + grad cap, 47 s, 785 credits) | TOKENS | ready, not posted — SERIES pilot | |
 | Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
 | Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
 | Claude + LinkedIn (LinkedIn-blue street look, 46 s paced, 710 credits; linkedin-mcp-server 4.1k ⭐; honesty = ban warning + zero-risk export option) | LINK | ready, not posted | |
@@ -123,3 +126,17 @@ test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid 
 - Decide on the first paid product.
 - 1K story poll: after 24 h ask the owner for the winner → it becomes the next reel (run reel-script-writer);
   post a result slide ("You picked X. Dropping <day>.").
+
+## Learn AI Engineering series (started 31 Oct 2026)
+Owner's idea: a daily explainer series so the audience AND the owner learn AI engineering.
+- Format: ~45 s speedy explainer, one concept per day, avatar with grad cap, series pill "LEARN AI ENGINEERING · DAY N".
+- Each day: own keyword (topic word, e.g. TOKENS) → DM → /ai/day-N/ page = plain-words idea + 15-min exercise
+  (+ a "for builders" code snippet) + vocabulary. Hub page /ai/ lists all days (add a row per day).
+- Owner's CTA rule: comment KEYWORD + "follow for the full series". Do NOT tease the next day's topic.
+- Mix: ~3 tool/chore reels + 2 series episodes a week; compare after 5 episodes (series earns saves/follows,
+  tool reels earn comments).
+- Accuracy: every number sourced; illustrative probabilities/vectors footnoted; never show unverifiable
+  token IDs (tiktoken/npm tokenizer downloads are blocked in-session).
+- Season 1 plan: Day 1 tokens/next-token (BUILT) · hallucinations · context window · temperature ·
+  embeddings · training vs fine-tuning vs prompting. Season 2: prompting, first API call, RAG, vector DBs,
+  tool use, MCP, agents, evals, cost. Season 3: careers (AI eng vs ML eng vs DS, roadmap, portfolio, salaries).
