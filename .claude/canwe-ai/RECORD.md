@@ -56,6 +56,14 @@ build a buyer list).
 - Live: **https://canwe-guides.vercel.app** (project `canwe-guides`, team `team_6Xaw8O6MfjFggwU7zLunNZOO`,
   SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/, /link/.
 - Source: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/guide-site/`.
+- **Our-apps promo (live 31 Oct, all pages):** a block injected by `copy.js` above the follow card
+  (styles: `.apps` in `style.css`), promoting the owner's own Android apps by CanWe.tech:
+  **Docxify: 300+ PDF Tool Offline** (`com.docxify.app` — resume <200 KB, exam-form photo/signature
+  sizes, 500+ conversions, offline/private, ads+IAP ₹199–2,999) and **8XDL: Secure Download Manager**
+  (`com.codex.torrentx` — private browser + download manager + media player, 4.8★, 5K+ downloads,
+  ads+IAP ₹100–500). One edit in copy.js updates every current and future page. Labeled honestly
+  ("OUR APPS · MADE BY THE SAME TEAM" + ads/IAP note). Docxify is a 6/6 formula topic for its own
+  reel later (first own-product monetization loop; could pair with Stirling-PDF topic #2).
 - Deploy gotcha: every deploy must send ALL files inline (utf-8). SHA references fail with
   `missing_files`, and a redeploy via `deploymentId` drops unsent files. Verify with `web_fetch_vercel_url`.
 - Web Analytics is NOT enabled (owner must click Enable in the dashboard; then add the script).
