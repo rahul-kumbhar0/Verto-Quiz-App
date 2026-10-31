@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["4 MB", "shady website", "free#1", "Docxify", "2.4 MB", "SSC, IBPS, UPSC", "PDF office", "Aadhaar masking", "offline", "we built this", "exam size cheat sheet"], "bold": ["[20 KB]", "[fifty rupees]", "[ourselves]", "[198 KB]", "Exact KB", "[300+ tools]", "never leave your phone", "[PDF]#3"]};
+window.PINS = [["[20 KB] .", "facepalm"], ["[fifty rupees] .", "fist_pump"], ["It's free .", "present"], ["every portal's limit.", "point_side"], ["Exact KB .", "excited"], ["Aadhaar masking .", "serious"], ["built this .", "point_cam"]];

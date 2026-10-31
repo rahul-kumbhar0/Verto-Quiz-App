@@ -31,3 +31,4 @@ freehire (A):
 Why it worked (our read): personal + specific input line ("Python internships in Bangalore") +
 4 rapid proofs with numbers + a held-back wow (form autofill) + trust line (open source) +
 keyword that names exactly what you get.
+| Docxify 4MB vs 20KB (OWN APP) | A demo→keyword + paradox hook | PDF | 49.8 s, 5 stops, 1.08x, 3D press + R.xview teardown | | | | | first monetized reel; disclosure as a STRENGTH ('we built it'); cyber-café ₹50 beat is the relatable spike |

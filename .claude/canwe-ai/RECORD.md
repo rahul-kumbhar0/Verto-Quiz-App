@@ -48,13 +48,15 @@ media_id (`list_reels`), dry-run test, turn ON. All use follow gate + once per u
 | 26 | OSS (exact) | Claude Max free for open source | /oss/ | OFF (not posted yet; on lock switch match to "any" like #17–#19) |
 | 27 | TV (exact) | cleanyourtv: delete your TV's ads | /tv/ | OFF (not posted yet; same lock flow) |
 | 29 | GROW (exact) | Claude runs my Instagram (skills pack) | /grow/ | OFF (not posted yet; same lock flow) |
-| 35 | LINK (exact) | Claude + LinkedIn (linkedin-mcp) | /link/ | OFF (not posted yet; same lock flow) |
+| 35 | LINK (exact) | Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
+| Claude + LinkedIn (linkedin-mcp) | /link/ | OFF (not posted yet; same lock flow) |
+| 38 | PDF (exact) | Docxify — OUR OWN app (exam sizes + resume <200 KB) | /pdf/ | OFF (not posted yet; same lock flow) |
 (#22, #25, #28 and #30-34 do not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
 build a buyer list).
 
 ## Guide site (Vercel)
 - Live: **https://canwe-guides.vercel.app** (project `canwe-guides`, team `team_6Xaw8O6MfjFggwU7zLunNZOO`,
-  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/, /link/.
+  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/, /link/, /pdf/.
 - Source: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/guide-site/`.
 - **Our-apps promo (live 31 Oct, all pages):** a block injected by `copy.js` above the follow card
   (styles: `.apps` in `style.css`), promoting the owner's own Android apps by CanWe.tech:
@@ -89,6 +91,7 @@ build a buyer list).
 | Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (use the v2 files) | |
 | cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: wave decays) | |
 | Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) | GROW | ready, not posted (post next) | |
+| Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
 | Claude + LinkedIn (LinkedIn-blue street look, 46 s paced, 710 credits; linkedin-mcp-server 4.1k ⭐; honesty = ban warning + zero-risk export option) | LINK | ready, not posted | |
 Scripts/scenes for each: `.claude/skills/speedy-explainer-reel/assets/examples/<reel>/`.
 
