@@ -129,13 +129,11 @@ test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid 
 
 ## Learn AI Engineering series (started 31 Oct 2026)
 Owner's idea: a daily explainer series so the audience AND the owner learn AI engineering.
-- Format (updated 31 Oct after owner feedback + reference reel princegupta.ai "Day 05"): PREMIUM UI MODE
-  (`speedy-explainer-reel/references/premium-ui-mode.md`) + the `speedy-hidden-mechanism-reel` spine, 55–70 s.
-  No cartoon presenter; realistic UI cards reacting word by word; ONE running example prompt followed through
-  every step; persistent bottom card "What happens after Enter · step n of N"; serif-italic feeling words in
-  captions; one light "smart part" chapter; series card with a day tracker; music `"style":"pulse"` (dark
-  sub drone, half-time kick, hook dry for ~2 s). Owner's verdict on the first Day 1 build: "not the way we
-  think" — the mechanism must be walked through on ONE example, not listed.
+- Format: OUR speedy style as it is (grad-cap presenter, big captions, selection box, dark/light flips, rail)
+  + the `speedy-hidden-mechanism-reel` spine, 55–70 s, with STRONGER 3D explanation and animation: one running
+  example prompt through every step, 3D props per step, word-synced changes, blur dissolves, step rail ticks,
+  music `"style":"pulse"`. Owner, 31 Oct: "keep our style as it is, just improve the 3D explanation and
+  animation" — a no-presenter "premium UI" build copying princegupta.ai was REJECTED (only borrow techniques).
 - Each day: own keyword (topic word, e.g. TOKENS) → DM → /ai/day-N/ page = plain-words idea + 15-min exercise
   (+ a "for builders" code snippet) + vocabulary. Hub page /ai/ lists all days (add a row per day).
 - Owner's CTA rule: comment KEYWORD + "follow for the full series". Do NOT tease the next day's topic.

@@ -17,11 +17,11 @@ cartoon presenter (y 1420–1920)**, near-black canvas flipping to off-white per
 selection box on one keyword per phrase, a pose change every ~2 s, exact numbers, honesty
 footnotes, a punchline CTA.
 
-**Second look: premium UI mode** (`references/premium-ui-mode.md`, read it when the owner asks for
-the "princegupta" / premium / no-cartoon look, and ALWAYS for the Learn AI Engineering series):
-no presenter, realistic product cards that react word by word, a persistent bottom progress card,
-calm captions with serif-italic feeling words (`<body class="premium">`), blur dissolves, one light
-"smart part" chapter, and the dark `"style":"pulse"` music bed.
+**Animation lessons from other creators** (`references/premium-ui-mode.md`): techniques borrowed from a
+princegupta.ai reel — word-synced micro-changes on the hero object, blur dissolves, one example followed
+through every step, a step tracker that ticks, the dark `"style":"pulse"` music bed. **The owner's rule
+(31 Oct): we keep OUR style as it is** (presenter, big kinetic captions, selection box, dark/light flips,
+rail). Borrow their *animation and explanation techniques*, never their look.
 
 ## 0. Setup (once per session, ~1 min)
 ```bash
@@ -155,7 +155,7 @@ stock puppet was used.
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
 - `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/`, `assets/examples/exploded-view-demo/` and `assets/examples/explainer-kit-demo/` (process steps, analogy split, zoom-through, bar chart)
 - `references/logos.md` — real-logo rule, `scripts/brand_logos.mjs` (offline official marks + contact sheet), `R.lg` tiles/brand chips
-- `references/premium-ui-mode.md` — the no-presenter premium look (princegupta.ai reference, measured voice pace + music), layout bands, card style, script shape, `"style":"pulse"` music
+- `references/premium-ui-mode.md` — animation/explanation techniques borrowed from a princegupta.ai reel (measured voice pace + music, `"style":"pulse"`). Apply inside our style; their no-presenter look is NOT ours
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode

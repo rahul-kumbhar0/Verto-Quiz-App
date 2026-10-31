@@ -1,10 +1,18 @@
-# Premium UI mode (no presenter, product-UI storytelling)
+# Animation lessons from princegupta.ai (techniques to borrow, NOT a look to copy)
+
+> **Owner's rule (31 Oct 2026):** "we want our style as it is, just improve the 3D explanation and
+> animation." Our look stays: cartoon presenter, big kinetic captions with the selection box,
+> dark/light chapter flips, rail + counter, real logos, mascot. From this reference we take ONLY:
+> word-synced micro-changes on the hero object (rule 3), one running example through every step,
+> a step tracker that ticks (use OUR rail for it), blur dissolves between beats (`enter:"blur"`),
+> the "smart part" light chapter, the data-shown-not-said charts, the UI-sequence CTA, and the
+> `"style":"pulse"` music bed. Do NOT turn on `<body class="premium">` for canwe.ai reels unless
+> the owner asks for that look. A no-presenter build of Day 1 was rejected for this reason.
 
 Source: a 48 s reel by princegupta.ai, "Day 05 · Repositories you should know about"
 (Cloudflare security-audit-skill), sent by the owner as the target for editing, animation,
 presenting and music. Contact sheets (2 fps): `ref-frames/premium-ui-sheet1.jpg`, `-sheet2.jpg`.
-Use this mode for the **Learn AI Engineering** series and any "how it works inside" reel where
-the subject is software. It is an alternative to the cartoon-presenter look, not a replacement.
+The full breakdown of their look is kept below for reference only.
 
 ## What makes it feel premium (the 10 rules)
 1. **No presenter. The UI is the presenter.** Every beat is a realistic product surface (repo
