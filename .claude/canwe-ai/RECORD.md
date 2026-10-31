@@ -145,3 +145,22 @@ Owner's idea: a daily explainer series so the audience AND the owner learn AI en
 - Season 1 plan: Day 1 tokens/next-token (FINAL = 3D rebuild ai01v4 on the v1 voice; a 70 s 'France' script v3 exists, voice not generated — ElevenLabs call was denied) · hallucinations · context window · temperature ·
   embeddings · training vs fine-tuning vs prompting. Season 2: prompting, first API call, RAG, vector DBs,
   tool use, MCP, agents, evals, cost. Season 3: careers (AI eng vs ML eng vs DS, roadmap, portfolio, salaries).
+
+## Performance snapshot — 31 Oct 2026 (likes/comments via PullRows post_details; DMs/clicks via DirectApply 90-day analytics)
+Views/reach/saves/shares are NOT readable from here (Instagram hides them from scraping; only the owner's Insights app has them).
+| Reel (posted) | Likes | Comments | DMs fired | Unique link clickers |
+|---|---|---|---|---|
+| JOBS — automated job search with freehire + Claude (27 Oct) | 572 | 1,521 | 693 | 542 |
+| SALARY — same degree ₹3.5L vs ₹21L (27 Oct) | 81 | 54 | 28 | 25 |
+| OFFER — career-ops 740 jobs → 1 offer (28 Oct) | 57 | 61 | 21 | 14 |
+| PROMPT — which jobs you actually fit (30 Oct) | 52 | 47 | 19 | 15 |
+| LINK — Claude on LinkedIn (31 Oct, same day) | 45 | 54 | 20 | 15 |
+| RESUME — 75% ATS myth (28 Oct) | 23 | 30 | 24 | 22 |
+| TV — cleanyourtv (29 Oct) | 31 | 20 | 7 | 7 |
+| OSS — Claude Max free for open source (30 Oct) | 30 | 20 | 9 | 6 |
+| Coding interview cheating (25 Oct, no keyword) | 32 | 1 | – | – |
+| AGENT — what is an AI agent (30 Oct) | 3 | 0 | 0 | 0 |
+| TOKENS — Learn AI Eng Day 1 (31 Oct, hours old) | 7 | 0 | 0 | 0 |
+Read: the account wins on **fresher job-hunt outcome + free tool/prompt + Claude** (JOBS ≫ everything; LINK/PROMPT/OFFER
+next) and on **money** (SALARY). Pure AI-concept explainers (AGENT, TOKENS so far) get almost nothing. Plan: make the
+next reels JOBS-shaped; tie every Learn-AI episode to a job/career payoff in the hook, or slow the series down.
