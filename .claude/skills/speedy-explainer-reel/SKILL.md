@@ -17,6 +17,12 @@ cartoon presenter (y 1420–1920)**, near-black canvas flipping to off-white per
 selection box on one keyword per phrase, a pose change every ~2 s, exact numbers, honesty
 footnotes, a punchline CTA.
 
+**Second look: premium UI mode** (`references/premium-ui-mode.md`, read it when the owner asks for
+the "princegupta" / premium / no-cartoon look, and ALWAYS for the Learn AI Engineering series):
+no presenter, realistic product cards that react word by word, a persistent bottom progress card,
+calm captions with serif-italic feeling words (`<body class="premium">`), blur dissolves, one light
+"smart part" chapter, and the dark `"style":"pulse"` music bed.
+
 ## 0. Setup (once per session, ~1 min)
 ```bash
 SK=<this skill's folder>; W=$HOME/reel-work; bash $SK/scripts/setup.sh $W
@@ -125,6 +131,7 @@ cd $W; node tools/render.mjs $P/index.html --cues $P/cues.json
 D=$(python3 -c "import json;w=json.load(open('$P/words.json'))['words'];print(round(w[-1]['end']+1.8,2))")   # = REEL_DURATION
 python3 tools/sfx.py $P/cues.json $D $P/audio/sfx.wav
 echo '{"bpm":96,"dur":'$D',"groove_in":0.4,"breaks":[],"fade_out":1.6,"key":"Dm"}' > $P/music.json; python3 tools/music.py $P/music.json $P/audio/music.wav
+# premium UI mode: {"bpm":136,"dur":D,"groove_in":2.3,"breaks":[[a,b]],"fade_out":1.5,"key":"Cm","style":"pulse"}
 while pgrep -f "render.mjs $P/index.html $P/video.mp4" >/dev/null; do sleep 5; done
 bash tools/mix.sh $P/video.mp4 $P/audio/voice.wav $P/audio/sfx.wav $P/audio/music.wav $D $P/out/<slug>.mp4 0.10
 bash tools/mix.sh $P/video.mp4 $P/audio/voice.wav $P/audio/sfx.wav none $D $P/out/<slug>_nomusic.mp4
@@ -148,6 +155,7 @@ stock puppet was used.
   the shared formula · `references/script-formula.md` — beat sheet + sentence rules + markup
 - `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/`, `assets/examples/exploded-view-demo/` and `assets/examples/explainer-kit-demo/` (process steps, analogy split, zoom-through, bar chart)
 - `references/logos.md` — real-logo rule, `scripts/brand_logos.mjs` (offline official marks + contact sheet), `R.lg` tiles/brand chips
+- `references/premium-ui-mode.md` — the no-presenter premium look (princegupta.ai reference, measured voice pace + music), layout bands, card style, script shape, `"style":"pulse"` music
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode

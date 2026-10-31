@@ -129,7 +129,13 @@ test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid 
 
 ## Learn AI Engineering series (started 31 Oct 2026)
 Owner's idea: a daily explainer series so the audience AND the owner learn AI engineering.
-- Format: ~45 s speedy explainer, one concept per day, avatar with grad cap, series pill "LEARN AI ENGINEERING · DAY N".
+- Format (updated 31 Oct after owner feedback + reference reel princegupta.ai "Day 05"): PREMIUM UI MODE
+  (`speedy-explainer-reel/references/premium-ui-mode.md`) + the `speedy-hidden-mechanism-reel` spine, 55–70 s.
+  No cartoon presenter; realistic UI cards reacting word by word; ONE running example prompt followed through
+  every step; persistent bottom card "What happens after Enter · step n of N"; serif-italic feeling words in
+  captions; one light "smart part" chapter; series card with a day tracker; music `"style":"pulse"` (dark
+  sub drone, half-time kick, hook dry for ~2 s). Owner's verdict on the first Day 1 build: "not the way we
+  think" — the mechanism must be walked through on ONE example, not listed.
 - Each day: own keyword (topic word, e.g. TOKENS) → DM → /ai/day-N/ page = plain-words idea + 15-min exercise
   (+ a "for builders" code snippet) + vocabulary. Hub page /ai/ lists all days (add a row per day).
 - Owner's CTA rule: comment KEYWORD + "follow for the full series". Do NOT tease the next day's topic.
@@ -137,6 +143,6 @@ Owner's idea: a daily explainer series so the audience AND the owner learn AI en
   tool reels earn comments).
 - Accuracy: every number sourced; illustrative probabilities/vectors footnoted; never show unverifiable
   token IDs (tiktoken/npm tokenizer downloads are blocked in-session).
-- Season 1 plan: Day 1 tokens/next-token (BUILT) · hallucinations · context window · temperature ·
+- Season 1 plan: Day 1 tokens/next-token (v1 built, v2 premium rebuild in progress) · hallucinations · context window · temperature ·
   embeddings · training vs fine-tuning vs prompting. Season 2: prompting, first API call, RAG, vector DBs,
   tool use, MCP, agents, evals, cost. Season 3: careers (AI eng vs ML eng vs DS, roadmap, portfolio, salaries).

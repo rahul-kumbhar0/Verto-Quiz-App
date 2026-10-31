@@ -36,6 +36,16 @@ Load and follow `speedy-explainer-reel` with these format rules. Reference:
    Profile card + finger tap → DM thread where the friend's two messages make the joke
    ("autocorrect again" / "ok so it was never autocorrect") → watermark.
 
+## Premium UI variant (Learn AI Engineering series, software mechanisms)
+When the mechanism lives in software (tokens, embeddings, attention, RAG, agents), use
+`speedy-explainer-reel/references/premium-ui-mode.md` instead of the cartoon presenter: the
+"magnified prop" becomes a realistic UI card (chat box, tokenizer view, score list), the running
+example is ONE prompt followed through every step, the persistent bottom card lists the steps
+("What happens after Enter · step n of 5"), the light chapter is "the smart part" (the one idea
+people will repeat), and the history/credibility beat becomes one real artefact card inside it
+(paper + year, model + exact number). Music `"style":"pulse"`. Keep the spine below (paradox
+hook, pivot, mechanism shown before explained, second trick, recap answering the hook).
+
 ## Template configuration
 No rail: delete `#rail`, omit `chapters`/`counter`. `light: [[T.history, T.secondTrick]]`.
 Stage band is 500–1330 (taller — the phone mock can be 2× scale). Components: `.phone` +
