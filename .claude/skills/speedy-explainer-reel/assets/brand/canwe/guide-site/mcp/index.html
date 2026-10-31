@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Plug 5 apps into Claude (MCP) · canwe.ai</title>
+<meta name="description" content="Zomato, Swiggy, Zerodha, the Government of India's stats office and Gmail can plug into Claude through MCP. Setup for each, plus the honest catch.">
+<meta property="og:title" content="You can now order Zomato from inside Claude: setup for all 5">
+<meta property="og:description" content="Zomato · Swiggy · Zerodha · MoSPI · Gmail — the exact links, steps and catches.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>Plug 5 apps into <span class="sel"><i></i><b>Claude</b></span>. Setup for all.</h1>
+  <p class="lead">These connections use <b>MCP</b> (Model Context Protocol): think of it as a USB port for AI. The company runs a small "server", you paste its link into Claude once, and Claude can use that app for you. Each one below has the link, the steps, and the honest catch.</p>
+  <div class="chips"><span class="chip">4 Indian services</span><span class="chip">official, run by the companies</span><span class="chip">catches included</span></div>
+
+  <nav class="toc">
+    <a href="#how"><small>00</small>How to add any of them</a>
+    <a href="#zomato"><small>01</small>Zomato</a>
+    <a href="#swiggy"><small>02</small>Swiggy</a>
+    <a href="#zerodha"><small>03</small>Zerodha</a>
+    <a href="#govt"><small>04</small>Govt data (MoSPI)</a>
+    <a href="#gmail"><small>05</small>Gmail</a>
+  </nav>
+
+  <section id="how">
+    <div class="step">STEP 00</div><h2>How to add a connection (once)</h2>
+    <ol>
+      <li>Open <b>claude.ai</b> (or the Claude desktop app) → <b>Settings → Connectors</b>.</li>
+      <li>Tap <b>Add custom connector</b>, paste the link from the section below, save.</li>
+      <li>Sign in to that app when it asks (that's how it knows it's you), then start a new chat.</li>
+    </ol>
+    <p class="warn">💡 Plan limits change: as of late 2026, several guides say the free Claude plan allows <b>one</b> custom connector, with more on paid plans. Check what your Settings page shows.</p>
+  </section>
+
+  <section id="zomato">
+    <div class="step">01 · ZOMATO</div><h2>Order food from inside Claude</h2>
+    <p>Zomato's own MCP server (launched Oct 2025): Claude searches restaurants, reads menus, builds your cart, and you pay by scanning a <b>UPI QR</b> yourself.</p>
+    <div class="code pad"><button class="cp">Copy</button>https://mcp-server.zomato.com/mcp</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>Find a veg biryani near me under ₹250 with good ratings and build the cart. Show me the cart before checkout.</div>
+    <p class="warn">⚠️ The catch: Zomato labels its MCP setup as being <b>for testing</b>, so expect rough edges. Always check the cart and the amount before you pay.</p>
+  </section>
+
+  <section id="swiggy">
+    <div class="step">02 · SWIGGY</div><h2>Fill your Instamart cart</h2>
+    <p>Swiggy runs official MCP servers for <b>Food</b>, <b>Instamart</b> (40,000+ products) and <b>Dineout</b> (launched Jan 2026). Claude can plan and fill a grocery cart from one message.</p>
+    <a class="btn pri" href="https://mcp.swiggy.com/access" target="_blank" rel="noopener">⏳ Request access (Swiggy)</a>
+    <a class="btn sec" href="https://mcp.swiggy.com/builders" target="_blank" rel="noopener">📘 Swiggy MCP docs</a>
+    <div class="code prompt pad"><button class="cp">Copy</button>Plan one week of simple hostel breakfasts and fill my Instamart cart with what I need. Keep it under ₹800 and show me the list first.</div>
+    <p class="warn">⏳ The catch: it's <b>early access</b> — production use needs approval via the form above. Early reports also said payment was cash on delivery only.</p>
+  </section>
+
+  <section id="zerodha">
+    <div class="step">03 · ZERODHA</div><h2>Check your portfolio's risk</h2>
+    <p>Zerodha's official <b>Kite MCP</b> is free. After you log in to Kite, Claude can read your holdings, positions and P&amp;L and explain where your risk sits.</p>
+    <div class="code pad"><button class="cp">Copy</button>https://mcp.kite.trade/mcp</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>Look at my holdings. Which sector or single stock is my biggest concentration risk? Explain in simple words. Don't suggest any trades.</div>
+    <p class="warn">📌 The catch: this is <b>analysis, not advice</b>. Zerodha describes the hosted server as read-only (GTT orders aside), but one review saw order tools listed. Never ask an AI to place trades for you.</p>
+  </section>
+
+  <section id="govt">
+    <div class="step">04 · GOVT OF INDIA</div><h2>Official stats, straight from the source</h2>
+    <p>The Ministry of Statistics (MoSPI / National Statistics Office) launched India's first government MCP server in Feb 2026 on its eSankhyiki portal. It's free and needs <b>no login</b>.</p>
+    <div class="code pad"><button class="cp">Copy</button>https://mcp.mospi.gov.in/</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>Using the official MoSPI data, what is the latest CPI inflation figure, which month is it for, and what was it a year earlier? Cite the dataset.</div>
+    <p class="warn">🧪 The catch: it's a <b>beta</b> with a limited set of datasets. Official setup steps: <a href="https://datainnovation.mospi.gov.in" target="_blank" rel="noopener">datainnovation.mospi.gov.in</a> — use those if the link above changes. UPSC aspirants: always note the date of a stat.</p>
+  </section>
+
+  <section id="gmail">
+    <div class="step">05 · GMAIL</div><h2>Never miss a recruiter reply</h2>
+    <p>Gmail is one of Claude's built-in connectors (with Calendar and Drive): no link needed, just <b>Settings → Connectors → Gmail</b> and sign in with Google.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Search my Gmail for every reply from recruiters or companies in the last 30 days. List interview invites, assignments and deadlines in a table, then draft a short follow-up for anyone I haven't answered.</div>
+    <p class="warn">✋ The catch: Claude <b>reads and drafts</b> — it doesn't send. You review every draft and press send yourself. Sources disagree on which plans include it; check your Connectors page.</p>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Free tools that plug into AI, explained in 60 seconds — with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Links and details from each company's public MCP pages and news coverage, checked 31 Oct 2026. These services change fast; if a link stops working, the company's own docs win. Not affiliated with Zomato, Swiggy, Zerodha, MoSPI, Google or Anthropic.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

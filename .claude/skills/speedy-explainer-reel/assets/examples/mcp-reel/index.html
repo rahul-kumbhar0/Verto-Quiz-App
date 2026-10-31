@@ -1,0 +1,223 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Claude can now order Zomato — 5 apps on MCP</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- MCP listicle reel (classes prefixed mc-) ---- */
+.mc-cube{position:absolute}
+.mc-tag{position:absolute;left:0;right:0;text-align:center;opacity:0;z-index:4}
+.mc-tag span{display:inline-flex;align-items:center;gap:12px;font:800 34px Inter;color:#fff;background:#17191D;border:2px solid #D97757;border-radius:999px;padding:12px 30px;box-shadow:0 16px 44px rgba(217,119,87,.35)}
+.mc-lbl{position:absolute;font:800 28px Inter;color:#fff;text-align:center;width:260px;opacity:0}
+.mc-lbl small{display:block;font:600 19px Mono;color:#9AA0A8;letter-spacing:1px}
+/* four services */
+.mc-tile{position:absolute;top:1045px;width:200px;height:170px;border-radius:26px;background:#17191D;border:2px solid #2A2D33;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;opacity:0;box-shadow:0 22px 50px rgba(0,0,0,.5);font-family:Inter}
+.mc-tile b{font:800 22px Inter;color:#fff;text-align:center;line-height:1.15}
+.mc-tile .flag{font-size:58px;line-height:1}
+/* socket row (light) */
+.mc-row{position:absolute;left:70px;right:70px;top:640px;display:flex;justify-content:space-between}
+.mc-sock{width:150px;height:118px;border-radius:24px;background:#fff;border:2px solid var(--l-line);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:.35;box-shadow:0 10px 26px rgba(0,0,0,.06);font:800 17px Inter;color:#333}
+.mc-sock.on{opacity:1;border-color:#D97757;box-shadow:0 0 0 4px rgba(217,119,87,.25),0 18px 40px rgba(217,119,87,.25)}
+.mc-sock .flag{font-size:40px;line-height:1}
+.mc-cable{position:absolute;top:768px;width:6px;height:52px;border-radius:3px;background:linear-gradient(#D97757,#F5B49C);opacity:0;z-index:2}
+/* chat cards (light) */
+.mc-chat{position:absolute;left:90px;right:90px;top:820px;height:470px;border-radius:30px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:22px 26px;opacity:0;font-family:Inter}
+.mc-chat .hd{display:flex;align-items:center;gap:12px;font:800 26px Inter;color:#111;padding-bottom:14px;border-bottom:1.5px solid #EEE}
+.mc-chat .hd em{margin-left:auto;font-style:normal;font:700 18px Inter;color:#15803D;background:#E8F7EF;border-radius:999px;padding:6px 14px;display:inline-flex;align-items:center;gap:8px}
+.mc-u{margin:18px 0 0 auto;max-width:86%;width:fit-content;background:#F0EEE6;color:#222;border-radius:22px 22px 6px 22px;padding:14px 20px;font:600 26px/1.35 Inter;min-height:40px}
+.mc-a{margin-top:16px;display:flex;flex-direction:column;gap:10px}
+.mc-r{display:flex;align-items:center;gap:14px;background:#F7F7F9;border:1.5px solid #ECECF0;border-radius:16px;padding:12px 16px;font:600 24px Inter;color:#222;opacity:0}
+.mc-r i{font-style:normal;font-size:28px;flex:none}
+.mc-r b{font-weight:800}
+.mc-r.hi{background:#FFF4EF;border-color:#F5B49C}
+.mc-catch{position:absolute;left:0;right:0;top:1310px;text-align:center;opacity:0;z-index:4}
+.mc-catch span{display:inline-block;font:800 30px Inter;color:#92400E;background:#FFF7E8;border:3px solid #F59E0B;border-radius:999px;padding:10px 28px}
+.mc-fn{position:absolute;left:0;right:0;top:1380px;text-align:center;font:600 21px Inter;color:#8E8E93;opacity:0;z-index:4}
+/* MCP explainer (dark) */
+.mc-usb{position:absolute;left:0;right:0;top:650px;height:330px}
+.mc-port{position:absolute;left:390px;top:40px;width:300px;height:250px;border-radius:40px;background:linear-gradient(160deg,#2B2E35,#15171B);border:2px solid #3A3F49;box-shadow:0 30px 80px rgba(0,0,0,.6), inset 0 2px 0 #4A505C;display:grid;place-items:center;opacity:0}
+.mc-port .slot{width:150px;height:56px;border-radius:10px;background:#0B0C0E;border:3px solid #D97757;box-shadow:0 0 30px rgba(217,119,87,.45)}
+.mc-port small{position:absolute;bottom:22px;font:800 24px Mono;color:#F5B49C;letter-spacing:3px}
+.mc-plug{position:absolute;top:130px;width:150px;height:84px;border-radius:18px;background:#fff;display:grid;place-items:center;opacity:0;box-shadow:0 16px 40px rgba(0,0,0,.5)}
+.mc-eq{position:absolute;left:0;right:0;top:1020px;text-align:center;opacity:0}
+.mc-eq span{display:inline-flex;align-items:center;gap:18px;font:900 46px Inter;color:#fff}
+.mc-eq b{color:#F5B49C}
+.mc-one{position:absolute;left:0;right:0;top:1130px;text-align:center;opacity:0}
+.mc-one span{display:inline-block;font:800 34px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 34px;box-shadow:0 0 44px rgba(62,207,142,.45)}
+/* CTA (house pattern) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#D97757,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #D97757;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(217,119,87,.35)}
+.endcta b{color:#D97757}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="floor" id="fl" style="left:90px;top:800px"></div>
+    <div class="flow" id="fwH" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="box3d mc-cube" id="cubeC" style="left:140px;top:720px"></div>
+    <div class="box3d mc-cube" id="cubeZ" style="left:700px;top:720px"></div>
+    <div class="mc-lbl" id="lC" style="left:120px;top:990px">Claude<small>THE BRAIN</small></div>
+    <div class="mc-lbl" id="lZ" style="left:680px;top:990px">Zomato<small>THE APP</small></div>
+    <div class="mc-tag" id="hookTag" style="top:1110px"><span>🛒 search → cart → 💳 UPI QR</span></div>
+  </section>
+  <section class="scene" id="sFour">
+    <div class="flow" id="fw1" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="fw2" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="fw3" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="flow" id="fw4" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="box3d mc-cube" id="cubeHub" style="left:425px;top:640px"></div>
+    <div class="mc-tile" id="t1" style="left:50px"><span id="t1l"></span><b>Zomato</b></div>
+    <div class="mc-tile" id="t2" style="left:300px"><span id="t2l"></span><b>Swiggy</b></div>
+    <div class="mc-tile" id="t3" style="left:580px"><span id="t3l"></span><b>Zerodha</b></div>
+    <div class="mc-tile" id="t4" style="left:830px"><span class="flag">🇮🇳</span><b>Govt data<br><span style="font:600 17px Mono;color:#9AA0A8">MoSPI</span></b></div>
+  </section>
+  <section class="scene" id="sList">
+    <div class="mc-row">
+      <div class="mc-sock" id="s1"><span id="s1l"></span>Zomato</div>
+      <div class="mc-sock" id="s2"><span id="s2l"></span>Swiggy</div>
+      <div class="mc-sock" id="s3"><span id="s3l"></span>Zerodha</div>
+      <div class="mc-sock" id="s4"><span class="flag">🇮🇳</span>Govt</div>
+      <div class="mc-sock" id="s5"><span id="s5l"></span>Gmail</div>
+    </div>
+    <i class="mc-cable" id="cable"></i>
+    <div class="mc-chat" id="c1"><div class="hd"><span class="cl"></span>Claude<em>🔌 Zomato connected</em></div>
+      <div class="mc-u"><span id="u1"></span></div>
+      <div class="mc-a"><div class="mc-r" id="r11"><i>🔍</i>Restaurants near you, <b>veg biryani</b></div><div class="mc-r" id="r12"><i>🛒</i>Cart built: <b>Veg Biryani × 1</b></div><div class="mc-r hi" id="r13"><i>💳</i><b>Pay with UPI QR</b> — you scan, you pay</div></div></div>
+    <div class="mc-chat" id="c2"><div class="hd"><span class="cl"></span>Claude<em>🔌 Instamart connected</em></div>
+      <div class="mc-u"><span id="u2"></span></div>
+      <div class="mc-a"><div class="mc-r" id="r21"><i>🍜</i>Instant noodles <b>× 6</b></div><div class="mc-r" id="r22"><i>🥛</i>Milk <b>× 4</b> · Eggs <b>× 12</b></div><div class="mc-r hi" id="r23"><i>🛒</i><b>Cart ready</b> — you check out</div></div></div>
+    <div class="mc-chat" id="c3"><div class="hd"><span class="cl"></span>Claude<em>🔌 Kite connected</em></div>
+      <div class="mc-u"><span id="u3"></span></div>
+      <div class="mc-a"><div class="mc-r" id="r31"><i>📊</i>Read your <b>holdings + P&amp;L</b></div><div class="mc-r" id="r32"><i>🧮</i>Checked <b>sector concentration</b></div><div class="mc-r hi" id="r33"><i>⚠️</i>Flags the <b>biggest risk</b> for you to review</div></div></div>
+    <div class="mc-chat" id="c4"><div class="hd"><span class="cl"></span>Claude<em>🔌 MoSPI connected</em></div>
+      <div class="mc-u"><span id="u4"></span></div>
+      <div class="mc-a"><div class="mc-r" id="r41"><i>🏛️</i>Pulled from <b>official NSO data</b></div><div class="mc-r" id="r42"><i>📈</i>Latest series + <b>the date</b> it's from</div><div class="mc-r hi" id="r43"><i>✅</i><b>Source attached</b> — quote it in your answer</div></div></div>
+    <div class="mc-chat" id="c5"><div class="hd"><span class="cl"></span>Claude<em>🔌 Gmail connected</em></div>
+      <div class="mc-u"><span id="u5"></span></div>
+      <div class="mc-a"><div class="mc-r" id="r51"><i>📬</i>Every <b>recruiter reply</b>, in one list</div><div class="mc-r" id="r52"><i>📅</i>Interview dates + <b>deadlines</b></div><div class="mc-r hi" id="r53"><i>✍️</i>Follow-up <b>drafted</b> — you hit send</div></div></div>
+    <div class="mc-catch" id="k1"><span>⚠ Zomato calls it "testing" for now</span></div>
+    <div class="mc-catch" id="k2"><span>⏳ Early access — request needed</span></div>
+    <div class="mc-catch" id="k3"><span>📌 Analysis, not advice</span></div>
+    <div class="mc-catch" id="k4"><span>🆓 Free · no login · beta</span></div>
+    <div class="mc-catch" id="k5"><span>✋ Drafts only — you press send</span></div>
+    <div class="mc-fn" id="fnL">Sample chats — illustration of what each connection does</div>
+  </section>
+  <section class="scene" id="sHow">
+    <div class="mc-usb">
+      <div class="mc-plug" id="pg1"></div><div class="mc-plug" id="pg3"></div>
+      <div class="mc-port" id="port"><div class="slot"></div><small>MCP</small></div>
+    </div>
+    <div class="mc-eq" id="eq"><span>MCP <b>=</b> a USB port <b>for AI</b></span></div>
+    <div class="mc-one" id="one"><span>one plug → any app 🔌</span></div>
+    <div class="mc-fn" id="fnH" style="top:1230px;color:#8E8E93">Model Context Protocol · open standard, introduced by Anthropic in 2024</div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Aarav · 2m</small><b>MCP</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Ishita · 1m</small><b>MCP</b> the Zomato one 😭🍛</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Rohan · 40s</small><b>MCP</b> UPSC wala bhi chahiye</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#D97757,#3B82F6)"></i><div><small>you · now</small><b>MCP</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>setup for all 5 🔌📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>MCP</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+[["t1l","zomato",120],["t2l","swiggy",64],["t3l","zerodha",64]].forEach(([id, s, z]) => R.$(id).outerHTML = R.lg(s, { s: z === 120 ? 70 : z }));
+[["s1l","zomato"],["s2l","swiggy"],["s3l","zerodha"],["s5l","gmail"]].forEach(([id, s]) => R.$(id).outerHTML = R.lg(s, { s: 48 }));
+document.querySelectorAll(".mc-chat .cl").forEach(e => e.outerHTML = R.lg("claude", { s: 40 }));
+R.$("pg1").innerHTML = R.lg("zomato", { s: 70 }); R.$("pg3").innerHTML = R.lg("gmail", { s: 54 });
+
+const I = [at("one Zomato"), at("two Swiggy"), at("three Zerodha"), at("four the Indian"), at("five Gmail")];
+const T = { four: at("and that's"), list: I[0], how: at("how MCP"), cta: at("comment MCP"), stop: R.voiceEnd() };
+I.push(T.how);
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.four, enter: "none" }, { id: "sFour", s: T.four, e: T.list, enter: "blurzoom" },
+  { id: "sList", s: T.list, e: T.how, enter: "push" }, { id: "sHow", s: T.how, e: T.cta, enter: "blurzoom" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.list, T.how], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "THE HOOK", at: 0.2 }, { label: "5 APPS", at: T.list }, { label: "HOW", at: T.how, end: T.cta }],
+  counter: { unit: "apps plugged in", steps: [[0.3, 1, "app plugged in"], [at("four Indian") - 0.1, 4, "Indian services"],
+    [I[0] - 0.1, 1, "of 5"], [I[1] - 0.1, 2, "of 5"], [I[2] - 0.1, 3, "of 5"], [I[3] - 0.1, 4, "of 5"], [I[4] - 0.1, 5, "of 5 ✓"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } },
+  poses: [[0.15, "surprised"], [at("inside Claude"), "present"], ...window.PINS.map(([p, n]) => [at(p), n])], autoPoses: {},
+});
+const HUB = [540, 870];
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK — Claude cube + Zomato cube, data flowing between them
+  R.rays("fl", t, 0.2); R.rings("fl", t, [0.3]);
+  R.box("cubeC", t, { at: 0.15, size: 220, icon: "logos/claude.svg", side: "claude", spin: 6 });
+  R.box("cubeZ", t, { at: at("Zomato") - 0.15, size: 220, icon: "logos/zomato.svg", side: "zomato", spin: -6 });
+  R.flow("fwH", t, { at: at("from inside") - 0.2, path: "M 370 830 C 480 760, 600 760, 710 830", n: 4, speed: 0.6, doc: true });
+  R.rise("lC", t, 0.4, { dy: 14 }); R.rise("lZ", t, at("Zomato"), { dy: 14 });
+  R.rise("hookTag", t, at("Claude") + 0.15, { dy: 20 });
+  // FOUR — hub cube; four service tiles plug in with packet streams
+  R.box("cubeHub", t, { at: T.four + 0.1, size: 230, icon: "logos/claude.svg", side: "MCP", spin: 8 });
+  const tx = [150, 400, 680, 930], ta = at("four Indian");
+  tx.forEach((x, i) => {
+    const a = ta + i * 0.28; R.pop("t" + (i + 1), t, a, { from: 0.6 });
+    R.flow("fw" + (i + 1), t, { at: a + 0.2, path: `M ${x} 1045 C ${x} 960, ${HUB[0]} 980, ${HUB[0]} ${HUB[1]}`, n: 4, speed: 0.55 + i * 0.05 });
+  });
+  // LIST — socket lights + Claude chat demo per app
+  const Q = ["Order a veg biryani near me", "Hostel groceries for a week", "What's my biggest portfolio risk?", "Latest official inflation data?", "Find every recruiter reply this month"];
+  const sx = [70 + 75, 70 + 75 + 211, 540, 540 + 211, 1010 - 75];
+  let cur = -1; I.slice(0, 5).forEach((a, i) => { if (t >= a - 0.1) cur = i; });
+  for (let i = 0; i < 5; i++) {
+    const a = I[i], b = I[i + 1], on = i === cur;
+    R.$("s" + (i + 1)).classList.toggle("on", on);
+    R.card("c" + (i + 1), t, { in: a + 0.05, out: b, y: 36 });
+    R.type("u" + (i + 1), Q[i], t, a + 0.35, 34);
+    [1, 2, 3].forEach(k => R.rise(`r${i + 1}${k}`, t, a + 0.9 + k * 0.32, { dy: 12 }));
+    R.card("k" + (i + 1), t, { in: a + 1.9, out: b, y: 16 });
+    if (t >= a) R.cue("click", a, { soft: true });
+  }
+  const cb = R.$("cable"); cb.style.left = (sx[Math.max(cur, 0)] - 3) + "px"; cb.style.opacity = cur >= 0 && t < T.how ? 1 : 0;
+  R.note("fnL", t, I[0] + 1.2, T.how);
+  // HOW — USB port, three app plugs slide in
+  pop("port", t, T.how + 0.15, { from: 0.7 });
+  [["pg1", -320, 0], ["pg3", 320, 0]].forEach(([id, dx, dy], k) => {
+    const a = at("USB") + k * 0.25, p = ease.spring(prog(t, a, 0.5)); const el = R.$(id);
+    const ex = 465 + dx * 1.0, ey = 130 + dy;
+    el.style.left = lerp(ex + dx * 0.9, ex, p) + "px"; el.style.top = lerp(ey + dy * 0.9, ey, p) + "px";
+    el.style.opacity = clamp(p * 2); if (p > 0) R.cue("click", a, { soft: true });
+  });
+  R.rise("eq", t, at("USB") - 0.2, { dy: 20 });
+  R.rise("one", t, at("one plug") - 0.1, { dy: 18 });
+  R.note("fnH", t, at("USB") + 0.4, T.cta);
+  // CTA — house pattern
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "MCP", tyA = at("comment MCP") + 0.3, posted = R.end("comment MCP") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 9); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("all five") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>
