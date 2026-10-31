@@ -14,10 +14,10 @@ document.querySelectorAll('.cp').forEach(b => b.addEventListener('click', async 
   el.className = 'apps';
   el.innerHTML = '<div class="hd">OUR APPS · MADE BY THE SAME TEAM</div>' +
     '<a class="app" href="https://play.google.com/store/apps/details?id=com.docxify.app" target="_blank" rel="noopener">' +
-    '<span class="ic">📄</span><div><b>Docxify: 300+ PDF Tools, Offline</b>' +
+    '<img class="ic" src="/apps/docxify.png" alt="Docxify app icon"><div><b>Docxify: 300+ PDF Tool Offline</b>' +
     '<span>Resume under 200 KB for upload portals · exam-form photo & signature sizes (SSC, IBPS, UPSC…) · scan, merge, sign, convert. Files stay on your phone.</span></div><em>Google Play</em></a>' +
     '<a class="app" href="https://play.google.com/store/apps/details?id=com.codex.torrentx" target="_blank" rel="noopener">' +
-    '<span class="ic">⚡</span><div><b>8XDL: Secure Download Manager</b>' +
+    '<img class="ic" src="/apps/8xdl.png" alt="8XDL app icon"><div><b>8XDL - Secure Download Manager</b>' +
     '<span>Private browser + fast download manager + media player & file manager. 4.8★ on Google Play.</span></div><em>Google Play</em></a>' +
     '<div class="note">Our own Android apps (CanWe.tech). Free to install; they contain ads and optional in-app purchases.</div>';
   var follow = document.querySelector('.follow');

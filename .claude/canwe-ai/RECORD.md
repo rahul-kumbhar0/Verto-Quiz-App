@@ -61,11 +61,18 @@ build a buyer list).
   **Docxify: 300+ PDF Tool Offline** (`com.docxify.app` — resume <200 KB, exam-form photo/signature
   sizes, 500+ conversions, offline/private, ads+IAP ₹199–2,999) and **8XDL: Secure Download Manager**
   (`com.codex.torrentx` — private browser + download manager + media player, 4.8★, 5K+ downloads,
-  ads+IAP ₹100–500). One edit in copy.js updates every current and future page. Labeled honestly
+  ads+IAP ₹100–500). One edit in copy.js updates every current and future page. Real Play Store app icons (user-provided)
+  live at `/apps/docxify.png` + `/apps/8xdl.png` (source `guide-site/apps/`, quantized small PNGs;
+  titles match the store listings exactly). Labeled honestly
   ("OUR APPS · MADE BY THE SAME TEAM" + ads/IAP note). Docxify is a 6/6 formula topic for its own
   reel later (first own-product monetization loop; could pair with Stirling-PDF topic #2).
-- Deploy gotcha: every deploy must send ALL files inline (utf-8). SHA references fail with
-  `missing_files`, and a redeploy via `deploymentId` drops unsent files. Verify with `web_fetch_vercel_url`.
+- Deploy gotcha: every deploy must carry ALL files. Two working ways per file: inline
+  (`{"file","encoding":"utf-8","data"}`; binary needs base64 and is easy to corrupt in a tool call) or
+  `upload_file` (base64 + `xVercelDigest` sha1 + `contentLength`; server VERIFIES the sha, so corruption
+  is caught) then reference `{"file","sha","size"}` in create_deployment. Both forms can be mixed in one
+  deploy. Files sent inline in an earlier deploy are NOT reusable by sha (missing_files); only
+  upload_file'd blobs are. A redeploy via `deploymentId` drops unsent files. vercel.app is
+  network-blocked for curl in-session; verify with `web_fetch_vercel_url`.
 - Web Analytics is NOT enabled (owner must click Enable in the dashboard; then add the script).
 
 ## Reels: status and results
