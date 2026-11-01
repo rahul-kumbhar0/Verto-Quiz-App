@@ -1,0 +1,15 @@
+{
+  "name": "youtube-automation",
+  "version": "1.0.0",
+  "description": "Connect a YouTube channel and upload Claude-generated videos via the YouTube Data API v3",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "auth": "node get-refresh-token.js",
+    "upload": "node upload.js"
+  },
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "googleapis": "^144.0.0"
+  }
+}
