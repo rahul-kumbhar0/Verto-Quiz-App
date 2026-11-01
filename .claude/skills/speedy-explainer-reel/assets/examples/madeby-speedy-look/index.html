@@ -1,0 +1,111 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Claude made this whole reel (speedy + look + fx)</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css">
+<style>
+/* reel-specific (prefix mb-) */
+.mb-sc{position:absolute;inset:0;visibility:hidden}
+.mb-flip{position:absolute;left:170px;width:740px;top:660px;height:640px}
+.mb-frame{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px}
+.mb-frame .cap{font:800 40px Inter;color:var(--ink)}.mb-frame .cap b{color:var(--ink);background:rgba(59,130,246,.18);outline:3px solid #3B82F6;padding:0 8px;border-radius:4px}
+.mb-frame .row{display:flex;gap:10px}
+.mb-frame .row i{width:96px;height:66px;border-radius:12px;background:linear-gradient(180deg,#30333B,#24262D);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.mb-frame .row i.a{background:linear-gradient(180deg,#F0A585 -40%,#D97757 50%,#B95E40)}
+.mb-frame .av{width:120px;height:120px;border-radius:50%;background:linear-gradient(180deg,#D97757,#9C4A30);box-shadow:inset 0 2px 0 rgba(255,255,255,.25)}
+.mb-frame .tag{font:700 20px Mono;letter-spacing:3px;color:var(--ink-3)}
+.mb-code{width:100%;height:100%;padding:38px 36px;box-sizing:border-box}
+.mb-code .hd{font:700 20px Mono;letter-spacing:3px;color:var(--ink-3);margin-bottom:18px}
+.mb-trend{position:absolute;left:110px;right:110px;top:670px;padding:26px 28px}
+.mb-trend .hd{display:flex;justify-content:space-between;margin-bottom:12px}
+.mb-row{display:flex;align-items:center;gap:18px;padding:16px 18px;border-radius:16px;margin-top:10px;background:rgba(255,255,255,.025);border:1.5px solid transparent;opacity:0}
+.mb-row b{flex:1;font:700 27px Inter;color:var(--ink)}
+.mb-row span{font:800 26px Mono;color:var(--ink-2)}
+.mb-row.on{border-color:rgba(217,119,87,.6);background:rgba(217,119,87,.10)}.mb-row.on span{color:var(--acc-hi)}
+.mb-row i{width:46px;height:46px;border-radius:12px;background:linear-gradient(180deg,#30333B,#24262D);font:800 22px Inter;font-style:normal;color:var(--ink-2);display:grid;place-items:center}
+.mb-script{position:absolute;left:110px;right:110px;top:670px;height:600px;padding:30px 32px;box-sizing:border-box}
+.mb-score{position:absolute;left:150px;right:150px;top:680px;padding:40px 36px 34px;text-align:center}
+.mb-score .t-hero{font-size:210px;line-height:1}
+.mb-score .of{font:900 64px Inter;color:var(--ink-3);vertical-align:top}
+.mb-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:22px}
+.mb-chips .m-chip{font-size:22px;padding:9px 18px;opacity:0}
+.mb-voice{position:absolute;left:90px;right:90px;top:670px;height:620px;padding:30px;box-sizing:border-box}
+.mb-wave{position:relative;height:200px;display:flex;align-items:center;gap:5px;margin-top:20px}
+.mb-wave i{flex:1;border-radius:4px;background:linear-gradient(180deg,#4A4E58,#30333B)}
+.mb-wave i.p{background:linear-gradient(180deg,#F0A585,#D97757)}
+.mb-play{position:absolute;top:-10px;bottom:-10px;width:3px;background:var(--acc);box-shadow:0 0 18px var(--acc-glow)}
+.mb-tl{position:relative;height:200px;margin-top:34px;border-top:1.5px solid var(--g-line)}
+.mb-tl .w{position:absolute;top:26px;font:800 23px Inter;color:var(--ink);padding:8px 12px;border-radius:10px;background:linear-gradient(180deg,#262930,#1D1F25);border:1.5px solid var(--g-line-hi);opacity:0;white-space:nowrap}
+.mb-tl .w small{display:block;font:600 15px Mono;color:var(--ink-3);margin-top:4px}
+.mb-tl .w.k{border-color:rgba(217,119,87,.7);color:var(--acc-hi)}
+.mb-fn{position:absolute;left:0;right:0;top:1300px;text-align:center;font:500 20px Inter;color:var(--ink-3);opacity:0;z-index:4}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <div id="cam">
+    <section class="mb-sc" id="sHook">
+      <div class="mb-flip fx-flip" id="flip"><div class="fx-card">
+        <div class="fx-front m-card mb-frame"><div class="tag">THIS REEL · FRAME 1</div><div class="cap">No editor touched this <b>reel.</b></div><div class="row"><i></i><i></i><i class="a"></i><i></i></div><div class="av"></div></div>
+        <div class="fx-back m-card mb-code"><div class="hd">scene-01.html</div><div class="fx-code" id="code1"></div></div></div></div>
+    </section>
+    <section class="mb-sc" id="sTopic">
+      <div class="mb-trend m-card" id="trend"><div class="hd"><span class="t-kicker">trending · last 30 days</span><span class="t-kicker">views</span></div>
+        <div class="mb-row" id="r1"><i>1</i><b>"Claude made this whole video"</b><span>1.8M</span></div>
+        <div class="mb-row" id="r2"><i>2</i><b>"I graduated today. Zero offers."</b><span>1.2M</span></div>
+        <div class="mb-row" id="r3"><i>3</i><b>"13 free Claude skills for Instagram"</b><span>550K</span></div></div>
+      <div class="mb-script m-card" id="scr"><div class="t-kicker" style="margin-bottom:16px">script.md</div><div class="fx-code" id="code2" style="font-size:24px;white-space:pre-wrap"></div></div>
+      <div class="mb-fn" id="fn1">View counts: PullRows estimates, Oct 2026</div>
+    </section>
+    <section class="mb-sc" id="sScore">
+      <div class="mb-score m-card" id="score"><div class="t-kicker">hook score</div><div><span class="t-hero" id="odo"></span><span class="of">/12</span></div>
+        <div class="mb-chips" id="chips"><span class="m-chip">specific</span><span class="m-chip">stakes</span><span class="m-chip">curiosity</span><span class="m-chip">fast</span><span class="m-chip">showable</span><span class="m-chip acc">true</span></div></div>
+    </section>
+    <section class="mb-sc" id="sVoice">
+      <div class="mb-voice m-card" id="voice"><div class="t-kicker">voice take · AI voice</div><div class="mb-wave" id="wave"><div class="mb-play" id="play"></div></div>
+        <div class="t-kicker" style="margin-top:30px">captions · word by word</div><div class="mb-tl" id="tl"></div></div>
+    </section>
+  </div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, { at, end, prog, clamp, lerp, ease } = R, $ = R.$, E = ease;
+const T = { topic: at("Here's how"), score: at("Then it scores"), voice: at("The voice"), scenes: at("Every scene"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.scenes + 0.2).toFixed(2);   // PREVIEW: first four lines only
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH,
+  chapters: [{ label: "topic", at: T.topic }, { label: "script", at: at("writes") }, { label: "hook", at: T.score }, { label: "voice", at: T.voice }, { label: "scenes", at: T.scenes }, { label: "post", at: 999, end: 999 }],
+  counter: { unit: "/12", steps: [[at("scores") + 0.2, 12, "hook score"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
+const SNIP = `<section class="scene">\n  <div class="m-card" id="frame">\n    No editor touched this reel.\n  </div>\n</section>\n<script>R.fx.flip("frame", t, 1.9)<\/script>`;
+const SCRIPT = `No editor touched this [reel.]\nEvery frame you're seeing is *code* Claude [wrote.]\nHere's how. I give Claude a [topic.]\n…`;
+$("wave").insertAdjacentHTML("beforeend", Array.from({ length: 64 }, (_, i) => `<i style="height:${18 + Math.abs(F.hash(i) * 150) + Math.abs(Math.sin(i * 0.7)) * 30}px"></i>`).join(""));
+const CW = ["The", "voice?", "An", "AI", "voice", "reads", "Claude's", "script."];
+{ const W = window.CAPTIONS || []; $("tl").innerHTML = CW.map((w, i) => `<div class="w${w === "AI" || w === "script." ? " k" : ""}" id="cw${i}" style="left:${i * 100}px">${w}<small>${(T.voice + i * 0.3).toFixed(2)}s</small></div>`).join(""); }
+window.seek = t => {
+  R.frame(t);
+  // base state, then the seams (current = LEFT), then in-scene motion
+  F.slots(t, [["sHook", 0, T.topic], ["sTopic", T.topic, T.score], ["sScore", T.score, T.voice], ["sVoice", T.voice, 99]]);
+  F.cutCurve("sHook", "sTopic", t, T.topic); F.zoomCut("sTopic", "sScore", t, T.score); F.cutCurve("sScore", "sVoice", t, T.voice);
+  // camera with intent: establish slightly wide on the hook, settle by the flip
+  F.cam("cam", t, [{ t: 0, s: 1.06 }, { t: at("Every frame"), s: 1, ease: "power2InOut" }, { t: 99, s: 1 }], { mblur: false });
+  R.speedyFrame(t);
+  // HOOK — signature shot: the reel's own frame flips to the code behind it
+  F.flip("flip", t, at("Every frame") - 0.1, { d: 0.9 }); F.code("code1", SNIP, t, at("Every frame") + 0.7, { cps: 70 });
+  // TOPIC — trending list, our topic lights up; then the script types itself
+  ["r1", "r2", "r3"].forEach((id, i) => { const p = E.power4Out(prog(t, T.topic + 0.25 + i * 0.08, 0.4)); $(id).style.opacity = p; $(id).style.transform = `translateY(${(1 - p) * 30}px)`; });
+  $("r1").classList.toggle("on", t >= at("already") - 0.1);
+  const sw = t >= at("writes") - 0.2;
+  F.slots(t, [["trend", sw ? -1 : 0, sw ? -1 : 99], ["scr", sw ? 0 : -1, sw ? 99 : -1]]);
+  F.rackFocus("trend", "scr", t, at("writes") - 0.2);
+  F.code("code2", SCRIPT, t, at("writes"), { cps: 60 });
+  R.note("fn1", t, T.topic + 0.6, at("writes") - 0.3);
+  // SCORE — odometer to 12, chips stagger, sheen when it lands (stillness, then payoff)
+  F.odometer("odo", t, T.score + 0.3, 0.9, 12, { spins: 1 }); F.sheen("score", t, T.score + 1.3);
+  [...$("chips").children].forEach((c, i) => { const p = E.power4Out(prog(t, at("before") + i * 0.06, 0.35)); c.style.opacity = p; c.style.transform = `translateY(${(1 - p) * 18}px)`; });
+  // VOICE — playhead runs, waveform lights behind it, caption words drop onto the timeline at their times
+  const pp = clamp((t - T.voice - 0.2) / 3.2), bars = $("wave").querySelectorAll("i");
+  $("play").style.left = (pp * 100) + "%"; bars.forEach((b, i) => b.classList.toggle("p", i / bars.length < pp));
+  CW.forEach((w, i) => { const p = E.power4Out(prog(t, T.voice + 0.3 + i * 0.3, 0.3)); $("cw" + i).style.opacity = p; $("cw" + i).style.transform = `translateY(${(1 - p) * -40}px)`; });
+};
+window.seek(0);
+</script></body></html>

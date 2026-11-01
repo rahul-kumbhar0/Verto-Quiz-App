@@ -5,6 +5,8 @@
 .fx-card{position:relative;width:100%;height:100%;transform-style:preserve-3d}
 .fx-front,.fx-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;overflow:hidden}
 .fx-back{transform:rotateY(180deg)}
+/* material classes (.m-card etc.) set position:relative — keep both faces stacked */
+.fx-flip .fx-front,.fx-flip .fx-back{position:absolute;inset:0}
 .fx-flip.x .fx-back{transform:rotateX(180deg)}
 /* sheen */
 .fx-sheen{position:absolute;top:-10%;bottom:-10%;left:0;width:38%;pointer-events:none;opacity:0;border-radius:inherit;

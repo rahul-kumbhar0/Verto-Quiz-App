@@ -44,6 +44,10 @@ Look first: `references/look.md` (materials, one accent, BANNED candy colours). 
     impact = flash/shake/inverse zoom, glitch, type, pop, click, ding, shutter. Music dips before the payoff.
 12. **Signature shot in 0–3 s** (the cover frame) and **real motion blur** on finals (`MBLUR=3`).
 
+**Always inside the Speedy template** (presenter + kinetic captions + rail): the fx demo is only a kit test. Worked
+integration: `assets/examples/madeby-speedy-look/` (`R.setup({scenes:[]})`, then per frame `R.frame` → `R.fx.slots` → seams
+→ `R.fx.cam` → `R.speedyFrame` → scene motion; `<body class="look">`; emphasis tokens must match display merges).
+
 Scene plumbing: call `R.fx.slots(t, [[id,start,end]…])` FIRST every frame (base visibility/reset), THEN the
 seams (each only touches its own window), THEN in-scene motion.
 
