@@ -33,7 +33,8 @@ Rule from the data: a reel with no keyword gets no comments (AI-interview: 32 li
 concept without a viewer stake gets nothing. When unsure, it is a tool-demo reel.
 
 ## House defaults (canwe.ai) — override only when the owner says so
-- Voice: ElevenLabs "Shlok" (`2i7LhYjvw41fgbcqlf3Z`, eleven_v3): `estimate_only` first, then ONE take
+- Voice: ElevenLabs "Shlok" (`2i7LhYjvw41fgbcqlf3Z`, eleven_v3), prompt = `narration_tts.txt` from mark_script (audio tags
+  `<tag>` → `[tag]`, `^stress^` → CAPS; reel-script-writer voice.md § Sound human): `estimate_only` first, then ONE take
   (`generations_count: 1`); ≈ 3.0 words/s → 120 words ≈ 40 s. Pace with `pace.py --pause 0.16 --stop 0.55
   --tempo 1.06–1.08`. If the generate call is denied, never retry it — ask, or reuse an approved voice.
 - Look: OUR style (presenter + kinetic captions + selection box + dark/light flips + rail). Techniques from

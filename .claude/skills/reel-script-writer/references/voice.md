@@ -20,6 +20,24 @@ connected my Claude".
   makes it noise.
 - Humour: one line max, usually the reaction or the CTA's friend line.
 
+## Sound human (ElevenLabs v3 audio tags) — owner, 1 Nov 2026: "like a real person, not generated"
+The voice is ElevenLabs v3 (Shlok). v3 performs inline AUDIO TAGS, so we direct the take like an actor.
+**Markup in script.md:** `<tag>` = audio tag (becomes `[tag]` in `narration_tts.txt`, never shown in captions);
+`^word^` = vocal stress (sent in CAPS, captions stay normal). `[box]`/`*bold*`/`{pose}` stay caption/presenter marks
+and are stripped from the TTS prompt (v3 would read `[box]` as a tag — that is why the prompt file exists).
+Rules (from the ElevenLabs v3 guide + our ear):
+- Tags describe HOW it is said, never actions: `<excited>`, `<curious>`, `<surprised>`, `<warmly>`,
+  `<matter of fact>`, `<softly>`, `<mischievously>`, `<impressed>`. Stage directions (`smiling`, `pacing`) are NOT performed.
+- A tag holds until the next one: change it only where the delivery changes (hook → setup → payoff → CTA): 3–6 per reel.
+- Non-verbal sounds make it human but max 2 per reel: `<chuckles>` after a funny/absurd beat, `<exhales>` before a
+  big number, `<short pause>` before the payoff (or an ellipsis …). Never a laugh at the start of the hook.
+- Talk like you'd say it to a friend: "okay so", "wait", "honestly", a self-correction ("not three… FOUR"), a
+  reaction to your own result ("that's… a lot") — max 2 fillers.
+- Stress one word per sentence max with `^word^`; numbers stay in digits (v3 reads them naturally).
+- Arc for a tool demo: `<curious>` hook → `<matter of fact>` setup → `<excited>` proof/payoff (+ `<short pause>`
+  before the biggest number) → `<warmly>` CTA.
+- One take, then listen: if a tag over-acts, soften it (`<excited>` → `<impressed>`), don't stack more.
+
 ## Pacing: fast, with hard stops (the "stop and speak" delivery)
 Viral delivery = dense speech + sudden silence, not uniform speed. The winners talk fast and then
 STOP for half a second on the turn. Write for it, then build it (`pace.py` in speedy-explainer-reel):

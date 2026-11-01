@@ -25,7 +25,7 @@ DEFAULT_MAX = {"leads": 45, "sale": 45, "reach": 60, "follow": 50}
 def strip(md):
     lines = [l for l in md.splitlines() if l.strip() and not l.lstrip().startswith("#")]
     raw = " ".join(lines)
-    return raw, re.sub(r"\s+", " ", re.sub(r"\{[^}]*\}|[\[\]*]", "", raw)).strip()
+    return raw, re.sub(r"\s+", " ", re.sub(r"\{[^}]*\}|<[a-z][a-z ]*>|[\[\]*^]", "", raw)).strip()
 
 
 def sentences(text):
@@ -90,6 +90,17 @@ def main():
     if raw.count("[") != raw.count("]"): say("ERROR", "unbalanced [box] brackets")
     if raw.count("{") != raw.count("}"): say("ERROR", "unbalanced {pose} braces")
     if raw.count("*") % 2: say("ERROR", "odd number of * (bold markers)")
+    # ElevenLabs v3 audio tags <tag> (human delivery)
+    tags = re.findall(r"<([a-z][a-z ]*)>", raw)
+    STAGE = {"smiling", "grinning", "pacing", "standing", "nodding", "pointing", "music", "typing", "leaning"}
+    nv = [t for t in tags if t in ("laughs", "laughs softly", "chuckles", "giggles", "sighs", "exhales", "gasps")]
+    if not tags: say("WARN", "no <audio tags>: add 3–6 so the voice sounds like a person (references/voice.md § Sound human)")
+    else:
+        say("WARN" if len(tags) > max(8, n / 12) else "OK", f"audio tags: {len(tags)} ({', '.join(dict.fromkeys(tags))})")
+        if len(nv) > 2: say("WARN", f"{len(nv)} non-verbal sounds ({', '.join(nv)}): max 2 per reel or it sounds acted")
+        bad = [t for t in tags if t in STAGE]
+        if bad: say("ERROR", f"stage-direction tags are not performed: {bad} — describe HOW it is said")
+        if re.match(r"\s*(\{[^}]*\}\s*)*<(chuckles|laughs|sighs|gasps)", raw.split("\n")[0] if raw else ""): say("WARN", "don't open the hook with a non-verbal sound; open on the payoff noun")
     boxes = len(re.findall(r"\[[^\]]+\]", raw))
     if boxes:
         per = n / boxes
