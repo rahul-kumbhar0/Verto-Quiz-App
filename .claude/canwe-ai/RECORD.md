@@ -94,7 +94,7 @@ build a buyer list).
 | One prompt: which jobs you fit (green hoodie + grad cap, eyes-pop gag) | PROMPT | ready, not posted | |
 | Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (use the v2 files) | |
 | cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: wave decays) | |
-| Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) | GROW | ready, not posted (post next) | |
+| Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) — FINAL = 3D rebuild 1 Nov (reels/grow3d: 3D phone, exploded reel layers, pedestals, station belt + packet, 3D Post key, 13 skill cubes; pulse music; same voice) | GROW | ready, posting 1 Nov | |
 | Learn AI Engineering · Day 1: every word AI writes is a guess — FINAL = 3D rebuild (reels/ai01v4: v1 voice + script, 3D token slab/laser split, number skyline, isometric next-token bars, pulse music; 47 s, no new credits) | TOKENS | ready, not posted — SERIES pilot | |
 | Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
 | Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |

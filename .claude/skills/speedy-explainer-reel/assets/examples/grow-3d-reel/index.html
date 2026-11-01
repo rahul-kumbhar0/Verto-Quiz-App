@@ -1,0 +1,237 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>I automated my Instagram with Claude (3D)</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="kit3d.css">
+<style>
+/* ---- grow 3D rebuild (classes prefixed g3-) ---- */
+.g3-ph .fr{display:block;padding:26px 26px;text-align:left;background:#17191D;border:2px solid #2A2D33;border-radius:44px;font-family:Inter;white-space:normal;box-shadow:none}
+.g3-hd{display:flex;align-items:center;gap:18px}
+.g3-hd img{width:92px;height:92px;border-radius:50%;box-shadow:0 0 0 3px #fff}
+.g3-hd b{display:block;font:800 32px Inter;color:#fff}.g3-hd span{display:block;font:600 20px Inter;color:#9AA0A8;margin-top:4px}
+.g3-st{display:flex;gap:10px;margin-top:20px}
+.g3-st div{flex:1;text-align:center;background:#1E2126;border-radius:16px;padding:12px 4px}
+.g3-st b{display:block;font:900 36px Inter;color:#fff}.g3-st span{font:600 18px Inter;color:#9AA0A8}
+.g3-gr{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px;perspective:800px}
+.g3-gr i{aspect-ratio:3/4;border-radius:12px;background:linear-gradient(160deg,#3A2A44,#17191D);display:grid;place-items:center;font-size:44px;font-style:normal;backface-visibility:hidden;box-shadow:inset 0 0 0 1.5px rgba(255,255,255,.08)}
+.g3-chip{position:absolute;left:0;right:0;top:1250px;text-align:center;opacity:0;z-index:5}
+.g3-chip span{display:inline-flex;align-items:center;gap:14px;font:800 36px Inter;color:#fff;background:#17191D;border:2px solid #D97757;border-radius:999px;padding:14px 30px;box-shadow:0 16px 44px rgba(217,119,87,.4)}
+/* meta: exploded reel layers */
+.g3-ly{position:absolute;left:-330px;width:660px;height:150px;border-radius:24px;background:#17191D;border:2px solid #2A2D33;box-sizing:border-box;padding:18px 24px;font-family:Inter;transform-style:preserve-3d;box-shadow:0 30px 60px rgba(0,0,0,.45)}
+.g3-ly .t{display:flex;align-items:center;gap:12px;font:800 30px Inter;color:#fff}
+.g3-ly .t i{font-style:normal;font-size:34px}
+.g3-ly .body{margin-top:10px;font:600 22px/1.4 Mono;color:#9AA0A8;white-space:nowrap;overflow:hidden}
+.g3-wave{display:flex;align-items:flex-end;gap:5px;height:50px;margin-top:10px}.g3-wave i{width:10px;border-radius:4px;background:#3ECF8E}
+.g3-tl{display:flex;gap:6px;margin-top:14px}.g3-tl i{height:30px;border-radius:7px}
+.g3-bdg{position:absolute;right:18px;top:16px;display:flex;align-items:center;gap:8px;font:800 22px Inter;color:#D97757;border:2px solid #D97757;border-radius:999px;padding:6px 14px;opacity:0;background:rgba(43,22,14,.9);transform:translateZ(30px)}
+/* numbers: pedestals (light) */
+.g3-pd .fr{display:flex;flex-direction:column;justify-content:flex-start;padding-top:22px;color:#111;font-family:Inter;border:2px solid #E3E1DC}
+.g3-pd .fr b{font:900 60px Inter;letter-spacing:-2px}.g3-pd .fr span{font:700 20px Inter;color:#6B7280;margin-top:4px;text-align:center;white-space:normal;line-height:1.2;padding:0 8px}
+.g3-fn{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+/* system: stations */
+.g3-sta .fr{display:flex;flex-direction:column;gap:6px;font:800 24px Inter;color:#fff;text-align:center;white-space:normal;line-height:1.15;padding:8px}
+.g3-sta .fr i{font-style:normal;font-size:46px}
+.g3-pk .fr{box-shadow:0 0 30px #F9CE34}
+.g3-hk{position:absolute;opacity:0;font:900 22px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:6px 14px;white-space:nowrap}
+/* rule */
+.g3-key{position:absolute;left:340px;top:900px;width:400px;height:190px;perspective:900px}
+.g3-key .cap{position:absolute;inset:0;border-radius:34px;background:linear-gradient(180deg,#3D8BFF,#1F5FD6);box-shadow:0 24px 0 #123E91,0 40px 70px rgba(0,0,0,.6),inset 0 3px 0 #8DB8FF;display:grid;place-items:center;font:900 72px Inter;color:#fff;transform:rotateX(30deg)}
+.g3-ban{position:absolute;left:0;right:0;top:700px;text-align:center;opacity:0;z-index:5}
+.g3-ban span{display:inline-flex;align-items:center;gap:14px;font:900 50px Inter;color:#FF9A9E;border:6px solid #FF5A5F;border-radius:20px;padding:12px 30px;background:rgba(42,20,22,.94);transform:rotate(-3deg)}
+.g3-chk{position:absolute;left:0;right:0;top:1150px;display:flex;justify-content:center;gap:12px}
+.g3-chk i{font-style:normal;font:800 26px Inter;color:#fff;background:#17191D;border:2px solid #2A2D33;border-radius:999px;padding:10px 20px;opacity:0}
+.g3-you{position:absolute;left:0;right:0;top:820px;text-align:center;opacity:0;z-index:5}
+.g3-you span{display:inline-block;font:900 40px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:10px 30px}
+/* pack (light) */
+.g3-repo{position:absolute;left:100px;right:100px;top:660px;border-radius:26px;background:#fff;border:2px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);padding:20px 26px;opacity:0;font-family:Inter;display:flex;align-items:center;gap:18px}
+.g3-repo .nm b{display:block;font:800 28px Mono;color:#111}.g3-repo .nm span{font:600 20px Inter;color:#777}
+.g3-repo .st{margin-left:auto;text-align:right}.g3-repo .st b{display:block;font:900 42px Inter;color:#B45309}.g3-repo .st span{font:700 18px Inter;color:#999}
+.g3-sk .fr{font:800 17px Mono;color:#fff;white-space:normal;text-align:center;line-height:1.1;padding:4px}
+.g3-26{position:absolute;left:0;right:0;top:1150px;text-align:center;opacity:0;z-index:4}
+.g3-26 span{display:inline-block;font:900 44px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:10px 34px;box-shadow:0 14px 34px rgba(62,207,142,.4)}
+.g3-free{position:absolute;left:0;right:0;top:1240px;display:flex;justify-content:center;gap:14px;opacity:0;z-index:4}
+.g3-free i{font-style:normal;font:800 26px Inter;color:#111;background:#fff;border:2px solid var(--l-line);border-radius:999px;padding:10px 22px}
+/* honesty */
+.g3-hon{position:absolute;left:0;right:0;top:760px;text-align:center;perspective:1200px}
+.g3-hon .card{display:inline-block;width:820px;border-radius:30px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);padding:34px;font-family:Inter;opacity:0;transform-origin:50% 0}
+.g3-hon .card b{display:block;font:900 54px Inter;color:#111;letter-spacing:-1px}.g3-hon .card span{display:block;margin-top:12px;font:600 28px Inter;color:#777}
+/* CTA overrides (grow = blue) */
+.cmts .inp i{background:linear-gradient(135deg,#3ECF8E,#3B82F6)}
+.dm .av{background:#fff}
+.endcta span{font:800 64px Inter;border-color:#3B82F6;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <section class="scene" id="sHook">
+    <div class="q3-wrap" style="top:640px;height:680px"><div class="q3-g" id="phG"></div></div>
+    <div class="g3-chip" id="clch"><span><span id="clchin"></span>run with Claude</span></div>
+  </section>
+
+  <section class="scene" id="sMeta">
+    <div class="q3-wrap" style="top:640px;height:680px"><div class="q3-g" id="lyG">
+      <div class="g3-ly" id="ly3" style="top:40px"><div class="t"><i>🎬</i>scenes.html</div><div class="g3-tl" id="tl"></div><div class="g3-bdg" id="b3"><span id="cl3"></span>Claude</div></div>
+      <div class="g3-ly" id="ly2" style="top:-75px"><div class="t"><i>🎙️</i>voice take</div><div class="g3-wave" id="wave"></div><div class="g3-bdg" id="b2"><span id="cl2"></span>Claude</div></div>
+      <div class="g3-ly" id="ly1" style="top:-190px"><div class="t"><i>📝</i>script.md</div><div class="body" id="m1t"></div><div class="g3-bdg" id="b1"><span id="cl1"></span>Claude</div></div>
+    </div></div>
+  </section>
+
+  <section class="scene" id="sNum">
+    <div class="q3-wrap" style="top:700px;height:580px"><div class="q3-g" id="pdG"></div></div>
+    <div class="g3-fn" id="fn1">This account's real numbers, Oct 2026. Results vary.</div>
+  </section>
+
+  <section class="scene" id="sSys">
+    <div class="q3-wrap" style="top:660px;height:660px"><div class="q3-g" id="sysG"></div></div>
+  </section>
+
+  <section class="scene" id="sRule">
+    <div class="g3-ban" id="ban"><span>🚫 Claude NEVER presses post</span></div>
+    <div class="g3-you" id="you"><span>✅ I do</span></div>
+    <div class="g3-key" id="key"><div class="cap" id="kcap">Post</div></div>
+    <div class="g3-chk" id="chk"><i>✓ script</i><i>✓ facts</i><i>✓ captions</i><i>✓ DMs</i></div>
+  </section>
+
+  <section class="scene" id="sPack">
+    <div class="g3-repo" id="repo"><span id="ghl"></span><div class="nm"><b>instagram-agent-skill</b><span>13 Claude skills · MIT</span></div><div class="st"><b id="stars">0</b><span>GitHub stars ⭐</span></div></div>
+    <div class="q3-wrap" style="top:800px;height:400px"><div class="q3-g" id="skG"></div></div>
+    <div class="g3-26" id="f26"><span>26 hook formulas inside</span></div>
+    <div class="g3-free" id="freeb"><i>✅ free</i><i>✅ open source</i><i>✅ no signup</i></div>
+    <div class="g3-fn" id="fn2" style="top:1310px">By Jake Schincariol · "These skills write. You post."</div>
+  </section>
+
+  <section class="scene" id="sHon">
+    <div class="g3-hon"><div class="card" id="hon"><b>My numbers. Not a promise.</b><span>Yours depend on your topics and consistency.</span></div></div>
+  </section>
+
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Riya · 2m</small><b>GROW</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Ankit · 1m</small><b>GROW</b> 🙏 starting my page</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Tara · 40s</small><b>GROW</b> this is so meta 😂</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>GROW</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname">canwe.ai</b><span>the free pack + my exact workflow 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>GROW</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const $ = R.$, IO = ease.inOut, SP = ease.spring || ease.inOut;
+const box = (o) => `<div class="q3-bx ${o.cls || ""}" id="${o.id || ""}" style="--w:${o.w}px;--h:${o.h}px;--d:${o.d}px;--c:${o.c};${o.fs ? `--fs:${o.fs}px;` : ""}${o.st || ""}"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr">${o.html || ""}</div></div>`;
+// HOOK phone (3D slab with the real profile on the screen)
+const TILES = ["🧲", "💰", "📄", "🤖", "💼", "📺"];
+$("phG").innerHTML = box({ id: "ph", cls: "g3-ph", w: 560, h: 640, d: 46, c: "#0B0C0F", st: "left:-280px;top:-320px",
+  html: `<div class="g3-hd"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>AI, tech &amp; job-hunt hacks</span></div></div>
+  <div class="g3-st"><div><b>9</b><span>reels</span></div><div><b id="pf">0</b><span>followers</span></div><div><b>40K</b><span>best reel</span></div></div>
+  <div class="g3-gr" id="pgrid">${TILES.map(e => `<i>${e}</i>`).join("")}</div>` });
+["clchin", "cl1", "cl2", "cl3"].forEach(id => $(id).outerHTML = R.lg("claude", { s: id === "clchin" ? 48 : 30 }));
+$("ghl").outerHTML = R.lg("github", { s: 58 });
+$("wave").innerHTML = Array.from({ length: 30 }, () => "<i></i>").join("");
+$("tl").innerHTML = [["#7C3AED", 90], ["#3B82F6", 140], ["#3ECF8E", 70], ["#F59E0B", 120], ["#EE2A7B", 100]].map(([c, w]) => `<i style="background:${c};width:${w}px;opacity:0"></i>`).join("");
+// NUMBERS pedestals
+const PD = [["4", "days of posting", 150, "#F5F3FF"], ["1,000", "followers", 230, "#FFF1F7"], ["40K", "best reel views", 330, "#FFF7E6"]];
+$("pdG").innerHTML = `<div class="q3-floor" style="left:-380px;top:-180px;width:760px;height:360px;transform:rotateX(90deg);background-image:linear-gradient(rgba(0,0,0,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(0,0,0,.06) 1px,transparent 1px);border-color:rgba(0,0,0,.08)"></div>` +
+  PD.map(([n, l, h, c], i) => box({ id: "pd" + i, cls: "g3-pd", w: 210, h: 10, d: 170, c, html: `<b id="pdn${i}">${i ? "0" : n}</b><span>${l}</span>`, st: `left:${-345 + i * 240}px;top:0` })).join("");
+// SYSTEM stations on a floor + travelling packet
+const ST = [["🔍", "Finds the topic"], ["📝", "Writes + scores"], ["🎬", "Builds scenes"], ["📩", "Writes the DMs"]];
+const SX = [-330, -110, 110, 330];
+$("sysG").innerHTML = `<div class="q3-floor" style="left:-460px;top:-200px;width:920px;height:400px;transform:rotateX(90deg)"></div>` +
+  `<div style="position:absolute;left:-360px;top:-6px;width:720px;height:12px;border-radius:6px;background:repeating-linear-gradient(90deg,#3A3F49 0 30px,#2A2D33 30px 60px);transform:rotateX(90deg)" id="belt"></div>` +
+  ST.map(([i, t], k) => box({ id: "st" + k, cls: "g3-sta", w: 180, h: 170, d: 170, c: "#2A2D33", html: `<i>${i}</i>${t}`, st: `left:${SX[k] - 90}px;top:-170px` })).join("") +
+  box({ id: "pk", cls: "g3-pk", w: 50, h: 50, d: 50, c: "#F9CE34", st: "left:-25px;top:-50px" }) +
+  `<div class="g3-hk" id="hk" style="left:-170px;top:-260px">hook scored ✓</div>`;
+// PACK: 13 skill cubes
+const SK = ["reel", "caption", "comment", "plan", "viral", "profile", "skill", "skill", "skill", "skill", "skill", "skill", "skill"];
+const SC = ["#7C3AED", "#3B82F6", "#0EA5E9", "#10B981", "#EE2A7B", "#F59E0B"];
+$("skG").innerHTML = SK.map((s, k) => { const row = k < 5 ? 0 : k < 10 ? 1 : 2, col = k < 5 ? k : k < 10 ? k - 5 : k - 10 + 1; return box({ id: "sk" + k, cls: "g3-sk", w: 104, h: 84, d: 84, c: k < 6 ? SC[k] : "#9CA3AF", html: k < 6 ? "/ig-" + s : "+", st: `left:${-300 + col * 124}px;top:${-150 + row * 104}px` }); }).join("");
+
+const T = { meta: at("This reel?"), num: at("4 days"), sys: at("Here's the system."), rule: at("But here's the rule."),
+  pack: at("Want this?"), hon: at("My numbers,"), cta: at("Comment GROW"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.meta, enter: "none" }, { id: "sMeta", s: T.meta, e: T.num, enter: "blurzoom" },
+  { id: "sNum", s: T.num, e: T.sys, enter: "blurzoom" }, { id: "sSys", s: T.sys, e: T.rule, enter: "blur" },
+  { id: "sRule", s: T.rule, e: T.pack, enter: "blurzoom" }, { id: "sPack", s: T.pack, e: T.hon, enter: "swing" },
+  { id: "sHon", s: T.hon, e: T.cta, enter: "blur" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.num, T.sys], [T.pack, T.cta]],
+  emph: window.EMPH,
+  chapters: [{ label: "the proof", at: 0.2 }, { label: "the system", at: T.sys }, { label: "the rule", at: T.rule }, { label: "free pack", at: T.pack, end: T.cta }],
+  counter: { unit: "followers", steps: [[at("thousand followers.") - 0.2, 1000, "followers"], [at("40,000") - 0.1, 40000, "best reel views"], [at("13") - 0.1, 13, "free skills"], [at("26") - 0.1, 26, "hook formulas"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "classic", style: { shirt: "#C13584", shirtLine: "#8E2466", lens1: "#F9CE34", lens2: "#EE2A7B" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {},
+});
+const setH = (e, h) => { e.style.setProperty("--h", h + "px"); e.style.height = h + "px"; e.style.top = -h + "px"; };
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // ---------- HOOK: 3D phone with our profile; tiles flip in; followers roll; push in on "proof" ----------
+  const pin = SP(prog(t, 0.05, 0.7)), push = IO(prog(t, at("proof.") - 0.2, 0.8));
+  $("phG").style.transform = `translateY(${(1 - pin) * 200}px) rotateX(${8 - 3 * Math.sin(t * 0.9)}deg) rotateY(${-22 + 8 * Math.sin(t * 0.6) + 14 * push}deg) scale(${0.9 + 0.08 * push})`;
+  $("phG").style.opacity = clamp(pin * 2);
+  R.count("pf", t, at("automated") - 0.1, 1.6, 1000);
+  $("pgrid").querySelectorAll("i").forEach((g, i) => { const p = IO(prog(t, 0.4 + i * 0.12, 0.45)); g.style.transform = `rotateY(${(1 - p) * 180}deg)`; g.style.opacity = p > 0 ? 1 : 0; });
+  const cp = prog(t, at("Claude.") - 0.2, 0.5); $("clch").style.opacity = clamp(cp * 3); $("clch").style.transform = `perspective(900px) translateZ(${(1 - SP(cp)) * 400}px) rotateX(${(1 - SP(cp)) * -40}deg)`;
+  if (cp > 0) R.cue("ding", at("Claude.") - 0.2, { soft: true });
+  // ---------- META: the reel explodes into 3 layers; each gets its Claude stamp ----------
+  const ex = IO(prog(t, T.meta + 0.1, 0.9));
+  $("lyG").style.transform = `rotateX(${30 + 6 * Math.sin(t * 0.8)}deg) rotateY(${-24 + 6 * Math.sin(t * 0.6)}deg) rotateZ(4deg) scale(1.22)`;
+  [["ly1", T.meta + 0.05, 0], ["ly2", at("voice?") - 0.3, 1], ["ly3", at("animation?") - 0.3, 2]].forEach(([id, a, k]) => {
+    const p = SP(prog(t, a, 0.6)); $(id).style.opacity = clamp(p * 2); $(id).style.transform = `translateZ(${(2 - k) * 70 * ex + (1 - p) * 300}px) translateY(${(1 - p) * -60}px)`; });
+  R.type("m1t", "I automated my Instagram. With Claude…", t, T.meta + 0.3, 24);
+  $("wave").querySelectorAll("i").forEach((w, i) => { const on = t >= at("voice?"); w.style.height = on ? 8 + 40 * Math.abs(Math.sin(i * 1.7 + t * 7)) + "px" : "8px"; });
+  $("tl").querySelectorAll("i").forEach((c, i) => { const p = IO(prog(t, at("animation?") + i * 0.1, 0.3)); c.style.opacity = p; c.style.transform = `scaleX(${p})`; c.style.transformOrigin = "0 50%"; });
+  [["b1", at("wrote") + 0.1], ["b2", at("voice?") + 0.5], ["b3", at("Also") + 0.1]].forEach(([id, a]) => { const p = prog(t, a, 0.45); $(id).style.opacity = clamp(p * 3); $(id).style.transform = `translateZ(30px) scale(${lerp(1.8, 1, SP(p))}) rotate(${(1 - SP(p)) * -12}deg)`; if (p > 0) R.cue("click", a, { soft: true }); });
+  // ---------- NUMBERS (light): three 3D pedestals rise on their words ----------
+  $("pdG").style.transform = `rotateX(-22deg) rotateY(${-26 + 6 * Math.sin(t * 0.6)}deg) translateY(150px)`;
+  [[0, T.num + 0.05], [1, at("thousand followers.") - 0.45], [2, at("40,000") - 0.45]].forEach(([k, a]) => { const p = SP(prog(t, a, 0.7)), e = $("pd" + k); setH(e, Math.max(4, PD[k][2] * p)); e.style.opacity = p > 0 ? 1 : 0; if (p > 0) R.cue("pop", a, { soft: true }); });
+  R.count("pdn1", t, at("thousand followers.") - 0.35, 0.8, 1000);
+  R.count("pdn2", t, at("40,000") - 0.35, 0.9, 40000, { fmt: x => Math.round(x / 1000) + "K" });
+  R.note("fn1", t, at("views.") + 0.2, T.sys);
+  // ---------- SYSTEM: 4 stations on a belt; a glowing packet travels station to station on its word ----------
+  $("sysG").style.transform = `rotateX(-26deg) rotateY(${-30 + 5 * Math.sin(t * 0.5)}deg) translateY(110px) scale(1.12)`;
+  const SA = [at("topic") - 0.1, at("Writes") - 0.1, at("Builds") - 0.1, at("DMs") - 0.1];
+  ST.forEach((s, k) => { const e = $("st" + k), p = IO(prog(t, T.sys + 0.1 + k * 0.1, 0.5)), on = t >= SA[k];
+    e.style.opacity = p; e.style.transform = `translateY(${(1 - p) * -200}px)`; e.style.setProperty("--c", on ? ["#7C3AED", "#3B82F6", "#EE2A7B", "#10B981"][k] : "#2A2D33"); if (on) R.cue("pop", SA[k], { soft: true }); });
+  let px = -460, py = 0; SA.forEach((a, k) => { const p = IO(prog(t, a - 0.35, 0.35)); if (p > 0) { px = lerp(k ? SX[k - 1] : -460, SX[k], p); py = -Math.sin(Math.PI * p) * 120 - (p >= 1 ? 190 : 0) * 0; } });
+  const lastOn = t >= SA[0]; $("pk").style.opacity = t >= SA[0] - 0.35 && t < T.rule ? 1 : 0;
+  $("pk").style.transform = `translate3d(${px}px, ${py - 175}px, 0) rotateY(${t * 200}deg)`;
+  R.rise("hk", t, at("scores") - 0.05, { dy: 20 }); $("hk").style.transform += " translateZ(120px)";
+  $("belt").style.backgroundPosition = `${t * 120}px 0`;
+  // ---------- RULE: the big 3D Post key; Claude banned from it; you press it ----------
+  R.rise("key", t, T.rule + 0.1, { dy: 60 });
+  const bp = prog(t, at("never") - 0.1, 0.45); $("ban").style.opacity = clamp(bp * 3) * (1 - prog(t, at("Then") - 0.2, 0.3)); $("ban").style.transform = `scale(${lerp(2.2, 1, SP(bp))})`; if (bp > 0) R.cue("pop", at("never") - 0.1);
+  $("chk").querySelectorAll("i").forEach((c, i) => R.rise(c, t, at("I read") + i * 0.18, { dy: 16 }));
+  const yp = prog(t, at("Then") - 0.1, 0.4); $("you").style.opacity = clamp(yp * 3); $("you").style.transform = `scale(${lerp(0.5, 1, SP(yp))})`;
+  const kp = prog(t, at("Then I post.") + 0.35, 0.4), press = Math.sin(Math.PI * kp);
+  $("kcap").style.transform = `rotateX(30deg) translateY(${press * 20}px)`; $("kcap").style.boxShadow = `0 ${24 - press * 18}px 0 #123E91,0 40px 70px rgba(0,0,0,.6),inset 0 3px 0 #8DB8FF`; if (kp > 0) R.cue("click", at("Then I post.") + 0.35);
+  // ---------- PACK (light): repo card + 13 skill cubes drop in; named ones light on their word ----------
+  R.card("repo", t, { in: T.pack + 0.05, y: 30 }); $("repo").style.transform += ` perspective(1400px) rotateX(${8}deg)`;
+  R.count("stars", t, at("13") - 0.1, 0.8, 3600, { fmt: x => Math.round(x).toLocaleString("en-US") });
+  $("skG").style.transform = `rotateX(-30deg) rotateY(${-24 + 5 * Math.sin(t * 0.6)}deg) translateY(40px)`;
+  const LIT = { 0: at("Reel writer,"), 1: at("Captions,"), 2: at("comments,"), 3: at("weekly") };
+  SK.forEach((s, k) => { const e = $("sk" + k), p = SP(prog(t, at("13") - 0.15 + k * 0.05, 0.55)), lit = LIT[k] != null && t >= LIT[k] - 0.1;
+    const lift = LIT[k] != null ? Math.sin(Math.PI * clamp(prog(t, LIT[k] - 0.1, 0.6))) : 0;
+    e.style.opacity = p > 0 ? 1 : 0; e.style.transform = `translateY(${(1 - p) * -260 - lift * 40}px) translateZ(${lit ? 20 : 0}px)`; e.querySelector(".fr").style.boxShadow = lit ? "0 0 30px rgba(124,58,237,.7)" : "none";
+    if (p > 0) R.cue("pop", at("13") - 0.15 + k * 0.05, { soft: true }); });
+  const fp = prog(t, at("26") - 0.15, 0.45); $("f26").style.opacity = clamp(fp * 3) * (1 - prog(t, at("Captions,") - 0.2, 0.3)); $("f26").style.transform = `scale(${lerp(0.6, 1, SP(fp))})`; if (fp > 0) R.cue("ding", at("26") - 0.15, { soft: true });
+  R.rise("freeb", t, at("Free,") - 0.1, { dy: 18 });
+  R.note("fn2", t, at("signup.") + 0.1, T.hon);
+  // ---------- HONESTY: card flips down ----------
+  const hp = prog(t, T.hon + 0.05, 0.6); $("hon").style.opacity = clamp(hp * 2); $("hon").style.transform = `rotateX(${(1 - SP(hp)) * -90}deg)`;
+  // ---------- CTA (house) ----------
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const tyA = at("Comment GROW") + 0.3, posted = R.end("Comment GROW") + 0.35;
+  if (t < posted) R.type("ctx", "GROW", t, tyA, 16); else $("ctx").textContent = "";
+  $("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  $("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("exact workflow.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>
