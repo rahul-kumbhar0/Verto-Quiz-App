@@ -18,6 +18,8 @@ Page: @canwe.ai (Instagram) + YouTube Shorts. Format: speedy explainer, voice Sh
 | (draft) | Claude Max free for open source (OSS) | D+E · free + price "Anthropic is giving away Claude's $200 plan. Free, for 6 months." | ~48 s v2 paced (5 hard stops, 1.06x) | | | | | honesty beat: "impossible for a student? one path you can hit" |
 | (posted ~28 Oct) | career-ops Claude job hunter (OFFER) | F+D · result in numbers "740 jobs. 68 applications. 12 interviews. 1 offer." | ~41 s | | | | | worked example in examples/career-ops |
 
+| (draft 1 Nov) | JOBS part 2: which ONE skill gets the most jobs (SKILL) | A demo + F numbers · "I asked Claude which one skill gets me the most new jobs." | ~34 s | | | | | sequel to our #1; live freehire counts (India intern+junior: Py/SQL 1,036 → +AI 1,552) |
+
 ## Scripts that worked (verbatim, for tone)
 freehire (A):
 > Okay so, I basically automated my entire job search. With one free GitHub repo. I just hooked it
