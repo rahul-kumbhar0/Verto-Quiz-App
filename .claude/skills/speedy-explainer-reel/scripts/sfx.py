@@ -2,7 +2,7 @@
 
 usage: python3 sfx.py cues.json duration out.wav
 cues.json: the list exported by `render.mjs --cues` ([{type, t, t2?}, ...], types:
-whoosh | pop | type (t..t2) | click | ding), or the legacy dict form
+whoosh | pop | type (t..t2) | click | ding | swish | impact | riser (t..t2) | glitch | shutter), or the legacy dict form
 {"whoosh":[...], "pop":[...], "type":[[a,b,cps]], "ding":[...]}.
 All sounds are generated here (no samples), so there are no licensing questions.
 """
@@ -44,6 +44,34 @@ def ding():
     y = sum(a * np.sin(2 * np.pi * f * t) for f, a in [(1318.5, 1), (1975.5, .45), (2637, .2)])
     return y * np.exp(-t * 3.2) * env(n, 60, 2000) * .32
 
+def swish(d=0.22):
+    n = int(SR * d); x = rng.standard_normal(n); y = np.zeros(n); s = 0.0
+    cut = np.interp(np.arange(n), [0, n * .4, n], [1200, 7000, 2500]); a = np.exp(-2 * np.pi * cut / SR)
+    for i in range(n): s = a[i] * s + (1 - a[i]) * x[i]; y[i] = s
+    return y * env(n, n * .35, n * .65) * 1.3
+
+def impact():
+    n = int(SR * 0.9); t = np.arange(n) / SR
+    f = 42 + 70 * np.exp(-t * 18)
+    body = np.sin(2 * np.pi * np.cumsum(f) / SR) * np.exp(-t * 4.5)
+    crack = rng.standard_normal(n) * np.exp(-t * 60) * .35
+    return (body + crack) * .7
+
+def riser(d):
+    n = int(SR * max(.2, d)); t = np.arange(n) / SR; x = rng.standard_normal(n); y = np.zeros(n); s = 0.0
+    cut = np.linspace(400, 9000, n); a = np.exp(-2 * np.pi * cut / SR)
+    for i in range(n): s = a[i] * s + (1 - a[i]) * x[i]; y[i] = s
+    tone = np.sin(2 * np.pi * np.cumsum(np.linspace(220, 880, n)) / SR) * .25
+    return (y * 1.2 + tone) * (t / t[-1]) ** 2 * .5
+
+def glitch():
+    n = int(SR * .18); x = np.sign(np.sin(2 * np.pi * np.cumsum(rng.choice([180, 360, 1200, 2400], n)) / SR))
+    return x * (rng.random(n) > .3) * env(n, 20, n * .3) * .16
+
+def shutter():
+    n = int(SR * .09); t = np.arange(n) / SR
+    return np.diff(rng.standard_normal(n), prepend=0) * (np.exp(-t * 300) + .6 * np.exp(-((t - .045) ** 2) / 1e-5)) * .3
+
 def place(sig, at, gain=1.0):
     i = int(max(0, at) * SR); j = min(len(track), i + len(sig))
     if i < len(track): track[i:j] += sig[: j - i] * gain
@@ -65,6 +93,11 @@ for k, c in enumerate(cues):
         for i in range(int((c["t2"] - t) * cps)): place(tick(), t + i / cps + rng.uniform(-.008, .008), rng.uniform(.6, 1))
     elif ty == "click": place(click(), t, .9)
     elif ty == "ding": place(ding(), t)
+    elif ty == "swish": place(swish(), t - .08, .6)
+    elif ty == "impact": place(impact(), t, .55 if c.get("soft") else .8)
+    elif ty == "riser": place(riser(c.get("t2", t + 1) - t), t, .5)
+    elif ty == "glitch": place(glitch(), t)
+    elif ty == "shutter": place(shutter(), t, .8)
 
 track = np.clip(track, -1, 1)
 with wave.open(out, "wb") as w:

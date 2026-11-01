@@ -183,3 +183,6 @@ next reels JOBS-shaped; tie every Learn-AI episode to a job/career payoff in the
 *comments include our automation's public replies (≈ half).
 Lessons: first-person "I did X with Claude" hooks + job/money payoff win; concept explainers die; 3 posts/day killed
 AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
+
+## Editing level 2 (1 Nov 2026)
+Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (camera, whip, zoom-through, 3D flip, flash, leak, glitch, shake, sheen, letters, odometer, scramble, code typing, particles, beat sync), new SFX (swish, impact, riser, glitch, shutter), real motion blur (`MBLUR=3`), and `references/advanced-editing.md` (12 rules). Demo: `speedy-explainer-reel/assets/examples/fx-demo/`. Every new reel loads fx.js from the template.

@@ -39,3 +39,14 @@ Pinned: 📌 https://canwe-guides.vercel.app/grow/
 
 === DM AUTOMATION (new) ===
 keyword REEL (any) · locked to this reel · follow gate ON → /grow/
+
+=== EDIT PLAN (fx kit, references/advanced-editing.md) ===
+0–3 s SIGNATURE: R.fx.flip — the reel frame flips to its own HTML (R.fx.code on the back) · music silent until the flip lands (impact)
+topic/script: R.fx.cam push-in + trend cards whip in (R.fx.whip between 2 cards) + script.md via R.fx.code
+hook score: R.fx.odometer 0→12 "/12" + R.fx.sheen on the score card + R.fx.burst on 12
+voice/captions: waveform + caption words snapping (R.fx.letters mode pop)
+"every scene is a web page": light chapter, Day-1 3D blocks → wireframe → solid; R.fx.glitch on "just code"
+"30 photos a second": R.fx.zoomThrough into a browser window → filmstrip; R.fx.odometer 0→(real frame count); real render-log line typed with R.fx.code
+"music is code": R.fx.code `{"bpm":136,"style":"pulse"}` → bars pulsing with R.fx.pulse (beat grid)
+"press post": 3D Post key + R.fx.shake + R.fx.flash on the press
+CTA house sequence · camera drift on throughout · cuts R.fx.snap'ed to beats · MBLUR=3 final render

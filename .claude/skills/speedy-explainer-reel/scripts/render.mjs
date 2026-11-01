@@ -1,5 +1,6 @@
 // Deterministic frame renderer for seek(t)-driven HTML reels.
 //   node render.mjs page.html out.mp4 <duration|auto> [fps=30] [workers=6]   full render (video only);
+//        MBLUR=3 node render.mjs …  → real motion blur: renders 3 sub-frames per frame and blends them (3× time)
 //        "auto" reads window.REEL_DURATION from the page
 //   node render.mjs page.html --stills <dir> t1 t2 ...                   PNG stills for layout checks
 //   node render.mjs page.html --cues <cues.json>                         export SFX cues registered by engine.js
@@ -56,20 +57,21 @@ if (mode === "--stills") {
   let dur = +rest[0];
   if (!dur) { const p = await open(); dur = await p.evaluate(() => window.REEL_DURATION); await p.close(); }
   if (!dur) throw new Error("pass a duration or set window.REEL_DURATION in the page");
-  const n = Math.round(dur * fps), dir = out + ".frames", t0 = Date.now();
+  const mb = Math.max(1, +(process.env.MBLUR || 1)), rate = fps * mb;
+  const n = Math.round(dur * rate), dir = out + ".frames", t0 = Date.now();
   fs.rmSync(dir, { recursive: true, force: true }); fs.mkdirSync(dir, { recursive: true });
   let done = 0;
   await Promise.all([...Array(workers).keys()].map(async w => {
     const p = await open();
     for (let i = w; i < n; i += workers) {
-      await p.evaluate(x => window.seek(x), i / fps);
+      await p.evaluate(x => window.seek(x), i / rate);
       await p.screenshot({ path: `${dir}/${String(i).padStart(5, "0")}.jpg`, type: "jpeg", quality: 95 });
       if (++done % 300 === 0) console.log(`${done}/${n} frames  ${((Date.now() - t0) / 1000).toFixed(0)}s`);
     }
   }));
-  execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-framerate", String(fps), "-i", `${dir}/%05d.jpg`,
-    "-c:v", "libx264", "-preset", "slow", "-crf", "20", "-maxrate", "9M", "-bufsize", "18M", "-pix_fmt", "yuv420p", out], { stdio: "inherit" });
+  execFileSync("ffmpeg", ["-y", "-loglevel", "error", "-framerate", String(rate), "-i", `${dir}/%05d.jpg`,
+    ...(mb > 1 ? ["-vf", `tmix=frames=${mb},fps=${fps}`] : []), "-c:v", "libx264", "-preset", "slow", "-crf", "20", "-maxrate", "9M", "-bufsize", "18M", "-pix_fmt", "yuv420p", out], { stdio: "inherit" });
   fs.rmSync(dir, { recursive: true, force: true });
-  console.log(`wrote ${out}: ${n} frames in ${((Date.now() - t0) / 1000).toFixed(0)}s`);
+  console.log(`wrote ${out}: ${Math.round(n / mb)} frames${mb > 1 ? ` (motion blur ×${mb})` : ""} in ${((Date.now() - t0) / 1000).toFixed(0)}s`);
 }
 await browser.close();

@@ -125,6 +125,7 @@ Then re-run `captions.py` and re-still 4 frames: `at()` anchors re-time themselv
 token can throw `phrase not found` (fix `display.json`).
 
 ## 5. Render, sound, mix, QA
+Final renders use real motion blur: `MBLUR=3 node tools/render.mjs …` (3× time; previews without it). Plan the edit with `references/advanced-editing.md` first.
 ```bash
 cd $W; node tools/render.mjs $P/index.html --cues $P/cues.json
 (node tools/render.mjs $P/index.html $P/video.mp4 auto 30 6 > $P/render.log 2>&1 &)      # ~1.5 min per 30 s
@@ -156,6 +157,7 @@ stock puppet was used.
 - `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/`, `assets/examples/exploded-view-demo/` and `assets/examples/explainer-kit-demo/` (process steps, analogy split, zoom-through, bar chart)
 - `references/logos.md` — real-logo rule, `scripts/brand_logos.mjs` (offline official marks + contact sheet), `R.lg` tiles/brand chips
 - `references/premium-ui-mode.md` — animation/explanation techniques borrowed from a princegupta.ai reel (measured voice pace + music, `"style":"pulse"`). Apply inside our style; their no-presenter look is NOT ours
+- `references/advanced-editing.md` — **edit level 2**: the 12 rules (camera never locked, cuts on beats, transition = meaning, signature shot, layered sound design, real motion blur) + the `fx.js` kit API (`R.fx.cam/whip/zoomThrough/flip/flash/leak/glitch/shake/sheen/letters/odometer/scramble/code/burst/beats`); demo `assets/examples/fx-demo/`. READ IT for every new reel
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode
