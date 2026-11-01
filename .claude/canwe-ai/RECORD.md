@@ -164,3 +164,22 @@ Views/reach/saves/shares are NOT readable from here (Instagram hides them from s
 Read: the account wins on **fresher job-hunt outcome + free tool/prompt + Claude** (JOBS ≫ everything; LINK/PROMPT/OFFER
 next) and on **money** (SALARY). Pure AI-concept explainers (AGENT, TOKENS so far) get almost nothing. Plan: make the
 next reels JOBS-shaped; tie every Learn-AI episode to a job/career payoff in the hook, or slow the series down.
+
+## Performance snapshot — 1 Nov 2026 (~10:00 UTC)
+| Reel (posted, IST) | Likes | Comments* | DMs | Unique clickers |
+|---|---|---|---|---|
+| JOBS freehire (27 Oct 07:27) | 575 | 1,556 | 711 | 554 |
+| GROW Claude runs my Instagram (1 Nov 10:08, ~5 h old) | 75 | 175 | 57 | 50 |
+| LINK Claude + LinkedIn (31 Oct 15:11) | 61 | 95 | 35 | 27 |
+| SALARY bands (27 Oct 15:35) | 81 | 54 | 28 | 25 |
+| OFFER career-ops (28 Oct 17:33) | 60 | 66 | 22 | 15 |
+| PROMPT which jobs you fit (30 Oct 20:23) | 54 | 47 | 19 | 15 |
+| RESUME ATS myth (28 Oct 09:53) | 24 | 30 | 24 | 22 |
+| TV cleanyourtv (29 Oct 12:13) | 31 | 20 | 7 | 7 |
+| OSS Claude Max free (30 Oct 08:35) | 31 | 20 | 9 | 6 |
+| AI interview (25 Oct, no keyword) | 32 | 1 | – | – |
+| TOKENS Day 1 (31 Oct 18:12) | 10 | 0 | 0 | 0 |
+| AGENT (30 Oct 18:38, 3rd post that day) | 3 | 0 | 0 | 0 |
+*comments include our automation's public replies (≈ half).
+Lessons: first-person "I did X with Claude" hooks + job/money payoff win; concept explainers die; 3 posts/day killed
+AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
