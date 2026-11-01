@@ -30,3 +30,17 @@ Series packaging: "Free AI that does your chores · Day N" + "Follow so you don'
 | C7 | bench (reach play) | Claude builds 3D scenes in Blender | ahujasid/blender-mcp ~22.7k stars (Jun 2026) | 3D | Needs Blender on a laptop |
 Verification gaps: GitHub API and support.zerodha.com / medianama / analyticsvidhya were blocked in-session; star counts and feature claims come from search results. Re-verify each at build time.
 | C0 | BUILT 31 Oct | "Claude can now order Zomato" — 5-app MCP listicle (Zomato, Swiggy, Zerodha, MoSPI, Gmail) | official servers | MCP (#41) | per-app catch on screen |
+
+## "I automated / connected my ___ with Claude" series (owner's ask, 1 Nov 2026) — verify each before scripting
+| # | Hook | Tool (status) | Catch to say | Keyword |
+|---|---|---|---|---|
+| 1 | I connected my Instagram to Claude. It sent 912 DMs this week. | DirectApply DM MCP (OURS: disclose) · real stats 912 DMs/7d, 981 clicks/30d | only replies to people who comment; I approve every message | DM |
+| 2 | I automated my YouTube with Claude. | our own pipeline (script→voice→animation) + youtube-connector-mcp (PyPI, ShellyDeng08: analytics/comments/transcripts, API key, 10k units/day) | no upload via MCP found: I still press upload | TUBE |
+| 3 | I connected my Gmail to Claude. It found every recruiter reply. | built-in Gmail connector | drafts only, I press send | MAIL |
+| 4 | I connected my GitHub to Claude. It wrote my resume from my code. | GitHub connector | only real projects, no invented bullets | REPO |
+| 5 | I connected Canva to Claude. My resume, designed in one sentence. | official Canva AI connector (Canva MCP server; free to link per guides) | switch it on per chat; keep it one column for ATS | DESIGN |
+| 6 | I connected Blender to Claude. It built a 3D room from one sentence. | ahujasid/blender-mcp (MIT, ~21.6K stars per TypingMind) | it runs code inside Blender: save first | 3D |
+| 7 | I connected my Google Calendar to Claude. It planned my placement season. | built-in Calendar connector | — | PLAN |
+| 8 | I connected my Zerodha to Claude. It roasted my portfolio. | official Kite MCP (on /mcp/) | analysis, not advice | ROAST |
+| 9 | I connected my Drive to Claude. Every certificate became one CV. | built-in Drive connector | — | CV |
+| 10 | I connected WhatsApp to Claude. (read-only) | lharries/whatsapp-mcp (unofficial, v0.0.1, ban risk) | LOW PRIORITY: unofficial, ToS risk, read-only only | — |
