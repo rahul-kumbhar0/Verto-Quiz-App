@@ -1,80 +1,83 @@
 <!doctype html>
-<html><head><meta charset="utf-8"><title>fx kit demo — advanced editing</title>
-<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/fx.css">
+<html><head><meta charset="utf-8"><title>fx kit demo v2 — canwe.ai look + motion doctrine</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/look.css"><link rel="stylesheet" href="../../template/fx.css">
 <style>
 #cam{position:absolute;inset:0}
-.dm-sc{position:absolute;inset:0;opacity:0}
-.dm-lbl{position:absolute;left:0;right:0;top:250px;text-align:center;font:800 30px Mono;letter-spacing:4px;color:#F5B49C}
-.dm-big{position:absolute;left:0;right:0;top:700px;text-align:center;font:900 120px/1 Inter;color:#fff;perspective:900px;letter-spacing:-3px}
-.dm-card{position:absolute;left:140px;right:140px;top:1050px;height:220px;border-radius:30px;background:linear-gradient(135deg,#1E2230,#141620);border:1.5px solid #2E3446;overflow:hidden;display:grid;place-items:center;font:800 44px Inter;color:#fff;box-shadow:0 30px 70px rgba(0,0,0,.55)}
-.dm-odo{position:absolute;left:0;right:0;top:760px;text-align:center;font:900 190px/1 Inter;color:#fff;letter-spacing:-4px}
-.dm-odo small{display:block;font:700 34px Mono;color:#9AA0A8;letter-spacing:3px;margin-top:20px}
-.dm-codecard{position:absolute;left:90px;right:90px;top:620px;height:560px;border-radius:26px;background:#0D1117;border:1.5px solid #30363D;padding:30px 34px;box-sizing:border-box;box-shadow:0 40px 90px rgba(0,0,0,.6)}
-.dm-flip{position:absolute;left:150px;width:780px;top:620px;height:640px}
-.dm-ui{width:100%;height:100%;background:linear-gradient(160deg,#2B1C3D,#14121C);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;border:2px solid #3A2C50}
-.dm-ui b{font:900 64px Inter;color:#fff}.dm-ui span{display:flex;gap:10px}
-.dm-ui span i{width:96px;height:70px;border-radius:14px}
-.dm-back{background:#0D1117;border:2px solid #30363D;padding:34px;box-sizing:border-box}
-.dm-item{position:absolute;left:140px;right:140px;top:700px;height:520px;border-radius:34px;display:grid;place-items:center;font:900 90px Inter;color:#fff}
-.dm-phone{position:absolute;left:340px;top:600px;width:400px;height:780px;border-radius:60px;background:#0B0C0F;border:10px solid #2A2D33;box-shadow:0 40px 90px rgba(0,0,0,.6);display:grid;place-items:center}
-.dm-phone i{width:300px;height:560px;border-radius:30px;background:linear-gradient(160deg,#3B82F6,#7C3AED)}
-.dm-inside{position:absolute;inset:0;background:linear-gradient(160deg,#3B82F6,#7C3AED);display:grid;place-items:center;font:900 96px Inter;color:#fff;text-align:center}
-.dm-done{position:absolute;left:0;right:0;top:820px;text-align:center;font:900 150px Inter;color:#3ECF8E}
-.dm-scr{position:absolute;left:60px;right:60px;top:820px;text-align:center;font:800 64px Mono;color:#fff}
-.dm-beats{position:absolute;left:120px;right:120px;top:780px;display:flex;gap:20px}
-.dm-beats i{flex:1;height:300px;border-radius:24px;background:#3B82F6}
+.dm-sc{position:absolute;inset:0;visibility:hidden}
+.dm-k{position:absolute;left:0;right:0;top:300px;text-align:center}
+.dm-title{position:absolute;left:80px;right:80px;top:720px;text-align:center}
+.dm-wrap{position:absolute;left:0;right:0;top:640px;height:600px;perspective:1700px}
+.dm-g{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+.dm-odo{position:absolute;left:150px;right:150px;top:700px;padding:44px 40px 40px;text-align:center}
+.dm-odo .t-hero{font-size:170px}
+.dm-flip{position:absolute;left:130px;width:820px;top:640px;height:620px}
+.dm-ui{width:100%;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:30px}
+.dm-ui .row{display:flex;gap:12px}
+.dm-ui .row i{width:110px;height:76px;border-radius:14px;background:linear-gradient(180deg,#30333B,#24262D);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.dm-ui .row i.a{background:linear-gradient(180deg,#F0A585 -40%,#D97757 50%,#B95E40)}
+.dm-code{width:100%;height:100%;padding:40px 38px;box-sizing:border-box}
+.dm-big{position:absolute;left:0;right:0;top:820px;text-align:center}
+.dm-pay{position:absolute;left:0;right:0;top:760px;display:flex;justify-content:center}
+.dm-pay .m-acc{font:900 92px Inter;letter-spacing:-3px;padding:26px 60px}
+.dm-chart{position:absolute;left:150px;right:150px;top:660px;height:600px;padding:40px;box-sizing:border-box}
+.dm-bars{position:absolute;left:60px;right:60px;bottom:90px;height:360px;display:flex;align-items:flex-end;gap:26px}
+.dm-bars i{flex:1;border-radius:14px 14px 6px 6px;background:linear-gradient(180deg,#3C4049,#2A2D34);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.1)}
+.dm-bars i.a{background:linear-gradient(180deg,#F0A585 -30%,#D97757 50%,#A9553A);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.3),0 20px 50px -10px rgba(217,119,87,.5)}
+.dm-lab{position:absolute;left:60px;right:60px;bottom:40px;display:flex;gap:26px}
+.dm-lab span{flex:1;text-align:center;font:600 22px Mono;color:var(--ink-3)}
 </style></head>
-<body><div id="stage">
+<body class="look"><div id="stage">
   <div class="s-bg"></div><div class="s-vig"></div>
   <div id="cam">
-    <section class="dm-sc" id="s1"><div class="dm-lbl">LETTERS · SHEEN · CAMERA DRIFT</div><div class="dm-big" id="big"></div><div class="dm-card" id="card">canwe.ai editing kit</div></section>
-    <section class="dm-sc" id="s2"><div class="dm-lbl">ODOMETER</div><div class="dm-odo"><span id="odo"></span><small>FRAMES RENDERED</small></div></section>
-    <section class="dm-sc" id="s3"><div class="dm-lbl">CODE TYPING · GLITCH</div><div class="dm-codecard" id="cc"><div class="fx-code" id="code"></div></div></section>
-    <section class="dm-sc" id="s4"><div class="dm-lbl">3D FLIP REVEAL</div>
-      <div class="dm-flip fx-flip" id="flip"><div class="fx-card"><div class="fx-front dm-ui"><b>This reel</b><span><i style="background:#E11D48"></i><i style="background:#F59E0B"></i><i style="background:#10B981"></i></span></div>
-        <div class="fx-back dm-back"><div class="fx-code" id="code2"></div></div></div></div></section>
-    <section class="dm-sc" id="s5"><div class="dm-lbl">WHIP PAN</div><div class="dm-item" id="w1" style="background:#E11D48">#1</div><div class="dm-item" id="w2" style="background:#3B82F6">#2</div></section>
-    <section class="dm-sc" id="s6"><div class="dm-lbl">ZOOM-THROUGH</div><div id="zo"><div class="dm-phone"><i></i></div></div><div class="dm-inside" id="zi">inside the<br>screen</div></section>
-    <section class="dm-sc" id="s7"><div class="dm-lbl">FLASH · SHAKE · BURST</div><div class="dm-done" id="done">DONE ✓</div><div class="fx-burst" id="bst" style="left:540px;top:900px"></div></section>
-    <section class="dm-sc" id="s8"><div class="dm-lbl">SCRAMBLE · LIGHT LEAK</div><div class="dm-scr" id="scr"></div></section>
-    <section class="dm-sc" id="s9"><div class="dm-lbl">BEAT PULSE (136 BPM)</div><div class="dm-beats" id="bt"><i></i><i style="background:#7C3AED"></i><i style="background:#EE2A7B"></i></div></section>
+    <section class="dm-sc" id="s1"><div class="dm-k t-kicker">edit level 2</div><div class="dm-title t-hero" id="ttl"></div></section>
+    <section class="dm-sc" id="s2"><div class="dm-k t-kicker">material, not candy</div><div class="dm-wrap"><div class="dm-g" id="blk"></div></div></section>
+    <section class="dm-sc" id="s3"><div class="dm-k t-kicker">odometer + sheen</div><div class="dm-odo m-card" id="odoc"><div class="t-hero" id="odo"></div><div class="t-kicker" style="margin-top:18px">frames rendered</div></div></section>
+    <section class="dm-sc" id="s4"><div class="dm-k t-kicker">flip to the hidden side</div>
+      <div class="dm-flip fx-flip" id="flip"><div class="fx-card"><div class="fx-front m-card dm-ui"><div class="t-hero" style="font-size:84px">This reel</div><div class="row"><i></i><i></i><i class="a"></i><i></i></div></div>
+        <div class="fx-back m-card dm-code"><div class="fx-code" id="code"></div></div></div></div></section>
+    <section class="dm-sc" id="s5"><div class="dm-k t-kicker">zoom cut → deeper</div><div class="dm-big t-hero" style="font-size:120px">one <em>page</em></div></section>
+    <section class="dm-sc" id="s6"><div class="dm-k t-kicker">inverse zoom = payoff</div><div class="dm-big t-hero" style="font-size:120px">30× a <em>second</em></div></section>
+    <section class="dm-sc" id="s7"><div class="dm-pay"><div class="m-acc" id="pay">Posted ✓</div></div><div class="fx-burst" id="bst" style="left:540px;top:830px"></div></section>
+    <section class="dm-sc" id="s8"><div class="dm-k t-kicker">rack focus · same surface, new state</div>
+      <div class="dm-chart m-card" id="chA"><div class="t-kicker">views · before</div><div class="dm-bars"><i style="height:30%"></i><i style="height:42%"></i><i style="height:36%"></i><i style="height:48%"></i></div><div class="dm-lab"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div></div>
+      <div class="dm-chart m-card" id="chB"><div class="t-kicker">views · after</div><div class="dm-bars"><i style="height:30%"></i><i style="height:42%"></i><i style="height:36%"></i><i class="a" style="height:96%"></i></div><div class="dm-lab"><span>W1</span><span>W2</span><span>W3</span><span>W4</span></div></div></section>
   </div>
   <div id="grain"></div><div id="fxOverlay"></div>
 </div>
 <script src="../../template/engine.js"></script><script src="../../template/fx.js"></script>
 <script>
-const R = Reel, F = R.fx, { prog, clamp } = R, $ = R.$;
-window.REEL_DURATION = 23;
-const SC = [["s1", 0, 3.2], ["s2", 3.2, 5.6], ["s3", 5.6, 8.2], ["s4", 8.2, 11.2], ["s5", 11.2, 13.4], ["s6", 13.4, 16], ["s7", 16, 18.2], ["s8", 18.2, 20.6], ["s9", 20.6, 23]];
-F.beats({ bpm: 136, groove_in: 20.6, dur: 23 });
-const SRC = `// one scene = one web page\nconst scene = R.fx.cam("stage", t, keys);\nawait render("reel.mp4", { fps: 30 });\n// 1411 frames, no editor`;
+const R = Reel, F = R.fx, { prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+window.REEL_DURATION = 22;
+// seam times (cut moments); every boundary = cut-the-curve LEFT (the film's current) unless the meaning says otherwise
+const C = { s2: 3.4, s3: 6.6, s4: 9.0, s5: 12.4, s6: 14.2, s7: 16.0, s8: 17.8 };
+const TOK = ["Every", "frame", "is", "code"], TW = TOK.map(w => 60 + 30 * w.length); const TOT = TW.reduce((a, b) => a + b, 0);
+{ let x = -TOT / 2; $("blk").innerHTML = TOK.map((w, i) => { const h = `<div class="m-box${i === 3 ? " acc" : ""}" id="mb${i}" style="--w:${TW[i]}px;--h:118px;--d:60px;--fs:50px;left:${x}px;top:-59px"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr">${w}</div></div>`; x += TW[i]; return h; }).join("") + `<div class="m-floor" style="left:-420px;top:90px;width:840px;height:120px;transform:rotateX(90deg)"></div>`; }
+const SRC = `// one scene = one web page\nconst frames = await render("reel.html", { fps: 30 });\nconsole.log(frames.length); // 1411`;
 window.seek = t => {
-  SC.forEach(([id, a, b]) => { const e = $(id); e.style.opacity = t >= a && t < b ? 1 : 0; });
-  F.cam("cam", t, [{ t: 0, s: 1.06, ry: -6 }, { t: 3, s: 1, ry: 0 }, { t: 23, s: 1.02 }], { drift: true });
-  // 1 letters + sheen
-  F.letters("big", "ADVANCED", t, 0.2, { mode: "flip", stagger: 0.05 });
-  F.sheen("card", t, 1.6);
-  // 2 odometer
-  F.odometer("odo", t, 3.35, 1.6, 1411);
-  // 3 code + glitch
-  F.code("code", SRC, t, 5.7, { cps: 60 });
-  F.glitch("cc", t, 7.5, { d: 0.35 });
-  // 4 flip
-  F.code("code2", SRC, t, 9.3, { cps: 70, sfx: false });
-  F.flip("flip", t, 8.7, { d: 0.9 });
-  // 5 whip
-  F.whip("w1", "w2", t, 12.3, { dir: -1 });
-  // 6 zoom-through into the phone screen
-  F.zoomThrough("zo", "zi", t, 14.6, { origin: [540, 990] });
-  // 7 flash + shake + burst
-  F.flash(t, 16.6); F.burst("bst", t, 16.6, { n: 22, r: 300 });
-  const dp = prog(t, 16.55, 0.45); $("done").style.transform = `scale(${R.lerp(2.2, 1, R.ease.spring(dp))})`; $("done").style.opacity = clamp(dp * 4);
-  F.shake("s7", t, 16.6, { amp: 22 });
-  // 8 scramble + leak
-  F.scramble("scr", "every frame is code", t, 18.4, { d: 1.1 });
-  F.leak(t, 19.8, { d: 0.9 });
-  // 9 beat pulse
-  const pl = F.pulse(t); document.querySelectorAll("#bt i").forEach((b, i) => b.style.transform = `scaleY(${1 + 0.35 * pl * (1 - i * 0.2)})`);
+  // visibility: a scene is on from its cut until the next cut (seams handle the in/out motion)
+  const order = ["s1", "s2", "s3", "s4", "s5", "s6", "s7", "s8"], starts = [0, C.s2, C.s3, C.s4, C.s5, C.s6, C.s7, C.s8, 99];
+  F.slots(t, order.map((id, i) => [id, starts[i], starts[i + 1]]));
+  const ch = t < C.s8 + 1.6; F.slots(t, [["chA", ch ? 0 : -1, ch ? 99 : -1], ["chB", ch ? -1 : 0, ch ? -1 : 99]]);
+  // camera WITH INTENT (no idle wobble): establish wide → arrive; orbit only while the 3D prop is the subject
+  F.cam("cam", t, [{ t: 0, s: 1.05 }, { t: 2.2, s: 1, ease: "power2InOut" }, { t: 22, s: 1 }], { mblur: false });
+  // S1 waterfall title, then it lands DEAD STILL
+  F.waterfall("ttl", ["Every", "frame", "is", "*code.*"], t, 0.35);
+  // seams (current = left)
+  F.cutCurve("s1", "s2", t, C.s2); F.cutCurve("s2", "s3", t, C.s3); F.cutCurve("s3", "s4", t, C.s4);
+  F.cutCurve("s4", "s5", t, C.s5); F.zoomCut("s5", "s6", t, C.s6); F.inverseZoom("s6", "s7", t, C.s7); F.cutCurve("s7", "s8", t, C.s8);
+  // S2 lit graphite blocks; one accent block = the meaning; purposeful orbit + split
+  const sp = E.power4Out(prog(t, C.s2 + 0.6, 0.7));
+  $("blk").style.transform = `rotateX(${-20}deg) rotateY(${lerp(-30, -14, E.power2InOut(prog(t, C.s2, 3)))}deg)`;
+  TOK.forEach((w, i) => $("mb" + i).style.transform = `translate3d(${(i - 1.5) * 26 * sp}px,${i === 3 ? -40 * sp : 0}px,${i === 3 ? 60 * sp : 0}px)`);
+  if (t > C.s2 + 0.6) R.cue("pop", C.s2 + 0.6, { soft: true });
+  // S3 odometer + sheen as it lands
+  F.odometer("odo", t, C.s3 + 0.35, 1.3, 1411); F.sheen("odoc", t, C.s3 + 1.55);
+  // S4 flip reveals the code behind the UI, code types after the flip lands
+  F.flip("flip", t, C.s4 + 0.9, { d: 0.9 }); F.code("code", SRC, t, C.s4 + 1.7, { cps: 55 });
+  // S7 payoff: stillness before climax (handled by the seam gap), accent pill + small burst, subtle flash
+  F.flash(t, C.s7, { max: 0.25, sfx: false }); F.burst("bst", t, C.s7 + 0.05, { n: 16, r: 260 }); F.sheen("pay", t, C.s7 + 0.5);
+  // S8 rack focus: same chart surface, new state (the one visible cut)
+  F.rackFocus("chA", "chB", t, C.s8 + 1.6);
 };
 window.seek(0);
 </script></body></html>

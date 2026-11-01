@@ -1,54 +1,64 @@
 # Advanced editing (the "edit level 2" rules + the fx kit)
 
-Owner's ask (1 Nov 2026): "make our editing level advanced". Our LOOK stays (presenter, kinetic captions,
+Owner's asks (1 Nov 2026): "make our editing level advanced" and "don't use these colours, it looks like cheap
+editing — use open source like HyperFrames". Look: `references/look.md`. Motion rules below are adapted from
+HeyGen's open-source HyperFrames (Apache-2.0, github.com/heygen-com/hyperframes: motion-doctrine, cut-the-curve,
+references/motion.md). Their registry (210 blocks + components: caption styles, transitions, camera rigs) is a
+reference library: `git clone --depth 1 https://github.com/heygen-com/hyperframes` and read
+`registry/components/CATALOG.md`; port techniques into fx.js with credit, never their scripts or brand looks. Our LOOK stays (presenter, kinetic captions,
 selection box, dark/light flips, rail, mascot). What changes is the EDITING GRAMMAR: camera, transitions,
 reveals, text, particles, beat sync, sound design and real motion blur. Code: `assets/template/fx.js` +
 `fx.css` (namespace `R.fx`, load after engine.js). Live demo of every effect: `assets/examples/fx-demo/`.
 
-## 1. The 12 rules of an advanced edit
-1. **The camera is never locked off.** Wrap the stage content in a full-size `#cam`
-   (`position:absolute; inset:0`, REQUIRED or children collapse) and drive it with `R.fx.cam(…, {drift:true})`:
-   slow push-ins on explanations, a fast dolly/whip on "next", a pull-back on the recap.
-2. **Every cut lands on a beat.** `R.fx.beats(music.json)` once, then `R.fx.snap(T.x)` for scene starts.
-   Cuts on the beat feel "edited"; cuts between beats feel "assembled".
-3. **Transition = meaning, never decoration.** Pick by what the line does:
-   | line does | transition | call |
-   |---|---|---|
-   | next item / "and another" | whip pan | `R.fx.whip(out, in, t, at, {dir})` |
-   | go inside / "under the hood" | zoom-through | `R.fx.zoomThrough(out, in, t, at, {origin})` |
-   | reveal the hidden side / "behind this" | 3D card flip | `R.fx.flip(el, t, at)` (.fx-flip markup) |
-   | surprise / number drop / payoff | flash + shake (+ burst) | `R.fx.flash`, `R.fx.shake`, `R.fx.burst` |
-   | code, error, hack, "wait what" | glitch | `R.fx.glitch(el, t, at)` |
-   | mood shift / premium moment | light leak | `R.fx.leak(t, at)` |
-   | calm chapter change | blur dissolve (engine `enter:"blur"`) | — |
-   Max 3 transition TYPES per reel; repeat them so they become the reel's grammar.
-4. **Hold 0.6–1.2 s after every reveal.** Fast in, still hold, fast out. Never move during the payoff word.
-5. **Three depth layers per scene:** background (grid/glow, slow), hero (the prop, medium), foreground
-   (chips/particles, fastest). Optional `R.fx.dof([[el,z]…], focusZ)` to blur what is not in focus.
-6. **Overshoot, don't bounce.** Entrances use `ease.backOut`/`ease.spring` (one overshoot), exits use
-   `ease.expoInOut`. No linear motion anywhere.
-7. **Text is animated by the letter for titles,** by the word for captions (engine), by the digit for numbers:
-   `R.fx.letters` (flip/rise/pop), `R.fx.odometer` (money, counts), `R.fx.scramble` (decode), `R.fx.code`
-   (syntax-coloured typing + caret).
-8. **Every reveal gets a light:** `R.fx.sheen(el, t, at)` on the card/button the moment it lands.
-9. **Sound design is layered under every move** (cues are automatic): whoosh = camera move, swish = whip/flip,
-   riser → impact = zoom-through / big reveal, impact = flash/shake, glitch = glitch, type = text/code,
-   pop = particles/chips, click = presses, ding = success, shutter = photo/frame.
-   Drop the music for 0.5–1 s before the biggest reveal (`breaks` in music.json), land the impact on the beat.
-10. **Real motion blur on final renders:** `MBLUR=3 node tools/render.mjs …` (3 sub-frames per frame,
-    blended; 3× render time). Fast moves then look filmed, not "web".
-11. **One signature shot per reel** in the first 3 s (the flip of the reel into its code, the zoom into the
-    phone, the slab cut by lasers). Plan it before anything else; it is the cover frame.
-12. **Pattern interrupt every ~8 s:** a flash, a theme flip, a camera whip or a glitch — the viewer must feel
-    the reel "change gear" at least 4× in 40 s.
+## 1. Motion doctrine (adopted from HyperFrames' motion-doctrine + cut-the-curve, Apache-2.0)
+Look first: `references/look.md` (materials, one accent, BANNED candy colours). Then:
+1. **One film, one current.** Pick the dominant direction (default LEFT). Every ordinary scene boundary is
+   `R.fx.cutCurve` in that direction: partial travel ±230 px, mirrored `power4` eases, cut MID-motion on both
+   sides, never both scenes visible, never a crossfade. Other vectors are reserved and MEAN something:
+   up = a conclusion rises · `R.fx.zoomCut` (Z forward) = deeper into the same thought · `R.fx.inverseZoom`
+   (Z back) = ARRIVAL/payoff · `R.fx.dive` (object becomes the world) = going inside · `R.fx.rackFocus` =
+   the one visible cut, same surface new state (≤ once per ~8 s) · `R.fx.whip` = fast list items.
+2. **Z sign rule:** a push exit (growing) is answered by a growing entry; a pull (shrinking) by a shrinking
+   entry. A receding exit + grow-from-small entry is the classic mistake.
+3. **No idle wobble.** Breathing/floating/pulsing loops are banned as "motion". Between entry and exit every
+   scene is owned by a route: staged reveals on narration words · camera WITH INTENT (establish → travel →
+   arrive, `R.fx.cam` keyframes, `power2InOut`) · the UI doing its job (counts tick, rows fill) · an
+   animated sequence (a card files into a stack) · a cursor/finger leading the eye. Pause test: at any
+   second something meaningful is mid-flight. (`R.fx.pulse` is only for a beat ACCENT on a hit, never a loop.)
+4. **Arrive slow, leave clean.** Arrivals on long-tailed `expoOut`/`power4Out` (overshoot max `backOut 1.4–1.7`
+   on position/size, never on opacity/colour); exits 40–50 % shorter on `power3In`/`power4In`; camera and
+   colour floods `power2InOut`. Linear only for rotation/progress. Overlap: next element starts when the
+   previous is 30–50 % done. Stagger: letters 1 frame, words 60–120 ms, list items 40–80 ms, total ≤ 500 ms.
+5. **Titles land and hold DEAD STILL.** Waterfall entry (`R.fx.waterfall`, words from below, binary opacity,
+   gaps shrinking ×0.84, heavy word travels further) or per-word blur-in 8 → 0 px in 0.13 s. Hold ≈ 0.5 s +
+   0.3 s per word; last line ≥ 2 s. Exit = blur-out + fade 0.13–0.25 s or ride the seam.
+6. **Causal chain.** Effects start ON the causing frame (press → squash → release → flight → impact →
+   reveal). Reactions scale with mass: big things rebound slower.
+7. **Stillness before climax.** 0.3–0.75 s of nothing between the action and the result, then the payoff at
+   normal speed (inverse zoom + accent material + small burst + soft flash ≤ 0.3).
+8. **Transition budget:** 2–3 seam types per reel, repeated; cut-the-curve is the default and does not count.
+9. **Blur logic:** text-scale 8–10 px, full-frame surfaces 18–20 px, same peak on both sides of a cut; blur
+   the wrapper, never the children.
+10. **Beat grid:** compute beats by index (`R.fx.beats`), cut on the beat, change layout on the bar.
+11. **Sound under every move** (automatic cues): swish = seams/flip/whip, riser → impact = dive / payoff,
+    impact = flash/shake/inverse zoom, glitch, type, pop, click, ding, shutter. Music dips before the payoff.
+12. **Signature shot in 0–3 s** (the cover frame) and **real motion blur** on finals (`MBLUR=3`).
+
+Scene plumbing: call `R.fx.slots(t, [[id,start,end]…])` FIRST every frame (base visibility/reset), THEN the
+seams (each only touches its own window), THEN in-scene motion.
 
 ## 2. fx kit API (all pure functions of t, deterministic, auto sound cues)
 | call | does | notes |
 |---|---|---|
-| `R.fx.cam(el,t,keys,{drift,mblur,persp})` | keyframed virtual camera: `keys=[{t,x,y,z,rx,ry,rz,s,ease}]`, auto blur from speed | wrapper must be absolute + full size |
+| `R.fx.slots(t,[[el,a,b]])` | base state: scene visible + reset inside its slot, hidden outside | call first |
+| `R.fx.cutCurve(out,in,t,cut,{dir,travel,d,blur})` | DEFAULT seam: velocity-matched partial-travel cut in the current | swish |
+| `R.fx.zoomCut` / `R.fx.inverseZoom(out,in,t,cut)` | Z forward (deeper) / Z back (arrival, payoff) | swish / impact |
+| `R.fx.rackFocus(out,in,t,cut)` | blur-spike swap of the same surface | — |
+| `R.fx.waterfall(el,words,t,at)` | title cascade from below; `*word*` = heavy + accent | type |
+| `R.fx.cam(el,t,keys,{drift,mblur,persp})` | keyframed camera WITH INTENT: `keys=[{t,x,y,z,rx,ry,rz,s,ease}]`, auto blur from speed (drift = handheld, use rarely) | wrapper must be absolute + full size |
 | `R.fx.shake(el,t,at,{amp,d})` | decaying handheld shake (uses CSS translate/rotate, composes with transforms) | impact cue |
 | `R.fx.whip(out,in,t,at,{dir,d})` | whip pan with skew + streak blur | swish cue |
-| `R.fx.zoomThrough(out,in,t,at,{origin,d})` | dive into a point; next scene grows out of it | riser + impact |
+| `R.fx.dive(out,in,t,at,{origin,d})` (alias zoomThrough) | object becomes the world: dive into a point, next scene grows out of it | riser + impact |
 | `R.fx.flash(t,at,{color,max,d})` / `R.fx.leak(t,at,{color,max,d})` | full-frame flash / warm light leak (one `#fxOverlay`, auto-created) | impact cue on flash |
 | `R.fx.glitch(el,t,at,{amp,d})` | RGB split + slice jitter | glitch cue |
 | `R.fx.flip(el,t,at,{axis,dir,d,back})` | 3D card flip `.fx-flip > .fx-card > .fx-front + .fx-back` | swish cue |

@@ -13,6 +13,10 @@
     expoInOut: p => (p <= 0 ? 0 : p >= 1 ? 1 : p < 0.5 ? Math.pow(2, 20 * p - 10) / 2 : (2 - Math.pow(2, -20 * p + 10)) / 2),
     backOut: (p, s = 1.9) => 1 + (s + 1) * Math.pow(p - 1, 3) + s * Math.pow(p - 1, 2),
     elastic: p => (p <= 0 ? 0 : p >= 1 ? 1 : Math.pow(2, -10 * p) * Math.sin((p * 10 - 0.75) * (2 * Math.PI) / 3) + 1),
+    // GSAP-equivalent powers (HyperFrames motion doctrine: arrive on power4/expo.out, exits power3/4.in, camera power2.inOut)
+    power2InOut: p => (p < 0.5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2),
+    power3In: p => p * p * p, power4In: p => p * p * p * p,
+    power4Out: p => 1 - Math.pow(1 - p, 4),
   });
   const E = R.ease;
   // deterministic noise: hash(i) in [-1,1], smooth noise for shakes/drift
@@ -61,8 +65,8 @@
     if (p >= 1) { set(outEl, W, false); set(inEl, 0, true); return; }
     set(outEl, e * W, true); set(inEl, (e - 1) * W, true);
   };
-  /** zoom-through: dive INTO a point of the outgoing scene, the next one grows out of it ("go inside") */
-  F.zoomThrough = (outEl, inEl, t, at, o = {}) => {
+  /** dive ("object becomes the world"): a point/card of the outgoing scene grows past the frame and the next scene grows out of it */
+  F.dive = F.zoomThrough = (outEl, inEl, t, at, o = {}) => {
     const d = o.d ?? 0.55, p = prog(t, at - d / 2, d), [ox, oy] = o.origin || [540, 960];
     const a = $(outEl), b = $(inEl);
     if (a) { a.style.transformOrigin = `${ox}px ${oy}px`; const q = E.expoInOut(clamp(p * 1.6)); a.style.transform = `scale(${1 + q * 7})`; a.style.opacity = 1 - clamp((p - 0.35) * 3); a.style.filter = p > 0 && p < 1 ? `blur(${q * 18}px)` : ""; }
@@ -104,7 +108,7 @@
   };
   /** specular sheen: a light bar sweeps across a card/button (premium "shine" on reveal). Adds .fx-sheen child. */
   F.sheen = (el, t, at, o = {}) => {
-    el = $(el); let s = el.querySelector(":scope > .fx-sheen"); if (!s) { s = document.createElement("i"); s.className = "fx-sheen"; el.appendChild(s); }
+    el = $(el); let s = el.querySelector(":scope > .fx-sheen"); if (!s) { s = document.createElement("i"); s.className = "fx-sheen"; el.appendChild(s); el.style.overflow = "hidden"; }
     const p = prog(t, at, o.d ?? 0.7); s.style.transform = `translateX(${lerp(-140, 260, E.inOut(p))}%) skewX(-18deg)`; s.style.opacity = p > 0 && p < 1 ? 1 : 0;
   };
   /** depth of field: blur each element by its distance from the focus z (els: [[el, z]]) */
@@ -149,10 +153,62 @@
     if (o.sfx !== false) R.cue("type", at, { t2: at + src.length / cps });
   };
 
+
+  /** base state for slot-based scenes: call FIRST every frame, seams after it.
+   *  slots: [[el, start, end]] — inside its slot a scene is visible + reset, outside hidden. */
+  F.slots = (t, slots) => slots.forEach(([el, a, b]) => { el = $(el); if (!el) return; const on = t >= a && t < b;
+    el.style.visibility = on ? "visible" : "hidden"; el.style.opacity = on ? 1 : 0; el.style.transform = ""; el.style.filter = ""; });
+  // ---------- VELOCITY-MATCHED SEAMS (HyperFrames cut-the-curve catalog, Apache-2.0, adapted to seek(t)) ----------
+  // Law: cut mid-motion, same axis + direction + speed both sides (mirrored eases), never both visible, never a crossfade.
+  const seamSet = (el, o) => { el = $(el); if (!el) return; el.style.transform = `translate(${o.x || 0}px,${o.y || 0}px) scale(${o.s ?? 1})`;
+    el.style.opacity = o.a; el.style.filter = o.b > 0.2 ? `blur(${o.b.toFixed(1)}px)` : ""; el.style.visibility = o.a <= 0.001 ? "hidden" : "visible"; };
+  /** cut-the-curve: the DEFAULT scene boundary, in the film's current (dir "left" default). Partial travel ±230 px. */
+  F.cutCurve = (outEl, inEl, t, cut, o = {}) => {
+    const D = o.d ?? 0.32, tr = o.travel ?? 230, ax = /up|down/.test(o.dir || "") ? "y" : "x", sg = /right|down/.test(o.dir || "") ? 1 : -1, bl = o.blur ?? 9;
+    if (o.sfx !== false) R.cue("swish", cut - D * 0.6);
+    const pe = prog(t, cut - D, D), pi = prog(t, cut, D);
+    if (t < cut - D || t > cut + D + 0.04) return;   // outside the seam: leave the scenes to the base state
+    if (t < cut) { const e = E.power4In(pe); seamSet(outEl, { [ax]: sg * tr * e, a: pe <= 0 ? 1 : clamp(1 - pe / 0.92), b: bl * e }); seamSet(inEl, { a: 0 }); }
+    else { const e = E.power4Out(pi); seamSet(outEl, { a: 0 }); seamSet(inEl, { [ax]: -sg * tr * (1 - e), a: pi >= 1 ? 1 : lerp(0.35, 1, clamp(pi * 2)), b: bl * (1 - e) }); }
+  };
+  /** forward zoom cut (deeper into the same thought): out 1→1.2 blur→10, in 0.75→1 (everything GROWS) */
+  F.zoomCut = (outEl, inEl, t, cut, o = {}) => {
+    const de = o.de ?? 0.2, di = o.di ?? 0.5, bl = o.blur ?? 10;
+    if (o.sfx !== false) R.cue("swish", cut - de);
+    if (t < cut - de || t > cut + di + 0.04) return;
+    if (t < cut) { const p = prog(t, cut - de, de), e = E.power3In(p); seamSet(outEl, { s: 1 + 0.2 * e, a: lerp(1, 0.15, p), b: bl * e }); seamSet(inEl, { a: 0 }); }
+    else { const p = prog(t, cut, di), e = E.expoOut(p); seamSet(outEl, { a: 0 }); seamSet(inEl, { s: lerp(0.75, 1, e), a: lerp(0.15, 1, e), b: bl * (1 - e) }); }
+  };
+  /** inverse zoom (ARRIVAL / payoff only): out 1→0.8, in arrives oversized 1.25→1 (everything SHRINKS) */
+  F.inverseZoom = (outEl, inEl, t, cut, o = {}) => {
+    const de = o.de ?? 0.2, di = o.di ?? 0.5, bl = o.blur ?? 10;
+    if (o.sfx !== false) R.cue("impact", cut, { soft: true });
+    if (t < cut - de || t > cut + di + 0.04) return;
+    if (t < cut) { const p = prog(t, cut - de, de), e = E.power3In(p); seamSet(outEl, { s: 1 - 0.2 * e, a: lerp(1, 0.15, p), b: bl * e }); seamSet(inEl, { a: 0 }); }
+    else { const p = prog(t, cut, di), e = E.expoOut(p); seamSet(outEl, { a: 0 }); seamSet(inEl, { s: lerp(1.25, 1, e), a: lerp(0.15, 1, e), b: bl * (1 - e) }); }
+  };
+  /** rack-focus blur cut (the ONE visible cut, same surface state swap, ≤ once per ~8 s): blur spike hides a hard swap */
+  F.rackFocus = (outEl, inEl, t, cut, o = {}) => {
+    const d = o.d ?? 0.28, pk = o.blur ?? 11;
+    if (t < cut - d || t > cut + d * 1.2 + 0.04) return;
+    if (t < cut) { const p = prog(t, cut - d, d), e = E.power2InOut(p); seamSet(outEl, { s: 1 + 0.06 * e, a: 1, b: pk * e }); seamSet(inEl, { a: 0 }); }
+    else { const p = prog(t, cut, d * 1.2), e = E.power2InOut(p); seamSet(outEl, { a: 0 }); seamSet(inEl, { s: 1.06 - 0.06 * e, a: 1, b: pk * (1 - e) }); }
+  };
+  /** waterfall ENTRY: words whip up from below with binary opacity, overlapping, gaps shrinking; the last word snaps.
+   *  words: ["Every","frame","is","*code.*"]  (*x* = anchor/heavy word: travels further, accent colour) */
+  F.waterfall = (el, words, t, at, o = {}) => {
+    el = $(el); const key = words.join("|");
+    if (el.dataset.wf !== key) { el.innerHTML = words.map(w => { const h = /^\*.*\*$/.test(w); return `<span class="fx-w${h ? " h" : ""}">${h ? w.slice(1, -1) : w}</span>`; }).join(" "); el.dataset.wf = key; }
+    let a = at, gap = o.gap ?? 0.11;
+    el.querySelectorAll(".fx-w").forEach((w, i) => { const heavy = w.classList.contains("h"), d = heavy ? 0.2 : 0.15, dy = heavy ? 76 : 46;
+      const p = prog(t, a, d), e = E.power4Out(p); w.style.opacity = t >= a ? 1 : 0; w.style.transform = `translateY(${(1 - e) * dy}px)`; a += gap; gap *= 0.84; });
+    if (o.sfx !== false) R.cue("type", at, { t2: a });
+  };
+
   // ---------- PARTICLES ----------
   /** burst of sparks/confetti from a point (emphasis, "done", win). Creates children once. */
   F.burst = (el, t, at, o = {}) => {
-    el = $(el); const n = o.n ?? 18, d = o.d ?? 0.9, cols = o.colors || ["#F9CE34", "#EE2A7B", "#3B82F6", "#3ECF8E"];
+    el = $(el); const n = o.n ?? 18, d = o.d ?? 0.9, cols = o.colors || ["#D97757", "#F0A585", "#F3F1EC", "#7A3A26"];
     if (!el.dataset.burst) { el.innerHTML = Array.from({ length: n }, (_, i) => `<i class="fx-pt" style="background:${cols[i % cols.length]}"></i>`).join(""); el.dataset.burst = 1; }
     const p = prog(t, at, d);
     el.querySelectorAll(".fx-pt").forEach((q, i) => { const ang = (i / n) * Math.PI * 2 + hash(i) * 0.4, r = (o.r ?? 220) * (0.6 + 0.4 * (hash(i + 5) * 0.5 + 0.5)) * E.expoOut(p);
@@ -162,9 +218,11 @@
 
   // ---------- BEAT SYNC ----------
   /** beat grid from the music.json you pass to music.py: R.fx.beats({bpm, groove_in}) */
-  F.beats = (cfg) => { const b = 60 / cfg.bpm, out = []; for (let x = cfg.groove_in || 0; x < (cfg.dur || 120); x += b) out.push(+x.toFixed(3)); F._beats = out; F._beat = b; return out; };
+  F.beats = (cfg) => { const b = 60 / cfg.bpm, g = cfg.groove_in || 0, out = []; for (let i = 0; g + i * b < (cfg.dur || 120); i++) out.push(+(g + i * b).toFixed(3)); F._beats = out; F._beat = b; return out; };
   /** 0..1 pulse that spikes on every beat and decays (scale a glow, a card, the background) */
   F.pulse = (t, o = {}) => { const B = F._beats || []; let last = -9; for (const x of B) { if (x <= t) last = x; else break; } return Math.exp(-(t - last) * (o.decay ?? 9)) * (t - last < (o.every ?? 99) ? 1 : 0); };
   /** snap a time to the nearest beat (cut scenes ON the beat) */
   F.snap = x => { const B = F._beats || []; if (!B.length) return x; return B.reduce((a, b) => (Math.abs(b - x) < Math.abs(a - x) ? b : a), B[0]); };
 })();
+/* Portions adapted from HyperFrames (https://github.com/heygen-com/hyperframes), Apache License 2.0:
+ * cut-the-curve / zoom-through / inverse zoom / rack-focus seam parameters and the waterfall entry cascade. */
