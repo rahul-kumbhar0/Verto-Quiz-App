@@ -44,3 +44,16 @@ Verification gaps: GitHub API and support.zerodha.com / medianama / analyticsvid
 | 8 | I connected my Zerodha to Claude. It roasted my portfolio. | official Kite MCP (on /mcp/) | analysis, not advice | ROAST |
 | 9 | I connected my Drive to Claude. Every certificate became one CV. | built-in Drive connector | — | CV |
 | 10 | I connected WhatsApp to Claude. (read-only) | lharries/whatsapp-mcp (unofficial, v0.0.1, ban risk) | LOW PRIORITY: unofficial, ToS risk, read-only only | — |
+
+## Instagram trend scan — 1 Nov 2026 (PullRows trends_find: #claudeai #aitools #jobsearch #placements, last 31 days; views are the tool's estimates)
+Proven this month (→ our angle):
+1. AI job-search autopilot: @10x.with.ai "I graduated today. Zero offers." (~1.2M in 17 h, APPLY: Playwright + Claude, 200 career pages, fills forms, stops before Submit);
+   @10x.with.ai "I applied to 200 jobs on LinkedIn. Zero replies." (~221K in 38 h: Google site:jobs.lever.co / jobs.ashbyhq.com / boards.greenhouse.io + Claude scheduled task, paid plan);
+   @an.idiotic_soul "Automate your job search using AI" (~702K); @manikk.ai (~160K). → JOBS part 2/3, story hook "Placement season. Zero offers."
+2. "Claude made this whole video": @damianodesu (~1.8M, PROMPTS), @visionaryclown.tv (~1.3M), @vibha.in.progress claude-video-effects repo (~1.0M, 54K comments), @tenfoldmarc, @techayushyaduvanshi, @jayantcreates.ai. → we have the real proof (our pipeline).
+3. Instagram Agent Skill (13 skills): @auraguy.ai (~550K), @aiandharshit Hinglish (~499K), @swapsays_wtf (~639K). → our GROW rides it (posted 1 Nov).
+4. YouTube Agent Skill (11 skills, Claude runs your YouTube): @ai.nxtlvl (~244K, 21K comments). → "I automated my YouTube with Claude" validated; verify repo.
+5. Referral message: @making.navi "10 days. 3 offers. No referral requests." (~775K, NOTE). → post our REFER reel.
+6. Claude multi-agent skills: @opusjake 100 sub-agents (~2.2M), 11-agent trading team (~1.6M). → power-user; low fit.
+7. AI in interviews: @yournishaant (~7.2M, few comments) → reach only.
+Patterns: 7/10 winners original voice-over; first-person story/number hooks; one-word keyword CTA; winning captions ~40–110 words.
