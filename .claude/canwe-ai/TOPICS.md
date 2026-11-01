@@ -57,3 +57,6 @@ Proven this month (→ our angle):
 6. Claude multi-agent skills: @opusjake 100 sub-agents (~2.2M), 11-agent trading team (~1.6M). → power-user; low fit.
 7. AI in interviews: @yournishaant (~7.2M, few comments) → reach only.
 Patterns: 7/10 winners original voice-over; first-person story/number hooks; one-word keyword CTA; winning captions ~40–110 words.
+
+## LinkedIn posting with Claude (1 Nov 2026) — draft in canwe-ai/drafts/lipost (keyword POST)
+linkedin-agent-skill (Jake Schincariol, MIT, 3.0k★): 11 skills, /li-post 21 hook formulas, humanizer, profile /100, weekly plan; 'these skills write, you post'. Trend: ~907K / ~531K / ~253K view reels this month. Siblings to check next: youtube-agent-skill, x-agent-skill.
