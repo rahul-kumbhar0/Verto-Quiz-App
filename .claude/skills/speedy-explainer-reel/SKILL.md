@@ -39,6 +39,7 @@ concept without a viewer stake gets nothing. When unsure, it is a tool-demo reel
 - Look: OUR style (presenter + kinetic captions + selection box + dark/light flips + rail). Techniques from
   other creators are borrowed, never their look (`references/premium-ui-mode.md` header).
 - Look: `references/look.md` + `look.css` (`<body class="look">`): graphite materials, ONE terracotta accent, no candy colours.
+- Real UI: whenever the script says Claude/GitHub/a terminal, show the REAL interface (`references/real-ui.md`), not a generic card.
 - Editing: `references/advanced-editing.md` (HyperFrames-derived motion doctrine + fx kit), `MBLUR=3` on final renders.
 - Music: `music.py` `"style":"pulse"` (dark sub drone, half-time kick), hook dry until the first reveal.
 - CTA: "Comment KEYWORD and I'll DM you <thing>" + the comments → DM sequence. "Follow + share with the
@@ -182,6 +183,7 @@ stock puppet was used.
 - `references/props3d.md` — the 3D hero props (database stack that explodes into labelled layers, isometric server tray, rack-bar translator, WAL journal + dial, pooler fiber stream) PLUS the any-topic kit (3D box, chip, globe, packet flow), the **exploded view** (`R.xview`: layers split along an axis, numbered leader-line labels, one part pulls out and explains itself) + **detail lens** (`R.lens`: magnified circle + cone + caption) for every "what's inside X" beat, and a topic→prop recipe table; worked reproductions in `assets/examples/supabase-hook/`, `assets/examples/exploded-view-demo/` and `assets/examples/explainer-kit-demo/` (process steps, analogy split, zoom-through, bar chart)
 - `references/logos.md` — real-logo rule, `scripts/brand_logos.mjs` (offline official marks + contact sheet), `R.lg` tiles/brand chips
 - `references/premium-ui-mode.md` — animation/explanation techniques borrowed from a princegupta.ai reel (measured voice pace + music, `"style":"pulse"`). Apply inside our style; their no-presenter look is NOT ours
+- `references/real-ui.md` — **real product UI** (`ui.js`/`ui.css`): exact GitHub repo page, Claude chat/home, Claude Code terminal, browser chrome; real data + dated footnote; camera framing rules
 - `references/look.md` — the canwe.ai LOOK line (numbers), materials, BANNED list, data-colour rule (`assets/template/look.css`)
 - `references/advanced-editing.md` — **edit level 2**: the 12 rules (camera never locked, cuts on beats, transition = meaning, signature shot, layered sound design, real motion blur) + the `fx.js` kit API (`R.fx.cam/whip/zoomThrough/flip/flash/leak/glitch/shake/sheen/letters/odometer/scramble/code/burst/beats`); demo `assets/examples/fx-demo/`. READ IT for every new reel
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence

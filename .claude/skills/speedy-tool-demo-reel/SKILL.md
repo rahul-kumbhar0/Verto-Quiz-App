@@ -18,7 +18,8 @@ different preset or give it a job/money stake.
    running, the number, the result card) — no logo intro, no "hey guys". Never "Okay so…" (RESUME lost
    its first seconds to that).
 2. **The input line (3–8 s):** the exact thing you typed/did ("find me Python internships in
-   Bangalore") on a 3D chat/terminal card. Specific > clever.
+   Bangalore") typed into the REAL Claude UI / terminal / repo page (`R.ui`, references/real-ui.md) with the real
+   result streaming back. Specific > clever.
 3. **3–4 rapid proofs (8–30 s), each = one phrase + one visual change + one real number:**
    "3.3 million live jobs" · "same job on three sites shows up once" · "ghost jobs flagged". Whip pan
    between proofs (`R.fx.whip`), odometer on every number (`R.fx.odometer`), sheen on each card.

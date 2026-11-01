@@ -1,0 +1,71 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Real UI demo — GitHub + Claude replicas in the speedy reel</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css">
+<style>
+.ru-sc{position:absolute;inset:0;visibility:hidden}
+.ru-gh{position:absolute;left:0;top:0;width:1280px;transform-origin:0 0}
+.ru-gh .br-page{height:720px}
+.ru-cl{position:absolute;left:33px;top:650px;transform-origin:0 0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(255,255,255,.08),0 50px 120px -20px rgba(0,0,0,.8)}
+.ru-cl .ui-cl{height:590px}
+.ru-fn{position:absolute;left:50%;transform:translateX(-50%);top:1296px;white-space:nowrap;font:500 19px Inter;color:var(--ink-2);opacity:0;z-index:4;background:rgba(14,15,18,.88);border:1px solid var(--g-line);border-radius:999px;padding:6px 16px}
+.ru-cta{position:absolute;left:0;right:0;top:880px;display:flex;justify-content:center}
+.ru-cta .m-acc{font:900 84px Inter;letter-spacing:-2px;padding:24px 56px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <div id="cam">
+    <section class="ru-sc" id="sGh"><div class="ru-gh" id="ghw"><div id="gh"></div></div>
+      <div class="ru-fn" id="fn1">github.com/strelov1/freehire · numbers as of 1 Nov 2026</div></section>
+    <section class="ru-sc" id="sCl"><div class="ru-cl" id="clw"><div id="cl"></div></div>
+      <div class="ru-fn" id="fn2">Real freehire results, 1 Nov 2026 · not sponsored</div></section>
+    <section class="ru-sc" id="sCta"><div class="ru-cta"><div class="m-acc" id="cta">Comment JOBS 👇</div></div></section>
+  </div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, U = R.ui, { at, prog, clamp, lerp, ease } = R, $ = R.$, E = ease;
+// REAL data (GitHub page + live freehire search, 1 Nov 2026)
+U.github("gh", { owner: "strelov1", repo: "freehire", stars: "3.5k", forks: "360", watch: "11", issues: 8, prs: 6, branches: 10, tags: 15,
+  about: "freehire — the open-source search engine for job seekers", url: "freehire.me",
+  topics: ["ats", "career", "careers", "golang", "hiring", "job-aggregator", "job-board", "job-search", "jobs", "llm", "postgresql", "remote-jobs"],
+  commit: { who: "strelov1", msg: "Remove NUL bytes before sanitizing description HTML (#4030)", sha: "4f77ef9", when: "23 minutes ago", count: "4,801" },
+  files: [[".github", "build: align TLS client checks with Go 1.27", "yesterday"], ["cmd", "Merge pull request #4023", "26 minutes ago"], ["design-system", "Hold the dictionary page to the design-system baselines.", "5 hours ago"],
+          ["docs", "Merge clearance filters and regenerate combined API docum…", "13 hours ago"], ["extension", "Bump @lucide/svelte to 1.65 in all three packages", "yesterday"], ["harvest", "Widen the LinkedIn harvest into thin markets", "last week"], ["internal", "Remove NUL bytes before sanitizing description HTML", "23 minutes ago"]] });
+U.browser("ghw", { url: "github.com/strelov1/freehire" });
+U.claudeChat("cl", { title: "Python internships", initial: "R", model: "Claude", tool: { name: "freehire", fn: "search_jobs" },
+  answer: ["Found <b>37</b> Python internships in Bangalore. The newest:", "<b>1. KOTS</b> — Intern, Full Stack Python (Angular) · Whitefield · ₹21,000/month",
+           "<b>2. Synechron</b> — Python Software Engineer · Bellandur · via Workday", "Want me to save these and send new ones daily?"] });
+const T = { gh: 0, star: at("3.5K"), cl: at("Then I typed"), cta: at("Comment"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 1.6).toFixed(2);
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH,
+  chapters: [{ label: "the repo", at: 0.2 }, { label: "claude", at: T.cl }, { label: "result", at: at("found"), end: T.cta }],
+  counter: { unit: "jobs", steps: [[at("37"), 37, "internships"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
+// camera on the GitHub page: P (native px) lands on screen point Q at scale s
+const ghCam = (t) => { const base = { s: 0.97, x: -14, y: 668 }, zoom = { s: 1.6, P: [1150, 190], Q: [640, 900] };
+  const z = E.power2InOut(prog(t, T.star - 0.5, 0.8)) * (1 - E.power2InOut(prog(t, T.cl - 0.6, 0.5)));
+  const zs = { s: zoom.s, x: zoom.Q[0] - zoom.P[0] * zoom.s, y: zoom.Q[1] - zoom.P[1] * zoom.s };
+  const s = lerp(base.s, zs.s, z), x = lerp(base.x, zs.x, z), y = lerp(base.y, zs.y, z);
+  const pin = E.expoOut(prog(t, 0.05, 0.8));
+  $("ghw").style.transform = `translate(${x}px,${y + (1 - pin) * 120}px) scale(${s})`; $("ghw").style.opacity = pin; };
+window.seek = t => {
+  R.frame(t);
+  F.slots(t, [["sGh", 0, T.cl], ["sCl", T.cl, T.cta], ["sCta", T.cta, 99]]);
+  F.cutCurve("sGh", "sCl", t, T.cl); F.inverseZoom("sCl", "sCta", t, T.cta);
+  R.speedyFrame(t);
+  // GitHub: page arrives, rows highlight in a wave, camera pushes to the real star count, Star pressed
+  ghCam(t);
+  for (let k = 0; k < 7; k++) $("gh-row" + k).classList.toggle("hi", t >= 1.0 + k * 0.12 && t < 1.25 + k * 0.12);
+  U.ghStar("gh", t, T.star + 0.35); F.sheen("gh-star", t, T.star + 0.55);
+  R.note("fn1", t, 0.6, T.cl - 0.3);
+  // Claude: the real chat UI — type, send, tool call, answer streams
+  const cp = E.expoOut(prog(t, T.cl, 0.6)); $("clw").style.transform = `scale(${lerp(1.22, 1.18, cp)})`;
+  U.claudePlay("cl", t, { text: "Find me Python internships in Bangalore", at: T.cl + 0.35, cps: 30, toolDur: 0.8, wps: 26 });
+  R.note("fn2", t, at("found"), T.cta);
+  F.sheen("cta", t, T.cta + 0.6);
+};
+window.seek(0);
+</script></body></html>
