@@ -37,6 +37,9 @@ Fill this in `brief.md` before writing a word:
 | follow | **E. Myth-buster** ("Bots don't reject your resume. Here's what does.") | contrarian + useful |
 | leads | **F. Result story** ("10 days. 3 offers. No referrals. Here's the message.") | proof first, copy-paste value |
 Hybrid is our house style: a B/E body (explainer) with an A/C ending (keyword → DM).
+**Build preset by archetype** (speedy-explainer-reel router): A / C / F and money-myth E → `speedy-tool-demo-reel`
+(our winners); B curiosity → `speedy-hidden-mechanism-reel` (hook MUST carry a job/money stake — our pure
+explainers got ~0 comments); "Let's design X" → `speedy-system-design-reel` (mini 60–90 s by default).
 
 ## 2. Hook lab (the first 1.5 seconds)
 Write **10 hooks** using **at least 5 different formulas** from `references/hooks.md`. For each,

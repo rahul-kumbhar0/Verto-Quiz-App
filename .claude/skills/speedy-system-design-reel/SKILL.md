@@ -9,7 +9,19 @@ Load and follow `speedy-explainer-reel` (setup → research → script → anima
 deliver) with these format rules. Reference: `references/example-scripts.md` §B and
 `references/ref-frames/supabase-reel-contact-sheet-*.jpg` in that skill.
 
-## Story spine (8–10 chapters, 120–160 s, ≈2.8 w/s)
+## canwe.ai rules first
+- Untested on our page; treat as Season 2 / an occasional big piece. Default to the **mini design** (60–90 s,
+  4–5 chapters, ≈ 3.0 w/s) and only do the full 120–160 s when the owner asks.
+- Pick systems our audience uses or wants to build: UPI payment, IRCTC Tatkal, Swiggy delivery ETA,
+  Instagram's DM keyword bot (ours — disclose), a freehire-style job search engine, "design your first AI app".
+- End on a keyword → DM (the architecture cheat sheet / starter repo) instead of follow + share.
+
+## Edit plan (references/advanced-editing.md)
+hook = the exploded stack (signature shot, camera orbit) · zoom-through into each chapter's component ·
+whip pan between sibling components · the running-example counter as an odometer · "now it goes viral" =
+glitch + shake + the matrix going red · recap rack with sheen per layer · beat-snapped chapter cuts · MBLUR=3.
+
+## Story spine (full: 8–10 chapters, 120–160 s · mini: 4–5 chapters, 60–90 s)
 1. **Hook (0–2.5 s, no presenter, dark)**: "Let's design X." over the product's exploded stack —
    build it with `R.stack` + `R.rays` + `R.rings` + `R.callout` + `R.bolt` (references/props3d.md;
    copy assets/examples/supabase-hook/): bokeh backdrop, discs rise and SPLIT into labelled
@@ -29,8 +41,8 @@ deliver) with these format rules. Reference: `references/example-scripts.md` §B
 6. **Recap (dark)**: the rack stacks bottom-up while one breath lists every chapter: "So X is
    <provider> plus its own layer. A runs B and C writes the API. D and E guard every row. One
    journal powers F, G and H. All so you never write a backend."
-7. **CTA (light, 5–6 s)**: "Follow for more breakdowns, and share it with the friend who
-   <topic-specific flaw>." Profile card → finger taps Follow → share sheet with one friend
+7. **CTA (light, 5–6 s)**: canwe.ai = "Comment KEYWORD and I'll DM you the <architecture cheat sheet>"; the
+   reference's "Follow for more breakdowns, and share it with the friend who <topic-specific flaw>" for reach-only. Profile card → finger taps Follow → share sheet with one friend
    selected → the joke card in the message (`users · 2,184 rows · RLS Unrestricted`) → Send.
 
 ## Template configuration

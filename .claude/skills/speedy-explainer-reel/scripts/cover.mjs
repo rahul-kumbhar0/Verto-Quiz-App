@@ -10,7 +10,11 @@
 import { chromium } from 'playwright';
 import fs from 'fs';
 import path from 'path';
-const [,, html, t, out, cfgPath] = process.argv;
+const [,, html, t, out, cfgArg] = process.argv;
+// default: cover.json next to the reel page (forgetting the arg used to silently render the old ai-interview cover)
+const cfgGuess = path.join(path.dirname(path.resolve(html)), "cover.json");
+const cfgPath = cfgArg || (fs.existsSync(cfgGuess) ? cfgGuess : "");
+if (!cfgPath) console.warn("cover.mjs: no cover.json found — using the built-in example headline");
 const C = Object.assign({ logo: "", kicker: "CODING INTERVIEWS", accent: "#FF5A5F", line1: "How they {catch}", line2: "you using AI",
   stamp: "⚠ FLAGGED", stampAt: [120, 1080], brand: "@canwe.ai", light: false, hide: [], shift: { ".plat": "0 110px" } },
   cfgPath ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : {});

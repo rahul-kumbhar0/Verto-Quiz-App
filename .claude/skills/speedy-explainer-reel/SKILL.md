@@ -1,6 +1,6 @@
 ---
 name: speedy-explainer-reel
-description: "Topic in → finished vertical explainer reel in the @speedy_devv style: a cartoon presenter at the bottom reacting to every line, one crisp UI/diagram hero object in the middle, and word-by-word captions on top with ONE keyword in a blue Figma-style selection box, dark/light chapter flips, a chapter rail with a live counter, a 'Follow + share it with the friend who…' ending. No footage needed — everything is generated (HTML scenes rendered with Playwright + voice). Use for 'make a speedy_devv style reel', 'Let's design X breakdown', 'how X actually works under the hood reel', 'system design reel', 'explainer with the cartoon guy', or any request for an animated tech/product explainer Reel/Short; also when the user attaches a speedy_devv reel as the reference."
+description: "Topic in → finished vertical explainer reel in the @speedy_devv style: a cartoon presenter at the bottom reacting to every line, one crisp UI/diagram hero object in the middle, and word-by-word captions on top with ONE keyword in a blue Figma-style selection box, dark/light chapter flips, a chapter rail with a live counter, a 'Follow + share it with the friend who…' ending. No footage needed — everything is generated (HTML scenes rendered with Playwright + voice). Presets: speedy-tool-demo-reel (default for canwe.ai: 'I connected X to Claude' → keyword DM), speedy-hidden-mechanism-reel, speedy-system-design-reel. Use for 'make a speedy_devv style reel', 'Let's design X breakdown', 'how X actually works under the hood reel', 'system design reel', 'explainer with the cartoon guy', or any request for an animated tech/product explainer Reel/Short; also when the user attaches a speedy_devv reel as the reference."
 ---
 
 # Speedy explainer reel
@@ -9,8 +9,7 @@ Two reference reels were taken apart frame by frame (78 s "Every key on your iPh
 smaller than your thumb" and 154 s "Let's design Supabase"). The result is this skill: a style
 breakdown, a script formula, a tested HTML template with the presenter puppet and every stage
 component, and the render/mix pipeline. Read `references/style-breakdown.md` once per session
-before building anything; it is the target. The two formats have their own preset skills
-(`speedy-system-design-reel`, `speedy-hidden-mechanism-reel`) that load this one.
+before building anything; it is the target. Each format has its own preset skill that loads this one (pick with the table below).
 
 The look in one line: **headline-captions (y 300–470) · one hero object (y 640–1330) ·
 cartoon presenter (y 1420–1920)**, near-black canvas flipping to off-white per chapter, a blue
@@ -22,6 +21,31 @@ princegupta.ai reel — word-synced micro-changes on the hero object, blur disso
 through every step, a step tracker that ticks, the dark `"style":"pulse"` music bed. **The owner's rule
 (31 Oct): we keep OUR style as it is** (presenter, big kinetic captions, selection box, dark/light flips,
 rail). Borrow their *animation and explanation techniques*, never their look.
+
+## Pick the preset FIRST (canwe.ai data, Nov 2026 — `canwe-ai/RECORD.md` snapshots)
+| Topic is… | Preset | Length | Ending | Our evidence |
+|---|---|---|---|---|
+| a tool / repo / connector / prompt / app we can SHOW working ("I connected X to Claude") — or a list of them | **`speedy-tool-demo-reel`** | 38–48 s | Comment KEYWORD → DM → guide | JOBS 711 DMs · GROW 57 DMs in 5 h · LINK · PROMPT · OFFER · MCP |
+| money / hiring myth with numbers (salary bands, ATS myth) | `speedy-tool-demo-reel` spine with a myth/number hook (reel-script-writer archetype E/F) | 40–46 s | keyword → DM | SALARY 81 likes, 28 DMs · RESUME 24 DMs |
+| an invisible mechanism inside something people use (tokens, autocorrect, UPI) | `speedy-hidden-mechanism-reel` | 45–60 s (series ≤ 60) | keyword → DM (+ follow for series) | TOKENS / AGENT ≈ 0 comments → MUST hook on a job/money stake |
+| how a product is built end to end (Let's design X) | `speedy-system-design-reel` | 60–90 s mini · 120–160 s full | keyword → DM | not tested yet — Season 2 / rare |
+Rule from the data: a reel with no keyword gets no comments (AI-interview: 32 likes, 1 comment), and a
+concept without a viewer stake gets nothing. When unsure, it is a tool-demo reel.
+
+## House defaults (canwe.ai) — override only when the owner says so
+- Voice: ElevenLabs "Shlok" (`2i7LhYjvw41fgbcqlf3Z`, eleven_v3): `estimate_only` first, then ONE take
+  (`generations_count: 1`); ≈ 3.0 words/s → 120 words ≈ 40 s. Pace with `pace.py --pause 0.16 --stop 0.55
+  --tempo 1.06–1.08`. If the generate call is denied, never retry it — ask, or reuse an approved voice.
+- Look: OUR style (presenter + kinetic captions + selection box + dark/light flips + rail). Techniques from
+  other creators are borrowed, never their look (`references/premium-ui-mode.md` header).
+- Editing: `references/advanced-editing.md` (fx kit, 12 rules), `MBLUR=3` on final renders.
+- Music: `music.py` `"style":"pulse"` (dark sub drone, half-time kick), hook dry until the first reveal.
+- CTA: "Comment KEYWORD and I'll DM you <thing>" + the comments → DM sequence. "Follow + share with the
+  friend who…" only for pure reach reels.
+- Cover: `node tools/cover.mjs index.html <t> out/cover.png cover.json` from the reel folder (always pass
+  cover.json; avoid the single raised index finger pose; keep text inside y 240–1680).
+- Honesty: sourced numbers only, illustrations footnoted, own/partner products disclosed on screen and in
+  the caption.
 
 ## 0. Setup (once per session, ~1 min)
 ```bash
@@ -48,20 +72,20 @@ schema simplified), note the footnote now.
 **Write the script with the `reel-script-writer` skill first** (hooks scored, archetype by goal,
 lint, caption/cover/DM package); then apply the speedy-specific rules below (beat sheet visuals,
 glosses, markup).
-Pick the format (hidden mechanism / system design), fill the beat sheet (every row has a line, a
+Pick the preset (table above: tool demo / hidden mechanism / system design), fill the beat sheet (every row has a line, a
 stage object and a pose), then write `script.md` with the emphasis markup: `[box]` on the one
-keyword per phrase, `*bold*` on 1–2 structure words, optional `{pose}` pins. Pace ≈2.6 w/s.
+keyword per phrase, `*bold*` on 1–2 structure words, optional `{pose}` pins. Pace ≈3.0 w/s (ElevenLabs Shlok; 2.6 for voice-studio).
 ```bash
 python3 $W/tools/mark_script.py $P/script.md $P      # -> narration.txt, emph.json, poses.json
 ```
 Write `display.json` merges for every spoken number/command that must be one caption token
 (`[["ten","thousand"],"10,000"]`). Handle for the CTA: the user's real one (ask once; never
-invent). The CTA punchline must be about the topic ("the friend who blames autocorrect for
-everything").
+invent). Lead reels end on the keyword → DM line; reach-only reels may end on a topic punchline ("the friend
+who blames autocorrect for everything").
 
 ## 3. Animatic first (free) → stills → fix
 ```bash
-cd $P; python3 $W/tools/fake_timings.py narration.txt words.json 2.6
+cd $P; python3 $W/tools/fake_timings.py narration.txt words.json 3.0
 python3 $W/tools/captions.py words.json captions.js captions.srt display.json --max 5
 ```
 Author `index.html` from the template (keep the skeleton, layers, script order, `R.frame(t);

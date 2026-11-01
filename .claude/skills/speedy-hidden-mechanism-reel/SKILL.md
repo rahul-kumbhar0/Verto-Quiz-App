@@ -8,7 +8,22 @@ description: "Preset of speedy-explainer-reel for the 'invisible thing inside a 
 Load and follow `speedy-explainer-reel` with these format rules. Reference:
 `references/example-scripts.md` §A and `references/ref-frames/keyboard-reel-contact-sheet.jpg`.
 
-## Story spine (60–90 s, ≈2.6 w/s, dark canvas with ONE light chapter)
+## canwe.ai rules first (from our numbers, Nov 2026)
+- Our two pure explainers (AGENT, TOKENS Day 1) got ~0 comments while tool demos got hundreds. So the hook
+  MUST carry a stake for an Indian student/fresher (marks, job, money, interview, time) or a physical
+  paradox they can feel — and the reel ends on a keyword → DM (an exercise/cheat sheet/prompt), plus
+  "follow for the series" for Learn AI episodes. No next-day tease (owner's call).
+- Length 45–60 s at ElevenLabs Shlok pace (≈ 3.0 w/s → 135–175 words); 60–90 s only when the owner asks.
+- Good canwe.ai topics: how UPI knows the money arrived · why Tatkal sells out in a minute · how ATS reads
+  a resume · how your phone keyboard guesses (the reference) · why ChatGPT gives a different answer twice.
+
+## Edit plan (references/advanced-editing.md)
+signature shot = the prop magnified with the mechanism already glowing (camera push, drift on) ·
+zoom-through INTO the prop when the mechanism is explained · flip for the "second trick" (front = what you
+see, back = what really happens) · odometer on every exact number · flash + shake on the payoff ·
+light chapter for history/credibility · pulse music, MBLUR=3.
+
+## Story spine (45–60 s for canwe.ai; the reference ran 60–90 s; dark canvas with ONE light chapter)
 1. **Hook (0–3 s, no presenter)**: a paradox in physical terms — "Every key on your iPhone
    keyboard is smaller than your thumb, and you still hit the right letter almost every time."
    Stage: the prop magnified 2–3× (`R.camera` push on a phone/keyboard), the hidden mechanism
@@ -32,7 +47,8 @@ Load and follow `speedy-explainer-reel` with these format rules. Reference:
    (the letter preview popping above the finger — `R.preview`), explained in 3 sentences.
 7. **Recap**: restate the hook as the answer in one sentence ("Your iPhone is quietly guessing the
    key to where your thumb was about to land.").
-8. **CTA (dark, 5–6 s)**: "Follow me, and send this to the friend who <blames the mechanism>."
+8. **CTA (dark, 5–6 s)**: canwe.ai = "Comment KEYWORD and I'll DM you <the exercise / cheat sheet>" (+ "follow for
+   the series"); the reference's "send this to the friend who <blames the mechanism>" is for reach-only reels.
    Profile card + finger tap → DM thread where the friend's two messages make the joke
    ("autocorrect again" / "ok so it was never autocorrect") → watermark.
 
