@@ -30,6 +30,10 @@ There is **no ready-made YouTube connector** in Claude's connector directory (on
 
 ## 5. Authorize your channel (one time)
 
+**Easiest option — let Claude run it (device flow):** create the OAuth client as type **"TVs and Limited Input devices"** instead of "Web application" (no redirect URI needed), paste the Client ID and Secret to Claude, and Claude runs `node get-refresh-token-device.js` from its cloud session. You just open the link it gives you, enter the short code, and approve. Done.
+
+**Or run it yourself locally (web flow):**
+
 On your own computer (needs a browser):
 
 ```bash
