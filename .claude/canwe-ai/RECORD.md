@@ -189,3 +189,11 @@ Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (
 
 ## Real product UI (1 Nov 2026)
 Owner: show the EXACT Claude / GitHub UI when we talk about them. Added `ui.js`/`ui.css` (GitHub repo page, Claude chat + home, Claude Code terminal, browser chrome) from live screenshots, Primer Octicons (MIT), Source Serif 4 (OFL). Rule: real data + dated footnote; chat answers from real runs. Demo: `speedy-explainer-reel/assets/examples/real-ui-demo/` (freehire repo 3.5k★ → Claude finds 37 real Python internships in Bangalore).
+
+## Reel: Claude writes my LinkedIn posts (built 1 Nov 2026)
+reels/lipost · keyword POST (exact) · automation #48 OFF (lock + activate after upload) · guide https://canwe-guides.vercel.app/post/ (live, linked from hub) ·
+first reel with ElevenLabs v3 audio tags (580 credits) + real-UI kit (LinkedIn composer, real GitHub page 3k★, Claude Code terminal) + new look/fx.
+Owner must run /li-post once on his own LinkedIn before posting (hook is first-person). Running the pack's own humanizer scripts was blocked
+by the permission classifier (third-party code); the reel shows real slop.json replacements, no invented score.
+Vercel: the last deploy referenced EVERY file by sha and succeeded (dpl_FjbRi9Mv9Bdxy2YLtgtXF77BMWqs) — all current pages are reusable by sha now;
+shas: index 2b5e5192… (2584) · post 66b5cdd5… (6062) · oss f744d285… · freehire 42e21325… · resume c7c58193… · salary 176488f1… · refer 6031500b… · agent c8ab1401… · career-ops 64aa45ae….

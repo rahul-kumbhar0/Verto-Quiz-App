@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude writes my LinkedIn posts · canwe.ai</title>
+<meta name="description" content="The free 11-skill Claude pack for LinkedIn (linkedin-agent-skill): install in 2 minutes, set up your voice file, and the safe way to post.">
+<meta property="og:title" content="I let Claude write my LinkedIn posts: the free pack + the voice file">
+<meta property="og:description" content="linkedin-agent-skill (free, MIT, 11 skills): hooks from 21 formulas, a humanizer, profile score, weekly plan. You still press post.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>Claude writes my <span class="sel"><i></i><b>LinkedIn</b></span> posts. I press post.</h1>
+  <p class="lead">The free pack from the reel: 11 Claude skills that draft posts, comments and replies, score your profile and plan your week. Nothing posts by itself.</p>
+  <div class="chips"><span class="chip">free · MIT</span><span class="chip">11 skills</span><span class="chip">nothing auto-posts</span></div>
+
+  <nav class="toc">
+    <a href="#install"><small>01</small>Install (2 min)</a>
+    <a href="#voice"><small>02</small>The voice file (10 min)</a>
+    <a href="#use"><small>03</small>My 3 prompts</a>
+    <a href="#safe"><small>04</small>Post safely</a>
+  </nav>
+
+  <section id="install">
+    <div class="step">STEP 01</div><h2>Install the pack</h2>
+    <p><b>linkedin-agent-skill</b> by Jake Schincariol. Free, MIT-licensed; its README: "no signup, no API key, nothing to connect."</p>
+    <ol><li><b>Easiest (Claude app):</b> paste this into Claude:</li></ol>
+    <div class="code pad"><button class="cp">Copy</button>https://github.com/Jakeschincariol/linkedin-agent-skill
+
+Install this skill, then confirm /li-post works.</div>
+    <ol start="2"><li><b>Claude Code (plugin):</b></li></ol>
+    <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add Jakeschincariol/linkedin-agent-skill
+/plugin install linkedin-agent</div>
+    <p style="color:var(--mute);font-size:15px">No Claude Code? Paste any single SKILL.md at the top of a chat and it runs as a mode (you lose the humanizer's two Python tools).</p>
+    <a class="btn pri" href="https://github.com/Jakeschincariol/linkedin-agent-skill" target="_blank" rel="noopener">⭐ Open the repo on GitHub</a>
+  </section>
+
+  <section id="voice">
+    <div class="step">STEP 02</div><h2>The voice file (the part everyone skips)</h2>
+    <p>Every skill reads <b>voice.md</b>. Skip it and your posts sound like everyone else's. Fastest way: paste 3 of your own posts (or 3 messages you wrote) into Claude with this:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Here are 3 things I wrote. Write my voice.md for the linkedin-agent-skill from them: how I open, my sentence length, words I use, words I never use, and how I end a post. Keep it honest; don't make me sound smarter than I am.
+
+1) [paste]
+2) [paste]
+3) [paste]</div>
+    <p>Save it as <b>~/.claude/linkedin/voice.md</b> (the pack's template lives in <b>templates/voice.md</b>).</p>
+  </section>
+
+  <section id="use">
+    <div class="step">STEP 03</div><h2>My 3 prompts</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>/li-post</strong> — "/li-post [one idea from your week: a project, an internship task, a mistake]". You get 3 hooks from its 21 formulas + one full draft, humanized.</div></li>
+      <li><b>2</b><div><strong>/li-profile</strong> — scores your profile out of 100 (12-part rubric) and rewrites what lost points, worst first. Do this before you post anything.</div></li>
+      <li><b>3</b><div><strong>/li-plan</strong> — your week: what to post, when, and 10 people to engage with. Freshers: pick alumni and recruiters at companies you're applying to.</div></li>
+    </ul>
+    <p>Bonus: <b>/li-human</b> on anything you wrote with any AI. It strips em dashes, slop words ("leverage", "delve into", "game-changer") and invisible characters, and flags lines like "It's not just X, it's Y".</p>
+  </section>
+
+  <section id="safe">
+    <div class="step">STEP 04</div><h2>Post safely</h2>
+    <div class="feat">
+      <div><span>✋</span><div><b>You press post.</b> The pack only writes ("These skills write. You post."). Read every word; it's your name on it.</div></div>
+      <div><span>🚫</span><div><b>No bots on your account.</b> LinkedIn prohibits automated access, so don't connect scrapers or auto-commenters to it. Copy-paste posting has zero risk.</div></div>
+      <div><span>🔗</span><div><b>Want true scheduling?</b> Use an official route (LinkedIn's own scheduler, or a tool that uses LinkedIn's official API such as Zapier's "Create Share Update"), never a browser bot.</div></div>
+      <div><span>📏</span><div><b>Only real numbers.</b> If the draft says "37 interviews", it had better be true.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>AI, tech and how hiring really works, in 60-second reels.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Pack details from the linkedin-agent-skill README (github.com/Jakeschincariol/linkedin-agent-skill, MIT, 3.0k★, read 1 Nov 2026). Not affiliated with the author or LinkedIn.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

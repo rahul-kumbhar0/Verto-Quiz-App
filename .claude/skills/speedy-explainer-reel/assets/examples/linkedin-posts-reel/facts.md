@@ -1,0 +1,6 @@
+# LinkedIn posting with Claude — facts (checked 1 Nov 2026)
+- Repo: github.com/Jakeschincariol/linkedin-agent-skill — MIT, 3.0k stars, 480 forks, 30 watching (live page, 1 Nov 2026). Same author as the Instagram pack in our GROW reel. Sibling packs exist: youtube-agent-skill, x-agent-skill.
+- README: 11 skills (/li-post, /li-comment, /li-reply, /li-profile, /li-plan, /li-human, /li-carousel, /li-repurpose, /li-dm, /li-inbox, /li-audit); /li-post = 3 hook options from 21 formulas + one full draft, humanized; /li-human strips em dashes, slop vocabulary and invisible watermark characters, scores vs a five-check detection panel; /li-profile scores out of 100 (12-part rubric); /li-plan = the week + 10 people to engage with. "Nothing gets posted until you say yes. These skills write. You post." templates/voice.md = your voice file.
+- Trend proof (Instagram, PullRows estimates): @aiandharshit LinkedIn automation with Claude ~907K views / 48K comments; @avigrondin ~531K / 52K comments; @swapsays_wtf "LinkedIn influencer" ~253K.
+- Optional real auto-posting route (official API): Zapier MCP LinkedIn "Create Share Update" (2 Zapier tasks per call). Not needed for the reel.
+- HONESTY: the hook says "I let Claude write my LinkedIn posts" -> the owner must actually run /li-post on his account before posting (record the real Claude Code screen for the demo).
