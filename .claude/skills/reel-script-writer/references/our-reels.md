@@ -20,6 +20,8 @@ Page: @canwe.ai (Instagram) + YouTube Shorts. Format: speedy explainer, voice Sh
 
 | (draft 1 Nov) | JOBS part 2: which ONE skill gets the most jobs (SKILL) | A demo + F numbers · "I asked Claude which one skill gets me the most new jobs." | ~34 s | | | | | sequel to our #1; live freehire counts (India intern+junior: Py/SQL 1,036 → +AI 1,552) |
 
+| (draft 1 Nov) | NQT × Claude examiner (NQT) | A demo + money hook · "Same company. Same exam. ₹3.5 lakh or ₹11.5 lakh." | ~39 s | | | | | SALARY sequel; reuses /salary/ STEP 04 prompt; no exam minutes/counts (sources disagree) |
+
 ## Scripts that worked (verbatim, for tone)
 freehire (A):
 > Okay so, I basically automated my entire job search. With one free GitHub repo. I just hooked it

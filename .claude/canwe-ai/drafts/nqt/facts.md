@@ -1,0 +1,4 @@
+# NQT × Claude — facts
+- TCS hiring tracks + approx CTC: Ninja ≈ ₹3.4L, Digital ≈ ₹7L, Prime ₹9–11.5L (our SALARY reel facts; Business Standard + 2026 hiring guides; guide /salary/)
+- NQT = Foundation + Advanced sections; Ninja = Foundation, Digital/Prime = Foundation + Advanced (FACE Prep table: https://www.faceprep.in/article/tcs-exam-pattern/ ; placementpreparation.io lists Advanced Coding for Prime). Prep sites disagree on minutes/question counts → script states NO minutes or question counts. On-screen footnote: "Pattern per 2026 prep guides — check TCS NextStep for your drive."
+- The prompt = /salary/ STEP 04 (one coding problem at Digital/SP level, no solution, checks correctness + edge cases, 2 follow-ups incl. time complexity, score /10, one topic to practise next). Works in any chat AI.
