@@ -197,3 +197,8 @@ Owner must run /li-post once on his own LinkedIn before posting (hook is first-p
 by the permission classifier (third-party code); the reel shows real slop.json replacements, no invented score.
 Vercel: the last deploy referenced EVERY file by sha and succeeded (dpl_FjbRi9Mv9Bdxy2YLtgtXF77BMWqs) — all current pages are reusable by sha now;
 shas: index 2b5e5192… (2584) · post 66b5cdd5… (6062) · oss f744d285… · freehire 42e21325… · resume c7c58193… · salary 176488f1… · refer 6031500b… · agent c8ab1401… · career-ops 64aa45ae….
+Music version (owner's request): out/claude-linkedin-posts_notlikeus.mp4 = Kendrick Lamar "Not Like Us" instrumental (owner's mp3), source 6.34 → 41.53 s.
+Sync: riff under the hook, the beat enters at 2.36 s, the song's breakdown (27.7–32.4 s) sits under "it never posts by itself… I press post", and the drop (32.44 s) lands on "3,000" (video 26.10 s).
+Mix: music ×0.21, −3 dB at 2.5 kHz, sidechain ratio 3 / thr 0.05 (≈12–13 dB under the voice), +10 dB during the hook riff, +7.6 dB during the breakdown, −14.1 LUFS, −1.5 dBTP.
+COPYRIGHT: a commercial song can get the reel muted or blocked on IG/YouTube. Safe route = the _nomusic file + the same song from Instagram's music library (start the clip at the drop).
+How-to for any song: find the drop/beat entry by RMS (50 ms windows), offset = drop_src − payoff_word_time, and duck gently (ratio 3), not mix.sh's ratio 6, which buries a full song about 20 dB down.
