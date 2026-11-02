@@ -1,0 +1,295 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Hook gallery — 14 ways to open the LinkedIn reel</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="mg.css">
+<style>
+#cam{position:absolute;inset:0}
+.hg{position:absolute;inset:0;visibility:hidden}
+/* label (what this clip demonstrates) */
+#lab{position:absolute;left:0;right:0;top:54px;text-align:center;z-index:12}
+#lab .m-chip{font:800 26px Inter;letter-spacing:1px;padding:10px 24px}
+#labD{margin-top:10px;font:600 23px Inter;color:var(--ink-2)}
+.is-light #labD{color:var(--p-ink-2)}
+/* caption with the selection box (our kinetic caption look) */
+.cap{position:absolute;left:50px;right:50px;top:250px;text-align:center;font:700 76px/1.14 Inter;letter-spacing:-2px;color:#fff;z-index:8}
+.cap.big{font-size:150px;letter-spacing:-5px;top:330px}
+.is-light .cap{color:var(--p-ink)}
+.cap .w{display:inline-block;margin:0 .1em;opacity:0}
+.cap .w.a{color:var(--acc-hi)}
+.cap .sel{position:relative;display:inline-block;padding:0 .12em;margin:0 .05em;opacity:0}
+.cap .sel .w{opacity:1;margin:0}
+.cap .sel .box{position:absolute;inset:0 -1px 6px -1px;border:3px solid #3B82F6;background:rgba(59,130,246,.16);border-radius:3px}
+.cap .sel .hd{position:absolute;width:14px;height:14px;border-radius:50%;background:#3B82F6}
+.cap .sel .hd.tl{left:-8px;top:-8px}.cap .sel .hd.br{right:-8px;bottom:-2px}
+.tag{position:absolute;left:0;right:0;top:470px;text-align:center;opacity:0;z-index:8}
+.tag span{font:700 24px Mono;letter-spacing:2px;color:var(--acc-hi);background:rgba(217,119,87,.12);border:1.5px solid rgba(217,119,87,.5);border-radius:999px;padding:8px 18px}
+/* LinkedIn composer replica (dark, from the live feed 1 Nov 2026) */
+.li-box{position:absolute;left:70px;width:940px;top:640px;background:#1b1f23;border-radius:14px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 50px 120px -20px rgba(0,0,0,.85);font-family:Inter;color:#e9e9e9;overflow:hidden;z-index:2}
+.li-hd{display:flex;align-items:center;gap:16px;padding:22px 26px 10px}
+.li-av{width:64px;height:64px;border-radius:50%;background:#fff url(canwe-logo.svg) center/cover;flex:none}
+.li-hd b{display:block;font:700 24px Inter;color:#fff}.li-hd span{display:block;font:500 18px Inter;color:#b0b0b0}
+.li-x{margin-left:auto;font:400 34px Inter;color:#b0b0b0}
+.li-body{padding:14px 30px 10px;min-height:250px;font:500 26px/1.5 Inter;color:#e9e9e9;white-space:pre-wrap}
+.li-body .ph{color:#8a9096}
+.cur{display:inline-block;width:2px;height:30px;background:#fff;vertical-align:-6px}
+.li-foot{display:flex;align-items:center;gap:18px;padding:16px 26px 22px;border-top:1px solid rgba(255,255,255,.08)}
+.li-foot .ic{width:34px;height:34px;border-radius:8px;background:#2b3035}
+.li-post{margin-left:auto;background:#71b7fb;color:#000;font:700 22px Inter;border-radius:999px;padding:10px 30px}
+.li-post.off{background:#3b4045;color:#8a9096}
+.li-cl{position:absolute;right:30px;top:24px;font:600 18px Inter;color:#D97757;background:rgba(217,119,87,.12);border:1px solid rgba(217,119,87,.4);border-radius:999px;padding:6px 14px}
+/* our spark buddy (own character, not a brand logo) */
+.spk{position:absolute;width:120px;height:120px;left:0;top:0;z-index:9;filter:drop-shadow(0 10px 24px rgba(217,119,87,.55))}
+.itag{position:absolute;font:800 26px Inter;color:var(--acc-hi);opacity:0;z-index:9}
+/* misc */
+.lock{position:absolute;background:rgba(14,15,18,.94);border:1.5px solid var(--acc);color:var(--acc-hi);font:700 24px Inter;border-radius:12px;padding:10px 16px;opacity:0;z-index:9}
+.cloud{position:absolute;left:110px;width:860px;top:620px;height:460px;z-index:3;opacity:0}
+.cloud .bg{position:absolute;inset:0;background:#F3F1EC;border-radius:220px 240px 200px 230px/180px 200px 220px 190px;box-shadow:0 30px 80px -20px rgba(0,0,0,.6)}
+.cloud .bg::before,.cloud .bg::after{content:"";position:absolute;background:#F3F1EC;border-radius:50%}
+.cloud .bg::before{width:300px;height:220px;left:80px;top:-70px}.cloud .bg::after{width:260px;height:200px;right:90px;top:-50px}
+.cloud .tx{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font:800 54px/1.2 Inter;color:#16171A}
+.dot{position:absolute;border-radius:50%;background:#F3F1EC;opacity:0;z-index:3}
+.hooks3{position:absolute;left:70px;width:940px;top:640px;display:flex;flex-direction:column;gap:16px;z-index:3}
+.hooks3 .m-card{padding:20px 26px;font:600 28px/1.35 Inter;opacity:0}.hooks3 .m-card b{color:var(--acc-hi);font:700 20px Mono;display:block;margin-bottom:6px}
+#vhs{position:absolute;inset:0;z-index:11;opacity:0;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(255,255,255,.07) 0 2px,transparent 2px 6px)}
+#vhs b{position:absolute;left:0;right:0;text-align:center;top:1250px;font:900 64px Mono;color:#fff;letter-spacing:4px;text-shadow:0 0 18px rgba(255,255,255,.6)}
+.hgdm{position:absolute;left:110px;width:860px;top:660px;display:flex;align-items:center;gap:18px;padding:20px 24px;z-index:4}
+.hgdm img{width:64px;height:64px;border-radius:50%;background:#fff}.hgdm b{display:block;font:700 26px Inter}.hgdm span{font:500 24px Inter;color:var(--ink-2)}
+.ff{position:absolute;left:0;right:0;top:880px;text-align:center;z-index:4}
+.ff .t-hero{font-size:170px}
+.half{position:absolute;top:600px;width:480px;height:600px;padding:26px;z-index:3}
+.half h4{font:800 26px Mono;letter-spacing:3px;color:var(--ink-3)}
+.half .n{font:900 120px/1 Inter;letter-spacing:-4px;margin:20px 0 18px}
+.half p{font:500 24px/1.45 Inter;color:var(--ink-2)}
+.half s{color:#E07A6F}
+.half.r{border-color:rgba(217,119,87,.6)}.half.r .n{color:var(--acc-hi)}.half.r p{color:var(--ink)}
+.stopb{position:absolute;left:80px;right:80px;top:560px;padding:40px 44px;font:900 108px/0.98 Inter;letter-spacing:-4px;z-index:4}
+.pills{position:absolute;left:70px;right:70px;top:640px;display:flex;flex-direction:column;gap:18px;z-index:3}
+.pills .m-card{display:flex;align-items:center;gap:20px;padding:22px 26px;font:700 32px Inter}
+.pills .m-card i{font:900 34px Inter;font-style:normal;width:58px;height:58px;border-radius:14px;display:grid;place-items:center;background:#2B2E35;color:var(--ink-2)}
+.pills .m-card.on{box-shadow:inset 0 0 0 2px rgba(217,119,87,.7),0 30px 70px -20px rgba(217,119,87,.45)}.pills .m-card.on i{background:var(--acc);color:#1A0E08}
+.pills .m-card.lk{color:var(--ink-3)}
+.cnt{position:absolute;left:0;right:0;top:1100px;text-align:center;font:900 90px Inter;color:var(--ink);z-index:3}
+.cnt small{font:700 26px Mono;color:var(--ink-3);letter-spacing:3px;display:block}
+.sticker{position:absolute;left:540px;top:1180px;font:900 54px Inter;padding:16px 30px;z-index:10;opacity:0;white-space:nowrap}
+.loopchip{position:absolute;left:0;right:0;top:1150px;text-align:center;opacity:0;z-index:9}
+.f0{position:absolute;right:86px;top:600px;font:700 20px Mono;color:#1A0E08;background:var(--acc-hi);border-radius:8px;padding:4px 10px;z-index:5}
+.intro{position:absolute;left:60px;right:60px;top:560px;text-align:center}
+.intro .t-hero{font-size:150px}
+.intro .sub{margin-top:30px;font:600 40px/1.3 Inter;color:var(--ink-2)}
+#avatar{z-index:7}
+#top{z-index:10}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam"></div>
+  <div id="avatar"></div>
+  <div class="mg-layer" id="mgFx"></div>
+  <svg class="mg-svg" id="top"></svg>
+  <div id="lab"><span class="m-chip acc" id="labN"></span><div id="labD"></div></div>
+  <div id="vhs"><b>◀◀ REWIND</b></div>
+  <div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="engine.js"></script><script src="fx.js"></script><script src="mg.js"></script><script src="avatar.js"></script>
+<script>
+const R = Reel, F = R.fx, M = R.mg, { prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const POST = "Finding internships used to take me a weekend.\nIt now takes one sentence.";
+// ---------- builders ----------
+const composer = (id, o = {}) => `<div class="li-box" id="${id}"${o.style ? ` style="${o.style}"` : ""}><div class="li-hd"><span class="li-av"></span><div><b>canwe.ai</b><span>Post to Anyone ▾</span></div><span class="li-x">×</span></div>
+  ${o.claude ? '<div class="li-cl">✦ Claude is drafting</div>' : ""}<div class="li-body" id="${id}_b">${o.text || ""}</div>
+  <div class="li-foot"><span class="ic"></span><span class="ic"></span><span class="ic"></span><span class="li-post${o.off ? " off" : ""}" id="${id}_p">Post</span></div></div>`;
+let spkN = 0;
+const spark = id => { const g = "sg" + spkN++; return `<svg class="spk" id="${id}" viewBox="-60 -60 120 120"><defs><radialGradient id="${g}" cx=".4" cy=".35"><stop offset="0" stop-color="#F6C2A6"/><stop offset=".55" stop-color="#E58F6E"/><stop offset="1" stop-color="#C46546"/></radialGradient></defs>
+  <path d="M0,-50 C8,-12 12,-8 50,0 C12,8 8,12 0,50 C-8,12 -12,8 -50,0 C-12,-8 -8,-12 0,-50Z" fill="url(#${g})" stroke="#9E4E33" stroke-width="2.5"/>
+  <ellipse cx="-10" cy="-4" rx="7" ry="9" fill="#fff"/><ellipse cx="10" cy="-4" rx="7" ry="9" fill="#fff"/><circle class="pu" cx="-8" cy="-2" r="3.6" fill="#1A0E08"/><circle class="pu" cx="12" cy="-2" r="3.6" fill="#1A0E08"/>
+  <path d="M-7,11 q7,7 14,0" stroke="#1A0E08" stroke-width="3" fill="none" stroke-linecap="round"/></svg>`; };
+const capHTML = text => text.match(/\[[^\]]+\]|\S+/g).map(w => /^\[.*\]$/.test(w) ? `<span class="sel"><span class="box"></span><span class="hd tl"></span><span class="hd br"></span><span class="w">${w.slice(1, -1)}</span></span>`
+  : /^\*.*\*$/.test(w) ? `<span class="w a">${w.slice(1, -1)}</span>` : `<span class="w">${w}</span>`).join(" ");
+/** kinetic caption: words pop in one by one, the [keyword] arrives in the blue selection box */
+const cap = (id, text, lt, at, o = {}) => { const el = $(id); if (el.dataset.k !== text) { el.innerHTML = capHTML(text); el.dataset.k = text; }
+  const gap = o.gap ?? 0.14, items = [...el.children];
+  items.forEach((w, i) => { const a = at + i * gap, p = lt < a ? 0 : E.backOut(clamp((lt - a) / 0.22), 1.6); w.style.opacity = lt >= a ? 1 : 0; w.style.transform = `translateY(${(1 - p) * 26}px) scale(${lerp(0.82, 1, p)})`; });
+  const out = o.out != null ? E.power3In(prog(lt, o.out, 0.18)) : 0; el.style.opacity = 1 - out; el.style.transform = `translateY(${-out * 30}px)`;
+  return at + items.length * gap; };
+const mouthFor = (lt, a, b) => (lt >= a && lt < b ? clamp(0.55 + 0.45 * Math.sin(lt * 2 * Math.PI * 4.6)) : 0);
+// ---------- avatar driver ----------
+const AV = $("avatar");
+Avatar.init(AV, { look: "hoodie", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } });
+const avPlace = (o = {}) => { const w = o.w ?? 600; AV.style.left = (o.x ?? 240) + "px"; AV.style.top = (o.y ?? 1330) + "px"; AV.style.width = w + "px"; AV.style.height = w * 640 / 600 + "px";
+  AV.style.transform = `scale(${o.s ?? 1}) rotate(${o.r ?? 0}deg)`; AV.style.opacity = o.op ?? 1; AV.style.filter = o.filter || ""; };
+const pose = (lt, list, o = {}) => { let i = 0; list.forEach((x, k) => { if (lt >= x[0]) i = k; });
+  const cur = list[i][1], prev = i ? list[i - 1][1] : cur, p = i ? clamp((lt - list[i][0]) / 0.32) : 1;
+  Avatar.frame(o.at ?? lt, cur, p, prev, o.mouth || 0, { expr: list[i][2], shades: o.shades, flip: o.flip, fx: o.fx, prop: o.prop, beat: o.beat || 0 }); };
+// ---------- clips ----------
+const CLIPS = [
+  { d: 2.4, n: "", t: "", html: `<div class="intro"><div class="t-kicker">canwe.ai · hook lab</div><div class="t-hero" id="i1"></div><div class="sub" id="i2"></div></div>` },
+  { d: 3.9, n: "HOOK #1 · TOPIC GAG", t: "the pain in 1 second, then Claude fixes it", html: composer("c1", { off: true }) + `<div class="cap" id="c1a"></div><div class="cap" id="c1b"></div>` + spark("c1s"),
+    cues: [[0.95, "whoosh"], [1.5, "pop"], [1.6, "type", { t2: 2.5, soft: true }]] },
+  { d: 3.9, n: "HOOK #2 · BIG REACTION + REWIND", t: "a face that stops the scroll, then rewind to the start", html: `<div class="cap big" id="c2a"></div><div class="cap" id="c2b"></div>` + composer("c2", { claude: true }),
+    cues: [[0, "impact"], [1.25, "glitch"], [1.95, "swish"], [2.1, "type", { t2: 3.6, soft: true }]] },
+  { d: 3.5, n: "HOOK #3 · HE GRABS THE PROOF", t: "the cartoon throws the real post onto the screen", html: composer("c3", { text: POST, claude: true }) + `<div class="cap" id="c3a"></div>`,
+    cues: [[0.55, "whoosh"], [0.92, "impact"]] },
+  { d: 3.9, n: "HOOK #4 · RECURRING SIDEKICK", t: "our own spark buddy, back in every reel", html: composer("c4") + spark("c4s") + `<div class="itag" id="c4t">my intern ↘</div><div class="lock" id="c4l">🔒 only I press Post</div><div class="cap" id="c4a"></div><div class="cap" id="c4b"></div>`,
+    cues: [[0.2, "type", { t2: 1.8, soft: true }], [2.2, "pop"]] },
+  { d: 3.9, n: "HOOK #5 · THOUGHT BUBBLE POPS", t: "show the problem in his head, pop it with the answer", html: `<i class="dot" id="d1"></i><i class="dot" id="d2"></i><i class="dot" id="d3"></i><div class="cloud" id="c5c"><div class="bg"></div><div class="tx">What do I<br>even post?<span class="cur" style="background:#16171A;height:48px;vertical-align:-8px"></span></div></div>
+    <div class="hooks3" id="c5h"><div class="m-card"><b>HOOK 1 · TIME ANCHOR</b>Finding internships used to take me a weekend.</div><div class="m-card"><b>HOOK 2 · THE RECEIPT</b>37 internships. 1 sentence. 0 portals.</div><div class="m-card"><b>HOOK 3 · MYTH BUST</b>200 applications isn't why you have no interviews.</div></div>
+    <div class="cap" id="c5a"></div><div class="cap" id="c5b"></div><div id="c5x" style="position:absolute;left:540px;top:850px;z-index:6"></div>`,
+    cues: [[0.3, "pop"], [1.8, "impact", { soft: true }], [1.8, "pop"]] },
+  { d: 3.1, n: "HOOK #7 + #8 + #10 · FULL FRAME 0", t: "title + proof + presenter already there, camera moving", html: `<div class="cap" id="c6a"></div>` + composer("c6", { text: POST, claude: true }) + `<div class="f0">frame 0</div>`, cues: [[0, "impact", { soft: true }]] },
+  { d: 3.3, n: "HOOK #9 · START BIG ON THE FACE", t: "a face fills the screen, then shrinks to its spot", html: `<div class="cap" id="c7a"></div><div class="cap" id="c7b"></div>` + composer("c7", { text: POST, claude: true }), cues: [[1.0, "whoosh"]] },
+  { d: 3.6, n: "HOOK #11 · FLASH-FORWARD", t: "0.7 s of the ending first, then back to the start", html: `<div class="hgdm m-glass" id="c8d"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The setup + voice file 📩</span></div></div><div class="ff" id="c8f"><div class="t-kicker">github stars</div><div class="t-hero">3,000 ★</div></div>
+    <div class="cap" id="c8a"></div><div class="cap" id="c8b"></div>` + composer("c8", { off: true }), cues: [[0.72, "swish"], [0.8, "shutter"]] },
+  { d: 3.5, n: "HOOK #12 · BEFORE / AFTER SPLIT", t: "the old way vs the Claude way in one frame", html: `<div class="cap" id="c9a"></div>
+    <div class="half m-card" id="c9l" style="left:40px"><h4>ME</h4><div class="n">2 h</div><p><s>In today's fast-paced world</s>… <s>I'm thrilled to announce</s>… still 0 posts.</p></div>
+    <div class="half m-card r" id="c9r" style="left:560px"><h4 style="color:var(--acc-hi)">CLAUDE</h4><div class="n"><span id="c9n"></span> s</div><p>3 hooks from 21 formulas + a full draft, humanized.</p></div>`, cues: [[0.05, "swish"]] },
+  { d: 2.9, n: "HOOK #13 · BRIGHT FIRST FRAME", t: "a light frame stands out in a dark feed", html: `<div class="stopb m-acc" id="c10">Stop writing LinkedIn posts yourself.</div>`, cues: [[0, "impact", { soft: true }]] },
+  { d: 5.2, n: "HOOK #14–#18 · SCRIPT HOOKS", t: "four ways to word the first line", html: composer("c11", { text: POST, claude: true, style: "opacity:.35" }) + `<div class="cap" id="c11a"></div><div class="tag" id="c11t"><span id="c11ts"></span></div>`, cues: [[0, "swish"], [1.3, "swish"], [2.6, "swish"], [3.9, "swish"]] },
+  { d: 3.7, n: "HOOK #20 + #22 · SOUND HIT + FREEZE FRAME", t: "record scratch, freeze, a caption roasting yourself", html: composer("c12") + `<div class="cap" id="c12a"></div><div class="sticker m-acc" id="c12s">yep, that's me.</div>`,
+    cues: [[0, "impact", { soft: true }], [0.1, "type", { t2: 1.35, soft: true }], [1.4, "glitch"], [1.5, "pop"]] },
+  { d: 3.5, n: "HOOK #25 · PROMISE COUNTER", t: "say how many, keep them for the last one", html: `<div class="cap" id="c13a"></div><div class="pills" id="c13p"><div class="m-card"><i>1</i>Writes my posts</div><div class="m-card"><i>2</i>Scores my profile</div><div class="m-card lk"><i>3</i>🔒 the wild one…</div></div><div class="cnt" id="c13c"></div>`,
+    cues: [[1.2, "pop"], [1.75, "pop"], [2.3, "glitch"]] },
+  { d: 4.0, n: "HOOK #26 · LOOP ENDING", t: "the last frame turns into the first, so it replays", html: `<div class="hgdm m-glass" id="c14d" style="z-index:4"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The setup + voice file 📩</span></div></div>
+    <div class="cap" id="c14a"></div><div class="cap" id="c14b"></div><div class="loopchip"><span class="m-chip acc" id="c14c">↻ the end is the start</span></div>` + composer("c14", { text: POST, claude: true, style: "opacity:0" }), cues: [[1.6, "whoosh"], [2.0, "pop"]] },
+];
+let acc = 0; CLIPS.forEach((c, i) => { c.s = acc; acc += c.d; c.id = "k" + i; $("cam").insertAdjacentHTML("beforeend", `<section class="hg" id="${c.id}">${c.html}</section>`); });
+window.REEL_DURATION = +acc.toFixed(2);
+CLIPS.forEach(c => (c.cues || []).forEach(([a, ty, ex]) => R.cue(ty, c.s + a, ex ? { ...ex, t2: ex.t2 != null ? c.s + ex.t2 : undefined } : {})));
+// probes (no transforms yet)
+const SR = $("stage").getBoundingClientRect();
+CLIPS.forEach(c => $(c.id).style.visibility = "visible");
+const boxOf = id => { const r = $(id).getBoundingClientRect(); return { x: r.left - SR.left, y: r.top - SR.top, w: r.width, h: r.height }; };
+const LIB = boxOf("c14"), DMB = boxOf("c14d"), P4 = boxOf("c4_p"), C4 = boxOf("c4");
+CLIPS.forEach(c => $(c.id).style.visibility = "hidden");
+const qb = (a, b, c, u) => [(1 - u) * (1 - u) * a[0] + 2 * (1 - u) * u * b[0] + u * u * c[0], (1 - u) * (1 - u) * a[1] + 2 * (1 - u) * u * b[1] + u * u * c[1]];
+const putSpk = (id, x, y, s = 1, r = 0) => { const e = $(id); e.style.transform = `translate(${x - 60}px,${y - 60}px) rotate(${r}deg) scale(${s})`; };
+const typed = (id, text, lt, a, cps, caret = true) => { const n = clamp(Math.floor((lt - a) * cps), 0, text.length);
+  $(id).innerHTML = (n ? text.slice(0, n).replace(/\n/g, "<br>") : lt < a ? '<span class="ph">What do you want to talk about?</span>' : "") + (caret && Math.floor(lt * 2.2) % 2 ? '<span class="cur"></span>' : ""); };
+
+window.seek = t => {
+  let k = 0; CLIPS.forEach((c, i) => { if (t >= c.s) k = i; }); const C = CLIPS[k], lt = t - C.s, S = C.s;
+  if (window._k !== k) { const s = $("top"); s.innerHTML = ""; s._rays = null; window._k = k; }
+  F.slots(t, CLIPS.map(c => [c.id, c.s, c.s + c.d]));
+  // per-frame resets for shared layers
+  $("cam").style.transform = ""; $("cam").style.filter = ""; $("cam").style.translate = ""; $("cam").style.rotate = "";
+  document.querySelector(".s-light").style.opacity = 0; document.body.classList.remove("is-light");
+  $("vhs").style.opacity = 0; $("cam").style.clipPath = ""; avPlace(); $("mgFx").querySelectorAll(".mg-ring").forEach(r => (r.style.opacity = 0));
+  // label
+  $("lab").style.opacity = C.n ? 1 : 0; $("labN").textContent = C.n; $("labD").textContent = C.t; if (C.n) M.fly("lab", t, S + 0.02, { y: -30, s: 0.9 }, { f: 3, z: 0.7 });
+  let waves = [[S, 540, 960, 0.6]], pulse = F.pulse(t, { decay: 7 });
+
+  if (k === 0) {
+    M.rise("i1", "Hook *lab*", lt, 0.1); M.rise("i2", "14 ways to open the LinkedIn reel", lt, 0.7, { stagger: 0.04 });
+    pose(lt, [[0, "present", "happy"], [1.2, "wave", "happy"]], { flip: prog(lt, 0.2, 0.8) });
+  }
+  if (k === 1) {   // TOPIC GAG
+    typed("c1_b", lt < 1.6 ? "" : POST, lt, 1.6, 60);
+    cap("c1a", "LinkedIn post. [Blank.] Again.", lt, 0.05, { gap: 0.2, out: 1.45 }); if (lt >= 1.6) cap("c1b", "Then Claude [tapped] in.", lt, 1.62); else $("c1b").style.opacity = 0;
+    const u = E.power2InOut(prog(lt, 0.95, 0.55)), [x, y] = qb([1150, 120], [1000, 520], [905, 660], u); putSpk("c1s", x, y, lerp(0.6, 1, u), (1 - u) * 540);
+    $("c1s").style.opacity = lt > 0.95 ? 1 : 0; if (lt > 1.5) putSpk("c1s", 905, 660 + Math.sin(lt * 9) * 4, 1 + 0.25 * Math.exp(-(lt - 1.5) * 8));
+    M.ring("mgFx", t, S + 1.5, { x: 905, y: 660, r: 160, d: 0.6 }); waves.push([S + 1.5, 905, 660, 1]);
+    pose(lt, [[0, "facepalm", "serious"], [1.55, "celebrate", "excited"]], { fx: lt < 1.4 ? [["sweat", (lt % 1.3) / 1.3]] : [["spark", prog(lt, 1.6, 1.2)]], mouth: mouthFor(lt, 0.05, 0.9) + mouthFor(lt, 1.62, 2.3) });
+  }
+  if (k === 2) {   // BIG REACTION + REWIND
+    const rw = prog(lt, 1.25, 0.7), big = lt < 1.25 ? 1 : 1 - E.power2InOut(rw), punch = 1 + 0.14 * (1 - M.spring(lt, 0, { f: 3, z: 0.45 }));
+    avPlace({ s: lerp(1, 2.3, big) * (lt < 1.25 ? punch : 1), x: 240 + (lt >= 1.25 && lt < 1.95 ? F.noise(lt * 40) * 24 : 0) });
+    pose(lt, [[0, "hands_head", "surprised"], [1.95, "point_stage", "happy"]], { shades: lt < 1.25 ? clamp(lt / 0.12) : 1 - rw, mouth: lt < 1.0 ? 0.7 : mouthFor(lt, 2.0, 2.9) });
+    cap("c2a", "[WAIT.]", lt, 0.0, { out: 1.2 }); M.ring("mgFx", t, S + 0.02, { x: 540, y: 1120, r: 520, d: 0.8 });
+    $("vhs").style.opacity = lt >= 1.25 && lt < 1.95 ? 1 : 0; if (lt >= 1.25 && lt < 1.95) F.glitch("cam", t, S + 1.3, { sfx: false });
+    $("c2").style.opacity = lt >= 1.95 ? 1 : 0; M.fly("c2", t, S + 1.95, { y: 120, s: 0.9 }, { f: 2.4, z: 0.6 }); typed("c2_b", POST, lt, 2.1, 40);
+    if (lt >= 1.95) cap("c2b", "Let me [show] you.", lt, 1.97); else $("c2b").style.opacity = 0;
+  }
+  if (k === 3) {   // GRABS THE PROOF
+    const throwA = 0.55, land = 0.92, from = { x: 700 - 540, y: 1500 - 830, r: -28, s: 0.16 };
+    M.trail("c3", t, tt => M.flyT(tt, S + throwA, from, { f: 2.3, z: 0.55 }), { n: 3, lag: 0.035, a: 0.25 }); $("c3").style.opacity = lt >= throwA ? 1 : 0;
+    pose(lt, [[0, "hold", "excited"], [throwA, "point_up", "excited"], [1.6, "thumbs", "happy"]], { prop: lt < throwA ? ["paper", 1] : null, mouth: mouthFor(lt, 1.0, 1.9) });
+    F.shake("cam", t, S + land, { amp: 16, sfx: false }); M.ring("mgFx", t, S + land, { x: 540, y: 830, r: 520, d: 0.7 }); F.flash(t, S + land, { max: 0.25, sfx: false }); waves.push([S + land, 540, 830, 1.4]);
+    cap("c3a", "Claude writes [these] now.", lt, 1.0);
+  }
+  if (k === 4) {   // SIDEKICK
+    typed("c4_b", POST, lt, 0.2, 45, false);
+    const tx = 300 + Math.min(1, prog(lt, 0.2, 1.6)) * 520, dash = E.power2InOut(prog(lt, 1.85, 0.35)), back = E.power2InOut(prog(lt, 2.35, 0.3));
+    const sx = lerp(lerp(tx, P4.x + P4.w / 2, dash), 760, back), sy = lerp(lerp(C4.y - 10 + Math.abs(Math.sin(lt * 14)) * -14, P4.y - 30, dash), C4.y - 20, back);
+    putSpk("c4s", sx, sy, 0.9 + 0.1 * Math.sin(lt * 14), Math.sin(lt * 14) * 8); $("c4s").style.opacity = 1;
+    $("c4t").style.left = "120px"; $("c4t").style.top = (C4.y - 90) + "px"; $("c4t").style.opacity = clamp((lt - 0.4) / 0.2) * (1 - prog(lt, 1.8, 0.2));
+    const lk = M.spring(lt, 2.15, { f: 2.6, z: 0.45 }); $("c4l").style.left = (P4.x - 250) + "px"; $("c4l").style.top = (P4.y - 70) + "px"; $("c4l").style.opacity = lt >= 2.15 ? 1 : 0; $("c4l").style.transform = `scale(${lerp(0.5, 1, lk)})`;
+    M.ring("mgFx", t, S + 2.15, { x: P4.x + P4.w / 2, y: P4.y + P4.h / 2, r: 150, d: 0.6, cool: true });
+    cap("c4a", "Meet my new [intern.]", lt, 0.05, { out: 1.95 }); if (lt >= 2.0) cap("c4b", "It [never] posts. I do.", lt, 2.02); else $("c4b").style.opacity = 0;
+    pose(lt, [[0, "shrug", "unsure"], [2.0, "stop", "serious"]], { mouth: mouthFor(lt, 0.05, 0.8) + mouthFor(lt, 2.02, 2.8) });
+  }
+  if (k === 5) {   // THOUGHT BUBBLE
+    [["d1", 560, 1360, 26, 0.05], ["d2", 600, 1270, 40, 0.15], ["d3", 650, 1170, 56, 0.25]].forEach(([id, x, y, r, a]) => { const p = M.spring(lt, a, { f: 3, z: 0.5 }), e = $(id);
+      e.style.left = x - r / 2 + "px"; e.style.top = y - r / 2 + "px"; e.style.width = e.style.height = r + "px"; e.style.opacity = lt >= a && lt < 1.8 ? 1 : 0; e.style.transform = `scale(${p})`; });
+    const cp = M.spring(lt, 0.3, { f: 2.2, z: 0.55 }), pop = prog(lt, 1.8, 0.18); $("c5c").style.opacity = lt < 0.3 ? 0 : 1 - pop; $("c5c").style.transform = `scale(${lerp(0.3, 1, cp) * (1 + pop * 0.3)})`;
+    F.burst("c5x", t, S + 1.8, { n: 22, r: 380 }); M.rays("top", t, S + 1.8, { x: 540, y: 850, r0: 260, len: 140, n: 16, d: 0.6 }); waves.push([S + 1.8, 540, 850, 1.3]);
+    [...$("c5h").children].forEach((c, i) => M.fly(c, t, S + 1.95 + i * 0.12, { y: 60, s: 0.85, r: (i - 1) * 4 }, { f: 2.4, z: 0.55 }));
+    cap("c5a", "Every fresher, every [Monday.]", lt, 0.1, { out: 1.75 }); if (lt >= 1.9) cap("c5b", "Until Claude wrote [three.]", lt, 1.92); else $("c5b").style.opacity = 0;
+    pose(lt, [[0, "think", "think"], [1.85, "celebrate", "excited"]], { fx: lt > 1.9 ? [["spark", prog(lt, 1.9, 1.3)]] : [], mouth: mouthFor(lt, 1.92, 2.6) });
+  }
+  if (k === 6) {   // FULL FRAME 0
+    F.cam("cam", t, [{ t: S, s: 1.1, y: -40 }, { t: S + 1.4, s: 1, y: 0, ease: "power2InOut" }], { drift: true, mblur: false });
+    cap("c6a", "Claude writes my [LinkedIn] posts.", lt, -1);
+    pose(lt, [[0, "present", "happy"], [1.4, "point_stage", "happy"]], { mouth: mouthFor(lt, 0, 1.2), flip: prog(lt, 0.0, 0.7) });
+  }
+  if (k === 7) {   // BIG FACE
+    const sh = M.spring(lt, 1.0, { f: 1.9, z: 0.68 }); avPlace({ s: lerp(2.3, 1, sh) });
+    pose(lt, [[0, "point_cam", "happy"], [1.4, "present", "happy"]], { flip: prog(lt, 0.05, 0.7), mouth: mouthFor(lt, 0.05, 0.8) + mouthFor(lt, 1.25, 2.2) });
+    cap("c7a", "[You.] Yes, you.", lt, 0.05, { out: 1.0, gap: 0.22 }); if (lt >= 1.2) cap("c7b", "This is how I post [now.]", lt, 1.22); else $("c7b").style.opacity = 0;
+    $("c7").style.opacity = lt >= 1.05 ? 1 : 0; M.fly("c7", t, S + 1.05, { y: -260, s: 0.8 }, { f: 2.2, z: 0.6 });
+  }
+  if (k === 8) {   // FLASH-FORWARD
+    const ff = lt < 0.72; $("c8d").style.opacity = $("c8f").style.opacity = ff ? 1 : 0; $("c8").style.opacity = ff ? 0 : 1; typed("c8_b", "", lt, 99, 1);
+    $("vhs").style.opacity = ff ? 0.6 : 0; $("vhs").querySelector("b").textContent = ff ? "▶▶ 30 SECONDS LATER" : "◀◀ REWIND";
+    if (ff) cap("c8a", "This is where we [end] up.", lt, 0.0, { gap: 0.08 }); else $("c8a").style.opacity = 0;
+    F.flash(t, S + 0.72, { max: 0.9, sfx: false }); if (lt >= 0.72 && lt < 0.9) $("cam").style.filter = `blur(${(1 - prog(lt, 0.72, 0.18)) * 14}px)`;
+    if (lt >= 0.95) cap("c8b", "But first, the [blank] page.", lt, 0.97); else $("c8b").style.opacity = 0;
+    pose(lt, [[0, "double_thumbs", "excited"], [0.75, "shrug", "unsure"], [1.9, "point_stage", "think"]], { mouth: mouthFor(lt, 0.97, 1.9) });
+  }
+  if (k === 9) {   // BEFORE / AFTER
+    M.reveal("c9l", t, S + 0.02, { shape: "split", d: 0.45 }); M.reveal("c9r", t, S + 0.12, { shape: "split", d: 0.45 });
+    $("top").innerHTML = '<path id="c9ln" class="mg-line" d="M540,580 L540,1220" style="stroke-width:4"/>'; M.draw("c9ln", t, S, 0.4);
+    F.odometer("c9n", t, S + 0.3, 0.7, 10, { sfx: false }); F.sheen("c9r", t, S + 1.1);
+    cap("c9a", "[2 hours] vs 10 seconds.", lt, 0.05);
+    pose(lt, [[0, "two", "serious"], [1.5, "thumbs", "happy"]], { mouth: mouthFor(lt, 0.05, 1.0) });
+  }
+  if (k === 10) {  // BRIGHT FIRST FRAME
+    document.querySelector(".s-light").style.opacity = 1; document.body.classList.add("is-light");
+    const p = M.spring(lt, 0, { f: 2.2, z: 0.5 }); $("c10").style.transform = `rotate(-2deg) scale(${lerp(1.12, 1, p)})`;
+    pose(lt, [[0, "stop", "serious"], [1.6, "wag", "serious"]], { mouth: mouthFor(lt, 0.05, 1.2) });
+  }
+  if (k === 11) {  // SCRIPT HOOKS
+    const L = [["[Claude] writes my LinkedIn posts.", "#14 · payoff word first", "point_cam", "happy"], ["Don't copy me [yet.]", "#15 · open a loop", "stop", "serious"],
+               ["Fresher? LinkedIn [scares] you?", "#16 · name the audience", "shrug", "unsure"], ["Stop writing posts [yourself.]", "#18 · contrarian", "wag", "serious"]];
+    const i = Math.min(3, Math.floor(lt / 1.3)), a = i * 1.3;
+    cap("c11a", L[i][0], lt, a + 0.02, { gap: 0.1, out: a + 1.2 }); $("c11ts").textContent = L[i][1]; $("c11t").style.opacity = clamp((lt - a - 0.3) / 0.15) * (1 - prog(lt, a + 1.15, 0.12));
+    pose(lt, L.map((x, j) => [j * 1.3, x[2], x[3]]), { mouth: mouthFor(lt, a + 0.02, a + 0.8) });
+  }
+  if (k === 12) {  // SOUND HIT + FREEZE
+    const fz = 1.4, ft = Math.min(lt, fz); typed("c12_b", "I'm thrilled to announce that I am humbled", ft, 0.1, 30);
+    cap("c12a", "Me, writing one post at [2 AM]", ft, 0.05);
+    pose(ft, [[0, "typing", "think"]], { at: ft, fx: [["sweat", (ft % 1.1) / 1.1]] });
+    if (lt >= fz) { const g = "grayscale(.85) contrast(1.15)"; $("cam").style.filter = g; AV.style.filter = g; F.flash(t, S + fz, { max: 0.35, sfx: false });
+      const sp = M.spring(lt, fz + 0.1, { f: 2.6, z: 0.45 }); $("c12s").style.opacity = 1; $("c12s").style.transform = `translateX(-50%) rotate(-6deg) scale(${lerp(0.4, 1, sp)})`;
+      $("top").innerHTML = `<path id="c12e" class="mg-line scrib" d="${M.ellipse(540, 1560, 215, 200, 3)}"/>`; M.draw("c12e", t, S + fz + 0.15, 0.45, { ease: "power2InOut" }); }
+    else $("c12s").style.opacity = 0;
+  }
+  if (k === 13) {  // PROMISE COUNTER
+    cap("c13a", "[3 things] Claude does on my LinkedIn", lt, 0.03, { gap: 0.1 });
+    const pl = [...$("c13p").children]; pl.forEach((c, i) => { M.fly(c, t, S + 0.35 + i * 0.12, { x: 80, s: 0.92 }, { f: 2.5, z: 0.6 }); c.classList.toggle("on", i === 0 ? lt >= 1.2 : i === 1 ? lt >= 1.75 : false); });
+    if (lt > 2.3) pl[2].style.translate = `${F.noise(lt * 30) * 10 * Math.exp(-(lt - 2.3) * 4)}px 0`; else pl[2].style.translate = "";
+    $("c13c").innerHTML = `${lt >= 1.75 ? 2 : lt >= 1.2 ? 1 : 0} / 3<small>${lt >= 2.3 ? "#3 is the wild one" : "keep watching"}</small>`;
+    M.ring("mgFx", t, S + 1.2, { x: 540, y: 680, r: 200, d: 0.55 });
+    pose(lt, [[0, "three", "excited"], [2.3, "shh", "think"]], { mouth: mouthFor(lt, 0.03, 1.0) });
+  }
+  if (k === 14) {  // LOOP
+    const m = lt >= 1.6; $("c14d").style.visibility = "visible";
+    if (!m) { Object.assign($("c14d").style, { left: DMB.x + "px", top: DMB.y + "px", width: DMB.w + "px", height: DMB.h + "px", borderRadius: "26px", filter: "", background: "" }); $("c14d").firstElementChild.style.opacity = 1; $("c14d").children[1].style.opacity = 1; }
+    else { const p = M.morph("c14d", t, S + 1.6, { x: DMB.x, y: DMB.y, w: DMB.w, h: DMB.h, r: 26 }, { x: LIB.x, y: LIB.y, w: LIB.w, h: LIB.h, r: 14 }, { f: 1.8, z: 0.75, sfx: false });
+      $("c14d").style.background = `color-mix(in srgb,#1b1f23 ${Math.round(clamp(p) * 100)}%,rgba(26,28,34,.62))`; [0, 1].forEach(j => $("c14d").children[j].style.opacity = 1 - clamp(p * 3));
+      $("c14").style.opacity = clamp((lt - 2.05) / 0.2); }
+    cap("c14a", "…plus the voice file that makes it sound like [you.]", lt, 0.05, { gap: 0.08, out: 1.5 }); if (lt >= 1.75) cap("c14b", "Claude writes my [LinkedIn] posts.", lt, 1.78); else $("c14b").style.opacity = 0;
+    $("c14c").parentNode.style.opacity = clamp((lt - 2.0) / 0.2); M.ring("mgFx", t, S + 2.0, { x: 540, y: 860, r: 480, d: 0.7 }); waves.push([S + 2.0, 540, 860, 1.2]);
+    pose(lt, [[0, "double_thumbs", "excited"], [1.75, "point_cam", "happy"]], { mouth: mouthFor(lt, 0.05, 1.4) + mouthFor(lt, 1.78, 2.6) });
+  }
+  M.grid("mgGrid", t, { pulse, waves, light: k === 10, drift: 8 });
+};
+F.beats({ bpm: 136, groove_in: 0, dur: 80 });
+window.seek(0);
+</script></body></html>
