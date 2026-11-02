@@ -42,6 +42,9 @@ concept without a viewer stake gets nothing. When unsure, it is a tool-demo reel
 - Look: `references/look.md` + `look.css` (`<body class="look">`): graphite materials, ONE terracotta accent, no candy colours.
 - Real UI: whenever the script says Claude/GitHub/a terminal, show the REAL interface (`references/real-ui.md`), not a generic card.
 - Editing: `references/advanced-editing.md` (HyperFrames-derived motion doctrine + fx kit), `MBLUR=3` on final renders.
+- Motion graphics (edit level 3): `references/motion-graphics.md` + `mg.js`/`mg.css` (`R.mg`). Every reel gets the living
+  dot grid on the beat, ≥ 1 morph or iris seam, a drawn connector with packets for every "X goes to Y", springs on every
+  entrance, and the impact stack (shake + rays + rings + grid wave) on the ONE biggest number. Demo `assets/examples/mg-demo/`.
 - Music: `music.py` `"style":"pulse"` (dark sub drone, half-time kick), hook dry until the first reveal.
 - CTA: "Comment KEYWORD and I'll DM you <thing>" + the comments → DM sequence. "Follow + share with the
   friend who…" only for pure reach reels.
@@ -187,6 +190,7 @@ stock puppet was used.
 - `references/ai-broll.md` — optional AI B-roll plate (Video_Create MCP) with a cinematic camera/lens/aperture prompt recipe in our look; costs credits, footnote "AI-generated"
 - `references/real-ui.md` — **real product UI** (`ui.js`/`ui.css`): exact GitHub repo page, Claude chat/home, Claude Code terminal, browser chrome; real data + dated footnote; camera framing rules
 - `references/look.md` — the canwe.ai LOOK line (numbers), materials, BANNED list, data-colour rule (`assets/template/look.css`)
+- `references/motion-graphics.md` — **edit level 3, motion graphics**: `mg.js` kit (springs, speed ramps, trim-path draw, packets, iris/morph seams, masked word rise, marker + strike, echo trails, shockwave rings, rays, gauges, living dot grid), the scene recipes and the per-reel checklist; demo `assets/examples/mg-demo/` (the LinkedIn reel rebuilt)
 - `references/advanced-editing.md` — **edit level 2**: the 12 rules (camera never locked, cuts on beats, transition = meaning, signature shot, layered sound design, real motion blur) + the `fx.js` kit API (`R.fx.cam/whip/zoomThrough/flip/flash/leak/glitch/shake/sheen/letters/odometer/scramble/code/burst/beats`); demo `assets/examples/fx-demo/`. READ IT for every new reel
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls

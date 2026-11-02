@@ -187,6 +187,12 @@ AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
 ## Editing level 2 (1 Nov 2026)
 Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (camera, whip, zoom-through, 3D flip, flash, leak, glitch, shake, sheen, letters, odometer, scramble, code typing, particles, beat sync), new SFX (swish, impact, riser, glitch, shutter), real motion blur (`MBLUR=3`), and `references/advanced-editing.md` (12 rules). Demo: `speedy-explainer-reel/assets/examples/fx-demo/`. Every new reel loads fx.js from the template.
 
+## Motion graphics level 3 (2 Nov 2026)
+Owner: "improve the motion graphics to the extra level". Added `mg.js`/`mg.css` (R.mg) + references/motion-graphics.md (8 laws, API, recipes, checklist), wired into the template.
+Demo = the LinkedIn posts reel rebuilt with it (reels/lipost-mg → skill example mg-demo), with the same voice and the "Not Like Us" mix:
+logo tile morphs into the composer; iris seam from the Claude chip; a connector draws from the skills folder and the chips fly out on springs with echo trails; a 21-tile → 3-picked formula strip;
+humanizer marker + drawn strike + spring-in fixes; a gauge (sample 78/100, footnoted illustrative); a week line drawn; the lock/press rings; the drop stack (shake + rays + double ring + grid wave) on "3,000"; a comment → DM packet path; a beat-pulsing dot grid (136.5 BPM, off in the breakdown).
+
 ## Real product UI (1 Nov 2026)
 Owner: show the EXACT Claude / GitHub UI when we talk about them. Added `ui.js`/`ui.css` (GitHub repo page, Claude chat + home, Claude Code terminal, browser chrome) from live screenshots, Primer Octicons (MIT), Source Serif 4 (OFL). Rule: real data + dated footnote; chat answers from real runs. Demo: `speedy-explainer-reel/assets/examples/real-ui-demo/` (freehire repo 3.5k★ → Claude finds 37 real Python internships in Bangalore).
 

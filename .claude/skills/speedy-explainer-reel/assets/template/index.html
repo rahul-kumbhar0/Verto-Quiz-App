@@ -1,6 +1,6 @@
 <!doctype html>
 <html><head><meta charset="utf-8"><title>Reel (speedy)</title>
-<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css">
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
 <style>
 /* reel-specific styles (demo: "Let's design a URL shortener") */
 .urlbox{position:absolute;left:90px;top:760px;width:900px;padding:30px 36px;border-radius:24px;background:var(--card);border:1.5px solid var(--line);font:500 30px/1.45 Mono;color:var(--mute);word-break:break-all;opacity:0}
@@ -15,7 +15,7 @@
 .stat2{position:absolute;right:30px;top:24px;text-align:right}.stat2 b{display:block;font:700 56px/1 Mono}.stat2 span{font:500 20px Mono;color:var(--mute)}
 </style></head>
 <body><div id="stage">
-  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
 
   <!-- HOOK · the paradox shown big (no presenter yet) -->
   <section class="scene" id="sHook">
@@ -78,6 +78,7 @@
     <div class="wm" id="wm">◎ instagram.com/<span class="bname">yourpage</span></div>
   </section>
 
+  <div class="mg-layer" id="mgFx" style="position:absolute;inset:0;pointer-events:none;z-index:6"></div><div class="mg-iris" id="irisRing"></div>
   <div id="rail"></div>
   <div id="kin"></div>
   <div id="avatar"></div>
@@ -87,6 +88,7 @@
 <script src="engine.js"></script>
 <script src="fx.js"></script>
 <script src="ui.js"></script>
+<script src="mg.js"></script>
 <script src="avatar.js"></script>
 <script src="speedy.js"></script>
 <script>

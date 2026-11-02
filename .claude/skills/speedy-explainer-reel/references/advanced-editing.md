@@ -1,5 +1,8 @@
 # Advanced editing (the "edit level 2" rules + the fx kit)
 
+> Level 3 sits on top of this: `motion-graphics.md` (`mg.js`: springs, drawn connectors + packets, iris/morph seams,
+> marker/strike text edits, rings/rays, gauges, the living dot grid). Use both on every reel.
+
 Owner's asks (1 Nov 2026): "make our editing level advanced" and "don't use these colours, it looks like cheap
 editing — use open source like HyperFrames". Look: `references/look.md`. Motion rules below are adapted from
 HeyGen's open-source HyperFrames (Apache-2.0, github.com/heygen-com/hyperframes: motion-doctrine, cut-the-curve,
