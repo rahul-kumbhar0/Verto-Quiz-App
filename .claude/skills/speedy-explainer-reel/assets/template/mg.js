@@ -119,7 +119,7 @@
     const p = E.expoOut(prog(t, at, o.d ?? 0.3)); k.style.transform = `scaleX(${p})`; return p; };
   /** echo trail: n ghost copies of el follow the same motion with a lag (AE "Echo"). pos(tt) → CSS transform string. */
   M.trail = (el, t, pos, o = {}) => { el = $(el); const n = o.n ?? 4, lag = o.lag ?? 0.035;
-    if (!el._gh) { el._gh = Array.from({ length: n }, () => { const g = el.cloneNode(true); g.removeAttribute("id"); g.classList.add("mg-ghost");
+    if (!el._gh) { el._gh = Array.from({ length: n }, () => { const g = el.cloneNode(true); g.removeAttribute("id"); g.querySelectorAll("[id]").forEach(x => x.removeAttribute("id")); g.classList.add("mg-ghost");   // no duplicate ids
       Object.assign(g.style, { position: "absolute", left: el.offsetLeft + "px", top: el.offsetTop + "px", width: el.offsetWidth + "px", margin: 0 });   // out of flow: never pushes the layout
       el.parentNode.insertBefore(g, el); return g; }); }
     el.style.transform = pos(t); el._gh.forEach((g, i) => { const tt = t - (i + 1) * lag, same = pos(tt) === pos(t);

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude made this reel: the 4 steps + our video skills · canwe.ai</title>
+<meta name="description" content="The exact 4-step setup behind canwe.ai's reels: the free Instagram skill pack, trends, DM automation with 2il.in, and our two free Claude skills that make the videos.">
+<meta property="og:title" content="Claude made this reel. Here's the exact setup (4 steps + free skills)">
+<meta property="og:description" content="Skill pack · trends · DMs · the video. Download the Claude skills that make our reels.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>Claude made this <span class="sel"><i></i><b>reel.</b></span> Here's the setup.</h1>
+  <p class="lead">Four steps: a free skill pack, trends, DM automation and the video itself. Claude researches, writes, voices and animates every reel on this page. I watch every one and press post myself. At the bottom: the two Claude skills that make our videos, free to download.</p>
+  <div class="chips"><span class="chip">4 steps</span><span class="chip">free skills download</span><span class="chip">nothing auto-posts</span></div>
+
+  <nav class="toc">
+    <a href="#s1"><small>01</small>The skill pack</a>
+    <a href="#s2"><small>02</small>Trends</a>
+    <a href="#s3"><small>03</small>DMs (2il.in)</a>
+    <a href="#s4"><small>04</small>The video + our skills</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Add the free Instagram skill pack</h2>
+    <p><b>instagram-agent-skill</b> by Jake Schincariol: 13 Claude skills (reel scripts with 26 hook formulas, captions, carousels, profile score, weekly plan, replies…). Free and MIT-licensed. In Claude Code:</p>
+    <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add Jakeschincariol/instagram-agent-skill
+/plugin install instagram-agent</div>
+    <p>On claude.ai instead, paste <b>https://github.com/Jakeschincariol/instagram-agent-skill</b> into a chat and say "install this skill, then confirm /ig-reel works".</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Connect trends: what's blowing up this week</h2>
+    <p>We use a Chrome extension (PullRows) connected to Claude: it reads the top reels for a hashtag and ranks them by views per hour, so you copy patterns, not luck. Any trend tool works. The point is to pick topics from real numbers.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Find the 10 fastest-growing reels on #[your niche] from the last 7 days. For each: the hook (first sentence), length, views and comments. Then tell me the 3 patterns the winners share and ONE topic I can post today.</div>
+    <p style="color:var(--mute);font-size:15px">In the reel: our real scan from 1 Nov 2026. The top format on #claudeai was "Claude made this video" (about 1.8M, 1.3M and 1.0M views, the tool's estimates).</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Connect your DMs with 2il.in</h2>
+    <p><b>Full disclosure: 2il.in is our own tool</b>, and this reel is how we promote it. It's what sends every "Comment REEL" DM on this account: in the 7 days to 2 Nov 2026 it sent <b>1,135 DMs</b> for @canwe.ai across 12 live automations.</p>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Sign up at <a href="https://2il.in" target="_blank" rel="noopener">2il.in</a></strong> and connect your Instagram (a professional account: creator or business).</div></li>
+      <li><b>2</b><div><strong>Add it to Claude:</strong> Claude → Settings → Connectors → Add custom connector → paste the connector link from your 2il.in dashboard.</div></li>
+      <li><b>3</b><div><strong>Ask Claude to build the automation:</strong> keyword, the DM text, a button to your guide, 3–5 public replies. Keep it off until the reel is live.</div></li>
+    </ul>
+    <div class="code prompt pad"><button class="cp">Copy</button>Create a comment → DM automation for my next reel: keyword [WORD], exact match, a friendly DM that uses {name}, a button to [your link], 5 different public replies, follow gate on. Create it switched OFF and show it to me before anything goes live.</div>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>The video (and our skills, free)</h2>
+    <p>Claude writes every scene as code (HTML), adds the voice (ElevenLabs, uses credits) and renders the reel with Playwright + ffmpeg. No video editor, no timeline. These are the exact skills that made this reel:</p>
+    <div class="feat">
+      <div><span>✍️</span><div><b>reel-script-writer</b>: 10 scored hooks, voice direction with audio tags, a script linter, caption + DM copy.</div></div>
+      <div><span>🎬</span><div><b>speedy-explainer-reel</b>: the cartoon presenter, kinetic captions, motion graphics, real product UI, 14 hook openers, and the render / voice / music / mix scripts. Plus 3 presets.</div></div>
+    </div>
+    <a class="btn pri" href="/reel/canwe-reel-skills.zip" download>⬇️ Download the skills (zip, 1.8 MB)</a>
+    <p><b>Install:</b> unzip into <b>~/.claude/skills/</b>, open Claude Code and say:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Use reel-script-writer to write a 40-second reel about [topic] for [audience]. Then build it with speedy-explainer-reel and render a preview.</div>
+    <p style="color:var(--mute);font-size:15px">Needs Claude Code, Node + Playwright (Chromium), Python 3 and ffmpeg. Some files mention our own setup (voice, guide site, DM tool), so swap in yours. Licences are in the zip's README (parts adapted from HyperFrames, Apache-2.0; fonts OFL; Octicons MIT).</p>
+  </section>
+
+  <section id="rules">
+    <div class="step">THE CATCH</div><h2>The honest rules</h2>
+    <div class="feat">
+      <div><span>✋</span><div><b>Claude never presses post.</b> It writes and renders; I watch every reel and post it myself.</div></div>
+      <div><span>💳</span><div><b>Not everything is free.</b> The skill pack and our skills are free; the voice uses ElevenLabs credits and Claude Code needs a paid Claude plan.</div></div>
+      <div><span>📏</span><div><b>Never invent numbers.</b> Every number on screen in our reels has a source and a date.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for part 3: an Instagram account run with Claude, in the open.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · 2il.in is our own product (disclosed). Pack details from the instagram-agent-skill README (github.com/Jakeschincariol/instagram-agent-skill). DM numbers from our 2il.in dashboard, 7 days to 2 Nov 2026. Trend numbers: PullRows estimates, 1 Nov 2026. Not affiliated with the pack's author, PullRows, ElevenLabs or Anthropic.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

@@ -187,6 +187,12 @@ AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
 ## Editing level 2 (1 Nov 2026)
 Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (camera, whip, zoom-through, 3D flip, flash, leak, glitch, shake, sheen, letters, odometer, scramble, code typing, particles, beat sync), new SFX (swish, impact, riser, glitch, shutter), real motion blur (`MBLUR=3`), and `references/advanced-editing.md` (12 rules). Demo: `speedy-explainer-reel/assets/examples/fx-demo/`. Every new reel loads fx.js from the template.
 
+## Reel: GROW part 2, "Claude made this reel" (keyword REEL, building 2 Nov 2026)
+drafts/grow2 + reels/grow2 · automation #51 REEL OFF · guide /reel/ (written, not deployed) · 2il.in = OUR OWN DM tool (owner: promote it here, disclosed).
+Voice generated (782 cr, flow 6Gd670L7iR9lec9BTrQT) but elevenlabsusercontent.com is blocked in this session → owner must allow it. Skills zip needs a host (owner upload → link).
+Real numbers used: 1,135 DMs / 12 automations / 1,964 contacts (DM dashboard, 7 days to 2 Nov 2026); trends from the 1 Nov PullRows scan (PullRows connector currently disconnected).
+POST #48 is live (locked to the LinkedIn reel).
+
 ## Motion graphics level 3 (2 Nov 2026)
 Owner: "improve the motion graphics to the extra level". Added `mg.js`/`mg.css` (R.mg) + references/motion-graphics.md (8 laws, API, recipes, checklist), wired into the template.
 Demo = the LinkedIn posts reel rebuilt with it (reels/lipost-mg → skill example mg-demo), with the same voice and the "Not Like Us" mix:
