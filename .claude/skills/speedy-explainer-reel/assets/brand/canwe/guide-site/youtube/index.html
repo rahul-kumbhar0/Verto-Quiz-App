@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>I automated my YouTube channel with Claude: every step · canwe.ai</title>
+<meta name="description" content="The free 11-skill YouTube pack for Claude, the Google Cloud setup (YouTube Data API v3 + desktop login), the connector, and the honest catches.">
+<meta property="og:title" content="I automated my YouTube channel with Claude. Here's every step.">
+<meta property="og:description" content="Skill pack · Google Cloud · connector · the prompt. With the catches.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>I automated my <span class="sel"><i></i><b>YouTube</b></span> with Claude. Every step.</h1>
+  <p class="lead">Three steps: a free skill pack that writes and checks everything, a Google Cloud login (the part nobody shows), and a connector that lets Claude upload to your channel. Uploads land private, so you still press publish.</p>
+  <div class="chips"><span class="chip">free skill pack · MIT</span><span class="chip">~20 min setup</span><span class="chip">you press publish</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>The skill pack</a>
+    <a href="#s2"><small>02</small>Google Cloud</a>
+    <a href="#s3"><small>03</small>The connector</a>
+    <a href="#s4"><small>04</small>The prompt + catches</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Add the free YouTube skill pack</h2>
+    <p><b>youtube-agent-skill</b> by Jake Schincariol: 11 Claude skills, MIT, 4.3k ⭐ (3 Nov 2026). It writes and checks; it never publishes. In Claude Code:</p>
+    <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add Jakeschincariol/youtube-agent-skill
+/plugin install youtube-agent</div>
+    <div class="feat">
+      <div><span>🎬</span><div><b>/yt-script</b>: one idea → a script with 5 hooks scored against 21 formulas.</div></div>
+      <div><span>🖼️</span><div><b>/yt-package</b>: checks your title and thumbnail together (truncation, duplication, vague words).</div></div>
+      <div><span>🔎</span><div><b>/yt-seo</b>: description, tags and the search queries to target.</div></div>
+      <div><span>✂️</span><div><b>/yt-shorts</b>: finds Shorts inside long videos and writes a new opening line for each.</div></div>
+    </div>
+    <p style="color:var(--mute);font-size:15px">Also: /yt-edit, /yt-comment, /yt-plan, /yt-viral, /yt-retention, /yt-chapters, /yt-audit.</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Google Cloud: the part nobody shows</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>New project</strong> at console.cloud.google.com (name it anything, e.g. my-youtube).</div></li>
+      <li><b>2</b><div><strong>Turn on the YouTube Data API v3</strong>: APIs &amp; Services → Library → search "YouTube Data API v3" → Enable.</div></li>
+      <li><b>3</b><div><strong>OAuth consent screen</strong>: User type External, fill the app name, and add the Google account that OWNS your channel as a test user.</div></li>
+      <li><b>4</b><div><strong>Desktop login</strong>: Credentials → Create credentials → OAuth client ID → Application type <b>Desktop app</b>.</div></li>
+      <li><b>5</b><div><strong>Download one file</strong>: the client_secret JSON. 🔐 Never share it, never put it in a public repo.</div></li>
+    </ul>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Add a YouTube connector to Claude</h2>
+    <p>The skill pack doesn't upload. A YouTube MCP server (connector) does, using YOUR Google login from step 2. Point it at your client_secret file, add it to Claude, then sign in once with the channel-owner Google account. The token stays on your computer.</p>
+    <p style="color:var(--mute);font-size:15px">[CONNECTOR: exact server + install command go here once chosen and checked.]</p>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>The prompt, and the honest catches</h2>
+    <div class="code prompt pad"><button class="cp">Copy</button>Make a YouTube Short from my latest reel: use /yt-script to pick the best hook, /yt-package to check the title and thumbnail, /yt-seo for the description and tags. Then upload it to my channel as PRIVATE and give me the Studio link. Don't publish.</div>
+    <div class="feat">
+      <div><span>🔒</span><div><b>Uploads land private.</b> YouTube keeps uploads from new, unverified Google projects private until the project passes an audit. You review in Studio and press publish.</div></div>
+      <div><span>🔢</span><div><b>About 6 uploads a day.</b> The free quota is 10,000 units/day and one upload costs 1,600.</div></div>
+      <div><span>⏳</span><div><b>Re-sign-in weekly.</b> While your Google app is in "Testing", the login expires after 7 days.</div></div>
+      <div><span>🧠</span><div><b>You're still the editor.</b> Watch every Short before it goes public. Your channel, your name.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for part 4: a social media team run with Claude, in the open.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Pack details from the youtube-agent-skill README (github.com/Jakeschincariol/youtube-agent-skill, 4.3k★, read 3 Nov 2026). Quota and private-upload rules from the YouTube Data API docs. Not affiliated with the pack's author, Google or YouTube.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
