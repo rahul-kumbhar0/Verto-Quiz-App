@@ -202,6 +202,13 @@ Voice generated (782 cr, flow 6Gd670L7iR9lec9BTrQT) but elevenlabsusercontent.co
 Real numbers used: 1,135 DMs / 12 automations / 1,964 contacts (DM dashboard, 7 days to 2 Nov 2026); trends from the 1 Nov PullRows scan (PullRows connector currently disconnected).
 POST #48 is live (locked to the LinkedIn reel).
 
+## Paper editorial mode (3 Nov 2026)
+From the @mrcreates.ai read (TOPICS.md): `<body class="look paper">` in look.css (warm paper + grid, ink, ONE accent --pacc default editorial blue),
+editorial type (.e-pair word pairs sans + Instrument Serif italic, .e-kick/.e-rule/.e-ticks/.e-foot frame, .e-idx numbered index, .e-card paper UI, .e-swap),
+mg.js motions M.pair / M.tear (the torn ₹4,999 checkout) / M.ticks / M.underline / M.swap. Presenter stays as a 360 px sticker bottom-right; captions flip to ink.
+Reference: speedy-explainer-reel/references/paper-editorial.md. Demo: assets/examples/paper-editorial-demo (reels/paperdemo, 20.7 s, no voice, lofi music).
+Use for list/tool reels and "anti-course" hooks (e.g. the REEL reel: "people sell this as a course; the skills are free").
+
 ## Motion graphics level 3 (2 Nov 2026)
 Owner: "improve the motion graphics to the extra level". Added `mg.js`/`mg.css` (R.mg) + references/motion-graphics.md (8 laws, API, recipes, checklist), wired into the template.
 Demo = the LinkedIn posts reel rebuilt with it (reels/lipost-mg → skill example mg-demo), with the same voice and the "Not Like Us" mix:

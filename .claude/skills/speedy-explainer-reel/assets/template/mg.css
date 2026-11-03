@@ -31,3 +31,7 @@
 .mg-sth{position:relative}
 .mg-st{position:absolute;left:-3px;right:-3px;top:52%;height:4px;margin-top:-2px;border-radius:2px;background:#C0392B;transform-origin:0 50%;transform:scaleX(0)}
 .mg-layer{position:absolute;inset:0;pointer-events:none;z-index:6}
+/* editorial: tear halves, underline */
+.mg-tear{pointer-events:none;will-change:transform}
+.mg-ulh{position:relative;display:inline-block}
+.mg-ul{position:absolute;left:0;right:0;bottom:-.06em;height:.08em;border-radius:2px;background:var(--pacc,var(--acc,#D97757));transform-origin:0 50%;transform:scaleX(0)}

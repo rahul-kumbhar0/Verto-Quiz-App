@@ -147,6 +147,37 @@
   M.gauge = (el, t, at, d, value, max = 100) => { el = $(el); const r = +el.getAttribute("r"), C = 2 * Math.PI * r, p = E.expoOut(prog(t, at, d)) * value / max;
     el.style.strokeDasharray = `${C * p} ${C}`; el.style.opacity = t < at ? 0 : 1; return Math.round(p * max); };
 
+  // ---------- EDITORIAL (paper mode): word pairs, tear, ticks, underline ----------
+  /** word pair: a sans line + an italic serif accent line, both masked-rise. M.pair("id","Stop paying.","for tutorials.",t,at,{out}) */
+  M.pair = (el, a, b, t, at, o = {}) => { el = $(el); const key = a + "|" + b;
+    if (el.dataset.pair !== key) { el.innerHTML = `<span class="e-a"></span><span class="e-b"></span>`; el.dataset.pair = key; }
+    M.rise(el.children[0], a, t, at, { stagger: o.stagger ?? 0.07 }); M.rise(el.children[1], b, t, at + (o.gap ?? 0.22), { stagger: o.stagger ?? 0.07 });
+    const q = o.out != null ? E.power4In(prog(t, o.out, 0.3)) : 0; el.style.opacity = t < at ? 0 : 1 - q; el.style.transform = `translateY(${(-q * 40).toFixed(1)}px)`; };
+  /** tear: the element rips down a jagged centre line; the halves fall apart and fade. el = position:absolute card. */
+  M.tear = (el, t, at, o = {}) => { el = $(el); const d = o.d ?? 1.0;
+    if (!el._tear) { const n = o.n ?? 11, pts = []; for (let i = 0; i <= n; i++) pts.push([50 + (i % 2 ? -1 : 1) * (o.jag ?? 3) * (0.5 + 0.5 * Math.abs(hash(i + 1))), (i / n) * 100]);
+      const line = pts.map(p => `${p[0].toFixed(1)}% ${p[1].toFixed(1)}%`).join(",");
+      el._tear = [-1, 1].map(side => { const g = el.cloneNode(true); g.removeAttribute("id"); g.querySelectorAll("[id]").forEach(x => x.removeAttribute("id")); g.classList.add("mg-tear");
+        Object.assign(g.style, { position: "absolute", left: el.offsetLeft + "px", top: el.offsetTop + "px", width: el.offsetWidth + "px", height: el.offsetHeight + "px", margin: 0, opacity: 0 });
+        g.style.clipPath = side < 0 ? `polygon(0 0,${line},0 100%)` : `polygon(100% 0,${line},100% 100%)`; el.parentNode.appendChild(g); return g; }); }
+    const p = prog(t, at, d);
+    if (p <= 0) { el.style.visibility = ""; el._tear.forEach(g => (g.style.opacity = 0)); return 0; }
+    el.style.visibility = "hidden"; const sep = E.expoOut(clamp(p * 2.2)), fall = p * p;
+    el._tear.forEach((g, i) => { const s = i ? 1 : -1; g.style.opacity = 1 - clamp((p - 0.65) / 0.35);
+      g.style.transform = `translate(${(s * (26 + 34 * sep)).toFixed(1)}px,${(30 * sep + 760 * fall).toFixed(1)}px) rotate(${(s * (5 + 16 * fall)).toFixed(2)}deg)`; });
+    if (o.sfx !== false) R.cue("impact", at, { soft: true }); return p; };
+  /** progress ticks: n bars, bar i turns on at times[i] */
+  M.ticks = (el, t, times) => { el = $(el); if (el.children.length !== times.length) el.innerHTML = times.map(() => "<i></i>").join("");
+    [...el.children].forEach((c, i) => c.classList.toggle("on", t >= times[i])); };
+  /** underline: an accent line draws under a word (adds a .mg-ul child once) */
+  M.underline = (el, t, at, o = {}) => { el = $(el); let u = el.querySelector(":scope>.mg-ul");
+    if (!u) { u = document.createElement("i"); u.className = "mg-ul"; el.appendChild(u); el.classList.add("mg-ulh"); }
+    const p = E.expoOut(prog(t, at, o.d ?? 0.35)); u.style.transform = `scaleX(${p})`; return p; };
+  /** strike + replace: the old word (italic serif) gets struck, the new word springs in over it. el = .e-swap with .was and .now */
+  M.swap = (el, t, at, o = {}) => { el = $(el); const was = el.querySelector(".was"), now = el.querySelector(".now");
+    M.strike(was, t, at, { d: 0.25 }); was.style.opacity = 1 - 0.75 * prog(t, at + 0.15, 0.3);
+    now.style.display = t >= at + 0.2 ? "" : "none"; M.fly(now, t, at + 0.2, { y: -30, s: 0.6 }, { f: 2.8, z: 0.45 }); };
+
   // ---------- LIVING BACKGROUND: dot-grid field ----------
   /** <canvas id="mgGrid" class="mg-grid" width="1080" height="1920"> right after .s-bg.
    *  o.waves: [[t0, x, y, amp?]] shockwaves through the field · o.pulse: 0..1 (F.pulse on the beat) · o.cam: {x,y} parallax

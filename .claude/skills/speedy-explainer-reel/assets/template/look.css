@@ -63,3 +63,44 @@
 .t-kicker{font:700 24px Mono;letter-spacing:4px;color:var(--ink-3);text-transform:uppercase}
 .t-hero{font:900 112px/0.95 Inter;letter-spacing:-4px;color:var(--ink)}
 .t-hero em{font-style:normal;color:var(--acc)}
+
+/* ---------- PAPER EDITORIAL mode (3 Nov 2026, from the @mrcreates.ai read): <body class="look paper"> + R.speedy({light:[[0,1e9]]})
+   Warm paper + faint grid, black sans + italic serif word pairs, ONE accent (default editorial blue; set --pacc per reel, terracotta stays our brand).
+   Hero objects are white "paper" UI cards with hairlines. Captions flip to ink via speedy's light theme. ---------- */
+.look.paper{--pg:#FBFAF7;--pgrid:rgba(17,17,20,.075);--pink:#111114;--pink-2:#5B5A57;--pink-3:#9B9994;--pline:#E3E1DB;--pacc:#2F55E6;--pacc-soft:rgba(47,85,230,.12)}
+.look.paper .s-bg,.look.paper .s-light{background-color:var(--pg);background-image:linear-gradient(var(--pgrid) 1px,transparent 1px),linear-gradient(90deg,var(--pgrid) 1px,transparent 1px);background-size:60px 60px;background-position:-1px -1px}
+.look.paper .s-bg::before{opacity:0}
+.look.paper .s-vig,.look.paper.is-light .s-vig{background:radial-gradient(ellipse 82% 64% at 50% 45%,transparent 62%,rgba(40,30,20,.07) 100%)}
+.look.paper #grain{mix-blend-mode:multiply;opacity:.05}
+.look.paper #kin .w,.look.paper.is-light #kin .w{color:var(--pink)} .look.paper.is-light #kin .w:not(.hot):not(.b){color:var(--pink-2)}
+/* editorial type */
+.e-kick{position:absolute;font:700 19px Mono;letter-spacing:3px;text-transform:uppercase;color:var(--pink-3);white-space:nowrap}
+.e-rule{position:absolute;height:1.5px;background:var(--pink)}
+.e-foot{position:absolute;left:70px;right:70px;font:500 18px Inter;color:var(--pink-3);display:flex;justify-content:space-between;border-top:1px solid var(--pline);padding-top:12px}
+.e-pair{position:absolute;left:60px;right:60px;text-align:center;line-height:1.02}
+.e-pair .e-a{display:block;font:800 118px Inter;letter-spacing:-5px;color:var(--pink)}
+.e-pair .e-b{display:block;font:italic 400 112px Serif;color:var(--pacc);margin-top:4px}
+.e-pair.sm .e-a{font-size:86px;letter-spacing:-3px}.e-pair.sm .e-b{font-size:84px}
+.e-sub{position:absolute;left:0;right:0;text-align:center;font:500 30px Inter;color:var(--pink-2)}
+.e-sub b{font-weight:800;color:var(--pink)} .e-sub i{font:italic 400 1.08em Serif;color:var(--pacc)}
+/* progress ticks + numbered index rows */
+.e-ticks{position:absolute;display:flex;gap:10px}.e-ticks i{flex:1;height:3px;border-radius:2px;background:var(--pline)}.e-ticks i.on{background:var(--pacc)}
+.e-idx{display:flex;align-items:center;gap:22px;padding:14px 0;border-bottom:1px solid var(--pline)}
+.e-idx b{font:800 74px/1 Inter;letter-spacing:-3px;color:var(--pacc);width:110px}
+.e-idx .ic{width:58px;height:58px;border-radius:14px;background:#fff;border:1px solid var(--pline);display:grid;place-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.25)}.e-idx .ic img{width:34px;height:34px}
+.e-idx span{font:700 40px Inter;color:var(--pink);letter-spacing:-1px}.e-idx small{display:block;font:500 20px Inter;color:var(--pink-3)}
+.e-idx.dim{opacity:.35}
+/* paper UI card (hero objects) */
+.e-card{position:absolute;background:#fff;border:1px solid var(--pline);border-radius:18px;box-shadow:0 30px 70px -28px rgba(30,25,20,.35),0 2px 6px rgba(0,0,0,.05);color:var(--pink);font-family:Inter}
+.e-btn{display:block;text-align:center;background:var(--pink);color:#fff;font:700 26px Inter;border-radius:12px;padding:16px}
+.e-btn.acc{background:var(--pacc)}
+.e-in{border:1px solid var(--pline);border-radius:10px;padding:12px 14px;font:500 20px Inter;color:var(--pink-3)}
+.e-tag{display:inline-block;font:700 15px Mono;letter-spacing:1px;color:#fff;background:var(--pink);border-radius:999px;padding:4px 10px}
+.e-tag.acc{background:var(--pacc)}
+/* the strike + replacement pair */
+.e-swap{position:relative;display:inline-block}
+.e-swap .was{font:italic 400 1em Serif;color:var(--pink-2)}
+.e-swap .now{position:absolute;left:0;top:0;font:800 1em Inter;letter-spacing:-.03em;color:var(--pacc);white-space:nowrap}
+/* small presenter sticker (paper mode puts him bottom-right at ~55 %) */
+.look.paper #avatar{filter:drop-shadow(0 18px 24px rgba(30,25,20,.22))}
+.look.paper .e-pair .mg-mw>span.h,.look.paper .e-sub .mg-mw>span.h{color:var(--pacc)}   /* one accent per scene: *word* marks go blue on paper */
