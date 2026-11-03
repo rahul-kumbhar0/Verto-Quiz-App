@@ -147,6 +147,14 @@
   M.gauge = (el, t, at, d, value, max = 100) => { el = $(el); const r = +el.getAttribute("r"), C = 2 * Math.PI * r, p = E.expoOut(prog(t, at, d)) * value / max;
     el.style.strokeDasharray = `${C * p} ${C}`; el.style.opacity = t < at ? 0 : 1; return Math.round(p * max); };
 
+  /** first-frame headline: big type that rises on frame 0 (hook #7/#8) and exits at o.out; "|" = line break, *word* = accent */
+  M.headline = (el, text, t, o = {}) => { el = $(el); const lines = text.split("|"), at = o.at ?? 0.02;
+    if (el.dataset.hl !== text) { el.innerHTML = lines.map(() => "<div></div>").join(""); el.dataset.hl = text; }
+    lines.forEach((ln, i) => M.rise(el.children[i], ln.trim(), t, at + i * (o.lineGap ?? 0.12), { stagger: o.stagger ?? 0.07, f: 2.1, z: 0.66 }));
+    const q = o.out != null ? E.power3In(prog(t, o.out, o.outD ?? 0.32)) : 0;
+    el.style.opacity = t < at ? 0 : 1 - q; el.style.transform = `translateY(${(-q * 140).toFixed(1)}px) scale(${(1 - q * 0.08).toFixed(3)})`; el.style.visibility = q >= 1 ? "hidden" : "visible";
+    if (o.sfx !== false && o.out != null) R.cue("swish", o.out); return q; };
+
   // ---------- EDITORIAL (paper mode): word pairs, tear, ticks, underline ----------
   /** word pair: a sans line + an italic serif accent line, both masked-rise. M.pair("id","Stop paying.","for tutorials.",t,at,{out}) */
   M.pair = (el, a, b, t, at, o = {}) => { el = $(el); const key = a + "|" + b;

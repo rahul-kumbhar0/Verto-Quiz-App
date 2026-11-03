@@ -42,6 +42,7 @@ concept without a viewer stake gets nothing. When unsure, it is a tool-demo reel
 - Look: `references/look.md` + `look.css` (`<body class="look">`): graphite materials, ONE terracotta accent, no candy colours.
 - Real UI: whenever the script says Claude/GitHub/a terminal, show the REAL interface (`references/real-ui.md`), not a generic card.
 - Editing: `references/advanced-editing.md` (HyperFrames-derived motion doctrine + fx kit), `MBLUR=3` on final renders.
+- First frame (house default from 3 Nov 2026): a BIG headline on frame 0 (`<div class="headline" id="hl">` + `M.headline("hl", "I automated my|*YouTube*|with Claude.", t, {at:-0.45, out:<hero time>})`), readable with the sound off, the hero blurred behind it (`.hl-back` look), the presenter already on screen (`avatar.in:-0.5`). It exits on the first "here's how" word and the hero comes forward. Keep the hook screen to headline + hero + presenter: no rail counter, no footnote until the hero is up.
 - Paper editorial mode (optional, per reel): `references/paper-editorial.md`. Same presenter + voice + real UI, on warm paper with word-pair headlines and a numbered index. Use it for list/tool reels and "anti-course" hooks.
 - Motion graphics (edit level 3): `references/motion-graphics.md` + `mg.js`/`mg.css` (`R.mg`). Every reel gets the living
   dot grid on the beat, ≥ 1 morph or iris seam, a drawn connector with packets for every "X goes to Y", springs on every

@@ -11,7 +11,7 @@ Never use a slow build from an empty frame.
 | 3 | He grabs the proof | `hold` + paper prop → `point_up` throw; the real UI flies up (spring + echo trail) and lands with shake + ring | any real-UI reel |
 | 4 | Recurring sidekick | our own spark buddy (`spark()` svg, not a brand logo) types in the tool; doubles as the honest catch | series identity |
 | 5 | Thought bubble pops | dots + cloud with the problem, then pop (burst + rays + grid wave) into the answer cards | relatable pain |
-| 7/8/10 | Full frame 0 | caption title + filled proof + presenter mid-gesture at t=0, camera pushing in (`F.cam`) | default baseline |
+| 7/8/10 | Full frame 0 (HOUSE DEFAULT) | `M.headline` big type on frame 0 over the blurred hero, presenter already in, exits on "here's how" → hero forward (YouTube reel, 3 Nov) | every reel |
 | 9 | Start big on the face | avatar ×2.3 `point_cam` + signature flip, springs down to its spot as the UI drops in | "you" hooks |
 | 11 | Flash-forward | 0.7 s of the ending (DM + big number), "▶▶ 30 SECONDS LATER", flash, then back to the blank start | funnel reels |
 | 12 | Before/after split | two halves split-reveal, a divider draws, the right side odometers | time/money savings |

@@ -104,3 +104,13 @@
 /* small presenter sticker (paper mode puts him bottom-right at ~55 %) */
 .look.paper #avatar{filter:drop-shadow(0 18px 24px rgba(30,25,20,.22))}
 .look.paper .e-pair .mg-mw>span.h,.look.paper .e-sub .mg-mw>span.h{color:var(--pacc)}   /* one accent per scene: *word* marks go blue on paper */
+
+/* ---------- FIRST-FRAME HEADLINE (hook #7/#8, 3 Nov 2026): the hook as big type, readable muted, 0–2.5 s, then it exits and the hero takes over ----------
+   <div class="headline" id="hl"></div> inside the hook section · M.headline("hl", "I automated my|*YouTube*|with Claude.", t, {at:0.02, out:T.hero})  ("|" = line break) */
+.headline{position:absolute;left:50px;right:50px;top:600px;text-align:center;font:900 116px/0.96 Inter;letter-spacing:-5px;color:var(--ink);z-index:6;will-change:transform}
+.headline>div{display:block}
+.headline .mg-mw>span.h{color:var(--acc-hi)}
+.headline.sm{font-size:92px;letter-spacing:-4px}
+.look.paper .headline{color:var(--pink)}.look.paper .headline .mg-mw>span.h{color:var(--pacc)}
+/* the hero sits behind the headline until it exits: apply .hl-back while the headline is up */
+.hl-back{filter:blur(8px);opacity:.45}
