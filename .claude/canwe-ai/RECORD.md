@@ -187,7 +187,7 @@ AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
 ## Editing level 2 (1 Nov 2026)
 Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (camera, whip, zoom-through, 3D flip, flash, leak, glitch, shake, sheen, letters, odometer, scramble, code typing, particles, beat sync), new SFX (swish, impact, riser, glitch, shutter), real motion blur (`MBLUR=3`), and `references/advanced-editing.md` (12 rules). Demo: `speedy-explainer-reel/assets/examples/fx-demo/`. Every new reel loads fx.js from the template.
 
-## Reel: YouTube × Claude, "I automated my YouTube channel with Claude" (keyword YOUTUBE, building 3 Nov 2026)
+## Reel: YouTube × Claude, "I automated my YouTube channel with Claude" (keyword YOUTUBE, FINAL rendered 3 Nov 2026: out/claude-youtube.mp4 49.1 s −14.2 LUFS + _nomusic + cover)
 drafts/yt + reels/yt · voice 843 cr, 48 s (owner uploaded the mp3; elevenlabsusercontent.com still blocked in this session even after allowing → needs a new session) · paced 47.4 s, 5 stops, ×1.05 · cover out/cover.png ("I automated my {YouTube}") · guide youtube/index.html written (connector line TBD, not deployed) ·
 scenes built (Studio flash-forward hook, real install + 11 skills, Google Cloud enable/desktop/client_secret (light), Google sign-in → connected,
 Claude chat → /yt-script → render → upload_video tool chain + impact stack, Private→Public + quota meter ≈6/day, comment → DM via 2il.in) ·
