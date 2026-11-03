@@ -60,3 +60,20 @@ Patterns: 7/10 winners original voice-over; first-person story/number hooks; one
 
 ## LinkedIn posting with Claude (1 Nov 2026) — draft in canwe-ai/drafts/lipost (keyword POST)
 linkedin-agent-skill (Jake Schincariol, MIT, 3.0k★): 11 skills, /li-post 21 hook formulas, humanizer, profile /100, weekly plan; 'these skills write, you post'. Trend: ~907K / ~531K / ~253K view reels this month. Siblings to check next: youtube-agent-skill, x-agent-skill.
+
+## Competitor read: @mrcreates.ai (3 Nov 2026, PullRows profile scan + 4 reels watched)
+M Rohmanudin, "AI & Content Strategist", 13K followers, 14 posts, ~1 reel/day since 25 Oct. Niche = Claude Code video editing / MCPs / creator tools.
+Numbers (tool estimates): EDITOR reel (2 Nov) ~425K views, 17K likes, 12.9K comments (!), 515 shares; course-flip reel (25 Oct) 93K / 7.3K comments;
+"fully edited by AI" (26 Oct) 909 comments on 276 likes; 5 MCPs (3 Nov) 211; SOUND 329; INSTAGRAM agent skill 232; Prompt Motion 164; Hypit 195.
+Format: 60 s, no face, no voice-over in the frames we saw (original audio = music/SFX), WHITE paper + faint grid, big black sans + blue italic serif
+word pairs ("Post. every day." / "Three tools. One better edit."), a tiny line-art avatar (his face) that reacts, UI mock-ups (checkout card $497 →
+torn, chat replies, Openverse site, waveform cards), a numbered rail "01 Perplexity …" with progress bars, strike-through + odometer-style text,
+kicker lines top-left ("MR / SOUND DESIGN", "01 FIND · 02 PLACE · 03 CHECK"), footnotes bottom ("workflow illustration", "Check each file's licence").
+Made with: Claude Code + HyperFrames-style HTML motion graphics (he promotes the HyperFrames MCP), Hypit (open-source reference-video studier),
+Prompt Motion (prompt library), Real SFX / Earshot / Openverse for sound. Every reel = one keyword CTA (EDITOR, CLAUDE, MCP, SOUND, MOTION, HYPIT).
+Hooks: contrarian money ("Stop paying for AI editing tutorials", "Most people will pay for a course… you don't have to"), meta-proof ("The video you
+just watched was fully edited by AI"), pain ("…still sound like a silent movie"). Captions 60–110 words, 3–5 hashtags, #claudecode + #aitools always.
+Why EDITOR exploded: anti-course angle + "entire workflow, every prompt and repo, free" + the torn $497 checkout visual + comment gate.
+What we take: (1) the anti-course/"free, here's everything" angle for the REEL reel; (2) tear/strike visuals on a price; (3) kicker + numbered rail
+labels; (4) daily cadence; (5) shares matter (515). What we keep: our presenter + voice + real-UI proofs (his are illustrations, labelled). Overlap
+risk: his INSTAGRAM-agent-skill reel = our GROW; his "fully edited by AI" = our REEL, so our angle must be the REAL pipeline + 2il.in + skills download.
