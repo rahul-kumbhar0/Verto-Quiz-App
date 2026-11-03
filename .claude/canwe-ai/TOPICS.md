@@ -77,3 +77,15 @@ Why EDITOR exploded: anti-course angle + "entire workflow, every prompt and repo
 What we take: (1) the anti-course/"free, here's everything" angle for the REEL reel; (2) tear/strike visuals on a price; (3) kicker + numbered rail
 labels; (4) daily cadence; (5) shares matter (515). What we keep: our presenter + voice + real-UI proofs (his are illustrations, labelled). Overlap
 risk: his INSTAGRAM-agent-skill reel = our GROW; his "fully edited by AI" = our REEL, so our angle must be the REAL pipeline + 2il.in + skills download.
+
+## Trend scan — 3 Nov 2026 (PullRows, #claudeai + #aitools, last 7 days; views = tool estimates) → NEXT TOPIC PICK
+1. @10x.with.ai "I graduated today. Zero offers." ~2.5M views, 98K likes, 18.3K comments in 3 days (APPLY): Playwright MCP (Microsoft, free) in Claude Desktop →
+   Claude searches 200 company career pages → scores jobs vs resume (140 → 50) → FILLS every application, stops before Submit. "Company sites only: LinkedIn doesn't allow bots."
+2. @davidexplainstech MoneyPrinterTurbo (faceless videos from one topic) ~475K/23 h, 5.7K comments (TURBO) — creator niche, low fit.
+3. @winkguys "Claude edits in 1 hour, feed it reference videos" ~254K/11 h, 9.7K comments; @techayushyaduvanshi same angle 151K / 7.5K (EDITOR) — covered by our REEL plan.
+4. @buildwithai.club cleanyourtv ~533K (TV) — we posted TV already. 5. @techstackbro Hinglish "6 steps, claude code se reels" 325K / 10.4K comments — Hinglish works.
+6. @heysansser "30 best Claude plugins" 144K / 3.5K (PLUGINS) — list format. 7. @nocodealex YouTube agent skill 77K / 4K (YOUTUBE) — same as our reel, ours has the connector + real channel.
+PICK: APPLY — "Placement season. Zero offers. Claude filled my applications." Playwright MCP = microsoft/playwright-mcp, 39.1k ★, Apache-2.0, Node 18+,
+`claude mcp add playwright npx @playwright/mcp@latest` (Claude Desktop: mcpServers → npx @playwright/mcp@latest); tools browser_fill_form / click / type / file_upload.
+"Stop before Submit" is a PROMPT rule, not a setting (say so). Real number: freehire, India, intern+junior, last 7 days = 901 postings (338 intern, 563 junior; 231 internships) on 3 Nov 2026.
+Sequel logic: JOBS (freehire finds, 1,556 comments) → OFFER (career-ops scores) → APPLY (Playwright fills). Keyword APPLY. Must do one real application on a company careers page before filming.
