@@ -40,7 +40,7 @@ The catch: new Google projects upload as private (you publish), and ~6 uploads/d
 [keywords: claude youtube automation, youtube data api, claude skills, youtube shorts automation, google cloud oauth]
 #claudeai #youtubeautomation #aitools #youtubeshorts
 Pinned: Comment YOUTUBE for all the steps. Part 1 (Instagram) + Part 2 (LinkedIn) are on my page.
-YouTube title: I Connected My YouTube Channel to Claude (Every Step)
+YouTube title: I Automated My YouTube Channel with Claude (Every Step)
 DM: Hey {name}! 📺 Every step: the 11-skill pack, the Google Cloud setup (API + desktop login), the connector, and my exact prompt 👉 canwe-guides.vercel.app/youtube/
 
 ## Before filming (must be true)
