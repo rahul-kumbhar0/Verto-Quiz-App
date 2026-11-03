@@ -149,7 +149,11 @@ after the big number, after the punchline ("Real fixes, not spam."). Then:
 cp words.json words_raw.json
 python3 $W/tools/pace.py audio/voice.wav words_raw.json stops.json audio/voice_paced.wav words.json --pause 0.18 --stop 0.55 --tempo 1.06
 ```
-It finds real silences by energy (aligner word gaps lie), trims them, injects ~0.55 s of dead air at
+Then the LEVEL marks from the script (`dyn.json`, see reel-script-writer voice.md § Dynamics):
+```bash
+python3 $W/tools/dynamics.py audio/voice_paced.wav words.json dyn.json audio/voice_dyn.wav   # voice up on the twist/payoff, down on the catch
+```
+and mix with `voice_dyn.wav` (same timings as words.json). It finds real silences by energy (aligner word gaps lie), trims them, injects ~0.55 s of dead air at
 each stop and speeds the speech 6% (pitch kept). Mix with `voice_paced.wav`. Captions, `at()` anchors,
 cues, sfx and music all re-time from the new words.json: re-run captions.py, re-export cues, re-render.
 Put a music `break` across the biggest stop (the question beat) for full-silence drama.

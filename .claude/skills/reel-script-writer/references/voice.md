@@ -38,6 +38,23 @@ Rules (from the ElevenLabs v3 guide + our ear):
   before the biggest number) → `<warmly>` CTA.
 - One take, then listen: if a tag over-acts, soften it (`<excited>` → `<impressed>`), don't stack more.
 
+## Dynamics: voice up, voice down, on the exact word (owner, 3 Nov 2026)
+A real person doesn't speak at one level. Two layers, both marked in script.md:
+1. **TONE = ElevenLabs tags** (`<tag>` → `[tag]`): they change HOW the line is performed. Arc for a tool demo:
+   `<matter of fact>` pain line (flat, low) → `<excited>` twist → `<matter of fact>` steps → `<short pause>` + `<exhales>`
+   before the biggest number → `<softly>` on the honest catch (quieter = more honest) → `<warmly>` CTA. `<whispers>` only
+   once, for a secret ("the part nobody shows"). Never two emotion tags in a row; a tag holds until the next one.
+2. **LEVEL = our marks** (`<up>` +2 dB, `<down>` −2.5 dB, `<+3>`, `<-4>`, `<0>` reset): applied by `dynamics.py`
+   AFTER `pace.py`, 120 ms ramps, clamped ±4 dB, so the mix stays at −14 LUFS. Where they go:
+   - `<up>` on the twist (beat 2 of the opening) and right ON the payoff number ("*3,000* stars"), never on the first word of the reel;
+   - `<down>` on the line before a reveal ("But here's the catch." is said lower, the catch itself normal or `<softly>`)
+     and on an aside ("Full disclosure, this one's our own tool");
+   - `<0>` at the CTA so "Comment X" is at full, warm level;
+   - max 4 level changes per reel. If the take already does it (v3 often lifts on `<excited>`), skip the mark.
+   Pipeline: `mark_script.py` writes `dyn.json` → after `pace.py`: `python3 tools/dynamics.py audio/voice_paced.wav words.json dyn.json audio/voice_dyn.wav`
+   → mix with `voice_dyn.wav`. Music does the opposite (ducks under lifts, swells under drops: mix.sh's sidechain does it).
+3. **Stress** `^word^` = CAPS in the prompt: one per sentence max; it is the word the caption boxes.
+
 ## Pacing: fast, with hard stops (the "stop and speak" delivery)
 Viral delivery = dense speech + sudden silence, not uniform speed. The winners talk fast and then
 STOP for half a second on the turn. Write for it, then build it (`pace.py` in speedy-explainer-reel):

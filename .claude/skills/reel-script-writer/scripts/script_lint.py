@@ -91,7 +91,9 @@ def main():
     if raw.count("{") != raw.count("}"): say("ERROR", "unbalanced {pose} braces")
     if raw.count("*") % 2: say("ERROR", "odd number of * (bold markers)")
     # ElevenLabs v3 audio tags <tag> (human delivery)
-    tags = re.findall(r"<([a-z][a-z ]*)>", raw)
+    tags = [t for t in re.findall(r"<([a-z][a-z ]*)>", raw) if t not in ("up", "down")]   # <up>/<down>/<+2> are LEVEL marks, not tags
+    levels = re.findall(r"<(?:up|down|[+-]?\d+(?:\.\d+)?)>", raw)
+    if levels: say("WARN" if len(levels) > 8 else "OK", f"level marks: {len(levels)} (voice up/down; aim ≤ 8)")
     STAGE = {"smiling", "grinning", "pacing", "standing", "nodding", "pointing", "music", "typing", "leaning"}
     nv = [t for t in tags if t in ("laughs", "laughs softly", "chuckles", "giggles", "sighs", "exhales", "gasps")]
     if not tags: say("WARN", "no <audio tags>: add 3–6 so the voice sounds like a person (references/voice.md § Sound human)")

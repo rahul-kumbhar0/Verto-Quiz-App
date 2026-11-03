@@ -11,7 +11,7 @@ whole post package. It is format-neutral, but its output drops straight into
 
 Read once per session: `references/research.md` (what the winners do, with numbers),
 `references/hooks.md` (the formula library), `references/structures.md` (beat sheets),
-`references/endings.md`, `references/voice.md`. `references/our-reels.md` is the log of what
+`references/endings.md`, `references/voice.md`, `references/opening.md` (the 3-beat opening + voice dynamics marks). `references/our-reels.md` is the log of what
 worked on OUR page; it outranks general research when they disagree.
 
 ## 0. Brief (ask nothing you can infer; ask once for what you can't)
@@ -41,7 +41,7 @@ Hybrid is our house style: a B/E body (explainer) with an A/C ending (keyword �
 (our winners); B curiosity → `speedy-hidden-mechanism-reel` (hook MUST carry a job/money stake — our pure
 explainers got ~0 comments); "Let's design X" → `speedy-system-design-reel` (mini 60–90 s by default).
 
-## 2. Hook lab (the first 1.5 seconds)
+## 2. Hook lab (the first 1.5 seconds) — then shape it with `references/opening.md` (pain/claim → twist → promise, ≤ 18 words)
 Write **10 hooks** using **at least 5 different formulas** from `references/hooks.md`. For each,
 write the spoken line AND the frame-1 on-screen text (≤ 7 words; can differ from the spoken line).
 Score each 0–2 on six criteria (max 12) in a table:
@@ -65,7 +65,7 @@ Fill the archetype's beat sheet from `structures.md` with timings. Rules that ho
   (Shlok) measures ≈ 3.0 words/s (125 words = 41.5 s); the local voice-studio ≈ 2.6. Words =
   seconds × pace. Under 60 s for Reels + Shorts unless the user asks.
 
-## 4. Write the lines (`references/voice.md`)
+## 4. Write the lines (`references/voice.md`) — tags for TONE, `<up>`/`<down>` marks for LEVEL (§ Dynamics)
 Casual, spoken, human: like telling a friend over chai, not a presenter reading. Contractions,
 "so", "honestly", "basically" (sparingly), "you". Indian English rhythm is fine; no slang that
 needs a dictionary. Each technical noun gets a ≤ 6-word plain gloss right after it. Exact numbers

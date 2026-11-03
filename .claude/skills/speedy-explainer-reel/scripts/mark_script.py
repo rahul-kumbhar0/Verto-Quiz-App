@@ -24,11 +24,14 @@ norm = lambda s: re.sub(r"[^\w]", "", s).lower()
 # walk the marked text once, emitting spoken tokens and remembering where each mark starts
 spoken, marks, poses = [], [], []
 i = 0
-pat = re.compile(r"\[([^\]]+)\]|\*([^*]+)\*|\{([a-z_]+)\}|<([a-z][a-z ]*)>|(\S+)|\s+")
-tags = []
+pat = re.compile(r"\[([^\]]+)\]|\*([^*]+)\*|\{([a-z_]+)\}|<([a-z][a-z ]*|[+-]?\d+(?:\.\d+)?|up|down)>|(\S+)|\s+")
+tags, dyn = [], []
+LEVEL = {"up": 2.0, "down": -2.5}
 for m in pat.finditer(text):
     box, bold, pose, tag, plain = m.groups()
     if tag:
+        if tag in LEVEL or re.fullmatch(r"[+-]?\d+(?:\.\d+)?", tag):
+            dyn.append({"at": len(spoken), "db": LEVEL[tag] if tag in LEVEL else float(tag)}); continue
         tags.append(tag); continue
     if plain: plain = plain.replace("^", "")
     if box or bold:
@@ -59,6 +62,7 @@ def tts_line(l):
     l = re.sub(r"\{[a-z_]+\}", "", l)
     l = re.sub(r"\^([^^]+)\^", lambda m: m.group(1).upper(), l)
     l = re.sub(r"\[([^\]]+)\]", r"\1", l).replace("*", "")
+    l = re.sub(r"<(?:[+-]?\d+(?:\.\d+)?|up|down)>\s*", "", l)
     l = re.sub(r"<([a-z][a-z ]*)>", r"[\1]", l)
     return re.sub(r"\s+", " ", l).strip()
 tts = "\n".join(tts_line(l) for l in src.splitlines() if l.strip() and not l.strip().startswith("//"))
@@ -71,6 +75,8 @@ if unknown: print("check audio tags (describe HOW it is said, not actions):", so
 print(f"{len(tags)} audio tags -> narration_tts.txt")
 json.dump(emph, open(os.path.join(out, "emph.json"), "w"), indent=1)
 json.dump(poses, open(os.path.join(out, "poses.json"), "w"), indent=1)
+json.dump({"marks": dyn, "note": "word index -> gain dB; holds until the next mark; dynamics.py applies it after pace.py"}, open(os.path.join(out, "dyn.json"), "w"), indent=1)
+if dyn: print(f"{len(dyn)} level marks -> dyn.json (run dynamics.py after pace.py)")
 words = len(spoken)
 print(f"{words} words (~{words/2.6:.0f}s at 2.6 w/s) · {len(emph['box'])} boxed · {len(emph['bold'])} bold · {len(poses)} poses")
 if len(emph["bold"]) > words / 3: print("note: more than one bold per 3 words — the hot-word caption system reads best at ~1 per 4")
