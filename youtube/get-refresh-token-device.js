@@ -54,8 +54,22 @@ while (Date.now() < deadline) {
   });
   const tokenData = await tokenRes.json();
   if (tokenRes.ok) {
-    console.log("✅ YouTube connected! Add this to youtube/.env (or your environment secrets):\n");
-    console.log(`YT_REFRESH_TOKEN=${tokenData.refresh_token}\n`);
+    // --name <label> saves the token as YT_REFRESH_TOKEN_<LABEL> in youtube/.env
+    // so several channels can be connected side by side.
+    const nameIdx = process.argv.indexOf("--name");
+    const label = nameIdx !== -1 ? process.argv[nameIdx + 1] : null;
+    if (label) {
+      const fs = await import("node:fs");
+      const path = new URL("./.env", import.meta.url);
+      const key = `YT_REFRESH_TOKEN_${label.toUpperCase().replace(/[^A-Z0-9]/g, "_")}`;
+      let env = fs.existsSync(path) ? fs.readFileSync(path, "utf8") : "";
+      env = env.split("\n").filter((l) => !l.startsWith(`${key}=`)).join("\n").replace(/\n*$/, "\n");
+      fs.writeFileSync(path, `${env}${key}=${tokenData.refresh_token}\n`);
+      console.log(`✅ YouTube connected! Saved as ${key} in youtube/.env`);
+    } else {
+      console.log("✅ YouTube connected! Add this to youtube/.env (or your environment secrets):\n");
+      console.log(`YT_REFRESH_TOKEN=${tokenData.refresh_token}\n`);
+    }
     process.exit(0);
   }
   if (tokenData.error === "authorization_pending" || tokenData.error === "slow_down") continue;

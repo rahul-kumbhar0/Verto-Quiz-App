@@ -32,9 +32,13 @@ if (!fs.existsSync(file)) {
   process.exit(1);
 }
 
-const { YT_CLIENT_ID, YT_CLIENT_SECRET, YT_REFRESH_TOKEN } = process.env;
+// --channel <label> picks YT_REFRESH_TOKEN_<LABEL>; without it the default YT_REFRESH_TOKEN is used.
+const channel = getArg("channel");
+const tokenKey = channel ? `YT_REFRESH_TOKEN_${channel.toUpperCase().replace(/[^A-Z0-9]/g, "_")}` : "YT_REFRESH_TOKEN";
+const { YT_CLIENT_ID, YT_CLIENT_SECRET } = process.env;
+const YT_REFRESH_TOKEN = process.env[tokenKey];
 if (!YT_CLIENT_ID || !YT_CLIENT_SECRET || !YT_REFRESH_TOKEN) {
-  console.error("Missing YT_CLIENT_ID / YT_CLIENT_SECRET / YT_REFRESH_TOKEN in youtube/.env — run `npm run auth` first (see README.md).");
+  console.error(`Missing YT_CLIENT_ID / YT_CLIENT_SECRET / ${tokenKey} in youtube/.env — connect the channel first (see README.md).`);
   process.exit(1);
 }
 
