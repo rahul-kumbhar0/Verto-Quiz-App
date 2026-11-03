@@ -187,6 +187,13 @@ AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
 ## Editing level 2 (1 Nov 2026)
 Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (camera, whip, zoom-through, 3D flip, flash, leak, glitch, shake, sheen, letters, odometer, scramble, code typing, particles, beat sync), new SFX (swish, impact, riser, glitch, shutter), real motion blur (`MBLUR=3`), and `references/advanced-editing.md` (12 rules). Demo: `speedy-explainer-reel/assets/examples/fx-demo/`. Every new reel loads fx.js from the template.
 
+## Reel: YouTube × Claude, "I automated my YouTube channel with Claude" (keyword YOUTUBE, building 3 Nov 2026)
+drafts/yt + reels/yt · voice generated (843 cr, 48 s, flow CuZozXCxQMDOO0JFbOn5) — download blocked here, owner to download + upload the mp3 ·
+scenes built (Studio flash-forward hook, real install + 11 skills, Google Cloud enable/desktop/client_secret (light), Google sign-in → connected,
+Claude chat → /yt-script → render → upload_video tool chain + impact stack, Private→Public + quota meter ≈6/day, comment → DM via 2il.in) ·
+no-voice preview rendered · automation #54 YOUTUBE OFF → /youtube/ (guide page still to write + deploy) · MUST be true before posting: canwe.ai channel
+really connected (owner OAuth) + one Short really uploaded as private; pick/audit the connector (candidates ~30★).
+
 ## Reel: GROW part 2, "Claude made this reel" (keyword REEL, building 2 Nov 2026)
 ON HOLD (owner, 3 Nov): post only when our extension + the paid "Reel Studio Pro" pack are live (plan: PRODUCT-reel-studio-pro.md). #51 stays OFF.
 drafts/grow2 + reels/grow2 · automation #51 REEL OFF · guide /reel/ (written, not deployed) · 2il.in = OUR OWN DM tool (owner: promote it here, disclosed).
