@@ -51,7 +51,11 @@
   <section id="s3">
     <div class="step">STEP 03</div><h2>Add a YouTube connector to Claude</h2>
     <p>The skill pack doesn't upload. A YouTube MCP server (connector) does, using YOUR Google login from step 2. Point it at your client_secret file, add it to Claude, then sign in once with the channel-owner Google account. The token stays on your computer.</p>
-    <p style="color:var(--mute);font-size:15px">[CONNECTOR: exact server + install command go here once chosen and checked.]</p>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Pick an open-source YouTube MCP server that supports OAuth uploads</strong>, for example <a href="https://github.com/pauling-ai/youtube-mcp-server" target="_blank" rel="noopener">pauling-ai/youtube-mcp-server</a> (MIT). These are small community projects: read the code or README before you give it your login.</div></li>
+      <li><b>2</b><div><strong>Follow its README:</strong> put your client_secret JSON where it says, then add the server to Claude (Claude Desktop config or Claude Code MCP settings).</div></li>
+      <li><b>3</b><div><strong>Sign in once</strong> with the Google account that owns your channel. Ask Claude "check my YouTube connection" to confirm it works.</div></li>
+    </ul>
   </section>
 
   <section id="s4">
