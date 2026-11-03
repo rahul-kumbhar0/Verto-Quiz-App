@@ -10,6 +10,30 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/style.css">
+<style>
+.scr{margin:14px 0 6px;border-radius:12px;overflow:hidden;border:1px solid #dadce0;background:#fff;color:#202124;font:500 14px/1.45 Inter,Roboto,sans-serif;box-shadow:0 10px 30px -12px rgba(0,0,0,.45)}
+.scr .bar{display:flex;align-items:center;gap:8px;padding:8px 12px;background:#f1f3f4;border-bottom:1px solid #dadce0;font-size:12px;color:#5f6368}
+.scr .bar i{width:9px;height:9px;border-radius:50%;background:#ff5f57}.scr .bar i+i{background:#febc2e}.scr .bar i+i+i{background:#28c840}
+.scr .bar span{margin-left:8px;background:#fff;border-radius:10px;padding:2px 10px;flex:1;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.scr .bd{padding:14px 16px}
+.scr h5{margin:0 0 10px;font:500 17px Inter,Roboto,sans-serif;color:#202124}
+.scr .row{display:flex;align-items:center;gap:10px;margin:8px 0;flex-wrap:wrap}
+.scr .lbl{font-size:12px;color:#5f6368;margin:8px 0 4px}
+.scr .in{border:1px solid #dadce0;border-radius:6px;padding:8px 10px;color:#202124;background:#fff}
+.scr .in.on{border-color:#1a73e8;box-shadow:0 0 0 1px #1a73e8}
+.scr .gb{display:inline-block;background:#1a73e8;color:#fff;font:600 13px Inter,Roboto,sans-serif;letter-spacing:.4px;border-radius:6px;padding:8px 16px}
+.scr .gb.ok{background:#e6f4ea;color:#137333}
+.scr .gt{display:inline-block;color:#1a73e8;font:600 13px Inter,Roboto,sans-serif;letter-spacing:.4px;padding:8px 4px}
+.scr .hi{outline:3px solid #D97757;outline-offset:3px;border-radius:6px}
+.scr .rad{display:inline-block;width:14px;height:14px;border-radius:50%;border:2px solid #5f6368;vertical-align:-2px;margin-right:6px}
+.scr .rad.on{border-color:#1a73e8;background:radial-gradient(circle,#1a73e8 45%,transparent 50%)}
+.scr.dark{background:#1a1918;color:#e8e6dc;border-color:#333}.scr.dark .bar{background:#2a2927;border-color:#333;color:#9a978e}.scr.dark .bar span{background:#1a1918}
+.scr.dark pre{margin:0;font:500 13px/1.7 'JetBrains Mono',monospace;white-space:pre-wrap;color:#e8e6dc}.scr.dark pre b{color:#D97757}.scr.dark pre em{font-style:normal;color:#7CC4A0}
+.scr.yt{background:#282828;color:#fff;border-color:#3f3f3f}.scr.yt .bar{background:#1f1f1f;border-color:#3f3f3f;color:#aaa}.scr.yt .bar span{background:#282828}
+.scr.yt .opt{display:flex;gap:10px;align-items:flex-start;padding:8px;border-radius:8px}.scr.yt .opt small{display:block;color:#aaa;font-size:12px}
+.scr.yt .rad{border-color:#aaa}.scr.yt .rad.on{border-color:#3ea6ff;background:radial-gradient(circle,#3ea6ff 45%,transparent 50%)}
+.scrcap{font-size:13px;color:var(--mute);margin:0 0 14px}
+</style>
 </head>
 <body><div class="wrap">
   <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
@@ -28,6 +52,11 @@
     <p><b>youtube-agent-skill</b> by Jake Schincariol: 11 Claude skills, MIT, 4.3k ⭐ (3 Nov 2026). It writes and checks; it never publishes. In Claude Code:</p>
     <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add Jakeschincariol/youtube-agent-skill
 /plugin install youtube-agent</div>
+    <div class="scr dark"><div class="bar"><i></i><i></i><i></i><span>~ — claude</span></div><div class="bd"><pre><b>❯</b> /plugin marketplace add Jakeschincariol/youtube-agent-skill
+<em>✓</em> marketplace added
+<b>❯</b> /plugin install youtube-agent
+<em>✓</em> 11 skills ready · /yt-script … /yt-audit</pre></div></div>
+    <p class="scrcap">Claude Code, after both commands.</p>
     <div class="feat">
       <div><span>🎬</span><div><b>/yt-script</b>: one idea → a script with 5 hooks scored against 21 formulas.</div></div>
       <div><span>🖼️</span><div><b>/yt-package</b>: checks your title and thumbnail together (truncation, duplication, vague words).</div></div>
@@ -39,12 +68,44 @@
 
   <section id="s2">
     <div class="step">STEP 02</div><h2>Google Cloud: the part nobody shows</h2>
+    <p class="scrcap">Screens below are recreated to match what you'll see (Google moves buttons around sometimes; the names stay the same). The <b style="color:#D97757">orange outline</b> = what to click.</p>
     <ul class="chk">
       <li><b>1</b><div><strong>New project</strong> at console.cloud.google.com (name it anything, e.g. my-youtube).</div></li>
+    </ul>
+    <div class="scr"><div class="bar"><i></i><i></i><i></i><span>console.cloud.google.com/projectcreate</span></div><div class="bd"><h5>New Project</h5>
+      <div class="lbl">Project name *</div><div class="in on">my-youtube</div><div class="lbl">Location</div><div class="in">No organization</div>
+      <div class="row" style="margin-top:12px"><span class="gb hi">CREATE</span><span class="gt">CANCEL</span></div></div></div>
+    <p class="scrcap">① Top bar → project picker → <b>New project</b> → name it → <b>Create</b>. Make sure it's selected afterwards.</p>
+    <ul class="chk">
       <li><b>2</b><div><strong>Turn on the YouTube Data API v3</strong>: APIs &amp; Services → Library → search "YouTube Data API v3" → Enable.</div></li>
-      <li><b>3</b><div><strong>OAuth consent screen</strong>: User type External, fill the app name, and add the Google account that OWNS your channel as a test user.</div></li>
-      <li><b>4</b><div><strong>Desktop login</strong>: Credentials → Create credentials → OAuth client ID → Application type <b>Desktop app</b>.</div></li>
+    </ul>
+    <div class="scr"><div class="bar"><i></i><i></i><i></i><span>console.cloud.google.com/apis/library/youtube.googleapis.com</span></div><div class="bd">
+      <div class="lbl">APIs &amp; Services › Library</div><h5>YouTube Data API v3</h5><div style="color:#5f6368;font-size:13px">Google Enterprise API · The YouTube Data API lets you upload and manage videos</div>
+      <div class="row" style="margin-top:12px"><span class="gb hi">ENABLE</span><span class="gt">TRY THIS API</span></div></div></div>
+    <p class="scrcap">② After you click it, the button becomes <b>Manage</b> and you see "API enabled".</p>
+    <ul class="chk">
+      <li><b>3</b><div><strong>Consent screen</strong> (now called <b>Google Auth Platform</b>, older name "OAuth consent screen"): Get started → app name + your email → Audience <b>External</b> → then under <b>Audience → Test users</b> add the Google account that OWNS your channel.</div></li>
+    </ul>
+    <div class="scr"><div class="bar"><i></i><i></i><i></i><span>console.cloud.google.com/auth/audience</span></div><div class="bd"><h5>Audience</h5>
+      <div class="row"><span><span class="rad"></span>Internal</span><span><span class="rad on"></span>External</span></div>
+      <div class="lbl">Publishing status: Testing</div><div class="lbl" style="color:#202124;font-weight:600">Test users</div>
+      <div class="row"><span class="gt hi">+ ADD USERS</span><span class="in">yourchannel@gmail.com</span></div></div></div>
+    <p class="scrcap">③ Skip the test user and sign-in fails later with "access_denied".</p>
+    <ul class="chk">
+      <li><b>4</b><div><strong>Desktop login</strong>: APIs &amp; Services → Credentials → Create credentials → <b>OAuth client ID</b> (or Google Auth Platform → Clients → Create client) → Application type <b>Desktop app</b> → Create.</div></li>
+    </ul>
+    <div class="scr"><div class="bar"><i></i><i></i><i></i><span>console.cloud.google.com/auth/clients/create</span></div><div class="bd"><h5>Create OAuth client ID</h5>
+      <div class="lbl">Application type *</div><div class="in on hi">Desktop app ▾</div><div class="lbl">Name *</div><div class="in">claude-youtube</div>
+      <div class="row" style="margin-top:12px"><span class="gb">CREATE</span></div></div></div>
+    <p class="scrcap">④ Pick <b>Desktop app</b>, not "Web application".</p>
+    <ul class="chk">
       <li><b>5</b><div><strong>Download one file</strong>: the client_secret JSON. 🔐 Never share it, never put it in a public repo.</div></li>
+    </ul>
+    <div class="scr"><div class="bar"><i></i><i></i><i></i><span>console.cloud.google.com/auth/clients</span></div><div class="bd"><h5>OAuth client created</h5>
+      <div class="lbl">Client ID</div><div class="in">1234…apps.googleusercontent.com</div>
+      <div class="row" style="margin-top:12px"><span class="gb hi">⬇ DOWNLOAD JSON</span><span class="gt">OK</span></div></div></div>
+    <p class="scrcap">⑤ The file is named like <b>client_secret_….json</b>. Missed the popup? Open the client again and use the download icon.</p>
+    <ul class="chk" style="display:none">
     </ul>
   </section>
 
@@ -56,11 +117,22 @@
       <li><b>2</b><div><strong>Follow its README:</strong> put your client_secret JSON where it says, then add the server to Claude (Claude Desktop config or Claude Code MCP settings).</div></li>
       <li><b>3</b><div><strong>Sign in once</strong> with the Google account that owns your channel. Ask Claude "check my YouTube connection" to confirm it works.</div></li>
     </ul>
+    <div class="scr"><div class="bar"><i></i><i></i><i></i><span>accounts.google.com</span></div><div class="bd"><h5>claude-youtube wants to access your Google Account</h5>
+      <div class="in" style="display:inline-block">yourchannel@gmail.com</div>
+      <ul style="margin:10px 0 0 18px;padding:0;font-size:13px;color:#3c4043"><li>Manage your YouTube account</li><li>See your YouTube Analytics reports</li></ul>
+      <div class="row" style="justify-content:flex-end"><span class="gt">CANCEL</span><span class="gb hi">ALLOW</span></div></div></div>
+    <p class="scrcap">The one-time sign-in. You may first see "Google hasn't verified this app": it's YOUR app in testing, so click <b>Continue</b>.</p>
   </section>
 
   <section id="s4">
     <div class="step">STEP 04</div><h2>The prompt, and the honest catches</h2>
     <div class="code prompt pad"><button class="cp">Copy</button>Make a YouTube Short from my latest reel: use /yt-script to pick the best hook, /yt-package to check the title and thumbnail, /yt-seo for the description and tags. Then upload it to my channel as PRIVATE and give me the Studio link. Don't publish.</div>
+    <div class="scr yt"><div class="bar"><i></i><i></i><i></i><span>studio.youtube.com · Content → Shorts</span></div><div class="bd"><h5 style="color:#fff">Visibility</h5>
+      <div class="opt"><span class="rad"></span><div>Private<small>Where every API upload lands</small></div></div>
+      <div class="opt"><span class="rad"></span><div>Unlisted<small>Anyone with the link</small></div></div>
+      <div class="opt hi"><span class="rad on"></span><div>Public<small>Everyone can watch</small></div></div>
+      <div class="row" style="justify-content:flex-end"><span class="gb" style="background:#3ea6ff;color:#0f0f0f">SAVE</span></div></div></div>
+    <p class="scrcap">YouTube Studio → Content → your Short → Visibility → <b>Public</b> → Save. This is the one step Claude never does.</p>
     <div class="feat">
       <div><span>🔒</span><div><b>Uploads land private.</b> YouTube keeps uploads from new, unverified Google projects private until the project passes an audit. You review in Studio and press publish.</div></div>
       <div><span>🔢</span><div><b>About 6 uploads a day.</b> The free quota is 10,000 units/day and one upload costs 1,600.</div></div>
