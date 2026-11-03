@@ -1,0 +1,228 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>speedy-devv-visual</title>
+<style>
+  :root{
+    --bg:#060709; --ink:#f2f3f5; --dim:#8d93a0; --line:#2a2f3b;
+    --plate:#0d1016; --accent:#8ab4ff;
+    --serif:Georgia,'Times New Roman',serif;
+    --sans:system-ui,-apple-system,'Segoe UI',Arial,sans-serif;
+    --mono:'Courier New',ui-monospace,monospace;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1920px;overflow:hidden;background:var(--bg)}
+  #root{position:absolute;inset:0;font-family:var(--sans);color:var(--ink)}
+
+  /* backdrop */
+  #dots{position:absolute;inset:0;
+    background-image:radial-gradient(circle,#1c202a 1px,transparent 1.4px);
+    background-size:64px 64px;opacity:.35}
+  #vig{position:absolute;inset:0;
+    background:radial-gradient(ellipse 80% 62% at 50% 46%,transparent 55%,rgba(0,0,0,.78) 100%)}
+  #grain{position:absolute;inset:-20px;opacity:.07;pointer-events:none;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E")}
+
+  /* command line */
+  #cmd{position:absolute;top:210px;left:0;right:0;text-align:center;
+    font-family:var(--mono);font-size:34px;color:var(--dim);letter-spacing:.5px}
+  #cmd .sl{color:var(--accent)}
+  #cmd .cur{display:inline-block;width:18px;height:40px;background:var(--ink);
+    vertical-align:-6px;margin-left:6px}
+  #cmdtag{position:absolute;top:150px;left:0;right:0;text-align:center;
+    font-family:var(--mono);font-size:24px;color:#4c5260}
+
+  /* headline */
+  #head{position:absolute;top:330px;left:0;right:0;text-align:center;line-height:1.12}
+  #head .pre{font-family:var(--serif);font-style:italic;font-weight:300;font-size:92px}
+  #head .word{font-family:var(--sans);font-weight:800;font-size:96px;letter-spacing:-2px;
+    display:inline-block;border:3px solid var(--ink);border-radius:6px;padding:2px 26px;margin-top:18px}
+  .mask{display:inline-block;overflow:hidden;vertical-align:bottom}
+  .mask>span{display:inline-block;will-change:transform}
+
+  /* stage */
+  #stage{position:absolute;inset:0;transform-origin:540px 1040px}
+  #iso{position:absolute;left:540px;top:1210px;transform-style:preserve-3d;
+    perspective:none}
+  .plate{position:absolute;left:-260px;top:-160px;width:520px;height:320px;
+    border:1.5px solid #3a4154;border-radius:14px;
+    background:linear-gradient(135deg,#141925 0%,#0c0f16 55%,#090b11 100%);
+    box-shadow:0 0 50px rgba(0,0,0,.75), inset 0 0 40px rgba(138,180,255,.04);
+    transform-style:preserve-3d}
+  .plate .pname{position:absolute;left:34px;top:26px;font-family:var(--mono);
+    font-size:30px;color:#525b70;transform:rotateZ(45deg);transform-origin:left top}
+  .plate.hot{border-color:var(--accent);
+    box-shadow:0 0 70px rgba(138,180,255,.18), inset 0 0 40px rgba(138,180,255,.07)}
+  .lab{position:absolute;left:700px;width:340px}
+  .lab .ln{position:absolute;top:22px;height:1px;background:#5b6478;left:-160px}
+  .lab .t1{font-family:var(--sans);font-weight:700;font-size:38px;white-space:nowrap}
+  .lab .t2{font-family:var(--mono);font-size:26px;color:var(--dim);margin-top:6px;white-space:nowrap}
+
+  /* stats chips + counter */
+  #chips{position:absolute;top:1560px;left:0;right:0;text-align:center}
+  .chip{display:inline-block;font-family:var(--mono);font-size:28px;color:var(--ink);
+    border:1px solid var(--line);border-radius:999px;padding:12px 26px;margin:0 10px;
+    background:rgba(13,16,22,.9)}
+  #counter{position:absolute;top:430px;left:0;right:0;text-align:center;display:none}
+  #counter .num{font-family:var(--sans);font-weight:800;font-size:150px;letter-spacing:-4px}
+  #counter .num .pct{font-size:80px;color:var(--dim);font-weight:600}
+  #counter .sub{font-family:var(--mono);font-size:30px;color:var(--dim);margin-top:8px}
+
+  /* end card */
+  #cta{position:absolute;inset:0;background:var(--bg);display:none}
+  #cta .in{position:absolute;top:800px;left:0;right:0;text-align:center}
+  #cta .l1{font-family:var(--serif);font-style:italic;font-size:74px;line-height:1.25;padding:0 90px}
+  #cta .l2{font-family:var(--mono);font-size:32px;color:var(--accent);margin-top:56px}
+  #cta .arrow{font-family:var(--sans);font-size:60px;margin-top:40px;color:var(--dim)}
+
+  #foot{position:absolute;bottom:130px;left:0;right:0;text-align:center;
+    font-family:var(--mono);font-size:26px;color:#4c5260}
+</style>
+</head>
+<body>
+<div id="root">
+  <div id="dots"></div>
+  <div id="stage">
+    <div id="head"></div>
+    <div id="iso"></div>
+    <div id="chips"></div>
+    <div id="counter"><div class="num"></div><div class="sub"></div></div>
+  </div>
+  <div id="cmdtag">&#10035; animating with /full-visual</div>
+  <div id="cmd"></div>
+  <div id="foot"></div>
+  <div id="cta"><div class="in"><div class="l1"></div><div class="arrow">&#8595;</div><div class="l2"></div></div></div>
+  <div id="vig"></div>
+  <div id="grain"></div>
+</div>
+
+<script>
+/* ======================= CONFIG — rewrite this per reel ======================= */
+const CONFIG = {
+  dur: 26, bpm: 84,
+  cmd:   { at: 0.4, text: "/full-visual design a quiz API" },
+  head:  { at: 2.3, pre: "Let’s design", word: "Verto." },
+  layers: [                              // bottom -> top, narrative order
+    { at:  4.4, label: "MongoDB Atlas",  sub: "mongoose ODM" },
+    { at:  6.5, label: "Question model", sub: "answers hidden on GET" },
+    { at:  8.6, label: "Quiz model",     sub: "duplicate guard" },
+    { at: 10.7, label: "quizController", sub: "auto-scoring" },
+    { at: 12.8, label: "Express routes", sub: "POST /api/quizzes" },
+  ],
+  punch: { at: 14.9 },                   // camera punch-in beat
+  chips: { at: 15.3, items: ["create", "take", "score"] },
+  counter: { at: 17.4, to: 100, suffix: "%", sub: "tests passing · jest + supertest" },
+  cta:   { at: 22.3, line: "Save this if you’re building APIs.",
+           url: "github.com/rahul-kumbhar0/Verto-Quiz-App" },
+  foot:  "node · express · mongodb",
+};
+/* ============================================================================ */
+
+const $=s=>document.querySelector(s);
+const clamp=(x,a,b)=>Math.max(a,Math.min(b,x));
+const seg=(t,a,d)=>clamp((t-a)/d,0,1);
+const out4=p=>1-Math.pow(1-p,4);
+const back=p=>{const c=1.70158;p-=1;return 1+p*p*((c+1)*p+c)};
+const beat=60/CONFIG.bpm;
+
+// build DOM once
+const head=$("#head");
+head.innerHTML=`<div class="mask"><span class="pre">${CONFIG.head.pre}</span></div><br>
+  <div class="mask"><span class="wrap"><span class="word">${CONFIG.head.word}</span></span></div>`;
+const iso=$("#iso");
+const Z=120, plates=[], labs=[];
+CONFIG.layers.forEach((L,i)=>{
+  const p=document.createElement("div");p.className="plate";
+  p.innerHTML=`<div class="pname">${String(i+1).padStart(2,"0")}</div>`;
+  iso.appendChild(p);plates.push(p);
+  const lab=document.createElement("div");lab.className="lab";
+  lab.innerHTML=`<div class="ln"></div><div class="t1">${L.label}</div><div class="t2">${L.sub}</div>`;
+  $("#stage").appendChild(lab);labs.push(lab);
+});
+const chipsBox=$("#chips");
+CONFIG.chips.items.forEach(c=>{const d=document.createElement("span");
+  d.className="chip";d.textContent=c;chipsBox.appendChild(d)});
+$("#cta .l1").textContent=CONFIG.cta.line;
+$("#cta .l2").textContent=CONFIG.cta.url;
+$("#foot").textContent=CONFIG.foot;
+
+// label screen anchor per layer (stack rises on screen as i grows)
+const labY=i=>1400-i*122;
+
+window.DUR=CONFIG.dur;
+window.seek=t=>{
+  /* command typing */
+  const c=CONFIG.cmd, n=Math.floor(seg(t,c.at,1.6)*c.text.length);
+  const typed=c.text.slice(0,n), cur=(t<CONFIG.head.at+1.5&&Math.floor(t/0.4)%2===0)?'<span class="cur"></span>':'';
+  $("#cmd").innerHTML='<span class="sl">'+typed.split(" ")[0]+'</span>'+typed.slice(typed.split(" ")[0].length)+cur;
+  $("#cmdtag").style.opacity=seg(t,0.1,0.5)*0.9;
+
+  /* headline rise + keyword box pop */
+  const h=CONFIG.head;
+  const m=head.querySelectorAll(".mask>span");
+  m[0].style.transform=`translateY(${(1-out4(seg(t,h.at,0.7)))*120}%)`;
+  m[1].style.transform=`translateY(${(1-out4(seg(t,h.at+0.35,0.7)))*120}%)`;
+  const pop=seg(t,h.at+1.0,0.45);
+  head.querySelector(".word").style.transform=`scale(${pop<1?0.92+0.08*back(pop):1})`;
+  head.querySelector(".word").style.borderColor=pop>0?"var(--ink)":"transparent";
+
+  /* iso plates fly in, lines draw, labels type */
+  CONFIG.layers.forEach((L,i)=>{
+    const p=seg(t,L.at,0.8), pb=back(p);
+    const z=i*Z, drop=(1-pb)*560;
+    plates[i].style.transform=
+      `rotateX(57deg) rotateZ(-45deg) translateZ(${z-drop}px)`;
+    plates[i].style.opacity=seg(t,L.at,0.3);
+    plates[i].classList.toggle("hot",t>=L.at&&t<L.at+1.9);
+    const lab=labs[i]; lab.style.top=labY(i)+"px";
+    const lw=seg(t,L.at+0.5,0.5);
+    lab.querySelector(".ln").style.width=(160*lw)+"px";
+    lab.querySelector(".ln").style.left=(-160)+"px";
+    const chars=Math.floor(seg(t,L.at+0.7,0.7)*L.label.length);
+    lab.querySelector(".t1").textContent=L.label.slice(0,chars);
+    lab.querySelector(".t2").style.opacity=seg(t,L.at+1.2,0.4);
+  });
+
+  /* chips */
+  chipsBox.querySelectorAll(".chip").forEach((ch,i)=>{
+    const p=seg(t,CONFIG.chips.at+i*0.3,0.5);
+    ch.style.opacity=p;ch.style.transform=`translateY(${(1-back(p))*40}px)`;
+  });
+
+  /* counter (replaces headline zone) */
+  const K=CONFIG.counter,kp=seg(t,K.at,1.4);
+  $("#counter").style.display=kp>0?"block":"none";
+  if(kp>0){
+    $("#head").style.opacity=1-seg(t,K.at,0.4);
+    $("#counter .num").innerHTML=Math.round(out4(kp)*K.to)+'<span class="pct">'+K.suffix+'</span>';
+    $("#counter .sub").textContent=K.sub;
+    $("#counter .sub").style.opacity=seg(t,K.at+0.8,0.5);
+  } else $("#head").style.opacity=1;
+
+  /* camera: permanent drift + punch-in */
+  const drift=1.015+0.02*Math.sin(t*0.35), dx=10*Math.sin(t*0.22), dy=8*Math.cos(t*0.17);
+  const punch=1+0.10*out4(seg(t,CONFIG.punch.at,0.6))*(1-seg(t,CONFIG.cta.at-1.2,1.0));
+  $("#stage").style.transform=
+    `translate(${dx}px,${dy}px) scale(${drift*punch}) rotate(${0.4*Math.sin(t*0.25)}deg)`;
+  const pulse=1-0.5*((t/beat)%1);                       // beat pulse on vignette
+  $("#vig").style.opacity=0.85+0.08*pulse;
+  $("#grain").style.backgroundPosition=`${(t*797)%300}px ${(t*463)%300}px`;
+
+  /* end card */
+  const e=seg(t,CONFIG.cta.at,0.6);
+  $("#cta").style.display=e>0?"block":"none";
+  $("#cta").style.opacity=e;
+  if(e>0){
+    $("#cta .l1").style.transform=`translateY(${(1-out4(seg(t,CONFIG.cta.at+0.2,0.8)))*60}px)`;
+    $("#cta .l1").style.opacity=seg(t,CONFIG.cta.at+0.2,0.6);
+    $("#cta .arrow").style.opacity=seg(t,CONFIG.cta.at+0.8,0.5);
+    $("#cta .arrow").style.transform=`translateY(${6*Math.sin(t*4)}px)`;
+    $("#cta .l2").style.opacity=seg(t,CONFIG.cta.at+1.1,0.5);
+  }
+  $("#foot").style.opacity=(t>1&&e===0)?0.9:0;
+};
+window.seek(0);
+</script>
+</body>
+</html>

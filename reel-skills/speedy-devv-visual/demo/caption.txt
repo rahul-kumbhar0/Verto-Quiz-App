@@ -1,0 +1,10 @@
+Verto is a quiz API that scores itself, and the whole backend is 3 models and a controller.
+
+github.com/rahul-kumbhar0/Verto-Quiz-App
+
+> Express routes: create quizzes, add questions, submit answers
+> auto-scoring on submit, correct answers hidden on GET
+> duplicate-question guard at the model layer
+> MongoDB + Mongoose, tested with Jest + Supertest
+
+Save this if you're building APIs.
