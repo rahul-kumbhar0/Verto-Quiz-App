@@ -1,4 +1,4 @@
-<curious> I connected my ^YouTube^ channel to Claude. Here's every [step.] {point_cam}
+<curious> I automated my ^YouTube^ channel with Claude. Here's how you can [too.] {point_cam}
 <matter of fact> Step one. Add the free YouTube skill pack. *Eleven* skills, *4,300* stars on [GitHub.] {typing}
 It writes scripts with *five* scored [hooks,] checks your title *and* [thumbnail,] and does the [SEO.] {three}
 Step two. The part nobody shows. Google [Cloud.] {point_stage}

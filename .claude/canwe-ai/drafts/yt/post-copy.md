@@ -1,11 +1,13 @@
-# YouTube × Claude: "I connected my YouTube channel to Claude." (keyword YOUTUBE), script only, 3 Nov 2026
+# YouTube × Claude: "I automated my YouTube channel with Claude. Here's how you can too." (keyword YOUTUBE), script only, 3 Nov 2026
 Archetype A (demo → keyword) + LINK-style catch. Preset speedy-tool-demo-reel. 135 words ≈ 45 s (≈ 47–48 s paced), lint PASS.
 Hard stops: "every step." · "Google Cloud." · "canwe.ai." · "here's the catch." · "press publish."
 
 ## Hook lab (specific / stakes / curiosity / fast / showable / true, max 12)
 | # | Formula | Spoken | Frame-1 text | Score |
 |---|---|---|---|---|
-| 1 | automated / connected (our #1 format: JOBS, GROW, LINK) | I connected my YouTube channel to Claude. Here's every step. | My [YouTube] runs on Claude | 11 ✅ main |
+| 0 | automated + "you can" (owner's idea, tightened) | I automated my YouTube channel with Claude. Here's how you can too. | I automated my [YouTube] | 12 ✅ MAIN (v2) |
+| 0b | owner's exact line | I automated my entire YouTube channel through this. And here's how you can. | — | 9 (specific 1: "this" names nothing; true 1: "entire" clashes with the catch, I still press publish) |
+| 1 | connected | I connected my YouTube channel to Claude. Here's every step. | My [YouTube] runs on Claude | 11 (v1 main) |
 | 2 | catch-as-hook (LINK did well) | I connected Claude to my YouTube. Google makes you do one thing first. | Step 2 nobody shows | 10 ✅ trial A |
 | 3 | numbers | 11 skills. 1 Google login. My YouTube runs on Claude. | [11 skills] · 1 login | 10 ✅ trial B |
 | 4 | series | Part 3: after Instagram and LinkedIn, Claude now runs my YouTube. | Part 3: [YouTube] | 9 |
