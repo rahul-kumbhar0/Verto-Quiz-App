@@ -1,4 +1,4 @@
-# ROAST — notes (4 Nov 2026)
+# KITE (was ROAST) — notes (4 Nov 2026). Owner: no roast, make them USE it → "4 questions I ask my portfolio". Keyword KITE, guide /kite/.
 - Kite MCP (official, Zerodha): hosted at mcp.kite.trade; Claude Desktop config "kite": {"command":"npx","args":["mcp-remote","https://mcp.kite.trade/mcp"]}; Kite login; free.
   Read-only per Zerodha EXCEPT GTT orders → script says "built for analysis, not trading" (not "can't place orders"). zerodha.com was blocked in-session: re-verify on build.
 - SEBI risk (2026): SEBI's AI tool "Sudarshan" has removed ~1.2 lakh posts by unregistered finfluencers; "if you give investment advice you must be registered".

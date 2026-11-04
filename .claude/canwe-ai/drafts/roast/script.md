@@ -1,11 +1,10 @@
 <matter of fact> I connected my ^Zerodha^ to [Claude.] {point_cam}
-<excited> <up> It roasted my [portfolio.] {hands_head}
-<short pause> <0> Here's the setup, and what it [found.] {point_stage}
-<matter of fact> Zerodha has an *official* connector, called Kite [MCP.] One line in Claude's settings, then you log in with [Kite.] {typing}
-It *reads* your holdings. It's built for analysis, not [trading.] {stop}
-<excited> <up> Roast one. *40* percent of my money, in *one* [stock.] "That's not a portfolio. That's a [bet."] {facepalm}
-<chuckles> Roast two. My *three* mutual funds own the *same* [companies.] {three}
-Roast three. *Eleven* tiny positions. "A collection, not a [plan."] {shrug}
-<short pause> <down> Then it asked me one [question.] What is this money *actually* [for?] {think}
-<softly> <0> It never says buy or sell. It's analysis, not [advice.] *I* decide. {point_cam}
-<warmly> Comment [ROAST] and I'll DM you the setup, plus the exact roast [prompt.] {wave}
+<excited> <up> Now I just *ask* my portfolio [questions.] {hands_head}
+<short pause> <0> Here's the setup, and the *four* questions I [use.] {point_stage}
+<matter of fact> Zerodha has an *official* connector, called Kite [MCP.] It's free. One line in Claude's settings, then you log in with [Kite.] {typing}
+Question one. "Where is my money, by [sector?"] It draws the split in [seconds.] {explain}
+<excited> Question two. "Do my mutual funds *overlap?"* Mine owned the *same* top [companies.] {three}
+Question three. "What did I *gain* or *lose* this month, and on [what?"] {thumbs}
+<up> Question four. "Explain my portfolio like I'm [18."] Every term, in plain [English.] {present}
+<short pause> <softly> <0> It reads. It never tells you to buy or [sell.] *You* decide. {stop}
+<warmly> Comment [KITE] and I'll DM you the setup, plus all four [prompts.] {wave}
