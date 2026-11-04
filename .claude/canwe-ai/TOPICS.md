@@ -89,3 +89,13 @@ PICK: APPLY — "Placement season. Zero offers. Claude filled my applications." 
 `claude mcp add playwright npx @playwright/mcp@latest` (Claude Desktop: mcpServers → npx @playwright/mcp@latest); tools browser_fill_form / click / type / file_upload.
 "Stop before Submit" is a PROMPT rule, not a setting (say so). Real number: freehire, India, intern+junior, last 7 days = 901 postings (338 intern, 563 junior; 231 internships) on 3 Nov 2026.
 Sequel logic: JOBS (freehire finds, 1,556 comments) → OFFER (career-ops scores) → APPLY (Playwright fills). Keyword APPLY. Must do one real application on a company careers page before filming.
+
+## Next pick — 4 Nov 2026 (PullRows disconnected; picked from our own DM data + web check)
+Our last 7 days (DM dashboard, 4 Nov): GROW 583 DMs / 476 unique clickers (our #1 this week, ahead of JOBS 196), LINK 118, YOUTUBE 118 (101 clickers), OFFER 29, PROMPT 23.
+→ the "Claude runs my socials / my job hunt" lines both work; connector reels with a real setup beat concept reels.
+PICK: INBOX = job-hunt part 4, already promised on the /apply/ guide ("Follow for part 4: the follow-up email Claude drafts after you apply").
+"I connected my Gmail to Claude. It found every recruiter reply I missed." Official Gmail connector (claude.ai Settings → Connectors, Pro/Max/Team/Enterprise):
+search threads, read threads, create DRAFTS, labels; it CANNOT send ("creates drafts… cannot send emails on your behalf"); no background watching (only in a chat).
+Demo inbox must be a sample (never show the owner's real mail). Keyword INBOX. Catch: drafts only, you press send; needs a paid plan.
+Runner-up: replica-skill (Jakeschincariol, 7.5k ★, "11 skills to reverse-engineer and rebuild any app") → "I gave Claude an app. It rebuilt it." (reach play, devs).
+Jakeschincariol packs now: instagram 4.7k, youtube 4.5k, linkedin 3.2k, replica 7.5k, day-trader 5k, founder 2.4k (no X/TikTok pack visible).
