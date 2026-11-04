@@ -15,6 +15,7 @@
 .kt-link{position:absolute;left:0;right:0;top:700px;height:300px;z-index:4}
 .kt-node{position:absolute;top:760px;width:190px;height:190px;border-radius:44px;background:#F3F1EC;display:grid;place-items:center;z-index:5;box-shadow:0 30px 70px -20px rgba(0,0,0,.7)}
 .kt-node img{width:110px}
+#hl{top:405px;font-size:86px;line-height:1.08;letter-spacing:-3.5px}
 .kt-chip{position:absolute;left:0;right:0;top:1010px;text-align:center;z-index:6}.kt-chip .m-acc{font:900 44px Inter;padding:16px 34px;opacity:0;display:inline-block}
 /* 4 tiles */
 .kt-tiles{position:absolute;left:70px;right:70px;top:1040px;display:grid;grid-template-columns:1fr 1fr;gap:14px;z-index:6}
@@ -145,10 +146,11 @@ window.seek = t => {
   R.speedyFrame(t);
   M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), drift: 8, waves: [[0.05, 540, 760, 0.9], [T.twist + 0.4, 540, 855, 1.4], [at("ten") + 0.1, 540, 760, 1.5], [at("overlap.") + 0.1, 540, 900], [at("tracker.") + 0.1, 540, 800], [at("DM") + 0.45, DMI[0], DMI[1]]] });
   // HOOK — big headline over the blurred sample holdings; on "Connect it to Claude" the app sinks, Zerodha + Claude tiles link up with packets → "free portfolio analyst"; "here's what it does" deals 4 tiles
-  M.headline("hl", "Green or red.|Then you|*close* it.", t, { at: -0.45, out: T.twist - 0.1 });
-  const sink = E.power3In(prog(t, T.twist - 0.1, 0.45)); $("app").style.transform = `translateY(${sink * 500}px) scale(${lerp(1, 0.8, sink)})`; $("app").style.filter = t < T.twist ? "blur(7px)" : `blur(${7 + sink * 6}px)`; $("app").style.opacity = t < T.twist - 0.1 ? 0.45 : 0.45 * (1 - sink);
-  [["nZ", T.twist + 0.05, -1], ["nC", T.twist + 0.2, 1]].forEach(([id, a, s]) => M.fly(id, t, a, { x: s * 260, s: 0.5, r: s * 12 }, { f: 2.3, z: 0.55 }));
-  const ln = M.path("lnk", "kl", M.curve(NZ[0] + 95, NZ[1], NC[0] - 95, NC[1], 0), "mg-line acc"); M.draw(ln, t, T.twist + 0.45, 0.35); M.flow(ln, t, { n: 5, speed: 1.4, from: T.twist + 0.7, to: T.s1 });
+  M.headline("hl", "Zerodha + Claude|= a free portfolio|*analyst.*", t, { at: -1.2, out: T.twist - 0.1 });
+  const sink = E.power3In(prog(t, T.twist - 0.1, 0.45)); $("app").style.transform = `translateY(${sink * 500}px) scale(${lerp(1, 0.8, sink)})`; $("app").style.filter = t < T.twist ? "blur(7px)" : `blur(${7 + sink * 6}px)`; $("app").style.opacity = t < T.twist - 0.1 ? 0.16 : 0.16 * (1 - sink);
+  [["nZ", -0.7, -1], ["nC", -0.6, 1]].forEach(([id, a, s]) => M.fly(id, t, a, { x: s * 260, s: 0.5, r: s * 12 }, { f: 2.3, z: 0.55 }));
+  { const bump = M.spring(t, T.twist + 0.05, { f: 3, z: 0.35 }), k = t >= T.twist + 0.05 ? 1 + 0.12 * Math.sin(Math.min(1, (t - T.twist - 0.05) / 0.35) * Math.PI) : 1; ["nZ", "nC"].forEach(id => $(id).style.transform += ` scale(${k})`); }
+  const ln = M.path("lnk", "kl", M.curve(NZ[0] + 95, NZ[1], NC[0] - 95, NC[1], 0), "mg-line acc"); M.draw(ln, t, -0.2, 0.35); M.flow(ln, t, { n: 5, speed: 1.4, from: 0.1, to: T.s1 });
   M.ring("mgFx", t, T.twist + 0.4, { x: 540, y: 855, r: 320, d: 0.7, sfx: true });
   const ap = M.spring(t, at("analyst.") - 0.05, { f: 2.6, z: 0.5 }); $("an").style.opacity = t >= at("analyst.") - 0.05 ? 1 : 0; $("an").style.transform = `scale(${lerp(0.5, 1, ap)})`;
   ["t1", "t2", "t3", "t4"].forEach((id, i) => M.fly(id, t, T.promise + 0.05 + i * 0.09, { y: 140, s: 0.7, r: (i % 2 ? 5 : -5) }, { f: 2.3, z: 0.55 }));

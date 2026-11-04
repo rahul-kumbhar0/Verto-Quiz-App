@@ -239,6 +239,7 @@ How-to for any song: find the drop/beat entry by RMS (50 ms windows), offset = d
 
 ## KITE (4 Nov 2026): Zerodha + Claude = free portfolio analyst — FINAL rendered 4 Nov
 out: reels/kite/out/claude-kite.mp4 (pulse) + _nomusic + _notlikeus (song from 71.25 s, drop on "Connect it to Claude" 3.95 s, breakdown boosted under the opening, dip on "It never") + cover.png ("Your portfolio, explained. {Free.}") ·
+HOOK v2 (owner: "is our hook strong?" → rated 7/10, payoff late): frame 0 now shows the PAYOFF — headline "Zerodha + Claude = a free portfolio analyst." + both logos already linked with packets, app faded behind; voice keeps the pain line (mute viewers see the promise, sound viewers hear the pain). Trial-reel idea: spoken stakes opener "Two of your mutual funds might own the same companies. You're paying twice." ·
 audio: owner uploaded the mp3; "It only reads." cut at 33.22–34.34 s; TTS said "P/E ratio" so narration/script now say "P/E ratio"; paced 42.2 s (6 stops incl. "one sheet."), 5 level marks · 44 s total ·
 drafts/roast (script v3, notes, post-copy) + /root/reel-work/reels/kite (index.html scenes done, previewed on fake timings) ·
 voice 825 cr, 43.8 s, flow abpj0xhQSlOljPZ2hmIP (download blocked again in this session → owner uploads the mp3) ·
