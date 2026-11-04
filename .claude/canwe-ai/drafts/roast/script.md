@@ -5,6 +5,6 @@
 <excited> Two. It catches hidden [overlap.] Two mutual funds, two fees, the *same* [companies.] {three}
 Three. It turns jargon into [English.] XIRR, P/E, expense ratio, explained with *your* own [numbers.] {present}
 <up> Four. It builds you a [tracker.] Every holding, buy price, today's price, in one [sheet.] {thumbs}
-<short pause> <softly> <0> It only reads. It never tells you what to buy or [sell.] *You* decide. {stop}
+<short pause> <softly> <0> It never tells you what to buy or [sell.] *You* decide. {stop}
 <matter of fact> The setup is free, it's official, and it takes a few [minutes.] {typing}
 <warmly> Comment [KITE] and I'll DM you the whole setup, step by [step.] {wave}

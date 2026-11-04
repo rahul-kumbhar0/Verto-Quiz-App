@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Connect Zerodha to Claude: the whole setup · canwe.ai</title>
+<meta name="description" content="Zerodha's official Kite MCP in Claude, step by step, plus the 4 prompts: a one-page portfolio report, hidden fund overlap, jargon in plain English, and a tracker sheet.">
+<meta property="og:title" content="Connect Zerodha to Claude: a free portfolio analyst">
+<meta property="og:description" content="Official Kite MCP · free · a few minutes · 4 copy-paste prompts · analysis, never advice.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Connect Zerodha to Claude. Get a free portfolio <span class="sel"><i></i><b>analyst.</b></span></h1>
+  <p class="lead">Zerodha's own Kite MCP lets Claude read your holdings and explain them. Below: the setup, step by step, and the 4 prompts from the reel. It explains your numbers. It never tells you what to buy or sell. You decide.</p>
+  <div class="chips"><span class="chip">free · official (Zerodha)</span><span class="chip">~5 min setup</span><span class="chip">analysis, not advice</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>Add Kite to Claude</a>
+    <a href="#s2"><small>02</small>Log in to Kite</a>
+    <a href="#s3"><small>03</small>The rule prompt</a>
+    <a href="#s4"><small>04</small>The 4 prompts</a>
+    <a href="#s5"><small>05</small>Safety rules</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Add Zerodha's Kite MCP to Claude</h2>
+    <p>It's hosted by Zerodha at <b>mcp.kite.trade</b>: no install, no API key. Source: <b>github.com/zerodha/kite-mcp-server</b> (MIT licence).</p>
+    <p><b>claude.ai or the Claude app</b>: Settings → Connectors → <b>Add custom connector</b> → paste this URL → Add:</p>
+    <div class="code pad"><button class="cp">Copy</button>https://mcp.kite.trade/mcp</div>
+    <p><b>Claude Desktop (config file)</b>: Settings → Developer → Edit config, add this inside <b>mcpServers</b>, save, restart Claude. Needs Node.js installed.</p>
+    <div class="code pad"><button class="cp">Copy</button>"kite": { "command": "npx", "args": ["mcp-remote", "https://mcp.kite.trade/mcp"] }</div>
+    <p><b>Claude Code</b> (one command):</p>
+    <div class="code pad"><button class="cp">Copy</button>claude mcp add --transport http kite https://mcp.kite.trade/mcp</div>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Log in to Kite (from inside Claude)</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Type:</strong> "Log in to Kite." Claude replies with a login link.</div></li>
+      <li><b>2</b><div><strong>Open the link</strong> and log in on Zerodha's own page (kite.zerodha.com). Never type your password or TOTP into the chat.</div></li>
+      <li><b>3</b><div><strong>Come back and type:</strong> "Show my holdings." If you see them, you're connected.</div></li>
+      <li><b>4</b><div><strong>The login expires</strong> (Kite sessions don't last forever, usually a day). If Claude says you're logged out, just repeat step 1.</div></li>
+    </ul>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Paste the rule first (every new chat)</h2>
+    <p>This is the "explain · never advise" rule from the reel. It's a prompt rule you type, not a Zerodha setting, so paste it at the start of each chat (or put it in a Claude Project's instructions).</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>RULES for this chat: You are my portfolio explainer, not an advisor. Use my Kite data to explain facts and numbers in simple English. NEVER tell me to buy, sell or hold anything, never predict prices, and NEVER place, modify or cancel any order or GTT. If I ask for advice, remind me you only explain. Show the numbers you used.</div>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>The 4 prompts from the reel</h2>
+    <h3>1 · One-page portfolio report (≈10 seconds)</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Using my Kite holdings and mutual fund holdings, make a one-page report: total invested, current value, total gain or loss in ₹ and %, my best and worst holding by % return, and my split by sector / fund type as percentages. A short table, then 3 plain-English lines on what the numbers show. No advice.</div>
+    <h3>2 · Hidden overlap between my funds</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>List my mutual funds from Kite. For each, look up its latest top 10 holdings from the fund house's official factsheet (say which month). Show which companies appear in more than one of my funds, and each fund's expense ratio. Explain the overlap in simple words. Don't tell me to switch or sell anything.</div>
+    <p style="color:var(--mute);font-size:15px">Kite shows which funds you own, not what's inside them, so Claude needs web search on for this one (or paste the factsheets yourself).</p>
+    <h3>3 · Jargon → English, with my own numbers</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Explain these like I'm new to investing, each in 2 lines, using an example from MY portfolio: XIRR, P/E ratio, expense ratio, NAV, LTP, and the difference between unrealised and realised P&amp;L. If you can't calculate one from my data, say so instead of guessing.</div>
+    <h3>4 · My tracker sheet</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Make a tracker file (Excel/CSV) of my holdings with columns: Holding, Quantity, Average buy price, Today's price (LTP), Current value, Change %. Sort by current value. Then tell me how to open it in Google Sheets.</div>
+    <p style="color:var(--mute);font-size:15px">Claude makes the file; download it and open it in Google Sheets (File → Import). Re-run the prompt whenever you want fresh prices.</p>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>Safety rules (read once)</h2>
+    <div class="feat">
+      <div><span>🧭</span><div><b>Analysis, not advice.</b> Claude isn't a SEBI-registered advisor and neither am I. Use it to understand your numbers; decisions are yours.</div></div>
+      <div><span>🔒</span><div><b>Orders.</b> Zerodha's hosted server leaves out the normal buy/sell order tools, but its GTT (good-till-triggered) tools may be there. The rule prompt says never touch orders; check what Claude did before you approve any tool call.</div></div>
+      <div><span>✋</span><div><b>Approve tool calls yourself.</b> Keep Claude's "ask before using a tool" on for Kite. Read what it wants to call.</div></div>
+      <div><span>🔑</span><div><b>Passwords and TOTP</b> only ever go into Zerodha's own login page, never into a chat.</div></div>
+      <div><span>📅</span><div><b>Check the date</b> on any number Claude looks up (factsheets, prices). Old data = wrong picture.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more "I connected X to Claude" setups, every step included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Kite MCP by Zerodha (github.com/zerodha/kite-mcp-server, MIT; hosted at mcp.kite.trade; README read 4 Nov 2026: hosted version "excludes potentially destructive trading operations"). The portfolio in the reel is a made-up sample with generic names. Educational only, not investment advice; not SEBI-registered. Not affiliated with Zerodha or Anthropic. DMs sent with 2il.in (our own tool).</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

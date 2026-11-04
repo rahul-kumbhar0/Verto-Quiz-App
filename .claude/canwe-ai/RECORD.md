@@ -236,3 +236,11 @@ Sync: riff under the hook, the beat enters at 2.36 s, the song's breakdown (27.7
 Mix: music ×0.21, −3 dB at 2.5 kHz, sidechain ratio 3 / thr 0.05 (≈12–13 dB under the voice), +10 dB during the hook riff, +7.6 dB during the breakdown, −14.1 LUFS, −1.5 dBTP.
 COPYRIGHT: a commercial song can get the reel muted or blocked on IG/YouTube. Safe route = the _nomusic file + the same song from Instagram's music library (start the clip at the drop).
 How-to for any song: find the drop/beat entry by RMS (50 ms windows), offset = drop_src − payoff_word_time, and duck gently (ratio 3), not mix.sh's ratio 6, which buries a full song about 20 dB down.
+
+## KITE (4 Nov 2026): Zerodha + Claude = free portfolio analyst — BUILDING (waiting for the voice mp3)
+drafts/roast (script v3, notes, post-copy) + /root/reel-work/reels/kite (index.html scenes done, previewed on fake timings) ·
+voice 825 cr, 43.8 s, flow abpj0xhQSlOljPZ2hmIP (download blocked again in this session → owner uploads the mp3) ·
+TRUTH FIX: the spoken "It only reads." gets cut from the audio (hosted Kite MCP may keep GTT tools; README read 4 Nov: "excludes potentially destructive trading operations");
+on screen it's the prompt rule "explain · never advise" · every screen = labelled SAMPLE portfolio with generic names, footnote "not investment advice · not SEBI-registered" from the twist on ·
+guide https://canwe-guides.vercel.app/kite/ LIVE (dpl_GGMk4fhRqH1ckj1ePG7KaqoK1Saf; setup via claude.ai custom connector / Desktop mcp-remote / Claude Code, Kite login, rule prompt, 4 prompts, safety) · hub links it ·
+automation #60 KITE OFF (exact, all reels, follow gate) → lock to the reel + activate on "uploaded".
