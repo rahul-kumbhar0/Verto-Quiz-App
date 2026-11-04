@@ -113,3 +113,17 @@ Real account numbers (DM dashboard, 7 days to 4 Nov): 1,590 comments · 1,046 au
 | 7 | "30 days of Instagram content in 10 minutes." | /ig-plan + /ig-carousel + /ig-caption | the plan writes, you still film | PLAN | 8 |
 | 8 | "Someone tagged me in a story. Claude thanked them in 3 seconds." | 2il.in story_mention trigger | small feature | STORY | 6 |
 | 9 | Hinglish GROW ("Maine apna Instagram Claude ko de diya.") as a Trial Reel | same as GROW | — | GROW | trial |
+
+## "I automated my ___ with Claude" — full setups (4 Nov 2026; ✅ = setup checked this week, 🔍 = verify at build time)
+1 INBOX ✅ Gmail connector: claude.ai Settings → Connectors → Gmail → sign in. Prompt: "Find every reply from a recruiter/company in the last 30 days, list status + next step, draft a polite follow-up for each one older than 7 days." Drafts only (our rule: I press send); paid plan; works only inside a chat.
+2 PLAN ✅ Google Calendar connector (create/update events, check free time): "Read my emails for interview invites and test dates, add each to my calendar with a 1-day reminder, then block 2 free hours a day for DSA." Check each event it creates.
+3 CV ✅ Google Drive connector (search/read Docs/Sheets/PDFs, create files): "Read my certificates and project docs in Drive and build a one-page resume Doc, only facts from the files." You verify every line.
+4 REPO 🔍 GitHub connector (built in): "Read my repos and write 3 resume bullets per project, only what the code proves." Only real projects.
+5 DESIGN 🔍 Canva connector (search/create designs, fill templates, export): "Design a one-column resume / a LinkedIn banner in Canva from this text." Some templates need Canva Pro; keep resumes one-column for ATS.
+6 ROAST ✅ Zerodha Kite MCP (official): Claude Desktop config → "kite": {"command":"npx","args":["mcp-remote","https://mcp.kite.trade/mcp"]} → log in with Kite. Read-only (no orders except GTT). Say "analysis, not advice".
+7 3D ✅ Blender: official Blender connector (Apr 2026, Settings → Connectors → "blender") or ahujasid/blender-mcp (~21k ★, add-on + uvx blender-mcp). "Build a cosy study room from one sentence." It runs code in Blender: save first.
+8 APPLY ✅ BUILT (Playwright MCP). 9 YOUTUBE ✅ BUILT. 10 LINKEDIN ✅ BUILT. 11 INSTAGRAM ✅ BUILT (GROW) + PROFILE/SCHEDULE/FUNNEL in the Instagram bank.
+12 NOTES 🔍 YouTube transcript MCP (small repos) → "turn this 3-hour lecture into notes + 20 flashcards". Needs captions.
+13 REBUILD 🔍 Jakeschincariol/replica-skill (7.5k ★): "I gave Claude an app. It rebuilt it." Reach play for coders.
+14 STARTUP 🔍 Jakeschincariol/founder-skill (2.4k ★): "I tested my startup idea on a fake board of investors."
+AVOID: WhatsApp (unofficial MCP, ban risk), LinkedIn/Naukri bots (ToS), any "auto-send" claim.
