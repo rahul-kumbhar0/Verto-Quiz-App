@@ -1,0 +1,11 @@
+[matter of fact] I connected my ZERODHA to Claude.
+[excited] It roasted my portfolio.
+[short pause] Here's the setup, and what it found.
+[matter of fact] Zerodha has an official connector, called Kite MCP. One line in Claude's settings, then you log in with Kite.
+It reads your holdings. It's built for analysis, not trading.
+[excited] Roast one. 40 percent of my money, in one stock. "That's not a portfolio. That's a bet."
+[chuckles] Roast two. My three mutual funds own the same companies.
+Roast three. Eleven tiny positions. "A collection, not a plan."
+[short pause] Then it asked me one question. What is this money actually for?
+[softly] It never says buy or sell. It's analysis, not advice. I decide.
+[warmly] Comment ROAST and I'll DM you the setup, plus the exact roast prompt.
