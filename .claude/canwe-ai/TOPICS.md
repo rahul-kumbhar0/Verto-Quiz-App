@@ -99,3 +99,17 @@ search threads, read threads, create DRAFTS, labels; it CANNOT send ("creates dr
 Demo inbox must be a sample (never show the owner's real mail). Keyword INBOX. Catch: drafts only, you press send; needs a paid plan.
 Runner-up: replica-skill (Jakeschincariol, 7.5k ★, "11 skills to reverse-engineer and rebuild any app") → "I gave Claude an app. It rebuilt it." (reach play, devs).
 Jakeschincariol packs now: instagram 4.7k, youtube 4.5k, linkedin 3.2k, replica 7.5k, day-trader 5k, founder 2.4k (no X/TikTok pack visible).
+
+## Instagram-automation topic bank — 4 Nov 2026 (GROW = our #1: 583 DMs / 476 clickers in 7 days). PullRows down, so from our data + tools + web.
+Real account numbers (DM dashboard, 7 days to 4 Nov): 1,590 comments · 1,046 automations fired · 1,723 DMs received · 1,130 link clicks.
+| # | Hook | What it really uses | Catch | Keyword | Score |
+|---|---|---|---|---|---|
+| 1 | "You're about to comment a word. Here's what happens next." (the funnel reveal) | 2il.in (OURS, disclose) comment→DM + public reply + follow gate + guide page; real 7-day numbers | our own product; I write every DM | FUNNEL | 12 |
+| 2 | "Claude scored my Instagram profile: __/100. Then it fixed it." | instagram-agent-skill /ig-profile (12-part rubric) on @canwe.ai, owner runs it, real score | score is a rubric, not Instagram's | PROFILE | 11 |
+| 3 | "I post at 7 pm every day. I haven't opened Instagram in a week." | 2il.in schedule_post + auto-attached DM automation; Claude drafts caption via /ig-caption | I approve every post; Claude never presses post | SCHEDULE | 10 |
+| 4 | "Claude found the reels in my niche that beat their own average by 10x." | /ig-viral (ranks by outlier vs the account's median) | public listings only; copy the pattern, not the video | VIRAL | 10 |
+| 5 | "Claude read my Insights and told me why my reels flop." | community Instagram MCP (Graph API: reach, saves, shares, avg watch time) or an Insights screenshot | community servers, data lags ~48 h | AUDIT | 9 |
+| 6 | "Claude replies to every comment, in my voice." | /ig-reply + /ig-comment drafts; 2il.in public replies | genuine replies only, no spam | REPLY | 8 |
+| 7 | "30 days of Instagram content in 10 minutes." | /ig-plan + /ig-carousel + /ig-caption | the plan writes, you still film | PLAN | 8 |
+| 8 | "Someone tagged me in a story. Claude thanked them in 3 seconds." | 2il.in story_mention trigger | small feature | STORY | 6 |
+| 9 | Hinglish GROW ("Maine apna Instagram Claude ko de diya.") as a Trial Reel | same as GROW | — | GROW | trial |
