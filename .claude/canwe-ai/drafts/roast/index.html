@@ -1,0 +1,189 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Your Zerodha, explained by Claude</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.kt{position:absolute;inset:0;visibility:hidden}
+.kt-fn{position:absolute;left:50%;transform:translateX(-50%);top:1296px;white-space:nowrap;font:500 19px Inter;color:var(--ink-2);z-index:4;background:rgba(14,15,18,.88);border:1px solid var(--g-line);border-radius:999px;padding:6px 16px}
+/* sample holdings screen (light, broker-style, generic) */
+.kt-app{position:absolute;left:90px;width:900px;top:640px;background:#fff;border-radius:22px;overflow:hidden;font-family:Inter;color:#222;z-index:3;transform-origin:50% 100%;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 50px 120px -20px rgba(0,0,0,.85)}
+.kt-app .hd{display:flex;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid #eee;font:700 22px Inter}.kt-app .hd img{width:30px}
+.kt-app .hd small{margin-left:auto;font:600 15px Mono;color:#999}
+.kt-app .sum{display:flex;gap:30px;padding:18px 24px;border-bottom:1px solid #eee}.kt-app .sum div{font:500 15px Inter;color:#888}.kt-app .sum b{display:block;font:700 28px Inter;color:#222}
+.kt-row{display:flex;align-items:center;padding:14px 24px;border-bottom:1px solid #f1f1f1;font:600 19px Inter}.kt-row span{flex:1}.kt-row em{font-style:normal;width:130px;text-align:right;font-weight:700}
+.up{color:#1a9c5b}.dn{color:#e0473b}
+/* connect */
+.kt-link{position:absolute;left:0;right:0;top:700px;height:300px;z-index:4}
+.kt-node{position:absolute;top:760px;width:190px;height:190px;border-radius:44px;background:#F3F1EC;display:grid;place-items:center;z-index:5;box-shadow:0 30px 70px -20px rgba(0,0,0,.7)}
+.kt-node img{width:110px}
+.kt-chip{position:absolute;left:0;right:0;top:1010px;text-align:center;z-index:6}.kt-chip .m-acc{font:900 44px Inter;padding:16px 34px;opacity:0;display:inline-block}
+/* 4 tiles */
+.kt-tiles{position:absolute;left:70px;right:70px;top:1040px;display:grid;grid-template-columns:1fr 1fr;gap:14px;z-index:6}
+.kt-tiles .m-card{height:110px;padding:16px 20px;display:flex;align-items:center;gap:16px;opacity:0}
+.kt-tiles b{font:900 46px Inter;color:var(--acc-hi)}.kt-tiles span{font:800 24px/1.15 Inter;color:var(--ink)}
+/* 1 report */
+.kt-rep{position:absolute;left:110px;width:860px;top:640px;padding:28px 30px;z-index:3}
+.kt-rep .t-kicker{font-size:18px}
+.kt-rep .big{font:900 92px Inter;letter-spacing:-3px;margin:8px 0 2px}
+.kt-rep .g{font:800 34px Inter;color:#7CC4A0}
+.kt-rep .two{display:flex;gap:16px;margin-top:22px}.kt-rep .two .m-chip{flex:1;justify-content:space-between;font:700 22px Inter;opacity:0}
+.kt-rep .two .m-chip em{font-style:normal}
+.kt-sec{display:flex;height:26px;border-radius:13px;overflow:hidden;margin-top:22px}.kt-sec i{display:block;height:100%}
+.kt-secl{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font:600 17px Inter;color:var(--ink-2)}.kt-secl span{display:flex;align-items:center;gap:6px}.kt-secl i{width:12px;height:12px;border-radius:3px;display:inline-block}
+/* 2 overlap */
+.kt-ven{position:absolute;left:0;top:0;width:1080px;height:1920px;z-index:3}
+.kt-vl{position:absolute;top:700px;font:800 26px Inter;color:var(--ink);text-align:center;width:300px;z-index:4;opacity:0}
+.kt-vl small{display:block;font:600 18px Mono;color:var(--ink-3)}
+.kt-mid{position:absolute;left:390px;width:300px;top:820px;display:flex;flex-direction:column;gap:8px;align-items:center;z-index:5}
+.kt-mid .m-chip{font:700 20px Inter;padding:6px 14px;opacity:0}
+.kt-fees{position:absolute;left:0;right:0;top:1150px;display:flex;justify-content:center;gap:14px;z-index:5}.kt-fees .m-chip{opacity:0}
+/* 3 jargon */
+.kt-jar{position:absolute;left:90px;right:90px;top:650px;display:flex;flex-direction:column;gap:14px;z-index:3}
+.kt-jar .m-card{padding:18px 24px;opacity:0}
+.kt-jar h4{margin:0;font:900 40px Inter;color:var(--ink);display:flex;align-items:baseline;gap:14px}.kt-jar h4 small{font:600 18px Mono;color:var(--ink-3)}
+.kt-jar p{margin:6px 0 0;font:500 23px/1.4 Inter;color:var(--ink-2);opacity:0}.kt-jar p b{color:var(--acc-hi)}
+/* 4 tracker */
+.kt-sh{position:absolute;left:60px;width:960px;top:640px;background:#fff;border-radius:14px;overflow:hidden;font-family:Inter;color:#222;z-index:3;box-shadow:0 50px 120px -20px rgba(0,0,0,.85)}
+.kt-sh .tb{display:flex;align-items:center;gap:10px;background:#f8f9fa;padding:12px 16px;border-bottom:1px solid #e3e3e3;font:600 18px Inter}.kt-sh .tb img{width:26px}
+.kt-sh table{width:100%;border-collapse:collapse;font:500 19px Inter}
+.kt-sh th{background:#f1f3f4;font:700 15px Inter;color:#555;text-align:left;padding:9px 12px;border:1px solid #e3e3e3}
+.kt-sh td{padding:10px 12px;border:1px solid #e9e9e9}.kt-sh tr.r{opacity:0}
+/* catch */
+.kt-ro{position:absolute;left:0;right:0;top:680px;text-align:center;z-index:4}
+.kt-ro .m-card{display:inline-flex;align-items:center;gap:16px;padding:20px 30px;opacity:0}.kt-rule{font:700 34px "JetBrains Mono",Mono,monospace;color:var(--acc-hi)}
+.kt-bs{position:absolute;left:0;right:0;top:880px;display:flex;justify-content:center;gap:24px;z-index:4}
+.kt-bs>span{font:900 52px Inter;padding:16px 40px;border-radius:16px;opacity:0;position:relative}
+.kt-bs .mg-st{background:#fff;height:7px;margin-top:-3px;box-shadow:0 2px 8px rgba(0,0,0,.4)}.kt-bs .b{background:#1a9c5b;color:#fff}.kt-bs .s{background:#e0473b;color:#fff}
+.kt-you{position:absolute;left:0;right:0;top:1080px;text-align:center;z-index:4}.kt-you .m-acc{font:900 60px Inter;padding:18px 44px;display:inline-block;opacity:0}
+.kt-setup{position:absolute;left:0;right:0;top:1200px;display:flex;justify-content:center;gap:12px;z-index:4}.kt-setup .m-chip{opacity:0;display:inline-flex;align-items:center;gap:10px}.kt-setup img{width:26px}
+/* CTA */
+.kt-cm{position:absolute;left:100px;right:100px;top:720px;padding:24px 26px;z-index:3}
+.kt-cm .row{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 25px Inter;color:var(--ink);opacity:0}
+.kt-cm .row i{width:46px;height:46px;border-radius:50%;flex:none}.kt-cm .row small{display:block;font:600 17px Inter;color:var(--ink-3)}
+.kt-cm .inp{display:flex;align-items:center;margin-top:12px;border:1.5px solid var(--g-line-hi);border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;min-height:36px}
+.kt-cm .inp .ph{color:var(--ink-3);font-weight:500}.kt-cm .inp .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:var(--acc);display:grid;place-items:center;color:#1A0E08;font-weight:900}
+.kt-dm{position:absolute;left:110px;right:110px;top:600px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7}
+.kt-dm img{width:56px;height:56px;border-radius:50%;background:#fff}.kt-dm b{display:block;font:700 22px Inter}.kt-dm span{font:500 21px Inter;color:var(--ink-2)}
+.kt-dm em{margin-left:auto;font:700 16px Mono;font-style:normal;color:var(--acc-hi);border:1px solid rgba(217,119,87,.5);border-radius:999px;padding:4px 10px}
+#disc{position:absolute;left:0;right:0;top:1268px;text-align:center;z-index:9;font:600 17px Mono;color:var(--ink-3);letter-spacing:1px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="kt" id="sHook">
+      <div class="headline sm" id="hl"></div>
+      <div class="kt-app" id="app"><div class="hd"><img src="logos/zerodha.svg" alt="">Holdings<small>SAMPLE</small></div>
+        <div class="sum"><div>Invested<b>₹2,21,600</b></div><div>Current<b>₹2,40,000</b></div><div>P&amp;L<b class="up">+₹18,400</b></div></div>
+        <div class="kt-row"><span>Large-cap bank</span><em class="up">+6.2%</em></div><div class="kt-row"><span>IT services co.</span><em class="up">+21.4%</em></div>
+        <div class="kt-row"><span>Index fund A</span><em class="up">+9.1%</em></div><div class="kt-row"><span>Flexi-cap fund B</span><em class="up">+7.8%</em></div>
+        <div class="kt-row"><span>Small-cap fund C</span><em class="dn">−6.0%</em></div></div>
+      <svg class="mg-svg kt-link" id="lnk" style="top:0;height:1920px"></svg>
+      <div class="kt-node" id="nZ" style="left:150px"><img src="logos/zerodha.svg" alt=""></div><div class="kt-node" id="nC" style="left:740px"><img src="logos/claude.svg" alt=""></div>
+      <div class="kt-chip"><span class="m-acc" id="an">free portfolio analyst</span></div>
+      <div class="kt-tiles" id="tiles"><div class="m-card" id="t1"><b>1</b><span>Report in<br>10 seconds</span></div><div class="m-card" id="t2"><b>2</b><span>Hidden<br>overlap</span></div>
+        <div class="m-card" id="t3"><b>3</b><span>Jargon →<br>English</span></div><div class="m-card" id="t4"><b>4</b><span>Your<br>tracker</span></div></div>
+    </section>
+    <section class="kt" id="s1"><div class="kt-rep m-card" id="rep"><div class="t-kicker">portfolio report · sample · generated in 10 s</div>
+      <div class="big" id="val">₹0</div><div class="g">+₹18,400 · +8.3%</div>
+      <div class="kt-sec" id="sec"><i style="background:#D97757;width:0"></i><i style="background:#8FA3BF;width:0"></i><i style="background:#7CC4A0;width:0"></i><i style="background:#B9B6AF;width:0"></i></div>
+      <div class="kt-secl"><span><i style="background:#D97757"></i>Banking 38%</span><span><i style="background:#8FA3BF"></i>IT 27%</span><span><i style="background:#7CC4A0"></i>Index 22%</span><span><i style="background:#B9B6AF"></i>Other 13%</span></div>
+      <div class="two"><span class="m-chip" id="bst">Best · IT services co. <em class="up">+21.4%</em></span><span class="m-chip" id="wst">Worst · Small-cap fund C <em class="dn">−6.0%</em></span></div></div></section>
+    <section class="kt" id="s2"><svg class="mg-svg kt-ven" id="ven"></svg>
+      <div class="kt-vl" id="vA" style="left:120px">Flexi-cap fund B<small>fee 1.1%/yr</small></div><div class="kt-vl" id="vB" style="left:660px">Index fund A<small>fee 0.2%/yr</small></div>
+      <div class="kt-mid" id="mid"><span class="m-chip acc">Large-cap bank</span><span class="m-chip acc">IT services co.</span><span class="m-chip acc">Energy co.</span><span class="m-chip acc">FMCG co.</span><span class="m-chip">+ 6 more</span></div>
+      <div class="kt-fees"><span class="m-chip" id="fee1">2 funds</span><span class="m-chip" id="fee2">2 fees</span><span class="m-chip acc" id="fee3">same 10 companies</span></div></section>
+    <section class="kt" id="s3"><div class="kt-jar">
+      <div class="m-card" id="j1"><h4>XIRR <small>= your real yearly return</small></h4><p>Counts <b>when</b> you put money in. Yours: <b>11.2% a year</b>.</p></div>
+      <div class="m-card" id="j2"><h4>P/E ratio <small>= price ÷ yearly profit</small></h4><p>₹24 paid for every <b>₹1</b> the company earns in a year.</p></div>
+      <div class="m-card" id="j3"><h4>Expense ratio <small>= the fund's yearly fee</small></h4><p>1.1% of ₹1,20,000 = <b>₹1,320 a year</b>, taken quietly.</p></div></div></section>
+    <section class="kt" id="s4"><div class="kt-sh"><div class="tb"><img src="logos/googlesheets.svg" alt="">My holdings tracker · sample</div>
+      <table><tr><th>Holding</th><th>Buy price</th><th>Today</th><th>Change</th></tr>
+        <tr class="r"><td>Large-cap bank</td><td>₹1,540</td><td>₹1,636</td><td class="up">+6.2%</td></tr>
+        <tr class="r"><td>IT services co.</td><td>₹3,210</td><td>₹3,897</td><td class="up">+21.4%</td></tr>
+        <tr class="r"><td>Index fund A</td><td>₹182.40</td><td>₹199.00</td><td class="up">+9.1%</td></tr>
+        <tr class="r"><td>Flexi-cap fund B</td><td>₹64.10</td><td>₹69.10</td><td class="up">+7.8%</td></tr>
+        <tr class="r"><td>Small-cap fund C</td><td>₹41.70</td><td>₹39.20</td><td class="dn">−6.0%</td></tr></table></div></section>
+    <section class="kt" id="sCatch">
+      <div class="kt-ro"><span class="m-card" id="ro"><code class="kt-rule">rule: explain · never advise</code></span></div>
+      <div class="kt-bs"><span class="b" id="bb">BUY</span><span class="s" id="bs">SELL</span></div>
+      <div class="kt-you"><span class="m-acc" id="you">you decide</span></div>
+      <div class="kt-setup"><span class="m-chip" id="su1">free</span><span class="m-chip" id="su2"><img src="logos/zerodha.svg" alt="">official</span><span class="m-chip acc" id="su3">a few minutes</span></div></section>
+    <section class="kt" id="sCta"><svg class="mg-svg" id="ctsvg" style="z-index:8"><circle id="ctHead" class="mg-head" r="9"/></svg>
+      <div class="kt-cm m-card"><div class="t-kicker" style="margin-bottom:8px">comments</div>
+        <div class="row" id="r1"><i style="background:#8FA3BF"></i><div><small>sneha · 2m</small>KITE</div></div>
+        <div class="row" id="r2"><i style="background:#7A3A26"></i><div><small>rohit · 1m</small>KITE my funds definitely overlap 😅</div></div>
+        <div class="row" id="r3"><i style="background:linear-gradient(135deg,#F0A585,#D97757)"></i><div><small>you · now</small>KITE</div></div>
+        <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+      <div class="kt-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The whole setup, step by step 📈</span></div><em>via 2il.in</em></div>
+    </section>
+  </div>
+  <div id="disc">SAMPLE PORTFOLIO · EDUCATIONAL · NOT INVESTMENT ADVICE · NOT SEBI-REGISTERED</div>
+  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const T = { twist: at("Connect it"), promise: at("Here's what"), s1: at("One."), s2: at("Two."), s3: at("Three."), s4: at("Four."), cat: at("It never"), setup: at("The setup"), cta: at("Comment"), end: R.voiceEnd() };
+window.REEL_DURATION = +(T.end + 1.8).toFixed(2);
+const SR = $("stage").getBoundingClientRect(), SCN = ["sHook", "s1", "s2", "s3", "s4", "sCatch", "sCta"];
+SCN.forEach(s => $(s).style.visibility = "visible");
+const box = id => { const r = $(id).getBoundingClientRect(); return { x: r.left - SR.left, y: r.top - SR.top, w: r.width, h: r.height }; };
+const ctr = id => { const b = box(id); return [b.x + b.w / 2, b.y + b.h / 2]; };
+const NZ = ctr("nZ"), NC = ctr("nC"), SND = ctr("snd"), DMB = box("dm"), DMI = [DMB.x + 48, DMB.y + DMB.h / 2];
+SCN.forEach(s => $(s).style.visibility = "hidden");
+F.beats({ bpm: 136, groove_in: 0.0, dur: 80 });
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH,
+  chapters: [{ label: "report", at: T.s1 }, { label: "overlap", at: T.s2 }, { label: "jargon", at: T.s3 }, { label: "tracker", at: T.s4, end: T.cat }],
+  avatar: { x: 240, y: 1330, w: 600, in: -0.5, look: "classic", style: { shirt: "#387ED1", shirtLine: "#24589A" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
+
+window.seek = t => {
+  R.frame(t);
+  F.slots(t, [["sHook", 0, T.s1], ["s1", T.s1, T.s2], ["s2", T.s2, T.s3], ["s3", T.s3, T.s4], ["s4", T.s4, T.cat], ["sCatch", T.cat, T.cta], ["sCta", T.cta, 99]]);
+  F.zoomCut("sHook", "s1", t, T.s1); F.cutCurve("s1", "s2", t, T.s2); F.cutCurve("s2", "s3", t, T.s3); F.cutCurve("s3", "s4", t, T.s4); F.rackFocus("s4", "sCatch", t, T.cat); F.inverseZoom("sCatch", "sCta", t, T.cta);
+  R.speedyFrame(t);
+  M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), drift: 8, waves: [[0.05, 540, 760, 0.9], [T.twist + 0.4, 540, 855, 1.4], [at("ten") + 0.1, 540, 760, 1.5], [at("overlap.") + 0.1, 540, 900], [at("tracker.") + 0.1, 540, 800], [at("DM") + 0.45, DMI[0], DMI[1]]] });
+  // HOOK — big headline over the blurred sample holdings; on "Connect it to Claude" the app sinks, Zerodha + Claude tiles link up with packets → "free portfolio analyst"; "here's what it does" deals 4 tiles
+  M.headline("hl", "Green or red.|Then you|*close* it.", t, { at: -0.45, out: T.twist - 0.1 });
+  const sink = E.power3In(prog(t, T.twist - 0.1, 0.45)); $("app").style.transform = `translateY(${sink * 500}px) scale(${lerp(1, 0.8, sink)})`; $("app").style.filter = t < T.twist ? "blur(7px)" : `blur(${7 + sink * 6}px)`; $("app").style.opacity = t < T.twist - 0.1 ? 0.45 : 0.45 * (1 - sink);
+  [["nZ", T.twist + 0.05, -1], ["nC", T.twist + 0.2, 1]].forEach(([id, a, s]) => M.fly(id, t, a, { x: s * 260, s: 0.5, r: s * 12 }, { f: 2.3, z: 0.55 }));
+  const ln = M.path("lnk", "kl", M.curve(NZ[0] + 95, NZ[1], NC[0] - 95, NC[1], 0), "mg-line acc"); M.draw(ln, t, T.twist + 0.45, 0.35); M.flow(ln, t, { n: 5, speed: 1.4, from: T.twist + 0.7, to: T.s1 });
+  M.ring("mgFx", t, T.twist + 0.4, { x: 540, y: 855, r: 320, d: 0.7, sfx: true });
+  const ap = M.spring(t, at("analyst.") - 0.05, { f: 2.6, z: 0.5 }); $("an").style.opacity = t >= at("analyst.") - 0.05 ? 1 : 0; $("an").style.transform = `scale(${lerp(0.5, 1, ap)})`;
+  ["t1", "t2", "t3", "t4"].forEach((id, i) => M.fly(id, t, T.promise + 0.05 + i * 0.09, { y: 140, s: 0.7, r: (i % 2 ? 5 : -5) }, { f: 2.3, z: 0.55 }));
+  $("an").parentNode.style.opacity = t >= T.promise ? 1 - prog(t, T.promise, 0.2) : 1;
+  // 1 REPORT — value odometer-style count, sector bar fills, best/worst chips
+  const vp = E.expoOut(prog(t, at("ten") - 0.1, 0.9)); $("val").textContent = "₹" + Math.round(240000 * vp).toLocaleString("en-IN");
+  [38, 27, 22, 13].forEach((w, i) => $("sec").children[i].style.width = (w * E.expoOut(prog(t, at("Value,") + i * 0.12, 0.5))) + "%");
+  M.fly("bst", t, at("best") - 0.05, { y: 30, s: 0.8 }, { f: 2.6, z: 0.5 }); M.fly("wst", t, at("worst") - 0.05, { y: 30, s: 0.8 }, { f: 2.6, z: 0.5 });
+  if (t >= T.s1 && t < T.s2) F.sheen("rep", t, at("page.") + 0.05);
+  // 2 OVERLAP — two fund circles DRAW, slide together, the shared companies pop in the middle, then "2 funds · 2 fees · same 10 companies"
+  if (t >= T.s2 - 0.2 && t < T.s3 + 0.4) { const m = E.power2InOut(prog(t, at("overlap.") - 0.2, 0.6)), cx1 = lerp(330, 430, m), cx2 = lerp(750, 650, m);
+    const c1 = M.path("ven", "c1", `M${cx1 + 230},900 A230,230 0 1,1 ${cx1 - 230},900 A230,230 0 1,1 ${cx1 + 230},900`, "mg-line"), c2 = M.path("ven", "c2", `M${cx2 + 230},900 A230,230 0 1,1 ${cx2 - 230},900 A230,230 0 1,1 ${cx2 + 230},900`, "mg-line acc");
+    M.draw(c1, t, T.s2 + 0.1, 0.5); M.draw(c2, t, T.s2 + 0.25, 0.5); $("vA").style.transform = `translateX(${(cx1 - 330) * 0.6}px)`; $("vB").style.transform = `translateX(${(cx2 - 750) * 0.6}px)`; }
+  M.fly("vA", t, T.s2 + 0.2, { y: 20, s: 0.9 }); M.fly("vB", t, T.s2 + 0.35, { y: 20, s: 0.9 });
+  [...$("mid").children].forEach((c, i) => M.fly(c, t, at("overlap.") + 0.3 + i * 0.08, { y: 20, s: 0.6 }, { f: 2.8, z: 0.5 }));
+  [["fee1", at("mutual")], ["fee2", at("fees,")], ["fee3", at("same")]].forEach(([id, a]) => M.fly(id, t, a, { y: 30, s: 0.6 }, { f: 2.6, z: 0.5 }));
+  M.ring("mgFx", t, at("same"), { x: 540, y: 900, r: 260, d: 0.6 });
+  // 3 JARGON — each term drops in, its plain-English line springs under it
+  [["j1", at("XIRR,")], ["j2", at("P/E")], ["j3", at("expense")]].forEach(([id, a], i) => { M.fly(id, t, at("jargon") - 0.1 + i * 0.12, { x: -80, s: 0.92 }, { f: 2.5, z: 0.6 }); const p = $(id).querySelector("p"), q = M.spring(t, a + 0.15, { f: 2.6, z: 0.6 }); p.style.opacity = t >= a + 0.15 ? 1 : 0; p.style.transform = `translateY(${(1 - q) * 16}px)`; });
+  // 4 TRACKER — rows fill in one by one
+  [...$("s4").querySelectorAll("tr.r")].forEach((r, i) => { const a = at("Every") + i * 0.18, p = E.power4Out(prog(t, a, 0.3)); r.style.opacity = p; r.style.transform = `translateX(${(1 - p) * 40}px)`; R.cue("pop", a, { soft: true }); });
+  // CATCH — the prompt rule; BUY / SELL appear and get struck out; "you decide"; then the setup chips
+  const rp = M.spring(t, T.cat + 0.05, { f: 2.6, z: 0.5 }); $("ro").style.opacity = t >= T.cat + 0.05 ? 1 : 0; $("ro").style.transform = `scale(${lerp(0.6, 1, rp)})`;
+  [["bb", at("buy", 1) - 0.05], ["bs", at("sell.") - 0.05]].forEach(([id, a]) => { M.fly(id, t, a, { y: 30, s: 0.7 }, { f: 2.8, z: 0.5 }); M.strike(id, t, a + 0.3, { d: 0.22 }); if (t >= a + 0.5) $(id).style.opacity = Math.min(+$(id).style.opacity, 0.45); });
+  M.ring("mgFx", t, at("decide.") - 0.05, { x: 540, y: 1120, r: 220, d: 0.6 }); const yp = M.spring(t, at("decide.") - 0.1, { f: 2.6, z: 0.5 }); $("you").style.opacity = t >= at("decide.") - 0.1 ? 1 : 0; $("you").style.transform = `scale(${lerp(0.5, 1, yp)})`;
+  [["su1", at("is free")], ["su2", at("official,")], ["su3", at("few")]].forEach(([id, a]) => M.fly(id, t, a - 0.05, { y: 30, s: 0.6 }, { f: 2.6, z: 0.5 }));
+  R.cue("swish", T.cat - 0.1); R.cue("pop", at("same")); [at("buy", 1) + 0.25, at("sell.") + 0.25].forEach(a => R.cue("swish", a)); R.cue("impact", at("decide.") - 0.1); R.cue("pop", at("analyst.") - 0.05);
+  // CTA
+  [["r1", T.cta + 0.15], ["r2", T.cta + 0.3]].forEach(([id, a]) => M.fly(id, t, a, { x: -60, s: 0.9 }, { f: 2.4, z: 0.6 }));
+  const tyA = T.cta + 0.4, sent = tyA + 0.45, dmA = at("DM");
+  if (t < sent) R.type("cty", "KITE", t, tyA, 14); else $("cty").textContent = "";
+  $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.1); M.fly("r3", t, sent, { y: 40, s: 0.9 }, { f: 2.6, z: 0.55 });
+  if (t >= T.cta) { const l2 = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(l2, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
+  R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); R.cue("pop", dmA + 0.15); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 });
+  $("disc").style.opacity = t < T.twist ? 0 : 0.9;
+};
+window.seek(0);
+</script></body></html>
