@@ -13,3 +13,9 @@
   (e.g. "Large-cap bank", "IT services", "Index fund A/B") so no real stock gets an opinion. The 4 answers on screen are what Claude would compute from that sample:
   sector split chart · fund overlap list · month gain/loss by holding · plain-English glossary.
 - Setup shown = the real one (Claude Desktop → Settings → Developer → Edit config → "kite" line → restart → Kite login). Re-verify on zerodha.com at build (blocked here).
+
+## v3 (4 Nov): owner — "give them the solution / use case, not questions; what Claude did for us, so they set it up; then we give the whole setup"
+4 outcomes (data facts, never advice): (1) one-page report in 10 s: value, gain/loss, best + worst holding · (2) hidden overlap: two funds, two fees, same companies ·
+(3) jargon → English with your own numbers (XIRR, P/E, expense ratio) · (4) a tracker sheet: every holding, buy price, today's price.
+Setup moved to the end ("free, official, a few minutes") → the DM/guide delivers the WHOLE setup step by step. Screens = labelled sample portfolio.
+If the owner runs it on his own account, lines can switch to first person ("it found 2 of my funds overlap") with his real results.
