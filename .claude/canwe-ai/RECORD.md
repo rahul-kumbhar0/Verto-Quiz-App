@@ -248,7 +248,10 @@ on screen it's the prompt rule "explain · never advise" · every screen = label
 guide https://canwe-guides.vercel.app/kite/ LIVE (dpl_GGMk4fhRqH1ckj1ePG7KaqoK1Saf; setup via claude.ai custom connector / Desktop mcp-remote / Claude Code, Kite login, rule prompt, 4 prompts, safety) · hub links it ·
 automation #60 KITE OFF (exact, all reels, follow gate) → lock to the reel + activate on "uploaded".
 
-## VIDEO (5 Nov 2026): "Stop paying for video-editing courses. Claude makes every reel on this page." — BUILDING (waiting for the voice mp3)
+## VIDEO (5 Nov 2026): "Stop paying for video-editing courses. Claude makes every reel on this page." — FINAL rendered 5 Nov
+out: reels/video/out/claude-video.mp4 (pulse, break on "Here's the catch") + _nomusic + _notlikeus (song from 72.52 s, drop on "Claude makes" 2.68 s, breakdown under the hook, dip on the catch) + cover.png ("Claude makes my {reels}", kicker NO EDITING COURSE) · 41.1 s · owner uploaded the mp3; paced 39.3 s, 4 stops, 4 level marks ·
+presenter = the job-search "street" character in the house outfit, auto-staged (walks to the side + points at 15 data-ex elements), depth (closer on twist/catch/CTA, back while pointing), squash/landing, wow sparkles on every "Claude" ·
+guide https://canwe-guides.vercel.app/video/ LIVE (dpl_8Jvpm1ptEotUwwebqdfqigcMdN1s; inline-sent kite/index.html WAS reusable by sha this time) · hub links it · automation #63 VIDEO OFF → lock + activate on "uploaded".
 drafts/video (script v1 + Hinglish trial, hooks, post-copy, guide facts, reel.html source, hyperframes-test/) + /root/reel-work/reels/video ·
 voice 753 cr, 39.4 s, flow sE8JHt3dg1Q2gyU3M7yw (history 9Pl3wXGmF3zSSijKQix4; download blocked → owner uploads) ·
 HYPERFRAMES TESTED FOR REAL (5 Nov): npm hyperframes v0.9.15 (Apache-2.0, Node 22+ + FFmpeg). `npx hyperframes init canwe-test --resolution portrait --non-interactive`
