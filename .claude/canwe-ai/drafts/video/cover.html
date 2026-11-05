@@ -1,0 +1,33 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="look.css">
+<style>
+html,body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0F0F11}
+#bgw{position:absolute;left:-260px;top:-330px;width:1600px;height:2600px;transform:rotate(-9deg);display:grid;grid-template-columns:repeat(6,250px);gap:22px;align-content:start}
+#bgw i{display:block;width:250px;height:444px;border-radius:20px;background-size:cover;background-position:center;box-shadow:0 20px 40px -10px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.08)}
+#bgw i:nth-child(6n+2),#bgw i:nth-child(6n+4),#bgw i:nth-child(6n+6){transform:translateY(-150px)}
+#dim{position:absolute;inset:0;background:radial-gradient(70% 38% at 50% 44%,rgba(15,15,17,.9),rgba(15,15,17,.55) 70%,rgba(15,15,17,.35)),linear-gradient(rgba(15,15,17,.35),rgba(15,15,17,.1) 40%,rgba(15,15,17,.92) 82%)}
+#panel{position:absolute;left:0;right:0;top:560px;text-align:center;z-index:5}
+#kick{display:inline-block;font:800 30px "JetBrains Mono",monospace;letter-spacing:5px;color:#F0A585;border:2px solid rgba(217,119,87,.6);border-radius:999px;padding:12px 30px;background:rgba(15,15,17,.7)}
+#h1{margin-top:34px;font:900 150px/0.98 Inter;letter-spacing:-7px;color:#F3F1EC;text-shadow:0 10px 40px rgba(0,0,0,.8)}
+#h1 .selw{position:relative;display:inline-block;color:#fff;padding:0 18px;isolation:isolate}
+#h1 .selw b{position:absolute;inset:-4px 0 6px;border:4px solid #3B82F6;background:rgba(59,130,246,.28);border-radius:6px;z-index:-1}
+#h1 .selw u{position:absolute;width:22px;height:22px;background:#fff;border:4px solid #3B82F6;border-radius:50%}
+#spark{position:absolute;left:770px;top:440px;width:190px;height:190px;background:url(logos/claude.svg) center/contain no-repeat;filter:drop-shadow(0 0 40px rgba(217,119,87,.95));transform:rotate(14deg)}
+#count{position:absolute;left:0;right:0;top:1090px;z-index:5;text-align:center;font:700 34px Inter;color:#C9C5BC}
+#count b{color:#F0A585}
+#avatar{position:absolute;left:240px;top:1330px;width:600px;height:640px}
+#brand{position:absolute;left:0;right:0;justify-content:center;top:1170px;z-index:5;display:flex;align-items:center;gap:14px;font:800 34px Inter;color:#F3F1EC}
+#brand img{width:64px;height:64px;border-radius:50%;background:#fff}
+</style></head><body>
+<div id="bgw"></div><div id="dim"></div>
+<div id="spark"></div>
+<div id="panel"><div id="kick">NO EDITING COURSE</div>
+<div id="h1">Claude makes<br>my <span class="selw"><b></b><u style="left:-13px;top:-15px"></u><u style="right:-13px;bottom:-9px"></u>reels</span></div></div>
+<div id="count">Every reel on this page · <b>5 steps</b> inside</div>
+<div id="avatar"></div>
+<div id="brand"><img src="canwe-logo.svg" alt="">@canwe.ai</div>
+<script src="avatar.js"></script>
+<script>
+const w=document.getElementById("bgw"); for(let k=0;k<42;k++){const i=document.createElement("i");i.style.backgroundImage=`url(covers_all/a${(k*7%23)+1}.jpg)`;w.appendChild(i);}
+Avatar.init(document.getElementById("avatar"),{look:"street",style:{shirt:"#1D1E23",shirtLine:"#0B0C0F",print:"#D97757",chain:"#F2C14E",lens1:"#F0A585",lens2:"#D97757"}});
+Avatar.frame(1.2,"point_up",1,"point_up",0.6,{expr:"excited"});
+</script></body></html>
