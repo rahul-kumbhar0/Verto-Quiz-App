@@ -247,3 +247,16 @@ TRUTH FIX: the spoken "It only reads." gets cut from the audio (hosted Kite MCP 
 on screen it's the prompt rule "explain · never advise" · every screen = labelled SAMPLE portfolio with generic names, footnote "not investment advice · not SEBI-registered" from the twist on ·
 guide https://canwe-guides.vercel.app/kite/ LIVE (dpl_GGMk4fhRqH1ckj1ePG7KaqoK1Saf; setup via claude.ai custom connector / Desktop mcp-remote / Claude Code, Kite login, rule prompt, 4 prompts, safety) · hub links it ·
 automation #60 KITE OFF (exact, all reels, follow gate) → lock to the reel + activate on "uploaded".
+
+## VIDEO (5 Nov 2026): "Stop paying for video-editing courses. Claude makes every reel on this page." — BUILDING (waiting for the voice mp3)
+drafts/video (script v1 + Hinglish trial, hooks, post-copy, guide facts, reel.html source, hyperframes-test/) + /root/reel-work/reels/video ·
+voice 753 cr, 39.4 s, flow sE8JHt3dg1Q2gyU3M7yw (history 9Pl3wXGmF3zSSijKQix4; download blocked → owner uploads) ·
+HYPERFRAMES TESTED FOR REAL (5 Nov): npm hyperframes v0.9.15 (Apache-2.0, Node 22+ + FFmpeg). `npx hyperframes init canwe-test --resolution portrait --non-interactive`
+also installed skills hyperframes / hyperframes-cli / hyperframes-registry / media-use into ~/.claude/skills ("Review skills before use"). check flagged: empty first frame,
+nested clips, tween overlap, text occluded → fixed; render blocked loading GSAP from jsdelivr in the sandbox → local assets/gsap.min.js; render: 8.0 s 1080×1920 in 9.0 s.
+There IS a paid "HyperFrames Pro" tier (templates, /reverse-any-video, /style-sampling, credits) → we say "core: free + open source". GitHub API for the repo blocked here → no live star count, so no stars on screen.
+Reel scenes: frame-0 headline over a course checkout that TEARS on "courses." · giant Claude spark detonates (rays, ring, flash) · 3D wall of 15 REAL covers of posted reels ·
+5-step deck slams in · 01 reel cards fly into Claude → pattern chips · 02 script types + 45 s gauge (38) · 03 live waveform + ElevenLabs / free local chips ·
+04 real terminal (init) → prompt → frames fan out → phone plays the REAL HyperFrames render ("REAL RENDER" + "Render complete · 8.0 s · 9.0 s") · 05 same render continues, caption, cover flip, "you" press Share ·
+catch chips · comment → DM via 2il.in. "Claude emoji" = the Claude spark: an inline spinning icon after every spoken "Claude" in the captions + a big spark pop with burst above the word (claudePop()).
+guide /video/ written (not deployed yet) · hub line added · automation #63 VIDEO OFF.

@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Stop paying for editing courses: make reels with Claude in 5 steps · canwe.ai</title>
+<meta name="description" content="Idea, script, voice, video and post: every command and prompt, with HyperFrames (HeyGen's free open-source video tool) in Claude Code.">
+<meta property="og:title" content="Stop paying for video-editing courses. Claude makes my reels.">
+<meta property="og:description" content="5 steps · every command + prompt · HyperFrames (free, open source) in Claude Code · you post it.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Stop paying for editing courses. Claude makes the <span class="sel"><i></i><b>reel.</b></span></h1>
+  <p class="lead">Every reel on @canwe.ai is made with Claude. Here's the free public route, step by step: the prompts, the voice options, and HyperFrames (HeyGen's open-source video tool), tested by us on 5 Nov 2026.</p>
+  <div class="chips"><span class="chip">HyperFrames: free · open source</span><span class="chip">~20 min first setup</span><span class="chip">you press post</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>The idea</a>
+    <a href="#s2"><small>02</small>The script</a>
+    <a href="#s3"><small>03</small>The voice</a>
+    <a href="#s4"><small>04</small>The video</a>
+    <a href="#s5"><small>05</small>Captions + post</a>
+    <a href="#catch"><small>!</small>The catch</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>The idea: let Claude find the pattern</h2>
+    <p>Open the 5 best reels in your niche from the last 2 weeks. Copy each one's hook (first line), caption, length and view count. Paste them into Claude with:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Here are 5 top reels from my niche (hook, caption, length, views). Find the pattern they share: hook type, length, structure, CTA. Then give me 5 reel ideas for MY page that use the same pattern but a topic they didn't cover. My niche: [your niche]. My audience: [who].</div>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>The script: hook first, under 45 seconds</h2>
+    <div class="code prompt pad"><button class="cp">Copy</button>Write a 35–45 second reel script on [idea]. Rules: the first line is a hook of 6 words or fewer with a number or a strong claim; one idea per line; spoken, casual, like telling a friend; prove it before you ask; end with ONE call to action ("Comment WORD and I'll DM you…"). Give me 5 hook options scored 0–10 first, then the script with the best one. Max 125 words.</div>
+    <p style="color:var(--mute);font-size:15px">Read it out loud once. If you run out of breath in a sentence, cut it in two.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>The voice</h2>
+    <div class="feat">
+      <div><span>🎙️</span><div><b>ElevenLabs</b> (what we use): paste the script, pick a voice, download the MP3. It uses credits (a 40-second reel costs us ~750–850 credits on the v3 model).</div></div>
+      <div><span>💻</span><div><b>Free, on your laptop:</b> a local text-to-speech voice (for example Kokoro, open source). Less expressive, costs nothing. Or record your own voice on your phone: still the most human option.</div></div>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>The video: HyperFrames in Claude Code</h2>
+    <p><b>HyperFrames</b> by HeyGen turns HTML into MP4 video and ships skills that teach Claude how to use it. Core tool: free and open source (Apache-2.0). Needs <b>Node.js 22+</b>, <b>FFmpeg</b> and <b>Claude Code</b>.</p>
+    <p><b>1. Create the project</b> (this also installs the HyperFrames skills into Claude Code):</p>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes init my-reel --resolution portrait</div>
+    <p><b>2. Open it in Claude Code</b> (start a new session so the skills load):</p>
+    <div class="code pad"><button class="cp">Copy</button>cd my-reel && claude</div>
+    <p><b>3. Describe your reel</b>:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Using /hyperframes, make a 9:16 reel (1080×1920) from this script and my voiceover file (voice.mp3 in assets/): [paste script]. Big bold captions word by word, one visual per sentence, my brand colours [#hex], a strong first frame that works on mute. Keep text between 170 px and 1330 px from the top so Instagram's buttons don't cover it. Run the check before you show me.</div>
+    <p><b>4. Check and render</b>:</p>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes check
+npx hyperframes render -o reel.mp4</div>
+    <p style="color:var(--mute);font-size:15px">Our test: an 8-second 1080×1920 clip rendered in 9 seconds (v0.9.15). Two things we hit: the check flagged an empty first frame (fix it, it's your thumbnail), and the render couldn't load an animation library from the internet in our sandbox, so we put a local copy in <b>assets/</b>.</p>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>Captions, cover, and you post it</h2>
+    <div class="code prompt pad"><button class="cp">Copy</button>Write my Instagram caption for this reel: first line = the hook or "Comment WORD…", then 3–5 short value lines, one honest line, a [keywords: …] line with 5 search phrases, and 4 hashtags. Then give me 3 cover texts of 5 words or fewer.</div>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Cover:</strong> ask Claude for a 1080×1920 cover frame in the same project, with the key text inside the middle 3:4 area (that's what your profile grid shows).</div></li>
+      <li><b>2</b><div><strong>Post it yourself.</strong> Watch the whole reel once with sound and once on mute before you press Share.</div></li>
+    </ul>
+  </section>
+
+  <section id="catch">
+    <div class="step">THE CATCH</div><h2>What it costs, honestly</h2>
+    <div class="feat">
+      <div><span>💳</span><div><b>Claude Code needs a paid Claude plan.</b> HyperFrames itself is free.</div></div>
+      <div><span>⭐</span><div><b>HyperFrames has a paid Pro tier</b> (extra style templates and features). Everything in this guide uses the free, open-source core.</div></div>
+      <div><span>🧪</span><div><b>Your first reel takes practice:</b> expect an hour and a few rounds of "make the captions bigger". It gets fast after that.</div></div>
+      <div><span>🔐</span><div><b>Skills run with your agent's permissions.</b> The installer says it too: read what you install.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more "Claude does it for me" setups, every step included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · HyperFrames by HeyGen (npm "hyperframes" v0.9.15, Apache-2.0, tested 5 Nov 2026; hyperframes.heygen.com). Our own reels use our own Claude pipeline; this guide is the free public route. Not sponsored; not affiliated with HeyGen, ElevenLabs or Anthropic. DMs sent with 2il.in (our own tool).</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
