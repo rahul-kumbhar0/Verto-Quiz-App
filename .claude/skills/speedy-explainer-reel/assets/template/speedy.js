@@ -83,6 +83,22 @@
       if (keys[keys.length - 1][1] !== e.x) keys.push([e.t - lead, e.x]);
       if (!nx || nx.t - e.end > 0.9) keys.push([e.end + 0.1, home]); });
     N.EX = ex; N.KEYS = keys; N.home = home; N.aw = w;
+    // DEPTH (camera distance): steps back while pointing, steps close on stage.close phrases, normal otherwise
+    const back = st.back ?? 0.86, close = st.closeScale ?? 1.17, dk = [[-9, 1]];
+    const win = [];
+    ex.forEach(e => win.push([e.t - 0.25, e.end, back]));
+    (st.close || []).forEach(c => { const [ph, d] = Array.isArray(c) ? c : [c, 1.6]; try { const a0 = R.at(ph); win.push([a0 - 0.15, a0 + d, close]); } catch (e) {} });
+    win.sort((x, y) => x[0] - y[0]).forEach(([a0, b0, v]) => { dk.push([a0, v]); dk.push([b0, 1]); });
+    N.DK = dk.sort((x, y) => x[0] - y[0]);
+    // WOW moments: every occurrence of a stage.wow word → sparkles + excited face + a little hop
+    N.WOW = []; (st.wow || []).forEach(ph => { for (let n = 0; n < 12; n++) { try { N.WOW.push(R.at(ph, n)); } catch (e) { break; } } });
+    if (N.R) N.WOW.forEach(a0 => N.R.fx.push([a0, "spark", 1.3]));
+  }
+  function depthAt(t) {
+    const K = N.DK; if (!K) return 1; let k = 0; for (let i = 0; i < K.length; i++) if (t >= K[i][0]) k = i;
+    const from = k ? K[k - 1][1] : 1, p = clamp((t - K[k][0]) / 0.5), e = 1 - Math.pow(1 - p, 3);
+    // the value before key k is wherever the previous segment ended (keys are close together, so chain them)
+    return lerp(from, K[k][1], e);
   }
   function stagePos(t) {
     const K = N.KEYS; if (!K) return { x: N.home ?? 240, walk: 0, dir: 0 };
@@ -91,7 +107,6 @@
     const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
     return { x: lerp(from, to, e), walk: p > 0 && p < 1 ? Math.sin(Math.PI * p) : 0, p, dir: Math.sign(to - from) };
   }
-
 
   // ---------- theme: hard-ish flip between dark and light chapters ----------
   function theme(t) {
@@ -189,9 +204,17 @@
     const inT = a.in ?? 0, pin = E.out3(prog(t, inT, 0.5));
     const sp = stagePos(t), base = a.x ?? 240, step = sp.walk ? Math.abs(Math.sin(sp.p * Math.PI * 3)) * 22 * sp.walk : 0;
     av.style.opacity = show ? pin : 0; av.style.transformOrigin = "50% 100%";
-    av.style.transform = `translate(${(sp.x - base).toFixed(1)}px,${((1 - pin) * 120 - step).toFixed(1)}px) rotate(${(sp.dir * 7 * sp.walk).toFixed(2)}deg)`;
+    let pi0 = 0; for (let k = 0; k < N.poses.length; k++) if (t >= N.poses[k][0]) pi0 = k;
+    const pq = prog(t, N.poses[pi0][0], 0.32), sq = pq > 0 && pq < 1 ? Math.sin(Math.PI * pq) * 0.045 : 0;
+    const K = N.KEYS || [], lk = K.reduce((b, k) => (t >= k[0] + 0.6 ? k : b), null), lp = lk ? prog(t, lk[0] + 0.6, 0.3) : 1, land = lp > 0 && lp < 1 ? Math.sin(Math.PI * lp) * 0.06 : 0;
+    let bt = 0; (N.beats || []).forEach(b0 => { const d = t - b0 + 0.05; if (d >= 0 && d < 0.5) bt = Math.max(bt, Math.sin(Math.PI * d / 0.5)); });
+    let hop = 0, wow = 0; (N.WOW || []).forEach(w0 => { const d = t - w0; if (d >= 0 && d < 0.45) hop = Math.max(hop, Math.sin(Math.PI * d / 0.45)); if (d >= 0 && d < 0.9) wow = 1; });
+    const dep = depthAt(t) * (1 + 0.035 * bt), sx = dep * (1 - sq * 0.6 + land), sy = dep * (1 + sq - land);
+    av.style.transform = `translate(${(sp.x - base).toFixed(1)}px,${((1 - pin) * 120 - step - 26 * hop).toFixed(1)}px) rotate(${(sp.dir * 7 * sp.walk).toFixed(2)}deg) scale(${sx.toFixed(4)},${sy.toFixed(4)})`;
+    N._wow = wow;
     let beat = 0; (N.beats || []).forEach(s => { const d = t - s + 0.04; if (d >= 0 && d < 0.42) beat = Math.max(beat, Math.sin(Math.PI * d / 0.42)); });
     const X = { beat, expr: N.poses[i][2], exprPrev: N.poses[Math.max(0, i - 1)][2], exprP: p };
+    if (N._wow) { X.expr = "excited"; X.exprP = 1; }
     if (N.R) {
       const env = (a, d) => { const q = (t - a) / d; return q <= 0 || q >= 1 ? 0 : q < 0.18 ? q / 0.18 : q > 0.8 ? (1 - q) / 0.2 : 1; };
       X.shades = Math.max(0, ...N.R.gags.map(([a, d]) => env(a, d)));

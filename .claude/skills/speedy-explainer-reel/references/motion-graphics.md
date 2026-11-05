@@ -106,3 +106,10 @@ House rule from the VIDEO reel on: the presenter is the job-search character (`l
 Every spoken "Claude" gets: the caption word turns peach with a glow + a small spinning Claude logo after it, and a big spark
 pops ABOVE the word (spring scale, 450° spin, halo, 16-particle burst, drifts up and fades in 1.5 s). See `claudePop()` in
 reels/video/index.html (canwe-ai/drafts/video/reel.html); copy it into any reel that names Claude.
+
+### Depth + reactions (owner, 5 Nov: "make him big and small while talking, like a real one")
+- Camera distance: he steps BACK (×0.86, `stage.back`) while pointing; steps CLOSE (×1.17, `stage.closeScale`) on `stage.close`
+  phrases (e.g. `[["Claude makes",1.4],["Here's the catch",2.6],["Comment",3.2]]` = the twist, the honest catch, the CTA);
+  a +3.5 % lean-in on every boxed (stressed) word. Scaled from the feet (origin bottom centre), eased 0.5 s.
+- Body: squash & stretch on every pose change (4.5 %), a landing squash (6 %) after each walk, stepping bob while walking.
+- `stage.wow: ["Claude"]` → every occurrence: ✨ sparkles, excited face, a 26 px hop. Use it for the product/brand word.

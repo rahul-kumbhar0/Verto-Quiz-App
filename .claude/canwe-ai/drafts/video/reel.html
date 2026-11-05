@@ -209,7 +209,7 @@ R.setup({ push: 0, scenes: [] });
 R.speedy({ emph: window.EMPH,
   chapters: [{ label: "idea", at: T.s1 }, { label: "script", at: T.s2 }, { label: "voice", at: T.s3 }, { label: "video", at: T.s4 }, { label: "post", at: T.s5, end: T.cat }],
   avatar: { x: 240, y: 1330, w: 600, in: -0.5, look: "street", style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" } },
-  stage: { hold: 2.6, left: -90, right: 570 },
+  stage: { hold: 2.6, left: -90, right: 570, close: [["Claude makes", 1.4], ["Here's the catch", 2.6], ["Comment", 3.2]], wow: ["Claude"] },
   poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
 
 const SCRIPT_SRC = `// HOOK (≤ 6 words)\n"Stop paying for editing courses."\n// TWIST\nClaude makes every reel.\n// 5 STEPS · 1 idea per line\n// CTA\nComment "VIDEO"`;
