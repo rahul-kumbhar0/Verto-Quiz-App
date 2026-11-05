@@ -62,7 +62,36 @@
     const av = $("avatar");
     if (av) { const a = N.avatar; av.style.left = (a.x ?? 240) + "px"; av.style.top = (a.y ?? 1330) + "px"; av.style.width = (a.w ?? 600) + "px"; av.style.height = (a.w ?? 600) * 640 / 600 + "px"; window.Avatar && Avatar.init(av, a); }
     if (N.chapters.length && $("rail")) buildRail();
+    if (N.stage !== false) buildStage();
   };
+
+  // ---------- STAGE: the presenter walks to the side and points at what is being explained ----------
+  // Mark any element with data-ex="<spoken word>" (optionally "word#n", 0-based nth). On that word the presenter
+  // walks to the side opposite the element (if it sits left he stands right, and the reverse), aims his arm at it
+  // (tracking it while it moves) and holds until the next marked word or `hold` seconds, then walks home.
+  function buildStage() {
+    const st = N.stage || {}, a = N.avatar, home = a.x ?? 240, w = a.w ?? 600, SR = $("stage").getBoundingClientRect();
+    const L = st.left ?? -30, Rx = st.right ?? 510, hold = st.hold ?? 2.4, lead = st.lead ?? 0.5;
+    const vis = [...document.querySelectorAll("section")].map(s => [s, s.style.visibility]); vis.forEach(([s]) => (s.style.visibility = "visible"));
+    let side = st.start || "R";
+    const ex = [...document.querySelectorAll("[data-ex]")].map(el => { const [ph, n] = el.dataset.ex.split("#"); let t = null; try { t = R.at(ph, +(n || 0)); } catch (e) {}
+      const r = el.getBoundingClientRect(); return { el, t, cx: r.left - SR.left + r.width / 2 }; }).filter(e => e.t != null).sort((x, y) => x.t - y.t);
+    vis.forEach(([s, v]) => (s.style.visibility = v));
+    ex.forEach(e => { if (Math.abs(e.cx - 540) > 120) side = e.cx < 540 ? "R" : "L"; e.side = side; e.x = side === "R" ? Rx : L; });
+    const keys = [[-9, home]];
+    ex.forEach((e, i) => { const nx = ex[i + 1]; e.end = nx ? Math.min(nx.t - 0.05, e.t + hold) : e.t + hold;
+      if (keys[keys.length - 1][1] !== e.x) keys.push([e.t - lead, e.x]);
+      if (!nx || nx.t - e.end > 0.9) keys.push([e.end + 0.1, home]); });
+    N.EX = ex; N.KEYS = keys; N.home = home; N.aw = w;
+  }
+  function stagePos(t) {
+    const K = N.KEYS; if (!K) return { x: N.home ?? 240, walk: 0, dir: 0 };
+    let k = 0; for (let i = 0; i < K.length; i++) if (t >= K[i][0]) k = i;
+    const from = k ? K[k - 1][1] : K[0][1], to = K[k][1], d = Math.abs(to - from) > 1 ? 0.6 : 0.01, p = clamp((t - K[k][0]) / d);
+    const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+    return { x: lerp(from, to, e), walk: p > 0 && p < 1 ? Math.sin(Math.PI * p) : 0, p, dir: Math.sign(to - from) };
+  }
+
 
   // ---------- theme: hard-ish flip between dark and light chapters ----------
   function theme(t) {
@@ -158,7 +187,9 @@
     const cur = N.poses[i][1], prev = N.poses[Math.max(0, i - 1)][1], p = prog(t, N.poses[i][0], 0.18);
     const av = $("avatar"), a = N.avatar, show = a.hide ? !a.hide.some(([x, y]) => t >= x && t < y) : true;
     const inT = a.in ?? 0, pin = E.out3(prog(t, inT, 0.5));
-    av.style.opacity = show ? pin : 0; av.style.transform = `translateY(${(1 - pin) * 120}px)`;
+    const sp = stagePos(t), base = a.x ?? 240, step = sp.walk ? Math.abs(Math.sin(sp.p * Math.PI * 3)) * 22 * sp.walk : 0;
+    av.style.opacity = show ? pin : 0; av.style.transformOrigin = "50% 100%";
+    av.style.transform = `translate(${(sp.x - base).toFixed(1)}px,${((1 - pin) * 120 - step).toFixed(1)}px) rotate(${(sp.dir * 7 * sp.walk).toFixed(2)}deg)`;
     let beat = 0; (N.beats || []).forEach(s => { const d = t - s + 0.04; if (d >= 0 && d < 0.42) beat = Math.max(beat, Math.sin(Math.PI * d / 0.42)); });
     const X = { beat, expr: N.poses[i][2], exprPrev: N.poses[Math.max(0, i - 1)][2], exprP: p };
     if (N.R) {
@@ -170,7 +201,21 @@
       if (pr) X.prop = [pr[2], Math.min(1, (t - pr[0] + 0.1) / 0.4) * (t < pr[1] ? 1 : Math.max(0, 1 - (t - pr[1]) / 0.35))];
       if (N.R.flip != null) X.flip = prog(t, N.R.flip, 1.0) < 1 ? prog(t, N.R.flip, 1.0) : 0;
     }
-    Avatar.frame(t, cur, p, prev, mouthAt(t), X);
+    // aim: while a marked element is being explained, the arm on its side points at it (live, so it tracks motion)
+    let C = cur, Pv = prev, pp = p;
+    const EXs = N.EX || [], j = EXs.reduce((b, e, k) => (t >= e.t - 0.2 ? k : b), -1), ea = j >= 0 && t < EXs[j].end ? EXs[j] : null;
+    if (ea && sp.walk < 0.5) {
+      const aim = e => { const r = e.el.getBoundingClientRect(), S0 = $("stage").getBoundingClientRect(), sc = (N.aw || 600) / 600, arm = e.side === "R" ? "L" : "R";
+        const shx = sp.x + (arm === "R" ? 432 : 168) * sc, shy = (a.y ?? 1330) + 452 * sc, tx = r.left - S0.left + r.width * (arm === "R" ? 0.25 : 0.75), ty = r.top - S0.top + r.height * 0.7;
+        let th = Math.atan2((arm === "R" ? 1 : -1) * (tx - shx), ty - shy) * 180 / Math.PI; th = clamp(th, 25, 142);
+        const rest = [10, 18, "relax"], pose = { head: (arm === "R" ? -1 : 1) * 5, lean: (arm === "R" ? 2 : -2), expr: "happy" };
+        pose[arm] = [th, 6, "point", 0, 1.15]; pose[arm === "R" ? "L" : "R"] = rest; return pose; };
+      Avatar.POSES.__aim = aim(ea);
+      const pr = j > 0 && EXs[j - 1].end >= ea.t - 0.3 ? EXs[j - 1] : null;
+      if (pr) { Avatar.POSES.__aimPrev = aim(pr); Pv = "__aimPrev"; } else Pv = cur;
+      C = "__aim"; pp = prog(t, Math.max(ea.t - 0.2, sp.p >= 1 ? ea.t - 0.2 : ea.t), 0.22);
+    }
+    Avatar.frame(t, C, pp, Pv, mouthAt(t), X);
   }
 
   // ---------- auto-direction: pick poses + expressions from the words being said ----------

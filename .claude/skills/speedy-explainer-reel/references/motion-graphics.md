@@ -88,3 +88,21 @@ Cuts stay on words, but snap within ±0.1 s to a beat when it's free (`F.snap`).
 - [ ] the impact stack only once; it lands on the drop or the biggest number
 - [ ] every number has a shape (gauge / tiles / line / odometer)
 - [ ] stills at the start of each seam + the drop; `MBLUR=3` final
+
+## Stage: the presenter walks over and points at what's being explained (5 Nov 2026, owner request)
+House rule from the VIDEO reel on: the presenter is the job-search character (`look:"street"`), and he MOVES with the explanation.
+- Mark any element with `data-ex="<spoken word>"` (or `"word#n"`, 0-based nth, same matcher as `at()`). On that word he walks
+  (0.6 s, stepping bob + lean) to the side opposite the element (element left → he stands right, and the reverse; elements within
+  ±120 px of centre keep his current side), then aims the arm on that side at the element (live: it tracks a moving element) and
+  holds until the next marked word or `stage.hold` seconds, then walks home.
+- Config: `R.speedy({ …, stage: { hold: 2.6, left: -90, right: 570, lead: 0.5 } })`; `stage:false` turns it off. Manual `{pose}` pins
+  still play whenever he is not aiming. The arm angle is clamped to a readable diagonal (25–142°).
+- Mark 1 element per sentence that has a visual (12–16 per 40 s reel). Side switches are what make it feel alive: lay the hero
+  objects out left/right alternately where the story allows.
+- House outfit ("street creator"): `style: { shirt:"#1D1E23", shirtLine:"#0B0C0F", print:"#D97757", chain:"#F2C14E", lens1:"#F0A585", lens2:"#D97757" }`
+  (graphite oversized tee, terracotta lightning print, gold chain, warm peach-to-terracotta shades).
+
+## The Claude spark (the "Claude emoji")
+Every spoken "Claude" gets: the caption word turns peach with a glow + a small spinning Claude logo after it, and a big spark
+pops ABOVE the word (spring scale, 450° spin, halo, 16-particle burst, drifts up and fades in 1.5 s). See `claudePop()` in
+reels/video/index.html (canwe-ai/drafts/video/reel.html); copy it into any reel that names Claude.
