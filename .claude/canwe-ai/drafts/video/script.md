@@ -1,6 +1,6 @@
 <curious> I automated my ^reels^ with Claude. And you're watching [one.] {point_cam}
 <excited> <up> The script, the captions, every single frame? Claude made [them.] {hands_head}
-<0> <matter of fact> *2,000* plus followers in *five* [days.] Over *3,000* [comments.] {big}
+<0> <matter of fact> *2,000* plus followers in one [week.] Over *3,000* [comments.] {big}
 Here's the whole system, in five [steps.] {point_stage}
 One. Claude reads the top reels in my niche and finds the [pattern.] {explain}
 Two. It writes the script, and scores ten hooks before I pick [one.] {three}
