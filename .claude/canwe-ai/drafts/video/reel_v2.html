@@ -29,6 +29,28 @@ body[data-theme="blueprint"] #bl1{background:radial-gradient(circle,rgba(60,140,
 body[data-theme="blueprint"] #bl2{background:radial-gradient(circle,rgba(217,119,87,.30),transparent 65%)}
 body[data-theme="blueprint"] #bl3{background:radial-gradient(circle,rgba(80,220,255,.18),transparent 65%)}
 body[data-theme="blueprint"] #floor{background-image:linear-gradient(rgba(110,190,255,.30) 2px,transparent 2px),linear-gradient(90deg,rgba(110,190,255,.30) 2px,transparent 2px);-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+
+/* ===== FRESH THEMES (owner: fresh colour, not black) ===== */
+body[data-theme="sunset"] .s-bg{background:linear-gradient(160deg,#FF8A5B 0%,#E5487F 48%,#5B3FD1 100%)}
+body[data-theme="sunset"] #bl1{background:radial-gradient(circle,rgba(255,214,102,.55),transparent 65%)}
+body[data-theme="sunset"] #bl2{background:radial-gradient(circle,rgba(255,255,255,.30),transparent 65%)}
+body[data-theme="sunset"] #bl3{background:radial-gradient(circle,rgba(90,220,255,.30),transparent 65%)}
+body[data-theme="ocean"] .s-bg{background:linear-gradient(165deg,#2EE6C9 0%,#1FA2E6 50%,#4150DC 100%)}
+body[data-theme="ocean"] #bl1{background:radial-gradient(circle,rgba(255,255,255,.35),transparent 65%)}
+body[data-theme="ocean"] #bl2{background:radial-gradient(circle,rgba(255,170,130,.40),transparent 65%)}
+body[data-theme="ocean"] #bl3{background:radial-gradient(circle,rgba(180,255,120,.30),transparent 65%)}
+body[data-theme="sunset"] #floor,body[data-theme="ocean"] #floor{background-image:linear-gradient(rgba(255,255,255,.38) 2px,transparent 2px),linear-gradient(90deg,rgba(255,255,255,.38) 2px,transparent 2px);-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+body[data-theme="sunset"] .s-vig,body[data-theme="ocean"] .s-vig{background:radial-gradient(ellipse 85% 65% at 50% 45%,transparent 55%,rgba(20,10,40,.28) 100%)}
+body[data-theme="cream"] .s-bg{background:linear-gradient(170deg,#FFF6EC 0%,#FFE9DD 55%,#F3E8FF 100%)}
+body[data-theme="cream"] #bl1{background:radial-gradient(circle,rgba(255,160,120,.55),transparent 65%)}
+body[data-theme="cream"] #bl2{background:radial-gradient(circle,rgba(110,220,185,.45),transparent 65%)}
+body[data-theme="cream"] #bl3{background:radial-gradient(circle,rgba(170,150,255,.40),transparent 65%)}
+body[data-theme="cream"] #floor{background-image:linear-gradient(rgba(217,119,87,.32) 2px,transparent 2px),linear-gradient(90deg,rgba(217,119,87,.32) 2px,transparent 2px);-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+body[data-theme="cream"] .s-vig{background:none}
+body[data-theme="cream"] #hl,body[data-theme="cream"] .vd-hd span{color:#16161A}
+body[data-theme="cream"] .vd-fn{color:#7A6F66}
+body[data-theme="cream"] #grain{mix-blend-mode:multiply;opacity:.05}
+body[data-theme="sunset"] .vd-fn,body[data-theme="ocean"] .vd-fn{color:rgba(255,255,255,.75)}
 /* timeline of our reels (s4) */
 #tl{position:absolute;left:60px;right:60px;top:920px;height:250px;z-index:5;border-radius:20px;background:rgba(14,14,18,.92);border:1px solid #2a2a30;padding:14px 18px;opacity:0;box-shadow:0 30px 70px -20px rgba(0,0,0,.9)}
 #tl .tlh{display:flex;justify-content:space-between;font:700 17px "JetBrains Mono",monospace;color:#8a877f;margin-bottom:10px}#tl .tlh b{color:#F0A585}
@@ -399,6 +421,7 @@ window.seek = t => {
   R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 }); R.cue("pop", dmA + 0.15);
   // footnotes
   $("fn").textContent = t < T.watch ? "Covers of reels already posted on @canwe.ai" : t >= T.proof && t < T.steps ? "Followers: Instagram, first week · comments: our DM dashboard, last 30 days" : t >= T.s4 && t < T.s5 ? "Our render engine is our own · HyperFrames v0.9.15 (Apache-2.0) tested by us 5 Nov · not sponsored" : t >= T.s1 && t < T.s2 ? "Sample reel cards" : "";
+  if (document.body.dataset.theme === "cream") document.body.classList.add("is-light");
   // ===== background + 3D camera (themes) =====
   [["bl1", 0.13, 0.0, 300, 600], ["bl2", 0.09, 2.1, 700, 1200], ["bl3", 0.11, 4.2, 200, 1500]].forEach(([id, w, ph, x0, y0]) => { $(id).style.transform = `translate(${(x0 - 450 + Math.sin(t * w * 6.28 + ph) * 260).toFixed(1)}px,${(y0 - 450 + Math.cos(t * w * 5.1 + ph) * 220).toFixed(1)}px) scale(${(1 + 0.15 * Math.sin(t * w * 3 + ph)).toFixed(3)})`; });
   $("floor").style.backgroundPosition = `0px ${(t * 70 % 120).toFixed(1)}px`;
