@@ -113,3 +113,10 @@ reels/video/index.html (canwe-ai/drafts/video/reel.html); copy it into any reel 
   a +3.5 % lean-in on every boxed (stressed) word. Scaled from the feet (origin bottom centre), eased 0.5 s.
 - Body: squash & stretch on every pose change (4.5 %), a landing squash (6 %) after each walk, stepping bob while walking.
 - `stage.wow: ["Claude"]` → every occurrence: ✨ sparkles, excited face, a 26 px hop. Use it for the product/brand word.
+
+## Fresh colour themes + 3D world (6 Nov 2026, owner picked PEACH CREAM over graphite)
+Source: canwe-ai/drafts/video/reel_v2.html. `<body class="look" data-theme="cream|sunset|ocean|aurora|studio|blueprint">` swaps the
+background (#bgfx: 3 slow glow blobs + a scrolling 3D floor grid) and turns on a 3D camera (#cam3d > #cam3dIn: ±2.6° X / ±3.4° Y drift + beat nudge).
+Cream needs: is-light captions, a frosted cream panel behind the frame-0 headline when it sits over dark content, dark text on gauges/headers,
+the Claude word in terracotta #C2552F (peach is too faint). Dark glass cards stay as they are: they read well on every fresh background.
+"Our reels as the example": an editing timeline with our covers as clips + playhead (while editing), and a rotating 3D ring of our covers (as the output).

@@ -271,3 +271,9 @@ Proof lines: "2,000 plus followers in one week" (owner-confirmed, 6 Nov; earlier
 Voice 791 cr (flow M27UH1FuDTZ0bWbbeIVi; owner uploaded the mp3), paced 43.5 s, 6 stops · 45.3 s total · reels/video2/out/claude-video-v2.mp4 (pulse, break on "The catch?") + _nomusic + _notlikeus (song from 72.46 s, drop on "you're watching one") + cover.png ("2,000+ FOLLOWERS IN 1 WEEK" · "I automated my {reels}" on the all-covers wall).
 Two-pass render: pass 1 → its first 8 s become the frames the phone plays ("THIS REEL"), pass 2 MBLUR final. Honesty: voice = ElevenLabs (said), our engine ≠ HyperFrames ("free tool for you"), number sources footnoted.
 Automation #63 VIDEO is ON but locked to the DELETED media 18106883129645628 → re-lock to the new media id on "uploaded".
+### VIDEO v2 · PEACH CREAM look (6 Nov, owner: "fresh colour, not black" → picked option C)
+Theme system in reels/video2 (body[data-theme]: aurora / studio / blueprint / sunset / ocean / cream) + 3D camera tilt (cam3d wrapper) + scrolling 3D floor grid + moving glow blobs.
+Cream = light gradient #FFF6EC → #FFE9DD → #F3E8FF, peach/mint/lilac glows, terracotta floor lines, captions dark (is-light), headline on a frosted cream panel, "Claude" word terracotta #C2552F.
+New in the edit: our real reels as clips on an editing timeline (step 04) + a 3D ring of our real covers as "the output" (step 05, stays dimmed behind the catch).
+Out: reels/video2/out/claude-video-v2-cream.mp4 (pulse) + _nomusic + _notlikeus + cover_cream.png (cream cover, terracotta pill). Phone frames re-shot from a cream pass 1.
+The dark v2 render (claude-video-v2*.mp4) is kept as the alternative.
