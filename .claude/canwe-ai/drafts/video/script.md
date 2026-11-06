@@ -1,9 +1,11 @@
-<matter of fact> Stop paying for video-editing [courses.] {stop}
-<excited> <up> Claude makes every reel on this ^page.^ Here are the 5 [steps.] {point_up}
-<0> <matter of fact> One. The idea. Paste five top reels from your niche, and Claude finds the [pattern.] {explain}
-Two. The script. Hook first, one idea per line, under 45 [seconds.] {three}
-Three. The voice. ElevenLabs, or a free voice that runs on your [laptop.] {present}
-<excited> Four. The video. Install HyperFrames, HeyGen's free open-source tool, with one [command.] Then *describe* your reel, and Claude builds every [frame.] {typing}
-Five. Captions, a cover, and you post it [yourself.] {thumbs}
-<short pause> <down> Here's the catch. <softly> You need a paid Claude plan, and your first reel takes [practice.] {stop}
-<0> <warmly> Comment [VIDEO] and I'll DM you every command and prompt, step by [step.] {wave}
+<curious> I automated my ^reels^ with Claude. And you're watching [one.] {point_cam}
+<excited> <up> The script, the captions, every single frame? Claude made [them.] {hands_head}
+<0> <matter of fact> This month, my reels got over *3,000* [comments.] {big}
+Here's the whole system, in five [steps.] {point_stage}
+One. Claude reads the top reels in my niche and finds the [pattern.] {explain}
+Two. It writes the script, and scores ten hooks before I pick [one.] {three}
+Three. The voice. ElevenLabs, with Claude's delivery [tags.] {present}
+Four. Claude writes every scene as code, and renders the [video.] Want the free tool for this? It's called [HyperFrames.] {typing}
+Five. Captions and a cover. Then *I* post [it.] {thumbs}
+<short pause> <down> The catch? <softly> You need a paid Claude plan, and your first reel takes [practice.] {stop}
+<0> <warmly> Comment [VIDEO] and I'll DM you every prompt, step by [step.] {wave}

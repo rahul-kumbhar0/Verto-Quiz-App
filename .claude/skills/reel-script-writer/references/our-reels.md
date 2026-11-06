@@ -38,3 +38,20 @@ keyword that names exactly what you get.
 | Docxify 4MB vs 20KB (OWN APP) | A demo→keyword + paradox hook | PDF | 49.8 s, 5 stops, 1.08x, 3D press + R.xview teardown | | | | | first monetized reel; disclosure as a STRENGTH ('we built it'); cyber-café ₹50 beat is the relatable spike |
 | Claude can now order Zomato (5 apps on MCP) | C list→keyword + B mini-explainer (USB analogy) | MCP | 41.7 s, 5 stops, 1.06x, 3D cube hub + chat demos | | | | | India-first official integrations; each item carries its catch in ≤5 words; demos labelled sample |
 | Learn AI Eng · Day 1: every word is a guess | B curiosity explainer (series) + keyword | TOKENS | 47 s, 5 stops, 1.08x; FINAL rebuilt in 3D (tilted chat, laser-split token blocks, number skyline, isometric next-token bars, pulse music) on the same voice | | | | | series pilot; CTA = keyword + follow for series (no next-day tease, owner's call) |
+
+## What made OUR reels go viral (DM dashboard, 30 days to 6 Nov 2026) — read this first
+| Reel | Hook (first line) | DMs fired · unique clickers |
+|---|---|---|
+| JOBS | "I basically automated my entire job search. With one free GitHub repo." | 812 · 632 |
+| GROW | "I automated my Instagram. With Claude. And you're watching the proof." | 682 · 556 |
+| YOUTUBE | "I automated my YouTube channel with Claude. Here's how you can too." | 402 · 350 |
+| LINK | "I connected Claude to my LinkedIn. Don't copy me yet." | 125 · 88 |
+| SALARY / OFFER / RESUME / PROMPT / KITE / OSS / TV | myth, numbers, "Most of us…", news, "Anthropic is giving away…" | 7–31 each |
+| VIDEO v1 (5 Nov, deleted) | "Stop paying for video-editing courses." (contrarian money) | 0 DMs, ~1K views in trial |
+THE FORMULA (every winner has all 5, every loser misses #1 or #2):
+1. **First person + "I automated / I connected" + MY + a platform the viewer uses daily** (job search, Instagram, YouTube, LinkedIn). Not "you", not "most of us", not a myth.
+2. **"With Claude" inside the first 6 words.**
+3. **Proof inside the reel**: meta ("you're watching the proof") or a real input line ("find me Python internships in Bangalore") + 2–4 real numbers.
+4. **A named free tool + "one command"**, then a rule/catch said honestly ("Claude never presses post").
+5. **Keyword = the thing itself** (JOBS, GROW, YOUTUBE, VIDEO), and the DM names exactly what you get.
+Contrarian-money hooks ("Stop paying for…") borrowed from other creators did NOT transfer to our audience (students/freshers).
