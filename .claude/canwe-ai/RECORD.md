@@ -263,3 +263,11 @@ Reel scenes: frame-0 headline over a course checkout that TEARS on "courses." ·
 04 real terminal (init) → prompt → frames fan out → phone plays the REAL HyperFrames render ("REAL RENDER" + "Render complete · 8.0 s · 9.0 s") · 05 same render continues, caption, cover flip, "you" press Share ·
 catch chips · comment → DM via 2il.in. "Claude emoji" = the Claude spark: an inline spinning icon after every spoken "Claude" in the captions + a big spark pop with burst above the word (claudePop()).
 guide /video/ written (not deployed yet) · hub line added · automation #63 VIDEO OFF.
+
+## VIDEO v2 (6 Nov 2026): "I automated my reels with Claude. And you're watching one." — FINAL rendered
+v1 ("Stop paying for video-editing courses", posted 5 Nov as trial) got ~1K views, 0 DMs → owner DELETED it. v2 rebuilt on OUR formula (our-reels.md § What made OUR reels go viral:
+JOBS 812 / GROW 682 / YOUTUBE 402 DMs in 30 days all = "I automated my [platform] with Claude" + proof inside the reel + named free tool + catch + thing-keyword).
+Proof lines: "2,000 plus followers in one week" (owner-confirmed, 6 Nov; earlier notes had 1,112 on 30 Oct) · "Over 3,000 comments" (DM dashboard: 3,268 in 30 days).
+Voice 791 cr (flow M27UH1FuDTZ0bWbbeIVi; owner uploaded the mp3), paced 43.5 s, 6 stops · 45.3 s total · reels/video2/out/claude-video-v2.mp4 (pulse, break on "The catch?") + _nomusic + _notlikeus (song from 72.46 s, drop on "you're watching one") + cover.png ("2,000+ FOLLOWERS IN 1 WEEK" · "I automated my {reels}" on the all-covers wall).
+Two-pass render: pass 1 → its first 8 s become the frames the phone plays ("THIS REEL"), pass 2 MBLUR final. Honesty: voice = ElevenLabs (said), our engine ≠ HyperFrames ("free tool for you"), number sources footnoted.
+Automation #63 VIDEO is ON but locked to the DELETED media 18106883129645628 → re-lock to the new media id on "uploaded".
