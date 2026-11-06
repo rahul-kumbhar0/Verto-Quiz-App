@@ -47,3 +47,22 @@ Catch: Claude Code needs a paid plan. HyperFrames is free + open source (HeyGen)
 1 idea: 5 reel cards → Claude chat → "pattern: number hook · 1 keyword CTA" · 2 script: script.md types with a hook box · 3 voice: waveform + "ElevenLabs / free local" chips ·
 4 video: terminal `npx skills add heygen-com/hyperframes` ✓ → prompt typed → HTML frames → MP4 render bar (REAL run) · 5 captions + cover → phone "Post" button, cursor = you ·
 catch: "paid Claude plan" chip + "practice" · CTA comment VIDEO → DM via 2il.in.
+
+## v2 caption (6 Nov 2026, formula of JOBS/GROW/YOUTUBE)
+Comment VIDEO and I'll DM you every prompt 👇
+
+I automated my reels with Claude, and you just watched one. 2,000+ followers in one week. The system:
+
+1. Claude reads the top reels in my niche and finds the pattern
+2. It writes the script and scores 10 hooks before I pick one
+3. Voice: ElevenLabs, with Claude's delivery tags
+4. Claude writes every scene as code and renders the video (free tool for you: HyperFrames by HeyGen)
+5. Captions + cover, then I post it
+
+The catch: Claude Code needs a paid Claude plan, and your first reel takes practice. Not sponsored.
+
+[keywords: automate reels with claude, claude video editing, ai reels, claude code video, hyperframes]
+#claudeai #claudecode #aitools #reels
+Pinned: Comment VIDEO for every prompt + the full guide 🙌
+YouTube title: I Automated My Reels With Claude (2,000 Followers in 1 Week)
+Cover: kicker "2,000+ FOLLOWERS IN 1 WEEK" · "I automated my {reels}" · "With Claude · the 5 steps inside"

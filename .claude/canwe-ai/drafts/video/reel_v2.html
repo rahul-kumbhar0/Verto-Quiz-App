@@ -198,7 +198,7 @@
   <div class="clp" id="clp7"><div class="halo"></div><div class="sp"></div><div class="bu" id="clb7"></div></div>
   <div id="grain"></div><div id="fxOverlay"></div>
 </div>
-<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>window.SELF = true;</script><script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
 <script>
 const R = Reel, F = R.fx, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
 const T = { twist: at("Claude"), watch: at("watching"), made: at("Claude made"), proof: at("2,000"), comm: at("Over"), wall: -0.3, steps: at("Here's the whole"), s1: at("One. Claude"), s2: at("Two. It"), s3: at("Three. The"), s4: at("Four. Claude"), s5: at("Five. Captions"), cat: at("The catch?"), cta: at("Comment"), end: R.voiceEnd() };
@@ -281,7 +281,7 @@ window.seek = t => {
   [["tc1", at("script,"), -200], ["tc2", at("captions,"), 200], ["tc3", at("every"), -200]].forEach(([id, a, dx]) => { M.fly(id, t, a - 0.05, { x: dx, s: 0.6, r: dx > 0 ? 8 : -8 }, { f: 2.8, z: 0.5 }); if (t >= T.proof) $(id).style.opacity = 1 - prog(t, T.proof, 0.25); });
   { const a = T.made - 0.08, p = M.spring(t, a, { f: 2.4, z: 0.45 }), out = E.inOut(prog(t, T.proof - 0.15, 0.4)), rot = E.expoOut(prog(t, a, 1.4)) * 540 - 540;
     $("bigC").style.opacity = t < a ? 0 : 1 - out; $("bigC").style.transform = `translate(0px,${(-260 + -200 * out).toFixed(1)}px) scale(${(lerp(0.1, 0.8, p) * lerp(1, 0.3, out)).toFixed(3)})`; $("bigC").querySelector(".sp").style.transform = `rotate(${(rot + (t - a) * 40).toFixed(1)}deg)`;
-    M.rays("hkSvg", t, a + 0.05, { x: 540, y: 500, r0: 140, len: 150, n: 18, d: 0.7 }); M.ring("mgFx", t, a + 0.05, { x: 540, y: 500, r: 480, d: 0.8, sfx: true }); F.flash(t, a + 0.02, { d: 0.25 }); }
+    M.rays("hkSvg", t, a + 0.05, { x: 540, y: 500, r0: 140, len: 150, n: 18, d: 0.7 }); M.ring("mgFx", t, a + 0.05, { x: 540, y: 500, r: 480, d: 0.8, sfx: true }); }
   // real numbers: followers odometer, then comments odometer + keyword comments raining
   { const a1 = T.proof - 0.05, a2 = T.comm - 0.05;
     M.fly("st1", t, a1, { x: -300, s: 0.7, r: -6 }, { f: 2.5, z: 0.55 }); M.fly("st2", t, a2, { x: 300, s: 0.7, r: 6 }, { f: 2.5, z: 0.55 });
