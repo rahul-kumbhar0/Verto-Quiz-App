@@ -277,3 +277,7 @@ Cream = light gradient #FFF6EC → #FFE9DD → #F3E8FF, peach/mint/lilac glows, 
 New in the edit: our real reels as clips on an editing timeline (step 04) + a 3D ring of our real covers as "the output" (step 05, stays dimmed behind the catch).
 Out: reels/video2/out/claude-video-v2-cream.mp4 (pulse) + _nomusic + _notlikeus + cover_cream.png (cream cover, terracotta pill). Phone frames re-shot from a cream pass 1.
 The dark v2 render (claude-video-v2*.mp4) is kept as the alternative.
+### VIDEO v2 posted 6 Nov 2026 (media 18034821182899818, instagram.com/reel/DfYt8mRzh7c/)
+Owner linked #63 to it himself (still also lists the deleted v1 id 18106883129645628) and turned email capture ON.
+First check (same day): #63 fired 37 DMs, 13 link clicks, 9 unique clickers (v1 got 0 DMs in its whole trial). Views: ask the owner (not readable here).
+7-day context: GROW 705, YOUTUBE 445, JOBS 143, LINK 127 DMs. DM text still describes v1 ("HyperFrames … my exact prompt") → align to the v2 steps if the owner agrees.
