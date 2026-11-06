@@ -127,3 +127,24 @@ Real account numbers (DM dashboard, 7 days to 4 Nov): 1,590 comments · 1,046 au
 13 REBUILD 🔍 Jakeschincariol/replica-skill (7.5k ★): "I gave Claude an app. It rebuilt it." Reach play for coders.
 14 STARTUP 🔍 Jakeschincariol/founder-skill (2.4k ★): "I tested my startup idea on a fake board of investors."
 AVOID: WhatsApp (unofficial MCP, ban risk), LinkedIn/Naukri bots (ToS), any "auto-send" claim.
+
+## Trend scan — 6 Nov 2026 (PullRows reconnected; scans: #claudeai, #aitools, #jobsearch + profiles @himanshhh.ai, @ai.byarsh; "claude code"/#placements/#aiautomation returned nothing; views = tool estimates)
+WINNERS AND WHY:
+1. @himanshhh.ai "These companies are literally underrated 🤯 Comment Job" — ~3.5M in 3 days, 42.6K comments, 211K SHARES. NO voice-over: on-screen company list + trending slowed track, caption 20 words. Share-bait list + one-word keyword.
+2. @ai.byarsh "42 CLAUDE CODE ADD-ONS → I organised them into 5 departments, like an AI team" — ~97K/35h, 1.9K comments (SETUP). The organizing metaphor (departments/team) makes a 42-item list digestible; long keyword-stuffed caption for search.
+3. @techzminister (Hinglish) "Google ne ₹18,000 ke 5 PAID AI tools FREE kar diye" — 3.5K comments (GOOGLE5). Money-saved + urgency ("kal paid ho sakta hai") + follow-gate said openly.
+4. @thevarunmayya "These 3 GitHub repos have 150,000 stars combined" — ~227K, 8K shares, talking head. Authority = star numbers.
+5. @himanshhh.ai repeat formats: "3 free AI video tools" ~300K · "Wedding invitations upgrade, comment Prompt" ~140K/20K comments · "AI side income in dollars" · "15LPA offer trick" · "Don't pay ₹2,000/mo to ChatGPT". 6/8 winners = NO voice, trending track; "Comment anything" (zero friction); posts ~10:00–12:00, Thu strong.
+6. @ai.byarsh repeat formats: "100 Claude prompts master list, comment 100" ~87K · "Edit videos by typing: Claude + Remotion, 8 steps" ~17K (our VIDEO niche confirmed) · "Stop paying editors: 9 styles from one prompt".
+SCRIPT/STYLE PATTERNS (what to copy): number-first hooks (42/100/5/3/₹18,000/15LPA) · money frame (free / stop paying ₹X) · urgency when true · an organizing metaphor for lists ("5 departments of an AI team") · SHARES are the real lever (211K!) → make lists a friend needs · share-bait reels = short caption (≈20 words), search reels = long caption · Hinglish converts comments · follow-gate stated plainly.
+TOPIC LIST FOR US (ranked, our formula + our assets):
+| # | Hook | Proof/tool we own | KW | Score |
+|---|---|---|---|---|
+| 1 | "Claude found the companies hiring freshers this week that nobody applies to." | freehire live counts (REAL list, dated) + the 3.5M format; trial = NO-VOICE list + trending track (0 credits!) | HIRE | 12 |
+| 2 | "I turned Claude into my whole team. 5 departments run this page." | TRUE for us: script dept, voice, video, DMs (2il.in), guides; rides the 42-add-ons wave with our proof | TEAM | 11 |
+| 3 | "100 Claude prompts, one master list." (ours: placement-season prompts we actually use) | our guides corpus → one /prompts/ page | 100 | 10 |
+| 4 | "Edit videos by typing" follow-ups (styles library) | VIDEO v2 + HyperFrames test | VIDEO v3/STYLE | 9 |
+| 5 | "₹X of paid tools Claude replaces free" | needs careful verification per tool | SWAP | 8 (truth work) |
+| 6 | Wedding/festival invite prompt (reach play, off-niche) | one real Claude-made invite | INVITE | 7 |
+STYLE EXPERIMENTS: (a) one NO-VOICE share-bait trial reel (on-screen list + licensed/IG-added track, 20-word caption) — costs nothing, tests reach; (b) "Comment anything" vs exact keyword on a trial; (c) Hinglish trial variant; (d) a "send this to the friend who…" share line; (e) keep voiced explainers as the DM machine.
+PICK: HIRE next (data is ours, format proven at 3.5M, zero voice credits for the trial), then TEAM.
