@@ -4,6 +4,44 @@
 <style>
 .vd{position:absolute;inset:0;visibility:hidden}
 #rail{display:none!important}
+/* ===== THEMES (background) + 3D ===== */
+#bgfx{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(110px);opacity:0;left:0;top:0}
+#floorW{position:absolute;left:-540px;right:-540px;bottom:-60px;height:900px;perspective:700px;perspective-origin:50% 0%;opacity:0}
+#floor{position:absolute;inset:0;transform:rotateX(68deg);transform-origin:50% 0%;background-size:120px 120px}
+#cam3d{position:absolute;inset:0;perspective:1800px;perspective-origin:50% 45%}
+#cam3dIn{position:absolute;inset:0;transform-style:preserve-3d}
+body[data-theme] .s-bg::before{opacity:0}
+body[data-theme] .blob,body[data-theme] #floorW{opacity:1}
+body[data-theme="aurora"]{--g:#090B14}
+body[data-theme="aurora"] .s-bg{background-color:#090B14}
+body[data-theme="aurora"] #bl1{background:radial-gradient(circle,rgba(217,119,87,.55),transparent 65%)}
+body[data-theme="aurora"] #bl2{background:radial-gradient(circle,rgba(99,91,255,.45),transparent 65%)}
+body[data-theme="aurora"] #bl3{background:radial-gradient(circle,rgba(45,212,191,.22),transparent 65%)}
+body[data-theme="aurora"] #floor{background-image:linear-gradient(rgba(240,165,133,.22) 2px,transparent 2px),linear-gradient(90deg,rgba(240,165,133,.22) 2px,transparent 2px);-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+body[data-theme="studio"] .s-bg{background-color:#150E11;background-image:radial-gradient(70% 45% at 50% -5%,rgba(255,214,190,.16),transparent 70%)}
+body[data-theme="studio"] #bl1{background:radial-gradient(circle,rgba(217,119,87,.45),transparent 65%)}
+body[data-theme="studio"] #bl2{background:radial-gradient(circle,rgba(150,60,120,.40),transparent 65%)}
+body[data-theme="studio"] #bl3{background:radial-gradient(circle,rgba(242,193,78,.14),transparent 65%)}
+body[data-theme="studio"] #floor{background-image:linear-gradient(rgba(217,119,87,.30) 2px,transparent 2px),linear-gradient(90deg,rgba(217,119,87,.30) 2px,transparent 2px);-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+body[data-theme="blueprint"] .s-bg{background-color:#06152A;background-image:linear-gradient(rgba(90,170,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(90,170,255,.07) 1px,transparent 1px);background-size:40px 40px}
+body[data-theme="blueprint"] #bl1{background:radial-gradient(circle,rgba(60,140,255,.38),transparent 65%)}
+body[data-theme="blueprint"] #bl2{background:radial-gradient(circle,rgba(217,119,87,.30),transparent 65%)}
+body[data-theme="blueprint"] #bl3{background:radial-gradient(circle,rgba(80,220,255,.18),transparent 65%)}
+body[data-theme="blueprint"] #floor{background-image:linear-gradient(rgba(110,190,255,.30) 2px,transparent 2px),linear-gradient(90deg,rgba(110,190,255,.30) 2px,transparent 2px);-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+/* timeline of our reels (s4) */
+#tl{position:absolute;left:60px;right:60px;top:920px;height:250px;z-index:5;border-radius:20px;background:rgba(14,14,18,.92);border:1px solid #2a2a30;padding:14px 18px;opacity:0;box-shadow:0 30px 70px -20px rgba(0,0,0,.9)}
+#tl .tlh{display:flex;justify-content:space-between;font:700 17px "JetBrains Mono",monospace;color:#8a877f;margin-bottom:10px}#tl .tlh b{color:#F0A585}
+.trk{position:relative;height:84px;margin-bottom:10px;border-radius:10px;background:rgba(255,255,255,.03);overflow:hidden;white-space:nowrap}
+.trk i{display:inline-block;width:150px;height:84px;margin-right:4px;border-radius:8px;background-size:cover;background-position:center 30%;box-shadow:inset 0 0 0 2px rgba(255,255,255,.08)}
+#trk2{height:44px}#trk2 i{height:44px;width:96px;background:linear-gradient(90deg,#D97757,#F0A585);opacity:.55}
+#ph{position:absolute;top:40px;bottom:12px;width:3px;background:#fff;box-shadow:0 0 12px #fff;left:18px}
+/* output ring (s5) */
+#ring{position:absolute;left:0;right:0;top:520px;height:900px;perspective:1400px;z-index:3;opacity:0}
+#ringIn{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d}
+#ringIn i{position:absolute;width:220px;height:391px;margin:-195px 0 0 -110px;border-radius:16px;background-size:cover;background-position:center;box-shadow:0 20px 50px -10px rgba(0,0,0,.9),0 0 0 1px rgba(255,255,255,.1);backface-visibility:hidden}
+#ringLab{position:absolute;left:0;right:0;top:1330px;text-align:center;z-index:6;opacity:0}#ringLab .m-acc{font:900 34px Inter;padding:14px 26px;display:inline-block}
+
 #tp{position:absolute;left:350px;top:560px;width:380px;height:676px;border-radius:50px;background:#000;border:10px solid #1d1d21;box-shadow:0 0 0 2px #333,0 60px 120px -20px rgba(0,0,0,.95);overflow:hidden;z-index:6;opacity:0}
 #tp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 #tp .rec{position:absolute;left:18px;top:22px;display:flex;align-items:center;gap:8px;font:800 18px "JetBrains Mono",monospace;color:#fff;background:rgba(0,0,0,.6);padding:6px 12px;border-radius:999px;z-index:2}
@@ -116,8 +154,8 @@
 .vd-fn{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 17px "JetBrains Mono",monospace;color:var(--ink-3);letter-spacing:1px;z-index:9}
 </style></head>
 <body class="look"><div id="stage">
-  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
-  <div id="cam">
+  <div class="s-bg"></div><div class="s-light"></div><div id="bgfx"><i class="blob" id="bl1"></i><i class="blob" id="bl2"></i><i class="blob" id="bl3"></i><div id="floorW"><div id="floor"></div></div></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam3d"><div id="cam3dIn"><div id="cam">
     <section class="vd" id="sHook">
       <div class="headline" id="hl"></div>
       <div id="tp" data-ex="watching"><img id="tpimg" src="v1f/f001.jpg" alt=""><div class="rec"><i></i>THIS REEL</div><div class="scrub"><b id="tpbar"></b></div></div>
@@ -162,6 +200,7 @@
       <div id="term" data-ex="scene"><div class="bar"><i></i><i></i><i></i><span>scene-04.html — written by Claude</span></div><div id="termc"></div></div>
       <div class="m-card" id="prompt4"><div class="who"><i></i>you → Claude Code</div><div id="p4t"></div></div>
       <div id="strip"></div>
+      <div id="tl" data-ex="code,"><div class="tlh"><span>timeline · reel.mp4</span><b id="tlc">00:00</b></div><div class="trk" id="trk1"></div><div class="trk" id="trk2"></div><i id="ph"></i></div>
       <div id="phone" data-ex="video."><div class="nt"></div><img id="hfimg" src="hf/f001.jpg" alt=""></div>
       <div id="realTag">RENDERED</div>
       <div id="rdone"><span class="m-chip acc" id="rdc" data-ex="HyperFrames.">Free tool for you: HyperFrames by HeyGen · npx hyperframes init</span></div>
@@ -184,7 +223,8 @@
         <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
       <div class="vd-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! Every command + prompt 🎬</span></div><em>via 2il.in</em></div>
     </section>
-  </div>
+  </div></div></div>
+  <div id="ring"><div id="ringIn"></div></div><div id="ringLab"><span class="m-acc">the output: every reel on @canwe.ai</span></div>
   <div class="vd-fn" id="fn"></div>
   <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
   <div id="rail"></div><div id="kin"></div><div id="avatar"></div>
@@ -214,6 +254,9 @@ const FR = []; (() => { const s = $("strip"); [12, 40, 70, 105, 150, 200].forEac
 // ---- keyword comments that really came in on our reels ----
 const BUB = []; (() => { const w = $("bub"), K = ["JOBS", "GROW", "YOUTUBE", "LINK", "JOBS", "GROW", "KITE", "YOUTUBE", "TOKENS", "JOBS", "GROW", "POST"], C = ["#8FA3BF", "#7A3A26", "#7CC4A0", "#D97757", "#E8D9B5", "#F0A585"];
   K.forEach((k, i) => { const b = document.createElement("div"); b.className = "bu2"; b.innerHTML = `<i style="background:${C[i % C.length]}"></i>${k}`; b._x = 60 + (hash(i + 3) * 0.5 + 0.5) * 760; w.appendChild(b); BUB.push(b); }); })();
+// ---- timeline clips = our real reels; output ring = our real covers ----
+(() => { const t1 = $("trk1"), t2 = $("trk2"); for (let i = 0; i < 9; i++) { const c = document.createElement("i"); c.style.backgroundImage = `url(covers/c${(i * 5 % 16) + 1}.jpg)`; t1.appendChild(c); } for (let i = 0; i < 12; i++) t2.appendChild(document.createElement("i"));
+  const r = $("ringIn"); for (let i = 0; i < 12; i++) { const c = document.createElement("i"); c.style.backgroundImage = `url(covers_all/a${(i * 2 % 23) + 1}.jpg)`; c.style.transform = `rotateY(${i * 30}deg) translateZ(520px)`; r.appendChild(c); } })();
 // ---- waveform bars ----
 const BARS = []; (() => { const w = $("wave"); for (let i = 0; i < 46; i++) { const b = document.createElement("i"); w.appendChild(b); BARS.push(b); } })();
 
@@ -356,6 +399,19 @@ window.seek = t => {
   R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 }); R.cue("pop", dmA + 0.15);
   // footnotes
   $("fn").textContent = t < T.watch ? "Covers of reels already posted on @canwe.ai" : t >= T.proof && t < T.steps ? "Followers: Instagram, first week · comments: our DM dashboard, last 30 days" : t >= T.s4 && t < T.s5 ? "Our render engine is our own · HyperFrames v0.9.15 (Apache-2.0) tested by us 5 Nov · not sponsored" : t >= T.s1 && t < T.s2 ? "Sample reel cards" : "";
+  // ===== background + 3D camera (themes) =====
+  [["bl1", 0.13, 0.0, 300, 600], ["bl2", 0.09, 2.1, 700, 1200], ["bl3", 0.11, 4.2, 200, 1500]].forEach(([id, w, ph, x0, y0]) => { $(id).style.transform = `translate(${(x0 - 450 + Math.sin(t * w * 6.28 + ph) * 260).toFixed(1)}px,${(y0 - 450 + Math.cos(t * w * 5.1 + ph) * 220).toFixed(1)}px) scale(${(1 + 0.15 * Math.sin(t * w * 3 + ph)).toFixed(3)})`; });
+  $("floor").style.backgroundPosition = `0px ${(t * 70 % 120).toFixed(1)}px`;
+  if (document.body.dataset.theme) { const pulse = F.pulse(t, { decay: 7 }) || 0; $("cam3dIn").style.transform = `rotateX(${(2.6 * Math.sin(t * 0.42)).toFixed(2)}deg) rotateY(${(3.4 * Math.sin(t * 0.31 + 1)).toFixed(2)}deg) translateZ(${(pulse * 6).toFixed(1)}px)`; }
+  // ===== s4: our reels on the editing timeline =====
+  { const a = T.s4 + 0.25, out = prog(t, at("renders") - 0.2, 0.3); M.fly("tl", t, a, { y: 120, s: 0.9 }, { f: 2.4, z: 0.6 }); if (out > 0) $("tl").style.opacity = 1 - out;
+    const pp = prog(t, a + 0.2, at("renders") - a); $("ph").style.left = (18 + pp * 900).toFixed(1) + "px"; $("tlc").textContent = "00:" + String(Math.floor(pp * 45)).padStart(2, "0");
+    [...$("trk1").children].forEach((c, i) => { const q = M.spring(t, a + 0.15 + i * 0.06, { f: 2.8, z: 0.55 }); c.style.transform = `translateY(${((1 - q) * 90).toFixed(1)}px)`; c.style.opacity = t < a + 0.15 + i * 0.06 ? 0 : 1; }); }
+  // ===== s5: the output ring of our real reels =====
+  { const a = at("post") - 0.15, p = M.spring(t, a, { f: 2.2, z: 0.6 }), spin = (t - a) * 34; $("ring").style.opacity = t < a || t >= T.cta ? 0 : (t < T.cat ? 1 : 1 - 0.65 * prog(t, T.cat, 0.4)); $("ring").style.filter = t >= T.cat ? `blur(${(6 * prog(t, T.cat, 0.4)).toFixed(1)}px)` : "";
+    $("ringIn").style.transform = `rotateX(-8deg) rotateY(${(-spin - (1 - p) * 120).toFixed(1)}deg) scale(${lerp(0.3, 1, p).toFixed(3)})`;
+    const lp = M.spring(t, a + 0.3, { f: 2.6, z: 0.5 }); $("ringLab").style.opacity = t >= a + 0.3 && t < T.cat ? 1 : 0; $("ringLab").style.transform = `scale(${lerp(0.6, 1, lp)})`;
+    if (t >= a) { const sh = E.inOut(prog(t, a, 0.4)); $("ph5").style.opacity = 1 - sh; $("cur5").style.opacity = t < a + 0.2 ? 1 : 0; $("coverCard").style.opacity = 1 - sh; } }
   claudePop(t);
 };
 window.seek(0);
