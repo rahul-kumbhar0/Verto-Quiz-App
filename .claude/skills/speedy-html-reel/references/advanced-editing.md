@@ -107,3 +107,15 @@ during camera moves (never move the camera during the boxed keyword).
   the presenter stays in colour) + letterbox bars (`.lb`, 120 px) + `F.glitch` on the hero; colour returns on the payoff.
 - **Payoff stack**: press → sheen on the button → `F.burst` from its centre → soft flash. Leaks (`F.leak`) on the twist
   and the CTA arrival only (they share `#fxOverlay` with flash: never overlap them).
+
+## 6. Dark ↔ paper chapters + background type (APPLY v4, 7 Nov 2026)
+- Rhythm: hook dark (cinematic) → step 1 dark → step 2 PAPER → step 3 + catch dark → close PAPER. Do NOT use
+  `R.speedy({light})` (0.22 s crossfade); drive `.s-light` yourself: `clip-path: circle()` iris from the chapter's
+  focal point, accent ring = `#irisRing`, `body.is-light` toggled when r > 700 px. Exit light by COLLAPSING the circle
+  into the element the next seam dives into (synced with `F.dive`), so the theme change rides the transition.
+- Paper is DESIGNED, not inverted: `#F5F1EA` + warm dot grid, white cards with warm shadow, ink `#16171A`, muted
+  `#8C857B`, accent `#C2552F/#B04A26`. Slam cards stay dark on paper (contrast punch).
+- Trap: speedy.css styles `.is-light .sc` as a big card — any custom class named `sc` must be overridden.
+- Giant outlined background type per chapter (`#bgType`, 340 px Inter 900, stroke 7–9 % alpha, letter-rise in,
+  linear slide across the chapter, cropped by the frame) adds depth behind every hero in both themes.
+Worked code: `canwe-ai/drafts/apply/index.html` ("DARK <-> PAPER" and "giant background type" blocks).
