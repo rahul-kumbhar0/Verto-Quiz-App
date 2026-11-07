@@ -13,6 +13,7 @@
  *                   rounded shades. The house character.
  *   look:"classic" — fitted red tee + sport sunglasses (the first-generation puppet).
  *   look:"hoodie"  — the street head (mop hair, rounded shades) in a hoodie with drawstrings + front pocket.
+ *   look:"creator" — curly top + skin fade, beard, ROUND clear glasses (eyes visible), charcoal hoodie with Claude-orange strings/hood.
  * Both recolour through `style` tokens. PNG mode shows your own character instead:
  * one PNG per pose in png.dir (e.g. avatar/point_up.png), optional <pose>_open.png for lip flap. */
 (function () {
@@ -75,6 +76,9 @@
     hoodie:  { skin: "#F0BE97", skinLine: "#B07F58", hair: "#26211E", hairHi: "#4A4138", shirt: "#6D28D9", shirtLine: "#3B0F80",
                print: "none", chain: "none", lens1: "#F472B6", lens2: "#A855F7", frame: "#17181B", under: "#5B21B6",
                mouth: "#5A1A1A", teeth: "#FFFFFF", tongue: "#D9534F", string: "#F5F3FF" },
+    creator: { skin: "#C98B5F", skinLine: "#8E5A36", hair: "#1C1716", hairHi: "#463A35", shirt: "#2C3038", shirtLine: "#14161A",
+               print: "none", chain: "none", lens1: "rgba(255,255,255,.10)", lens2: "rgba(200,230,255,.18)", frame: "#121214", under: "#D97757",
+               mouth: "#4A1A14", teeth: "#FFFFFF", tongue: "#D9534F", string: "#D97757", beard: "#1C1716" },
     classic: { skin: "#F2C19C", skinLine: "#B9825C", hair: "#7B4A2D", hairHi: "#9C6238", shirt: "#E53935", shirtLine: "#B71C1C",
                print: "none", chain: "none", lens1: "#2ECC71", lens2: "#26C6DA", frame: "#161616", under: "#B71C1C",
                mouth: "#5A1A1A", teeth: "#FFFFFF", tongue: "#D9534F" },
@@ -224,11 +228,48 @@
       <path d="M208 248 q36 -12 62 -6" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>
       <path d="M330 248 q36 -12 62 -6" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".55"/>`;
   }
+  function headCreator() {
+    // curly top + skin fade, full short beard, ROUND see-through glasses (eyes always visible)
+    const curls = [[214,170,30],[248,138,34],[290,122,36],[334,126,34],[372,148,32],[396,182,24],[204,206,20],[232,108,26],[272,92,28],[316,90,28],[356,104,26],[270,160,26],[318,158,26]];
+    return `
+      <ellipse cx="196" cy="262" rx="20" ry="28" fill="${S.skin}" stroke="${S.skinLine}" stroke-width="3"/>
+      <ellipse cx="404" cy="262" rx="20" ry="28" fill="${S.skin}" stroke="${S.skinLine}" stroke-width="3"/>
+      <ellipse cx="300" cy="252" rx="106" ry="126" fill="${S.skin}" stroke="${S.skinLine}" stroke-width="3"/>
+      <!-- skin fade on the sides -->
+      <path d="M194 250 q-6 -60 22 -92 l10 6 q-22 34 -18 90z" fill="${S.hair}" opacity=".45"/>
+      <path d="M406 250 q6 -60 -22 -92 l-10 6 q22 34 18 90z" fill="${S.hair}" opacity=".45"/>
+      <!-- beard: jaw + chin, mouth window -->
+      <path d="M196 262 q4 92 58 116 q46 20 92 0 q54 -24 58 -116 q-10 56 -44 70 q-18 -26 -60 -24 q-42 -2 -60 24 q-34 -14 -44 -70z" fill="${S.beard}" stroke="#0E0C0B" stroke-width="2.5" stroke-linejoin="round"/>
+      <path d="M262 318 q38 -14 76 0 q-16 -10 -38 -10 q-22 0 -38 10z" fill="${S.beard}"/>
+      <path class="mouthClosed" d="M270 340 q30 20 60 0" fill="none" stroke="#F3D2BC" stroke-width="5" stroke-linecap="round"/>
+      <g class="mouthOpen" opacity="0"><ellipse class="mo" cx="300" cy="342" rx="28" ry="16" fill="${S.mouth}"/><rect class="teeth" x="276" y="327" width="48" height="11" rx="4" fill="${S.teeth}"/><ellipse class="tg" cx="300" cy="354" rx="15" ry="8" fill="${S.tongue}"/></g>
+      <!-- nose -->
+      <path d="M300 262 q12 26 2 38 q-8 4 -14 -2" fill="none" stroke="${S.skinLine}" stroke-width="4.5" stroke-linecap="round"/>
+      <!-- curly top -->
+      <path d="M196 214 q-4 -110 104 -118 q110 4 104 118 q-30 -46 -104 -48 q-74 2 -104 48z" fill="${S.hair}" stroke="#0E0C0B" stroke-width="3"/>
+      ${curls.map(([x,y,r]) => `<circle cx="${x}" cy="${y}" r="${r}" fill="${S.hair}" stroke="#0E0C0B" stroke-width="3"/><path d="M${x-r*.5} ${y-r*.15} q${r*.5} ${-r*.6} ${r} 0" fill="none" stroke="${S.hairHi}" stroke-width="4" stroke-linecap="round" opacity=".8"/>`).join("")}
+      <g class="brows"><path class="brow" data-s="L" d="M210 214 q34 -12 68 -2" fill="none" stroke="#0E0C0B" stroke-width="10" stroke-linecap="round"/>
+        <path class="brow" data-s="R" d="M322 212 q34 -10 68 2" fill="none" stroke="#0E0C0B" stroke-width="10" stroke-linecap="round"/></g>
+      <!-- always-visible small eyes behind clear lenses -->
+      <g class="ceyes"><ellipse cx="246" cy="256" rx="15" ry="16" fill="#fff"/><ellipse cx="354" cy="256" rx="15" ry="16" fill="#fff"/>
+        <circle cx="249" cy="259" r="8" fill="#20140E"/><circle cx="351" cy="259" r="8" fill="#20140E"/><circle cx="252" cy="255" r="2.6" fill="#fff"/><circle cx="354" cy="255" r="2.6" fill="#fff"/></g>
+      <g class="eyes" opacity="0"><ellipse cx="242" cy="256" rx="34" ry="40" fill="#fff" stroke="#15120F" stroke-width="4"/><ellipse cx="358" cy="256" rx="34" ry="40" fill="#fff" stroke="#15120F" stroke-width="4"/>
+        <circle class="pup" cx="246" cy="262" r="15" fill="#15120F"/><circle class="pup" cx="354" cy="262" r="15" fill="#15120F"/><circle cx="251" cy="255" r="5" fill="#fff"/><circle cx="359" cy="255" r="5" fill="#fff"/></g>
+      <!-- round glasses (class shades so every gag still works) -->
+      <g class="shades">
+        <circle cx="246" cy="256" r="44" fill="url(#lens)" stroke="${S.frame}" stroke-width="8"/>
+        <circle cx="354" cy="256" r="44" fill="url(#lens)" stroke="${S.frame}" stroke-width="8"/>
+        <path d="M290 250 q10 -10 20 0" fill="none" stroke="${S.frame}" stroke-width="7" stroke-linecap="round"/>
+        <path d="M202 248 h-18 M398 248 h18" stroke="${S.frame}" stroke-width="7" stroke-linecap="round"/>
+        <path d="M222 234 q14 -12 32 -12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".55"/>
+        <path d="M330 234 q14 -12 32 -12" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".45"/>
+      </g>`;
+  }
   function svg() {
     return `<svg viewBox="0 0 600 640" xmlns="http://www.w3.org/2000/svg" overflow="visible" style="overflow:visible">
     <g class="body">
-      ${LOOK === "street" ? bodyStreet() : LOOK === "hoodie" ? bodyHoodie() : bodyClassic()}
-      <g class="head">${LOOK === "classic" ? headClassic() : headStreet()}${ACC[cfg.accessory] || ""}</g>
+      ${LOOK === "street" ? bodyStreet() : (LOOK === "hoodie" || LOOK === "creator") ? bodyHoodie() : bodyClassic()}
+      <g class="head">${LOOK === "classic" ? headClassic() : LOOK === "creator" ? headCreator() : headStreet()}${ACC[cfg.accessory] || ""}</g>
     </g>
     <defs><linearGradient id="lens" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="${S.lens1}"/><stop offset=".55" stop-color="${S.lens2}"/><stop offset="1" stop-color="#1DE9B6"/></linearGradient></defs>
     <g class="arms">${arm("L")}${arm("R")}</g>
