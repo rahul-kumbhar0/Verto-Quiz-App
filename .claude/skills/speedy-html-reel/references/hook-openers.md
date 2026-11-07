@@ -23,3 +23,13 @@ Never use a slow build from an empty frame.
 
 Rules: the gag is about the topic, finished by 1.5 s, one cartoon SFX at most, graphite look kept. Every opener
 has the proof on screen by 1.5 s. Use Instagram Trial Reels to test two openers on the same body.
+
+## 15. Cinematic scene hook → dive into the explainer (APPLY v3, 7 Nov 2026)
+A "film" opening before our concept starts: a CSS-3D room (window light beam, dust, desk plane, a phone in perspective
+with a glowing inbox) where rejection emails stream OUT of the screen past the lens with depth blur, iOS
+notifications stack at the top, editorial titles land bottom-left (mono kicker · Instrument Serif italic line ·
+900-weight slam line with a shake). Karaoke captions and the presenter are hidden; on the twist the camera DIVES
+into the phone screen (scale ×7 + blur + brightness), a warm flash, and the first explainer surface grows out of the
+glow while the presenter springs up from below. Code: `canwe-ai/drafts/apply/index.html` ("PRO HOOK").
+AI b-roll (Video_Create) was the first choice, but its file host is blocked in cloud sessions, so build the scene in
+HTML when the plate can't be downloaded. Label sample content ("SAMPLE EMAILS · ILLUSTRATIVE").

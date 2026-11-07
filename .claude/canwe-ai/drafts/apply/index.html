@@ -71,6 +71,43 @@
 .lb{position:absolute;left:0;right:0;height:0;background:#050506;z-index:30;pointer-events:none}
 #lbT{top:0}#lbB{bottom:0}
 #bst{position:absolute;z-index:13}
+
+@font-face{font-family:"Instrument Serif";font-style:italic;font-weight:400;src:url(fonts/instrument-serif-latin-400-italic.woff2)}
+@font-face{font-family:Inter;font-weight:900;src:url(fonts/inter-latin-900-normal.woff2)}
+/* ---- PRO HOOK: cinematic AI shot + editorial type + notification stack, dives into the laptop ---- */
+#sFilm{position:absolute;inset:0;z-index:5;overflow:hidden;background:#000}
+#film{position:absolute;inset:0}#film img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;visibility:hidden;filter:contrast(1.08) saturate(.82) brightness(.92)}
+#sFilm .fv{position:absolute;inset:0;background:radial-gradient(120% 80% at 50% 45%,transparent 45%,rgba(0,0,0,.75));pointer-events:none}
+#sFilm .fg{position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.55),transparent 28%,transparent 60%,rgba(0,0,0,.7));pointer-events:none}
+
+/* 3D room scene (replaces the AI plate: its host is blocked in this sandbox) */
+#film{background:radial-gradient(90% 60% at 20% 18%,rgba(255,170,110,.20),transparent 60%),linear-gradient(180deg,#0b0b0e 0%,#121014 55%,#0a090b 100%)}
+.rm-win{position:absolute;left:-60px;top:120px;width:420px;height:620px;border-radius:12px;background:linear-gradient(160deg,rgba(255,196,140,.35),rgba(255,140,90,.06));box-shadow:0 0 160px 40px rgba(255,150,90,.12);transform:perspective(900px) rotateY(32deg);opacity:.55}
+.rm-win::before{content:"";position:absolute;left:50%;top:0;bottom:0;width:10px;background:#0b0b0e}.rm-win::after{content:"";position:absolute;top:50%;left:0;right:0;height:10px;background:#0b0b0e}
+.rm-beam{position:absolute;left:-200px;top:60px;width:1500px;height:900px;background:linear-gradient(115deg,rgba(255,180,120,.16),rgba(255,180,120,.05) 40%,transparent 62%);mix-blend-mode:screen;transform-origin:0 0;filter:blur(8px)}
+.rm-desk{position:absolute;left:-200px;right:-200px;top:1060px;height:1100px;background:linear-gradient(180deg,#1d1612,#0d0a09 60%);transform:perspective(1200px) rotateX(62deg);transform-origin:50% 0;box-shadow:inset 0 40px 120px rgba(0,0,0,.6)}
+.rm-glow{position:absolute;left:540px;top:900px;width:900px;height:900px;margin:-450px 0 0 -450px;border-radius:50%;background:radial-gradient(closest-side,rgba(120,170,255,.28),rgba(120,170,255,.06) 60%,transparent);mix-blend-mode:screen}
+.rm-dust{position:absolute;inset:0}.rm-dust i{position:absolute;width:4px;height:4px;border-radius:50%;background:rgba(255,214,170,.7);filter:blur(.6px)}
+.rm-sc{position:absolute;inset:0;perspective:1300px;perspective-origin:50% 40%}
+.rm-ph{position:absolute;left:340px;top:560px;width:400px;height:820px;border-radius:64px;background:#0d0d10;border:4px solid #2c2c31;box-shadow:0 60px 120px rgba(0,0,0,.8),0 0 0 2px #050506 inset;transform-style:preserve-3d}
+.rm-scr{position:absolute;inset:14px;border-radius:52px;overflow:hidden;background:linear-gradient(180deg,#0f1625,#0b0f18);box-shadow:0 0 80px rgba(110,160,255,.35)}
+.rm-scr h4{margin:70px 26px 14px;font:800 40px Inter;color:#fff}.rm-scr .rw{margin:0 18px 10px;padding:14px 16px;border-radius:18px;background:rgba(255,255,255,.06);color:#fff}
+.rm-scr .rw b{display:block;font:700 18px Inter}.rm-scr .rw span{display:block;font:500 16px Inter;color:rgba(255,255,255,.6)}.rm-scr .rw.r b::after{content:" · rejected";color:#ff7a6b;font-weight:600}
+.rm-fly{position:absolute;left:340px;top:700px;width:400px;transform-style:preserve-3d}
+.rm-fly .em{position:absolute;left:0;width:400px;padding:16px 18px;border-radius:22px;background:rgba(40,42,48,.92);border:1px solid rgba(255,255,255,.14);color:#fff;font:600 19px Inter;box-shadow:0 20px 40px rgba(0,0,0,.5)}
+.rm-fly .em small{display:block;font:500 16px Inter;color:rgba(255,255,255,.6)}
+.hk-t{position:absolute;left:70px;right:70px;top:1180px;text-align:left;z-index:3}
+.hk-k{font:600 26px Mono;letter-spacing:8px;color:#F0A585;text-transform:uppercase;opacity:0}
+.hk-a{margin-top:10px;font:400 italic 96px/1 "Instrument Serif",Georgia,serif;color:#F3F1EC;letter-spacing:-1px}
+.hk-b{font:900 168px/.92 Inter;letter-spacing:-8px;color:#fff}
+.hk-b .fx-w.h{color:#E8805C}
+.hk-a .fx-w,.hk-b .fx-w{display:inline-block}
+.hk-n{position:absolute;left:60px;right:60px;top:300px;z-index:4}
+.hk-n .nt{display:flex;gap:16px;align-items:flex-start;background:rgba(38,38,42,.78);backdrop-filter:blur(24px);border:1px solid rgba(255,255,255,.12);border-radius:30px;padding:20px 24px;margin-bottom:14px;color:#fff;opacity:0;box-shadow:0 20px 50px rgba(0,0,0,.45)}
+.hk-n .ic{width:58px;height:58px;border-radius:14px;background:linear-gradient(180deg,#5AA9FF,#1F6FEB);display:grid;place-items:center;font-size:30px;flex:none}
+.hk-n b{display:block;font:700 24px Inter}.hk-n span{display:block;font:500 22px/1.3 Inter;color:rgba(255,255,255,.78)}.hk-n em{margin-left:auto;font:500 19px Inter;color:rgba(255,255,255,.5);font-style:normal;white-space:nowrap}
+.hk-fn{position:absolute;right:40px;bottom:40px;font:600 17px Mono;letter-spacing:2px;color:rgba(255,255,255,.55);z-index:4}
+.hk-bar{position:absolute;left:0;right:0;height:150px;background:#000;z-index:6}.hk-bar.t{top:0}.hk-bar.b{bottom:0}
 </style></head>
 <body class="look"><div id="stage">
   <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
@@ -113,6 +150,20 @@
       <div class="ap-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The setup + the exact prompt 📝</span></div><em>via 2il.in</em></div>
     </section>
   </div>
+  <section id="sFilm"><div id="film"><div class="rm-win"></div><div class="rm-beam" id="rmBeam"></div><div class="rm-desk"></div><div class="rm-glow" id="rmGlow"></div>
+      <div class="rm-sc"><div class="rm-ph" id="rmPh"><div class="rm-scr"><h4>Inbox</h4>
+        <div class="rw r"><b>Graduate Hiring Team</b><span>Update on your application</span></div><div class="rw r"><b>Campus Recruitment</b><span>Application status</span></div>
+        <div class="rw r"><b>Talent Acquisition</b><span>Thank you for applying</span></div><div class="rw r"><b>HR · Early Careers</b><span>Your candidacy</span></div>
+        <div class="rw r"><b>Recruiting</b><span>Next steps</span></div><div class="rw r"><b>Hiring Desk</b><span>Re: Software Engineer, Graduate</span></div></div></div>
+        <div class="rm-fly" id="rmFly"></div></div>
+      <div class="rm-dust" id="rmDust"></div></div><div class="fv"></div><div class="fg"></div>
+    <div class="hk-n" id="hkN">
+      <div class="nt" id="n1"><div class="ic">✉️</div><div><b>Graduate Hiring Team</b><span>Unfortunately, we won't be moving forward with your application.</span></div><em>now</em></div>
+      <div class="nt" id="n2"><div class="ic">✉️</div><div><b>Campus Recruitment</b><span>Application status: not shortlisted.</span></div><em>2m</em></div>
+      <div class="nt" id="n3"><div class="ic">✉️</div><div><b>Talent Acquisition</b><span>Thank you for your interest. We regret to inform you…</span></div><em>5m</em></div></div>
+    <div class="hk-t"><div class="hk-k" id="hkK">1:47 am · hostel room</div><div class="hk-a" id="hkA"></div><div class="hk-b" id="hkB"></div></div>
+    <div class="hk-fn">SAMPLE EMAILS · ILLUSTRATIVE</div>
+    <div class="hk-bar t" id="hbT"></div><div class="hk-bar b" id="hbB"></div></section>
   <div class="mg-layer" id="mgFx"></div><div id="tint"></div><div class="ttl" id="ttl"><div class="ttl-n" id="ttlN"></div><div class="ttl-w" id="ttlW"></div><div class="ttl-k" id="ttlK"></div></div><div class="fx-burst" id="bst"></div><div class="lb" id="lbT"></div><div class="lb" id="lbB"></div><div class="mg-iris" id="irisRing"></div>
   <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
 </div>
@@ -134,11 +185,14 @@ const box = id => { const r = $(id).getBoundingClientRect(); return { x: r.left 
 const ctr = id => { const b = box(id); return [b.x + b.w / 2, b.y + b.h / 2]; };
 const FB = ["f1", "f2", "f3", "f4", "f5"].map(box), SUB = ctr("subBtn"), SND = ctr("snd"), DMB = box("dm"), DMI = [DMB.x + 48, DMB.y + DMB.h / 2], RES = ctr("res"), M1 = ctr("m1"), CHIP = TOOLS.map((_, i) => ctr("tl" + i));
 SCN.forEach(s => $(s).style.visibility = "hidden");
+const FLY = ["We regret to inform you","Not shortlisted","Position filled","Unfortunately…","Application closed","We won't be moving forward","Thank you for your interest","Not selected"];
+$("rmFly").innerHTML = FLY.map((x, i) => `<div class="em" id="fe${i}">✉️ ${x}<small>${["Hiring Team","Campus Recruitment","Talent Acquisition","HR","Recruiting","Early Careers","Hiring Desk","Careers"][i]}</small></div>`).join("");
+$("rmDust").innerHTML = Array.from({ length: 34 }, () => "<i></i>").join("");
 F.beats({ bpm: 136, groove_in: 0.0, dur: 80 });
 R.setup({ push: 0, scenes: [] });
 R.speedy({ emph: window.EMPH,
   chapters: [{ label: "playwright", at: T.s1 }, { label: "resume", at: T.s2 }, { label: "the form", at: T.s3 }, { label: "the catch", at: T.stop, end: T.cta }],
-  avatar: { x: 240, y: 1330, w: 600, in: -0.5, look: "creator" },
+  avatar: { x: 240, y: 1330, w: 600, in: T.twist + 0.25, look: "creator" },
   poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
 const FILL = [["f1", "Aarav Sharma", T.s3 + 0.35], ["f2", "aarav•••@gmail.com", T.s3 + 0.9], ["f3", "B.E. Computer · 2026", at("college")], ["f5", "Your graduate program ships to 40M users; my final-year project was a UPI reconciliation tool, so…", at("why this")]];
 const cursorTo = (t, keys) => { let k0 = keys[0], k1 = keys[0]; for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i][0]) { k0 = keys[i]; k1 = keys[i + 1]; }
@@ -155,7 +209,7 @@ window.seek = t => {
   M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), drift: 8, waves: [[0.05, 540, 760, 0.9], [T.twist, 540, 900, 1.2], [at("901") + 0.1, 760, 760, 1.5], [at("fills") + 0.1, 540, 900, 1.3], [at("Submit.") + 0.1, SUB[0], SUB[1], 1.2], [at("DM you") + 0.45, DMI[0], DMI[1]]] });
   const inHook = t < T.s1, inS3 = t >= T.s3 && t < T.cta;
   // HOOK — headline over the blurred form; the twist brings the form forward and the first field types itself; the steps deal on the promise
-  M.headline("hl", "Placement season.|*Zero* offers.", t, { at: -0.45, out: T.twist - 0.1 });
+  $("hl").style.opacity = 0;
   const fw = inHook ? E.expoOut(prog(t, T.twist - 0.1, 0.6)) : 1;
   $("brw").style.transform = `translateY(${lerp(140, 0, fw)}px) scale(${lerp(0.88, 1, fw)})`; $("brw").style.filter = fw < 1 ? `blur(${((1 - fw) * 8).toFixed(1)}px)` : ""; $("brw").style.opacity = lerp(0.4, 1, fw);
   ["st1", "st2", "st3"].forEach((id, i) => { const a = T.promise + 0.1 + i * 0.1; if (inHook) M.fly(id, t, a, { y: 160, r: (i - 1) * 6, s: 0.7 }, { f: 2.3, z: 0.55 }); else $(id).style.opacity = 0; });
@@ -195,6 +249,54 @@ window.seek = t => {
   if (t >= T.cta) { const ln = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(ln, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
   R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 });
 
+
+  // ================= PRO HOOK =================
+  const DIVE = T.twist + 0.1, FO = [540, 930];
+  $("kin").style.opacity = t < T.twist - 0.05 ? 0 : 1;
+  { const ap = M.spring(t, DIVE + 0.1, { f: 2.2, z: 0.6 }); $("avatar").style.opacity = t < DIVE + 0.1 ? 0 : 1; $("avatar").style.translate = `0px ${((1 - ap) * 520).toFixed(1)}px`; R.cue("swish", DIVE + 0.1, { soft: true }); }
+  const filmOn = t < DIVE + 0.5; $("sFilm").style.visibility = filmOn ? "visible" : "hidden";
+  if (filmOn) {
+    // phone: slow 3D orbit + settle (camera with intent), screen breathes with each new email
+    const orb = E.power2InOut(clamp(t / 2.6));
+    $("rmPh").style.transform = `rotateX(${lerp(34, 22, orb)}deg) rotateY(${lerp(-24, -10, orb)}deg) rotateZ(${lerp(6, 3, orb)}deg) translateZ(${lerp(-120, 0, orb)}px)`;
+    $("rmGlow").style.opacity = 0.8 + 0.2 * F.pulse(t, { decay: 6 });
+    $("rmBeam").style.transform = `rotate(${(-2 + 2 * Math.sin(t * 0.7)).toFixed(2)}deg)`;
+    // dust drifting in the beam (deterministic)
+    [...$("rmDust").children].forEach((d, i) => { const h1 = F.hash(i) * 0.5 + 0.5, h2 = F.hash(i + 40) * 0.5 + 0.5;
+      d.style.left = ((h1 * 1080 + t * (12 + 20 * h2)) % 1080).toFixed(1) + "px"; d.style.top = ((h2 * 1300 + 120 - t * (8 + 14 * h1) + 1300) % 1300).toFixed(1) + "px"; d.style.opacity = (0.25 + 0.6 * h2) * (0.6 + 0.4 * Math.sin(t * 2 + i)); });
+    // rejection emails stream OUT of the screen toward the lens (z -> past camera), depth blur grows as they pass
+    FLY.forEach((_, i) => { const a = 0.15 + i * 0.27, p = clamp((t - a) / 0.95), el = $("fe" + i);
+      if (p <= 0 || p >= 1) { el.style.opacity = 0; return; }
+      const e = E.power3In(p), side = (i % 2 ? 1 : -1) * (120 + 60 * (F.hash(i) * 0.5 + 0.5));
+      el.style.opacity = clamp(p * 6) * (1 - clamp((p - 0.85) * 6));
+      el.style.transform = `translate3d(${(side * e).toFixed(1)}px,${(-260 * e - 40).toFixed(1)}px,${(1150 * e).toFixed(1)}px) rotateY(${(-side * 0.04 * e).toFixed(2)}deg) rotateZ(${(side * 0.02 * e).toFixed(2)}deg)`;
+      el.style.filter = `blur(${(Math.max(0, e - 0.45) * 16).toFixed(1)}px)`; if (p > 0.02 && p < 0.06) {} });
+    FLY.forEach((_, i) => R.cue("swish", 0.15 + i * 0.27 + 0.55, { soft: true }));
+  }
+  // slow push on the plate + punch on "Zero"
+  const zp = E.expoOut(prog(t, at("Zero") - 0.02, 0.35));
+  $("film").style.transformOrigin = `${FO[0]}px ${FO[1]}px`;
+  $("film").style.transform = `scale(${(1.04 + 0.05 * clamp(t / 2.6) + 0.035 * (1 - zp) * (t >= at("Zero") ? 1 : 0)).toFixed(4)})`;
+  F.shake("sFilm", t, at("Zero"), { amp: 9, d: 0.32 });
+  // letterbox opens as the story starts
+  const bo = E.expoInOut(prog(t, 0.2, 0.9)); $("hbT").style.height = $("hbB").style.height = (150 - 90 * bo).toFixed(1) + "px";
+  // editorial titles
+  $("hkK").style.opacity = clamp((t - 0.05) / 0.25);
+  F.waterfall("hkA", ["Placement", "season."], t, 0.08, { sfx: false });
+  F.waterfall("hkB", ["*Zero*", "offers."], t, at("Zero") - 0.04);
+  // rejection notifications drop in (iOS spring), stack, the newest pushes the rest down
+  [["n1", 0.35], ["n2", 0.85], ["n3", at("Zero") - 0.1]].forEach(([id, a]) => { const p = M.spring(t, a, { f: 2.4, z: 0.62 }); const el = $(id);
+    el.style.opacity = t >= a ? clamp((t - a) / 0.12) : 0; el.style.transform = `translateY(${lerp(-160, 0, p)}px) scale(${lerp(0.9, 1, p)})`; R.cue("pop", a, { soft: true }); });
+  // the DIVE: into the laptop glow -> the careers form grows out of it
+  const dp = prog(t, DIVE - 0.35, 0.7);
+  if (t > DIVE - 0.35 && t < DIVE + 0.5) {
+    const q = E.expoInOut(clamp(dp * 1.6)); $("sFilm").style.transformOrigin = `${FO[0]}px ${FO[1]}px`; $("sFilm").style.transform = `scale(${1 + q * 6})`;
+    $("sFilm").style.opacity = 1 - clamp((dp - 0.38) * 3.5); $("sFilm").style.filter = `blur(${(q * 16).toFixed(1)}px) brightness(${(1 + q * 1.4).toFixed(2)})`;
+    const qi = E.expoOut(clamp((dp - 0.35) / 0.65)); const sh = $("sHook"); sh.style.transformOrigin = `${FO[0]}px ${FO[1]}px`;
+    sh.style.transform = `scale(${lerp(0.3, 1, qi)})`; sh.style.opacity = clamp((dp - 0.3) * 4); sh.style.filter = qi < 1 && dp > 0.3 ? `blur(${((1 - qi) * 14).toFixed(1)}px)` : "";
+  } else { $("sFilm").style.transform = ""; $("sFilm").style.opacity = 1; $("sFilm").style.filter = ""; }
+  F.flash(t, DIVE + 0.02, { color: "#FFE6D4", max: 0.5, d: 0.3, sfx: false });
+  R.cue("riser", DIVE - 0.8, { t2: DIVE }); R.cue("impact", DIVE + 0.02);
   // ================= EDIT LEVEL 4 =================
   // camera with intent (establish -> travel -> arrive), dead still on the stop
   F.cam("cam", t, [
