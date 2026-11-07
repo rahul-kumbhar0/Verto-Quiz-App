@@ -93,3 +93,17 @@ Every call accepts `{sfx:false}` to mute its cue (e.g. a second code block typin
 signature shot in 0–3 s · camera drift on · ≥ 4 gear changes · cuts snapped to beats · max 3 transition types
 · every reveal has sheen/impact · music dips before the biggest reveal · MBLUR=3 · captions still readable
 during camera moves (never move the camera during the boxed keyword).
+
+## 5. Edit level 4 recipes (APPLY v2, 7 Nov 2026) — worked code in `canwe-ai/drafts/apply/index.html` ("EDIT LEVEL 4" block)
+- **One camera for the whole reel**: a single `F.cam("cam", t, keys)` list with establish → travel → arrive per
+  chapter (push on the hook, settle on the twist, tilt down onto chips, dolly into the big number, follow the form,
+  DEAD STILL on the stop, arrive from 0.94 on the CTA). Keep `y:0` and `s ≤ 1.04` on frames where `mgFx` rings
+  fire (rings live outside `#cam`, so big moves misalign them).
+- **Chapter slam**: dark glass card (`.ttl`) with an outlined number via `F.letters(...,{mode:"flip"})` + label via
+  `F.scramble`, in 0.28 s expoOut, out at +0.62 s up + blur. Cues registered unconditionally (impact soft + swish).
+- **Dive between chapters** (`F.dive`) only inside a guarded window (`t` within ±0.45 s of the cut) — the function
+  writes transforms at every t, so unguarded it hides the incoming scene.
+- **Freeze moment** on the biggest stop: `#tint` (`mix-blend-mode:saturation`, z-index BELOW `#avatar`/`#rail` so
+  the presenter stays in colour) + letterbox bars (`.lb`, 120 px) + `F.glitch` on the hero; colour returns on the payoff.
+- **Payoff stack**: press → sheen on the button → `F.burst` from its centre → soft flash. Leaks (`F.leak`) on the twist
+  and the CTA arrival only (they share `#fxOverlay` with flash: never overlap them).

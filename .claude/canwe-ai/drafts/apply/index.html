@@ -59,6 +59,18 @@
 .ap-dm{position:absolute;left:110px;right:110px;top:600px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7}
 .ap-dm img{width:56px;height:56px;border-radius:50%;background:#fff}.ap-dm b{display:block;font:700 22px Inter}.ap-dm span{font:500 21px Inter;color:var(--ink-2)}
 .ap-dm em{margin-left:auto;font:700 16px Mono;font-style:normal;color:var(--acc-hi);border:1px solid rgba(217,119,87,.5);border-radius:999px;padding:4px 10px}
+
+/* ---- edit level 4: chapter slams, freeze tint, letterbox ---- */
+.ttl{position:absolute;left:50%;top:700px;margin-left:-330px;width:660px;padding:34px 0 30px;text-align:center;z-index:12;pointer-events:none;opacity:0;background:rgba(14,14,17,.9);border:1.5px solid rgba(240,165,133,.35);border-radius:44px;box-shadow:0 40px 120px -20px rgba(0,0,0,.8),inset 0 1px 0 rgba(255,255,255,.08);backdrop-filter:blur(14px)}
+.ttl::before{display:none;content:"";position:absolute;left:50%;top:50%;width:900px;height:560px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(10,10,12,.92),rgba(10,10,12,.6) 60%,transparent);z-index:-1}
+.ttl-n{font:900 300px/1 Inter;letter-spacing:-14px;color:transparent;-webkit-text-stroke:5px #F0A585;perspective:900px}
+.ttl-n .fx-ch{display:inline-block}
+.ttl-w{margin-top:6px;font:800 54px Mono;letter-spacing:10px;color:#F3F1EC;text-transform:uppercase}
+.ttl-k{margin-top:14px;font:600 22px Mono;letter-spacing:6px;color:#9A948C}
+#tint{position:absolute;inset:0;background:#808080;mix-blend-mode:saturation;opacity:0;z-index:6;pointer-events:none}
+.lb{position:absolute;left:0;right:0;height:0;background:#050506;z-index:30;pointer-events:none}
+#lbT{top:0}#lbB{bottom:0}
+#bst{position:absolute;z-index:13}
 </style></head>
 <body class="look"><div id="stage">
   <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
@@ -101,7 +113,7 @@
       <div class="ap-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The setup + the exact prompt 📝</span></div><em>via 2il.in</em></div>
     </section>
   </div>
-  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
+  <div class="mg-layer" id="mgFx"></div><div id="tint"></div><div class="ttl" id="ttl"><div class="ttl-n" id="ttlN"></div><div class="ttl-w" id="ttlW"></div><div class="ttl-k" id="ttlK"></div></div><div class="fx-burst" id="bst"></div><div class="lb" id="lbT"></div><div class="lb" id="lbB"></div><div class="mg-iris" id="irisRing"></div>
   <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
 </div>
 <script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
@@ -138,7 +150,7 @@ window.seek = t => {
   const hookSlot = t >= T.s3 ? [T.s3, T.cta] : [0, T.s1];   // the form section is used twice (hook + step 3): one slot entry at a time
   F.slots(t, [["sHook", hookSlot[0], hookSlot[1]], ["s1", T.s1, T.s2], ["s2", T.s2, T.s3], ["sCta", T.cta, 99]]);
   // the hook form section comes BACK for step 3 (same surface): slots handles it; seams
-  F.cutCurve("sHook", "s1", t, T.s1); F.cutCurve("s1", "s2", t, T.s2); F.zoomCut("s2", "sHook", t, T.s3); F.inverseZoom("sHook", "sCta", t, T.cta);
+  F.cutCurve("sHook", "s1", t, T.s1); F.cutCurve("s1", "s2", t, T.s2); if (t > T.s3 - 0.4 && t < T.s3 + 0.45) F.dive("s2", "sHook", t, T.s3, { origin: M1, d: 0.7, sfx: false }); F.inverseZoom("sHook", "sCta", t, T.cta);
   R.speedyFrame(t);
   M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), drift: 8, waves: [[0.05, 540, 760, 0.9], [T.twist, 540, 900, 1.2], [at("901") + 0.1, 760, 760, 1.5], [at("fills") + 0.1, 540, 900, 1.3], [at("Submit.") + 0.1, SUB[0], SUB[1], 1.2], [at("DM you") + 0.45, DMI[0], DMI[1]]] });
   const inHook = t < T.s1, inS3 = t >= T.s3 && t < T.cta;
@@ -182,6 +194,44 @@ window.seek = t => {
   $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.1); M.fly("r3", t, sent, { y: 40, s: 0.9 }, { f: 2.6, z: 0.55 });
   if (t >= T.cta) { const ln = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(ln, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
   R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 });
+
+  // ================= EDIT LEVEL 4 =================
+  // camera with intent (establish -> travel -> arrive), dead still on the stop
+  F.cam("cam", t, [
+    { t: 0, s: 1.07, y: 24 }, { t: T.twist - 0.12, s: 1.07, y: 24 }, { t: T.twist + 0.6, s: 1, y: 0, ease: "expoOut" }, { t: T.s1 - 0.06, s: 1.02, ease: "power2InOut" },
+    { t: T.s1, s: 1, rx: 7, y: 30 }, { t: T.s1 + 0.7, s: 1.05, rx: 0, y: 46, ease: "expoOut" }, { t: at("open") - 0.25, s: 1.05, y: 46 },
+    { t: at("open") + 0.55, s: 1.0, y: -24, ry: -3, ease: "power2InOut" }, { t: T.s2 - 0.06, s: 1.0, y: -24, ry: 0, ease: "power2InOut" },
+    { t: T.s2, s: 1, y: 0 }, { t: at("901") - 0.08, s: 1.0 }, { t: at("901") + 0.35, s: 1.07, ease: "expoOut" }, { t: at("scores") - 0.1, s: 1.07 },
+    { t: at("scores") + 0.5, s: 1.0, y: -16, ease: "power2InOut" }, { t: T.s3 - 0.06, s: 1.0, y: -16 },
+    { t: T.s3, s: 1.0, y: 0 }, { t: T.s3 + 0.8, s: 1.06, y: 50, ease: "expoOut" }, { t: at("why this") - 0.1, s: 1.06, y: 20, ease: "power2InOut" },
+    { t: T.stop - 0.05, s: 1.0, y: 0, ease: "power2InOut" }, { t: at("press") - 0.15, s: 1.0, y: 0 }, { t: at("press") + 0.35, s: 1.03, ease: "expoOut" },
+    { t: T.li, s: 1.0, ease: "power2InOut" }, { t: T.cta - 0.05, s: 1.0 }, { t: T.cta, s: 0.94 }, { t: T.cta + 0.8, s: 1, ease: "expoOut" }, { t: 99, s: 1 }]);
+  F.shake("cam", t, at("Zero") + 0.05, { amp: 7, d: 0.3, sfx: false });
+  // chapter slams: outlined number flips in, label decodes, then leaves up
+  const SL = [[T.s1, "01", "playwright", "step one"], [T.s2, "02", "your resume", "step two"], [T.s3 + 0.05, "03", "the form", "step three"]];
+  SL.forEach(([a]) => { R.cue("impact", a, { soft: true }); R.cue("swish", a + 0.62); });
+  const sl = SL.find(([a]) => t >= a - 0.04 && t < a + 0.85);
+  if (sl) { const [a, n, w, k] = sl, inP = E.expoOut(prog(t, a - 0.04, 0.28)), outP = E.power3In(prog(t, a + 0.62, 0.2));
+    F.letters("ttlN", n, t, a - 0.04, { mode: "flip", stagger: 0.05, d: 0.35, sfx: false }); F.scramble("ttlW", w, t, a + 0.08, { d: 0.38, sfx: false }); $("ttlK").textContent = k;
+    const tl = $("ttl"); tl.style.opacity = Math.min(inP * 1.4, 1 - outP); tl.style.transform = `translateY(${-110 * outP}px) scale(${lerp(1.25, 1, inP)})`; tl.style.filter = (inP < 1 || outP > 0) ? `blur(${(Math.max(1 - inP, outP) * 10).toFixed(1)}px)` : ""; }
+  else $("ttl").style.opacity = 0;
+  if (t > T.s3 - 0.4 && t < T.s3 + 0.45) {} // (dive window handled above)
+  R.cue("riser", T.s3 - 0.75, { t2: T.s3 }); R.cue("impact", T.s3);
+  // light leaks on the twist and the CTA arrival
+  F.leak(t, T.twist - 0.05, { d: 0.9, max: 0.55 }); F.leak(t, T.cta - 0.1, { d: 0.8, max: 0.45 });
+  // sheens on every hero reveal
+  F.sheen("brw", t, T.twist + 0.45, { d: 0.75 }); F.sheen("res", t, T.s2 + 0.5); F.sheen("m1", t, at("keeps") + 0.1); F.sheen("subBtn", t, at("press") + 0.15, { d: 0.5 });
+  F.sheen("dm", t, at("DM you") + 0.5);
+  // FREEZE on "Then it stops." : colour drains, letterbox closes, the form glitches; colour returns on "I press submit"
+  const fzA = at("stops."), fzB = at("press") + 0.05;
+  const fz = clamp((t - fzA) / 0.18) * (1 - clamp((t - fzB) / 0.22));
+  $("tint").style.opacity = (0.9 * fz).toFixed(3);
+  const lb = E.expoOut(clamp((t - fzA) / 0.3)) * (1 - E.power3In(clamp((t - fzB) / 0.25)));
+  $("lbT").style.height = $("lbB").style.height = (120 * lb).toFixed(1) + "px";
+  F.glitch("brw", t, fzA, { amp: 12, d: 0.32 });
+  // payoff: I press submit -> sparks from the button
+  $("bst").style.left = SUB[0] + "px"; $("bst").style.top = SUB[1] + "px";
+  F.burst("bst", t, at("press") + 0.12, { n: 22, r: 240 });
 };
 window.seek(0);
 </script></body></html>
