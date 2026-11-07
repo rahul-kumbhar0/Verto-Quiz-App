@@ -1,0 +1,34 @@
+=== INSTAGRAM REEL ===
+Your coding interview records way more than your code 👀
+
+What they actually check:
+1️⃣ Every paste + tab switch (logged)
+2️⃣ Typing rhythm: long pause → burst of perfect code
+3️⃣ Your answer vs every submission + the web → one suspicion score
+4️⃣ Live call: eyes drifting, the long "hmm"
+5️⃣ The killer: one follow-up question
+
+Use AI to prepare, not to perform.
+Follow, and send this to the friend who keeps ChatGPT open in the other tab 😭
+
+Sources: HackerRank & CodeSignal documentation.
+#codinginterview #placements #developersindia #softwareengineer #interviewtips #chatgpt #ai #freshers #techjobs #leetcode #hackerrank #coding
+
+=== YOUTUBE SHORTS ===
+Title (≤100 chars):
+How Companies Catch You Using ChatGPT in a Coding Interview #shorts
+
+Description:
+Your coding interview records more than your code. Here's how platforms and interviewers catch AI answers:
+- every paste and tab switch is logged
+- typing rhythm: a long pause, then a burst of perfect code
+- your answer is compared with every submission and solutions online (suspicion score)
+- live calls: eyes drifting, the long "hmm"
+- the real catch: one follow-up question you can't answer
+
+Use AI to prepare, not to perform.
+Sources: HackerRank AI plagiarism detection docs; CodeSignal Suspicion Score docs.
+
+#shorts #codinginterview #placements #chatgpt #softwareengineer #interviewtips
+
+Tags: coding interview, ai cheating, chatgpt interview, hackerrank, codesignal, placement preparation, software engineer interview, freshers, tech interview india

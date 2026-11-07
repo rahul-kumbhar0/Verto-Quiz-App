@@ -1,0 +1,289 @@
+# canwe.ai: the running record (read this first)
+
+Everything a new Claude session needs to continue the @canwe.ai content work. Update it at the end
+of every session (reels posted, automation changes, results, decisions). Last updated: 28 Oct 2026.
+
+## The brand
+- **Instagram:** @canwe.ai (account id 17841462296118299). Also posts to YouTube Shorts.
+- **Audience:** Indian students, freshers and early-career techies; AI, jobs and tech explained.
+- **Logo:** the mascot (option B) is the ONLY canwe.ai logo, used everywhere: profile pics, DM avatars in
+  reels, cover brand mark, guide pages, favicons. File: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/`.
+- **Owner's other channels:** a 100K YouTube channel (old serial-image content, unused) and a 25K gaming
+  channel (unused). Both unmonetized. Decided not to post canwe.ai content there for now.
+
+## How we make reels (house rules)
+- **Script:** `.claude/skills/reel-script-writer` (10 scored hooks, archetype by goal, lint, full post
+  package). **Build:** `.claude/skills/speedy-explainer-reel` (cartoon presenter, captions, 3D props).
+- **Voice:** ElevenLabs **eleven_v3**, voice **Shlok** (voice_id `2i7LhYjvw41fgbcqlf3Z`), ONE take,
+  `estimate_only` first, keep credits low. **Never eleven_v4.** ≈ 700 credits per 40-s reel.
+- **Length:** under 60 s (Reels + Shorts). Lead reels 25–45 s. Measured pace ≈ 3.0 words/s.
+- **Tone:** casual, spoken, human ("like telling a friend"), short; say "I connected Claude" style.
+- **Every reel ends with** "Comment KEYWORD" → DM automation → a guide page.
+- **Real logos** for every brand named on screen (`scripts/brand_logos.mjs`), never emojis.
+- **3D exploded view + lens** for any "what's inside / what it makes" beat; **process steps, analogy split, zoom-through, bar chart** for how-it-works / beginner ideas / scale / numbers (table in speedy-explainer-reel references/props3d.md).
+- **Pacing (always, from 28 Oct):** `tools/pace.py` after align: 4-6 hard stops (~0.55 s) + speech
+  sped 1.06x; stops after the hook twist / before "But..." / after the punchline; music break over the
+  biggest stop. Topic picking: CHORE x CLAUDE x FREE scored 0-6 (reel-script-writer research.md).
+  Queued next: cleanyourtv TV reel (keyword TV), WhatsApp+Claude (lharries/whatsapp-mcp, 6.8k stars).
+- **Presenter is auto-directed** + auto reactions (💡 ??? 💧 ✨ 💨), shades-slide gag on shocking numbers, props in hand, signature flip / double-thumbs, outfit per topic.
+- **Presenter (detail)** (`poses: "auto"`): moves + expressions follow the words; pin with `{pose}` only where needed.
+- **Presenter look changes per reel** (street default, classic blue for referral, purple hoodie for
+  agent, orange tee for career-ops). Avoid the single-finger "one" pose on covers (reads as rude).
+- **Posting:** ONE reel a day, 7–9 pm IST. Wait ~24 h after a reel that is taking off. Trial reels
+  for extra posts. Share trial reels to followers once they prove themselves.
+- **Ask before installing anything on the owner's machine.** No PRs unless asked.
+
+## DM automations (DirectApply_DM MCP, account "canwe.ai")
+The flow: create automation OFF on "all reels" → owner posts and says "uploaded" → lock it to the reel's
+media_id (`list_reels`), dry-run test, turn ON. All use follow gate + once per user.
+| # | Keyword(s) | Reel | Guide | State (27 Oct) |
+|---|---|---|---|---|
+| 17 | JOBS / job | freehire (media 18118709285050879) | /freehire/ | ON, locked |
+| 18 | RESUME / cv | resume ATS myth (media 18191424364417334) | /resume/ | ON, locked |
+| 19 | SALARY | salary bands (media 18120356209948673) | /salary/ | ON, locked |
+| 20 | REFER | referral from a stranger | /refer/ | OFF (not posted yet) |
+| 21 | AGENT | what is an AI agent v2 | /agent/ | OFF (not posted yet) |
+| 23 | OFFER / offers | career-ops (740 jobs, 1 offer) (media 18082004081378019) | /career-ops/ | ON, locked (seen 28 Oct) |
+| 24 | PROMPT / prompts | one prompt → which jobs you fit | /prompt/ | OFF (not posted yet) |
+| 26 | OSS (exact) | Claude Max free for open source | /oss/ | OFF (not posted yet; on lock switch match to "any" like #17–#19) |
+| 27 | TV (exact) | cleanyourtv: delete your TV's ads | /tv/ | OFF (not posted yet; same lock flow) |
+| 29 | GROW (exact) | Claude runs my Instagram (skills pack) | /grow/ | OFF (not posted yet; same lock flow) |
+| 35 | LINK (exact) | Learn AI Engineering · Day 1: every word AI writes is a guess — FINAL = 3D rebuild (reels/ai01v4: v1 voice + script, 3D token slab/laser split, number skyline, isometric next-token bars, pulse music; 47 s, no new credits) | TOKENS | ready, not posted — SERIES pilot | |
+| Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
+| Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
+| Claude + LinkedIn (linkedin-mcp) | /link/ | OFF (not posted yet; same lock flow) |
+| 38 | PDF (exact) | Docxify — OUR OWN app (exam sizes + resume <200 KB) | /pdf/ | OFF (not posted yet; same lock flow) |
+| 42 | TOKENS (exact) | Learn AI Engineering · Day 1 (tokens → numbers → next-token prediction) | /ai/day-1/ | OFF (not posted yet; same lock flow) |
+| 41 | MCP (exact) | "Claude can now order Zomato" — 5 apps on MCP (Zomato, Swiggy, Zerodha, MoSPI, Gmail) | /mcp/ | OFF (not posted yet; same lock flow) |
+(#22, #25, #28 and #30-34 do not exist on this account.) Email capture is available but OFF everywhere (idea: turn on to
+build a buyer list).
+
+## Guide site (Vercel)
+- Live: **https://canwe-guides.vercel.app** (project `canwe-guides`, team `team_6Xaw8O6MfjFggwU7zLunNZOO`,
+  SSO protection disabled). Pages: /, /freehire/, /resume/, /salary/, /refer/, /agent/, /career-ops/, /prompt/, /oss/, /tv/, /grow/, /link/, /pdf/, /mcp/, /ai/ (series hub), /ai/day-1/.
+- Source: `.claude/skills/speedy-explainer-reel/assets/brand/canwe/guide-site/`.
+- **Our-apps promo (live 31 Oct, all pages):** a block injected by `copy.js` above the follow card
+  (styles: `.apps` in `style.css`), promoting the owner's own Android apps by CanWe.tech:
+  **Docxify: 300+ PDF Tool Offline** (`com.docxify.app` — resume <200 KB, exam-form photo/signature
+  sizes, 500+ conversions, offline/private, ads+IAP ₹199–2,999) and **8XDL: Secure Download Manager**
+  (`com.codex.torrentx` — private browser + download manager + media player, 4.8★, 5K+ downloads,
+  ads+IAP ₹100–500). One edit in copy.js updates every current and future page. Real Play Store app icons (user-provided)
+  live at `/apps/docxify.png` + `/apps/8xdl.png` (source `guide-site/apps/`, quantized small PNGs;
+  titles match the store listings exactly). Labeled honestly
+  ("OUR APPS · MADE BY THE SAME TEAM" + ads/IAP note). Docxify is a 6/6 formula topic for its own
+  reel later (first own-product monetization loop; could pair with Stirling-PDF topic #2).
+- Deploy gotcha: every deploy must carry ALL files. Two working ways per file: inline
+  (`{"file","encoding":"utf-8","data"}`; binary needs base64 and is easy to corrupt in a tool call) or
+  `upload_file` (base64 + `xVercelDigest` sha1 + `contentLength`; server VERIFIES the sha, so corruption
+  is caught) then reference `{"file","sha","size"}` in create_deployment. Both forms can be mixed in one
+  deploy. Files sent inline in an earlier deploy are NOT reusable by sha (missing_files); only
+  upload_file'd blobs are. Uploaded so far (reusable by sha): style.css, copy.js, logo.svg, apps/*.png, index, pdf, prompt, mcp, link, grow, tv, ai, ai/day-1 (always re-upload index.html after editing it; its sha changes). Still inline each deploy: oss, freehire, resume, salary, refer, agent, career-ops. A redeploy via `deploymentId` drops unsent files. vercel.app is
+  network-blocked for curl in-session; verify with `web_fetch_vercel_url`.
+- Web Analytics is NOT enabled (owner must click Enable in the dashboard; then add the script).
+
+## Reels: status and results
+| Reel | Keyword | Status | Results |
+|---|---|---|---|
+| AI interview detection | (none) | posted 25 Oct | ~1.8K in trial |
+| freehire job search | JOBS | posted 26 Oct (trial → shared) | 11K day 1 → 31K day 2; 613 comments, 379 DMs, 277 unique guide clicks |
+| Resume ATS myth | RESUME | posted ~27 Oct | (ask) |
+| Salary bands | SALARY | posted ~27 Oct | (ask) |
+| Referral from a stranger (blue look) | REFER | ready, not posted | |
+| What is an AI agent v2 (hoodie, demo-first) | AGENT | ready, not posted | |
+| career-ops: 740 jobs, 1 offer (orange tee, v2 auto presenter) | OFFER | posted (automation #23 is ON and locked) | (ask) |
+| One prompt: which jobs you fit (green hoodie + grad cap, eyes-pop gag) | PROMPT | ready, not posted | |
+| Claude Max free for open source (GitHub-dark hoodie + headset, 48 s v2 stop-and-go paced, 779 credits) | OSS | ready, not posted (use the v2 files) | |
+| cleanyourtv: TV ads deleted by Claude (dark-red tee, 46 s paced, 736 credits; topic bank #1, 6/6) | TV | ready, not posted (post FIRST: wave decays) | |
+| Claude runs my Instagram (IG-magenta classic look, 49 s paced, 789 credits; meta reel, topic #6 + instagram-agent-skill 3.6k ⭐) — FINAL = 3D rebuild 1 Nov (reels/grow3d: 3D phone, exploded reel layers, pedestals, station belt + packet, 3D Post key, 13 skill cubes; pulse music; same voice) | GROW | ready, posting 1 Nov | |
+| Learn AI Engineering · Day 1: every word AI writes is a guess — FINAL = 3D rebuild (reels/ai01v4: v1 voice + script, 3D token slab/laser split, number skyline, isometric next-token bars, pulse music; 47 s, no new credits) | TOKENS | ready, not posted — SERIES pilot | |
+| Claude can now order Zomato: 5 apps on MCP (hoodie Claude-orange, 41.7 s, 3D cubes + packet flows, per-app chat demos labelled "sample", USB-port analogy, 625 credits) | MCP | ready, not posted | |
+| Docxify: 4 MB photo vs 20 KB form (hoodie indigo, 49.8 s, 3D press + exploded teardown, 665 credits) | PDF | ready, not posted — FIRST OWN-PRODUCT reel (installs loop); disclosure spoken + on screen | |
+| Claude + LinkedIn (LinkedIn-blue street look, 46 s paced, 710 credits; linkedin-mcp-server 4.1k ⭐; honesty = ban warning + zero-risk export option) | LINK | ready, not posted | |
+Scripts/scenes for each: `.claude/skills/speedy-explainer-reel/assets/examples/<reel>/`.
+
+## Stories
+| Story | Status | Notes |
+|---|---|---|
+| 1,000 followers (28 Oct): thank-you counter · 4 reels coming (keywords) · "you pick the next reel" poll | made, sent to owner | link sticker → canwe-guides.vercel.app; poll: free AI tools for placements / coding interview hacks / how ChatGPT actually works / side income with AI. Files: `assets/examples/story-1k-followers/` |
+Results log for learning: `.claude/skills/reel-script-writer/references/our-reels.md`.
+**Rendered MP4s are NOT in git** (too big): they live in the session container and were sent to the
+owner in chat. Rebuild from the example folder + a new voice take if needed.
+
+## Money ideas (researched 27 Oct, not started)
+Top pick: a Claude "Job Hunt Skill Pack" (₹199) or "AI Job Hunt Kit" (₹149), plus a ₹99 live workshop to
+test demand. Payment via Topmate or Razorpay Payment Pages (owner's KYC). Avoid selling HR email lists
+(privacy law risk). Full list in the chat of 27 Oct.
+
+## Open to-dos
+- Status 30 Oct: TV/OSS/PROMPT/career-ops posted (owner locked #27/#26/#24 himself; #23 earlier). 1,112 followers, 60.8K views/30d.
+- Posting order now: GROW -> LINK -> referral / agent; on "uploaded" lock #29 / #35 / #20 / #21. ONE reel/day 7-9pm.
+- 29 Oct: career-ops creator (santifer) commented on our OFFER reel; pinned + replied; relationship open.
+- 30 Oct: declined Jiocoder sponsorship (offered Rs 200; floor Rs 1,500 = production cost). Policy: tiered menu, 50% advance, ASCI label, no paid-entry contests.
+- Jiocoder sponsorship DM (29 Oct): holding reply sent; no hackathon found anywhere, jiocoder.com NOT Reliance-affiliated; price only if they verify (anchor Rs 10-12K incl. ad rights, 50% advance, ASCI label). Policy: verify organizer, free entry, disclosure, we keep creative control.
+- Topic bank with verified repos: `.claude/canwe-ai/TOPICS.md` (CHORE x CLAUDE x FREE, scored).
+- Ask the owner for Insights numbers (views, follows, saves) for every posted reel → our-reels.md.
+- Enable Vercel Web Analytics (owner click) → add the tracking script to the guide pages.
+- Decide on the first paid product.
+- 1K story poll: after 24 h ask the owner for the winner → it becomes the next reel (run reel-script-writer);
+  post a result slide ("You picked X. Dropping <day>.").
+
+## Learn AI Engineering series (started 31 Oct 2026)
+Owner's idea: a daily explainer series so the audience AND the owner learn AI engineering.
+- Format: OUR speedy style as it is (grad-cap presenter, big captions, selection box, dark/light flips, rail)
+  + the `speedy-hidden-mechanism-reel` spine, 55–70 s, with STRONGER 3D explanation and animation: one running
+  example prompt through every step, 3D props per step, word-synced changes, blur dissolves, step rail ticks,
+  music `"style":"pulse"`. Owner, 31 Oct: "keep our style as it is, just improve the 3D explanation and
+  animation" — a no-presenter "premium UI" build copying princegupta.ai was REJECTED (only borrow techniques).
+  Worked example of the approved look: `speedy-explainer-reel/assets/examples/ai-day1-3d-reel/` (3D box helper, laser split, skyline, isometric bars).
+- Each day: own keyword (topic word, e.g. TOKENS) → DM → /ai/day-N/ page = plain-words idea + 15-min exercise
+  (+ a "for builders" code snippet) + vocabulary. Hub page /ai/ lists all days (add a row per day).
+- Owner's CTA rule: comment KEYWORD + "follow for the full series". Do NOT tease the next day's topic.
+- Mix: ~3 tool/chore reels + 2 series episodes a week; compare after 5 episodes (series earns saves/follows,
+  tool reels earn comments).
+- Accuracy: every number sourced; illustrative probabilities/vectors footnoted; never show unverifiable
+  token IDs (tiktoken/npm tokenizer downloads are blocked in-session).
+- Season 1 plan: Day 1 tokens/next-token (FINAL = 3D rebuild ai01v4 on the v1 voice; a 70 s 'France' script v3 exists, voice not generated — ElevenLabs call was denied) · hallucinations · context window · temperature ·
+  embeddings · training vs fine-tuning vs prompting. Season 2: prompting, first API call, RAG, vector DBs,
+  tool use, MCP, agents, evals, cost. Season 3: careers (AI eng vs ML eng vs DS, roadmap, portfolio, salaries).
+
+## Performance snapshot — 31 Oct 2026 (likes/comments via PullRows post_details; DMs/clicks via DirectApply 90-day analytics)
+Views/reach/saves/shares are NOT readable from here (Instagram hides them from scraping; only the owner's Insights app has them).
+| Reel (posted) | Likes | Comments | DMs fired | Unique link clickers |
+|---|---|---|---|---|
+| JOBS — automated job search with freehire + Claude (27 Oct) | 572 | 1,521 | 693 | 542 |
+| SALARY — same degree ₹3.5L vs ₹21L (27 Oct) | 81 | 54 | 28 | 25 |
+| OFFER — career-ops 740 jobs → 1 offer (28 Oct) | 57 | 61 | 21 | 14 |
+| PROMPT — which jobs you actually fit (30 Oct) | 52 | 47 | 19 | 15 |
+| LINK — Claude on LinkedIn (31 Oct, same day) | 45 | 54 | 20 | 15 |
+| RESUME — 75% ATS myth (28 Oct) | 23 | 30 | 24 | 22 |
+| TV — cleanyourtv (29 Oct) | 31 | 20 | 7 | 7 |
+| OSS — Claude Max free for open source (30 Oct) | 30 | 20 | 9 | 6 |
+| Coding interview cheating (25 Oct, no keyword) | 32 | 1 | – | – |
+| AGENT — what is an AI agent (30 Oct) | 3 | 0 | 0 | 0 |
+| TOKENS — Learn AI Eng Day 1 (31 Oct, hours old) | 7 | 0 | 0 | 0 |
+Read: the account wins on **fresher job-hunt outcome + free tool/prompt + Claude** (JOBS ≫ everything; LINK/PROMPT/OFFER
+next) and on **money** (SALARY). Pure AI-concept explainers (AGENT, TOKENS so far) get almost nothing. Plan: make the
+next reels JOBS-shaped; tie every Learn-AI episode to a job/career payoff in the hook, or slow the series down.
+
+## Performance snapshot — 1 Nov 2026 (~10:00 UTC)
+| Reel (posted, IST) | Likes | Comments* | DMs | Unique clickers |
+|---|---|---|---|---|
+| JOBS freehire (27 Oct 07:27) | 575 | 1,556 | 711 | 554 |
+| GROW Claude runs my Instagram (1 Nov 10:08, ~5 h old) | 75 | 175 | 57 | 50 |
+| LINK Claude + LinkedIn (31 Oct 15:11) | 61 | 95 | 35 | 27 |
+| SALARY bands (27 Oct 15:35) | 81 | 54 | 28 | 25 |
+| OFFER career-ops (28 Oct 17:33) | 60 | 66 | 22 | 15 |
+| PROMPT which jobs you fit (30 Oct 20:23) | 54 | 47 | 19 | 15 |
+| RESUME ATS myth (28 Oct 09:53) | 24 | 30 | 24 | 22 |
+| TV cleanyourtv (29 Oct 12:13) | 31 | 20 | 7 | 7 |
+| OSS Claude Max free (30 Oct 08:35) | 31 | 20 | 9 | 6 |
+| AI interview (25 Oct, no keyword) | 32 | 1 | – | – |
+| TOKENS Day 1 (31 Oct 18:12) | 10 | 0 | 0 | 0 |
+| AGENT (30 Oct 18:38, 3rd post that day) | 3 | 0 | 0 | 0 |
+*comments include our automation's public replies (≈ half).
+Lessons: first-person "I did X with Claude" hooks + job/money payoff win; concept explainers die; 3 posts/day killed
+AGENT; GROW proves the meta angle. Unposted: MCP (#41), PDF (#38), REFER (#20).
+
+## Editing level 2 (1 Nov 2026)
+Owner asked for advanced editing before the next build. Added `fx.js`/`fx.css` (camera, whip, zoom-through, 3D flip, flash, leak, glitch, shake, sheen, letters, odometer, scramble, code typing, particles, beat sync), new SFX (swish, impact, riser, glitch, shutter), real motion blur (`MBLUR=3`), and `references/advanced-editing.md` (12 rules). Demo: `speedy-explainer-reel/assets/examples/fx-demo/`. Every new reel loads fx.js from the template.
+
+## Reel: APPLY, "Placement season. Zero offers. So I let Claude apply." (FINAL rendered 3 Nov 2026)
+drafts/apply + reels/apply · voice 813 cr (owner uploaded the mp3), paced 42.3 s + dynamics.py (7 level marks: +2 dB twist/form, −2.5 dB 901 aside + "stops") ·
+first reel with the 3-beat opening + M.headline frame 0 · out/claude-apply.mp4 (pulse) + _nomusic + _notlikeus (song from 50.28 s, drop on "it fills the form" 24.9 s, dip on "Then it stops") · cover "Zero offers. So I let {Claude} apply." ·
+automation #56 APPLY OFF → guide https://canwe-guides.vercel.app/apply/ LIVE (dpl_6FaydHsLBvAeC2kEcmuJ94cyCsL5) · hub links it ·
+the careers form on screen is a recreated sample (footnoted); replace with the owner's real Playwright run before posting if possible. Playwright MCP facts in drafts/apply/post-copy.md.
+
+## Reel: YouTube × Claude, "I automated my YouTube channel with Claude" (keyword YOUTUBE, FINAL v2 rendered 3 Nov 2026 with the big first-frame headline (M.headline), counter dropped: out/claude-youtube.mp4 + _nomusic + _notlikeus, 49.1 s, cover)
+Music version (owner's song): out/claude-youtube_notlikeus.mp4 = "Not Like Us" from source 41.17 s: hook on the full beat, the song's 0.6 s silence falls after "…with Google." (28.5 s), breakdown under "make a Short… titles it", drop (75.25 s) on the upload hit "…to canwe.ai" (34.08 s), music dips on "here's the catch". Same mix settings as the LinkedIn song version.
+drafts/yt + reels/yt · voice 843 cr, 48 s (owner uploaded the mp3; elevenlabsusercontent.com still blocked in this session even after allowing → needs a new session) · paced 47.4 s, 5 stops, ×1.05 · cover out/cover.png ("I automated my {YouTube}") · guide https://canwe-guides.vercel.app/youtube/ LIVE with recreated step screens (dpl_6wtmWLLn5CdyqnDTcjy8pcoy5vq3, 3 Nov; replace with real screenshots once the owner does the setup; connector step = "pick an open-source OAuth YouTube MCP, e.g. pauling-ai/youtube-mcp-server, read it first"; hub links it; the /reel/ hub line is removed until the REEL launch, re-add then) ·
+scenes built (Studio flash-forward hook, real install + 11 skills, Google Cloud enable/desktop/client_secret (light), Google sign-in → connected,
+Claude chat → /yt-script → render → upload_video tool chain + impact stack, Private→Public + quota meter ≈6/day, comment → DM via 2il.in) ·
+no-voice preview rendered · automation #54 YOUTUBE OFF → /youtube/ (guide page still to write + deploy) · MUST be true before posting: canwe.ai channel
+really connected (owner OAuth) + one Short really uploaded as private; pick/audit the connector (candidates ~30★).
+
+## Reel: GROW part 2, "Claude made this reel" (keyword REEL, building 2 Nov 2026)
+ON HOLD (owner, 3 Nov): post only when our extension + the paid "Reel Studio Pro" pack are live (plan: PRODUCT-reel-studio-pro.md). #51 stays OFF.
+drafts/grow2 + reels/grow2 · automation #51 REEL OFF · guide /reel/ (written, not deployed) · 2il.in = OUR OWN DM tool (owner: promote it here, disclosed).
+Voice generated (782 cr, flow 6Gd670L7iR9lec9BTrQT) but elevenlabsusercontent.com is blocked in this session → owner must allow it. Skills zip needs a host (owner upload → link).
+Real numbers used: 1,135 DMs / 12 automations / 1,964 contacts (DM dashboard, 7 days to 2 Nov 2026); trends from the 1 Nov PullRows scan (PullRows connector currently disconnected).
+POST #48 is live (locked to the LinkedIn reel).
+
+## Paper editorial mode (3 Nov 2026)
+From the @mrcreates.ai read (TOPICS.md): `<body class="look paper">` in look.css (warm paper + grid, ink, ONE accent --pacc default editorial blue),
+editorial type (.e-pair word pairs sans + Instrument Serif italic, .e-kick/.e-rule/.e-ticks/.e-foot frame, .e-idx numbered index, .e-card paper UI, .e-swap),
+mg.js motions M.pair / M.tear (the torn ₹4,999 checkout) / M.ticks / M.underline / M.swap. Presenter stays as a 360 px sticker bottom-right; captions flip to ink.
+Reference: speedy-explainer-reel/references/paper-editorial.md. Demo: assets/examples/paper-editorial-demo (reels/paperdemo, 20.7 s, no voice, lofi music).
+Use for list/tool reels and "anti-course" hooks (e.g. the REEL reel: "people sell this as a course; the skills are free").
+
+## Motion graphics level 3 (2 Nov 2026)
+Owner: "improve the motion graphics to the extra level". Added `mg.js`/`mg.css` (R.mg) + references/motion-graphics.md (8 laws, API, recipes, checklist), wired into the template.
+Demo = the LinkedIn posts reel rebuilt with it (reels/lipost-mg → skill example mg-demo), with the same voice and the "Not Like Us" mix:
+logo tile morphs into the composer; iris seam from the Claude chip; a connector draws from the skills folder and the chips fly out on springs with echo trails; a 21-tile → 3-picked formula strip;
+humanizer marker + drawn strike + spring-in fixes; a gauge (sample 78/100, footnoted illustrative); a week line drawn; the lock/press rings; the drop stack (shake + rays + double ring + grid wave) on "3,000"; a comment → DM packet path; a beat-pulsing dot grid (136.5 BPM, off in the breakdown).
+
+## Real product UI (1 Nov 2026)
+Owner: show the EXACT Claude / GitHub UI when we talk about them. Added `ui.js`/`ui.css` (GitHub repo page, Claude chat + home, Claude Code terminal, browser chrome) from live screenshots, Primer Octicons (MIT), Source Serif 4 (OFL). Rule: real data + dated footnote; chat answers from real runs. Demo: `speedy-explainer-reel/assets/examples/real-ui-demo/` (freehire repo 3.5k★ → Claude finds 37 real Python internships in Bangalore).
+
+## Reel: Claude writes my LinkedIn posts (built 1 Nov 2026)
+reels/lipost · keyword POST (exact) · automation #48 OFF (lock + activate after upload) · guide https://canwe-guides.vercel.app/post/ (live, linked from hub) ·
+first reel with ElevenLabs v3 audio tags (580 credits) + real-UI kit (LinkedIn composer, real GitHub page 3k★, Claude Code terminal) + new look/fx.
+Owner must run /li-post once on his own LinkedIn before posting (hook is first-person). Running the pack's own humanizer scripts was blocked
+by the permission classifier (third-party code); the reel shows real slop.json replacements, no invented score.
+Vercel: the last deploy referenced EVERY file by sha and succeeded (dpl_FjbRi9Mv9Bdxy2YLtgtXF77BMWqs) — all current pages are reusable by sha now;
+shas: index 2b5e5192… (2584) · post 66b5cdd5… (6062) · oss f744d285… · freehire 42e21325… · resume c7c58193… · salary 176488f1… · refer 6031500b… · agent c8ab1401… · career-ops 64aa45ae….
+Music version (owner's request): out/claude-linkedin-posts_notlikeus.mp4 = Kendrick Lamar "Not Like Us" instrumental (owner's mp3), source 6.34 → 41.53 s.
+Sync: riff under the hook, the beat enters at 2.36 s, the song's breakdown (27.7–32.4 s) sits under "it never posts by itself… I press post", and the drop (32.44 s) lands on "3,000" (video 26.10 s).
+Mix: music ×0.21, −3 dB at 2.5 kHz, sidechain ratio 3 / thr 0.05 (≈12–13 dB under the voice), +10 dB during the hook riff, +7.6 dB during the breakdown, −14.1 LUFS, −1.5 dBTP.
+COPYRIGHT: a commercial song can get the reel muted or blocked on IG/YouTube. Safe route = the _nomusic file + the same song from Instagram's music library (start the clip at the drop).
+How-to for any song: find the drop/beat entry by RMS (50 ms windows), offset = drop_src − payoff_word_time, and duck gently (ratio 3), not mix.sh's ratio 6, which buries a full song about 20 dB down.
+
+## KITE (4 Nov 2026): Zerodha + Claude = free portfolio analyst — FINAL rendered 4 Nov
+out: reels/kite/out/claude-kite.mp4 (pulse) + _nomusic + _notlikeus (song from 71.25 s, drop on "Connect it to Claude" 3.95 s, breakdown boosted under the opening, dip on "It never") + cover.png ("Your portfolio, explained. {Free.}") ·
+HOOK v2 (owner: "is our hook strong?" → rated 7/10, payoff late): frame 0 now shows the PAYOFF — headline "Zerodha + Claude = a free portfolio analyst." + both logos already linked with packets, app faded behind; voice keeps the pain line (mute viewers see the promise, sound viewers hear the pain). Trial-reel idea: spoken stakes opener "Two of your mutual funds might own the same companies. You're paying twice." ·
+audio: owner uploaded the mp3; "It only reads." cut at 33.22–34.34 s; TTS said "P/E ratio" so narration/script now say "P/E ratio"; paced 42.2 s (6 stops incl. "one sheet."), 5 level marks · 44 s total ·
+drafts/roast (script v3, notes, post-copy) + /root/reel-work/reels/kite (index.html scenes done, previewed on fake timings) ·
+voice 825 cr, 43.8 s, flow abpj0xhQSlOljPZ2hmIP (download blocked again in this session → owner uploads the mp3) ·
+TRUTH FIX: the spoken "It only reads." gets cut from the audio (hosted Kite MCP may keep GTT tools; README read 4 Nov: "excludes potentially destructive trading operations");
+on screen it's the prompt rule "explain · never advise" · every screen = labelled SAMPLE portfolio with generic names, footnote "not investment advice · not SEBI-registered" from the twist on ·
+guide https://canwe-guides.vercel.app/kite/ LIVE (dpl_GGMk4fhRqH1ckj1ePG7KaqoK1Saf; setup via claude.ai custom connector / Desktop mcp-remote / Claude Code, Kite login, rule prompt, 4 prompts, safety) · hub links it ·
+automation #60 KITE OFF (exact, all reels, follow gate) → lock to the reel + activate on "uploaded".
+
+## VIDEO (5 Nov 2026): "Stop paying for video-editing courses. Claude makes every reel on this page." — FINAL rendered 5 Nov
+out: reels/video/out/claude-video.mp4 (pulse, break on "Here's the catch") + _nomusic + _notlikeus (song from 72.52 s, drop on "Claude makes" 2.68 s, breakdown under the hook, dip on the catch) + cover.png v2 (owner: background of ALL our covers: 23 real covers tiled + tilted −9°, dimmed centre, "Claude makes my {reels}", kicker NO EDITING COURSE, character pointing up; source drafts/video/cover.html, shot with tools/shot_cover.mjs) · 41.1 s · owner uploaded the mp3; paced 39.3 s, 4 stops, 4 level marks ·
+presenter = the job-search "street" character in the house outfit, auto-staged (walks to the side + points at 15 data-ex elements), depth (closer on twist/catch/CTA, back while pointing), squash/landing, wow sparkles on every "Claude" ·
+guide https://canwe-guides.vercel.app/video/ LIVE, v2 DETAILED (owner, 5 Nov: "build a guide more detailed so users can create videos like these"): 15 sections — install (Mac/Windows), idea, script, voice, init --audio (Whisper word timings), storyboard-first, our look as a prompt, presenter prompt, captions (catalog/add caption-highlight), motion (registry: claude-exchange, code-terminal-run, cut-the-curve, whip-pan-cut, marker-highlight, instagram-follow; 448 items), sound (/media-use, beats), review (check/snapshot/preview + revision prompts), render + cover prompt, post checklist, troubleshooting from our test, costs (dpl_49uqYKWzTev35WHNkWRH3rM4EjAn; earlier dpl_8Jvpm1ptEotUwwebqdfqigcMdN1s; inline-sent kite/index.html WAS reusable by sha this time) · hub links it · automation #63 VIDEO OFF → lock + activate on "uploaded".
+drafts/video (script v1 + Hinglish trial, hooks, post-copy, guide facts, reel.html source, hyperframes-test/) + /root/reel-work/reels/video ·
+voice 753 cr, 39.4 s, flow sE8JHt3dg1Q2gyU3M7yw (history 9Pl3wXGmF3zSSijKQix4; download blocked → owner uploads) ·
+HYPERFRAMES TESTED FOR REAL (5 Nov): npm hyperframes v0.9.15 (Apache-2.0, Node 22+ + FFmpeg). `npx hyperframes init canwe-test --resolution portrait --non-interactive`
+also installed skills hyperframes / hyperframes-cli / hyperframes-registry / media-use into ~/.claude/skills ("Review skills before use"). check flagged: empty first frame,
+nested clips, tween overlap, text occluded → fixed; render blocked loading GSAP from jsdelivr in the sandbox → local assets/gsap.min.js; render: 8.0 s 1080×1920 in 9.0 s.
+There IS a paid "HyperFrames Pro" tier (templates, /reverse-any-video, /style-sampling, credits) → we say "core: free + open source". GitHub API for the repo blocked here → no live star count, so no stars on screen.
+Reel scenes: frame-0 headline over a course checkout that TEARS on "courses." · giant Claude spark detonates (rays, ring, flash) · 3D wall of 15 REAL covers of posted reels ·
+5-step deck slams in · 01 reel cards fly into Claude → pattern chips · 02 script types + 45 s gauge (38) · 03 live waveform + ElevenLabs / free local chips ·
+04 real terminal (init) → prompt → frames fan out → phone plays the REAL HyperFrames render ("REAL RENDER" + "Render complete · 8.0 s · 9.0 s") · 05 same render continues, caption, cover flip, "you" press Share ·
+catch chips · comment → DM via 2il.in. "Claude emoji" = the Claude spark: an inline spinning icon after every spoken "Claude" in the captions + a big spark pop with burst above the word (claudePop()).
+guide /video/ written (not deployed yet) · hub line added · automation #63 VIDEO OFF.
+
+## VIDEO v2 (6 Nov 2026): "I automated my reels with Claude. And you're watching one." — FINAL rendered
+v1 ("Stop paying for video-editing courses", posted 5 Nov as trial) got ~1K views, 0 DMs → owner DELETED it. v2 rebuilt on OUR formula (our-reels.md § What made OUR reels go viral:
+JOBS 812 / GROW 682 / YOUTUBE 402 DMs in 30 days all = "I automated my [platform] with Claude" + proof inside the reel + named free tool + catch + thing-keyword).
+Proof lines: "2,000 plus followers in one week" (owner-confirmed, 6 Nov; earlier notes had 1,112 on 30 Oct) · "Over 3,000 comments" (DM dashboard: 3,268 in 30 days).
+Voice 791 cr (flow M27UH1FuDTZ0bWbbeIVi; owner uploaded the mp3), paced 43.5 s, 6 stops · 45.3 s total · reels/video2/out/claude-video-v2.mp4 (pulse, break on "The catch?") + _nomusic + _notlikeus (song from 72.46 s, drop on "you're watching one") + cover.png ("2,000+ FOLLOWERS IN 1 WEEK" · "I automated my {reels}" on the all-covers wall).
+Two-pass render: pass 1 → its first 8 s become the frames the phone plays ("THIS REEL"), pass 2 MBLUR final. Honesty: voice = ElevenLabs (said), our engine ≠ HyperFrames ("free tool for you"), number sources footnoted.
+Automation #63 VIDEO is ON but locked to the DELETED media 18106883129645628 → re-lock to the new media id on "uploaded".
+### VIDEO v2 · PEACH CREAM look (6 Nov, owner: "fresh colour, not black" → picked option C)
+Theme system in reels/video2 (body[data-theme]: aurora / studio / blueprint / sunset / ocean / cream) + 3D camera tilt (cam3d wrapper) + scrolling 3D floor grid + moving glow blobs.
+Cream = light gradient #FFF6EC → #FFE9DD → #F3E8FF, peach/mint/lilac glows, terracotta floor lines, captions dark (is-light), headline on a frosted cream panel, "Claude" word terracotta #C2552F.
+New in the edit: our real reels as clips on an editing timeline (step 04) + a 3D ring of our real covers as "the output" (step 05, stays dimmed behind the catch).
+Out: reels/video2/out/claude-video-v2-cream.mp4 (pulse) + _nomusic + _notlikeus + cover_cream.png (cream cover, terracotta pill). Phone frames re-shot from a cream pass 1.
+The dark v2 render (claude-video-v2*.mp4) is kept as the alternative.
+### VIDEO v2 posted 6 Nov 2026 (media 18034821182899818, instagram.com/reel/DfYt8mRzh7c/)
+Owner linked #63 to it himself (still also lists the deleted v1 id 18106883129645628) and turned email capture ON.
+First check (same day): #63 fired 37 DMs, 13 link clicks, 9 unique clickers (v1 got 0 DMs in its whole trial). Views: ask the owner (not readable here).
+7-day context: GROW 705, YOUTUBE 445, JOBS 143, LINK 127 DMs. DM text still describes v1 ("HyperFrames … my exact prompt") → align to the v2 steps if the owner agrees.
+## CRASH (7 Nov 2026): "$2.3 trillion gone in one day. So are AI jobs gone too?" — FINAL rendered 7 Nov (NEWS: post TODAY; part 2 = Nvidia earnings 17 Nov)
+out: reels/crash/out/claude-crash.mp4 (pulse, break on "And honestly?") + _nomusic + _notlikeus (song from 55.43 s, drop on "So I asked Claude" 19.77 s, dip on the honesty beat) + cover.png (cream covers wall, "5 NOV · WORST DAY IN A YEAR" · "$2.3T gone. {Your job too?}", shrugging presenter) · 49.8 s · owner uploaded the mp3; aligned ("185"=5 spoken tokens), paced 48 s, 6 stops, 4 level marks.
+NEWS reel (post within ~24h; part 2 = Nvidia earnings 17 Nov). drafts/crash (facts sourced NBC/Morningstar/Fool/IBTimes 5–6 Nov; "nearly 9%" because sources disagree; 10 hooks; script 135 w lint PASS; post-copy) + /root/reel-work/reels/crash (cream look + 3D world, scenes built + previewed on fake timings: $2.3T odometer + falling chart (illustrative, footnoted) → stakes card → 3 fall bars (−9*/−17/−6.3) + why chips → Claude chat → mood-vs-decision split (jitter ticker vs offer letter) → 185/153/150 bar race ("✓ checked 6 Nov") → "Did the bubble pop? Nobody knows" card → skill-up/panic chips (strike on panic) → CTA; is-light captions; footnote "educational · not investment advice" throughout).
+Voice 841 cr, 47.4 s (flow AYCFYQmWqYKN9lcLEM7Z, history 0phFwDQCdDnfjrgQV06A); download blocked → owner uploads. 185-AI-skill stat = freehire facets 6 Nov (ai 185 > python 153 > sql 150, India intern+junior 7d).
+Guide https://canwe-guides.vercel.app/crash/ LIVE (dpl_FM48rMd4dbFHNXcfpDfCGnMLgfW9) · hub links it · automation #70 CRASH OFF (exact, all reels, follow gate) → lock + activate on "uploaded".
+Vercel NOTE: index.html, video/index.html and crash/index.html are now UPLOADED blobs (sha-reusable): index 24bf1715… (3119) · video 6fb4a683… (21026) · crash 411cf4f2… (7304).

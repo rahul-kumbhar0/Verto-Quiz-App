@@ -1,0 +1,236 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>$2.3T gone in a day</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+#rail{display:none!important}
+.cr{position:absolute;inset:0;visibility:hidden}
+/* ===== cream theme + 3D world (house look from VIDEO v2) ===== */
+#bgfx{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(110px);left:0;top:0}
+#bl1{background:radial-gradient(circle,rgba(255,160,120,.55),transparent 65%)}
+#bl2{background:radial-gradient(circle,rgba(110,220,185,.45),transparent 65%)}
+#bl3{background:radial-gradient(circle,rgba(170,150,255,.40),transparent 65%)}
+#floorW{position:absolute;left:-540px;right:-540px;bottom:-60px;height:900px;perspective:700px;perspective-origin:50% 0%}
+#floor{position:absolute;inset:0;transform:rotateX(68deg);transform-origin:50% 0%;background-image:linear-gradient(rgba(217,119,87,.32) 2px,transparent 2px),linear-gradient(90deg,rgba(217,119,87,.32) 2px,transparent 2px);background-size:120px 120px;-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+#cam3d{position:absolute;inset:0;perspective:1800px;perspective-origin:50% 45%}
+#cam3dIn{position:absolute;inset:0;transform-style:preserve-3d}
+body.look .s-bg{background:linear-gradient(170deg,#FFF6EC 0%,#FFE9DD 55%,#F3E8FF 100%)!important;background-color:#FFF6EC!important}
+body.look .s-bg::before{opacity:0}
+body.look .s-vig{background:radial-gradient(ellipse 85% 65% at 50% 45%,transparent 62%,rgba(120,70,40,.10) 100%)!important}
+body.look #grain{mix-blend-mode:multiply;opacity:.05}
+.w.clw{color:#C2552F!important;text-shadow:none}
+.cl-ic{display:inline-block;width:.86em;height:.86em;margin-left:.16em;vertical-align:-.1em;background:url(logos/claude.svg) center/contain no-repeat;filter:drop-shadow(0 0 10px rgba(217,119,87,.8))}
+.clp{position:absolute;width:150px;height:150px;margin:-75px 0 0 -75px;left:0;top:0;z-index:30;opacity:0;pointer-events:none}
+.clp .sp{position:absolute;inset:0;background:url(logos/claude.svg) center/contain no-repeat;filter:drop-shadow(0 0 22px rgba(217,119,87,.95)) drop-shadow(0 0 4px #fff)}
+.clp .halo{position:absolute;inset:-60px;border-radius:50%;background:radial-gradient(circle,rgba(217,119,87,.55),rgba(217,119,87,0) 62%)}
+.clp .bu{position:absolute;left:75px;top:75px}
+/* ===== HOOK: $2.3T odometer + falling chart ===== */
+#big{position:absolute;left:0;right:0;top:560px;text-align:center;font:900 230px/1 Inter;letter-spacing:-12px;color:#16161A;z-index:5}
+#big small{display:block;font:800 44px Inter;letter-spacing:0;color:#C2552F;margin-top:18px}
+#chartW{position:absolute;left:60px;right:60px;top:880px;height:420px;z-index:3}
+#stakes{position:absolute;left:0;right:0;top:1120px;text-align:center;z-index:6}
+#stakes span{display:inline-block;font:900 72px Inter;letter-spacing:-2px;color:#fff;background:#16161A;border-radius:24px;padding:22px 44px;box-shadow:0 30px 70px -20px rgba(80,40,20,.5);opacity:0}
+/* ===== NEWS: fall bars + why chips ===== */
+.nh{position:absolute;left:70px;top:400px;z-index:6;display:flex;align-items:baseline;gap:18px}
+.nh b{font:900 100px/1 Inter;color:#C2552F;letter-spacing:-5px}.nh span{font:900 56px Inter;letter-spacing:-2px;color:#16161A}
+#bars{position:absolute;left:110px;right:110px;top:620px;height:560px;display:flex;justify-content:space-between;z-index:4}
+.fb{width:250px;position:relative}
+.fb .nm{position:absolute;top:0;left:0;right:0;text-align:center;font:800 34px Inter;color:#16161A}
+.fb .bar{position:absolute;left:35px;right:35px;top:80px;border-radius:0 0 18px 18px;background:linear-gradient(#E0473B,#8E2A22);transform-origin:50% 0;box-shadow:0 24px 50px -18px rgba(142,42,34,.55)}
+.fb .pc{position:absolute;left:0;right:0;text-align:center;font:900 58px Inter;letter-spacing:-2px;color:#C2552F;opacity:0}
+#why{position:absolute;left:0;right:0;top:1300px;display:flex;justify-content:center;gap:18px;z-index:5}
+#why .m-chip{font:700 30px Inter;background:#fff;color:#16161A;border:1.5px solid #EADFD2;opacity:0}
+/* ===== TWIST: Claude chat ===== */
+#chat{position:absolute;left:90px;right:90px;top:560px;z-index:4}
+.msg{border-radius:26px;padding:26px 32px;font:600 34px/1.35 Inter;opacity:0;box-shadow:0 26px 60px -22px rgba(80,40,20,.35)}
+#mu{background:#16161A;color:#F3F1EC;margin-left:140px}
+#mc{background:#fff;color:#16161A;margin:26px 140px 0 0;border:1.5px solid #EADFD2}
+#mc .who{display:flex;align-items:center;gap:10px;font:800 24px Inter;color:#C2552F;margin-bottom:12px}#mc .who i{width:30px;height:30px;background:url(logos/claude.svg) center/contain no-repeat;display:inline-block}
+#mct{min-height:100px}
+/* ===== 1: mood vs decision ===== */
+#split{position:absolute;left:70px;right:70px;top:580px;height:620px;display:flex;gap:26px;z-index:4}
+.half{flex:1;border-radius:30px;padding:34px;opacity:0;position:relative}
+#mood{background:#16161A;color:#F3F1EC}
+#decn{background:#fff;color:#16161A;border:1.5px solid #EADFD2;box-shadow:0 30px 70px -24px rgba(80,40,20,.4)}
+.half h3{margin:0;font:900 52px Inter;letter-spacing:-2px}
+.half .tag{margin-top:10px;font:800 26px "JetBrains Mono",monospace;color:#F0A585}
+#decn .tag{color:#1A9C5B}
+#tick{margin-top:30px;width:100%;height:260px}
+#offer{margin-top:30px;border:1.5px solid #EADFD2;border-radius:18px;padding:22px;font:700 28px/1.5 Inter;background:#FFFBF5}
+#offer .ok{color:#1A9C5B;font-weight:900}
+/* ===== 2: skills bar race ===== */
+#race{position:absolute;left:100px;right:100px;top:600px;z-index:4}
+.rr{height:120px;margin-bottom:26px;position:relative;opacity:0}
+.rr .lb{position:absolute;left:0;top:0;font:900 44px Inter;color:#16161A}
+.rr .bar2{position:absolute;left:0;top:62px;height:52px;border-radius:14px;background:linear-gradient(90deg,#D97757,#F0A585);transform-origin:0 50%;box-shadow:0 16px 36px -14px rgba(217,119,87,.5)}
+.rr.dim .bar2{background:#D8CFC4}
+.rr .ct{position:absolute;top:58px;font:900 52px "JetBrains Mono",monospace;color:#C2552F}
+.rr.dim .ct{color:#8A8178}
+#chk{position:absolute;left:0;right:0;top:1180px;text-align:center;z-index:5}
+#chk span{display:inline-block;font:800 28px "JetBrains Mono",monospace;color:#1A9C5B;background:rgba(26,156,91,.1);border:1.5px solid rgba(26,156,91,.4);border-radius:999px;padding:12px 26px;opacity:0}
+/* ===== honesty + recap ===== */
+#hon{position:absolute;left:110px;right:110px;top:700px;z-index:4;border-radius:30px;background:#16161A;color:#F3F1EC;padding:54px;text-align:center;opacity:0}
+#hon h3{margin:0;font:900 76px/1.15 Inter;letter-spacing:-3px}
+#hon p{margin:20px 0 0;font:600 36px Inter;color:#C9C5BC}
+#rec{position:absolute;left:0;right:0;top:1140px;display:flex;justify-content:center;gap:20px;z-index:5}
+#rec .m-chip{font:800 38px Inter;padding:20px 34px;background:#fff;color:#16161A;border:1.5px solid #EADFD2;opacity:0}
+/* ===== CTA ===== */
+.cm{position:absolute;left:100px;right:100px;top:700px;padding:24px 26px;z-index:3;background:#fff;border:1.5px solid #EADFD2;border-radius:28px;box-shadow:0 30px 70px -24px rgba(80,40,20,.35)}
+.cm .t-kicker{color:#8A8178}
+.cm .row{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 25px Inter;color:#16161A;opacity:0}
+.cm .row i{width:46px;height:46px;border-radius:50%;flex:none}.cm .row small{display:block;font:600 17px Inter;color:#8A8178}
+.cm .inp{display:flex;align-items:center;margin-top:12px;border:1.5px solid #EADFD2;border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;min-height:36px;color:#16161A}
+.cm .inp .ph{color:#B5AC9F;font-weight:500}.cm .inp .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:#D97757;display:grid;place-items:center;color:#fff;font-weight:900}
+#dm{position:absolute;left:110px;right:110px;top:580px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7;background:#16161A;color:#F3F1EC;border-radius:24px;box-shadow:0 30px 70px -24px rgba(80,40,20,.45)}
+#dm img{width:56px;height:56px;border-radius:50%;background:#fff}#dm b{display:block;font:700 22px Inter}#dm span{font:500 21px Inter;color:#C9C5BC}
+#dm em{margin-left:auto;font:700 16px "JetBrains Mono",monospace;font-style:normal;color:#F0A585;border:1px solid rgba(240,165,133,.5);border-radius:999px;padding:4px 10px}
+#fn{position:absolute;left:0;right:0;top:1740px;text-align:center;font:600 18px "JetBrains Mono",monospace;color:#7A6F66;letter-spacing:1px;z-index:9}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div>
+  <div id="bgfx"><i class="blob" id="bl1"></i><i class="blob" id="bl2"></i><i class="blob" id="bl3"></i><div id="floorW"><div id="floor"></div></div></div>
+  <canvas id="mgGrid" class="mg-grid" width="1080" height="1920" style="opacity:.25"></canvas><div class="s-vig"></div>
+  <div id="cam3d"><div id="cam3dIn"><div id="cam">
+    <section class="cr" id="sHook">
+      <div id="big">$0<small>GONE IN ONE DAY · 5 NOV</small></div>
+      <svg class="mg-svg" id="chartW" viewBox="0 0 960 420" data-ex="trillion."></svg>
+      <div id="stakes" data-ex="too?"><span>…your job too? 😳</span></div>
+    </section>
+    <section class="cr" id="sNews">
+      <div class="nh"><b>−$2.3T</b><span>what happened</span></div>
+      <div id="bars">
+        <div class="fb" id="f0" data-ex="Nvidia"><div class="nm">Nvidia</div><div class="bar"></div><div class="pc">−9%*</div></div>
+        <div class="fb" id="f1" data-ex="AMD,"><div class="nm">AMD</div><div class="bar"></div><div class="pc">−17%</div></div>
+        <div class="fb" id="f2"><div class="nm">Nasdaq 100</div><div class="bar"></div><div class="pc">−6.3%</div></div>
+      </div>
+      <div id="why" data-ex="bubble?#1"><span class="m-chip" id="w1">🗳️ US election results</span><span class="m-chip" id="w2">💸 "is AI spending a bubble?"</span></div>
+    </section>
+    <section class="cr" id="sTwist">
+      <div id="chat" data-ex="asked">
+        <div class="msg" id="mu">AI stocks crashed. What does it mean for a fresher like me?</div>
+        <div class="msg" id="mc"><div class="who"><i></i>Claude</div><div id="mct"></div></div>
+      </div>
+    </section>
+    <section class="cr" id="s1">
+      <div id="split">
+        <div class="half" id="mood" data-ex="mood."><h3>Stock price</h3><div class="tag">= A MOOD</div><svg id="tick" viewBox="0 0 420 260"></svg></div>
+        <div class="half" id="decn" data-ex="decision."><h3>Job posting</h3><div class="tag">= A DECISION</div>
+          <div id="offer">OFFER LETTER<br>Role: SDE Intern<br>Joining: Jan 2027<br><span class="ok">✓ signed by a human</span></div></div>
+      </div>
+    </section>
+    <section class="cr" id="s2">
+      <div id="race">
+        <div class="rr" id="r0" data-ex="skills.#0"><div class="lb">AI skills</div><div class="bar2"></div><div class="ct">0</div></div>
+        <div class="rr dim" id="r1" data-ex="Python."><div class="lb">Python</div><div class="bar2"></div><div class="ct">0</div></div>
+        <div class="rr dim" id="r2" data-ex="SQL."><div class="lb">SQL</div><div class="bar2"></div><div class="ct">0</div></div>
+      </div>
+      <div id="chk" data-ex="yesterday."><span>✓ fresher postings, India, last 7 days · checked 6 Nov</span></div>
+    </section>
+    <section class="cr" id="sHon">
+      <div id="hon" data-ex="popped."><h3>"Did the bubble pop?"</h3><p>Nobody knows. Not even the experts.</p></div>
+      <div id="rec"><span class="m-chip" id="rc1" data-ex="skill">📚 skill up like it's real</span><span class="m-chip" id="rc2" data-ex="panic">🧘 panic about nothing</span></div>
+    </section>
+    <section class="cr" id="sCta"><svg class="mg-svg" id="ctsvg" style="z-index:8"><circle id="ctHead" class="mg-head" r="9"/></svg>
+      <div class="cm" data-ex="Comment"><div class="t-kicker" style="margin-bottom:8px">comments</div>
+        <div class="row" id="c1"><i style="background:#8FA3BF"></i><div><small>priya · 2m</small>CRASH</div></div>
+        <div class="row" id="c2"><i style="background:#7A3A26"></i><div><small>dev · 1m</small>CRASH my dad called me about nvidia 😭</div></div>
+        <div class="row" id="c3"><i style="background:linear-gradient(135deg,#F0A585,#D97757)"></i><div><small>you · now</small>CRASH</div></div>
+        <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+      <div id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! Breakdown + the jobs data 📊</span></div><em>via 2il.in</em></div>
+    </section>
+  </div></div></div>
+  <div id="fn"></div>
+  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
+  <div id="kin"></div><div id="avatar"></div>
+  <div class="clp" id="clp0"><div class="halo"></div><div class="sp"></div><div class="bu" id="clb0"></div></div>
+  <div class="clp" id="clp1"><div class="halo"></div><div class="sp"></div><div class="bu" id="clb1"></div></div>
+  <div class="clp" id="clp2"><div class="halo"></div><div class="sp"></div><div class="bu" id="clb2"></div></div>
+  <div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const T = { stakes: at("So are"), news: at("Here's"), twist: at("So I"), s1: at("One. A"), s2: at("Two. This"), hon: at("And honestly?"), rec: at("So skill"), cta: at("Comment"), end: R.voiceEnd() };
+const CL = (window.CAPTION_PAGES || []).flat().filter(w => /^Claude/.test(w.t)).map(w => w.s).slice(0, 8);
+window.REEL_DURATION = +(T.end + 1.8).toFixed(2);
+const hash = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const SR = $("stage").getBoundingClientRect(), SCN = ["sHook", "sNews", "sTwist", "s1", "s2", "sHon", "sCta"];
+SCN.forEach(s => $(s).style.visibility = "visible");
+const ctr = id => { const r = $(id).getBoundingClientRect(); return [r.left - SR.left + r.width / 2, r.top - SR.top + r.height / 2]; };
+const SND = ctr("snd"), DMB = $("dm").getBoundingClientRect(), DMI = [DMB.left - SR.left + 48, DMB.top - SR.top + DMB.height / 2];
+SCN.forEach(s => $(s).style.visibility = "hidden");
+F.beats({ bpm: 136, groove_in: 0.0, dur: 80 });
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH,
+  chapters: [{ label: "what", at: T.news }, { label: "mood", at: T.s1 }, { label: "data", at: T.s2 }, { label: "honest", at: T.hon, end: T.cta }],
+  avatar: { x: 240, y: 1330, w: 600, in: -0.5, look: "street", style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" } },
+  stage: { hold: 2.6, left: -90, right: 570, close: [["$2.3", 1.8], ["So I asked", 1.6], ["And honestly?", 2.4], ["Comment", 3.2]], wow: ["Claude"] },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
+const CHART = (() => { let d = "M0,60", x = 0, y = 60; for (let i = 1; i <= 24; i++) { x = i * 40; y = 60 + i * 11 + (hash(i) * 36 - 18) + (i > 16 ? 28 : 0); d += ` L${x},${Math.min(y, 400).toFixed(0)}`; } return d; })();
+const MCT = "Short version: a stock price is a mood. A job posting is a decision. Here's this week's hiring data…";
+function claudePop(t) {
+  const words = [...document.querySelectorAll("#kin .w")];
+  words.forEach(w => { const isC = /^Claude/.test(w.textContent); w.classList.toggle("clw", isC);
+    if (isC && !w.querySelector(".cl-ic")) { const ic = document.createElement("i"); ic.className = "cl-ic"; w.appendChild(ic); } });
+  CL.forEach((a, i) => { const el = $("clp" + i); if (!el) return; if (t < a - 0.05 || t > a + 1.5) { el.style.opacity = 0; return; }
+    let x = 540, y = 330; const w = words.find(w => /^Claude/.test(w.textContent));
+    if (w) { const r = w.getBoundingClientRect(); x = r.left - SR.left + r.width / 2; y = r.top - SR.top - 62; }
+    const p = M.spring(t, a, { f: 2.6, z: 0.42 }), out = E.power3In(prog(t, a + 1.0, 0.45)), rot = E.expoOut(prog(t, a, 1.1)) * 450 - 270;
+    el.style.left = x + "px"; el.style.top = (y - 70 * out) + "px"; el.style.opacity = (1 - out).toFixed(3);
+    el.style.transform = `scale(${(lerp(0.2, 1, p) * (1 - 0.6 * out)).toFixed(3)})`; el.querySelector(".sp").style.transform = `rotate(${rot.toFixed(1)}deg)`;
+    el.querySelector(".halo").style.opacity = 1 - prog(t, a, 0.9);
+    F.burst("clb" + i, t, a + 0.02, { n: 16, r: 150, d: 0.8, sfx: false }); R.cue("pop", a, { soft: true }); });
+}
+window.seek = t => {
+  R.frame(t);
+  [["bl1", 0.13, 0, 250, 500], ["bl2", 0.09, 2.1, 650, 1150], ["bl3", 0.11, 4.2, 150, 1450]].forEach(([id, w, ph, x0, y0]) => { $(id).style.transform = `translate(${(x0 - 450 + Math.sin(t * w * 6.28 + ph) * 260).toFixed(1)}px,${(y0 - 450 + Math.cos(t * w * 5.1 + ph) * 220).toFixed(1)}px)`; });
+  $("floor").style.backgroundPosition = `0px ${(t * 70 % 120).toFixed(1)}px`;
+  { const pulse = F.pulse(t, { decay: 7 }) || 0; $("cam3dIn").style.transform = `rotateX(${(2.6 * Math.sin(t * 0.42)).toFixed(2)}deg) rotateY(${(3.4 * Math.sin(t * 0.31 + 1)).toFixed(2)}deg) translateZ(${(pulse * 6).toFixed(1)}px)`; }
+  F.slots(t, [["sHook", 0, T.news], ["sNews", T.news, T.twist], ["sTwist", T.twist, T.s1], ["s1", T.s1, T.s2], ["s2", T.s2, T.hon], ["sHon", T.hon, T.cta], ["sCta", T.cta, 99]]);
+  F.zoomCut("sHook", "sNews", t, T.news); F.whip("sNews", "sTwist", t, T.twist); F.cutCurve("sTwist", "s1", t, T.s1); F.whip("s1", "s2", t, T.s2, { dir: 1 }); F.rackFocus("s2", "sHon", t, T.hon); F.inverseZoom("sHon", "sCta", t, T.cta);
+  R.speedyFrame(t);
+  document.body.classList.add("is-light");
+  M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), drift: 8, waves: [[0.05, 540, 700, 1.2], [T.twist + 0.1, 540, 760, 1.5], [at("185") + 0.1, 540, 700], [at("DM") + 0.45, DMI[0], DMI[1]]] });
+  // HOOK: $2.3T counts DOWN-style crash + red chart falls + stakes card
+  { const p = E.expoOut(prog(t, 0.0, 1.0)); $("big").childNodes[0].nodeValue = "$" + (2.3 * p).toFixed(1) + "T";
+    $("big").style.transform = `scale(${lerp(1.15, 1, E.out3(prog(t, 0, 0.6))).toFixed(3)})`;
+    if (t >= 0.9 && t < 1.6) F.shake("cam", t, 0.95, { amp: 10, d: 0.4 });
+    const ln = M.path("chartW", "crl", CHART, "mg-line"); ln.style.stroke = "#C2552F"; ln.style.strokeWidth = "7"; M.draw(ln, t, 0.1, 1.6, { ease: "power2InOut" });
+    const sp = M.spring(t, T.stakes - 0.05, { f: 2.5, z: 0.5 }); const st = $("stakes").querySelector("span"); st.style.opacity = t < T.stakes - 0.05 ? 0 : 1; st.style.transform = `rotate(-2deg) scale(${lerp(0.6, 1, sp).toFixed(3)})`;
+    M.ring("mgFx", t, T.stakes, { x: 540, y: 1180, r: 300, d: 0.6 }); }
+  // NEWS: three fall bars grow downward on their words
+  { [["f0", at("Nvidia"), 0.38], ["f1", at("AMD,"), 0.72], ["f2", at("AMD,") + 0.5, 0.27]].forEach(([id, a, h]) => { const e = $(id), p = E.expoOut(prog(t, a, 0.7));
+      e.querySelector(".bar").style.height = (p * h * 520).toFixed(1) + "px";
+      const pc = e.querySelector(".pc"); pc.style.top = (90 + p * h * 520) + "px"; pc.style.opacity = t >= a + 0.45 ? 1 : 0;
+      if (t >= a && t < a + 0.25) R.cue("pop", a, { soft: true }); });
+    M.fly("w1", t, at("election") - 0.1, { y: 30, s: 0.7 }, { f: 2.6, z: 0.5 }); M.fly("w2", t, at("fear:") + 0.1, { y: 30, s: 0.7 }, { f: 2.6, z: 0.5 }); }
+  // TWIST: chat
+  { M.fly("mu", t, T.twist + 0.05, { y: 60, s: 0.94 }, { f: 2.4, z: 0.6 }); M.fly("mc", t, at("real") - 0.25, { y: 60, s: 0.94 }, { f: 2.4, z: 0.6 });
+    if (t >= at("real") - 0.1) F.code("mct", MCT, t, at("real") - 0.1, { cps: 46 }); else $("mct").textContent = ""; }
+  // 1: mood vs decision
+  { M.fly("mood", t, at("stock") - 0.15, { x: -220, s: 0.92, r: -3 }, { f: 2.4, z: 0.6 }); M.fly("decn", t, at("posting") - 0.15, { x: 220, s: 0.92, r: 3 }, { f: 2.4, z: 0.6 });
+    let d = "M0,130", y = 130; for (let i = 1; i <= 20; i++) { y = clamp(y + (hash(i + 9) * 70 - 35) + Math.sin(t * 3 + i) * 10, 20, 240); d += ` L${i * 21},${y.toFixed(0)}`; }
+    const tl = M.path("tick", "tk", d, "mg-line"); tl.style.stroke = "#E0473B"; tl.style.strokeWidth = "5"; tl.style.strokeDasharray = "none"; tl.style.opacity = 1;
+    M.ring("mgFx", t, at("decision.") + 0.1, { x: 790, y: 880, r: 240, d: 0.6 }); }
+  // 2: bar race 185 / 153 / 150
+  { [["r0", at("185") - 0.1, 185, 1], ["r1", at("Python.") - 0.25, 153, 0.827], ["r2", at("SQL.") - 0.2, 150, 0.81]].forEach(([id, a, n, w]) => { const e = $(id), p = M.spring(t, a, { f: 2.4, z: 0.6 }), g = E.expoOut(prog(t, a + 0.1, 0.8));
+      e.style.opacity = t < a ? 0 : 1; e.style.transform = `translateX(${((1 - p) * -160).toFixed(1)}px)`;
+      e.querySelector(".bar2").style.width = (g * w * 72) + "%"; const c = e.querySelector(".ct"); c.textContent = Math.round(g * n); c.style.left = `calc(${(g * w * 72)}% + 24px)`; });
+    const cp = M.spring(t, at("yesterday.") - 0.1, { f: 2.6, z: 0.5 }); const ck = $("chk").querySelector("span"); ck.style.opacity = t < at("yesterday.") - 0.1 ? 0 : 1; ck.style.transform = `scale(${lerp(0.7, 1, cp).toFixed(3)})`;
+    M.ring("mgFx", t, at("185") + 0.6, { x: 540, y: 660, r: 320, d: 0.7, sfx: true }); }
+  // honesty + recap
+  { const p = M.spring(t, T.hon + 0.1, { f: 2.3, z: 0.6 }); $("hon").style.opacity = t < T.hon + 0.1 ? 0 : 1; $("hon").style.transform = `translateY(${((1 - p) * 90).toFixed(1)}px)`;
+    M.fly("rc1", t, at("skill") - 0.1, { y: 40, s: 0.7 }, { f: 2.6, z: 0.5 }); M.fly("rc2", t, at("panic") - 0.1, { y: 40, s: 0.7 }, { f: 2.6, z: 0.5 });
+    M.strike("rc2", t, at("control.") - 0.15, { d: 0.25 }); }
+  // CTA
+  [["c1", T.cta + 0.15], ["c2", T.cta + 0.3]].forEach(([id, a]) => M.fly(id, t, a, { x: -60, s: 0.9 }, { f: 2.4, z: 0.6 }));
+  const tyA = T.cta + 0.4, sent = tyA + 0.5, dmA = at("DM");
+  if (t < sent) R.type("cty", "CRASH", t, tyA, 14); else $("cty").textContent = "";
+  $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.1); M.fly("c3", t, sent, { y: 40, s: 0.9 }, { f: 2.6, z: 0.55 });
+  if (t >= T.cta) { const l2 = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(l2, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
+  R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 }); R.cue("pop", dmA + 0.15);
+  $("fn").textContent = t < T.s2 ? "EDUCATIONAL · NOT INVESTMENT ADVICE · ILLUSTRATIVE CHART · SOURCES 5–6 NOV 2026" : t < T.hon ? "FRESHER POSTINGS: FREEHIRE (OPEN SOURCE), INDIA, 7 DAYS, CHECKED 6 NOV" : "EDUCATIONAL · NOT INVESTMENT ADVICE";
+  claudePop(t);
+};
+window.seek(0);
+</script></body></html>

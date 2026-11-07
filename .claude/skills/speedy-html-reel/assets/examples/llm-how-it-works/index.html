@@ -1,0 +1,343 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>How ChatGPT writes</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>
+/* ---- reel-specific ---- */
+.ans{position:absolute;left:70px;top:560px;width:940px;padding:26px 30px;border-radius:26px;background:var(--card);border:1.5px solid var(--line);
+  box-shadow:0 30px 70px rgba(0,0,0,.45);font:500 34px/1.75 Inter;color:var(--text);opacity:0}
+.ans .who{display:flex;align-items:center;gap:12px;font:600 22px Mono;color:var(--mute);margin-bottom:10px}
+.ans .who i{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6)}
+.tk{display:inline;padding:3px 2px;border-radius:7px;opacity:0;white-space:pre-wrap}
+.c0{background:rgba(107,90,214,.38)}.c1{background:rgba(62,207,142,.32)}.c2{background:rgba(243,178,58,.36)}.c3{background:rgba(232,119,90,.36)}.c4{background:rgba(59,130,246,.36)}
+.is-light .c0{background:rgba(107,90,214,.22)}.is-light .c1{background:rgba(62,207,142,.26)}.is-light .c2{background:rgba(243,178,58,.30)}.is-light .c3{background:rgba(232,119,90,.26)}.is-light .c4{background:rgba(59,130,246,.22)}
+.cursor1{display:inline-block;width:3px;height:36px;background:#3ECF8E;vertical-align:-6px;margin-left:4px}
+.hookstat{position:absolute;left:0;right:0;top:1250px;text-align:center;font:600 30px Mono;color:#EDEDED;opacity:0}.hookstat span{color:var(--mute);font-weight:500}
+/* tokens scene */
+.prompt{position:absolute;left:70px;top:690px;width:940px;padding:30px;border-radius:26px;background:var(--l-card);border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0}
+.prompt .lbl{font:600 20px Mono;color:var(--l-mute);letter-spacing:1px;margin-bottom:18px}
+.prow{display:flex;flex-wrap:nowrap;align-items:flex-end;font:600 46px Inter;color:var(--l-text)}
+.prow .pp{display:flex;flex-direction:column;align-items:center;border-radius:12px;padding:6px 4px;white-space:pre}
+.prow .pp small{font:600 18px Mono;color:var(--l-mute);margin-top:8px;opacity:0}
+.rule{position:absolute;left:0;right:0;top:1010px;text-align:center;opacity:0}
+.rule b{display:inline-block;padding:16px 30px;border-radius:999px;background:#111;color:#fff;font:700 34px Mono}
+/* vector scene */
+.tokbig{position:absolute;left:70px;top:860px;padding:18px 30px;border-radius:18px;font:700 52px Inter;color:#fff;opacity:0}
+.vec{position:absolute;left:400px;top:650px;width:610px;padding:20px 22px;border-radius:26px;background:var(--card);border:1.5px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.45);opacity:0}
+.vec .hd{display:flex;align-items:baseline;gap:14px;font:600 24px Mono;color:var(--mute);margin-bottom:14px}
+.vec .hd b{margin-left:auto;font:700 46px Mono;color:#fff}
+.vgrid{display:grid;grid-template-columns:repeat(8,1fr);gap:5px}
+.vgrid i{display:block;height:38px;border-radius:6px;font:500 15px/38px Mono;text-align:center;color:#EDEDED;font-style:normal}
+/* attention scene */
+.att{position:absolute;left:40px;top:690px;width:1000px;height:520px}
+.att .row{position:absolute;left:0;right:0;top:330px;display:flex;justify-content:center;gap:16px}
+.att .w{padding:16px 22px;border-radius:16px;background:var(--l-card);border:1.5px solid var(--l-line);font:700 40px Inter;color:var(--l-text);box-shadow:0 10px 24px rgba(0,0,0,.08);opacity:0}
+.att .w.me{background:#111;color:#fff;border-color:#111}
+.att svg{position:absolute;inset:0;overflow:visible}
+.att svg path{fill:none;stroke:#3B82F6;stroke-linecap:round}
+.att .pct{position:absolute;font:700 28px Mono;color:#3B82F6;opacity:0}
+.mean{position:absolute;left:250px;top:1110px;width:580px;padding:18px 26px;border-radius:20px;background:var(--l-card);border:1.5px solid var(--l-line);box-shadow:0 18px 40px rgba(0,0,0,.1);font:600 30px Inter;color:var(--l-text);opacity:0}
+.mean div{display:flex;justify-content:space-between;padding:6px 0}
+/* predict scene */
+.pred{position:absolute;left:70px;top:650px;width:940px;padding:26px 30px;border-radius:26px;background:var(--l-card);border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0}
+.pred .ctx{font:500 34px Inter;color:var(--l-text);padding-bottom:18px;border-bottom:1.5px solid var(--l-line);margin-bottom:18px;white-space:nowrap;overflow:hidden}
+.pred .ctx .new{background:rgba(62,207,142,.28);border-radius:8px;padding:0 6px}
+.pred .ctx .blank{display:inline-block;width:90px;border-bottom:4px solid #3ECF8E;margin-left:8px}
+.pred .hd{display:flex;font:600 22px Mono;color:var(--l-mute);margin-bottom:10px}.pred .hd b{margin-left:auto;color:var(--l-text);font-weight:700}
+.bar{position:relative;display:flex;align-items:center;gap:18px;height:62px;font:600 30px Inter;color:var(--l-text)}
+.bar .nm{width:170px;font-family:Mono;font-size:28px}
+.bar .tr{flex:1;height:30px;border-radius:15px;background:#EEF0F2;overflow:hidden}.bar .tr i{display:block;height:100%;width:0;border-radius:15px;background:#9AA3AA}
+.bar.top .tr i{background:#3ECF8E}
+.bar .pc{width:90px;text-align:right;font:700 28px Mono}
+/* training scene */
+.trn{position:absolute;left:70px;top:650px;width:940px;padding:20px 26px;border-radius:26px;background:var(--card);border:1.5px solid var(--line);box-shadow:0 30px 70px rgba(0,0,0,.45);opacity:0}
+.trn .hd{display:flex;align-items:baseline;font:600 24px Mono;color:var(--mute);margin-bottom:12px}.trn .hd b{margin-left:auto;font:700 44px Mono;color:#fff}
+.trn .matrix{padding:0}
+.wlabel{position:absolute;left:0;right:0;top:1250px;text-align:center;font:600 28px Mono;color:#EDEDED;opacity:0}.wlabel b{color:#3ECF8E}
+.paper{position:absolute;left:110px;top:650px;width:860px;padding:40px 44px;border-radius:18px;background:#FBFAF6;color:#151515;box-shadow:0 40px 90px rgba(0,0,0,.6);opacity:0;font-family:Georgia,"Times New Roman",serif}
+.paper .ax{font:600 20px Mono;color:#9A2B2B;margin-bottom:18px}
+.paper h3{font:700 54px Georgia,serif;line-height:1.12;margin-bottom:22px;text-align:center}
+.paper .au{font:400 25px/1.5 Georgia,serif;text-align:center;color:#333}
+.paper .org{font:italic 22px Georgia,serif;text-align:center;color:#777;margin-top:14px}
+.paper .yr{position:absolute;right:30px;top:26px;padding:6px 14px;border-radius:999px;background:#111;color:#fff;font:700 22px Mono}
+/* use scene */
+.vs{position:absolute;left:0;right:0;top:650px;display:flex;justify-content:center;align-items:center;gap:26px}
+.vs .p1,.vs .p2{padding:16px 30px;border-radius:999px;font:700 36px Inter;opacity:0}
+.vs .p1{background:rgba(62,207,142,.18);color:#1E7F55}.vs .p2{background:rgba(255,90,95,.14);color:#C23B40}
+.vs .ne{font:700 52px Inter;color:var(--l-mute);opacity:0}
+.tips{position:absolute;left:70px;top:800px;width:940px;padding:18px 0 10px;border-radius:26px;background:var(--l-card);border:1.5px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.10);opacity:0}
+.tips .lbl{padding:0 30px 10px;font:600 20px Mono;color:var(--l-mute);letter-spacing:1px}
+.tips .rw{display:flex;align-items:center;gap:22px;padding:20px 30px;border-top:1.5px solid var(--l-line);font:700 34px Inter;color:var(--l-text)}
+.tips .rw .ic{width:64px;height:64px;border-radius:16px;display:grid;place-items:center;font-size:34px;background:#F1F3F5}
+.tips .rw small{display:block;font:500 24px Mono;color:var(--l-mute);margin-top:4px}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <div class="bokeh" id="bk"></div>
+
+  <!-- HOOK: the model writing one token at a time -->
+  <section class="scene" id="sHook">
+    <div class="ans" id="ans"><div class="who"><i></i>ChatGPT</div><span id="anstx"></span><span class="cursor1" id="cur1"></span></div>
+    <div class="floor" id="fl" style="left:90px;top:900px"></div>
+    <div class="flow" id="fw0" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="chip3d" id="ch0" style="left:405px;top:960px"></div>
+    <div class="hookstat" id="hs0">1 token <span>at a time · each one a guess</span></div>
+  </section>
+
+  <!-- TOKENS (light) -->
+  <section class="scene" id="sTok">
+    <div class="prompt" id="pr"><div class="lbl">YOUR MESSAGE</div><div class="prow" id="prow"></div></div>
+    <div class="rule" id="rl"><b>100 tokens ≈ 75 words</b></div>
+    <div class="note r" id="n1" style="top:1260px">Rule of thumb from OpenAI's tokenizer docs.</div>
+  </section>
+
+  <!-- VECTORS (dark) -->
+  <section class="scene" id="sVec">
+    <div class="tokbig c3" id="tb">hole</div>
+    <div class="arrow" id="va" style="left:290px;top:905px;width:90px"></div>
+    <div class="vec" id="vc"><div class="hd">vector<b id="vn">0</b></div><div class="vgrid" id="vg"></div></div>
+    <div class="note l" id="n2" style="top:1270px">GPT-3 (Brown et al., 2020). Values illustrative.</div>
+  </section>
+
+  <!-- ATTENTION (light) -->
+  <section class="scene" id="sAtt">
+    <div class="att" id="att">
+      <svg id="arcs" viewBox="0 0 1000 520"></svg>
+      <div class="row" id="arow"></div>
+    </div>
+    <div class="mean" id="mean"><div><span>bank → 🏞️ river bank</span><b style="color:#1E7F55">✓</b></div><div><span>bank → 💰 money</span><b style="color:#C23B40">✗</b></div></div>
+    <div class="note r" id="n3" style="top:1270px">Attention weights illustrative.</div>
+  </section>
+
+  <!-- 96 LAYERS (dark, 3D stack) -->
+  <section class="scene" id="sLay">
+    <div class="floor" id="fl2" style="left:90px;top:860px"></div>
+    <div class="stack" id="st" style="left:330px;top:520px;width:420px;height:620px"></div>
+    <div class="callout" id="l1" style="right:770px;top:640px">layer 96 <i class="ln"></i></div>
+    <div class="callout r" id="l2" style="left:760px;top:700px"><i class="ln"></i>layer 95</div>
+    <div class="callout" id="l3" style="right:770px;top:760px">··· <i class="ln"></i></div>
+    <div class="callout r" id="l4" style="left:760px;top:820px"><i class="ln"></i>layer 2</div>
+    <div class="callout" id="l5" style="right:770px;top:880px">layer 1 <i class="ln"></i></div>
+    <div class="callout r" id="l6" style="left:760px;top:960px"><i class="ln"></i>your tokens</div>
+    <div class="hookstat" id="hs1" style="top:1230px">96 layers <span>· GPT-3</span></div>
+  </section>
+
+  <!-- PREDICT (light) -->
+  <section class="scene" id="sPred">
+    <div class="pred" id="pd">
+      <div class="ctx" id="ctx"></div>
+      <div class="hd">scoring every token<b><span id="voc">0</span> tokens</b></div>
+      <div id="bars"></div>
+      <div class="selbox" id="psel" style="left:16px;top:192px;width:908px;height:62px"></div>
+    </div>
+    <div class="flow" id="loop" style="left:0;top:0;width:1080px;height:1920px"></div>
+    <div class="note r" id="n4" style="top:1270px">Probabilities illustrative. GPT-3 vocabulary: 50,257.</div>
+  </section>
+
+  <!-- TRAINING (dark) -->
+  <section class="scene" id="sTrn">
+    <div class="trn" id="trn"><div class="hd">training text read<b id="trd">0</b></div><div class="matrix" id="mx"></div></div>
+    <div class="chip3d" id="ch1" style="left:405px;top:975px"></div>
+    <div class="wlabel" id="wl"><b>175 billion</b> weights, nudged after every guess</div>
+    <div class="paper" id="pp">
+      <span class="yr">2017</span>
+      <div class="ax">arXiv:1706.03762</div>
+      <h3>Attention Is All You Need</h3>
+      <div class="au">Ashish Vaswani · Noam Shazeer · Niki Parmar · Jakob Uszkoreit ·<br>Llion Jones · Aidan N. Gomez · Łukasz Kaiser · Illia Polosukhin</div>
+      <div class="org">Google Brain · Google Research · University of Toronto</div>
+    </div>
+    <div class="note r" id="n5" style="top:1300px">GPT-3 figures: Brown et al., 2020.</div>
+  </section>
+
+  <!-- USE (light) -->
+  <section class="scene" id="sUse">
+    <div class="vs"><span class="p1" id="v1">sounds right</span><span class="ne" id="v2">≠</span><span class="p2" id="v3">is right</span></div>
+    <div class="tips" id="tips"><div class="lbl">BETTER PROMPTS</div>
+      <div class="rw"><span class="ic">📎</span><div>Give it the facts<small>paste the doc, the data, the error</small></div></div>
+      <div class="rw"><span class="ic">🧩</span><div>Show it an example<small>"answer in this format: …"</small></div></div>
+      <div class="rw"><span class="ic">✅</span><div>Ask it to check its work<small>"verify each claim against the doc"</small></div></div>
+    </div>
+  </section>
+
+  <!-- RECAP (dark) -->
+  <section class="scene" id="sRec">
+    <div class="rack" id="rk" style="top:640px">
+      <div class="lay">↻ repeat for every token<span class="tag">loop</span></div>
+      <div class="lay">pick a likely next token<span class="tag">predict</span></div>
+      <div class="lay">score all 50,257<span class="tag">predict</span></div>
+      <div class="lay">attention × 96 layers<span class="tag">attention</span></div>
+      <div class="lay">12,288 numbers per token<span class="tag">vectors</span></div>
+      <div class="lay base">your message → tokens<span class="tag">tokens</span></div>
+    </div>
+  </section>
+
+  <!-- CTA (light) -->
+  <section class="scene" id="sCTA">
+    <div class="ig" id="ig" style="top:660px">
+      <div class="bar">‹ <span class="bname"></span><span class="ic">🔔 ···</span></div>
+      <div class="prof"><div class="pav"></div><div class="stat"><b>246</b><span>posts</span></div><div class="stat"><b>68K</b><span>followers</span></div><div class="stat"><b>209</b><span>following</span></div></div>
+      <div class="bio"><span class="bname"></span><small>How tech actually works</small></div>
+      <div class="btns"><div class="btn pri" id="followBtn">Follow</div><div class="btn">Message</div></div>
+      <div id="plus1" style="position:absolute;right:120px;top:120px;font:700 34px Inter;color:#3ECF8E;opacity:0">+1</div>
+      <div class="tabs"><i class="on">▦</i><i>▶</i><i>◎</i></div><div class="grid"><i></i><i></i><i></i></div>
+    </div>
+    <div class="share" id="sh" style="top:700px">
+      <div class="grab"></div><div class="srch">⌕ Search</div>
+      <div class="ppl"><div class="p"><i></i>Ava</div><div class="p sel"><i></i>Omar</div><div class="p"><i></i>Chloe</div><div class="p"><i></i>Hana</div><div class="p"><i></i>Leo</div><div class="p"><i></i>Nina</div><div class="p"><i></i>Sam</div><div class="p"><i></i>Marc</div></div>
+      <div class="msg" id="shmsg">Write a message…</div><div class="send" id="sendBtn">Send</div>
+    </div>
+    <div class="finger" id="fg"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+    <div class="wm" id="wm">◎ instagram.com/<span class="bname"></span></div>
+  </section>
+
+  <div id="rail"></div>
+  <div id="kin"></div>
+  <div id="avatar"></div>
+  <div id="grain"></div>
+</div>
+<script src="captions.js"></script>
+<script src="../../template/engine.js"></script>
+<script src="../../template/avatar.js"></script>
+<script src="../../template/speedy.js"></script>
+<script src="../../template/props.js"></script>
+<script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+const T = { how: at("So how"), first: at("First"), next1: at("Next, every"), then: at("Then, attention"), layers: at("And that happens"),
+  end: at("At the end"), where: at("So where"), idea: at("The idea"), use: at("So here's how"), recap: at("Your chatbot"), cta: at("Follow"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.0).toFixed(2);
+
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.first, enter: "none" }, { id: "sTok", s: T.first, e: T.next1, enter: "blurzoom" },
+  { id: "sVec", s: T.next1, e: T.then, enter: "push" }, { id: "sAtt", s: T.then, e: T.layers, enter: "blurzoom" },
+  { id: "sLay", s: T.layers, e: T.end, enter: "swing" }, { id: "sPred", s: T.end, e: T.where, enter: "blurzoom" },
+  { id: "sTrn", s: T.where, e: T.use, enter: "push" }, { id: "sUse", s: T.use, e: T.recap, enter: "blurzoom" },
+  { id: "sRec", s: T.recap, e: T.cta, enter: "swing" }, { id: "sCTA", s: T.cta, e: 999, enter: "blurzoom" } ] });
+
+const P = window.POSES.map(([ph, pose]) => [Math.max(R.at(ph), R.end(ph) - 0.5), pose]);
+R.speedy({
+  light: [[T.first, T.next1], [T.then, T.layers], [T.end, T.where], [T.use, T.recap], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "tokens", at: T.first }, { label: "vectors", at: T.next1 }, { label: "attention", at: T.then },
+             { label: "predict", at: T.end }, { label: "training", at: T.where }, { label: "use it", at: T.use, end: T.recap }],
+  counter: { unit: "tokens", steps: [[at("chopped into"), 6], [at("adds that token"), 7], [at("For every"), 8], [at("single word"), 9], [R.end("single word") - 0.2, 10]] },
+  avatar: { x: 240, y: 1330, w: 600, in: T.how },
+  wm: at("send this"),
+  poses: P,
+});
+
+// ---------- builders (run once) ----------
+const ANS = ["A", " black", " hole", " is", " a", " region", " of", " space", " where", " gravity", " is", " so", " strong", " that", " nothing", ",", " not", " even", " light", ",", " can", " escape", "."];
+R.$("anstx").innerHTML = ANS.map((w, i) => `<span class="tk c${i % 5}">${w}</span>`).join("");
+const PROMPT = ["What", " is", " a", " black", " hole", "?"];
+R.$("prow").innerHTML = PROMPT.map((w, i) => `<span class="pp c${i % 5}">${w}<small>${i + 1}</small></span>`).join("");
+let seed = 7; const rnd = () => (seed = (seed * 1103515245 + 12345) & 0x7fffffff) / 0x7fffffff;
+R.$("vg").innerHTML = Array.from({ length: 64 }, () => { const v = (rnd() * 2 - 1); const a = Math.abs(v);
+  return `<i data-v="${v.toFixed(2)}" style="background:${v > 0 ? `rgba(62,207,142,${0.15 + a * 0.6})` : `rgba(232,119,90,${0.15 + a * 0.6})`}">${v.toFixed(2)}</i>`; }).join("");
+const AW = ["We", "sat", "on", "the", "river", "bank"], WT = [0.05, 0.08, 0.07, 0.12, 0.62];
+R.$("arow").innerHTML = AW.map((w, i) => `<span class="w ${i === 5 ? "me" : ""}" id="aw${i}">${w}</span>`).join("");
+const BARS = [["region", 41], ["place", 23], ["star", 9], ["point", 6], ["massive", 4]];
+R.$("bars").innerHTML = BARS.map(([n, p], i) => `<div class="bar ${i === 0 ? "top" : ""}" id="br${i}"><span class="nm">"${n}"</span><span class="tr"><i></i></span><span class="pc">${p}%</span></div>`).join("");
+const CTX = ["A black hole is a", " region", " of", " space", " where"];
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  R.bokehDrift("bk", t);
+
+  // ---- HOOK: chip writes the answer one token at a time
+  R.card("ans", t, { in: 0.05 });
+  R.chip("ch0", t, { at: 0.1, size: 270, label: "LLM" });
+  R.rays("fl", t, 0.2); R.rings("fl", t, [0.35, 2.4]);
+  R.flow("fw0", t, { at: 0.4, path: "M 540 960 C 540 900, 540 860, 540 800", n: 4, speed: 1.6, hide: T.how });
+  const tks = R.$("anstx").children, step = (T.how - 0.6) / ANS.length;
+  [...tks].forEach((s, i) => { const a = 0.35 + i * step, p = ease.out3(prog(t, a, 0.18)); s.style.opacity = p; s.style.filter = p < 1 ? `blur(${(1 - p) * 6}px)` : ""; });
+  R.$("cur1").style.opacity = Math.floor(t * 2.5) % 2 ? 0.2 : 1;
+  R.note("hs0", t, 0.6, T.first);
+
+  // ---- TOKENS
+  R.card("pr", t, { in: T.first + 0.1 });
+  const split = ease.inOut(prog(t, at("chopped into"), 0.6));
+  R.$("prow").style.gap = lerp(0, 18, split) + "px";
+  [...R.$("prow").children].forEach((pp, i) => { pp.style.background = split > 0.02 ? "" : "transparent"; pp.style.opacity = 1;
+    pp.querySelector("small").style.opacity = ease.out3(prog(t, at("chopped into") + 0.4 + i * 0.08, 0.3));
+    pp.style.transform = `translateY(${-Math.sin(Math.PI * clamp(prog(t, at("chopped into") + i * 0.07, 0.5))) * 16}px)`; });
+  [...R.$("prow").children].forEach((pp, i) => pp.classList.toggle(`c${i % 5}`, split > 0.02));
+  pop("rl", t, at("three-quarters"), { from: 0.7 });
+  R.note("n1", t, at("three-quarters") + 0.3, T.next1);
+
+  // ---- VECTORS
+  pop("tb", t, T.next1 + 0.2, { from: 0.6 });
+  R.note("va", t, at("becomes a vector"));
+  R.card("vc", t, { in: at("becomes a vector") + 0.1 });
+  [...R.$("vg").children].forEach((c, i) => { const p = ease.out3(prog(t, at("a long list") + i * 0.025, 0.25)); c.style.opacity = p; c.style.transform = `scale(${lerp(0.6, 1, p)})`; });
+  count("vn", t, at("12,288"), 1.2, 12288, { ding: true });
+  R.note("n2", t, at("In GPT-3"), T.then);
+
+  // ---- ATTENTION
+  AW.forEach((w, i) => pop("aw" + i, t, T.then + 0.2 + i * 0.08, { from: 0.6, sfx: i === 0 }));
+  const svg = R.$("arcs");
+  if (!svg.dataset.built && R.$("arow").offsetWidth > 0 && R.$("aw5").offsetWidth > 0) {
+    const xs = [...R.$("arow").children].map(el => el.offsetLeft + el.offsetWidth / 2 + R.$("arow").offsetLeft);
+    svg.innerHTML = WT.map((w, i) => { const x1 = xs[5], x2 = xs[i], h = 90 + (5 - i) * 40;
+      return `<path id="arc${i}" d="M ${x1} 320 C ${x1} ${320 - h}, ${x2} ${320 - h}, ${x2} 320"/>`; }).join("");
+    svg.dataset.built = 1;
+    WT.forEach((w, i) => { const pc = document.createElement("div"); pc.className = "pct"; pc.id = "pc" + i; pc.textContent = Math.round(w * 100) + "%";
+      const x2 = xs[i], h = 90 + (5 - i) * 40; pc.style.left = (x2 + (xs[5] - x2) / 2 - 30) + "px"; pc.style.top = (320 - h * 0.78 - 34) + "px"; R.$("att").appendChild(pc); });
+  }
+  if (svg.dataset.built) WT.forEach((w, i) => { const pth = R.$("arc" + i); R.draw(pth, t, at("looks back") + i * 0.12, 0.6);
+    const g = ease.out3(prog(t, at("decides which"), 0.6)); pth.style.strokeWidth = lerp(3, 3 + w * 26, g); pth.style.opacity = lerp(0.85, 0.25 + w * 1.2, g);
+    R.note("pc" + i, t, at("decides which") + 0.2 + i * 0.05); });
+  R.card("mean", t, { in: at("pays attention"), y: 50 });
+  R.note("n3", t, at("decides which"), T.layers);
+
+  // ---- 96 LAYERS (3D stack)
+  R.rays("fl2", t, T.layers + 0.1); R.rings("fl2", t, [T.layers + 0.2]);
+  R.stack("st", t, { at: T.layers + 0.05, discs: 6, explode: at("96") + 0.1, gap: 18, core: "🧠" });
+  ["l1", "l2", "l3", "l4", "l5", "l6"].forEach((id, i) => R.callout(id, t, at("96") + 0.2 + i * 0.12));
+  R.note("hs1", t, at("96"), T.end);
+
+  // ---- PREDICT
+  R.card("pd", t, { in: T.end + 0.1 });
+  count("voc", t, at("50,257"), 1.0, 50257, { ding: true });
+  BARS.forEach((b, i) => { const p = ease.out3(prog(t, at("scores every") + i * 0.12, 0.7)); R.$("br" + i).querySelector(".tr i").style.width = (b[1] / 45 * 100 * p) + "%";
+    R.$("br" + i).style.opacity = clamp(p * 2); });
+  if (R.$("br0").offsetWidth) { R.$("psel").style.top = (R.$("br0").offsetTop - 2) + "px"; R.$("psel").style.height = "66px"; }
+  R.sel("psel", t, at("likely next"), at("Then it adds"));
+  // context grows: after "adds that token" the picked token joins; on "every single word" more join quickly
+  const added = [at("adds that token") + 0.2, at("For every"), at("single word"), R.end("single word") - 0.2].filter(x => t >= x).length;
+  R.$("ctx").innerHTML = CTX.slice(0, 1 + added).map((w, i) => i === added && i > 0 ? `<span class="new">${w}</span>` : w).join("") + `<span class="blank"></span>`;
+  R.flow("loop", t, { at: at("runs the whole"), path: "M 980 1000 C 1060 1000, 1060 640, 980 640 L 120 640 C 40 640, 40 720, 120 730", n: 5, speed: 0.7, hide: T.where - 0.3 });
+  R.note("n4", t, at("scores every") + 0.4, T.where);
+
+  // ---- TRAINING
+  R.card("trn", t, { in: T.where + 0.1, back: [T.idea, null] });
+  R.matrix("mx", t, { cols: 26, rows: 7, at: at("300 billion"), d: 1.6, to: 182 });
+  const tb = prog(t, at("300 billion"), 1.6); R.$("trd").textContent = tb <= 0 ? "0" : Math.round(lerp(0, 300, ease.out3(tb))) + "B tokens";
+  R.chip("ch1", t, { at: at("nudging"), size: 270, label: "175B" });
+  R.$("ch1").style.opacity = parseFloat(R.$("ch1").style.opacity || 0) * (1 - prog(t, T.idea, 0.3));
+  R.note("wl", t, at("175 billion"), T.idea);
+  R.card("pp", t, { in: T.idea + 0.1, y: 80 });
+  R.note("n5", t, at("300 billion"), T.idea);
+
+  // ---- USE
+  pop("v1", t, at("sounds right"), { from: 0.6 }); R.note("v2", t, at("not what is")); pop("v3", t, at("is right"), { from: 0.6 });
+  R.card("tips", t, { in: at("give it the facts") - 0.2 });
+  R.rows("tips", t, [at("give it the facts"), at("show it an"), at("ask it to check")]);
+
+  // ---- RECAP
+  R.rack("rk", t, T.recap + 0.1, { stagger: 0.32 });
+
+  // ---- CTA
+  R.card("ig", t, { in: T.cta - 0.05, out: at("send this") + 0.2 });
+  R.finger("fg", t, Object.assign([{ t: T.cta + 0.1, x: 700, y: 1500 }, { t: T.cta + 0.7, x: 300, y: 1080, press: true }, { t: at("breakdowns") + 0.2, x: 300, y: 1080 }, { t: at("send this") + 0.2, x: 900, y: 1700 }], { out: at("send this") }));
+  R.press("followBtn", t, T.cta + 0.7);
+  const followed = t >= T.cta + 0.95; const fb = R.$("followBtn"); fb.textContent = followed ? "Following ▾" : "Follow"; fb.style.background = followed ? "#2a2a2e" : "";
+  R.plusone("plus1", t, T.cta + 0.95);
+  R.sheet("sh", t, at("send this") + 0.25, { dy: 560 });
+  const typed = t >= at("thinks the AI"); R.$("shmsg").textContent = typed ? "it's literally guessing the next token 😭" : "Write a message…"; R.$("shmsg").style.color = typed ? "#111" : "";
+  R.press("sendBtn", t, R.end("alive") + 0.3);
+};
+window.seek(0);
+</script>
+</body></html>

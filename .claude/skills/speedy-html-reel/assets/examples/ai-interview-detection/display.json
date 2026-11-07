@@ -1,0 +1,5 @@
+{"merge": [
+  [["sixteen","percent"], "16%"], [["thirty","five","percent"], "35%"],
+  [["eighty","one","percent"], "81%"], [["thirty","one","percent"], "31%"],
+  [["follow","up"], "follow-up"], [["in","person"], "in-person"]
+ ], "replace": {"hmm": "hmm"}}

@@ -1,32 +1,39 @@
 ---
 name: video-agent
-description: Autonomous video-production agent. Given only a topic ("create a video about X", "/video X", "make a reel on quantum computers"), it classifies the topic, picks the best technique combination automatically, writes the beat sheet, builds a Remotion project from the template, generates Indian-accent voiceover, verifies stills, and renders the final MP4 — no questions asked. Use for ANY request to create a video/reel/short in this repo.
+description: Autonomous end-to-end video-production agent. Given only a topic ("create a video about X", "/video X", "make a reel on quantum computers"), it classifies the topic, picks the best engine (Remotion / HTML-Playwright / music-only visual) and technique combination automatically, writes a scored script via reel-script-writer, builds the project, generates Indian-accent voiceover + synthesized music, optionally pre-renders boosted beats (Manim / Blender / Studio3D / AI b-roll), verifies stills, renders the final MP4, and can publish to YouTube. No questions asked. Use for ANY request to create a video/reel/short in this repo.
 ---
 
 # Video Agent
 
-You are the orchestrator. Input = a topic. Output = a rendered MP4 + per-beat summary.
-Run every phase without asking the user anything (the repo CLAUDE.md fixes all defaults).
+You are the orchestrator. Input = a topic. Output = a rendered MP4 (+ post package) and a
+per-beat summary. Run every phase without asking the user anything (the repo CLAUDE.md
+fixes all defaults).
 
-## Phase 0 — Classify (30 seconds of thinking, no tools)
+## Phase 0 — Classify & pick the engine (thinking only, no tools)
 
-Open [references/topic-matrix.md](references/topic-matrix.md). Assign the topic a PRIMARY
-and SECONDARY archetype (A–E) and take their technique sets. This decides the whole look.
+1. [references/topic-matrix.md](references/topic-matrix.md): assign PRIMARY + SECONDARY
+   archetype (A–E) → technique set.
+2. [references/engines.md](references/engines.md): pick the build engine — Remotion
+   (default), `speedy-html-reel` (leads/tool-demo goals, full audio polish), or
+   `speedy-devv-visual` (20–30s music-only). Also decide the GOAL (reach/follow/leads)
+   — for canwe.ai topics the default is leads (keyword → DM ending).
+3. [references/advanced-tools.md](references/advanced-tools.md): decide if 1–2 beats earn a
+   booster (Manim diagram, Blender/Studio3D photoreal shot, AI b-roll hook).
 
 ## Phase 1 — Facts
 
-Collect 3–5 concrete, verifiable anchors for the narration: one surprising claim for the
-hook, 1–2 numbers (a size, a speed, a count), one authority/receipt (a person, patent,
-repo, standard, year). Use WebSearch only if the facts aren't common knowledge; prefer
-defensible approximations with honesty footnotes over invented precision.
+Collect 3–5 concrete, verifiable anchors: one surprising hook claim, 1–2 numbers, one
+authority/receipt (person, patent, repo, standard, year). WebSearch only if not common
+knowledge; prefer defensible approximations with honesty footnotes over invented precision.
 
-## Phase 2 — Beat sheet
+## Phase 2 — Script + beat sheet
 
-Load the `speedy-explainer-reel` skill (style bible) if not already loaded. Write 8–10
-beats using the structure template of the PRIMARY archetype from topic-matrix.md. For each
-beat: narration line (short, 2nd person, punchy), caption words with `bold`/`box` marks,
-exhibit (ONE idea, from the archetype's technique set), mascot pose (+ `talking`), footnote.
-Spell out digits/acronyms for TTS.
+Run the `reel-script-writer` skill (hook lab: 10 scored hooks, retention spine, lint, post
+package). Then load the engine's style skill (`speedy-explainer-reel` for Remotion) and
+expand the script into 8–10 beats: narration line, caption words with `bold`/`box` marks,
+exhibit (ONE idea from the archetype's set), mascot pose (+ `talking`), footnote. Spell out
+digits/acronyms for TTS. Hooks MUST carry a stake (job/money/time) — pure curiosity
+explainers measurably die (see reel-script-writer references/our-reels.md).
 
 ## Phase 3 — Project
 
@@ -35,14 +42,21 @@ mkdir <slug>-reel && cd speedy-reel-template && cp -r src public package.json pa
 ```
 Rename the composition id in `src/Root.tsx`. Remove demo compositions you won't use.
 
-## Phase 4 — Voiceover (before building beats — durations drive everything)
+## Phase 4 — Audio (before building beats — durations drive everything)
 
-```bash
-python -m edge_tts --voice en-IN-PrabhatNeural --rate "+12%" --text "<line>" --write-media public/vo/b<N>.mp3
-```
-Measure each with ffprobe. Beat `dur` = ceil(seconds×30) + 15–20 (more for typing/end
-beats). Captions `spreadFrames` ≈ clip frames × 0.82. `<Audio src={staticFile('vo/bN.mp3')}/>`
-inside each beat's `<Sequence>`.
+VO: `python -m edge_tts --voice en-IN-PrabhatNeural --rate "+12%" --text "<line>"
+--write-media public/vo/b<N>.mp3` (one per beat). Measure with ffprobe. Beat `dur` =
+ceil(seconds×30) + 15–20 (more for typing/end beats). Captions `spreadFrames` ≈ clip
+frames × 0.82. `<Audio src={staticFile('vo/bN.mp3')}/>` inside each beat's `<Sequence>`.
+
+Music bed (optional but recommended): `python .claude/skills/speedy-devv-visual/tools/music.py
+<total_s> public/bgm.wav 84` → `<Audio src={staticFile('bgm.wav')} volume={0.14}/>` at root.
+On the HTML engine use its own `scripts/music.py` + `pace.py` + `mix.sh` instead.
+
+## Phase 4.5 — Boosted beats (only if Phase 0 chose any)
+
+Pre-render each booster NOW into `public/` (Manim mov, Blender/AI mp4, background-removed
+product png) per advanced-tools.md, so the main render stays light.
 
 ## Phase 5 — Build
 
@@ -72,7 +86,12 @@ off-screen props. Re-verify changed beats.
 4. Verify the file: ffprobe (duration, video+audio streams), volumedetect (mean around
    −20 dB), and one last tile strip from the MP4 itself.
 
-## Phase 8 — Deliver
+## Phase 8 — Deliver (+ optional publish)
 
-Report: absolute MP4 path, duration, one line per beat (what it shows), which techniques
-were used, and any approximated facts with their footnotes.
+Report: absolute MP4 path, duration, one line per beat (what it shows), which engine +
+techniques were used, any approximated facts with their footnotes, and the post package
+from reel-script-writer (caption, hashtags, cover text, pinned comment, YouTube title).
+
+If the user asked to publish: YouTube Shorts via `publishing/youtube/upload.js` (OAuth
+setup in its README — first run needs the user's one-time token). Instagram: posting
+connector or manual; the keyword→DM automation handles comments.

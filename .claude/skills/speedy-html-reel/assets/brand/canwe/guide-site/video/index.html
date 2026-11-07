@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Make reels like ours with Claude: the complete guide · canwe.ai</title>
+<meta name="description" content="Install, idea, script, voice, storyboard, our look, captions, motion, sound, review, render and post: every command and prompt to make animated reels with Claude Code and HyperFrames.">
+<meta property="og:title" content="Stop paying for video-editing courses. Make reels like ours with Claude.">
+<meta property="og:description" content="The complete guide: 12 steps, every command and prompt, tested by us. HyperFrames (free, open-source core) + Claude Code.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+.note{color:var(--mute);font-size:15px}
+table.t{width:100%;border-collapse:collapse;font-size:15px;margin:10px 0 4px;display:block;overflow-x:auto}
+table.t th,table.t td{border:1px solid rgba(255,255,255,.1);padding:8px 10px;text-align:left;vertical-align:top}
+table.t th{background:rgba(255,255,255,.04);font-weight:700}
+table.t code{font-family:"JetBrains Mono",monospace;font-size:13px}
+</style>
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Make reels like ours with <span class="sel"><i></i><b>Claude.</b></span></h1>
+  <p class="lead">The complete guide behind the VIDEO reel: install once, then idea → script → voice → storyboard → our look → captions → motion → sound → review → render → post. We ran the core commands ourselves on 5 Nov 2026 (HyperFrames v0.9.15). No editing app, no course.</p>
+  <div class="chips"><span class="chip">HyperFrames: free · open-source core</span><span class="chip">first reel ≈ 2 hours · then ≈ 45 min</span><span class="chip">you press post</span></div>
+  <nav class="toc">
+    <a href="#s0"><small>00</small>Install (once)</a>
+    <a href="#s1"><small>01</small>The idea</a>
+    <a href="#s2"><small>02</small>The script</a>
+    <a href="#s3"><small>03</small>The voice</a>
+    <a href="#s4"><small>04</small>The project</a>
+    <a href="#s5"><small>05</small>Storyboard</a>
+    <a href="#s6"><small>06</small>Our look</a>
+    <a href="#s7"><small>07</small>Captions</a>
+    <a href="#s8"><small>08</small>Motion</a>
+    <a href="#s9"><small>09</small>Sound</a>
+    <a href="#s10"><small>10</small>Review + fix</a>
+    <a href="#s11"><small>11</small>Render + cover</a>
+    <a href="#s12"><small>12</small>Post</a>
+    <a href="#fix"><small>!</small>Troubleshooting</a>
+    <a href="#catch"><small>₹</small>Costs</a>
+  </nav>
+
+  <section id="s0">
+    <div class="step">STEP 00 · ONCE</div><h2>Install the 3 tools</h2>
+    <p>You need <b>Node.js 22 or newer</b>, <b>FFmpeg</b> and <b>Claude Code</b> (Claude in your terminal). About 10 minutes.</p>
+    <p><b>Mac</b> (with Homebrew):</p>
+    <div class="code pad"><button class="cp">Copy</button>brew install node ffmpeg</div>
+    <p><b>Windows</b> (PowerShell):</p>
+    <div class="code pad"><button class="cp">Copy</button>winget install OpenJS.NodeJS.LTS
+winget install Gyan.FFmpeg</div>
+    <p><b>Then Claude Code</b> (any system):</p>
+    <div class="code pad"><button class="cp">Copy</button>npm install -g @anthropic-ai/claude-code</div>
+    <p><b>Check it all worked</b> (close and reopen the terminal first):</p>
+    <div class="code pad"><button class="cp">Copy</button>node -v
+ffmpeg -version
+claude --version</div>
+    <p class="note">node -v must say v22 or higher. The first time you run <b>claude</b> it asks you to log in with your Claude account (paid plan needed, see Costs).</p>
+  </section>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>The idea: steal the pattern, not the video</h2>
+    <p>Open the 5 best reels in your niche from the last 2 weeks. For each, copy the first spoken line (the hook), the caption, the length and the views. Paste into Claude (claude.ai is fine for steps 1–2):</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Here are 5 top reels from my niche (hook, caption, length, views). Find the pattern they share: hook type, length, structure, how they show proof, and the call to action. Then give me 5 reel ideas for MY page that use the same pattern on a topic they didn't cover. Score each idea 0–10 for: specific, stakes for my viewer, easy to SHOW on screen, and true for me. My niche: [your niche]. My audience: [who].</div>
+    <p class="note">Pick the idea you can prove on screen. "I did X" only if you really did X.</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>The script: the 3-beat opening + one idea per line</h2>
+    <p>Our structure: <b>pain/claim (≤ 6 words) → twist with Claude → "here's how"</b>, then the steps, an honest catch, one CTA. 110–125 words = about 40 seconds.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Write a 38–42 second reel script (110–125 words) on [idea]. Structure: (1) hook, 6 words or fewer, with a number or a bold claim; (2) a twist line with Claude, 4–7 words; (3) "Here's how" or "Here are the N steps"; (4) the steps, each one short line said + shown; (5) an honest catch, said softly; (6) ONE call to action: "Comment WORD and I'll DM you [the thing]". Spoken, casual, like telling a friend. One idea per sentence, 6–14 words. No "in this video", "game-changer", "unlock". First give me 10 hooks scored 0–12 (specific, stakes, curiosity, fast, showable, true), then the script with the best hook, then 3 frame-0 headline options of 7 words or fewer.</div>
+    <p class="note">Read it out loud. If you need a breath in the middle of a sentence, split it.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>The voice</h2>
+    <div class="feat">
+      <div><span>🎙️</span><div><b>ElevenLabs</b> (what we use): model v3, one take. Add tags in square brackets for delivery: <b>[matter of fact]</b> on the hook, <b>[excited]</b> on the twist, <b>[short pause]</b> before the catch, <b>[softly]</b> on the catch, <b>[warmly]</b> on the CTA. Write a stressed word in CAPS. A 40-second reel costs us ~750–850 credits.</div></div>
+      <div><span>📱</span><div><b>Your own voice</b>: record on your phone in a quiet room, 15 cm from your mouth. Still the most human option, and free.</div></div>
+      <div><span>💻</span><div><b>Free, on your laptop</b>: an open-source text-to-speech voice such as Kokoro. Less expressive, costs nothing.</div></div>
+    </div>
+    <p>Save the file as <b>voice.mp3</b>. Example of a tagged line:</p>
+    <div class="code pad"><button class="cp">Copy</button>[matter of fact] Stop paying for video-editing courses.
+[excited] Claude makes every reel on this PAGE. Here are the 5 steps.</div>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>Create the project (with your voice in it)</h2>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes init my-reel --resolution portrait --audio voice.mp3 --model base.en --language en</div>
+    <ul class="chk">
+      <li><b>1</b><div><strong>What it does:</strong> makes a 1080×1920 project, copies your voice in and wires it to the timeline, transcribes it with Whisper (word timings for captions), and installs the HyperFrames skills into Claude Code.</div></li>
+      <li><b>2</b><div><strong>First run:</strong> it downloads the Whisper model once (needs internet). If transcription fails, the project is still created; run it again on a normal connection.</div></li>
+      <li><b>3</b><div><strong>The installer says:</strong> "Review skills before use; they run with full agent permissions." Worth 2 minutes of reading.</div></li>
+    </ul>
+    <p>Then open Claude Code inside the project (a <b>new</b> session, so it loads the skills):</p>
+    <div class="code pad"><button class="cp">Copy</button>cd my-reel
+claude</div>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>Storyboard first, build second</h2>
+    <p>Don't ask for the video in one go. Ask for a shot list, fix it, then build. This is the step that makes it look edited, not generated.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Using /hyperframes: here is my script (voice.mp3 is already in the project, with word timings). Before building anything, write a storyboard as a table: for every sentence give the time range, the ONE hero visual on screen (a real UI mock-up, a number, a diagram, never stock clipart), the motion that brings it in, and the transition to the next scene. Rules: frame 0 must already show a bold headline (it is the thumbnail and must work on mute); a new visual every 2–3 seconds; one accent colour; text only between 170 px and 1330 px from the top. Wait for my OK before building.</div>
+    <p class="note">Change anything that's vague ("show AI") into something concrete ("a chat card where Claude replies with 3 chips").</p>
+  </section>
+
+  <section id="s6">
+    <div class="step">STEP 06</div><h2>Our look, as a prompt</h2>
+    <p>This is how our reels are styled. Swap the colours for your brand.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Build it with this look. Background: graphite #0F0F11 with a faint dot grid and a soft vignette. Text: off-white #F3F1EC, one accent: terracotta #D97757 (and #F0A585 for highlights), nothing else coloured. Font: Inter, headlines weight 900, tight letter-spacing; code in JetBrains Mono. Cards: dark glass (#1B1B1F, 1.5px #2C2C31 border, 22px radius, deep soft shadow). Frame-0 headline: 2 lines, ~100px, the key word in the accent colour, rising in word by word. Section headers like "01 The idea" with the number big in the accent colour. Motion: things arrive on a fast ease-out with a tiny overshoot (power4/expo out), leave on ease-in, never linear; scene changes cut mid-motion (no slow crossfades). Keep everything inside the 90% safe area.</div>
+    <p><b>The cartoon presenter.</b> Our character is our own SVG puppet. To get yours:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Draw a cartoon presenter as an inline SVG at the bottom of the frame (head + shoulders, ~600px wide, standing in from y=1330): [describe: hair, glasses, outfit, colours]. Give him poses as separate arm angles (talk, point up, point left, point right, thumbs up, shrug, wave) and a mouth that opens and closes on the voice. On each step, he moves to the side opposite the hero visual and points at it; he steps closer (scale 1.15) on the hook twist and the CTA, and slightly back (0.86) while pointing.</div>
+  </section>
+
+  <section id="s7">
+    <div class="step">STEP 07</div><h2>Captions: word by word, one keyword boxed</h2>
+    <p>HyperFrames has ready-made caption styles. List them and install one:</p>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes catalog captions
+npx hyperframes add caption-highlight</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>Using the word timings from voice.mp3, add captions at the top (y ≈ 300px), max 5 words per page, each word blurring in as it's spoken. In every page, put ONE keyword in a blue "selection box" (2px #3B82F6 border, light blue fill, two small white corner handles, like a Figma selection). Every time the word "Claude" is spoken, turn it peach #F0A585 with a soft glow and pop a small Claude spark icon right after it.</div>
+  </section>
+
+  <section id="s8">
+    <div class="step">STEP 08</div><h2>Motion: use the 448 ready-made blocks</h2>
+    <p>Before hand-building any effect, search the registry. Blocks we found useful for reels:</p>
+    <table class="t">
+      <tr><th>What you want</th><th>Install</th></tr>
+      <tr><td>A vertical Claude chat mock-up</td><td><code>npx hyperframes add claude-exchange</code></td></tr>
+      <tr><td>A terminal typing a command</td><td><code>npx hyperframes add code-terminal-run</code></td></tr>
+      <tr><td>Fast scene cuts that match motion</td><td><code>npx hyperframes add cut-the-curve</code> · <code>whip-pan-cut</code></td></tr>
+      <tr><td>A marker highlight / cursor drawing on text</td><td><code>npx hyperframes add marker-highlight</code> · <code>cursor-annotate</code></td></tr>
+      <tr><td>Chat / notes / notification UIs (vertical)</td><td><code>chat-thread</code> · <code>notes-typing</code> · <code>notification-cascade</code></td></tr>
+      <tr><td>Instagram follow end card</td><td><code>npx hyperframes add instagram-follow</code></td></tr>
+    </table>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes catalog --tag transition
+npx hyperframes catalog chat</div>
+    <p>Then the motion prompt (paste after the build):</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Upgrade the motion: every hero visual enters on a spring (slight overshoot, settles in ~0.4s); cards deal in staggered 0.08s apart; on the hook's last word, tear the hero card in half (two clip-path halves falling apart) with a short camera shake; on the twist, a big accent burst (rays + an expanding ring + a 2-frame flash); between sections use a different cut each time (cut-the-curve, whip pan, iris from the next visual, rack focus). Nothing ever sits still for more than 2 seconds: slow drift or parallax on everything that's on screen.</div>
+  </section>
+
+  <section id="s9">
+    <div class="step">STEP 09</div><h2>Sound: music under, whooshes on cuts</h2>
+    <div class="code prompt pad"><button class="cp">Copy</button>Using /media-use: add background music under the voice (instrumental, ~130 BPM, ducks under the voice so every word is clear), a short whoosh on every scene cut, a soft pop when a card lands, and an impact on the hook's last word. Keep the voice on top. Fade the music out over the last 1.5 seconds.</div>
+    <p>Useful commands:</p>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes beats          # finds the music's beats so cuts can land on them
+npx hyperframes audio --at 12  # what sound plays where, at 12 s</div>
+    <p class="note">Only use music you have the rights to. Trending songs: add them inside Instagram's editor instead, so Instagram handles the licence.</p>
+  </section>
+
+  <section id="s10">
+    <div class="step">STEP 10</div><h2>Review like an editor</h2>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes check
+npx hyperframes snapshot --at 0,3,8,15,25,35
+npx hyperframes preview</div>
+    <ul class="chk">
+      <li><b>1</b><div><strong>check</strong> catches real problems. Ours flagged an empty first frame, overlapping animations, nested clips and text hidden under a shape.</div></li>
+      <li><b>2</b><div><strong>snapshot</strong> saves PNG frames plus a contact sheet. Give the sheet back to Claude: "Look at this contact sheet. What's hard to read, cramped or boring? Fix the 3 worst things."</div></li>
+      <li><b>3</b><div><strong>preview</strong> opens a live studio in your browser (localhost). Scrub through it with sound on, then on mute.</div></li>
+    </ul>
+    <p>Revision prompts that work:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Frame 0 isn't a thumbnail yet: put the headline fully on screen at 0.0s, bigger, with the hero visual already behind it.</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>Between 12s and 15s nothing new happens. Add a visual that shows exactly what the voice says there.</div>
+    <div class="code prompt pad"><button class="cp">Copy</button>The captions and the headline overlap at the top. Move the headline down 60px and keep 40px between them everywhere.</div>
+  </section>
+
+  <section id="s11">
+    <div class="step">STEP 11</div><h2>Render + the cover</h2>
+    <div class="code pad"><button class="cp">Copy</button>npx hyperframes render -o reel.mp4</div>
+    <p class="note">Our 8-second test rendered in 9 seconds; a 40-second reel takes a few minutes.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Make a 1080×1920 cover as a separate composition: background = a tilted, dimmed grid of my previous reel covers (files in assets/covers/), a small pill kicker on top, a 2-line headline of 5 words or fewer in 140px+ type with the keyword in the selection box, my handle under it, and the presenter pointing at the headline. Keep all text inside the middle 3:4 area (y 240–1680): that's what the profile grid shows. Render one frame to cover.png.</div>
+  </section>
+
+  <section id="s12">
+    <div class="step">STEP 12</div><h2>Post it (you, not Claude)</h2>
+    <div class="code prompt pad"><button class="cp">Copy</button>Write my Instagram caption: line 1 = "Comment WORD and I'll DM you…", then the hook, 3–5 numbered value lines, one honest line (costs / what's mine / not sponsored), a [keywords: …] line with 5 search phrases, and 4 hashtags. Then a pinned comment and a YouTube Shorts title under 60 characters.</div>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Watch it twice</strong>: once with sound, once on mute. On mute, the first frame alone must say what the reel is.</div></li>
+      <li><b>2</b><div><strong>Upload the cover</strong> as the reel cover; check the profile-grid crop.</div></li>
+      <li><b>3</b><div><strong>Set up the DM</strong> for your keyword before you post, so the first comments get answered. (We use our own tool, 2il.in.)</div></li>
+      <li><b>4</b><div><strong>Reply to comments</strong> in the first hour.</div></li>
+    </ul>
+  </section>
+
+  <section id="fix">
+    <div class="step">TROUBLESHOOTING</div><h2>What went wrong for us (and the fix)</h2>
+    <table class="t">
+      <tr><th>Problem</th><th>Fix</th></tr>
+      <tr><td>Claude doesn't know HyperFrames</td><td>Start a NEW Claude Code session inside the project after <code>init</code>, so it loads the skills. Then start prompts with "Using /hyperframes".</td></tr>
+      <tr><td>Render fails loading an animation library from the internet</td><td>Ask: "Download gsap.min.js into assets/ and load it from there instead of the CDN."</td></tr>
+      <tr><td>check: "first frame empty"</td><td>Put the headline on screen at 0.0s (it's your thumbnail).</td></tr>
+      <tr><td>check: "text occluded"</td><td>Move the text, or if the overlap is on purpose (a strike line), ask Claude to mark it as intentional.</td></tr>
+      <tr><td>check: "overlapping tweens" / "nested structure"</td><td>Paste the check output to Claude: "Fix every error in this check report."</td></tr>
+      <tr><td>Transcription skipped</td><td>It needs internet the first time (it downloads the Whisper model). Re-run init, or ask Claude to transcribe voice.mp3.</td></tr>
+      <tr><td>Captions drift from the voice</td><td>"Re-time every caption word to the transcript timings; never estimate timings."</td></tr>
+    </table>
+  </section>
+
+  <section id="catch">
+    <div class="step">THE CATCH</div><h2>What it costs, honestly</h2>
+    <div class="feat">
+      <div><span>💳</span><div><b>Claude Code needs a paid Claude plan.</b> Everything else on this page can be free.</div></div>
+      <div><span>⭐</span><div><b>HyperFrames has a paid Pro tier</b> (extra style templates and features). This guide only uses the free, open-source core.</div></div>
+      <div><span>🎙️</span><div><b>ElevenLabs uses credits</b>; your own voice or a local voice is free.</div></div>
+      <div><span>🧪</span><div><b>Your first reel takes practice</b>: plan ~2 hours. By the third one it's under an hour.</div></div>
+      <div><span>🔐</span><div><b>Skills run with your agent's permissions.</b> Read what you install.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Made one?</h2></div>
+    <p>Tag @canwe.ai. We'll share the best ones. Follow for more "Claude does it for me" setups.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · HyperFrames by HeyGen (npm "hyperframes" v0.9.15, Apache-2.0; commands init / check / snapshot / render / catalog / add run by us on 5 Nov 2026; preview, beats and audio from the CLI's own help; hyperframes.heygen.com). Our own reels use our own Claude pipeline (same idea: HTML scenes rendered to video); this guide is the free public route. Not sponsored; not affiliated with HeyGen, ElevenLabs or Anthropic. DMs sent with 2il.in (our own tool).</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

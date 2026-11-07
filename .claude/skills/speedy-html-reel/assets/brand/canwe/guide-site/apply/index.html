@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Placement season, zero offers, so I let Claude apply: the setup · canwe.ai</title>
+<meta name="description" content="Playwright in Claude (Microsoft, free), the resume-scoring prompt, the apply prompt, and the rule that makes Claude stop before Submit.">
+<meta property="og:title" content="Placement season. Zero offers. So I let Claude apply.">
+<meta property="og:description" content="Playwright in Claude · your resume · it fills the form · you press Submit.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Zero offers. So I let Claude <span class="sel"><i></i><b>apply.</b></span></h1>
+  <p class="lead">Part 3 of the job-hunt series. Part 1 (JOBS) finds the jobs, part 2 (OFFER) scores them, this one fills the application form. Claude types; you read every form and press Submit yourself.</p>
+  <div class="chips"><span class="chip">free · open source</span><span class="chip">~10 min setup</span><span class="chip">you press Submit</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>Playwright in Claude</a>
+    <a href="#s2"><small>02</small>Your resume</a>
+    <a href="#s3"><small>03</small>The apply prompt</a>
+    <a href="#s4"><small>04</small>The rules</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Give Claude a browser: Playwright (Microsoft, free)</h2>
+    <p><b>playwright-mcp</b> by Microsoft: 39.1k ⭐, Apache-2.0 (3 Nov 2026). It lets Claude open pages, read forms, type, click and upload files. Needs Node 18+.</p>
+    <p><b>Claude Code</b> (one command):</p>
+    <div class="code pad"><button class="cp">Copy</button>claude mcp add playwright npx @playwright/mcp@latest</div>
+    <p><b>Claude Desktop</b>: Settings → Developer → Edit config, add this under <b>mcpServers</b>, restart Claude:</p>
+    <div class="code pad"><button class="cp">Copy</button>"playwright": { "command": "npx", "args": ["@playwright/mcp@latest"] }</div>
+    <p style="color:var(--mute);font-size:15px">Test it: "Open example.com and tell me the page title." A browser window should open.</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Your resume → which jobs you actually fit</h2>
+    <p>This week (7 days to 3 Nov 2026) freehire counted <b>901 fresher postings in India</b> on company career sites. Don't apply to all of them. Attach your resume (remove your phone number and address first) and paste:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Here is my resume. For each job link I paste, score my fit 0–100 (skills, degree, location, experience asked vs mine), say the 2 biggest gaps honestly, and tell me if it's worth applying. Never invent experience I don't have.</div>
+    <p>Where to get the links: part 1 of this series (freehire + Claude, guide at /freehire/) or the company's own careers page.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>The apply prompt (with the stop rule built in)</h2>
+    <div class="code prompt pad"><button class="cp">Copy</button>Open this application: [paste the careers-page link]. Use my resume (attached) to fill every field: name, email, college, degree, year, projects, and write "why this company" in 3 honest sentences based on my actual projects. Upload resume.pdf where asked. RULE: NEVER click Submit, Apply, or any final button. When every field is filled, STOP, take a screenshot, and show me what you entered so I can check it.</div>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Read the filled form.</strong> Fix anything wrong in the browser yourself.</div></li>
+      <li><b>2</b><div><strong>You press Submit.</strong> Every time. It's your name on the application.</div></li>
+      <li><b>3</b><div><strong>Next job:</strong> paste the next link and the same prompt. Keep a sheet of what you applied to.</div></li>
+    </ul>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>The rules (read before your first run)</h2>
+    <div class="feat">
+      <div><span>✋</span><div><b>"Stop before Submit" is a prompt rule, not a setting.</b> Claude follows it well, but check the screenshot every time. Try it first on a form that doesn't matter.</div></div>
+      <div><span>🚫</span><div><b>Company sites only.</b> LinkedIn, Naukri and most job boards prohibit bots and can ban your account. Use Workday / Greenhouse / Lever / the company's own careers page.</div></div>
+      <div><span>📏</span><div><b>No invented experience.</b> The prompt says it; you enforce it. One made-up project costs you the interview.</div></div>
+      <div><span>🔐</span><div><b>Playwright is powerful.</b> Don't enable its "run code unsafe" option, and don't let it log in to your bank or email. It's a browser for forms, not a key to your life.</div></div>
+      <div><span>⏱️</span><div><b>Captchas and OTPs</b> are for you to do by hand. Claude will stop and ask.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for part 4: the follow-up email Claude drafts after you apply.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Playwright MCP by Microsoft (github.com/microsoft/playwright-mcp, 39.1k★, Apache-2.0, read 3 Nov 2026). 901 postings: freehire job_market_stats, India, intern + junior, 7 days to 3 Nov 2026. The form in the reel is a recreated sample. Not affiliated with Microsoft, Anthropic or any employer.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

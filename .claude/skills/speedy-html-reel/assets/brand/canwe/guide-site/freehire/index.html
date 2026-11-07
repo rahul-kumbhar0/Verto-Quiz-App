@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>freehire + Claude setup · canwe.ai</title>
+<meta name="description" content="How I automated my job search with freehire and Claude: setup in 5 minutes, 3 copy-paste prompts, daily alerts and form auto-fill.">
+<meta property="og:title" content="I automated my job search: the full setup">
+<meta property="og:description" content="freehire + Claude in 5 minutes. Copy-paste prompts included.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>I <span class="sel"><i></i><b>automated</b></span> my job search. Here's the full setup.</h1>
+  <p class="lead">One free, open-source GitHub repo (<b>freehire</b>) + Claude. Takes about 5 minutes. Everything you need is on this page.</p>
+  <div class="chips"><span class="chip">3.3M+ live jobs</span><span class="chip">straight from career pages</span><span class="chip">free · open source</span></div>
+
+  <nav class="toc">
+    <a href="#what"><small>01</small>What it is</a>
+    <a href="#claude"><small>02</small>Connect Claude</a>
+    <a href="#prompts"><small>03</small>My 3 prompts</a>
+    <a href="#alerts"><small>04</small>Daily alerts</a>
+    <a href="#apply"><small>05</small>Auto-fill forms</a>
+    <a href="#faq"><small>06</small>Good to know</a>
+  </nav>
+
+  <section id="what">
+    <div class="step">STEP 01</div><h2>What freehire is</h2>
+    <p>freehire is an open-source job search engine. Instead of copying jobs from other portals, it pulls them <b>straight from company career pages</b>, from Workday, Greenhouse, Lever and 100+ other hiring systems.</p>
+    <div class="feat">
+      <div><span>🔁</span><div><b>No reposts.</b> The same job posted on three sites shows up once.</div></div>
+      <div><span>🔗</span><div><b>No middlemen.</b> Every listing links to the company's own page.</div></div>
+      <div><span>👻</span><div><b>Ghost jobs flagged.</b> It marks postings that probably aren't really hiring.</div></div>
+      <div><span>🆓</span><div><b>Free to search,</b> no sign-up needed. MIT-licensed, so you can even run your own copy.</div></div>
+    </div>
+    <a class="btn pri" href="https://github.com/strelov1/freehire" target="_blank" rel="noopener">⭐ Open the repo on GitHub</a>
+    <a class="btn sec" href="https://freehire.me" target="_blank" rel="noopener">🔎 Search jobs on freehire.me</a>
+  </section>
+
+  <section id="claude">
+    <div class="step">STEP 02</div><h2>Connect it to Claude</h2>
+    <p>This is the part that makes it feel automated: once connected, you just ask Claude for jobs in plain English. Pick the option for the app you use.</p>
+
+    <div class="card">
+      <h3 style="margin-top:0">Option A · Claude app or claude.ai <span class="tag g">EASIEST</span></h3>
+      <ol><li>Open <b>Settings → Connectors</b>.</li><li>Tap <b>Add custom connector</b>.</li><li>Paste this URL and save:</li></ol>
+      <div class="code pad"><button class="cp">Copy</button>https://freehire.me/api/v1/mcp</div>
+      <p style="margin-top:10px;color:var(--mute);font-size:15px">No account or key needed. This gives Claude the job search tools.</p>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Option B · Claude Code <span class="tag">DEVS</span></h3>
+      <p>Run this inside Claude Code:</p>
+      <div class="code pad"><button class="cp">Copy</button>/plugin install freehire --marketplace strelov1/freehire-mcp</div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0">Option C · Full version <span class="tag">SAVE · TRACK · CV</span></h3>
+      <p>Lets Claude also save jobs, track your applications and tailor your CV to a job.</p>
+      <ol>
+        <li>Create a free account on <a href="https://freehire.me" target="_blank" rel="noopener">freehire.me</a>.</li>
+        <li>Open the <b>account menu → API keys</b> and create a key (it starts with <code>fhk_</code>).</li>
+        <li>In Claude Desktop go to <b>Settings → Developer → Edit config</b> and add:</li>
+      </ol>
+      <div class="code pad"><button class="cp">Copy</button>{
+  "mcpServers": {
+    "freehire": {
+      "command": "npx",
+      "args": ["-y", "freehire-mcp"],
+      "env": { "FREEHIRE_TOKEN": "fhk_your_key_here" }
+    }
+  }
+}</div>
+      <p class="warn" style="margin-top:12px">🔒 Your key is like a password. Never paste it in comments, DMs or screenshots.</p>
+    </div>
+  </section>
+
+  <section id="prompts">
+    <div class="step">STEP 03</div><h2>My 3 prompts (copy-paste)</h2>
+    <h3>1 · Find jobs</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Find Python or data internships in Bangalore or remote in India. Use the facets tool first so the filters are valid. Show me the 10 newest with company, location, link and one line on why each fits a fresher.</div>
+    <h3>2 · What to learn next</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>My skills are Python, SQL and Git. Use market_fit to check them against live internship demand in India and tell me the ONE skill that would unlock the most new matches.</div>
+    <h3>3 · Before you apply</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Read this job: [paste link]. List what it asks for that I don't have yet, and suggest 3 resume bullet points using only my real projects below. Don't invent anything.
+
+My projects:
+[paste your projects]</div>
+    <p style="color:var(--mute);font-size:15px;margin-top:10px">Swap in your own skills, city and role. Prompt 2 needs the connector from Step 02.</p>
+  </section>
+
+  <section id="alerts">
+    <div class="step">STEP 04</div><h2>Daily alerts on Telegram</h2>
+    <ol>
+      <li>On <a href="https://freehire.me" target="_blank" rel="noopener">freehire.me</a>, run your search (for example <b>Python · Internship · Bangalore</b>).</li>
+      <li>Save the search (needs a free account).</li>
+      <li>Turn on the digest for <b>Telegram</b> (or email).</li>
+    </ol>
+    <p>Now new matches come to you every day. You stop searching; the jobs come to you.</p>
+  </section>
+
+  <section id="apply">
+    <div class="step">STEP 05</div><h2>Let it fill the application form</h2>
+    <ol>
+      <li>Install the <b>freehire</b> extension from the <a href="https://chromewebstore.google.com/detail/freehire/ijfaechijopdlikalojadpojmpilplnj" target="_blank" rel="noopener">Chrome Web Store</a>.</li>
+      <li>Open any job's application page and open the freehire side panel.</li>
+      <li>Click <b>Fill this form</b>.</li>
+    </ol>
+    <p class="warn">✋ Always read every field before you hit submit. The extension fills the form; you stay in control.</p>
+  </section>
+
+  <section id="faq">
+    <div class="step">STEP 06</div><h2>Good to know</h2>
+    <div class="feat">
+      <div><span>💸</span><div><b>Is it free?</b> Searching is free and needs no sign-up. Some extra AI features (like CV tailoring) can use AI credits.</div></div>
+      <div><span>🇮🇳</span><div><b>Does it have Indian jobs?</b> Yes: about 41,000 jobs in India were posted in the last 30 days (freehire data, 25 Oct 2026). It focuses on IT/tech roles.</div></div>
+      <div><span>⚠️</span><div><b>Never pay to apply.</b> A real job never asks for a fee. If a company asks for money, walk away.</div></div>
+      <div><span>🤝</span><div><b>Not sponsored.</b> freehire is built by <a href="https://github.com/strelov1" target="_blank" rel="noopener">Ilya Strelov</a> and the open-source community. If it helps you, give the repo a ⭐.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>I share tools like this every week: AI, coding interviews and job-hunt hacks, explained in 60 seconds.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Numbers and setup steps from the freehire README and freehire-mcp docs (Oct 2026).</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

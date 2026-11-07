@@ -1,0 +1,57 @@
+<!doctype html><html><head><meta charset="utf-8"><title>1K story · frame 1</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="common.css"></head>
+<body><div id="stage"><div class="grid"></div><div class="glow" id="glow"></div>
+  <div class="brand" id="brand"><img src="canwe-logo.svg" alt="">canwe.ai</div>
+  <div class="kick" id="k1" style="top:375px">MILESTONE UNLOCKED</div>
+  <div class="big" id="num" style="top:420px">0</div>
+  <div class="kick" id="k2" style="top:690px;font-size:30px;letter-spacing:10px;color:#fff">FOLLOWERS</div>
+  <div class="ttl" id="ty" style="top:790px"><span class="sel"><i></i><b>Thank you</b></span> 🙌</div>
+  <div class="sub" id="s1" style="top:930px">for learning AI, tech and job-hunt hacks with us.</div>
+  <div class="sub" id="s2" style="top:1030px;color:#3ECF8E;font-weight:800">We're just getting started 🚀</div>
+  <div id="avatar" style="left:240px;top:1140px;width:600px;height:640px"></div>
+  <div class="conf" id="conf"></div>
+</div>
+<script src="engine.js"></script><script src="avatar.js"></script><script src="props.js"></script>
+<script>
+const R = Reel, { prog, ease: E, clamp, lerp } = R;
+window.REEL_DURATION = 12;
+Avatar.init(document.getElementById("avatar"), { look: "street" });
+// seeded confetti
+let sd = 7; const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
+const COLS = ["#3ECF8E", "#3B82F6", "#FDE68A", "#F472B6", "#A855F7", "#ffffff"], NC = 90, HIT = 3.4;
+const P = Array.from({ length: NC }, () => ({ x: 540 + (rnd() - .5) * 200, y: 560, vx: (rnd() - .5) * 1500, vy: -900 - rnd() * 900, r: rnd() * 360, vr: (rnd() - .5) * 900, c: COLS[Math.floor(rnd() * COLS.length)], w: 10 + rnd() * 10, h: 18 + rnd() * 16 }));
+document.getElementById("conf").innerHTML = P.map(p => `<i style="background:${p.c};width:${p.w}px;height:${p.h}px"></i>`).join("");
+// presenter timeline: [t, pose, expr]
+const POSES = [[0, "talk", "neutral"], [0.6, "big", "surprised"], [HIT, "celebrate", "excited"], [6.2, "double_thumbs", "excited"], [9.4, "wave", "happy"]];
+window.seek = t => {
+  R.pop("brand", t, 0.05, { from: 0.8 });
+  R.rise("k1", t, 0.25, { dy: 16 });
+  const cp = E.out3(prog(t, 0.6, HIT - 0.6)); document.getElementById("num").textContent = Math.round(1000 * cp).toLocaleString("en-US");
+  for (let k = 0; k < 14; k++) R.cue("click", 0.6 + k * 0.19, { soft: true });
+  R.cue("ding", HIT);
+  const punch = 1 + 0.12 * Math.sin(Math.PI * clamp(prog(t, HIT, 0.35)));
+  document.getElementById("num").style.transform = `scale(${punch})`;
+  document.getElementById("num").style.color = t >= HIT ? "#3ECF8E" : "#fff";
+  document.getElementById("glow").style.opacity = E.out3(prog(t, HIT, 0.5)) * (0.85 + 0.15 * Math.sin(t * 3));
+  R.rise("k2", t, HIT + 0.15, { dy: 16 });
+  R.pop("ty", t, 4.9, { from: 0.6 });
+  R.rise("s1", t, 5.7, { dy: 20 }); R.rise("s2", t, 7.0, { dy: 20 });
+  // confetti
+  document.querySelectorAll("#conf i").forEach((el, i) => {
+    const p = P[i], d = t - HIT - (i % 3) * 0.04;
+    if (d < 0) { el.style.opacity = 0; return; }
+    const x = p.x + p.vx * d * 0.6, y = p.y + p.vy * d + 0.5 * 1500 * d * d;
+    el.style.opacity = clamp(1 - prog(d, 3.2, 0.8)); el.style.transform = `translate(${x}px,${y}px) rotate(${p.r + p.vr * d}deg)`;
+  });
+  R.cue("whoosh", HIT - 0.1);
+  // presenter
+  let i = 0; POSES.forEach((q, k) => { if (t >= q[0]) i = k; });
+  const [ta, pose, ex] = POSES[i], prev = POSES[Math.max(0, i - 1)];
+  const q = (a, d) => { const u = (t - a) / d; return u <= 0 || u >= 1 ? 0 : u < 0.18 ? u / 0.18 : u > 0.8 ? (1 - u) / 0.2 : 1; };
+  const fx = []; [[HIT + 0.2, "spark", 2.2], [7.0, "spark", 1.6]].forEach(([a, n, d]) => { const u = (t - a) / d; if (u > 0 && u < 1) fx.push([n, u]); });
+  const beat = Math.max(0, ...[HIT, 4.9, 7.0].map(a => { const d = t - a; return d >= 0 && d < 0.42 ? Math.sin(Math.PI * d / 0.42) : 0; }));
+  Avatar.frame(t, pose, prog(t, ta, 0.18), prev[1], 0, { beat, expr: q(HIT, 1.6) > 0.3 ? "surprised" : ex, exprPrev: prev[2], exprP: prog(t, ta, 0.18), shades: q(HIT, 1.6), fx, flip: prog(t, 0.1, 1) < 1 ? prog(t, 0.1, 1) : 0 });
+  document.getElementById("avatar").style.transform = `translateY(${(1 - E.out3(prog(t, 0, 0.5))) * 120}px)`;
+};
+window.seek(0);
+</script></body></html>

@@ -16,12 +16,22 @@ autonomously until a rendered MP4 exists. The user's topic is the only input you
   lands in `<project>/out/`. 720×1280 output is acceptable (the originals ship at 720).
 - Each video = its own folder `<topic-slug>-reel/` copied from `speedy-reel-template/`.
 
-## Division of labor between the two skills
+## Division of labor between the skills
 
-- `video-agent` = the orchestrator: topic → archetype → beat sheet → build → VO → verify
-  stills → render → deliver. Start here for every video request.
-- `speedy-explainer-reel` = the style bible: exact colors, typography, motion recipes,
-  component contracts. The agent consults it while building; load it when writing beats.
+- `video-agent` = the orchestrator: topic → archetype + ENGINE pick → script → build →
+  audio → verify stills → render → deliver/publish. Start here for every video request.
+- `reel-script-writer` = the script brain (ALWAYS runs before building): scored hooks,
+  goal-driven archetypes, lint, full post package. Battle-tested on @canwe.ai.
+- Three build engines (video-agent/references/engines.md picks automatically):
+  - `speedy-explainer-reel` — Remotion/React engine (default; 3D, talking mascot)
+  - `speedy-html-reel` — HTML+Playwright engine (production-proven; align/pace/music/sfx/
+    mix/cover/logo scripts; keyword→DM presets; read `.claude/canwe-ai/RECORD.md` first)
+  - `speedy-devv-visual` — 20–30s music-only motion-graphics engine
+- Boosters for 1–2 beats max (video-agent/references/advanced-tools.md): Manim, Blender
+  headless, Studio3D, HyperFrames packs, AI b-roll (Video Create MCP / Higgsfield manual).
+- Publishing: `publishing/youtube/` (YouTube Data API uploader); IG via connectors.
+- `.claude/canwe-ai/` = the brand's running record: house rules, posted-reel results,
+  topics backlog. When the topic is for @canwe.ai, obey it (keyword→DM endings, audience).
 
 ## Hard rules
 

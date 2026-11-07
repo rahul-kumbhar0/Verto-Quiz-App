@@ -1,0 +1,32 @@
+<!doctype html>
+<!-- Presenter auto-direction demo: the career-ops voice + captions, NO hand-placed poses (poses:"auto").
+     The chip shows which word triggered which move + expression. Needs audio/voice.mp3 from the career-ops reel to mix. -->
+<html><head><meta charset="utf-8"><title>presenter auto-direction demo</title>
+<link rel="stylesheet" href="speedy.css">
+<style>
+.why{position:absolute;left:0;right:0;top:560px;text-align:center;z-index:8}
+.why span{display:inline-block;font:700 30px Inter;color:#fff;background:#17191D;border:2px solid #2A2D33;border-radius:999px;padding:12px 26px}
+.why b{color:var(--accent)} .why em{font-style:normal;color:#FDE68A}
+.badge{position:absolute;left:0;right:0;top:470px;text-align:center;font:700 20px Mono;letter-spacing:3px;color:#8E8E93}
+</style></head><body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="s1"><div class="badge">AUTO-DIRECTED · NO MANUAL POSES</div><div class="why" id="why"><span></span></div></section>
+  <div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel;
+window.REEL_DURATION = +(R.voiceEnd() + 1.8).toFixed(2);
+R.setup({ scenes: [{ id: "s1", s: 0, e: 999, enter: "none" }] });
+R.speedy({ emph: window.EMPH, poses: "auto", autoPoses: { gap: 1.4 },
+  avatar: { x: 90, y: 960, w: 900, in: 0, look: "street", style: { shirt: "#C2410C", shirtLine: "#7C2D12", print: "#FDE68A", lens1: "#2DD4BF", lens2: "#0EA5E9" } } });
+const A = window.AUTO_POSES;
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  let c = null; A.forEach(x => { if (t >= x.t) c = x; });
+  const w = R.$("why"), sp = w.querySelector("span");
+  if (c) { sp.innerHTML = `${/^\(/.test(c.word) ? `<em>${c.word}</em>` : `“<em>${c.word.replace(/[.,?!]$/, "")}</em>”`} → <b>${c.pose}</b>${c.expr ? " · " + c.expr : ""}`;
+    const p = R.ease.out3(R.prog(t, c.t, 0.25)); w.style.opacity = p; w.style.transform = `scale(${0.9 + 0.1 * p})`; } else w.style.opacity = 0;
+};
+window.seek(0);
+</script></body></html>

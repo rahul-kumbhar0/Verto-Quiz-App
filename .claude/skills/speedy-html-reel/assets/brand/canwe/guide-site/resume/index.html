@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ATS-safe resume kit · canwe.ai</title>
+<meta name="description" content="What really happens to your resume after you apply, an ATS-safe template and a Claude prompt that tailors it to any job.">
+<meta property="og:title" content="Do bots reject your resume? The truth + a free ATS-safe kit">
+<meta property="og:description" content="ATS-safe template, Claude tailoring prompt and a 10-second checklist.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free kit</span></div>
+
+  <h1>Do bots <span class="sel"><i></i><b>reject</b></span> your resume? Here's the truth + a free kit.</h1>
+  <p class="lead">What really happens after you hit apply, an ATS-safe resume template, and the Claude prompt I use to tailor it to any job.</p>
+  <div class="chips"><span class="chip">ATS-safe template</span><span class="chip">Claude tailoring prompt</span><span class="chip">10-second checklist</span></div>
+
+  <nav class="toc">
+    <a href="#truth"><small>01</small>The real reasons</a>
+    <a href="#template"><small>02</small>ATS-safe template</a>
+    <a href="#prompt"><small>03</small>Claude prompt</a>
+    <a href="#check"><small>04</small>10-sec checklist</a>
+  </nav>
+
+  <section id="truth">
+    <div class="step">STEP 01</div><h2>What actually kills your application</h2>
+    <div class="myth"><span style="font-size:24px">🧢</span><div><s>"75% of resumes are rejected by bots"</s> traces back to a 2012 sales pitch. No study was ever published.</div></div>
+    <div class="feat">
+      <div><span>❓</span><div><b>Screening questions.</b> Employers can set rules that auto-reject an application based on your answers (graduation year, sponsorship, location, licences). This is the real auto-reject. Read every question and answer honestly.</div></div>
+      <div><span>🔎</span><div><b>Keyword search.</b> Recruiters search their candidate database for words like <i>Python</i> and <i>SQL</i>. If the exact words from the job post aren't on your resume, you don't show up.</div></div>
+      <div><span>🧩</span><div><b>Layout.</b> Two columns, tables and text boxes can come out scrambled when the resume is parsed. One column is safest.</div></div>
+      <div><span>📥</span><div><b>Volume.</b> An entry-level role can get 400 to 600 applications within days. Applying early and matching the job post closely matter more than any trick.</div></div>
+    </div>
+  </section>
+
+  <section id="template">
+    <div class="step">STEP 02</div><h2>ATS-safe resume template</h2>
+    <p>Copy it into Google Docs or Word, replace the brackets, keep it to <b>one column</b>, and export as PDF. Use a normal font (Arial, Calibri) and plain headings exactly like these.</p>
+    <div class="code pad"><button class="cp">Copy</button>[FULL NAME]
+[City, State] | [phone] | [email] | linkedin.com/in/[you] | github.com/[you]
+
+SUMMARY
+[Final-year B.Tech CSE student / fresher] skilled in [Python, SQL, React]. Built [1 real project with a result]. Looking for a [Software Engineer Intern] role.
+
+SKILLS
+Languages: [Python, Java, SQL]
+Frameworks & tools: [React, Django, Git, Docker]
+Concepts: [REST APIs, DBMS, OOP, Data Structures]
+
+EXPERIENCE
+[Role], [Company] | [Month Year] – [Month Year]
+- [Action verb] [what you built] using [tech], [result with a number]
+- [Action verb] [what you improved], [result with a number]
+
+PROJECTS
+[Project name] | [Tech used] | [github link]
+- [What it does, who it helps, one number: users / speed / accuracy]
+- [The hardest part you solved]
+
+EDUCATION
+[Degree, Branch], [College] | [Year] | CGPA: [x.xx]
+
+CERTIFICATIONS & ACHIEVEMENTS
+- [Certification / hackathon / rank]</div>
+    <p class="warn" style="margin-top:12px">✋ No photos, icons, tables, text boxes or skill bars. Put contact details in the body, not in the page header.</p>
+  </section>
+
+  <section id="prompt">
+    <div class="step">STEP 03</div><h2>The Claude prompt that tailors it</h2>
+    <p>Paste this into Claude, then paste the job post and your resume below it.</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>You are helping me tailor my resume to one job. Rules: use ONLY facts from my resume, never invent experience, numbers or skills.
+
+1. List the 10 most important keywords and skills in the job post.
+2. Show which ones are already in my resume and which are missing.
+3. For the missing ones I genuinely have, rewrite my bullet points to include them naturally.
+4. For the ones I don't have, tell me honestly and suggest one small project to learn them.
+5. Give me the final resume in a single-column, plain-text format with these headings: SUMMARY, SKILLS, EXPERIENCE, PROJECTS, EDUCATION.
+
+JOB POST:
+[paste the job description]
+
+MY RESUME:
+[paste your resume text]</div>
+  </section>
+
+  <section id="check">
+    <div class="step">STEP 04</div><h2>10-second checklist before you apply</h2>
+    <ul class="chk">
+      <li><b>✓</b><div>I read every screening question and answered honestly.</div></li>
+      <li><b>✓</b><div>The exact skill words from the job post are in my resume (e.g. "SQL", not just "databases").</div></li>
+      <li><b>✓</b><div>One column, no tables, no text boxes, no images.</div></li>
+      <li><b>✓</b><div>Copy-paste test: when I paste my PDF text into Notes, it reads in the right order.</div></li>
+      <li><b>✓</b><div>File name: Firstname_Lastname_Resume.pdf</div></li>
+      <li><b>✓</b><div>I'm applying in the first few days after the job was posted.</div></li>
+    </ul>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>I break down how hiring really works, plus AI tools that help you get hired, in 60-second reels.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>
+    <p><b>Sources</b></p>
+    <ul class="src">
+      <li>Origin of the 75% stat: <a href="https://jobcannon.io/research/stats/ats-myth-preptel" target="_blank" rel="noopener">JobCannon research</a>, <a href="https://unchartedcareer.com/blog/the-75-of-resumes-are-auto-rejected-myth-traced-to-its-source" target="_blank" rel="noopener">Uncharted Career</a></li>
+      <li>Survey of 25 US recruiters (Enhancv, 2025): <a href="https://itbrief.co.uk/story/study-reveals-ats-rarely-auto-rejects-cvs-debunks-75-myth" target="_blank" rel="noopener">IT Brief</a></li>
+      <li>Keyword search in Greenhouse: <a href="https://support.greenhouse.io/hc/en-us/articles/115004600186-Search-resumes-for-keywords" target="_blank" rel="noopener">Greenhouse help center</a></li>
+      <li>Auto-reject rules on screening answers: <a href="https://enhancv.com/blog/how-does-greenhouse-work/" target="_blank" rel="noopener">Enhancv on Greenhouse</a>, <a href="https://www.jobscan.co/blog/knockout-questions-answer-application/" target="_blank" rel="noopener">Jobscan</a></li>
+    </ul>
+    Made by canwe.ai · Oct 2026
+  </footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

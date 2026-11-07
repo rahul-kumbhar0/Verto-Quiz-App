@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Day 1 · Every word AI writes is a guess · canwe.ai</title>
+<meta name="description" content="Learn AI Engineering, Day 1: what happens when you hit Enter in Claude or ChatGPT — tokens, numbers, next-token prediction — plus a 15-minute hands-on exercise.">
+<meta property="og:title" content="Learn AI Engineering · Day 1: every word AI writes is a guess">
+<meta property="og:description" content="Tokens → numbers → next-token prediction, explained simply. Plus a 15-minute exercise.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>learn AI · day 1</span></div>
+
+  <h1>Every word AI writes is a <span class="sel"><i></i><b>guess</b></span>.</h1>
+  <p class="lead"><b>Learn AI Engineering, Day 1.</b> What actually happens between you pressing Enter and Claude (or ChatGPT) replying. Read it in 3 minutes, then do the 15-minute exercise below — that's where it sticks.</p>
+  <div class="chips"><span class="chip">day 1 of the series</span><span class="chip">3-min read</span><span class="chip">15-min exercise</span></div>
+
+  <nav class="toc">
+    <a href="#idea"><small>01</small>The idea, simply</a>
+    <a href="#ex"><small>02</small>15-minute exercise</a>
+    <a href="#code"><small>03</small>For builders: 6 lines of Python</a>
+    <a href="#words"><small>04</small>Words to remember</a>
+  </nav>
+
+  <section id="idea">
+    <div class="step">01 · THE IDEA</div><h2>Three steps, on repeat</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Your text is chopped into tokens.</strong> A token is a piece of a word. In English, one token is roughly 4 characters, or about ¾ of a word (OpenAI's rule of thumb). Common words are one token; rare or long words get split into several.</div></li>
+      <li><b>2</b><div><strong>Each token becomes a list of numbers.</strong> The model never sees letters. Every token is turned into a long list of numbers (GPT-2 small used 768 per token) that captures how it's used. These numbers are learned during training.</div></li>
+      <li><b>3</b><div><strong>The model scores every possible next token.</strong> It gives a probability to every token in its vocabulary — GPT-2 had 50,257 to choose from — picks one, adds it to the text, and repeats the whole thing for the next token.</div></li>
+    </ul>
+    <p>That loop is why answers <b>stream in piece by piece</b>, and why asking the same question twice can give <b>different answers</b>: the model picks from probabilities, it doesn't fetch a stored answer. Without tools like web search, it's predicting from patterns it learned, not looking things up — which is also why it can sound confident and still be wrong.</p>
+    <p class="warn">💡 The numbers in the reel's bar chart were illustrative. Real probabilities depend on the model and everything before that point in the text.</p>
+  </section>
+
+  <section id="ex">
+    <div class="step">02 · DO THIS (15 MIN)</div><h2>See it with your own eyes</h2>
+    <h3>A · Watch text turn into tokens (5 min)</h3>
+    <ol>
+      <li>Open OpenAI's free tokenizer: <a href="https://platform.openai.com/tokenizer" target="_blank" rel="noopener">platform.openai.com/tokenizer</a>.</li>
+      <li>Paste: <code>Why is the sky blue?</code> — count the tokens.</li>
+      <li>Now paste a long rare word (<code>antidisestablishmentarianism</code>), a number (<code>2026</code>), and the same sentence in Hindi. Which uses the most tokens? (Hint: many tokenizers spend more tokens on non-English text — that's part of why it can cost more.)</li>
+    </ol>
+    <h3>B · Same question, three answers (5 min)</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Explain in two sentences why the sky is blue.</div>
+    <p>Ask this in three <b>new</b> chats. Write down what changed and what stayed the same. The facts usually match; the wording doesn't — that's sampling.</p>
+    <h3>C · Be the model (5 min)</h3>
+    <p>Cover the end of this sentence and guess the next word: <b>"I'll have a cup of ___"</b>. Write your top 3 with a rough % for each. Then ask Claude:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>For the text "I'll have a cup of", list the 5 most likely next words with a rough probability for each, and explain why the top one wins.</div>
+    <p>You just did what the model does — billions of times a day.</p>
+  </section>
+
+  <section id="code">
+    <div class="step">03 · FOR BUILDERS</div><h2>Count tokens in Python</h2>
+    <p>Install OpenAI's open-source tokenizer library and look at the pieces yourself:</p>
+    <div class="code pad"><button class="cp">Copy</button>pip install tiktoken</div>
+    <div class="code pad"><button class="cp">Copy</button>import tiktoken
+enc = tiktoken.get_encoding("gpt2")
+ids = enc.encode("Why is the sky blue?")
+print(len(ids), ids)
+print([enc.decode([i]) for i in ids])
+print(enc.n_vocab)   # size of GPT-2's vocabulary</div>
+    <p style="color:var(--mute);font-size:15px">Every AI API bills by tokens, so counting them is the first real AI-engineering skill: it decides cost and how much fits in one request.</p>
+  </section>
+
+  <section id="words">
+    <div class="step">04 · WORDS TO REMEMBER</div><h2>Today's vocabulary</h2>
+    <div class="feat">
+      <div><span>🧩</span><div><b>Token</b> — a piece of text the model reads and writes. ≈ ¾ of an English word.</div></div>
+      <div><span>📚</span><div><b>Vocabulary</b> — the full list of tokens a model knows (GPT-2: 50,257).</div></div>
+      <div><span>🔢</span><div><b>Embedding</b> — the list of numbers each token becomes.</div></div>
+      <div><span>🎯</span><div><b>Next-token prediction</b> — scoring every possible next token and picking one, again and again.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Day 2 is coming</h2></div>
+    <p>One AI concept a day, from zero to AI engineer — in 45 seconds each. <a href="/ai/" style="color:#fff;text-decoration:underline">See the full series →</a></p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>Made by canwe.ai · Sources: OpenAI's tokenizer guidance (1 token ≈ 4 characters ≈ ¾ of an English word), the GPT-2 release (50,257-token vocabulary, 768-number embeddings in the small model). Not affiliated with Anthropic or OpenAI.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

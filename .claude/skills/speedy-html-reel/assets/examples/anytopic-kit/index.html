@@ -1,0 +1,32 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css"></head>
+<body><div id="stage"><div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div><div class="bokeh" id="bk"></div>
+  <section class="scene" id="sGlobe">
+    <div class="globe" id="gl" style="left:300px;top:560px"></div>
+    <div class="sc" id="lat" style="left:170px;top:1090px;width:740px;padding:20px 28px;font:600 26px Mono;display:flex;gap:24px;align-items:center">
+      <span class="mut" style="font-size:19px;letter-spacing:2px">ROUND&nbsp;TRIP&nbsp;FROM&nbsp;TOKYO&nbsp;·&nbsp;</span><span>Frankfurt</span><b style="margin-left:auto">229 ms</b></div>
+  </section>
+  <section class="scene" id="sFlow">
+    <div class="box3d" id="bx1" style="left:90px;top:760px"></div>
+    <div class="box3d" id="bx2" style="left:720px;top:700px"></div>
+    <div class="flow" id="fw" style="left:0;top:0;width:1080px;height:1920px"></div>
+  </section>
+  <section class="scene" id="sChip">
+    <div class="chip3d" id="ch" style="left:410px;top:700px"></div>
+    <div class="note l" id="nn" style="top:1120px">one isolate per request</div>
+  </section>
+  <div id="kin"></div><div id="avatar"></div><div id="grain"></div></div>
+<script>window.CAPTION_PAGES=[[{t:"a",s:0.2,e:0.3},{t:"user",s:0.35,e:0.6},{t:"in",s:0.65,e:0.75},{t:"Tokyo",s:0.8,e:1.3}],[{t:"every",s:3.3,e:3.6},{t:"request",s:3.65,e:4.1}],[{t:"an",s:6.3,e:6.4},{t:"AI",s:6.5,e:6.8},{t:"model",s:6.9,e:7.3}]];</script>
+<script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script>
+<script>
+const R=Reel;
+R.setup({push:0.012,scenes:[{id:"sGlobe",s:0,e:3.1,enter:"blurzoom"},{id:"sFlow",s:3.1,e:6.1,enter:"push"},{id:"sChip",s:6.1,e:999,enter:"swing"}]});
+R.speedy({emph:{box:["Tokyo","request","AI"],bold:["user","every","model"]},avatar:{x:240,y:1330,w:600},poses:[[0.2,"point_stage"],[3.3,"explain"],[6.3,"pinch"]]});
+window.REEL_DURATION=9;
+window.seek=t=>{R.frame(t);R.speedyFrame(t);R.bokehDrift("bk",t);
+  R.globe("gl",t,{at:0.1,size:480,pins:[{x:18,y:38},{x:82,y:56,alt:true}],arc:{from:1,to:0,at:0.9,d:1.0,lift:30}});
+  R.card("lat",t,{in:1.6,y:50});
+  R.box("bx1",t,{at:3.2,size:240,icon:"🌐",side:"browser"});
+  R.box("bx2",t,{at:3.5,size:240,icon:"⚡",side:"edge cache"});
+  R.flow("fw",t,{at:3.9,n:6,path:"M 350 900 C 480 860, 580 850, 715 830",speed:0.4});
+  R.chip("ch",t,{at:6.2,size:260,label:"LLM"});
+};window.seek(0);</script></body></html>

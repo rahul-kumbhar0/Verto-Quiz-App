@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["Zomato#1", "Indian services", "Zomato#2", "cart#1", "Swiggy", "Early access", "Zerodha", "portfolio", "Indian government", "no login", "Gmail", "recruiter reply", "MCP#1", "any app", "MCP#2"], "bold": ["inside Claude", "UPI QR", "Instamart", "Analysis", "UPSC aspirants", "You#3", "USB port for AI"]};
+window.PINS = [["inside Claude .", "lean_in"], ["into Claude now.", "explain"], ["still press send.", "think"], ["any app .", "point_cam"]];

@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>3 AI agent setups · canwe.ai</title>
+<meta name="description" content="What an AI agent actually is (tools in a loop until a goal is done) and 3 agent setups you can try this week.">
+<meta property="og:title" content="What is an AI agent? + 3 setups to try this week">
+<meta property="og:description" content="Think, act, observe, repeat. Then try a job agent, a research agent and a coding agent.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+
+  <h1>What an AI <span class="sel"><i></i><b>agent</b></span> is, plus 3 setups to try this week.</h1>
+  <p class="lead">An agent is AI that uses tools, in a loop, until a goal is done. A chatbot answers once and stops. An agent keeps going: think, act, observe, repeat.</p>
+  <div class="chips"><span class="chip">job agent</span><span class="chip">research agent</span><span class="chip">coding agent</span></div>
+
+  <nav class="toc">
+    <a href="#what"><small>01</small>The loop, simply</a>
+    <a href="#job"><small>02</small>Job-hunt agent</a>
+    <a href="#research"><small>03</small>Research agent</a>
+    <a href="#code"><small>04</small>Coding agent</a>
+  </nav>
+
+  <section id="what">
+    <div class="step">STEP 01</div><h2>The loop, simply</h2>
+    <div class="feat">
+      <div><span>💭</span><div><b>Think.</b> The AI decides what to do next to reach your goal.</div></div>
+      <div><span>⚡</span><div><b>Act.</b> It uses a tool: search the web, open a page, run code, write to a sheet.</div></div>
+      <div><span>👀</span><div><b>Observe.</b> It reads what the tool returned.</div></div>
+      <div><span>🔁</span><div><b>Repeat.</b> It loops until the goal is done (or it asks you for help).</div></div>
+    </div>
+    <p class="warn" style="margin-top:12px">🔒 Safety first: never give an agent your passwords, OTPs or payment details, and review what it does before it submits or sends anything.</p>
+  </section>
+
+  <section id="job">
+    <div class="step">SETUP 1</div><h2>A job-hunt agent (5 minutes)</h2>
+    <p>Connect Claude to <b>freehire</b>, an open-source search over 3.3M+ live jobs from company career pages.</p>
+    <ol><li>In Claude open <b>Settings → Connectors → Add custom connector</b>.</li><li>Paste this URL and save:</li></ol>
+    <div class="code pad"><button class="cp">Copy</button>https://freehire.me/api/v1/mcp</div>
+    <p style="margin-top:10px">Then give it a goal, not a question:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Goal: find 10 fresher-friendly Python or data internships in India (remote or Bangalore) posted recently. Use the facets tool first so your filters are valid, search, open the most relevant postings, and give me a table with company, role, location, link and one line on why each fits. Keep going until you have 10 good ones.</div>
+    <p style="margin-top:8px;color:var(--mute);font-size:15px">Full freehire setup: <a href="/freehire/">canwe-guides.vercel.app/freehire</a></p>
+  </section>
+
+  <section id="research">
+    <div class="step">SETUP 2</div><h2>A research agent (no setup)</h2>
+    <p>Use any AI app that can browse the web (Claude, ChatGPT or Gemini with web search on) and give it a multi-step goal:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Goal: compare the fresher hiring process at TCS, Infosys and Wipro for 2026. Search the web, open the official careers pages first, then news reports. For each company list the tests, rounds, eligibility and approximate packages, with a source link for every number. Flag anything you couldn't confirm.</div>
+    <p style="margin-top:8px">That "keep going, open sources, flag what you couldn't confirm" instruction is what turns a chatbot answer into agent-style work.</p>
+  </section>
+
+  <section id="code">
+    <div class="step">SETUP 3</div><h2>A coding agent (for devs)</h2>
+    <p>Coding agents like <b>Claude Code</b> read your project, run commands, see the errors and fix them in a loop. Try it on a small project:</p>
+    <div class="code prompt pad"><button class="cp">Copy</button>Goal: add a "/health" endpoint to this project that returns {"status":"ok"}, write a test for it, run the tests, and keep fixing until they pass. Explain each change before you make it.</div>
+    <p class="warn" style="margin-top:12px">💡 Use git and commit before you start, so you can undo anything the agent changes.</p>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>I explain AI and tech in 60 seconds, plus tools that help you get hired.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+
+  <footer>
+    <p><b>Sources</b></p>
+    <ul class="src">
+      <li>OpenAI's always-on agents with their own computer and browser: <a href="https://techcrunch.com/2026/09/29/openai-launches-dots-its-bubbly-agentic-avatar/" target="_blank" rel="noopener">TechCrunch</a>, <a href="https://www.cnbc.com/2026/09/29/openai-devday-2026-live-updates.html" target="_blank" rel="noopener">CNBC</a></li>
+      <li>"Tools in a loop" definition: <a href="https://conffab.com/elsewhere/i-think-agent-may-finally-have-a-widely-enough-agreed-upon-definition-to-be-useful-jargon-now/" target="_blank" rel="noopener">Conffab</a>, <a href="https://blog.promptlayer.com/how-to-define-ai-agents-for-llm-apps/" target="_blank" rel="noopener">PromptLayer</a></li>
+      <li>freehire: <a href="https://github.com/strelov1/freehire" target="_blank" rel="noopener">github.com/strelov1/freehire</a> (MIT, not sponsored)</li>
+    </ul>
+    Made by canwe.ai · Oct 2026
+  </footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

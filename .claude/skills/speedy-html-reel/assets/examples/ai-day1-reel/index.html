@@ -1,0 +1,264 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Learn AI Engineering · Day 1 — every word is a guess</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- AI series Day 1 (classes prefixed a1-) ---- */
+/* chat card (dark) */
+.a1-chat{position:absolute;left:90px;right:90px;top:660px;border-radius:30px;background:#17191D;border:1.5px solid #2A2D33;padding:24px 26px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.a1-chat .hd{display:flex;align-items:center;gap:12px;font:800 26px Inter;color:#fff;padding-bottom:14px;border-bottom:1px solid #2A2D33}
+.a1-u{margin:18px 0 0 auto;width:fit-content;background:#2B5FD9;color:#fff;border-radius:22px 22px 6px 22px;padding:14px 20px;font:600 28px Inter}
+.a1-reply{margin-top:20px;font:600 30px/1.5 Inter;color:#E8E8EC;min-height:140px}
+.a1-reply i{font-style:normal;border-radius:6px;transition:none}
+.a1-reply i.new{background:rgba(217,119,87,.35);box-shadow:0 0 0 2px rgba(217,119,87,.6)}
+.a1-cur{display:inline-block;width:4px;height:34px;background:#D97757;vertical-align:middle;margin-left:4px}
+.a1-pop{position:absolute;left:150px;top:1100px;width:520px;border-radius:20px;background:#0E0F12;border:1.5px solid #3A3F49;padding:14px 18px;opacity:0;font-family:Inter;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.a1-pop small{display:block;font:700 16px Mono;letter-spacing:2px;color:#9AA0A8;margin-bottom:8px}
+.a1-pb{display:flex;align-items:center;gap:12px;margin-top:6px;font:700 22px Mono;color:#fff}
+.a1-pb span{width:150px}
+.a1-pb b{height:16px;border-radius:8px;background:#3A3F49}
+.a1-pb.top b{background:#D97757}
+.a1-pb em{font-style:normal;color:#9AA0A8;font-size:18px}
+/* day card (dark) */
+.a1-pill{position:absolute;left:0;right:0;top:660px;text-align:center;opacity:0}
+.a1-pill span{display:inline-block;font:800 30px Mono;letter-spacing:4px;color:#F5B49C;border:2.5px solid #D97757;border-radius:999px;padding:12px 30px;background:rgba(217,119,87,.08)}
+.a1-day{position:absolute;left:0;right:0;top:740px;text-align:center;font:900 200px/1 Inter;color:#fff;letter-spacing:-6px;opacity:0}
+.a1-day b{color:#D97757}
+.a1-key{position:absolute;left:390px;top:1000px;width:300px;height:170px;opacity:0;perspective:900px}
+.a1-key .a1-cap{position:absolute;inset:0;border-radius:28px;background:linear-gradient(180deg,#3A3F49,#22262D);box-shadow:0 18px 0 #111317,0 30px 60px rgba(0,0,0,.6),inset 0 2px 0 #565D6B;display:grid;place-items:center;font:800 46px Inter;color:#fff;transform:rotateX(28deg)}
+/* step 1: tokens (light) */
+.a1-sent{position:absolute;left:0;right:0;top:680px;display:flex;justify-content:center;gap:0;perspective:1200px}
+.a1-tk{display:inline-block;font:800 56px Inter;color:#111;padding:14px 8px;border-radius:16px;white-space:pre;opacity:0}
+.a1-tk.on{color:#fff}
+.a1-tid{position:absolute;left:0;right:0;top:-34px;text-align:center;font:700 18px Mono;color:#777;opacity:0}
+.a1-q{position:absolute;left:0;right:0;top:880px;text-align:center;opacity:0}
+.a1-q span{display:inline-block;font:800 38px Inter;color:#fff;background:#111;border-radius:999px;padding:14px 34px}
+.a1-q b{color:#F5B49C}
+.a1-cnt{position:absolute;left:0;right:0;top:980px;text-align:center;font:700 26px Inter;color:#555;opacity:0}
+.a1-cnt b{font:900 34px Mono;color:#111}
+.a1-fn{position:absolute;left:0;right:0;top:1300px;text-align:center;font:600 21px Inter;color:#8E8E93;opacity:0;z-index:4}
+/* step 2: numbers (light) */
+.a1-cols{position:absolute;left:60px;right:60px;top:660px;display:flex;justify-content:space-between}
+.a1-col{width:148px;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0}
+.a1-col .w{font:800 30px Inter;color:#fff;border-radius:14px;padding:8px 12px;white-space:pre;min-width:110px;text-align:center}
+.a1-col .n{font:700 22px Mono;color:#111;background:#fff;border:1.5px solid var(--l-line);border-radius:10px;width:128px;text-align:center;padding:6px 0;opacity:0}
+.a1-col .n.dim{color:#999}
+.a1-vec{position:absolute;left:0;right:0;top:1180px;text-align:center;opacity:0}
+.a1-vec span{display:inline-block;font:800 32px Inter;color:#fff;background:#3B82F6;border-radius:999px;padding:12px 32px;box-shadow:0 16px 40px rgba(59,130,246,.35)}
+/* step 3: next-token bars (dark) */
+.a1-ctx{position:absolute;left:90px;right:90px;top:650px;font:800 50px/1.3 Inter;color:#fff;opacity:0;min-height:140px}
+.a1-ctx i{font-style:normal}
+.a1-ctx i.new{color:#F5B49C}
+.a1-ctx .q{display:inline-block;width:40px;height:52px;border-bottom:6px solid #D97757;vertical-align:bottom}
+.a1-bars{position:absolute;left:90px;right:90px;top:840px;opacity:0}
+.a1-bar{display:flex;align-items:center;gap:18px;height:74px}
+.a1-bar span{width:200px;font:800 34px Mono;color:#fff;white-space:pre}
+.a1-bar b{height:40px;border-radius:12px;background:#3A3F49;box-shadow:inset 0 2px 0 rgba(255,255,255,.08)}
+.a1-bar em{font-style:normal;font:800 30px Mono;color:#9AA0A8}
+.a1-bar.top b{background:linear-gradient(90deg,#D97757,#F5B49C);box-shadow:0 0 30px rgba(217,119,87,.55)}
+.a1-bar.top em{color:#F5B49C}
+.a1-opts{position:absolute;left:0;right:0;top:1180px;text-align:center;opacity:0}
+.a1-opts span{display:inline-flex;align-items:center;gap:14px;font:700 28px Inter;color:#C9C9CE;background:#17191D;border:2px solid #2A2D33;border-radius:999px;padding:12px 28px}
+.a1-opts b{font:900 36px Mono;color:#fff}
+.a1-loop{position:absolute;right:90px;top:840px;font:900 34px Mono;color:#D97757;opacity:0}
+/* stream + different (light) */
+.a1-two{position:absolute;left:60px;right:60px;top:660px;display:flex;gap:22px}
+.a1-ans{flex:0 0 calc(50% - 11px);box-sizing:border-box;border-radius:26px;background:#fff;border:2px solid var(--l-line);box-shadow:0 24px 60px rgba(0,0,0,.08);padding:20px;opacity:0;font-family:Inter}
+.a1-ans small{display:block;font:800 18px Mono;letter-spacing:2px;color:#D97757}
+.a1-ans .q2{margin:12px 0 0 auto;width:fit-content;background:#F0EEE6;border-radius:16px 16px 4px 16px;padding:8px 14px;font:600 21px Inter;color:#222}
+.a1-ans p{margin:14px 0 0;font:600 24px/1.45 Inter;color:#222;min-height:150px}
+.a1-pred{position:absolute;left:0;right:0;top:1130px;text-align:center;opacity:0}
+.a1-pred span{display:inline-flex;align-items:center;gap:14px;font:800 36px Inter;color:#111;background:#fff;border:3px solid #D97757;border-radius:999px;padding:12px 32px;box-shadow:0 16px 40px rgba(217,119,87,.25)}
+.a1-pred s{color:#999;text-decoration-thickness:4px}
+/* CTA (house pattern) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#D97757,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 60px Inter;color:#111;background:#fff;border:5px solid #D97757;border-radius:26px;padding:12px 36px;box-shadow:0 20px 50px rgba(217,119,87,.35)}
+.endcta b{color:#D97757}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="a1-chat" id="chat"><div class="hd"><span id="cl1"></span>Claude</div>
+      <div class="a1-u">Why is the sky blue?</div>
+      <div class="a1-reply" id="reply"></div></div>
+    <div class="a1-pop" id="pop"><small>NEXT TOKEN · CANDIDATES</small>
+      <div class="a1-pb top"><span>" light"</span><b style="width:230px"></b><em>71%</em></div>
+      <div class="a1-pb"><span>" rays"</span><b style="width:60px"></b><em>12%</em></div>
+      <div class="a1-pb"><span>" waves"</span><b style="width:30px"></b><em>6%</em></div></div>
+    <div class="a1-fn" id="fnH" style="top:1340px">Illustration · probabilities are made up for this example</div>
+  </section>
+  <section class="scene" id="sDay">
+    <div class="a1-pill" id="pill"><span>LEARN AI ENGINEERING</span></div>
+    <div class="a1-day" id="day">DAY <b>1</b></div>
+    <div class="a1-key" id="key"><div class="a1-cap" id="a1cap">Enter ⏎</div></div>
+  </section>
+  <section class="scene" id="sS1">
+    <div class="a1-sent" id="sent"></div>
+    <div class="a1-q" id="q34"><span>1 token ≈ <b>¾</b> of a word</span></div>
+    <div class="a1-cnt" id="cnt">this sentence = <b>6</b> tokens</div>
+    <div class="a1-fn" id="fn1">Splits shown are illustrative — every model has its own tokenizer</div>
+  </section>
+  <section class="scene" id="sS2">
+    <div class="a1-cols" id="cols"></div>
+    <div class="a1-vec" id="vec"><span>GPT-2: 768 numbers per token</span></div>
+    <div class="a1-fn" id="fn2">Values illustrative · real vectors are learned during training</div>
+  </section>
+  <section class="scene" id="sS3">
+    <div class="a1-ctx" id="ctx"></div>
+    <div class="a1-bars" id="bars">
+      <div class="a1-bar top" id="a1b1"><span id="a1top">" blue"</span><b id="a1bb1"></b><em id="a1be1">0%</em></div>
+      <div class="a1-bar" id="a1b2"><span id="a1l2">" clear"</span><b id="a1bb2"></b><em id="a1be2">0%</em></div>
+      <div class="a1-bar" id="a1b3"><span id="a1l3">" dark"</span><b id="a1bb3"></b><em id="a1be3">0%</em></div>
+      <div class="a1-bar" id="a1b4"><span id="a1l4">" falling"</span><b id="a1bb4"></b><em id="a1be4">0%</em></div>
+    </div>
+    <div class="a1-loop" id="loop">↻ ×<span id="lpn">1</span></div>
+    <div class="a1-opts" id="opts"><span><b id="optn">0</b> possible next tokens (GPT-2)</span></div>
+    <div class="a1-fn" id="fn3" style="top:1290px;color:#8E8E93">Probabilities illustrative · vocabulary size from the GPT-2 release</div>
+  </section>
+  <section class="scene" id="sStream">
+    <div class="a1-two">
+      <div class="a1-ans" id="a1"><small>ASK #1</small><div class="q2">Why is the sky blue?</div><p id="p1"></p></div>
+      <div class="a1-ans" id="a2"><small>ASK #2 · SAME QUESTION</small><div class="q2">Why is the sky blue?</div><p id="p2"></p></div>
+    </div>
+    <div class="a1-pred" id="pred"><span>predicting ✅ <s>looking it up</s></span></div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Kavya · 2m</small><b>TOKENS</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Aditya · 1m</small><b>TOKENS</b> finally someone explains it 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Neha · 40s</small><b>TOKENS</b> day 2 when?</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#D97757,#3B82F6)"></i><div><small>you · now</small><b>TOKENS</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx2"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>your Day 1 exercise 🧠📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>TOKENS</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+R.$("cl1").outerHTML = R.lg("claude", { s: 40 });
+
+// shared data
+const TOK = ["Why", " is", " the", " sky", " blue", "?"];
+const COL = ["#E11D48", "#F59E0B", "#10B981", "#3B82F6", "#8B5CF6", "#0EA5E9"];
+const IDS = ["5195", "318", "262", "6766", "4171", "30"];
+const VEC = [["0.12", "-0.83", "0.47", "-0.05"], ["-0.31", "0.09", "0.66", "0.21"], ["0.58", "-0.14", "-0.72", "0.03"], ["-0.44", "0.91", "0.18", "-0.27"], ["0.07", "-0.39", "0.85", "0.61"], ["0.73", "0.26", "-0.11", "-0.94"]];
+const REPLY = ["The", " sky", " looks", " blue", " because", " sunlight", " scatters", " off", " air", " molecules", " and", " blue", " light", " scatters", " most", "."];
+R.$("reply").innerHTML = REPLY.map(w => `<i>${w}</i>`).join("") + `<span class="a1-cur" id="cur"></span>`;
+R.$("sent").innerHTML = TOK.map((w, i) => `<span class="a1-tk" id="tk${i}" style="position:relative">${w.replace(/ /g, " ")}<span class="a1-tid" id="ti${i}">#${IDS[i]}</span></span>`).join("");
+R.$("cols").innerHTML = TOK.map((w, i) => `<div class="a1-col" id="cc${i}"><div class="w" style="background:${COL[i]}">${w.trim() || w}</div>` +
+  VEC[i].map((v, k) => `<div class="n" id="n${i}${k}">${v}</div>`).join("") + `<div class="n dim" id="n${i}4">… 768</div></div>`).join("");
+const LOOPW = [" blue", " because", " sunlight", " scatters", " off", " air", " molecules"];
+
+const T = { day: at("learn AI"), s1: at("step one"), s2: at("step two"), s3: at("step three"), stream: at("that's why"), cta: at("comment tokens"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.day, enter: "none" }, { id: "sDay", s: T.day, e: T.s1, enter: "blurzoom" },
+  { id: "sS1", s: T.s1, e: T.s2, enter: "push" }, { id: "sS2", s: T.s2, e: T.s3, enter: "push" },
+  { id: "sS3", s: T.s3, e: T.stream, enter: "blurzoom" }, { id: "sStream", s: T.stream, e: T.cta, enter: "push" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.s1, T.s3], [T.stream, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "THE HOOK", at: 0.2 }, { label: "TOKENS", at: T.s1 }, { label: "NUMBERS", at: T.s2 }, { label: "PREDICT", at: T.s3, end: T.cta }],
+  counter: { unit: "tokens", steps: [[T.s1 + 0.5, 6, "tokens"], [T.s2 + 0.5, 768, "numbers / token"], [at("50,257") - 0.1, 50257, "options"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", accessory: "grad", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } },
+  poses: [[0.15, "surprised"], ...window.PINS.map(([p, n]) => [at(p), n])], autoPoses: {},
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK — reply streams token by token; candidate popover over the newest token
+  R.card("chat", t, { in: 0.1, y: 40 });
+  const t0 = 0.6, dt = 0.2; const n = Math.max(0, Math.min(REPLY.length, Math.floor((t - t0) / dt) + 1));
+  R.$("reply").querySelectorAll("i").forEach((e, i) => { e.style.opacity = i < n ? 1 : 0; e.classList.toggle("new", i === n - 1 && t < T.day - 0.2); });
+  R.$("cur").style.opacity = Math.floor(t * 3) % 2;
+  R.card("pop", t, { in: at("guess") - 0.1, y: 20 });
+  R.note("fnH", t, at("guess") + 0.3, T.day);
+  // DAY — series card + 3D Enter key press
+  R.rise("pill", t, T.day + 0.05, { dy: 20 }); pop("day", t, T.day + 0.25, { from: 0.6 });
+  R.rise("key", t, at("what actually") - 0.2, { dy: 30 });
+  const kp = prog(t, at("enter") - 0.05, 0.35), press = Math.sin(Math.PI * kp);
+  R.$("a1cap").style.transform = `rotateX(28deg) translateY(${press * 16}px)`; R.$("a1cap").style.boxShadow = `0 ${18 - press * 14}px 0 #111317,0 30px 60px rgba(0,0,0,.6),inset 0 2px 0 #565D6B`;
+  if (kp > 0) R.cue("click", at("enter") - 0.05);
+  // STEP 1 — sentence appears whole, then splits into coloured 3D token blocks
+  const s1a = T.s1 + 0.15, split = ease.inOut(prog(t, at("chopped") - 0.1, 0.6));
+  TOK.forEach((w, i) => {
+    const e = R.$("tk" + i); e.style.opacity = clamp(prog(t, s1a, 0.4) * 2);
+    e.classList.toggle("on", split > 0.5); e.style.background = split > 0.5 ? COL[i] : "transparent";
+    e.style.margin = `0 ${split * 9}px`; e.style.transform = `translateZ(${split * 40}px) rotateX(${split * 12}deg) translateY(${Math.sin(t * 2 + i) * 4 * split}px)`;
+    R.$("ti" + i).style.opacity = 0;
+    if (split > 0) R.cue("pop", at("chopped") - 0.1 + i * 0.05, { soft: true });
+  });
+  R.rise("cnt", t, at("small pieces"), { dy: 14 });
+  R.rise("q34", t, at("one token") - 0.1, { dy: 18 });
+  R.note("fn1", t, at("chopped") + 0.6, T.s2);
+  // STEP 2 — each token gets its column of numbers
+  TOK.forEach((w, i) => {
+    R.rise("cc" + i, t, T.s2 + 0.1 + i * 0.06, { dy: 16 });
+    for (let k = 0; k < 5; k++) R.rise(`n${i}${k}`, t, at("list of numbers") - 0.1 + k * 0.08 + i * 0.03, { dy: 10 });
+    const fw = 1 - 0.85 * prog(t, at("only numbers") - 0.1, 0.4); R.$("cc" + i).querySelector(".w").style.opacity = fw;
+  });
+  R.rise("vec", t, at("AI never") - 0.1, { dy: 16 });
+  R.note("fn2", t, at("list of numbers") + 0.8, T.s3);
+  // STEP 3 — next-token scoring bars, pick, loop faster
+  R.card("ctx", t, { in: T.s3 + 0.05, y: 20 });
+  const PCT = [62, 14, 9, 2], A = at("scores");
+  const loopA = at("picks one") - 0.05, again = at("all again");
+  let added = 0; if (t >= loopA + 0.3) added = 1;
+  if (t >= again) added = Math.min(LOOPW.length, 1 + Math.floor((t - again) / Math.max(0.12, 0.42 - (t - again) * 0.12)));
+  R.$("ctx").innerHTML = "The sky is" + LOOPW.slice(0, added).map((w, i) => `<i class="${i === added - 1 ? "new" : ""}">${w}</i>`).join("") + `<span class="q"></span>`;
+  R.card("bars", t, { in: A - 0.1, y: 24 });
+  const step = added, regrow = t >= again ? prog(t, again + (step - 1) * 0.0, 0.25) : 1;
+  const SETS = [[62, 14, 9, 2], [48, 21, 11, 5], [55, 17, 8, 4], [71, 9, 6, 3]];
+  const set = SETS[t >= again ? step % SETS.length : 0];
+  const ALT = [[" clear", " dark", " falling"], [" since", " and", " of"], [" light", " rays", " waves"], [" off", " through", " in"], [" across", " from", " around"], [" particles", " dust", " water"], [" molecules", " atoms", " gas"]];
+  const alt = ALT[t >= again ? Math.min(step, ALT.length - 1) : 0]; [2, 3, 4].forEach((k, i) => R.$("a1l" + k).textContent = '"' + alt[i] + '"');
+  R.$("a1top").textContent = '"' + (t >= again && step < LOOPW.length ? LOOPW[step] : " blue") + '"';
+  [1, 2, 3, 4].forEach((k, i) => {
+    const g = ease.inOut(prog(t, A + i * 0.12, 0.6));
+    const pulse = t >= again ? 0.75 + 0.25 * Math.abs(Math.sin((t - again) * 9)) : 1;
+    const v = set[i] * (i === 0 ? 1 : pulse);
+    R.$("a1bb" + k).style.width = (g * v * 6.2) + "px"; R.$("a1be" + k).textContent = Math.round(g * v) + "%";
+  });
+  const pk = prog(t, loopA, 0.4); R.$("a1b1").style.transform = `scale(${1 + 0.06 * Math.sin(Math.PI * pk)})`; if (pk > 0) R.cue("ding", loopA, { soft: true });
+  R.rise("loop", t, again, { dy: 10 }); R.$("lpn").textContent = Math.max(1, added);
+  R.rise("opts", t, at("50,257") - 0.2, { dy: 16 }); R.count("optn", t, at("50,257") - 0.1, 1.0, 50257, { fmt: x => Math.round(x).toLocaleString("en-US") });
+  R.note("fn3", t, at("choose from"), T.stream);
+  // STREAM + DIFFERENT — same question, two different answers
+  R.card("a1", t, { in: T.stream + 0.05, y: 30 });
+  R.type("p1", "Sunlight scatters off tiny air molecules, and blue light scatters the most.", t, at("stream") - 0.05, 30);
+  R.card("a2", t, { in: at("same question") - 0.15, y: 30 });
+  R.type("p2", "Blue light has a shorter wavelength, so the atmosphere bounces it around more.", t, at("different") - 0.1, 30);
+  R.rise("pred", t, at("predicting") - 0.1, { dy: 18 });
+  // CTA — house pattern
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "TOKENS", tyA = at("comment tokens") + 0.3, posted = R.end("comment tokens") + 0.4;
+  if (t < posted) R.type("ctx2", kw, t, tyA, 10); else R.$("ctx2").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, at("follow") - 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

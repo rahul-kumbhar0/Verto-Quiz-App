@@ -1,0 +1,104 @@
+<!doctype html><html><head><meta charset="utf-8"><title>hook test</title>
+<link rel="stylesheet" href="../../template/speedy.css"><link rel="stylesheet" href="../../template/props.css">
+<style>.stat{position:absolute;left:0;right:0;top:1230px;text-align:center;font:600 30px Mono;color:#EDEDED;opacity:0}.stat span{color:var(--mute);font-weight:500}</style>
+</head><body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <div class="bokeh" id="bk"></div>
+
+  <!-- HOOK: stack explodes into labelled layers -->
+  <section class="scene" id="sHook">
+    <div class="floor" id="fl" style="left:90px;top:760px"></div>
+    <div class="stack" id="st" style="left:330px;top:430px;height:620px;width:420px"></div>
+    <div class="bolt" id="b1" style="left:480px;top:400px"></div>
+    <div class="bolt refl" id="b2" style="left:480px;top:1040px"></div>
+    <div class="wordmark" id="wm2" style="top:1150px">supabase</div>
+    <div class="callout" id="c1" style="right:770px;top:555px">Supavisor <span class="ic">💧</span><i class="ln"></i></div>
+    <div class="callout r" id="c2" style="left:760px;top:605px"><i class="ln"></i><span class="ic">◔</span>Edge Functions</div>
+    <div class="callout" id="c3" style="right:770px;top:660px">Realtime <span class="ic">💧</span><i class="ln"></i></div>
+    <div class="callout r" id="c4" style="left:760px;top:710px"><i class="ln"></i><span class="ic" style="color:#29B6F6;font:800 20px Inter">GO</span>Auth</div>
+    <div class="callout" id="c5" style="right:770px;top:765px">PostgREST <span class="ic">⚙︎</span><i class="ln"></i></div>
+    <div class="callout r" id="c6" style="left:760px;top:830px"><i class="ln"></i><span class="ic">🐘</span>Postgres</div>
+    <div class="callout" id="c7" style="right:790px;top:905px">EC2 <span class="ic" style="background:#E8740C;color:#fff;font:700 16px Inter">aws</span><i class="ln"></i></div>
+    <div class="bucket3d" id="bu" style="left:800px;top:880px"><i class="body"></i><i class="rim"></i></div>
+    <div class="callout r" id="c8" style="left:970px;top:930px"><i class="ln" style="width:40px"></i><span class="ic" style="background:#86B322;color:#0a2;font-size:20px">🪣</span>S3</div>
+    <div class="stat" id="stat"><b id="statn">0</b> <span>new databases / week</span></div>
+  </section>
+
+  <!-- TRANSLATOR: request card -> rack bar -> SQL card -->
+  <section class="scene" id="sApi">
+    <div class="sc" id="req" style="left:70px;top:640px;width:940px"><div class="code" style="font-size:28px"><span class="k">GET</span> <span class="c">https://qzvhk….supabase.co</span>
+<span class="n">/rest/v1/</span><span class="s">messages</span>?<span class="n">room_id</span>=eq.<span class="num">42</span></div></div>
+    <div class="rackbar" id="rb" style="left:70px;top:860px;width:940px"><i class="screw tl"></i><i class="screw bl"></i><i class="screw tr"></i><i class="screw br"></i>⚙︎ PostgREST<span class="slot"></span><i class="led2"></i><i class="stem"></i></div>
+    <div class="sc" id="sql" style="left:70px;top:1010px;width:940px"><div class="code" style="font-size:30px"><span class="k">select</span> body, created_at
+<span class="k">from</span> <span class="n">messages</span>
+<span class="k">where</span> room_id = <span class="num">42</span></div></div>
+  </section>
+
+  <!-- POOLER: tiles -> fibers -> ring -> lanes -->
+  <section class="scene" id="sPool">
+    <div style="position:absolute;left:70px;top:640px;font:700 34px Inter;color:#fff" id="fl2">functions</div>
+    <div class="ftiles" id="ft" style="left:70px;top:710px;width:310px"></div>
+    <svg class="fibers" id="fb" style="left:0;top:0;width:1080px;height:1920px"></svg>
+    <div class="poolring" id="pr" style="left:520px;top:710px">
+      <i class="u" style="left:120px;top:30px"></i><i class="u" style="left:40px;top:110px"></i><i class="u" style="left:200px;top:120px"></i><i class="u" style="left:90px;top:200px"></i><i class="u" style="left:195px;top:215px"></i>
+    </div>
+    <div style="position:absolute;left:560px;top:1080px;font:700 36px Inter;color:#fff;opacity:0" id="sv">💧 Supavisor</div>
+    <div class="lanes" id="ln" style="left:840px;top:640px;width:215px"></div>
+    <div class="note l" id="n3" style="top:1250px;font-family:JetBrains Mono,monospace">aws-0-eu-central-1.pooler…:6543</div>
+  </section>
+
+  <!-- SERVER TRAY -->
+  <section class="scene" id="sTray">
+    <div class="isotray" id="tr" style="left:110px;top:560px">
+      <div class="board"><i class="edge"></i>
+        <div class="fan" style="left:30px;top:60px"><i></i></div><div class="fan" style="left:130px;top:60px"><i></i></div><div class="fan" style="left:230px;top:60px"><i></i></div>
+        <div class="fan" style="left:330px;top:60px"><i></i></div><div class="fan" style="left:430px;top:60px"><i></i></div><div class="fan" style="left:530px;top:60px"><i></i></div>
+        <div class="vendor"><span style="color:#E8740C">aws</span> eu-central-1</div>
+        <div class="stand" style="left:200px;top:150px">
+          <div class="sc" id="chip" style="position:relative;width:300px;padding:20px;opacity:1;display:grid;place-items:center;gap:6px"><span style="font-size:60px">🐘</span><b style="font:700 28px Inter">PostgreSQL</b><span class="pill ok">open</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script>window.CAPTION_PAGES=[[{t:"Let's",s:0.15,e:0.4},{t:"design",s:0.45,e:0.85}],[{t:"Supabase.",s:1.0,e:1.6}],[{t:"into",s:4.2,e:4.4},{t:"a",s:4.45,e:4.55},{t:"SQL",s:4.6,e:4.95},{t:"query",s:5.0,e:5.3}],[{t:"a",s:7.6,e:7.7},{t:"pooler.",s:7.8,e:8.3}],[{t:"On",s:11.2,e:11.35},{t:"it",s:11.4,e:11.5},{t:"runs",s:11.55,e:11.8},{t:"Postgres,",s:11.9,e:12.5}]];</script>
+<script src="../../template/engine.js"></script><script src="../../template/avatar.js"></script><script src="../../template/speedy.js"></script><script src="../../template/props.js"></script>
+<script>
+const R = Reel, { at, prog, ease } = R;
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: 4.0, enter: "none" }, { id: "sApi", s: 4.0, e: 7.4, enter: "blurzoom" },
+  { id: "sPool", s: 7.4, e: 11.0, enter: "push" }, { id: "sTray", s: 11.0, e: 999, enter: "blurzoom" } ] });
+R.speedy({ emph: { box: ["Supabase.", "SQL", "pooler.", "Postgres,"], bold: ["design", "query", "runs"] },
+  avatar: { x: 240, y: 1330, w: 600, in: 4.2 }, poses: [[4.2, "present"], [7.8, "point_stage"], [11.2, "point_up"]] });
+window.REEL_DURATION = 13;
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK
+  R.bokehDrift("bk", t);
+  R.rays("fl", t, 0.35); R.rings("fl", t, [0.5, 1.0]);
+  R.stack("st", t, { at: 0.15, explode: 0.95, gap: 20 });
+  R.bolt("b1", t, 1.35); R.bolt("b2", t, 1.45);
+  R.rise("wm2", t, 1.5, { dy: 24, blur: 10 });
+  ["c1","c2","c3","c4","c5","c6","c7","c8"].forEach((id, i) => R.callout(id, t, 1.15 + i * 0.1));
+  R.pop("bu", t, 1.7, { from: 0.6 });
+  R.note("stat", t, 0.3); R.count("statn", t, 0.3, 2.2, 1000000);
+  // TRANSLATOR
+  R.card("req", t, { in: 4.1 }); R.card("rb", t, { in: 4.5, y: 60 }); R.card("sql", t, { in: at("SQL") , y: 70 });
+  // POOLER
+  R.note("fl2", t, 7.5);
+  const ft = R.$("ft"); if (!ft.dataset.built) { ft.innerHTML = "<i>🧩</i>".repeat(25); ft.dataset.built = 1; }
+  ft.querySelectorAll("i").forEach((x, i) => R.pop(x, t, 7.5 + i * 0.02, { from: 0.5, sfx: false }));
+  R.fibers("fb", t, { at: 7.9, n: 14, x1: 385, y1: 860, x2: 690, y2: 875, spreadY: 22 });
+  R.pop("pr", t, 7.8, { from: 0.7 });
+  R.$("pr").querySelectorAll(".u").forEach((u, i) => R.pop(u, t, 8.0 + i * 0.1, { from: 0.4, sfx: false }));
+  R.rise("sv", t, 8.2, { dy: 16 });
+  R.lanes("ln", t, { at: 8.0, count: 8, busy: [[1, 8.6, 9.4], [4, 9.0, 10.2], [6, 9.6, 10.6]], cnt: tt => Math.round(R.lerp(0, 128, R.ease.out3(R.prog(tt, 8.2, 1.2)))) });
+  R.note("n3", t, 8.4);
+  // TRAY
+  R.fans("tr", t);
+  R.card("tr", t, { in: 11.05, blur: 20 });
+};
+window.seek(0);
+</script></body></html>
