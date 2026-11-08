@@ -80,6 +80,18 @@ seams (each only touches its own window), THEN in-scene motion.
 | `R.ease.expoOut/expoInOut/backOut/elastic` | extra easings | — |
 Every call accepts `{sfx:false}` to mute its cue (e.g. a second code block typing under the first).
 
+## 2b. LEVEL 4 — the PRO PASS (added 8 Nov 2026, from the speedy_devv / pro-editor study)
+A finished reel gets one more pass on top of everything above. Six tools (in fx.js), each with ONE job:
+| call | does | when |
+|---|---|---|
+| `F.punchS(t, stops, {seq})` | punch-in rhythm: the frame SNAPS between zoom levels (~1.0/1.05) at every sentence stop, 0.12 s expoOut — a punch, not a drift. Returns the scale; multiply it into a transform you own (the theme camera), or `F.punch(el,…)` to own a wrapper | EVERY reel: stops.json times or the T.* moments (~10–14 punches / 45 s). Never punch mid-boxed-keyword |
+| `F.matchCut(fromEl, toEl, t, cut, {d})` | true match cut: toEl ENTERS from fromEl's exact live box (FLIP morph + blur), object continuity across scenes | once per reel, where one scene's hero literally becomes the next scene's hero (the render → the post). Call at the END of seek so it wins the frame |
+| `F.wipe(el, t, at, {dir,d})` | masked clip-path reveal (left/right/up/down/iris); hands opacity back when done | wide panels (timelines, tables). Pairs with M.fly for slide+mask |
+| `F.ramp(t, a, b, {k})` | speed-ramp time remap: slow → rush → settle; feed the result to any F./M. call in place of t | playheads, long fills, "fast-forward through the boring part" |
+| `F.pop(el, t, at)` | spring pop + pop cue | badges, counters, stickers |
+| `F.vig(t, at, {max,d})` | focus vignette: edges darken ~1.2 s so the payoff owns the frame (own overlay `#fxVig`, composes with flash/leak) | the 1–2 biggest payoffs only |
+Rules: punch origin ≈ (540, 700) so the presenter stays planted · matchCut measures LIVE rects — layout must be static at the cut and overlapping M.fly settles after the window · ramp k=3–5 · J-cut audio: place the cue 0.05–0.1 s BEFORE the visual (R.cue takes any time). Worked example: `/root/reel-work/reels/demo-pro/` (VIDEO v2 + the pro pass).
+
 ## 3. Pitfalls (found while building the demo)
 - A transformed wrapper becomes the containing block: `#cam` without `position:absolute; inset:0` collapses
   every absolutely-positioned scene to 0 height.

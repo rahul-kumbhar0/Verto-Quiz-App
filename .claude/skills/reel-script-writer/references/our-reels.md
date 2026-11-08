@@ -55,3 +55,19 @@ THE FORMULA (every winner has all 5, every loser misses #1 or #2):
 4. **A named free tool + "one command"**, then a rule/catch said honestly ("Claude never presses post").
 5. **Keyword = the thing itself** (JOBS, GROW, YOUTUBE, VIDEO), and the DM names exactly what you get.
 Contrarian-money hooks ("Stop paying for…") borrowed from other creators did NOT transfer to our audience (students/freshers).
+
+## Script upgrade (8 Nov 2026) — casual-talk delivery + the Saraev layer
+Owner's rule: scripts are written **the way you'd say it to a friend**, never announcer voice. Rewrite pass on every draft:
+- Open with a shared-experience QUESTION, not a statement: "Okay, you know how Claude Code forgets everything?" beats "Claude Code forgets everything."
+- ACT OUT the problem as a 2-line micro-dialogue instead of describing it ("Yesterday you fixed a bug together. Today it asks — what bug?").
+- Say numbers like a human: "blowing up on GitHub this week", not "one of GitHub's fastest growing repositories".
+- Insider framing for the catch: "Now, two things nobody tells you." — never "Disclaimer:".
+- Filler that earns its place: "Okay," "So," "it's like..." at phrase starts (max 3 per script); contractions always.
+
+From the @nick_saraev study (12 reels ≈ 36K comments in 16 days; comment-keyword funnel like ours; several reels got MORE comments than likes — source: third-party teardown, figures unverified):
+1. **Hook = a thing the viewer already uses + a big outcome + free.** Same as our formula #1/#4 — keep ours.
+2. **DELIVERABLE-STACK CTA**: never "I'll DM you the guide". Name the stack: "Comment MEM and I'll DM you the install command, the safe setup, and the one command that turns analytics off." 2–4 named items, each concrete, each shown in the reel.
+3. **Every sentence ≤ 12 words carries ONE new fact.** Cut connective tissue ("and that means that…"). If a sentence can be split, split it.
+4. **Pivot line before the mechanism**: "Here's how it works." / "Here's the whole thing." — a spoken chapter mark.
+5. **Comments are the metric**: ask a micro-question mid-reel when natural ("guess what it costs — nothing") to bait replies beyond the keyword.
+Checklist line for the linter: casual-open? · acted-out problem? · deliverable stack (≥2 items) in CTA? · any sentence > 14 words? → flag.

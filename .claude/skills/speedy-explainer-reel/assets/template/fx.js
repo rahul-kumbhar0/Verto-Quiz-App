@@ -216,6 +216,74 @@
     if (o.sfx !== false) R.cue("pop", at);
   };
 
+  // ---------- LEVEL 4: PRO PASS (punch-ins, match cuts, wipes, ramps, pops, vignette) ----------
+  /** PUNCH-IN RHYTHM: hard micro zoom on every sentence stop (Hormozi/speedy_devv cadence).
+   *  stops: array of times (use stops.json sentence ends). The frame alternates 1.0 / zoom and
+   *  SNAPS there in ~0.12 s (a punch, not a drift). Put it on a full-frame wrapper (#cam).
+   *  o.z = punch scale (default 1.055), o.seq = custom scale sequence, o.ox/oy = zoom origin px. */
+  /** punchS: just the scale value — multiply it into a transform you already own (e.g. the theme camera). */
+  F.punchS = (t, stops, o = {}) => {
+    if (!stops.length) return 1;
+    let i = -1; for (let k = 0; k < stops.length; k++) { if (stops[k] <= t) i = k; else break; }
+    const seq = o.seq, zi = x => (x < 0 ? 1 : seq ? seq[x % seq.length] : (x % 2 ? (o.z ?? 1.055) : 1));
+    const e = i < 0 ? 1 : E.expoOut(prog(t, stops[i], 0.12)); // SNAP to the new frame size at the stop
+    return lerp(zi(i - 1), zi(i), e);
+  };
+  F.punch = (el, t, stops, o = {}) => {
+    el = $(el); if (!el) return;
+    el.style.transformOrigin = `${o.ox ?? 540}px ${o.oy ?? 760}px`;
+    el.style.transform = `scale(${F.punchS(t, stops, o).toFixed(4)})`;
+  };
+  /** MATCH CUT: object continuity across a cut — toEl ENTERS from fromEl's exact box (FLIP morph).
+   *  Both live anywhere in the DOM; rects are measured live (layout must be static at the cut).
+   *  Call every frame around the cut, AFTER slots. */
+  F.matchCut = (fromEl, toEl, t, cut, o = {}) => {
+    const a = $(fromEl), b = $(toEl), d = o.d ?? 0.5;
+    if (!a || !b || t < cut - 0.05 || t > cut + d + 0.04) return;
+    if (o.sfx !== false) R.cue("swish", cut - 0.05);
+    if (t < cut) { b.style.opacity = 0; return; }
+    const ra = a.getBoundingClientRect(), rb = b.getBoundingClientRect();
+    const st = $("stage").getBoundingClientRect(), k = 1080 / st.width;
+    a.style.opacity = 0;
+    const p = E.expoOut(prog(t, cut, d));
+    const dx = (ra.left + ra.width / 2 - rb.left - rb.width / 2) * k * (1 - p);
+    const dy = (ra.top + ra.height / 2 - rb.top - rb.height / 2) * k * (1 - p);
+    const s = lerp(ra.width / Math.max(1, rb.width), 1, p);
+    b.style.opacity = 1; b.style.transform = `translate(${dx}px,${dy}px) scale(${s.toFixed(4)})`;
+    b.style.filter = p < 1 ? `blur(${((1 - p) * 6).toFixed(1)}px)` : "";
+  };
+  /** MASKED WIPE reveal: clip-path sweeps the element open from a direction ("left","right","up","down","iris"). */
+  F.wipe = (el, t, at, o = {}) => {
+    el = $(el); const d = o.d ?? 0.55, p = prog(t, at, d), e = E.power4Out(p), dir = o.dir || "left";
+    if (o.sfx !== false) R.cue("swish", at);
+    if (p <= 0) { el.style.clipPath = dir === "iris" ? "circle(0% at 50% 50%)" : "inset(0 100% 0 0)"; el.style.opacity = 0; return; }
+    if (p >= 1) { if (el.dataset.wp) { el.style.clipPath = ""; el.dataset.wp = ""; } return; }  // done: hands opacity back
+    el.style.opacity = 1; el.dataset.wp = "1";
+    const v = (1 - e) * 100;
+    el.style.clipPath = dir === "iris" ? `circle(${e * 75}% at 50% 50%)`
+      : dir === "left" ? `inset(0 ${v}% 0 0)` : dir === "right" ? `inset(0 0 0 ${v}%)`
+      : dir === "up" ? `inset(${v}% 0 0 0)` : `inset(0 0 ${v}% 0)`;
+  };
+  /** SPEED RAMP: time remap for a sub-animation — slow → very fast → settle. Returns the remapped
+   *  local time in [a,b] for real time t (drive any F./M. call with it instead of t). */
+  F.ramp = (t, a, b, o = {}) => {
+    const p = clamp((t - a) / Math.max(0.001, b - a)), k = o.k ?? 3;
+    const e = p < 0.5 ? Math.pow(2 * p, k) / 2 : 1 - Math.pow(2 * (1 - p), k) / 2;
+    return a + (b - a) * e;
+  };
+  /** POP: spring scale-in with a pop cue (counters, badges, the boxed keyword's panel, stickers). */
+  F.pop = (el, t, at, o = {}) => {
+    el = $(el); const d = o.d ?? 0.5, p = prog(t, at, d), e = E.spring(p);
+    if (o.sfx !== false) R.cue("pop", at);
+    el.style.opacity = p > 0 ? 1 : 0; el.style.transform = `scale(${lerp(o.from ?? 0.3, 1, e).toFixed(4)})`;
+  };
+  /** FOCUS VIGNETTE: edges darken for a beat so the payoff owns the frame (own overlay #fxVig). */
+  F.vig = (t, at, o = {}) => {
+    let v = $("fxVig"); if (!v) { v = document.createElement("div"); v.id = "fxVig"; v.style.cssText = "position:absolute;inset:0;pointer-events:none;z-index:95;opacity:0;background:radial-gradient(62% 55% at 50% 46%,transparent 55%,rgba(0,0,0,.55) 100%)"; $("stage").appendChild(v); }
+    const d = o.d ?? 1.4, p = prog(t, at, d);
+    v.style.opacity = (p > 0 && p < 1 ? Math.sin(Math.PI * Math.min(1, p * 1.6)) * (o.max ?? 0.8) : 0);
+  };
+
   // ---------- BEAT SYNC ----------
   /** beat grid from the music.json you pass to music.py: R.fx.beats({bpm, groove_in}) */
   F.beats = (cfg) => { const b = 60 / cfg.bpm, g = cfg.groove_in || 0, out = []; for (let i = 0; g + i * b < (cfg.dur || 120); i++) out.push(+(g + i * b).toFixed(3)); F._beats = out; F._beat = b; return out; };

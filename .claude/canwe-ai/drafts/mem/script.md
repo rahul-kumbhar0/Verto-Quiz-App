@@ -10,7 +10,7 @@ Next session, Claude already knows your bugs, your decisions, where you left [of
 And all of it stays on *your* machine, in one [folder.] {present}
 <short pause> <down> Now, two things nobody tells [you.] <softly> That note-taker runs on tokens too, your plan or a paid [one.] And analytics are on by default. One command turns them [off.] {stop}
 <0> <matter of fact> Works with Claude Code, Cursor, and a dozen [more.] {explain}
-<warmly> Comment [MEM] and I'll DM you the install command, plus the safe [setup.] {wave}
+<warmly> Comment [MEM] and I'll DM you the install command, the safe setup, and the switch that turns analytics [off.] {wave}
 
 ---
 v1 (kept for reference):
