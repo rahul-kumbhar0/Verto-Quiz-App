@@ -306,3 +306,9 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - New skill .claude/skills/reel-pro-stack (director-rules, sound-kit, qa-gate, follow-cam refs + assets). speedy template exposes R.stageEX.
 - Demo /root/reel-work/reels/demo-stack/out/demo-stack-final.mp4 (VIDEO v2 voice; demo only, phone shows v1 frames). QA before (demo-pro) 86 [35 safe-zone violations, 0/5 stop-downs, 9 fx/10s] → after 96 [0 violations, 7/7 stop-downs, 27.4 fx/10s; only warn = deck subtitles 32–33px].
 - Rule going forward: every reel runs the reel-pro-stack QA gate before the owner sees it; report the score.
+
+## 9 Nov 2026 — @speedy_devv "Let's design GitHub" studied + copied (explanation, editing, mascot)
+- Owner sent the speedy_devv GitHub reel (126 s): "copy their style of explanation and editing; check how the mascot responds to the text".
+- Studied frame by frame (/root/reel-work/ref/v81642/: 2 fps sheets + 30 fps strips). Full grammar: speedy-explainer-reel/references/devv-github-breakdown.md (explanation · editing · mascot lexicon w/ timestamps). Script layer added to reel-script-writer/references/our-reels.md.
+- Engine (template + demo): avatar hands four/five/cup/flat; poses four five ten worry mindblown measure look_far palms show offer; fixed `cross` (was arms-out bug); expr worried; props lock + hourglass (held up while the other hand points). speedy.js autoPoses: devv lexicon, numbers 1–5/10/billion, LIST COUNT on comma lists, chapter numbers always count, props end at next sentence. Tool: assets/posegallery.mjs. "listen" pose dropped (forearm can't reach the ear).
+- Demo /root/reel-work/reels/demo-devv/out/demo-devv-final.mp4 (VIDEO v2 voice, demo only): reel rack hero (= GitHub's Spokes) fills 5 bays, docks lower-right, packets on wires, defocus morph swaps, odometer + crowd grid + comment wall, red rail for the catch, planted mascot on auto lexicon. QA 86/100, 0 fails, 0 safe-zone text, 24.8 fx/10 s.

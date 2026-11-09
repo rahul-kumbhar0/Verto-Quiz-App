@@ -352,7 +352,7 @@
       // props: hold until the end of the sentence (1.6–4 s)
       if (t0 > propUntil) for (const [k, set] of Object.entries(PROPS)) if (set.has(w)) {
         let j = i; while (j < T.length - 1 && !/[.!?]$/.test(T[j].t)) j++;
-        const t1 = Math.min(t0 + 4, Math.max(t0 + 1.6, T[j].e)); out.props.push([t0, t1, k]); propUntil = t1 + 0.6; break;
+        const nxt = T[j + 1] ? T[j + 1].s - 0.05 : 1e9, t1 = Math.min(t0 + 4, nxt, Math.max(t0 + 1.6, T[j].e)); out.props.push([t0, t1, k]); propUntil = t1 + 0.6; break;
       }
     });
     window.AUTO_REACTIONS = out;
