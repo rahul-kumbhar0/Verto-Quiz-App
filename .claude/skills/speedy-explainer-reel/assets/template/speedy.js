@@ -83,6 +83,7 @@
       if (keys[keys.length - 1][1] !== e.x) keys.push([e.t - lead, e.x]);
       if (!nx || nx.t - e.end > 0.9) keys.push([e.end + 0.1, home]); });
     N.EX = ex; N.KEYS = keys; N.home = home; N.aw = w;
+    R.stageEX = ex;   // public: [{el,t,end,cx}] — what the narration is pointing at, when (camera follow uses it)
     // DEPTH (camera distance): steps back while pointing, steps close on stage.close phrases, normal otherwise
     const back = st.back ?? 0.86, close = st.closeScale ?? 1.17, dk = [[-9, 1]];
     const win = [];

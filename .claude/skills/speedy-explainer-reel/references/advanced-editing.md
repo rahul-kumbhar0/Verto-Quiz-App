@@ -92,6 +92,11 @@ A finished reel gets one more pass on top of everything above. Six tools (in fx.
 | `F.vig(t, at, {max,d})` | focus vignette: edges darken ~1.2 s so the payoff owns the frame (own overlay `#fxVig`, composes with flash/leak) | the 1–2 biggest payoffs only |
 Rules: punch origin ≈ (540, 700) so the presenter stays planted · matchCut measures LIVE rects — layout must be static at the cut and overlapping M.fly settles after the window · ramp k=3–5 · J-cut audio: place the cue 0.05–0.1 s BEFORE the visual (R.cue takes any time). Worked example: `/root/reel-work/reels/demo-pro/` (VIDEO v2 + the pro pass).
 
+
+## 2c. FINISH every reel with `reel-pro-stack` (added 9 Nov 2026)
+After the build: follow cam (R.stageEX), earshot sound pass (sfx_pro.py), and the QA gate (reeltext.mjs + reelqa.py,
+score /100). Rules from huashu-motion, argo, explainroo, earshot and video-director live in that skill.
+
 ## 3. Pitfalls (found while building the demo)
 - A transformed wrapper becomes the containing block: `#cam` without `position:absolute; inset:0` collapses
   every absolutely-positioned scene to 0 height.
