@@ -157,3 +157,15 @@ PICK: HIRE next (data is ours, format proven at 3.5M, zero voice credits for the
 | 3 | "Claude can now use any app on my laptop. No screenshots." | vercel-labs/agent-desktop (Apache-2.0; reads the accessibility tree) | HANDS | dev-ish; macOS permission step; private-data warning in README |
 | — | Personal Finance in Claude (5 Nov) | US-only, paid, read-only via Plaid | — | SKIP for India audience (not available) |
 Catches for GAME: needs Claude Code (paid plan) + Git + Python 3; directors request Opus, 15 specialists Sonnet, 30 inherit your model (cost scales); it's a template — you still make every decision; the games are NOT shipped in the repo.
+
+## Wider scan — 9 Nov 2026 (headless browser: trendshift.io weekly + monthly; live ★ via api.ossinsight.io/gh/repos; READMEs via raw.githubusercontent)
+| rank | KEYWORD | hook draft | repo · live ★ (9 Nov) · license | honest catch |
+|---|---|---|---|---|
+| 1 | SLOP | "Your project looks AI-made. Recruiters can tell. This Claude skill fixes it." | heydamir/unslop · 12,420★ · CC-BY-4.0 · skill for Claude Code/Codex; finds purple gradients, glows, emoji labels, shouty copy; fixes pass by pass; works on a live link | needs Claude Code (paid); image generation is paid but it asks first; if the screen is already good it says so |
+| 2 | GAME | "I hired 49 AI employees to build my game. The laziest setting won." | Donchitos/Claude-Code-Game-Studios · 37,287★ · MIT | paid Claude Code; the 30-doc mode ranked LAST; template, games not included |
+| 3 | PHONE | "My Android phone uses itself now. While I scroll." | wangzan101/Mika · 7,863★ · Apache-2.0 · on-device agent, hidden background screen, stops before checkout | APK sideload + wireless debugging; your screen goes to the model you connect (own key / OpenRouter for Claude); demos are Chinese apps |
+| 4 | REMAKE | "I gave AI a viral reel. It told me exactly how it was edited." | JuneYaooo/rea-video · 5,129★ · Apache-2.0 · shot-by-shot: filmed / AI / coded + remake plan | ffmpeg + Python; AI-vs-real verdicts are estimates; meta angle: we just did this to @speedy_devv |
+| 5 | CRAFT | "Point it at any app or game. It figures out how it's built, then builds you your own." | storytold/craft-anything · 23,778★ · Apache-2.0 · clean-room engine in Rust | learning use only (respect ToS/IP); big download |
+| 6 | (GAME pt 2) | "244 pixel-art effects, and a Claude skill that makes more." | patch-gg/pixelfx · 6,237★ · MIT | pairs with GAME |
+DROPPED: morluto/rea (★ inconsistent: 445,600 OSSInsight vs 30.1k trendshift; binary RE is legally grey) · Switch emulators + omniget course downloader (piracy) · sherlock (finds people by username: stalking risk) · Claude Personal Finance (US-only).
+Trend signal: the month's top movers are "understand how X works" tools (craft-anything +4.7k, rea-video) and agent SKILLS (unslop, mattpocock/skills, google/elephant-goldfish-model, janestreet/agent_skills, cloudflare/security-audit-skill).
