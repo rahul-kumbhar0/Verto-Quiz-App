@@ -82,6 +82,14 @@ AI4Bharat **Indic Parler-TTS** (heavy torch install — avoid on low-RAM machine
 
 ## 6. Rendering on this machine (7.3 GB RAM)
 
-Chrome+x264 die when RAM is low. Use:
-`npx remotion render <id> out.mp4 --concurrency=1 --scale=0.6667 --disallow-parallel-encoding`
-(720×1280 = the resolution the originals actually ship at). Full 1080 needs free RAM.
+Chrome+x264 die when RAM is low. Ladder:
+1. `npx remotion render <id> out.mp4 --concurrency=1 --scale=0.6667 --disallow-parallel-encoding`
+   (720×1280 = the resolution the originals actually ship at). Full 1080 needs free RAM.
+2. Still OOM → render JPEG sequences in chunks at beat boundaries
+   (`--sequence --image-format=jpeg --frames=a-b`, one invocation per chunk = fresh Chrome),
+   normalize names to `element-%04d.jpeg`, then assemble with SYSTEM ffmpeg: frames +
+   per-beat VO clips via `adelay=<beat-start-ms>` + `amix=normalize=0`
+   (working example: `tap-to-pay-reel/finish-render.sh`).
+3. **Any beat with `Studio3D`/WebGL MUST render with `--gl=angle`** (hardware GPU).
+   The default software GL silently produces a WHITE canvas under RAM pressure — the
+   render "succeeds" but the 3D is blank. Always eyeball one frame of the 3D chunk.

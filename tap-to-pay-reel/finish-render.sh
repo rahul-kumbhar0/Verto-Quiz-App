@@ -8,18 +8,24 @@ for r in 0-204 205-420 421-702 703-921 922-1267 1268-1432; do
     echo "chunk $r done"; continue
   fi
   echo "rendering $r …"
+  GL=""; [ "$r" = "0-204" ] && GL="--gl=angle"   # WebGL beat needs hardware GL (software GL silently renders white)
   npx remotion render TapToPay "out/fr/c$r" --sequence --image-format=jpeg --jpeg-quality=90 \
-    --frames=$r --concurrency=1 --scale=0.6667 --log=error
+    --frames=$r --concurrency=1 --scale=0.6667 $GL --log=error
 done
 
-# merge numbered frames
+# merge frames, normalizing to 4-digit padding (chunks mix padded/unpadded names)
 mkdir -p out/fr/all
-for d in out/fr/c*/; do cp -n "$d"*.jpeg out/fr/all/ 2>/dev/null || true; done
+for d in out/fr/c*/; do
+  for f in "$d"element-*.jpeg; do
+    n=${f##*element-}; n=${n%.jpeg}; n=$((10#$n))
+    cp -n "$f" "out/fr/all/$(printf 'element-%04d.jpeg' $n)" 2>/dev/null || true
+  done
+done
 N=$(ls out/fr/all | wc -l); echo "frames: $N (expect 1433)"
 
 # assemble: video from frames + the 8 VO clips delayed to their beat starts
 # beat starts (frames): 0 205 421 553 703 922 1098 1268  -> ms at 30fps
-ffmpeg -y -framerate 30 -i out/fr/all/element-%d.jpeg \
+ffmpeg -y -framerate 30 -i out/fr/all/element-%04d.jpeg \
   -i public/vo/b1.mp3 -i public/vo/b2.mp3 -i public/vo/b3.mp3 -i public/vo/b4.mp3 \
   -i public/vo/b5.mp3 -i public/vo/b6.mp3 -i public/vo/b7.mp3 -i public/vo/b8.mp3 \
   -filter_complex "\
