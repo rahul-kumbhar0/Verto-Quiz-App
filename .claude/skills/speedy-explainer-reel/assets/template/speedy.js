@@ -279,7 +279,10 @@
         let j = i; while (j < T.length - 1 && !/[.!?]$/.test(T[j].t)) j++;
         // LIST COUNT (speedy_devv): "A, B, and C" -> fingers 1-2-3 as each item starts (>= 3 items, up to 5)
         const items = [i]; for (let k = i; k < j; k++) if (/,$/.test(T[k].t)) items.push(k + 1);
-        if (items.length >= 3 && o.listCount !== false) items.slice(0, 5).forEach((k, n) => C.push({ t: Math.max(from, T[k].s - lead), pose: ["one", "two", "three", "four", "five"][n], pr: 8, word: "(list " + (n + 1) + ") " + T[k].t }));
+        if (items.length >= 3 && o.listCount !== false) items.slice(0, 5).forEach((k, n) => C.push({ t: Math.max(from, T[k].s - lead), pose: ["one", "two", "three", "four", "five"][n], pr: 8, force: true, word: "(list " + (n + 1) + ") " + T[k].t }));
+        // a chapter number said as its own sentence ("Three.") always counts
+        const NUMW = { one: "one", two: "two", three: "three", four: "four", five: "five" };
+        if (j === i && NUMW[W(tok.t)]) C.push({ t: at, pose: NUMW[W(tok.t)], pr: 9, force: true, word: tok.t + " (chapter)" });
         if (/\?$/.test(T[j].t)) C.push({ t: at, pose: /^(why|how|what)/.test(w) || /why|how/.test(T.slice(i, j + 1).map(x => W(x.t)).join(" ")) ? "think" : "shrug", pr: 3, expr: "think", word: tok.t + "…?" });
         else if (/^(you|your|you're|youre)$/.test(w)) C.push({ t: at, pose: "point_cam", pr: 3, expr: "happy", word: tok.t });
         else C.push({ t: at, pose: DEF[defI++ % DEF.length], pr: 0, expr: null, word: "(new sentence)" });
@@ -310,7 +313,9 @@
       if (COMEDY.has(c.pose) && (used[c.pose] || 0) >= (o.maxComedy ?? 2)) return;
       const prev = out[out.length - 1];
       if (prev && c.pose === prev.pose) return;
-      if (!prev || c.t - prev.t >= gap) { out.push(c); used[c.pose] = (used[c.pose] || 0) + 1; return; }
+      if (!prev || c.t - prev.t >= gap || (c.force && c.t - prev.t >= 0.35)) { out.push(c); used[c.pose] = (used[c.pose] || 0) + 1; return; }
+      if (c.force) { used[prev.pose]--; out[out.length - 1] = c; used[c.pose] = (used[c.pose] || 0) + 1; return; }
+      if (prev.force && c.t - prev.t < 0.7) return;
       if (c.pr >= prev.pr + 2) {                                  // a stronger cue: follow quickly if there is room, else replace
         if (c.t - prev.t >= (o.minGap ?? 0.9)) out.push(c); else { used[prev.pose]--; out[out.length - 1] = c; }
         used[c.pose] = (used[c.pose] || 0) + 1;
