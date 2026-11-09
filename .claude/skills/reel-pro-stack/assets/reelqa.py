@@ -90,7 +90,7 @@ def analyse_picture(n, mean, std, d, skip, fps):
     ev = np.zeros(n); ev[cuts] = 1; ev[pops] = 0.5
     w = int(5 * fps); dens = np.convolve(ev, np.ones(w), "valid") if n > w else ev
     bi = int(np.argmax(dens)); burst_at = (bi + w / 2) / fps
-    hook_onset = next((i / fps for i in range(1, n) if d[i] > max(3.0, 2 * med)), None)
+    hook_onset = next((i / fps for i in range(1, n) if d[i] > 2.5), None)  # absolute: independent of later motion
     return {"frame0": {"mean": round(mean[0], 1), "contrast": round(std[0], 1)}, "median_step": round(med, 3),
             "flashes": [round(i / fps, 2) for i in flashes], "pops": [round(i / fps, 2) for i in pops],
             "cuts": [round(i / fps, 2) for i in cuts], "frozen": [(round(a, 2), round(b, 2)) for a, b in frozen],
@@ -180,8 +180,10 @@ def main():
             add("WARN", "music steps down >= 6 dB before each hit (earshot/huashu)", "not measured: pass --music <stem> --cues")
     if a.cues:
         cues = json.load(open(a.cues)); cl = cues if isinstance(cues, list) else cues.get("cues", [])
-        dens = len(cl) / info["dur"] * 10; lo, hi = (18, 30) if a.type == "explainer" else (3, 13)
-        add("PASS" if lo <= dens <= hi else "WARN", f"SFX density {lo}-{hi} per 10 s (earshot launch kit, {a.type})", f"{len(cl)} cues = {dens:.1f}/10 s")
+        # count audible effects: a "type" cue is a run of keys (one per ~0.1 s), impact = hit + drop
+        nfx = sum(max(1, int((c.get("t2", c["t"] + 0.6) - c["t"]) / 0.1) + 1) if c.get("type") == "type" else 2 if c.get("type") == "impact" else 1 for c in cl)
+        dens = nfx / info["dur"] * 10; lo, hi = (18, 30) if a.type == "explainer" else (3, 13)
+        add("PASS" if lo <= dens <= hi else "WARN", f"SFX density {lo}-{hi} per 10 s (earshot launch kit, {a.type})", f"{nfx} effects from {len(cl)} cues = {dens:.1f}/10 s")
     if a.text:
         T = json.load(open(a.text)); bad = T.get("unsafe", []); small = T.get("small", [])
         add("PASS" if not bad else "FAIL", "text inside the Reels safe zone (top 15 %, bottom 35 %, right 20 %, left 6 %)", f"{len(bad)} violations: " + "; ".join(f"{u['t']}s '{u['text'][:28]}' {u['why']}" for u in bad[:6]))
