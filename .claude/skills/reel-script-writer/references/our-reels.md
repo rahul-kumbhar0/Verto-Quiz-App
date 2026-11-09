@@ -71,3 +71,18 @@ From the @nick_saraev study (12 reels ≈ 36K comments in 16 days; comment-keywo
 4. **Pivot line before the mechanism**: "Here's how it works." / "Here's the whole thing." — a spoken chapter mark.
 5. **Comments are the metric**: ask a micro-question mid-reel when natural ("guess what it costs — nothing") to bait replies beyond the keyword.
 Checklist line for the linter: casual-open? · acted-out problem? · deliverable stack (≥2 items) in CTA? · any sentence > 14 words? → flag.
+
+## The speedy_devv explanation grammar (9 Nov 2026 — owner: "copy their style of explanation")
+Full study: speedy-explainer-reel/references/devv-github-breakdown.md. For any "how X works" / repo / system reel:
+1. Open on the thing + its labelled parts ("Let's design X." / "I connected X.").
+2. Scale = 2–3 numbers, each with a MASS visual (crowd grid, wall of cards) — never a bare number.
+3. "Let's follow one ___." → ONE named running example (a person + a concrete object: Ines's commit a3f9c1e) that
+   appears in every chapter.
+4. Chapters "First, / Next, / Then," on the rail; the corner stat = the chapter's takeaway.
+5. Name each part as the example passes through it, in travel order ("it hits A, then B, then C").
+6. Lists of 3–5 items with commas (the mascot counts them on fingers automatically).
+7. A twist chapter with real current data, then a CALLBACK to an earlier prop/idea ("Remember the lock?").
+8. Recap as one sentence that stacks every part ("a front door that checks, five copies that vote…").
+9. CTA: follow + share with a SPECIFIC person tied to the pain ("the dev whose Actions are stuck in the queue"),
+   or our keyword CTA — the deliverable stack still applies.
+Write mascot-friendly words on purpose: numbers, "never/before", "locked", "waiting", "billion" each trigger a gesture.

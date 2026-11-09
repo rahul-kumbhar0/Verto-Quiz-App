@@ -244,6 +244,15 @@
 
   // ---------- auto-direction: pick poses + expressions from the words being said ----------
   const LEX = [   // [pose, priority, expr?, words]
+    // speedy_devv GitHub breakdown vocabulary (9 Nov 2026): the gesture says the word
+    ["mindblown", 7, "surprised", "billion billions trillion trillions"],
+    ["worry", 6, "worried", "incident incidents outage outages down broke broken fail fails failed failing crash crashed risk bug bugs problem problems longer slower paid"],
+    ["show", 6, "happy", "lock locked locks padlock secure private practice waiting queue queued stuck"],
+    ["cross", 5, "serious", "rules rule enforce enforces enforced strict policy only"],
+    ["measure", 5, "think", "lines size long length entire"],
+    ["look_far", 5, "think", "wait away far distance later"],
+    ["palms", 5, "serious", "thrown gone delete deleted deletes wiped clean"],
+    ["offer", 4, "happy", "next then voice here's heres"],
     ["wag", 6, "serious", "myth myths fake wrong mistake lie lies scam"],
     ["celebrate", 7, "excited", "offer offers hired won win success finally"],
     ["stop", 5, "serious", "never no not don't dont stop skip nobody nothing zero without can't won't isn't doesn't"],
@@ -251,13 +260,13 @@
     ["small", 5, "think", "tiny small little micro nano"],
     ["hands_head", 5, "surprised", "crazy wow insane unbelievable seriously imagine"],
     ["typing", 5, "think", "type typed typing paste pasted write writes code coding prompt drafts fills search searches tailors"],
-    ["thumbs", 4, "happy", "free done works easy best perfect safe yes"],
+    ["thumbs", 4, "happy", "free done works easy best perfect safe yes access allowed approved passed passes ok okay agree post posted"],
     ["think", 4, "think", "think thought why how decide decided idea guess catch smart smartest"],
     ["present", 4, "happy", "called meet introducing"],
     ["point_stage", 3, null, "this these here look watch see screen link below"],
     ["shrug", 3, "unsure", "maybe honestly"],
   ].map(([pose, pr, expr, w]) => ({ pose, pr, expr, words: new Set(w.split(" ")) }));
-  const COMEDY = new Set(["hands_head", "facepalm", "celebrate", "shrug"]);
+  const COMEDY = new Set(["hands_head", "facepalm", "celebrate", "shrug", "mindblown", "worry"]);
   R.autoPoses = (o = {}) => {
     const T = (window.CAPTION_PAGES || []).flat(); if (!T.length) return [];
     const gap = o.gap ?? 1.5, from = o.from ?? 0, lead = o.lead ?? 0.12, DEF = o.defaults ?? ["explain", "present", "point_stage", "explain", "talk"];
@@ -268,6 +277,9 @@
       if (startOfSentence) {
         sStart = i;
         let j = i; while (j < T.length - 1 && !/[.!?]$/.test(T[j].t)) j++;
+        // LIST COUNT (speedy_devv): "A, B, and C" -> fingers 1-2-3 as each item starts (>= 3 items, up to 5)
+        const items = [i]; for (let k = i; k < j; k++) if (/,$/.test(T[k].t)) items.push(k + 1);
+        if (items.length >= 3 && o.listCount !== false) items.slice(0, 5).forEach((k, n) => C.push({ t: Math.max(from, T[k].s - lead), pose: ["one", "two", "three", "four", "five"][n], pr: 8, word: "(list " + (n + 1) + ") " + T[k].t }));
         if (/\?$/.test(T[j].t)) C.push({ t: at, pose: /^(why|how|what)/.test(w) || /why|how/.test(T.slice(i, j + 1).map(x => W(x.t)).join(" ")) ? "think" : "shrug", pr: 3, expr: "think", word: tok.t + "…?" });
         else if (/^(you|your|you're|youre)$/.test(w)) C.push({ t: at, pose: "point_cam", pr: 3, expr: "happy", word: tok.t });
         else C.push({ t: at, pose: DEF[defI++ % DEF.length], pr: 0, expr: null, word: "(new sentence)" });
@@ -276,12 +288,18 @@
       const num = /\d/.test(w) ? parseFloat(w.replace(/[^\d.]/g, "")) : null, big = /k$|l$|lakh|million|billion|,\d{3}/i.test(tok.t);
       if (num !== null) {
         if (num === 1) C.push({ t: at, pose: "one", pr: 7, word: tok.t }); else if (num === 2) C.push({ t: at, pose: "two", pr: 7, word: tok.t });
-        else if (num === 3) C.push({ t: at, pose: "three", pr: 7, word: tok.t }); else if (num >= 100 || big) C.push({ t: at, pose: "big", pr: 6, expr: "surprised", word: tok.t });
+        else if (num === 3) C.push({ t: at, pose: "three", pr: 7, word: tok.t }); else if (num === 4) C.push({ t: at, pose: "four", pr: 7, word: tok.t });
+        else if (num === 5) C.push({ t: at, pose: "five", pr: 7, word: tok.t }); else if (num === 10) C.push({ t: at, pose: "ten", pr: 7, expr: "excited", word: tok.t });
+        else if (/billion|trillion/i.test(tok.t) || num >= 1e9) C.push({ t: at, pose: "mindblown", pr: 7, expr: "surprised", word: tok.t });
+        else if (num >= 100 || big) C.push({ t: at, pose: "big", pr: 6, expr: "surprised", word: tok.t });
         return;
       }
       if (/^(one|first)$/.test(w)) C.push({ t: at, pose: "one", pr: 5, word: tok.t });
       else if (/^(two|second|both|twice)$/.test(w)) C.push({ t: at, pose: "two", pr: 5, word: tok.t });
       else if (/^(three|third)$/.test(w)) C.push({ t: at, pose: "three", pr: 5, word: tok.t });
+      else if (/^(four|fourth)$/.test(w)) C.push({ t: at, pose: "four", pr: 5, word: tok.t });
+      else if (/^(five|fifth)$/.test(w)) C.push({ t: at, pose: "five", pr: 5, word: tok.t });
+      else if (/^(ten|tenth)$/.test(w)) C.push({ t: at, pose: "ten", pr: 6, expr: "excited", word: tok.t });
       LEX.forEach(L => { if (L.words.has(w)) C.push({ t: at, pose: L.pose, pr: L.pr, expr: L.expr, word: tok.t }); });
     });
     // last sentence of the reel ends on a wave if it is a CTA
@@ -307,7 +325,8 @@
                 sweat: "placement placements deadline deadlines stress stressed scary rejected rejection exam exams pressure",
                 spark: "free best offer offers perfect hired easy bonus", steam: "scam scams fake ghost ghosted spam annoying angry" };
   const PROPW = { paper: "resume resumes cv cvs", phone: "phone phones app apps whatsapp telegram instagram",
-                  chai: "chai coffee tea break", magnifier: "search searches searching find finds scan scans hunt" };
+                  chai: "chai coffee tea break", magnifier: "search searches searching find finds scan scans hunt",
+                  lock: "lock locked locks padlock secure private", hourglass: "practice waiting queue queued stuck wait" };
   const sets = o => Object.fromEntries(Object.entries(o).map(([k, v]) => [k, new Set(v.split(" "))]));
   const FXS = sets(FXW), PROPS = sets(PROPW);
   R.autoReactions = (o = {}) => {

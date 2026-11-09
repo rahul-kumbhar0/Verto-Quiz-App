@@ -53,7 +53,17 @@
     hold:        { L: [10, 18, "relax"], R: [52, 92, "fist", -10], head: 3, expr: "happy" },          // shows a prop at chest height
     double_thumbs: { L: [28, 150, "thumb", -10], R: [28, 150, "thumb", 10], head: 3, lift: 6, expr: "excited" },   // signature sign-off
     shh:         { L: [10, 18, "relax"], R: [-4, 166, "point", 30], head: 4, expr: "think" },
-    cross:       { L: [-14, 112, "fist", 60], R: [-14, 112, "fist", -60], head: 2, expr: "serious" },
+    cross:       { L: [26, -134, "fist", 160], R: [26, -134, "fist", -160], head: 2, expr: "serious" },
+    four:        { L: [10, 18, "relax"], R: [25, 158, "four"], head: -2 },
+    five:        { L: [10, 18, "relax"], R: [25, 158, "five"], head: -2, expr: "happy" },
+    ten:         { L: [25, 158, "five"], R: [25, 158, "five"], head: -3, lift: 6, expr: "excited" },
+    worry:       { L: [10, 18, "relax"], R: [160, 130, "point", 150], head: 7, expr: "worried" },
+    mindblown:   { L: [60, 150, "five", -25], R: [60, 150, "five", 25], head: -4, lift: 10, expr: "surprised" },
+    measure:     { L: [74, -130, "flat", 120], R: [74, -130, "flat", -120], head: 3, expr: "think" },
+    look_far:    { L: [10, 18, "relax"], R: [168, 62, "flat", -100], head: -3, expr: "think" },
+    palms:       { L: [20, -108, "flat", 170], R: [20, -108, "flat", -170], head: 4, expr: "serious" },
+    show:        { L: [2, -106, "point", -40], R: [76, 142, "fist", -10], head: 4, expr: "happy" },
+    offer:       { L: [10, 18, "relax"], R: [40, 70, "palm", -60], head: -3, lean: -1, expr: "happy" },
   };
   /* Expressions: brow lift (px, negative = up), brow angle (deg, positive = inner ends down = frown),
      per-side extra lift for one raised brow, and the closed-mouth shape. */
@@ -65,6 +75,7 @@
     think:     { by: 2, ba: 4, byL: -9, mouth: "M270 344 q26 4 54 -8" },
     serious:   { by: 5, ba: 12, mouth: "M270 344 q30 0 60 0" },
     unsure:    { by: -8, ba: -10, mouth: "M268 344 q32 -8 64 0" },
+    worried:   { by: -6, ba: 16, mouth: "M266 346 q14 -10 34 -2 q20 8 34 -4" },
   };
   A.names = () => Object.keys(A.POSES);
 
@@ -98,6 +109,13 @@
     <g class="fx-spark" opacity="0"><text x="150" y="120" font-size="56">✨</text><text x="420" y="80" font-size="44">✨</text><text x="470" y="200" font-size="36">✨</text></g>
     <g class="fx-steam" opacity="0"><text x="150" y="250" font-size="54" text-anchor="middle">💨</text><text x="455" y="250" font-size="54" text-anchor="middle" transform="scale(-1 1) translate(-910 0)">💨</text></g>`;
   const PROP = {
+    lock: `<g transform="translate(-46 -150)"><path d="M18 62 v-22 a28 28 0 0 1 56 0 v22" fill="none" stroke="#9CA3AF" stroke-width="12" stroke-linecap="round"/><path d="M18 62 v-22 a28 28 0 0 1 56 0 v22" fill="none" stroke="#E5E7EB" stroke-width="5" stroke-linecap="round"/>
+            <rect x="0" y="58" width="92" height="76" rx="14" fill="#E8B23A" stroke="#8A5A0B" stroke-width="4"/><rect x="6" y="64" width="80" height="18" rx="8" fill="#F7D57A" opacity=".8"/>
+            <circle cx="46" cy="92" r="10" fill="#6B4206"/><rect x="41" y="96" width="10" height="22" rx="4" fill="#6B4206"/></g>`,
+    hourglass: `<g transform="translate(-42 -170)"><rect x="0" y="0" width="84" height="14" rx="5" fill="#B7791F" stroke="#7B4A0E" stroke-width="3"/><rect x="0" y="146" width="84" height="14" rx="5" fill="#B7791F" stroke="#7B4A0E" stroke-width="3"/>
+            <path d="M12 14 h60 q0 40 -24 66 q24 26 24 66 h-60 q0 -40 24 -66 q-24 -26 -24 -66z" fill="#E0F2FE" fill-opacity=".55" stroke="#94A3B8" stroke-width="3"/>
+            <path d="M22 36 h40 q-6 22 -20 38 q-14 -16 -20 -38z" fill="#F2C14E"/><path d="M42 82 v38" stroke="#F2C14E" stroke-width="3"/><path d="M20 140 q22 -26 44 0z" fill="#F2C14E"/>
+            <rect x="4" y="14" width="6" height="132" rx="3" fill="#7B4A0E"/><rect x="74" y="14" width="6" height="132" rx="3" fill="#7B4A0E"/></g>`,
     paper: `<g transform="translate(-60 -110) rotate(-6)"><rect width="120" height="158" rx="8" fill="#fff" stroke="#9CA3AF" stroke-width="3"/><rect x="14" y="14" width="60" height="12" rx="4" fill="#1F2937"/>
             <rect x="14" y="40" width="92" height="7" rx="3" fill="#D1D5DB"/><rect x="14" y="56" width="80" height="7" rx="3" fill="#D1D5DB"/><rect x="14" y="78" width="92" height="7" rx="3" fill="#BDEBD4"/><rect x="14" y="94" width="70" height="7" rx="3" fill="#D1D5DB"/><rect x="14" y="116" width="86" height="7" rx="3" fill="#D1D5DB"/>
             <text x="60" y="150" font-family="Inter" font-weight="800" font-size="14" text-anchor="middle" fill="#6B7280">RESUME</text></g>`,
@@ -122,6 +140,10 @@
       case "palm":  return `<rect x="-31" y="-6" width="62" height="64" rx="20" fill="${sk}" stroke="${ln}" stroke-width="3"/>` + f(-23, 44, 96, 15) + f(-8, 44, 108, 15) + f(8, 44, 106, 15) + f(23, 44, 92, 15) + `<rect x="24" y="2" width="16" height="48" rx="8" transform="rotate(-40 32 2)" fill="${sk}" stroke="${ln}" stroke-width="3"/>`;
       case "pinch": return fist + `<circle cx="0" cy="64" r="16" fill="none" stroke="${sk}" stroke-width="11"/><circle cx="0" cy="64" r="21" fill="none" stroke="${ln}" stroke-width="3"/><circle cx="0" cy="64" r="11" fill="none" stroke="${ln}" stroke-width="3"/>`;
       case "fist":  return fist;
+      case "four":  return fist + f(-21, 40, 96, 14) + f(-7, 40, 106, 14) + f(7, 40, 104, 14) + f(21, 40, 94, 14);
+      case "five":  return fist + f(-21, 40, 96, 14) + f(-7, 40, 106, 14) + f(7, 40, 104, 14) + f(21, 40, 94, 14) + `<rect x="22" y="0" width="16" height="50" rx="8" transform="rotate(-48 30 0)" fill="${sk}" stroke="${ln}" stroke-width="3"/>`;
+      case "cup":   return `<path d="M-28 -4 q-6 40 12 66 q20 18 40 -2 l0 -60 q-26 -14 -52 -4z" fill="${sk}" stroke="${ln}" stroke-width="3"/>` + f(18, 30, 84, 14);
+      case "flat":  return `<rect x="-30" y="-6" width="60" height="100" rx="22" fill="${sk}" stroke="${ln}" stroke-width="3"/><path d="M-10 60 v30 M6 62 v30" stroke="${ln}" stroke-width="2.5" opacity=".6"/>`;
       default:      return `<rect x="-25" y="-6" width="50" height="58" rx="20" fill="${sk}" stroke="${ln}" stroke-width="3"/><path d="M-16 44 q16 10 32 0" fill="none" stroke="${ln}" stroke-width="3"/>`;
     }
   }

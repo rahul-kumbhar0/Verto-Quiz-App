@@ -113,7 +113,11 @@ time taken from `at("phrase")`. Rules that make it read as the reference (motion
   "never" stop, "million" arms wide, "type" typing, "offer" celebrate, questions think, CTA point + wave)
   and pin only the moments you want different with `{pose}` (`references/avatar.md`); never covered by a card.
   Auto mode also adds reactions from the words (💡 ??? 💧 ✨ 💨), the shades-slide gag on a shocking
-  number, props in hand (resume, phone, chai, magnifier) and the signature flip / double-thumbs sign-off;
+  number, props in hand (resume, phone, chai, magnifier, padlock, hourglass — held up beside the head while
+  the other hand points at it) and the signature flip / double-thumbs sign-off; numbers 1–5 and 10 count on
+  fingers, comma LISTS of 3–5 count automatically, billion = mind-blown, incidents/paid = worried, rules = arms
+  crossed, waiting = look far (full lexicon: references/devv-github-breakdown.md §3). Keep the presenter PLANTED
+  (omit stage:{}) for the devv look — the gesture does the pointing;
   pick an outfit per topic with `avatar.accessory` (grad, headset, detective).
 - Footnote on every exaggerated visual; exact numbers via `R.count`/`R.meas`, never typed static.
 - CTA ≥ 5 s: profile card + finger tap on Follow → share sheet or DM with the punchline → watermark.
@@ -203,6 +207,10 @@ stock puppet was used.
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode
+- `references/devv-github-breakdown.md` — **THE reference (9 Nov 2026)**: @speedy_devv "Let's design GitHub" studied
+  frame by frame — explanation grammar (one running example, accumulating hero, corner stat, twist + callback, stacked
+  recap, share-with-a-specific-dev CTA), editing grammar (blur-in words, defocus morph, packets on wires) and the
+  mascot gesture lexicon (planted, literal gestures, list counting, held props). Worked demo: /root/reel-work/reels/demo-devv/
 - `references/ref-frames/` — contact sheets, key frames, pose catalogue of the references
 - `assets/template/` — index.html demo (38 s URL-shortener), speedy.css/js, props.css/js (3D props),
   avatar.js, engine.js, fonts, generated captions · `assets/examples/supabase-hook/` — the reference hook rebuilt
