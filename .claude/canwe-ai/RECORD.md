@@ -298,3 +298,11 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Script skill: our-reels.md new section "casual-talk delivery + Saraev layer" — question-opener, acted-out problem, insider catch framing, ≤12-word sentences, pivot line, DELIVERABLE-STACK CTA (≥2 named items). MEM script v2 CTA updated to stack form.
 - DEMO rendered: /root/reel-work/reels/demo-pro/ = VIDEO v2 (same voice) + pro pass, cream, phone uses v1f frames (demo only, NOT for posting). out/demo-pro-final.mp4 (−14.6 LUFS) sent to owner.
 - MEM reel: script v2 (casual) awaiting owner approval → then real install test, voice (estimate→1 take), build.
+
+## 9 Nov 2026 — reel-pro-stack (5 repos combined) + demo 86 → 96
+- Owner: install huashu-motion, argo-video/cli, explainroo, video-director, earshot; improve/combine skills; demo.
+- Repos mirrored to /root/reel-work/ext (jsDelivr; earshot via TAG 0.4.1 since @main was stale; huashu + argo via npm). video-director = 3 repos (win4r QA, SallyRS rules, DotanVG). All MIT.
+- Safety classifier REFUSED running their scripts/CLIs (win4r qa_video.py; earshot pip -e with torch). Not worked around: methods ported into OUR tools: tools/reelqa.py, tools/reeltext.mjs, tools/sfx_pro.py. earshot model-free cmds (sfx/kit/measure) run via tools/stack/es.py + venv-earshot (light deps); bank takes in /root/reel-work/sfxbank/earshot (52 wavs, 18 roles). Model listening (describe/timeline/critique) needs torch → owner must allow.
+- New skill .claude/skills/reel-pro-stack (director-rules, sound-kit, qa-gate, follow-cam refs + assets). speedy template exposes R.stageEX.
+- Demo /root/reel-work/reels/demo-stack/out/demo-stack-final.mp4 (VIDEO v2 voice; demo only, phone shows v1 frames). QA before (demo-pro) 86 [35 safe-zone violations, 0/5 stop-downs, 9 fx/10s] → after 96 [0 violations, 7/7 stop-downs, 27.4 fx/10s; only warn = deck subtitles 32–33px].
+- Rule going forward: every reel runs the reel-pro-stack QA gate before the owner sees it; report the score.
