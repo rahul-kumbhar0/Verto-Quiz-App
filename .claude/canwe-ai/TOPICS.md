@@ -148,3 +148,12 @@ TOPIC LIST FOR US (ranked, our formula + our assets):
 | 6 | Wedding/festival invite prompt (reach play, off-niche) | one real Claude-made invite | INVITE | 7 |
 STYLE EXPERIMENTS: (a) one NO-VOICE share-bait trial reel (on-screen list + licensed/IG-added track, 20-word caption) — costs nothing, tests reach; (b) "Comment anything" vs exact keyword on a trial; (c) Hinglish trial variant; (d) a "send this to the friend who…" share line; (e) keep voiced explainers as the DM machine.
 PICK: HIRE next (data is ours, format proven at 3.5M, zero voice credits for the trial), then TEAM.
+
+## Topic pick — 9 Nov 2026 (GitHub trending + READMEs verified via raw.githubusercontent; PullRows down)
+| rank | topic | repo (verified 9 Nov) | keyword | why |
+|---|---|---|---|---|
+| 1 PICK | "I hired 49 AI employees to build my game. The laziest setting won." | Donchitos/Claude-Code-Game-Studios (MIT; 49 agents, 74 skills, 15 hooks; Godot/Unity/Unreal specialists; `git clone` → `claude` → `/start`) — roundup: 36,085★, +6,685 in Oct 31–Nov 6 (third-party, don't state on screen) | GAME | students love games; org chart = perfect devv "Let's design" hero (directors → leads → specialists); built-in HONEST twist from its own README: 4 games from one brief — `minimal` rigor wrote 1 doc / 0 min before code, `standard` wrote 30 docs / 58 min, and 2 blind reviewers + a human playtest ranked `standard` LAST |
+| 2 | "If one AI agent is an employee, this is the company." | paperclipai/paperclip (MIT, ~110k★ per roundup) — org charts, budgets, goals for agent teams | TEAM | merges with our TEAM idea; needs a server + dashboard demo |
+| 3 | "Claude can now use any app on my laptop. No screenshots." | vercel-labs/agent-desktop (Apache-2.0; reads the accessibility tree) | HANDS | dev-ish; macOS permission step; private-data warning in README |
+| — | Personal Finance in Claude (5 Nov) | US-only, paid, read-only via Plaid | — | SKIP for India audience (not available) |
+Catches for GAME: needs Claude Code (paid plan) + Git + Python 3; directors request Opus, 15 specialists Sonnet, 30 inherit your model (cost scales); it's a template — you still make every decision; the games are NOT shipped in the repo.
