@@ -1,0 +1,3 @@
+KF.demo({ name: "stage-flip", group: "E", line: "Dark to light: a new chapter, real screens", dur: 4, build(host) {
+  const f = KF.make("stage-flip", host, { origin: [540, 420] }), a = KF.make("article-card", host, { theme: "light", site: "anthropic.com", date: "9 Nov 2026", headline: "Introducing *Claude Fable 5.2*", lines: 5 }), tx = KF.el("div", "", host, "CHAPTER 2"); tx.style.cssText = "position:absolute;left:0;right:0;top:20px;text-align:center;font:800 30px 'JetBrains Mono',monospace;letter-spacing:6px";
+  return t => { const s = { p: KF.prog(t, 1.0, 0.8) }; f.frame(t, s); tx.style.color = f.isLight(s) ? "#16181d" : "#F3F1EC"; a.frame(t, { show: KF.prog(t, 1.4, 0.6), mark: KF.prog(t, 2.4, 0.8) }); }; } });

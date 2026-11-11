@@ -1,0 +1,11 @@
+/* clip-stack: vertical clips fan out in an arc, then drop onto one stack ("a whole stack of Shorts from one video", outputs piling up).
+ * opts:  { n: cards, card: [w, h], captions: [..], images: [urls], top }
+ * state: { fan: 0..1 (cards fly in and fan out), stack: 0..1 (they collapse onto one pile) } · api: frame(t, state) · cards → the card elements */
+KF.define("clip-stack", (host, o) => {
+  const n = o.n || 5, cw = (o.card || [250, 444])[0], ch = (o.card || [250, 444])[1], cx = host.clientWidth / 2, top = o.top ?? 200, pal = [["#D97757", "#5b2a1c"], ["#4b8bff", "#172a52"], ["#a78bfa", "#2b1d52"], ["#3ECF8E", "#0f3a28"], ["#F2C14E", "#4d3a0c"]];
+  const cards = Array.from({ length: n }, (_, i) => { const e = KF.el("div", "", host), p = pal[i % 5]; e.dataset.qa = "texture"; e.style.cssText = `position:absolute;left:${cx - cw / 2}px;top:${top}px;width:${cw}px;height:${ch}px;border-radius:26px;overflow:hidden;background:${(o.images || [])[i] ? `url(${o.images[i]}) center/cover` : `linear-gradient(160deg,${p[0]},${p[1]})`};box-shadow:0 0 0 4px #fff,0 30px 60px -20px rgba(0,0,0,.7);font-family:Inter`;
+    e.innerHTML = `<span style="position:absolute;left:12px;top:12px;padding:6px 14px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff;font:700 24px 'JetBrains Mono',monospace">#${i + 1}</span><div style="position:absolute;left:12px;right:12px;bottom:26px;text-align:center;font:900 30px/1.1 Inter;color:#fff;text-shadow:0 3px 0 #000">${(o.captions || [])[i] || ""}</div>`; return e; });
+  return { cards, frame(t, s = {}) { const f = KF.clamp(s.fan ?? 0), st = KF.ease.inOut(KF.clamp(s.stack ?? 0)); cards.forEach((e, i) => { const k = i - (n - 1) / 2, q = KF.spring(f, i * 0.08, { f: 1.6, z: 0.62 }), on = f > i * 0.08;
+        const x = KF.lerp(k * 900, k * 200, q), y = KF.lerp(k % 2 ? 500 : -500, Math.abs(k) * 36, q), r = KF.lerp(k * 40, k * 9, q), sc = KF.lerp(0.6, 1 - Math.abs(k) * 0.07, q);
+        e.style.opacity = on ? 1 : 0; e.style.zIndex = st > 0.5 ? i + 1 : 10 - Math.abs(Math.round(k * 2)); e.style.transform = `translate(${KF.lerp(x, k * 10, st).toFixed(1)}px,${KF.lerp(y, -i * 8, st).toFixed(1)}px) rotate(${KF.lerp(r, k * 3, st).toFixed(2)}deg) scale(${KF.lerp(sc, 1, st).toFixed(4)})`; }); } };
+});

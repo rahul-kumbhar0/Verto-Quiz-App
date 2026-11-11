@@ -1,6 +1,6 @@
 # field-arcs
 
-glowing arcs jumping between a row of points, with sparks running along them. A "sink" (finger, hand, magnet) pulls the nearby arcs toward it.
+Glowing arcs jumping between a row of points, with sparks running along them. A "sink" (finger, hand, magnet) pulls the nearby arcs toward it.
 
 ![preview](preview.jpg)
 

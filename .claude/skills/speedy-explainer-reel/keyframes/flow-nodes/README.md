@@ -1,6 +1,6 @@
 # flow-nodes
 
-boxes joined by wires with packets travelling along them (request → server → database, a pipeline, "how X talks to Y").
+Boxes joined by wires with packets travelling along them (request → server → database, a pipeline, "how X talks to Y").
 
 ![preview](preview.jpg)
 

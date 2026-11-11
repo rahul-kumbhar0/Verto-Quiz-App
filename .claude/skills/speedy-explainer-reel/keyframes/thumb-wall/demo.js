@@ -1,0 +1,1 @@
+KF.demo({ name: "thumb-wall", group: "C", line: "A wall of covers drifting past", dur: 4, build(host) { const w = KF.make("thumb-wall", host, {}); return t => w.frame(t, { show: KF.prog(t, 0, 1), dim: KF.prog(t, 2.6, 0.5) * 0.6, hot: t > 2.6 ? 1002 : undefined }); } });

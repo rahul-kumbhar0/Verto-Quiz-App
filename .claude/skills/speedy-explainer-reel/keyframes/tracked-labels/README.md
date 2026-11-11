@@ -1,6 +1,6 @@
 # tracked-labels
 
-small caps labels with a pointer line that stay glued to moving things.
+Small caps labels with a pointer line that stay glued to moving things.
 
 ![preview](preview.jpg)
 

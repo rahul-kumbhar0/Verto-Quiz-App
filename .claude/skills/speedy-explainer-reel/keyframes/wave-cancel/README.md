@@ -1,6 +1,6 @@
 # wave-cancel
 
-one wave, its opposite, and what is left when they meet (noise cancelling, interference, "two things that cancel out").
+One wave, its opposite, and what is left when they meet (noise cancelling, interference, "two things that cancel out").
 
 ![preview](preview.jpg)
 

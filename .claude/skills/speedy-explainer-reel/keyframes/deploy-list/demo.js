@@ -1,0 +1,3 @@
+KF.demo({ name: "deploy-list", group: "B", line: "Jobs going from building to ready, one by one", dur: 5, build(host) {
+  const l = KF.make("deploy-list", host, { title: "Uploads", rows: [{ name: "Short #1 · I automated my YouTube", sub: "9:16 · 0:32", at: 0.3, done: 1.6 }, { name: "Short #2 · The whole channel?", sub: "9:16 · 0:27", at: 0.7, done: 2.3 }, { name: "Short #3 · The first three seconds", sub: "9:16 · 0:41", at: 1.1, done: 3.0 }, { name: "Short #4 · wrong aspect ratio", sub: "16:9 · 0:38", at: 1.5, done: 3.7, fail: true }] });
+  return t => l.frame(t, { busy: "Uploading", ok: "Private 🔒" }); } });

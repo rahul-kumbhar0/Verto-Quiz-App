@@ -1,6 +1,6 @@
 # tile-map
 
-a board of small tiles that fill in (test results, chips on a wafer, seats, days, pixels, "N of them").
+A board of small tiles that fill in (test results, chips on a wafer, seats, days, pixels, "N of them").
 
 ![preview](preview.jpg)
 

@@ -1,6 +1,6 @@
 # grid-zoom
 
-a woven grid of rows and columns (sensor grid, pixel grid, city blocks, seats). Light up one row, one column, then fly into their crossing.
+A woven grid of rows and columns (sensor grid, pixel grid, city blocks, seats). Light up one row, one column, then fly into their crossing.
 
 ![preview](preview.jpg)
 

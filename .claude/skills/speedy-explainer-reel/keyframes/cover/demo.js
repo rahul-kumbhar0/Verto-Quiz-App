@@ -1,0 +1,2 @@
+KF.demo({ name: "cover", group: "F", line: "The cover template", dur: 3, build(host) {
+  const b = KF.box(host, "left:262px;top:6px;width:556px;height:988px;border-radius:26px;box-shadow:0 0 0 4px #2a2d35"), in1 = KF.box(b, "left:0;top:0;width:1080px;height:1920px;transform:scale(.5148);transform-origin:0 0"); KF.make("cover", in1, { kicker: "PART 2 · FREE GITHUB REPO", headline: "1 video → *a stack of Shorts*", foot: "I automated my YouTube with Claude", sub: "AutoShorts · free repo" }).frame(); return t => {}; } });

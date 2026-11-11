@@ -1,0 +1,13 @@
+/* deploy-list: a list of jobs that go from "building" to "ready" one by one (deployments, uploads, exports, tests).
+ * opts:  { theme, title, rows: [{ name, sub, at: time it appears, done: time it turns ready, fail: bool }], w }
+ * state: { busy: "Building", ok: "Ready", bad: "Failed" } (labels, optional) · api: frame(t, state) */
+KF.define("deploy-list", (host, o) => {
+  const U = KF.ui(o.theme || "dark"), w = o.w || 860, c = KF.el("div", "", host), rows = o.rows || [];
+  c.style.cssText = `position:absolute;left:${(host.clientWidth - w) / 2}px;top:${o.top ?? 90}px;width:${w}px;border-radius:28px;background:${U.card};border:2px solid ${U.line};color:${U.ink};padding:30px 30px 14px;box-sizing:border-box;font-family:Inter;box-shadow:0 40px 90px -30px rgba(0,0,0,.6)`;
+  c.innerHTML = `<div style="font:900 40px Inter;margin:0 8px 22px">${o.title || "Deployments"}</div>` + rows.map(r => `<div class="r" style="display:flex;align-items:center;gap:18px;height:104px;margin-bottom:14px;padding:0 22px;border-radius:20px;background:${U.chip}"><i style="width:22px;height:22px;border-radius:50%;flex:none"></i><div style="flex:1;min-width:0"><div style="font:800 30px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${r.name}</div><div style="font:700 22px 'JetBrains Mono',monospace;color:${U.mute}">${r.sub || ""}</div><u style="display:block;height:6px;border-radius:3px;background:${U.line};margin-top:8px;overflow:hidden;text-decoration:none"><b style="display:block;height:100%;width:0;background:${KF.C.green}"></b></u></div><span style="font:800 26px Inter;padding:8px 16px;border-radius:999px"></span></div>`).join("");
+  const R = [...c.querySelectorAll(".r")];
+  return { frame(t, s = {}) { R.forEach((e, i) => { const r = rows[i], a = r.at ?? i * 0.4, d = r.done ?? a + 1.4, p = KF.spring(t, a, { f: 2.4, z: 0.7 }), q = KF.prog(t, a + 0.1, d - a - 0.1), done = t >= d, dot = e.querySelector("i"), tag = e.querySelector("span");
+        e.style.opacity = t >= a ? Math.min(1, p * 2) : 0; e.style.transform = `translateX(${((1 - p) * 80).toFixed(1)}px)`; e.querySelector("b").style.width = (KF.ease.inOut(q) * 100).toFixed(1) + "%"; e.querySelector("b").style.background = done && r.fail ? KF.C.red : KF.C.green;
+        const col = done ? (r.fail ? KF.C.red : KF.C.green) : KF.C.gold; dot.style.background = col; dot.style.boxShadow = done ? "none" : `0 0 0 ${(6 + 5 * Math.sin(t * 8)).toFixed(1)}px ${KF.rgba(KF.C.gold, 0.25)}`;
+        tag.textContent = done ? (r.fail ? s.bad || "Failed" : s.ok || "Ready") : s.busy || "Building"; tag.style.background = KF.rgba(col, 0.16); tag.style.color = col; const pop = KF.prog(t, d, 0.3); tag.style.transform = `scale(${(1 + 0.25 * Math.sin(Math.PI * pop)).toFixed(3)})`; }); } };
+});

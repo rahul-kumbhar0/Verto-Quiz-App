@@ -6,18 +6,15 @@ body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font
 #line{position:absolute;left:60px;right:60px;top:220px;font:800 44px/1.15 Inter;color:#F3F1EC}
 .slot{position:absolute;left:0;top:340px;width:1080px;height:1000px;overflow:hidden}
 #foot{position:absolute;left:60px;top:1370px;font:600 26px Inter;color:#8b8f98}
-</style></head><body><div id="stage"><div id="name"></div><div id="idx"></div><div id="line"></div><div id="foot">canwe.ai keyframes · group A</div></div>
-<script src="kf.js"></script>
-<script src="cutaway-stage/block.js"></script><script src="field-arcs/block.js"></script><script src="value-strip/block.js"></script><script src="tracked-labels/block.js"></script><script src="grid-zoom/block.js"></script>
-<script src="wave-cancel/block.js"></script><script src="point-cloud/block.js"></script><script src="tile-map/block.js"></script><script src="flow-nodes/block.js"></script><script src="magnifier/block.js"></script>
-<script src="cutaway-stage/demo.js"></script><script src="tracked-labels/demo.js"></script><script src="value-strip/demo.js"></script><script src="field-arcs/demo.js"></script><script src="grid-zoom/demo.js"></script>
-<script src="wave-cancel/demo.js"></script><script src="point-cloud/demo.js"></script><script src="tile-map/demo.js"></script><script src="flow-nodes/demo.js"></script><script src="magnifier/demo.js"></script>
+</style></head><body><div id="stage"><div id="name"></div><div id="idx"></div><div id="line"></div><div id="foot">canwe.ai keyframes</div></div>
+<script src="kf.js"></script><script src="manifest.js"></script><script src="../assets/template/avatar.js"></script>
+<script>KF_MANIFEST.forEach(([g, n]) => { if (n !== "loop-back") document.write('<script src="' + n + '/block.js"><\/script>'); }); KF_MANIFEST.forEach(([g, n]) => document.write('<script src="' + n + '/demo.js"><\/script>'));</script>
 <script>
 // gallery.html            → every block in turn      gallery.html?only=wave-cancel → one block on a loop
-const only = new URLSearchParams(location.search).get("only"), D = KF.demos.filter(d => !only || d.name === only), stage = document.getElementById("stage");
+const Q = new URLSearchParams(location.search), only = Q.get("only"), grp = Q.get("group"), GM = Object.fromEntries(KF_MANIFEST.map(([g, n]) => [n, g])), D = KF.demos.filter(d => (!only || d.name === only) && (!grp || grp.includes(GM[d.name]))), stage = document.getElementById("stage");
 let acc = 0; D.forEach((d, i) => { d.t0 = acc; acc += d.dur; d.slot = KF.el("div", "slot", stage); d.frame = d.build(d.slot); d.i = i; });
 window.REEL_DURATION = acc; window.KF_INDEX = D.map(d => ({ name: d.name, t0: d.t0, dur: d.dur }));
 window.seek = t => { t = Math.max(0, Math.min(acc - 1e-4, t)); const d = D.reduce((b, x) => (t >= x.t0 ? x : b), D[0]);
-  D.forEach(x => (x.slot.style.display = x === d ? "" : "none")); document.getElementById("name").textContent = d.name; document.getElementById("idx").textContent = (d.i + 1) + " / " + D.length; document.getElementById("line").textContent = d.line; d.frame(t - d.t0); };
+  D.forEach(x => (x.slot.style.display = x === d ? "" : "none")); document.getElementById("name").textContent = GM[d.name] + " · " + d.name; document.getElementById("idx").textContent = (d.i + 1) + " / " + D.length; document.getElementById("line").textContent = d.line; d.frame(t - d.t0); };
 window.seek(0);
 </script></body></html>

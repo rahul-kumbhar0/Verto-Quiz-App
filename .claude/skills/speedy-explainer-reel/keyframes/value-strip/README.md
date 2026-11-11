@@ -1,6 +1,6 @@
 # value-strip
 
-a row of live numbers (sensor readings, prices, scores). Cells roll to new values and light up while they differ from the base.
+A row of live numbers (sensor readings, prices, scores). Cells roll to new values and light up while they differ from the base.
 
 ![preview](preview.jpg)
 

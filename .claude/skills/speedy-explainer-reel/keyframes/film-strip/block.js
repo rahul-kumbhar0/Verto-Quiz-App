@@ -1,0 +1,15 @@
+/* film-strip: a long video shown as a strip of frames running under a playhead; the best moments light up with a score ("the AI picks the moments").
+ * opts:  { n: frames, frame: [w, h], images: [urls] (optional), picks: [frame indexes], scores: [numbers], y }
+ * state: { show: 0..1, scroll: 0..1 (how far the strip has run), lift: 0..1 (the picked frames rise out of the strip) } · api: frame(t, state) */
+KF.define("film-strip", (host, o) => {
+  const { ctx, w, h, clear } = KF.canvas(host), n = o.n || 16, fw = (o.frame || [300, 170])[0], fh = (o.frame || [300, 170])[1], gap = 16, y = o.y ?? h * 0.42, picks = o.picks || [3, 6, 9, 12], sc = o.scores || [92, 88, 95, 81];
+  const imgs = (o.images || []).map(u => { const im = new Image(); im.src = u; return im; }); if (imgs.length) window.__ready = Promise.all([window.__ready, ...imgs.map(im => im.decode().catch(() => {}))]);
+  const pal = ["#5b2a1c", "#1c3a5b", "#3a1c5b", "#1c5b3a", "#5b4a1c"];
+  return { frame(t, s = {}) { clear(); const a = KF.clamp(s.show ?? 1), scr = KF.ease.inOut(KF.clamp(s.scroll ?? 0)) * ((n - 1) * (fw + gap)), lift = KF.clamp(s.lift ?? 0), px = w / 2; ctx.globalAlpha = a;
+      ctx.fillStyle = "#101216"; ctx.fillRect(0, y - 34, w, fh + 68); ctx.fillStyle = "#2a2d35"; for (let x = -((scr * 1) % 40); x < w; x += 40) { KF.rr(ctx, x, y - 26, 22, 14, 4); ctx.fill(); KF.rr(ctx, x, y + fh + 12, 22, 14, 4); ctx.fill(); }
+      for (let i = 0; i < n; i++) { const x = px - fw / 2 + i * (fw + gap) - scr, k = picks.indexOf(i), hot = k >= 0 && x + fw / 2 <= px + 4; if (x > w || x + fw < 0) continue; const yy = y - (hot ? lift * (150 + 0 * k) : 0) - (hot ? 10 * Math.sin(Math.PI * KF.clamp((px - x - fw / 2) / 120)) : 0);
+        ctx.save(); KF.rr(ctx, x, yy, fw, fh, 10); ctx.clip(); const im = imgs.length ? imgs[i % imgs.length] : null; if (im && im.naturalWidth) ctx.drawImage(im, x, yy, fw, fh); else { const g = ctx.createLinearGradient(x, yy, x + fw, yy + fh); g.addColorStop(0, pal[i % 5]); g.addColorStop(1, "#0e0a0a"); ctx.fillStyle = g; ctx.fillRect(x, yy, fw, fh);
+          ctx.fillStyle = "#e8b48f"; ctx.beginPath(); ctx.arc(x + fw * (0.3 + 0.4 * KF.hash(i)), yy + fh * 0.45, 26, 0, 7); ctx.fill(); ctx.fillStyle = i % 2 ? "#5a7bd9" : "#D97757"; KF.rr(ctx, x + fw * (0.3 + 0.4 * KF.hash(i)) - 40, yy + fh * 0.62, 80, 80, 26); ctx.fill(); } ctx.restore();
+        if (hot) { ctx.strokeStyle = KF.C.accent; ctx.lineWidth = 6; ctx.shadowColor = KF.C.accent; ctx.shadowBlur = 30; KF.rr(ctx, x, yy, fw, fh, 10); ctx.stroke(); ctx.shadowBlur = 0; ctx.fillStyle = KF.C.accent; KF.rr(ctx, x + fw - 84, yy + 10, 74, 44, 22); ctx.fill(); ctx.fillStyle = "#1a0e08"; ctx.font = '700 28px "JetBrains Mono"'; ctx.textAlign = "center"; ctx.fillText(sc[k] ?? "", x + fw - 47, yy + 42); } }
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = 5; ctx.shadowColor = "#fff"; ctx.shadowBlur = 18; ctx.beginPath(); ctx.moveTo(px, y - 70); ctx.lineTo(px, y + fh + 70); ctx.stroke(); ctx.shadowBlur = 0; ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.moveTo(px - 16, y - 86); ctx.lineTo(px + 16, y - 86); ctx.lineTo(px, y - 62); ctx.fill(); ctx.globalAlpha = 1; } };
+});

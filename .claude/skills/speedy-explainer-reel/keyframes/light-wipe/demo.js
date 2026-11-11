@@ -1,0 +1,3 @@
+KF.demo({ name: "light-wipe", group: "E", line: "A glowing bar sweeps in the next scene", dur: 4, build(host) {
+  const a = KF.box(host, "left:0;top:0;width:1080px;height:1000px"), A = KF.make("point-cloud", a, {}), b = KF.box(host, "left:0;top:0;width:1080px;height:1000px;background:#0c0c0f"), B = KF.make("tile-map", b, { cols: 20, rows: 18, order: "center", colors: [KF.C.gold, KF.C.accent] }), c = KF.box(host, "left:0;top:0;width:1080px;height:1000px"), W = KF.make("light-wipe", c, {});
+  return t => { const p = KF.prog(t, 1.4, 0.9); A.frame(t, {}); B.frame(t, { fill: KF.prog(t, 1.8, 1.6) }); b.style.clipPath = `inset(0 ${Math.max(0, 1080 - W.edge(p)).toFixed(1)}px 0 0)`; W.frame(t, { p }); }; } });

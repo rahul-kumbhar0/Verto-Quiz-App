@@ -1,0 +1,19 @@
+/* world-map: a dotted world map with cities and routes that light up (CDN, servers, "your request travels from A to B", users everywhere).
+ * opts:  { cities: [{ name, lon, lat, color, at }], routes: [{ from, to, at, color }] (indexes into cities), dot: colour, label: true }
+ * state: { show: 0..1 (the map dots arrive), zoom: 1.., focus: city index } · api: frame(t, state) · xy(lon, lat) → [x, y] host pixels */
+KF.define("world-map", (host, o) => {
+  const M = ["       ######  ###         ############ ", "  ############ ###    ################# ", "      ########     ###################  ", "      #######      #################    ", "       #####       ################ #   ", "        ####      ################      ", "         ##       ########  ##  ### #   ", "           ####    #######     #####    ", "           ######    ####      ######   ", "           #####     #### #       ###   ", "            ####     ###         #####  ", "            ##        #          ####  #", "            #                          #", "                                        "];
+  const { ctx, w, h, clear } = KF.canvas(host), C = KF.C, mw = w - 80, cw = mw / 40, x0 = 40, y0 = (h - cw * 1.25 * 14) / 2, rh = cw * 1.25, cities = o.cities || [], routes = o.routes || [];
+  const xy = (lon, lat) => [x0 + (lon + 180) / 9 * cw, y0 + (80 - lat) / 10 * rh]; let Z = { z: 1, f: [w / 2, h / 2] };
+  return { frame(t, s = {}) { clear(); const a = KF.clamp(s.show ?? 1), z = s.zoom || 1, f = s.focus != null && cities[s.focus] ? xy(cities[s.focus].lon, cities[s.focus].lat) : [w / 2, h / 2]; ctx.setTransform(z, 0, 0, z, w / 2 - f[0] * z, h / 2 - f[1] * z);
+      M.forEach((row, j) => { for (let i = 0; i < 40; i++) if (row[i] === "#") for (let u = 0; u < 2; u++) for (let v = 0; v < 2; v++) { const k = j * 400 + i * 4 + u * 2 + v, q = KF.clamp(a * 1.5 - KF.hash(k) * 0.5); if (q <= 0) continue;
+            ctx.fillStyle = KF.rgba(o.dot || "#5b6270", 0.85 * q); ctx.beginPath(); ctx.arc(x0 + (i + 0.25 + u * 0.5) * cw, y0 + (j + 0.25 + v * 0.5) * rh, cw * 0.14, 0, 7); ctx.fill(); } });
+      ctx.lineCap = "round"; routes.forEach((r, k) => { const A = cities[r.from], B = cities[r.to]; if (!A || !B || t < (r.at ?? 0)) return; const p0 = xy(A.lon, A.lat), p1 = xy(B.lon, B.lat), d = Math.hypot(p1[0] - p0[0], p1[1] - p0[1]), cp = [(p0[0] + p1[0]) / 2, (p0[1] + p1[1]) / 2 - d * 0.32], q = KF.ease.inOut(KF.prog(t, r.at ?? 0, 0.8)), col = r.color || C.gold;
+        const pt = u => [(1 - u) * (1 - u) * p0[0] + 2 * (1 - u) * u * cp[0] + u * u * p1[0], (1 - u) * (1 - u) * p0[1] + 2 * (1 - u) * u * cp[1] + u * u * p1[1]];
+        ctx.beginPath(); for (let u = 0; u <= q + 1e-6; u += 0.03) { const p = pt(Math.min(u, q)); u === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]); } ctx.strokeStyle = KF.rgba(col, 0.25); ctx.lineWidth = 9; ctx.stroke(); ctx.strokeStyle = col; ctx.lineWidth = 3; ctx.stroke();
+        if (q >= 1) { const u = ((t - (r.at ?? 0)) * 0.7 + k * 0.3) % 1, p = pt(u); ctx.fillStyle = "#fff"; ctx.beginPath(); ctx.arc(p[0], p[1], 6, 0, 7); ctx.fill(); } });
+      cities.forEach(c => { if (t < (c.at ?? 0)) return; const p = xy(c.lon, c.lat), q = KF.spring(t, c.at ?? 0, { f: 3, z: 0.5 }), col = c.color || C.gold, pr = ((t - (c.at ?? 0)) * 0.8) % 1;
+        ctx.strokeStyle = KF.rgba(col, 1 - pr); ctx.lineWidth = 3; ctx.beginPath(); ctx.arc(p[0], p[1], 10 + 34 * pr, 0, 7); ctx.stroke(); ctx.fillStyle = col; ctx.beginPath(); ctx.arc(p[0], p[1], 11 * q, 0, 7); ctx.fill();
+        if (o.label !== false && c.name) { ctx.font = `800 ${Math.round(28 / z)}px Inter`; ctx.textAlign = "left"; ctx.fillStyle = C.ink; ctx.globalAlpha = Math.min(1, q); ctx.fillText(c.name, p[0] + 20 / z, p[1] - 14 / z); ctx.globalAlpha = 1; } });
+      ctx.setTransform(1, 0, 0, 1, 0, 0); }, xy };
+});

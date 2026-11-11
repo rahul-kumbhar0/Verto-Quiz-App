@@ -1,0 +1,3 @@
+KF.demo({ name: "props", group: "D", line: "Eight metaphor props, each with its own action", dur: 6, build(host) {
+  const kinds = ["badge", "vault", "logbook", "alarm", "rack", "sandbox", "lock", "camera"], P = kinds.map((k, i) => { const b = KF.box(host, `left:${30 + (i % 4) * 260}px;top:${90 + Math.floor(i / 4) * 440}px;width:240px;height:400px;overflow:visible`), lab = KF.el("div", "", b, k); lab.style.cssText = "position:absolute;left:0;right:0;bottom:0;text-align:center;font:700 26px 'JetBrains Mono',monospace;color:#8b8f98"; return KF.make("props", b, { kind: k, size: 230, y: 170 }); });
+  return t => P.forEach((p, i) => p.frame(t, { show: KF.prog(t, i * 0.12, 0.5), p: KF.prog(t, 1.6 + i * 0.35, 1.1) })); } });

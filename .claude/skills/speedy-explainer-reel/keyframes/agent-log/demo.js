@@ -1,0 +1,3 @@
+KF.demo({ name: "agent-log", group: "B", line: "An AI agent ticking through its steps", dur: 5, build(host) {
+  const a = KF.make("agent-log", host, { prompt: "Make a video about why your touchscreen feels your finger", steps: [{ verb: "Searched the web", obj: "capacitive touchscreen" }, { verb: "Read", obj: "3 web pages" }, { verb: "Created", obj: "facts.md", meta: "+22" }, { verb: "Created", obj: "script.txt", meta: "+24" }, { verb: "Made", obj: "voice.mp3", meta: "84.5 s" }, { verb: "Created", obj: "scenes/Finger.tsx", meta: "+105" }] });
+  return t => a.frame(t, { show: KF.prog(t, 0, 0.5), n: 6 * KF.prog(t, 0.7, 3.6) }); } });

@@ -1,0 +1,2 @@
+KF.demo({ name: "strike-row", group: "C", line: "\"No camera, no drawing, no editing\"", dur: 4, build(host) {
+  const s = KF.make("strike-row", host, { items: [{ icon: "📷", label: "camera", at: 0.2, strike: 0.9 }, { icon: "✏️", label: "drawing", at: 0.6, strike: 1.6 }, { icon: "🎞️", label: "editing", at: 1.0, strike: 2.3 }, { icon: "💬", label: "one sentence", at: 2.7, tick: 3.2 }], size: 190 }); return t => s.frame(t); } });

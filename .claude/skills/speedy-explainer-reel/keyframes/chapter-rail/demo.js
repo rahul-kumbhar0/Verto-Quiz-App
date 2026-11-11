@@ -1,0 +1,2 @@
+KF.demo({ name: "chapter-rail", group: "F", line: "Where you are in the video, plus the number that matters", dur: 5, build(host) {
+  const r = KF.make("chapter-rail", host, { steps: ["step 1", "step 2", "step 3", "upload", "catch"], top: 380 }); return t => { const at = 5 * KF.prog(t, 0.3, 4.2), i = Math.floor(at); r.frame(t, { at, alert: i >= 4, value: [1494, 1, 4, 5, 3, 3][i], label: ["★ stars", "video in", "moments", "Shorts", "catches", "catches"][i] }); }; } });

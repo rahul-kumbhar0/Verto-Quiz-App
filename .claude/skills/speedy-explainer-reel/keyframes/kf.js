@@ -25,6 +25,13 @@
     const ctx = cv.getContext("2d"); return { cv, ctx, w, h, clear: () => { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.clearRect(0, 0, w, h); } }; };
   KF.rr = (ctx, x, y, w, h, r) => { r = Math.min(r, w / 2, h / 2); ctx.beginPath(); ctx.moveTo(x + r, y); ctx.arcTo(x + w, y, x + w, y + h, r); ctx.arcTo(x + w, y + h, x, y + h, r); ctx.arcTo(x, y + h, x, y, r); ctx.arcTo(x, y, x + w, y, r); ctx.closePath(); };
   KF.rgba = (hex, a) => { const n = parseInt(hex.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+  KF.css = (id, css) => { if (document.getElementById("kfcss-" + id)) return; const st = document.createElement("style"); st.id = "kfcss-" + id; st.textContent = css; document.head.appendChild(st); };
+  KF.box = (host, css, cls) => { const d = KF.el("div", "kf-host" + (cls ? " " + cls : ""), KF.host(host)); d.style.cssText = css; return d; };
+  KF.fmt = (n, dec = 0) => Number(n).toLocaleString("en-US", { minimumFractionDigits: dec, maximumFractionDigits: dec });
+  KF.typed = (text, t, start, cps = 18) => text.slice(0, Math.max(0, Math.floor((t - start) * cps)));
+  KF.ui = theme => (theme === "light" ? { bg: "#F6F4EF", card: "#ffffff", ink: "#16181d", mute: "#6b7280", line: "#e3e0d8", chip: "#eeebe4" } : { bg: "#0c0c0f", card: "#15171c", ink: "#F3F1EC", mute: "#8b8f98", line: "#2a2d35", chip: "#22252c" });
+  /** loop-back: feed the opening scene this time during the last `tail` seconds so the reel ends on its first frame. → { t0: time for the opening scene, mix: 0..1 its opacity } */
+  KF.loopBack = (t, dur, tail = 1.2) => { const a = dur - tail; return t < a ? { t0: null, mix: 0 } : { t0: (t - a) - tail, mix: KF.ease.inOut(KF.prog(t, a, tail * 0.7)) }; };
   KF.define = (name, fn) => (KF.blocks[name] = fn);
   KF.make = (name, host, opts) => { if (!KF.blocks[name]) throw new Error("KF block not loaded: " + name); return KF.blocks[name](KF.host(host), opts || {}); };
   KF.demo = d => KF.demos.push(d);

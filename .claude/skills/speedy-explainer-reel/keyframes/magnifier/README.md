@@ -1,6 +1,6 @@
 # magnifier
 
-a lens that travels over another picture and shows it enlarged (inspect, review, "look closer").
+A lens that travels over another picture and shows it enlarged (inspect, review, "look closer").
 
 ![preview](preview.jpg)
 
