@@ -1,0 +1,1 @@
+I connected Claude to one free GitHub repo. It's called freehire. 3.5K stars. Then I typed one line into Claude. It searched live jobs, and found 37 internships. Comment JOBS for my setup.

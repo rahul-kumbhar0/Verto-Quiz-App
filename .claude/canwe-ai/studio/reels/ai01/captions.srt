@@ -1,0 +1,108 @@
+1
+00:00:00,000 --> 00:00:01,696
+every word Claude writes is
+
+2
+00:00:01,546 --> 00:00:02,863
+a guess here's how it
+
+3
+00:00:02,713 --> 00:00:05,326
+picks learn AI engineering day
+
+4
+00:00:05,176 --> 00:00:07,039
+one what actually happens when
+
+5
+00:00:06,889 --> 00:00:08,807
+you hit enter step one
+
+6
+00:00:08,787 --> 00:00:10,428
+your sentence gets chopped into
+
+7
+00:00:10,278 --> 00:00:12,372
+tokens small pieces of words
+
+8
+00:00:12,306 --> 00:00:14,150
+one token is about 3/4
+
+9
+00:00:14,000 --> 00:00:15,372
+of a word step two
+
+10
+00:00:15,361 --> 00:00:16,817
+every token becomes a list
+
+11
+00:00:16,667 --> 00:00:18,465
+of numbers AI never reads
+
+12
+00:00:18,315 --> 00:00:20,983
+words only numbers step three
+
+13
+00:00:20,833 --> 00:00:22,669
+the model scores every possible
+
+14
+00:00:22,519 --> 00:00:26,502
+next token GPT-2 had 50,257
+
+15
+00:00:26,352 --> 00:00:27,761
+to choose from it picks
+
+16
+00:00:27,611 --> 00:00:28,835
+one adds it to your
+
+17
+00:00:28,685 --> 00:00:30,020
+text then does it all
+
+18
+00:00:29,870 --> 00:00:31,881
+again for every single token
+
+19
+00:00:32,250 --> 00:00:33,881
+that's why answers stream in
+
+20
+00:00:33,731 --> 00:00:35,344
+piece by piece and why
+
+21
+00:00:35,194 --> 00:00:36,354
+the same question gets a
+
+22
+00:00:36,204 --> 00:00:38,502
+different answer it's predicting not
+
+23
+00:00:38,352 --> 00:00:40,493
+looking things up comment tokens
+
+24
+00:00:40,343 --> 00:00:41,372
+and i'll DM you a
+
+25
+00:00:41,222 --> 00:00:42,881
+15-minute exercise to see
+
+26
+00:00:42,731 --> 00:00:44,002
+it yourself and follow
+
+27
+00:00:43,852 --> 00:00:44,983
+for the full series
+

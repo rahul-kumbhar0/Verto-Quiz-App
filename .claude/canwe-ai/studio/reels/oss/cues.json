@@ -1,0 +1,223 @@
+[
+ {
+  "type": "whoosh",
+  "t": 4.792
+ },
+ {
+  "type": "whoosh",
+  "t": 7.264
+ },
+ {
+  "type": "whoosh",
+  "t": 11.434
+ },
+ {
+  "type": "whoosh",
+  "t": 21.934
+ },
+ {
+  "type": "whoosh",
+  "t": 24.321
+ },
+ {
+  "type": "whoosh",
+  "t": 31.094
+ },
+ {
+  "type": "whoosh",
+  "t": 37.821
+ },
+ {
+  "type": "whoosh",
+  "t": 40.443
+ },
+ {
+  "type": "pop",
+  "t": 2.882,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 5.845
+ },
+ {
+  "type": "pop",
+  "t": 9.533,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 36.731,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 1.755,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 3.292,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.672,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 5.925,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 10.406,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.802,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 14.361,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.946,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 19.305,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 22.858,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 25.104,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 29.528,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 31.755,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 33.352000000000004,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 34.642,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 36.047,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 39.349,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 44.84,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 3.452,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 10.306000000000001
+ },
+ {
+  "type": "pop",
+  "t": 10.376000000000001
+ },
+ {
+  "type": "pop",
+  "t": 10.446000000000002
+ },
+ {
+  "type": "pop",
+  "t": 10.516000000000002
+ },
+ {
+  "type": "pop",
+  "t": 10.586
+ },
+ {
+  "type": "pop",
+  "t": 10.656
+ },
+ {
+  "type": "pop",
+  "t": 10.726
+ },
+ {
+  "type": "pop",
+  "t": 10.796000000000001
+ },
+ {
+  "type": "pop",
+  "t": 21.984
+ },
+ {
+  "type": "pop",
+  "t": 33.372
+ },
+ {
+  "type": "pop",
+  "t": 33.928
+ },
+ {
+  "type": "pop",
+  "t": 34.542
+ },
+ {
+  "type": "type",
+  "t": 39.004,
+  "t2": 40.704
+ },
+ {
+  "type": "click",
+  "t": 39.865
+ },
+ {
+  "type": "type",
+  "t": 40.742999999999995,
+  "t2": 41.04299999999999
+ },
+ {
+  "type": "click",
+  "t": 41.754
+ },
+ {
+  "type": "pop",
+  "t": 45.921
+ }
+]

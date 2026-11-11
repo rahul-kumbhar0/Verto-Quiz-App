@@ -1,0 +1,144 @@
+1
+00:00:00,000 --> 00:00:01,188
+People are deleting the
+
+2
+00:00:01,038 --> 00:00:02,499
+ads from their TVs.
+
+3
+00:00:02,491 --> 00:00:03,782
+With Claude.
+
+4
+00:00:03,632 --> 00:00:04,650
+One guy cleaned his
+
+5
+00:00:04,500 --> 00:00:06,141
+parents' TV over Wi-Fi,
+
+6
+00:00:05,991 --> 00:00:07,018
+and posted it.
+
+7
+00:00:06,868 --> 00:00:08,244
+7M views.
+
+8
+00:00:08,575 --> 00:00:09,895
+Now it's a free repo.
+
+9
+00:00:09,896 --> 00:00:11,744
+Forty-three thousand GitHub stars.
+
+10
+00:00:11,594 --> 00:00:12,065
+So,
+
+11
+00:00:11,962 --> 00:00:12,914
+your TV is full
+
+12
+00:00:12,764 --> 00:00:14,669
+of ad apps, sponsored rows,
+
+13
+00:00:14,519 --> 00:00:15,424
+and trackers.
+
+14
+00:00:15,358 --> 00:00:16,801
+Claude connects over Wi-Fi,
+
+15
+00:00:16,651 --> 00:00:17,952
+and switches them off.
+
+16
+00:00:17,896 --> 00:00:18,905
+One, by one.
+
+17
+00:00:18,877 --> 00:00:20,697
+Nothing gets deleted.
+
+18
+00:00:20,547 --> 00:00:22,207
+One command restores everything.
+
+19
+00:00:22,057 --> 00:00:23,225
+Then it installs a
+
+20
+00:00:23,075 --> 00:00:24,207
+clean home screen.
+
+21
+00:00:24,160 --> 00:00:25,112
+Just your apps.
+
+22
+00:00:25,443 --> 00:00:26,669
+You paste one prompt,
+
+23
+00:00:26,519 --> 00:00:27,659
+with your TV model.
+
+24
+00:00:27,651 --> 00:00:28,886
+About 15 minutes.
+
+25
+00:00:28,849 --> 00:00:29,895
+Works on Android
+
+26
+00:00:29,745 --> 00:00:30,810
+and Google TV.
+
+27
+00:00:30,783 --> 00:00:33,442
+TCL, Sony, Xiaomi, all tested.
+
+28
+00:00:33,292 --> 00:00:34,424
+Samsung and LG?
+
+29
+00:00:34,349 --> 00:00:36,112
+Sorry, they're locked.
+
+30
+00:00:35,962 --> 00:00:37,763
+And switch debugging off after.
+
+31
+00:00:37,613 --> 00:00:38,952
+That port is open to
+
+32
+00:00:38,802 --> 00:00:40,169
+anyone on your Wi-Fi.
+
+33
+00:00:40,142 --> 00:00:41,037
+Comment TV,
+
+34
+00:00:40,887 --> 00:00:41,669
+and I'll DM
+
+35
+00:00:41,519 --> 00:00:42,310
+you the repo,
+
+36
+00:00:42,160 --> 00:00:44,065
+plus the safe step-by-step.
+

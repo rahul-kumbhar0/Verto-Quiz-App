@@ -1,0 +1,116 @@
+/* look.css — the canwe.ai LOOK (tokens + materials). Load after speedy.css. Spec: references/look.md.
+ * Rule: ground and hero come from a MATERIAL (graphite, glass, paper, ember light), never from candy flat fills.
+ * One accent (Claude terracotta) carries meaning; everything else is a tonal ramp.            */
+:root{
+  /* ground */
+  --g-deep:#0B0C0E; --g:#111216; --g-raise:#17191E; --g-line:rgba(255,255,255,.075); --g-line-hi:rgba(255,255,255,.14);
+  /* ink */
+  --ink:#F3F1EC; --ink-2:#B9B6AF; --ink-3:#7D7A74;
+  /* the ONE accent + its tonal ramp (data, highlights, the focal element) */
+  --acc:#D97757; --acc-hi:#F0A585; --acc-lo:#7A3A26; --acc-glow:rgba(217,119,87,.38);
+  /* cool counterweight (secondary data / "the other option"), desaturated */
+  --cool:#8FA3BF; --cool-lo:#3A4556;
+  /* status (only for status) */
+  --ok:#7CC4A0; --bad:#E07A6F;
+  /* paper chapter */
+  --p:#EEEBE5; --p-raise:#FBFAF7; --p-line:#DDD8CE; --p-ink:#16171A; --p-ink-2:#6B6760;
+  /* graphite tonal set for N items (instead of red/yellow/green/blue) */
+  --t1:#2B2E35; --t2:#33363E; --t3:#3B3F48; --t4:#454953; --t5:#50545F;
+}
+/* ground: solid + ONE local warm glow (radial, never a full-screen linear gradient: it bands in H.264) */
+.look .s-bg{background-color:var(--g);background-image:none}
+.look .s-bg::before{content:"";position:absolute;inset:0;background:radial-gradient(52% 34% at 50% 44%,rgba(217,119,87,var(--glow,.10)),transparent 72%)}
+.look .s-vig{background:radial-gradient(ellipse 78% 60% at 50% 45%,transparent 38%,rgba(0,0,0,.62) 100%)}
+.look .s-light{background-color:var(--p);background-image:none}
+.look.is-light .s-vig{background:radial-gradient(ellipse 80% 62% at 50% 45%,transparent 55%,rgba(40,30,20,.08) 100%)}
+.look.is-light .s-bg::before{opacity:0}
+
+/* ---------- materials ---------- */
+/* graphite card: tonal fill, hairline border, top inner highlight, long soft shadow */
+.m-card{position:relative;border-radius:28px;background:linear-gradient(180deg,#1B1D23 0%,#14161A 100%);
+  border:1.5px solid var(--g-line);box-shadow:inset 0 1.5px 0 rgba(255,255,255,.07),0 40px 90px -20px rgba(0,0,0,.75),0 8px 24px rgba(0,0,0,.35);color:var(--ink)}
+/* glass: for overlays above content (DM banners, popovers) */
+.m-glass{position:relative;border-radius:26px;background:rgba(26,28,34,.62);backdrop-filter:blur(18px) saturate(1.2);
+  border:1.5px solid rgba(255,255,255,.10);box-shadow:inset 0 1px 0 rgba(255,255,255,.12),0 30px 70px -10px rgba(0,0,0,.6);color:var(--ink)}
+/* the focal element: accent material (one per scene) */
+.m-acc{position:relative;border-radius:22px;background:linear-gradient(180deg,var(--acc-hi) -40%,var(--acc) 45%,#B95E40 100%);
+  color:#1A0E08;box-shadow:inset 0 1.5px 0 rgba(255,255,255,.35),0 24px 60px -12px var(--acc-glow),0 0 0 1px rgba(0,0,0,.25)}
+/* paper card for light chapters */
+.m-paper{position:relative;border-radius:28px;background:var(--p-raise);border:1.5px solid var(--p-line);color:var(--p-ink);
+  box-shadow:0 1px 0 #fff inset,0 30px 70px -24px rgba(40,30,20,.28)}
+/* chip / pill */
+.m-chip{display:inline-flex;align-items:center;gap:12px;border-radius:999px;padding:12px 26px;font:700 28px Inter;color:var(--ink);
+  background:linear-gradient(180deg,#22252C,#1A1C21);border:1.5px solid var(--g-line-hi);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.m-chip.acc{background:rgba(217,119,87,.14);border-color:rgba(217,119,87,.55);color:var(--acc-hi)}
+
+/* ---------- 3D box material (same markup as the q3 kit: .m-box > .fc.tp/.sd/.fr; vars --w --h --d) ----------
+   --c = base tone (default graphite). Faces are lit, not flat: top lighter, side darker, front has a soft vertical ramp + edge light. */
+.m-box{position:absolute;transform-style:preserve-3d;width:var(--w);height:var(--h);--c:var(--t3)}
+.m-box .fc{position:absolute;box-sizing:border-box}
+.m-box .fr{left:0;top:0;width:var(--w);height:var(--h);transform:translateZ(calc(var(--d) / 2));border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c),#fff 10%) 0%,var(--c) 55%,color-mix(in srgb,var(--c),#000 18%) 100%);
+  box-shadow:inset 0 1.5px 0 rgba(255,255,255,.18),inset 0 0 0 1px rgba(255,255,255,.05);
+  display:grid;place-items:center;font:800 var(--fs,44px) Inter;color:var(--ink);white-space:pre}
+.m-box .tp{left:0;width:var(--w);height:var(--d);top:calc(var(--h) / 2 - var(--d) / 2);transform:rotateX(90deg) translateZ(calc(var(--h) / 2));border-radius:12px;
+  background:linear-gradient(90deg,color-mix(in srgb,var(--c),#fff 22%),color-mix(in srgb,var(--c),#fff 12%))}
+.m-box .sd{top:0;height:var(--h);width:var(--d);left:calc(var(--w) / 2 - var(--d) / 2);transform:rotateY(90deg) translateZ(calc(var(--w) / 2));border-radius:12px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c),#000 30%),color-mix(in srgb,var(--c),#000 48%))}
+.m-box.acc{--c:var(--acc)} .m-box.acc .fr{color:#1A0E08}
+.m-box.cool{--c:var(--cool-lo)}
+/* reflection floor under 3D props */
+.m-floor{position:absolute;border-radius:50%;background:radial-gradient(closest-side,rgba(217,119,87,.16),transparent 70%);filter:blur(6px)}
+/* type */
+.t-kicker{font:700 24px Mono;letter-spacing:4px;color:var(--ink-3);text-transform:uppercase}
+.t-hero{font:900 112px/0.95 Inter;letter-spacing:-4px;color:var(--ink)}
+.t-hero em{font-style:normal;color:var(--acc)}
+
+/* ---------- PAPER EDITORIAL mode (3 Nov 2026, from the @mrcreates.ai read): <body class="look paper"> + R.speedy({light:[[0,1e9]]})
+   Warm paper + faint grid, black sans + italic serif word pairs, ONE accent (default editorial blue; set --pacc per reel, terracotta stays our brand).
+   Hero objects are white "paper" UI cards with hairlines. Captions flip to ink via speedy's light theme. ---------- */
+.look.paper{--pg:#FBFAF7;--pgrid:rgba(17,17,20,.075);--pink:#111114;--pink-2:#5B5A57;--pink-3:#9B9994;--pline:#E3E1DB;--pacc:#2F55E6;--pacc-soft:rgba(47,85,230,.12)}
+.look.paper .s-bg,.look.paper .s-light{background-color:var(--pg);background-image:linear-gradient(var(--pgrid) 1px,transparent 1px),linear-gradient(90deg,var(--pgrid) 1px,transparent 1px);background-size:60px 60px;background-position:-1px -1px}
+.look.paper .s-bg::before{opacity:0}
+.look.paper .s-vig,.look.paper.is-light .s-vig{background:radial-gradient(ellipse 82% 64% at 50% 45%,transparent 62%,rgba(40,30,20,.07) 100%)}
+.look.paper #grain{mix-blend-mode:multiply;opacity:.05}
+.look.paper #kin .w,.look.paper.is-light #kin .w{color:var(--pink)} .look.paper.is-light #kin .w:not(.hot):not(.b){color:var(--pink-2)}
+/* editorial type */
+.e-kick{position:absolute;font:700 19px Mono;letter-spacing:3px;text-transform:uppercase;color:var(--pink-3);white-space:nowrap}
+.e-rule{position:absolute;height:1.5px;background:var(--pink)}
+.e-foot{position:absolute;left:70px;right:70px;font:500 18px Inter;color:var(--pink-3);display:flex;justify-content:space-between;border-top:1px solid var(--pline);padding-top:12px}
+.e-pair{position:absolute;left:60px;right:60px;text-align:center;line-height:1.02}
+.e-pair .e-a{display:block;font:800 118px Inter;letter-spacing:-5px;color:var(--pink)}
+.e-pair .e-b{display:block;font:italic 400 112px Serif;color:var(--pacc);margin-top:4px}
+.e-pair.sm .e-a{font-size:86px;letter-spacing:-3px}.e-pair.sm .e-b{font-size:84px}
+.e-sub{position:absolute;left:0;right:0;text-align:center;font:500 30px Inter;color:var(--pink-2)}
+.e-sub b{font-weight:800;color:var(--pink)} .e-sub i{font:italic 400 1.08em Serif;color:var(--pacc)}
+/* progress ticks + numbered index rows */
+.e-ticks{position:absolute;display:flex;gap:10px}.e-ticks i{flex:1;height:3px;border-radius:2px;background:var(--pline)}.e-ticks i.on{background:var(--pacc)}
+.e-idx{display:flex;align-items:center;gap:22px;padding:14px 0;border-bottom:1px solid var(--pline)}
+.e-idx b{font:800 74px/1 Inter;letter-spacing:-3px;color:var(--pacc);width:110px}
+.e-idx .ic{width:58px;height:58px;border-radius:14px;background:#fff;border:1px solid var(--pline);display:grid;place-items:center;box-shadow:0 6px 18px -8px rgba(0,0,0,.25)}.e-idx .ic img{width:34px;height:34px}
+.e-idx span{font:700 40px Inter;color:var(--pink);letter-spacing:-1px}.e-idx small{display:block;font:500 20px Inter;color:var(--pink-3)}
+.e-idx.dim{opacity:.35}
+/* paper UI card (hero objects) */
+.e-card{position:absolute;background:#fff;border:1px solid var(--pline);border-radius:18px;box-shadow:0 30px 70px -28px rgba(30,25,20,.35),0 2px 6px rgba(0,0,0,.05);color:var(--pink);font-family:Inter}
+.e-btn{display:block;text-align:center;background:var(--pink);color:#fff;font:700 26px Inter;border-radius:12px;padding:16px}
+.e-btn.acc{background:var(--pacc)}
+.e-in{border:1px solid var(--pline);border-radius:10px;padding:12px 14px;font:500 20px Inter;color:var(--pink-3)}
+.e-tag{display:inline-block;font:700 15px Mono;letter-spacing:1px;color:#fff;background:var(--pink);border-radius:999px;padding:4px 10px}
+.e-tag.acc{background:var(--pacc)}
+/* the strike + replacement pair */
+.e-swap{position:relative;display:inline-block}
+.e-swap .was{font:italic 400 1em Serif;color:var(--pink-2)}
+.e-swap .now{position:absolute;left:0;top:0;font:800 1em Inter;letter-spacing:-.03em;color:var(--pacc);white-space:nowrap}
+/* small presenter sticker (paper mode puts him bottom-right at ~55 %) */
+.look.paper #avatar{filter:drop-shadow(0 18px 24px rgba(30,25,20,.22))}
+.look.paper .e-pair .mg-mw>span.h,.look.paper .e-sub .mg-mw>span.h{color:var(--pacc)}   /* one accent per scene: *word* marks go blue on paper */
+
+/* ---------- FIRST-FRAME HEADLINE (hook #7/#8, 3 Nov 2026): the hook as big type, readable muted, 0–2.5 s, then it exits and the hero takes over ----------
+   <div class="headline" id="hl"></div> inside the hook section · M.headline("hl", "I automated my|*YouTube*|with Claude.", t, {at:0.02, out:T.hero})  ("|" = line break) */
+.headline{position:absolute;left:50px;right:50px;top:600px;text-align:center;font:900 116px/0.96 Inter;letter-spacing:-5px;color:var(--ink);z-index:6;will-change:transform}
+.headline>div{display:block}
+.headline .mg-mw>span.h{color:var(--acc-hi)}
+.headline.sm{font-size:92px;letter-spacing:-4px}
+.look.paper .headline{color:var(--pink)}.look.paper .headline .mg-mw>span.h{color:var(--pacc)}
+/* the hero sits behind the headline until it exits: apply .hl-back while the headline is up */
+.hl-back{filter:blur(8px);opacity:.45}

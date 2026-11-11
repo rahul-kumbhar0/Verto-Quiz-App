@@ -1,0 +1,10 @@
+every word claude writes is a guess here's how it picks
+learn a i engineering day one what actually happens when you hit enter
+step one your sentence gets chopped into tokens small pieces of words
+one token is about three quarters of a word
+step two every token becomes a list of numbers a i never reads words only numbers
+step three the model scores every possible next token g p t two had fifty thousand two hundred fifty seven to choose from
+it picks one adds it to your text then does it all again for every single token
+that's why answers stream in piece by piece
+and why the same question gets a different answer it's predicting not looking things up
+comment tokens and i'll d m you a fifteen minute exercise to see it yourself and follow for the full series

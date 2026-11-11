@@ -1,0 +1,10 @@
+import { chromium } from "playwright";
+const [aud, out1, out2] = process.argv.slice(2);
+const b = await chromium.launch();
+const p = await b.newPage({ viewport: { width: 900, height: 760 } });
+await p.goto("file://" + aud); const n = await p.locator("audio").count(); console.log("auditions page: audio players =", n);
+await p.screenshot({ path: out1 });
+const q = await b.newPage({ viewport: { width: 1200, height: 860 } });
+await q.goto("http://localhost:7860/"); await q.waitForFunction(() => document.querySelectorAll("#va option").length > 10);
+console.log("studio page: voices loaded =", await q.locator("#va option").count(), "| designed chips =", await q.locator(".chip").count());
+await q.screenshot({ path: out2 }); await b.close();

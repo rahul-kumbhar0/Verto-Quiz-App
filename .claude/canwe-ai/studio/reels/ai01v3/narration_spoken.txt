@@ -1,0 +1,12 @@
+AI has never read a single word you typed. Not one. It only sees numbers.
+So what actually happens when you hit Enter? Learn AI engineering, day one.
+Let's follow one question. What's the capital of France?
+Step one. It gets chopped into tokens. Small pieces of words.
+Step two. Every token gets an ID. Its row number in the model's vocabulary. GPT-2 had fifty thousand, two hundred fifty seven rows.
+Step three. Every ID becomes a long list of numbers. Seven hundred sixty eight of them in GPT-2. That list is the token's meaning.
+And here's the smart part. Every token looks back at the tokens before it. So the model learns that capital and France belong together. That's called attention. It comes from one Google paper, from twenty seventeen.
+Step four. The model scores every token in its vocabulary. Paris wins.
+It adds Paris to your text. Then runs the whole thing again. For every single token. That's why answers stream in.
+One more trick. It doesn't always pick the top score. A setting called temperature adds a little randomness. That's why the same question gets a different answer.
+So AI isn't looking anything up. It's predicting the next piece. Really, really well.
+Comment TOKENS and I'll DM you a fifteen minute exercise to see it yourself. And follow for the full series.

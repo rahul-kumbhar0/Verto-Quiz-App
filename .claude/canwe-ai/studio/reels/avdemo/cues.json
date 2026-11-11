@@ -1,0 +1,102 @@
+[
+ {
+  "type": "pop",
+  "t": 0,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 1.6,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 3.34,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.66,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 7.62,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 9.680000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.780000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.9,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 17.43,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 19.79,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 20.81,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 24.349999999999998,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 25.669999999999998,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 28.669999999999998,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 30.47,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 32.300000000000004,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 33.470000000000006,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 35.75,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 37.080000000000005,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 41.18,
+  "soft": true
+ }
+]

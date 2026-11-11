@@ -1,0 +1,29 @@
+{
+ "word": {
+  "file": "logos/microsoftword.svg",
+  "white": "logos/microsoftword-white.svg",
+  "word": null,
+  "title": "word",
+  "hex": null,
+  "dark": true,
+  "source": "simple-icons(legacy):microsoftword"
+ },
+ "googleplay": {
+  "file": "logos/googleplay.svg",
+  "white": "logos/googleplay-white.svg",
+  "word": null,
+  "title": "Google Play",
+  "hex": "#414141",
+  "dark": true,
+  "source": "iconify-logos:googleplay-icon"
+ },
+ "android": {
+  "file": "logos/android.svg",
+  "white": "logos/android-white.svg",
+  "word": null,
+  "title": "Android",
+  "hex": "#3DDC84",
+  "dark": false,
+  "source": "iconify-logos:android-icon"
+ }
+}

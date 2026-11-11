@@ -1,0 +1,29 @@
+{
+ "claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "linkedin": {
+  "file": "logos/linkedin.svg",
+  "white": null,
+  "word": null,
+  "title": "linkedin",
+  "hex": null,
+  "dark": false,
+  "source": "iconify-logos:linkedin-icon"
+ },
+ "github": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ }
+}

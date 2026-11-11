@@ -1,0 +1,197 @@
+[
+ {
+  "type": "whoosh",
+  "t": 9.12
+ },
+ {
+  "type": "whoosh",
+  "t": 14.3
+ },
+ {
+  "type": "whoosh",
+  "t": 16.38
+ },
+ {
+  "type": "whoosh",
+  "t": 23.5
+ },
+ {
+  "type": "whoosh",
+  "t": 31.31
+ },
+ {
+  "type": "whoosh",
+  "t": 35.23
+ },
+ {
+  "type": "whoosh",
+  "t": 40.73
+ },
+ {
+  "type": "pop",
+  "t": -1,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.45,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 7.08,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 8.62,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 10.68,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.72,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.75,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 16.24,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 17.35,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 20.11,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 23,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 23.4,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 23.94,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 27.4,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 30.66,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 32.13,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 34.73,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 36.26,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 40.19,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 41.27,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 46.05,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.260000000000001
+ },
+ {
+  "type": "pop",
+  "t": 7.97
+ },
+ {
+  "type": "pop",
+  "t": 11.379999999999999
+ },
+ {
+  "type": "pop",
+  "t": 15.17
+ },
+ {
+  "type": "pop",
+  "t": 15.29
+ },
+ {
+  "type": "pop",
+  "t": 15.41
+ },
+ {
+  "type": "pop",
+  "t": 15.53
+ },
+ {
+  "type": "pop",
+  "t": 21.009999999999998
+ },
+ {
+  "type": "type",
+  "t": 25.64,
+  "t2": 27.195555555555558
+ },
+ {
+  "type": "pop",
+  "t": 32.730000000000004
+ },
+ {
+  "type": "ding",
+  "t": 39.66
+ },
+ {
+  "type": "pop",
+  "t": 39.94
+ },
+ {
+  "type": "type",
+  "t": 41.029999999999994,
+  "t2": 41.458571428571425
+ },
+ {
+  "type": "click",
+  "t": 41.92
+ },
+ {
+  "type": "pop",
+  "t": 46.65
+ }
+]

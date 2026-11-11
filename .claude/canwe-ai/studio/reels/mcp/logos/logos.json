@@ -1,0 +1,47 @@
+{
+ "claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "zomato": {
+  "file": "logos/zomato.svg",
+  "white": "logos/zomato-white.svg",
+  "word": null,
+  "title": "Zomato",
+  "hex": "#E23744",
+  "dark": false,
+  "source": "simple-icons:zomato"
+ },
+ "swiggy": {
+  "file": "logos/swiggy.svg",
+  "white": "logos/swiggy-white.svg",
+  "word": null,
+  "title": "Swiggy",
+  "hex": "#FC8019",
+  "dark": false,
+  "source": "simple-icons:swiggy"
+ },
+ "zerodha": {
+  "file": "logos/zerodha.svg",
+  "white": "logos/zerodha-white.svg",
+  "word": null,
+  "title": "Zerodha",
+  "hex": "#387ED1",
+  "dark": false,
+  "source": "simple-icons:zerodha"
+ },
+ "gmail": {
+  "file": "logos/gmail.svg",
+  "white": "logos/gmail-white.svg",
+  "word": null,
+  "title": "Gmail",
+  "hex": "#EA4335",
+  "dark": false,
+  "source": "simple-icons:gmail"
+ }
+}

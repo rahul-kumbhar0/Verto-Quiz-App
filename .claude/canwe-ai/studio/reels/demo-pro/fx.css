@@ -1,0 +1,26 @@
+/* fx.css — styles for fx.js (advanced editing kit). Classes are prefixed fx- (reserved). */
+#fxOverlay{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:50}
+/* 3D flip card: <div class="fx-flip" id="f"><div class="fx-card"><div class="fx-front">…</div><div class="fx-back">…</div></div></div> */
+.fx-flip{perspective:1800px}
+.fx-card{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.fx-front,.fx-back{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;overflow:hidden}
+.fx-back{transform:rotateY(180deg)}
+/* material classes (.m-card etc.) set position:relative — keep both faces stacked */
+.fx-flip .fx-front,.fx-flip .fx-back{position:absolute;inset:0}
+.fx-flip.x .fx-back{transform:rotateX(180deg)}
+/* sheen */
+.fx-sheen{position:absolute;top:-10%;bottom:-10%;left:0;width:38%;pointer-events:none;opacity:0;border-radius:inherit;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55) 50%,transparent);mix-blend-mode:screen}
+/* letters */
+.fx-ch{display:inline-block;transform-origin:50% 100%;backface-visibility:hidden;white-space:pre}
+/* odometer */
+.fx-odo{display:inline-block;height:1em;line-height:1em;overflow:hidden;vertical-align:top;-webkit-mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent);mask-image:linear-gradient(transparent,#000 22%,#000 78%,transparent)}
+.fx-odo>span{display:block;line-height:1em}
+/* code */
+.fx-code{font:500 26px/1.55 Mono;color:#E9E5DD;white-space:pre;text-align:left}
+.fx-code i{font-style:normal}.fx-code .k{color:#E58F6E}.fx-code .s{color:#D8C3A0}.fx-code .n{color:#F0A585}.fx-code .c{color:#6E6A64}
+.fx-caret{display:inline-block;width:12px;height:1.1em;background:#D97757;vertical-align:text-bottom;margin-left:2px}
+/* particles */
+.fx-burst{position:absolute;width:0;height:0;pointer-events:none;z-index:9}
+.fx-pt{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:3px;opacity:0}
+.fx-w{display:inline-block;will-change:transform}.fx-w.h{color:var(--acc,#D97757)}

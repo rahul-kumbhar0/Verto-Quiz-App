@@ -1,0 +1,8 @@
+Seven hundred forty jobs. Sixty-eight applications. Twelve interviews. One offer.
+That's one guy's job hunt, run by Claude. And the smartest part? What it tells you not to apply to.
+You paste a job link. It reads the job, and scores it against your resume, one to five.
+Below four? It tells you to skip it. No more wasted applications.
+Above four, it tailors your resume into a PDF screening software can read. Writes the cover letter. Drafts an answer for every form field.
+But here's the catch. It never hits submit. You read it, and you send it.
+It's called career ops. Seventy-seven thousand GitHub stars. Free, and open source.
+Comment OFFER, and I'll DM you the repo, plus my step-by-step setup with Claude.

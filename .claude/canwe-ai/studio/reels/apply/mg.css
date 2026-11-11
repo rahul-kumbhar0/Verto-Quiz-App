@@ -1,0 +1,37 @@
+/* mg.css — styles for mg.js (motion graphics kit, edit level 3). Classes prefixed mg- (reserved). Uses look.css tokens. */
+.mg-svg{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:visible;pointer-events:none;z-index:5}
+.mg-grid{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+/* lines: hairline graphite with an accent variant; round caps so draw-on heads look like a pen */
+.mg-line{fill:none;stroke:rgba(243,241,236,.28);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0}
+.mg-line.acc{stroke:var(--acc,#D97757);stroke-width:4;filter:drop-shadow(0 0 8px rgba(217,119,87,.55))}
+.mg-line.ink{stroke:var(--p-ink,#16171A)}
+.mg-line.scrib{stroke:var(--acc,#D97757);stroke-width:6;filter:none}
+.mg-head{fill:#F0A585;filter:drop-shadow(0 0 10px rgba(240,165,133,.9));opacity:0}
+.mg-pk{fill:#F0A585;filter:drop-shadow(0 0 9px rgba(217,119,87,.95));opacity:0}
+.mg-pk.cool{fill:#C9D6E8;filter:drop-shadow(0 0 8px rgba(143,163,191,.9))}
+.mg-ray{stroke:#F0A585;stroke-width:5;stroke-linecap:round;opacity:0}
+.mg-arc{fill:none;stroke:var(--acc,#D97757);stroke-width:16;stroke-linecap:round;transform:rotate(-90deg);transform-box:fill-box;transform-origin:center;opacity:0}
+.mg-arc-bg{fill:none;stroke:#2B2E35;stroke-width:16}
+/* iris seam ring + shockwave rings */
+.mg-iris{position:absolute;border-radius:50%;border:3px solid rgba(240,165,133,.85);box-shadow:0 0 40px rgba(217,119,87,.5),inset 0 0 40px rgba(217,119,87,.25);pointer-events:none;opacity:0;z-index:40}
+.mg-ring{position:absolute;border-radius:50%;border:10px solid rgba(240,165,133,.9);box-shadow:0 0 30px rgba(217,119,87,.45);pointer-events:none;opacity:0}
+.mg-ring.cool{border-color:rgba(201,214,232,.8);box-shadow:0 0 30px rgba(143,163,191,.4)}
+/* masked word rise */
+.mg-mw{display:inline-block;overflow:hidden;vertical-align:top;padding:0 .02em .08em;margin-bottom:-.08em}
+.mg-mw>span{display:inline-block;transform-origin:0 100%;will-change:transform}
+.mg-mw>span.h{color:var(--acc,#D97757)}
+/* highlighter behind a word */
+.mg-mkh{position:relative;z-index:0}
+.mg-mk{position:absolute;left:-4px;right:-4px;top:12%;bottom:4%;z-index:-1;border-radius:6px;transform-origin:0 50%;transform:scaleX(0);
+  background:linear-gradient(90deg,rgba(240,165,133,.55),rgba(217,119,87,.45))}
+.mg-mk.cool{background:rgba(143,163,191,.35)}
+/* echo ghosts */
+.mg-ghost{pointer-events:none;filter:blur(1.5px)}
+/* animated strike */
+.mg-sth{position:relative}
+.mg-st{position:absolute;left:-3px;right:-3px;top:52%;height:4px;margin-top:-2px;border-radius:2px;background:#C0392B;transform-origin:0 50%;transform:scaleX(0)}
+.mg-layer{position:absolute;inset:0;pointer-events:none;z-index:6}
+/* editorial: tear halves, underline */
+.mg-tear{pointer-events:none;will-change:transform}
+.mg-ulh{position:relative;display:inline-block}
+.mg-ul{position:absolute;left:0;right:0;bottom:-.06em;height:.08em;border-radius:2px;background:var(--pacc,var(--acc,#D97757));transform-origin:0 50%;transform:scaleX(0)}

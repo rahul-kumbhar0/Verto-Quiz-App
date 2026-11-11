@@ -1,0 +1,148 @@
+1
+00:00:00,000 --> 00:00:00,607
+Okay,
+
+2
+00:00:00,457 --> 00:00:02,283
+Claude Fable 5.2 is
+
+3
+00:00:02,133 --> 00:00:03,160
+free this week.
+
+4
+00:00:03,010 --> 00:00:03,969
+But only if you
+
+5
+00:00:03,819 --> 00:00:05,340
+know where to look.
+
+6
+00:00:05,190 --> 00:00:06,664
+First, why you'd want it.
+
+7
+00:00:06,619 --> 00:00:07,883
+A thousand copies of
+
+8
+00:00:07,733 --> 00:00:08,779
+it built an operating
+
+9
+00:00:08,629 --> 00:00:10,064
+system in eight days.
+
+10
+00:00:09,914 --> 00:00:11,350
+It designed three gadgets,
+
+11
+00:00:11,200 --> 00:00:12,112
+and all three
+
+12
+00:00:11,962 --> 00:00:13,102
+worked first time.
+
+13
+00:00:13,448 --> 00:00:14,883
+Normally it costs twice
+
+14
+00:00:14,733 --> 00:00:16,493
+what Opus 5.5 costs.
+
+15
+00:00:16,343 --> 00:00:17,160
+But if you were
+
+16
+00:00:17,010 --> 00:00:18,350
+already on Claude Pro,
+
+17
+00:00:18,276 --> 00:00:19,845
+it's included at no extra
+
+18
+00:00:19,695 --> 00:00:22,074
+cost until November 16th.
+
+19
+00:00:21,924 --> 00:00:22,750
+Up to half
+
+20
+00:00:22,600 --> 00:00:23,617
+your weekly limit,
+
+21
+00:00:23,467 --> 00:00:24,931
+plus one free reset.
+
+22
+00:00:24,781 --> 00:00:25,826
+Now, the catch.
+
+23
+00:00:25,752 --> 00:00:26,721
+On the free plan,
+
+24
+00:00:26,571 --> 00:00:27,283
+you don't get
+
+25
+00:00:27,133 --> 00:00:28,255
+it at all.
+
+26
+00:00:28,105 --> 00:00:29,521
+And those free Fable
+
+27
+00:00:29,371 --> 00:00:30,750
+API key sites?
+
+28
+00:00:30,600 --> 00:00:31,350
+Skip them.
+
+29
+00:00:31,371 --> 00:00:33,617
+Your prompts go to strangers.
+
+30
+00:00:33,467 --> 00:00:34,817
+Even Anthropic says:
+
+31
+00:00:34,667 --> 00:00:35,836
+start with Opus,
+
+32
+00:00:35,686 --> 00:00:36,864
+and save Fable for
+
+33
+00:00:36,714 --> 00:00:37,855
+your hardest job.
+
+34
+00:00:37,705 --> 00:00:39,198
+Comment FABLE and I'll DM
+
+35
+00:00:39,048 --> 00:00:40,198
+you how to switch,
+
+36
+00:00:40,048 --> 00:00:41,264
+and which job to give
+
+37
+00:00:41,114 --> 00:00:42,702
+it before the 16th ends.
+

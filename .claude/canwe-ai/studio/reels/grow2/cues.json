@@ -1,0 +1,203 @@
+[
+ {
+  "type": "pop",
+  "t": 5.603,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 24.226000000000003
+ },
+ {
+  "type": "pop",
+  "t": 0,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 2.537,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 2.943,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.5329999999999995,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 5.747,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 8.113000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 9.912,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.229000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.047,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.173,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 18.173,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 19.592,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 21.922,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 24.55,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 26.302,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 27.468,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 30.674,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 33.266000000000005,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 34.743,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 37.374,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 40.978,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 4.208000000000001
+ },
+ {
+  "type": "swish",
+  "t": 10.913
+ },
+ {
+  "type": "swish",
+  "t": 16.039
+ },
+ {
+  "type": "swish",
+  "t": 22.807000000000002
+ },
+ {
+  "type": "swish",
+  "t": 25.361
+ },
+ {
+  "type": "swish",
+  "t": 35.581
+ },
+ {
+  "type": "impact",
+  "t": 38.432,
+  "soft": true
+ },
+ {
+  "type": "impact",
+  "t": 0.3,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 0.05,
+  "t2": 0.75
+ },
+ {
+  "type": "type",
+  "t": 4.658,
+  "t2": 6.044363636363637
+ },
+ {
+  "type": "type",
+  "t": 11.405000000000001,
+  "t2": 12.510263157894737
+ },
+ {
+  "type": "click",
+  "t": 12.710263157894737
+ },
+ {
+  "type": "type",
+  "t": 13.910263157894738,
+  "t2": 14.910263157894738,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 24.206,
+  "t2": 24.926
+ },
+ {
+  "type": "impact",
+  "t": 24.356,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 25.753,
+  "t2": 28.338714285714286
+ },
+ {
+  "type": "click",
+  "t": 37.636
+ },
+ {
+  "type": "type",
+  "t": 38.832,
+  "t2": 39.165333333333336
+ },
+ {
+  "type": "click",
+  "t": 39.232
+ }
+]

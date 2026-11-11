@@ -1,0 +1,184 @@
+[
+ {
+  "type": "whoosh",
+  "t": 11.05
+ },
+ {
+  "type": "whoosh",
+  "t": 18.18
+ },
+ {
+  "type": "whoosh",
+  "t": 24.08
+ },
+ {
+  "type": "whoosh",
+  "t": 31.89
+ },
+ {
+  "type": "whoosh",
+  "t": 40.87
+ },
+ {
+  "type": "whoosh",
+  "t": 49.76
+ },
+ {
+  "type": "pop",
+  "t": -1,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.05,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 7.960000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 9.96,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 12.79,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 16.93,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 18.01,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 22.87,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 23.83,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 27.23,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 30.67,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 33.38,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 37.26,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 39.79,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 41.53,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 45.86,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 47.65,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 48.59,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 50.25,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 53.01,
+  "soft": true
+ },
+ {
+  "type": "ding",
+  "t": 2.8000000000000003
+ },
+ {
+  "type": "pop",
+  "t": 6.53
+ },
+ {
+  "type": "pop",
+  "t": 12.41
+ },
+ {
+  "type": "pop",
+  "t": 21.720000000000002
+ },
+ {
+  "type": "type",
+  "t": 25.61,
+  "t2": 26.11
+ },
+ {
+  "type": "pop",
+  "t": 25.91
+ },
+ {
+  "type": "pop",
+  "t": 26.310000000000002
+ },
+ {
+  "type": "pop",
+  "t": 27.02
+ },
+ {
+  "type": "pop",
+  "t": 38.35
+ },
+ {
+  "type": "pop",
+  "t": 47.260000000000005
+ },
+ {
+  "type": "pop",
+  "t": 48.370000000000005
+ },
+ {
+  "type": "type",
+  "t": 50.059999999999995,
+  "t2": 50.41714285714285
+ },
+ {
+  "type": "click",
+  "t": 50.9
+ },
+ {
+  "type": "pop",
+  "t": 53.61
+ }
+]

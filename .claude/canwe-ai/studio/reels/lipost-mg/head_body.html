@@ -1,0 +1,134 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>I let Claude write my LinkedIn posts</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.lp-sc{position:absolute;inset:0;visibility:hidden}
+/* ---- LinkedIn replica (dark mode, from the live feed 1 Nov 2026) ---- */
+.li-box{position:absolute;left:70px;width:940px;top:650px;background:#1b1f23;border-radius:14px;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 50px 120px -20px rgba(0,0,0,.85);font-family:Inter;color:#e9e9e9;overflow:hidden}
+.li-hd{display:flex;align-items:center;gap:16px;padding:22px 26px 10px}
+.li-av{width:64px;height:64px;border-radius:50%;background:#fff url(canwe-logo.svg) center/cover;flex:none}
+.li-hd b{display:block;font:700 24px Inter;color:#fff}.li-hd span{display:block;font:500 18px Inter;color:#b0b0b0}
+.li-x{margin-left:auto;font:400 34px Inter;color:#b0b0b0}
+.li-body{padding:14px 30px 10px;min-height:330px;font:500 25px/1.5 Inter;color:#e9e9e9;white-space:pre-wrap}
+.li-body .cur{display:inline-block;width:2px;height:28px;background:#fff;vertical-align:-5px}
+.li-foot{display:flex;align-items:center;gap:18px;padding:16px 26px 22px;border-top:1px solid rgba(255,255,255,.08)}
+.li-foot .ic{width:34px;height:34px;border-radius:8px;background:#2b3035}
+.li-post{margin-left:auto;background:#71b7fb;color:#000;font:700 22px Inter;border-radius:999px;padding:10px 30px}
+.li-post.off{background:#3b4045;color:#8a9096}
+.li-claude{position:absolute;right:30px;top:24px;display:flex;align-items:center;gap:10px;font:600 18px Inter;color:#D97757;background:rgba(217,119,87,.12);border:1px solid rgba(217,119,87,.4);border-radius:999px;padding:6px 14px}
+.li-lock{position:absolute;right:20px;bottom:76px;background:rgba(14,15,18,.92);border:1.5px solid var(--bad);color:#F2B5AE;font:700 22px Inter;border-radius:12px;padding:10px 16px;opacity:0}
+.li-scan{position:absolute;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,#F0A585,transparent);opacity:0;box-shadow:0 0 18px var(--acc-glow)}
+.li-done{position:absolute;left:0;right:0;top:930px;text-align:center;opacity:0}
+/* GitHub framing */
+.lp-gh{position:absolute;left:0;top:0;width:1280px;transform-origin:0 0}
+.lp-gh .br-page{height:760px}
+.lp-skills{position:absolute;left:50px;right:50px;top:1120px;background:rgba(14,15,18,.9);border:1px solid var(--g-line);border-radius:22px;padding:16px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;z-index:3}
+.lp-skills .m-chip{font:700 21px Mono;padding:8px 14px;opacity:0}
+/* terminal */
+.lp-term{position:absolute;left:60px;top:650px;width:960px}
+.lp-term .ui-term{width:960px}.lp-term .tm-body{min-height:560px;font-size:22px}
+.lp-term .tm-l.claude{color:#e8e6dc}.lp-term .tag{color:#7d7a74;font-size:17px}
+/* humanizer (light chapter) */
+.lp-hum{position:absolute;left:80px;right:80px;top:660px;padding:30px 34px}
+.lp-hum .t-kicker{color:var(--p-ink-2)}
+.lp-hum .txt{margin-top:16px;font:500 30px/1.6 Inter;color:var(--p-ink)}
+.sl{position:relative;display:inline}
+.sl s{color:#C0392B;text-decoration-thickness:3px;transition:none}
+.sl i{font-style:normal;color:#1E7A4F;font-weight:700;background:rgba(124,196,160,.22);border-radius:6px;padding:0 4px}
+.zw{display:inline-block;width:18px;height:28px;margin:0 2px;vertical-align:-5px;border:2px dashed #C0392B;border-radius:4px;background:rgba(192,57,43,.08)}
+.lp-flags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.lp-flags span{font:700 19px Mono;color:#7a3a26;background:rgba(217,119,87,.14);border:1px solid rgba(217,119,87,.45);border-radius:999px;padding:6px 14px;opacity:0}
+/* three skills */
+.lp-three{position:absolute;left:80px;right:80px;top:650px;display:flex;flex-direction:column;gap:20px}
+.lp-three .m-card{padding:22px 26px;opacity:0}
+.lp-three .h{display:flex;align-items:center;gap:12px;font:700 22px Mono;color:var(--acc-hi)}
+.lp-three .b{margin-top:10px;font:500 24px/1.45 Inter;color:var(--ink)}
+.lp-cmt{background:#1b1f23;border-radius:12px;padding:12px 16px;color:#e9e9e9}
+.lp-rub{display:flex;gap:6px;margin-top:12px}.lp-rub i{flex:1;height:14px;border-radius:4px;background:#2B2E35}.lp-rub i.on{background:linear-gradient(180deg,#F0A585,#D97757)}
+.lp-week{display:flex;gap:10px;margin-top:12px}.lp-week span{flex:1;text-align:center;border-radius:10px;padding:8px 0;background:#22252C;font:700 18px Inter;color:var(--ink-3)}.lp-week span.on{background:rgba(217,119,87,.16);color:var(--acc-hi);box-shadow:inset 0 0 0 1.5px rgba(217,119,87,.55)}
+/* stars */
+.lp-star{position:absolute;left:0;right:0;top:760px;text-align:center}
+.lp-star .t-hero{font-size:190px}
+.lp-chips{display:flex;justify-content:center;gap:14px;margin-top:26px}
+.lp-chips .m-chip{opacity:0}
+/* CTA */
+.lp-cm{position:absolute;left:100px;right:100px;top:700px;padding:24px 26px}
+.lp-cm .row{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 25px Inter;color:var(--ink);opacity:0}
+.lp-cm .row i{width:46px;height:46px;border-radius:50%;flex:none}
+.lp-cm .row small{display:block;font:600 17px Inter;color:var(--ink-3)}
+.lp-cm .inp{display:flex;align-items:center;margin-top:12px;border:1.5px solid var(--g-line-hi);border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;min-height:36px}
+.lp-cm .inp .ph{color:var(--ink-3);font-weight:500}.lp-cm .inp .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:var(--acc);display:grid;place-items:center;color:#1A0E08;font-weight:900}
+.lp-dm{position:absolute;left:120px;right:120px;top:600px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:6}
+.lp-dm img{width:56px;height:56px;border-radius:50%;background:#fff}.lp-dm b{display:block;font:700 22px Inter}.lp-dm span{font:500 21px Inter;color:var(--ink-2)}
+.lp-fn{position:absolute;left:50%;transform:translateX(-50%);top:1296px;white-space:nowrap;font:500 19px Inter;color:var(--ink-2);opacity:0;z-index:4;background:rgba(14,15,18,.88);border:1px solid var(--g-line);border-radius:999px;padding:6px 16px}
+.is-light .lp-fn{background:rgba(255,255,255,.9);color:var(--p-ink-2);border-color:var(--p-line)}
+
+/* ---- MG level-3 additions ---- */
+.mg-layer{position:absolute;inset:0;pointer-events:none;z-index:6}
+.mg-plate{position:absolute;z-index:1;box-shadow:0 0 0 1px rgba(255,255,255,.1),0 50px 120px -20px rgba(0,0,0,.85)}
+.mg-plate b{position:absolute;inset:0;display:grid;place-items:center;font:900 64px/1 Inter;color:#fff;letter-spacing:-2px}
+.li-box{z-index:2}
+.lp-term .tm-body{min-height:430px}
+.lp-form{position:absolute;left:93px;top:1142px;width:894px}
+.lp-form .tiles{display:flex;gap:9px}
+.lp-form .tiles i{width:34px;height:46px;border-radius:8px;background:linear-gradient(180deg,#30333B,#24262D);box-shadow:inset 0 1px 0 rgba(255,255,255,.08);opacity:0}
+.lp-form .tiles i.pk{background:linear-gradient(180deg,#F0A585 -40%,#D97757 50%,#B95E40);box-shadow:inset 0 1px 0 rgba(255,255,255,.35),0 10px 30px -6px rgba(217,119,87,.7)}
+.lp-form .lab{margin-top:12px;text-align:center;font:700 20px Mono;letter-spacing:3px;color:var(--ink-3);opacity:0}
+.lp-form .lab b{color:var(--acc-hi)}
+.sl i{display:inline-block}
+.sl s{text-decoration:none}
+.lp-three .m-card{position:relative}
+#c2{padding-right:170px;min-height:96px}
+.lp-gauge{position:absolute;right:26px;top:50%;margin-top:-58px}
+.lp-gnum{position:absolute;right:26px;width:116px;top:50%;margin-top:-22px;text-align:center;font:800 34px Inter;color:var(--ink)}
+.lp-gnum small{display:block;font:600 13px Mono;color:var(--ink-3);margin-top:-2px}
+.lp-wkl{display:block;margin-top:10px;overflow:visible}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="lp-sc" id="sHook">
+      <div class="mg-plate" id="plate"><b id="plIn">in</b></div>
+      <div class="li-box" id="li1"><div class="li-hd"><span class="li-av"></span><div><b>canwe.ai</b><span>Post to Anyone ▾</span></div><span class="li-x">×</span></div>
+        <div class="li-claude" id="lic1"><span id="spk1"></span>Claude is drafting</div>
+        <div class="li-body" id="lib1"></div><div class="li-foot"><span class="ic"></span><span class="ic"></span><span class="ic"></span><span class="li-post off">Post</span></div></div>
+    </section>
+    <section class="lp-sc" id="sGh"><div class="lp-gh" id="ghw"><div id="gh"></div></div><svg class="mg-svg" id="ghsvg"><circle id="ghHead" class="mg-head" r="8"/></svg>
+      <div class="lp-skills" id="sk"></div>
+      <div class="lp-fn" id="fn1">github.com/Jakeschincariol/linkedin-agent-skill · 1 Nov 2026 · not affiliated</div></section>
+    <section class="lp-sc" id="sTerm"><div class="lp-term"><div id="tm"></div></div>
+      <div class="lp-form"><div class="tiles" id="tiles"></div><div class="lab" id="flab">21 formulas <b>→ 3 picked</b></div></div>
+      <div class="lp-fn" id="fn2">Sample run of /li-post · hooks follow the pack's formulas</div></section>
+    <section class="lp-sc" id="sHum"><div class="lp-hum m-paper" id="hum"><div class="t-kicker">/li-human · before → after</div>
+      <div class="txt"><span class="sl" id="h1"><s>In today's fast-paced world</s> <i>Right now</i></span>, I wanted to <span class="sl" id="h2"><s>leverage</s> <i>use</i></span> Claude to <span class="sl" id="h3"><s>delve into</s> <i>look at</i></span> my job search<span class="sl" id="h4"><s>—</s><i>,</i></span> and it found 37 internships<span class="zw" id="z1"></span>. A <span class="sl" id="h5"><s>game-changer</s> <i>big deal</i></span>.<span class="zw" id="z2"></span></div>
+      <div class="lp-flags" id="flags"><span>flag: "It's not just X, it's Y"</span><span>flag: "Thoughts?"</span><span>flag: 🚀 emoji</span><span>flag: hashtag wall</span></div></div>
+      <div class="lp-fn" id="fn3">Replacements from the pack's slop.json · invisible characters shown as dashed boxes</div></section>
+    <section class="lp-sc" id="sThree"><div class="lp-three">
+      <div class="m-card" id="c1"><div class="h">/li-comment</div><div class="b lp-cmt">Love the "one idea, three hooks" bit. Tried it on my internship post, the 2nd hook won.</div></div>
+      <div class="m-card" id="c2"><div class="h">/li-profile · 12-part rubric</div><div class="lp-rub" id="rub"></div><svg class="lp-gauge" width="116" height="116" viewBox="0 0 116 116"><circle class="mg-arc-bg" cx="58" cy="58" r="46"/><circle id="gArc" class="mg-arc" cx="58" cy="58" r="46"/></svg><div class="lp-gnum" id="gNum">0<small>/ 100</small></div></div>
+      <div class="m-card" id="c3"><div class="h">/li-plan · your week</div><div class="lp-week" id="wk"><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span></div><svg class="lp-wkl" width="868" height="16" viewBox="0 0 868 16"><path id="wkp" class="mg-line acc" d="M8,8 L860,8"/><circle id="wkh" class="mg-head" r="7" cy="8"/></svg></div></div>
+      <div class="lp-fn" id="fn4">Illustrative screens · examples written for this reel</div></section>
+    <section class="lp-sc" id="sPost">
+      <div class="li-box" id="li2" style="top:640px"><div class="li-hd"><span class="li-av"></span><div><b>canwe.ai</b><span>Post to Anyone ▾</span></div><span class="li-x">×</span></div>
+        <div class="li-body" id="lib2">Finding internships used to take me a weekend.
+It now takes one sentence.
+
+I asked Claude for Python internships in Bangalore. It found 37, with links straight to the company pages.</div>
+        <div class="li-scan" id="scan"></div><div class="li-lock" id="lock">🔒 Claude can't press this</div>
+        <div class="li-foot"><span class="ic"></span><span class="ic"></span><span class="ic"></span><span class="li-post" id="pbtn">Post</span></div></div>
+    </section>
+    <section class="lp-sc" id="sStar"><svg class="mg-svg" id="stsvg"></svg><div class="lp-star"><div class="t-kicker">github stars</div><div class="t-hero" id="odo"></div>
+      <div class="lp-chips" id="chips"><span class="m-chip">free</span><span class="m-chip">MIT · open source</span><span class="m-chip acc">you press post</span></div></div></section>
+    <section class="lp-sc" id="sCta"><svg class="mg-svg" id="ctsvg" style="z-index:7"><circle id="ctHead" class="mg-head" r="9"/></svg>
+      <div class="lp-cm m-card" id="cm"><div class="t-kicker" style="margin-bottom:8px">comments</div>
+        <div class="row" id="r1"><i style="background:#8FA3BF"></i><div><small>aditi · 2m</small>POST</div></div>
+        <div class="row" id="r2"><i style="background:#7A3A26"></i><div><small>karthik · 1m</small>POST my LinkedIn needs this</div></div>
+        <div class="row" id="r3"><i style="background:linear-gradient(135deg,#F0A585,#D97757)"></i><div><small>you · now</small>POST</div></div>
+        <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+      <div class="lp-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The setup + voice file 📩</span></div></div>
+    </section>
+  </div>
+  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>

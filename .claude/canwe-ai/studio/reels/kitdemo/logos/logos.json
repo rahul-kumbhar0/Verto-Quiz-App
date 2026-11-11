@@ -1,0 +1,38 @@
+{
+ "Google Pay": {
+  "file": "logos/googlepay.svg",
+  "white": "logos/googlepay-white.svg",
+  "word": null,
+  "title": "Google Pay",
+  "hex": "#4285F4",
+  "dark": false,
+  "source": "iconify-logos:googlepay-icon"
+ },
+ "PhonePe": {
+  "file": "logos/phonepe.svg",
+  "white": "logos/phonepe-white.svg",
+  "word": null,
+  "title": "PhonePe",
+  "hex": "#5F259F",
+  "dark": false,
+  "source": "simple-icons:phonepe"
+ },
+ "Paytm": {
+  "file": "logos/paytm.svg",
+  "white": "logos/paytm-white.svg",
+  "word": null,
+  "title": "Paytm",
+  "hex": "#20336B",
+  "dark": true,
+  "source": "simple-icons:paytm"
+ },
+ "Infosys": {
+  "file": "logos/infosys.svg",
+  "white": "logos/infosys-white.svg",
+  "word": null,
+  "title": "Infosys",
+  "hex": "#007CC3",
+  "dark": false,
+  "source": "simple-icons:infosys"
+ }
+}

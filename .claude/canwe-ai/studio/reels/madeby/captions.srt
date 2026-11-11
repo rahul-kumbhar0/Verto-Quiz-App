@@ -1,0 +1,128 @@
+1
+00:00:00,150 --> 00:00:01,606
+No editor touched this reel.
+
+2
+00:00:01,861 --> 00:00:03,117
+Every frame you're seeing
+
+3
+00:00:02,997 --> 00:00:04,145
+is code Claude wrote.
+
+4
+00:00:04,403 --> 00:00:05,030
+Here's how.
+
+5
+00:00:05,282 --> 00:00:06,569
+I give Claude a topic.
+
+6
+00:00:06,826 --> 00:00:07,700
+It checks what
+
+7
+00:00:07,575 --> 00:00:08,637
+people already search,
+
+8
+00:00:08,677 --> 00:00:09,850
+and writes the script.
+
+9
+00:00:10,111 --> 00:00:11,456
+Then it scores the hook,
+
+10
+00:00:11,491 --> 00:00:12,780
+before anything gets made.
+
+11
+00:00:13,035 --> 00:00:13,656
+The voice?
+
+12
+00:00:13,914 --> 00:00:14,702
+An AI voice
+
+13
+00:00:14,579 --> 00:00:15,614
+reads Claude's script.
+
+14
+00:00:15,874 --> 00:00:16,828
+Then Claude lines
+
+15
+00:00:16,706 --> 00:00:17,627
+up every caption,
+
+16
+00:00:17,670 --> 00:00:18,488
+word by word.
+
+17
+00:00:18,743 --> 00:00:19,622
+Every scene is
+
+18
+00:00:19,491 --> 00:00:20,254
+a web page.
+
+19
+00:00:20,509 --> 00:00:21,405
+These 3D blocks?
+
+20
+00:00:21,665 --> 00:00:22,289
+Just code.
+
+21
+00:00:22,544 --> 00:00:23,870
+Then a browser takes a
+
+22
+00:00:23,736 --> 00:00:24,832
+photo of that page,
+
+23
+00:00:24,867 --> 00:00:26,040
+thirty times a second.
+
+24
+00:00:26,300 --> 00:00:27,972
+That's about 1,400 photos,
+
+25
+00:00:28,013 --> 00:00:29,271
+stitched into this video.
+
+26
+00:00:29,529 --> 00:00:30,846
+Even the music is code.
+
+27
+00:00:31,101 --> 00:00:31,576
+Original.
+
+28
+00:00:31,842 --> 00:00:32,485
+No samples.
+
+29
+00:00:32,748 --> 00:00:33,960
+What do I still do?
+
+30
+00:00:34,210 --> 00:00:35,908
+Read everything, and press post.
+
+31
+00:00:36,163 --> 00:00:37,514
+Comment REEL and I'll DM
+
+32
+00:00:37,383 --> 00:00:38,551
+you my exact workflow.
+

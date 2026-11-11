@@ -1,0 +1,83 @@
+<!doctype html><html><head><meta charset="utf-8"><style>
+@font-face{font-family:Inter;src:url(fonts/inter-latin-900-normal.woff2);font-weight:900}@font-face{font-family:Inter;src:url(fonts/inter-latin-700-normal.woff2);font-weight:700}
+@font-face{font-family:Mono;src:url(fonts/jetbrains-mono-latin-700-normal.woff2);font-weight:700}
+body{margin:0;width:1080px;height:1920px;background:#000;overflow:hidden;font-family:Inter}
+#cam{position:absolute;left:0;top:0;width:1080px;height:608px;overflow:hidden;background:#1a1210}
+#set{position:absolute;left:0;top:0;width:1080px;height:608px;transform-origin:0 0}
+.wall{position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,#4a2c22 0%,#2a1813 55%,#140c0a 100%)}
+.panel{position:absolute;top:40px;width:120px;height:330px;border-radius:10px;background:repeating-linear-gradient(90deg,#3a2219 0 14px,#2e1a13 14px 28px);opacity:.8}
+.shelf{position:absolute;top:120px;width:200px;height:12px;background:#5a3626;border-radius:3px;box-shadow:0 6px 0 #2a1610}
+.shelf i{position:absolute;bottom:12px;width:26px;border-radius:3px}
+.sign{position:absolute;left:50%;top:46px;transform:translateX(-50%);padding:14px 30px;border-radius:16px;border:4px solid #F0A585;color:#F7C9B3;font:900 40px Inter;letter-spacing:1px;text-shadow:0 0 18px #D97757,0 0 40px #D97757;box-shadow:0 0 30px rgba(217,119,87,.55),inset 0 0 20px rgba(217,119,87,.4);white-space:nowrap}
+.sign small{font:700 20px Mono;color:#ffd9c9;margin-left:12px;letter-spacing:3px}
+.lamp{position:absolute;top:0;width:260px;height:420px;background:radial-gradient(ellipse at 50% 0,rgba(255,200,150,.22),transparent 70%)}
+.plant{position:absolute;bottom:170px;width:70px;height:120px}
+.plant b{position:absolute;left:10px;bottom:0;width:50px;height:46px;border-radius:8px 8px 14px 14px;background:#6b4a3a}
+.plant i{position:absolute;bottom:40px;width:18px;height:70px;border-radius:50% 50% 0 0;background:#2f7a52;transform-origin:bottom center}
+.av{position:absolute;width:330px;height:352px}
+.desk{position:absolute;left:-40px;right:-40px;bottom:0;height:150px;background:linear-gradient(#5b3a2a,#3b2419);border-top:6px solid #7a4e38;box-shadow:0 -10px 30px rgba(0,0,0,.5)}
+.mic{position:absolute;bottom:120px;width:16px;height:120px;background:#2a2a2e;border-radius:6px}.mic:before{content:"";position:absolute;left:-16px;top:-56px;width:48px;height:72px;border-radius:24px;background:repeating-linear-gradient(#3a3a40 0 4px,#26262b 4px 8px);border:3px solid #55555c}
+.mug{position:absolute;bottom:150px;width:44px;height:50px;border-radius:6px 6px 10px 10px;background:#F3F1EC}.mug:after{content:"";position:absolute;right:-16px;top:10px;width:16px;height:24px;border:5px solid #F3F1EC;border-left:0;border-radius:0 12px 12px 0}
+.lt{position:absolute;left:34px;bottom:30px;display:flex;align-items:center;gap:14px;padding:10px 20px 10px 10px;border-radius:14px;background:rgba(15,15,17,.86);color:#fff;font:900 24px Inter;opacity:0}
+.lt i{width:44px;height:44px;border-radius:10px;background:#D97757}.lt small{display:block;font:700 16px Mono;color:#F0A585}
+.rec{position:absolute;right:26px;top:22px;font:700 18px Mono;color:#fff;display:flex;align-items:center;gap:8px}.rec i{width:14px;height:14px;border-radius:50%;background:#ff3b3b}
+</style></head><body>
+<div id="cam"><div id="set">
+  <div class="wall"></div>
+  <div class="lamp" style="left:120px"></div><div class="lamp" style="left:700px"></div>
+  <div class="panel" style="left:24px"></div><div class="panel" style="right:24px"></div>
+  <div class="shelf" style="left:170px"><i style="left:14px;height:54px;background:#D97757"></i><i style="left:46px;height:44px;background:#5a7bd9"></i><i style="left:78px;height:60px;background:#F3F1EC"></i><i style="left:130px;height:38px;background:#3ECF8E"></i></div>
+  <div class="shelf" style="right:170px"><i style="left:20px;height:48px;background:#F2C14E"></i><i style="left:54px;height:58px;background:#D97757"></i><i style="left:120px;height:42px;background:#5a7bd9"></i></div>
+  <div class="sign">canwe.ai<small>PODCAST</small></div>
+  <div class="plant" style="left:60px"><i style="left:14px;transform:rotate(-20deg)"></i><i style="left:28px"></i><i style="left:42px;transform:rotate(22deg)"></i><b></b></div>
+  <div class="plant" style="right:60px"><i style="left:14px;transform:rotate(-20deg)"></i><i style="left:28px"></i><i style="left:42px;transform:rotate(22deg)"></i><b></b></div>
+  <div class="av" id="host" style="left:115px;top:140px"></div>
+  <div class="av" id="guest" style="left:635px;top:140px"></div>
+  <div class="desk"></div>
+  <div class="mic" style="left:400px"></div><div class="mic" style="left:665px"></div>
+  <div class="mug" style="left:470px"></div>
+</div>
+  <div class="lt" id="lt"><i></i><div><span id="ltn"></span><small id="lts"></small></div></div>
+  <div class="rec"><i></i>EP 12</div>
+</div>
+<script src="avatar.js"></script><script>window.AvH = window.Avatar;</script>
+<script src="avatar.js"></script><script>window.AvG = window.Avatar;</script>
+<script>
+// our own demo podcast: [start, end, who, shot, pose, line]
+const S = [
+  [0, 5, "host", "wide", "explain", "Welcome back to the canwe.ai podcast."],
+  [5, 10, "host", "host", "point_cam", "I automated my YouTube with Claude."],
+  [10, 14, "guest", "guest", "surprised", "Wait. The whole channel?"],
+  [14, 19, "host", "host", "thumbs", "Every upload. I still press publish."],
+  [19, 24, "guest", "wide", "explain", "Okay, but who picks the clips?"],
+  [24, 29, "host", "host", "one", "The first three seconds decide everything."],
+  [29, 34, "guest", "guest", "point_cam", "So Claude picks the best moments?"],
+  [34, 40, "host", "wide", "present", "It reads the whole transcript first."],
+  [40, 45, "host", "host", "celebrate", "One video, a whole stack of Shorts."],
+  [45, 50, "guest", "guest", "thumbs", "Okay, I'm trying this tonight."],
+  [50, 60, "host", "wide", "talk", "Free setup? Comment SHORTS."],
+];
+window.SEGS = S;
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x));
+AvH.init("host", { look: "street", style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" } });
+AvG.init("guest", { look: "classic", style: { skin: "#C98E6A", skinLine: "#8E5E40", hair: "#3B2416", hairHi: "#5C3A24", shirt: "#3a5bb8", shirtLine: "#1d2f66", under: "#1d2f66", lens1: "#9fd4ff", lens2: "#5a7bd9" } });
+const SHOT = { wide: [1, 0, 0], host: [1.75, 280, 290], guest: [1.75, 800, 290] };
+window.REEL_DURATION = 60;
+const noise = x => Math.sin(x * 12.9898) * 0.5 + Math.sin(x * 4.1) * 0.3 + Math.sin(x * 23.1) * 0.2;
+window.seek = t => {
+  const i = Math.max(0, S.findIndex(s => t >= s[0] && t < s[1])), s = S[i], [sc, fx, fy] = SHOT[s[3]];
+  // slow push-in inside each shot (like a real edit), hard cut between shots
+  const k = (t - s[0]) / (s[1] - s[0]), z = sc * (1 + 0.04 * k), tx = 540 - fx * z, ty = 304 - fy * z;
+  document.getElementById("set").style.transform = sc === 1 ? `scale(${(1 + 0.03 * k).toFixed(4)}) translate(${(-16 * k).toFixed(1)}px,${(-9 * k).toFixed(1)}px)` : `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px) scale(${z.toFixed(4)})`;
+  ["host", "guest"].forEach(w => {
+    const A = w === "host" ? AvH : AvG, speaking = s[2] === w, mine = S.filter(x => x[2] === w && x[0] <= t).pop();
+    const pose = speaking ? s[4] : (mine && t - mine[1] < 1.2 ? "talk" : "talk"), p = clamp((t - (speaking ? s[0] : 0)) / 0.25);
+    const syl = speaking && t > s[0] + 0.2 && t < s[1] - 0.6 ? clamp(0.5 + 0.6 * Math.sin(t * 2 * Math.PI * 4.2) * (0.6 + 0.4 * noise(t))) : 0;
+    const beat = speaking ? clamp(Math.sin(t * 2 * Math.PI * 1.1)) * 0.5 : 0;
+    A.frame(t + (w === "guest" ? 3.7 : 0), pose, p, "talk", syl, { beat, expr: speaking ? undefined : (t % 7 < 1.5 ? "happy" : "neutral") });
+  });
+  const lt = document.getElementById("lt"), on = (t > 1 && t < 4.5) || (t > 10.3 && t < 13.5);
+  lt.style.opacity = on ? 1 : 0; document.getElementById("ltn").textContent = t < 6 ? "Host · canwe.ai" : "Guest"; document.getElementById("lts").textContent = t < 6 ? "@canwe.ai" : "a friend who makes Shorts";
+};
+window.seek(0);
+</script></body></html>

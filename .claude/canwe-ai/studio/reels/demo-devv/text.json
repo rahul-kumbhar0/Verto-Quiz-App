@@ -1,0 +1,114 @@
+{
+ "step": 0.5,
+ "safe": {
+  "top": 288,
+  "bottom": 1248,
+  "left": 64.8,
+  "right": 864
+ },
+ "unsafe": [],
+ "small": [
+  {
+   "t": 5.5,
+   "text": "1,359 frames · 30 fps",
+   "id": "SMALL",
+   "px": 29
+  },
+  {
+   "t": 7,
+   "text": "Claude",
+   "id": "by",
+   "px": 26
+  },
+  {
+   "t": 8,
+   "text": "Followers: Instagram, first week · comments: our DM dashboard, 30 days",
+   "id": "fn",
+   "px": 27
+  },
+  {
+   "t": 15,
+   "text": "Sample reels from @canwe.ai",
+   "id": "fn",
+   "px": 17
+  },
+  {
+   "t": 18,
+   "text": "number hook",
+   "id": "SPAN",
+   "px": 33
+  },
+  {
+   "t": 18,
+   "text": "one keyword",
+   "id": "SPAN",
+   "px": 33
+  },
+  {
+   "t": 18,
+   "text": "≈ 40 s",
+   "id": "SPAN",
+   "px": 33
+  },
+  {
+   "t": 23.5,
+   "text": "ElevenLabs",
+   "id": "v11",
+   "px": 30
+  },
+  {
+   "t": 25.5,
+   "text": "[curious] [softly]",
+   "id": "v12",
+   "px": 32
+  },
+  {
+   "t": 26,
+   "text": "HyperFrames v0.9.15 (Apache-2.0) tested by us · not sponsored",
+   "id": "fn",
+   "px": 27
+  },
+  {
+   "t": 31.5,
+   "text": "Free tool: HyperFrames",
+   "id": "hfTag",
+   "px": 32
+  },
+  {
+   "t": 34,
+   "text": "New reel",
+   "id": "DIV",
+   "px": 29
+  },
+  {
+   "t": 36.5,
+   "text": "A paid Claude plan",
+   "id": "DIV",
+   "px": 33
+  },
+  {
+   "t": 36.5,
+   "text": "the free tier won't run this",
+   "id": "SMALL",
+   "px": 29
+  },
+  {
+   "t": 39,
+   "text": "expect a rough first one",
+   "id": "SMALL",
+   "px": 29
+  },
+  {
+   "t": 41,
+   "text": "@canwe.ai",
+   "id": "B",
+   "px": 31
+  },
+  {
+   "t": 41,
+   "text": "Here's every prompt, step by step 👇",
+   "id": "DIV",
+   "px": 30
+  }
+ ]
+}

@@ -1,0 +1,10 @@
+{"fps":15,"w":640,"title":"canwe_podcast_ep12.mp4","length":"50:07","credit":"Sample: our own demo podcast, made for this reel",
+ "sets":{
+  "wide":{"src":"foot/src/canwe_podcast_ep12.mp4","start":0.6,"dur":3.4},
+  "strip":{"src":"foot/src/canwe_podcast_ep12.mp4","stills":[1,4,7,9,12,15,17,21,26,31,36,38,42,47]},
+  "m0":{"src":"foot/src/canwe_podcast_ep12.mp4","start":5.4,"dur":3.2},
+  "m1":{"src":"foot/src/canwe_podcast_ep12.mp4","start":10.2,"dur":3.2},
+  "m2":{"src":"foot/src/canwe_podcast_ep12.mp4","start":24.3,"dur":4.2},
+  "m3":{"src":"foot/src/canwe_podcast_ep12.mp4","start":29.3,"dur":3.4},
+  "m4":{"src":"foot/src/canwe_podcast_ep12.mp4","start":40.3,"dur":3.4},
+  "duo":{"src":"foot/src/canwe_podcast_ep12.mp4","start":19.4,"dur":4.4}}}

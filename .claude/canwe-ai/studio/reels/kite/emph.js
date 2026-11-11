@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["close it.", "analyst.", "seconds.", "page.", "overlap.", "companies.", "English.", "numbers.", "tracker.", "sheet.", "sell.", "minutes.", "KITE", "step.#2"], "bold": ["same", "your", "You#5"]};
+window.PINS = [["and close it.", "shrug"], ["free portfolio analyst.", "point_up"], ["does for you.", "point_cam"], ["on one page.", "explain"], ["the same companies.", "three"], ["your own numbers.", "present"], ["in one sheet.", "thumbs"], ["sell. You decide.", "stop"], ["a few minutes.", "typing"], ["step by step.", "wave"]];

@@ -1,0 +1,125 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Paper editorial demo — canwe.ai kit</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.pd{position:absolute;inset:0;visibility:hidden}
+#frame{position:absolute;inset:0;pointer-events:none;z-index:4}
+.pd-pair{top:560px}
+.pd-pair.lo{top:620px}
+.e-ticks.top{left:70px;right:70px;top:520px}
+/* checkout card */
+.pd-chk{left:140px;width:800px;top:900px;padding:28px 30px}
+.pd-chk .h{display:flex;align-items:center;justify-content:space-between;font:700 24px Inter;margin-bottom:18px}
+.pd-chk .prod{display:flex;gap:18px;align-items:center;margin-bottom:18px}
+.pd-chk .prod .th{width:92px;height:92px;border-radius:14px;background:#111114;color:#fff;display:grid;place-items:center;font:800 13px Mono;text-align:center;letter-spacing:1px}
+.pd-chk .prod b{display:block;font:700 28px Inter}.pd-chk .prod small{font:500 18px Inter;color:var(--pink-3)}
+.pd-chk .price{font:800 52px Inter;letter-spacing:-2px;margin:6px 0 16px}
+.pd-chk .e-in{margin-bottom:10px}
+/* index rows */
+.pd-idx{position:absolute;left:100px;right:100px;top:900px}
+.pd-idx .e-idx{opacity:0}
+.pd-idx .ic{font:800 30px Inter;color:var(--pacc)}
+/* post every day */
+.pd-sub{top:1010px;font-size:58px}
+.pd-clock{position:absolute;left:390px;top:1120px;width:300px;height:160px;display:flex;gap:10px;align-items:flex-end;justify-content:center}
+.pd-clock i{width:60px;border-radius:8px 8px 3px 3px;background:var(--pline)}.pd-clock i.on{background:var(--pacc)}
+/* code card */
+.pd-code{left:110px;width:860px;top:900px;height:330px;padding:26px 28px;overflow:hidden}
+.pd-code .fx-code{font-size:21px;color:var(--pink)}.pd-code .fx-code .k{color:var(--pacc)}.pd-code .fx-code .s{color:#8A6D3B}.pd-code .fx-code .n{color:#B4573A}.pd-code .fx-code .c{color:var(--pink-3)}
+.pd-code .fx-caret{background:var(--pacc)}
+.pd-tags{position:absolute;left:110px;top:1250px;display:flex;gap:12px}.pd-tags .e-tag{font-size:19px;padding:8px 16px;opacity:0}
+/* cta */
+.pd-dm{left:150px;width:780px;top:960px;padding:22px 26px;display:flex;align-items:center;gap:18px;opacity:0}
+.pd-dm img{width:64px;height:64px;border-radius:50%;border:1px solid var(--pline)}.pd-dm b{display:block;font:700 26px Inter}.pd-dm span{font:500 22px Inter;color:var(--pink-2)}
+.pd-dm em{margin-left:auto;font:700 15px Mono;font-style:normal;color:var(--pacc);border:1px solid var(--pacc);border-radius:999px;padding:4px 10px}
+.pd-cm{left:150px;width:780px;top:1110px;padding:18px 26px;display:flex;align-items:center;gap:14px;font:600 24px Inter;opacity:0}
+.pd-cm i{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#F0A585,#D97757)}
+.pd-cm small{display:block;font:600 16px Inter;color:var(--pink-3)}
+.e-foot{top:1300px}
+</style></head>
+<body class="look paper"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920" style="display:none"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="pd" id="s1">
+      <div class="e-pair pd-pair" id="p1"></div>
+      <div class="e-card pd-chk" id="chk"><div class="h"><span>Checkout</span><span class="e-tag">🔒 setup locked</span></div>
+        <div class="prod"><div class="th">MASTER<br>CLASS</div><div><b>AI Video Editing Course</b><small>12 modules · lifetime access</small></div></div>
+        <div class="price">₹4,999</div><div class="e-in">Email</div><div class="e-in">Card details</div><div class="e-btn">Pay ₹4,999 →</div></div>
+    </section>
+    <section class="pd" id="s2">
+      <div class="e-pair pd-pair sm" id="p2"></div>
+      <div class="pd-idx" id="idx">
+        <div class="e-idx" id="i1"><b>01</b><span class="ic">♫</span><div><span>Openverse</span><small>find the sound · no API key</small></div></div>
+        <div class="e-idx" id="i2"><b>02</b><span class="ic">▶</span><div><span>Real SFX</span><small>place it on the exact frame</small></div></div>
+        <div class="e-idx" id="i3"><b>03</b><span class="ic">✓</span><div><span>Earshot</span><small>check the mix and the licence</small></div></div></div>
+    </section>
+    <section class="pd" id="s3">
+      <div class="e-pair pd-pair" id="p3"></div>
+      <div class="e-sub pd-sub" id="sub3">without losing <span class="e-swap" id="sw"><span class="was">hours.</span><span class="now">minutes.</span></span></div>
+          </section>
+    <section class="pd" id="s4">
+      <div class="e-pair pd-pair sm" id="p4"></div>
+      <div class="e-card pd-code"><div class="fx-code" id="codeT"></div></div>
+      <div class="pd-tags"><span class="e-tag" id="t1">no editor</span><span class="e-tag" id="t2">no timeline</span><span class="e-tag acc" id="t3">rendered from code</span></div>
+    </section>
+    <section class="pd" id="s5">
+      <div class="e-pair pd-pair" id="p5"></div>
+      <div class="e-card pd-dm" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! All the prompts + links 📩</span></div><em>via 2il.in</em></div>
+      <div class="e-card pd-cm" id="cm"><i></i><div><small>you · now</small>EDITOR</div></div>
+    </section>
+  </div>
+  <div id="frame">
+    <div class="e-kick" style="left:70px;top:470px">canwe / paper editorial</div><div class="e-kick" style="right:70px;top:470px">demo · 3 nov 2026</div>
+    <div class="e-rule" id="rule" style="left:70px;top:505px;width:0"></div>
+    <div class="e-ticks top" id="ticks"></div>
+    <div class="e-foot" id="foot"><span>illustration · the three tools are free · screens recreated</span><span>@canwe.ai</span></div>
+  </div>
+  <div class="mg-layer" id="mgFx"></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const T = { s2: at("Three"), s3: at("Post"), s4: at("This"), s5: at("Comment"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 1.6).toFixed(2);
+const CODE = `// this reel, scene 1
+M.pair("p1", "Stop paying.", "for tutorials.", t, 0.05);
+M.tear("chk", t, at("already"));     // the ₹4,999 checkout rips
+M.ticks("ticks", t, [T.s2, T.s3, T.s4, T.s5]);`;
+const SR = $("stage").getBoundingClientRect();
+["s1","s2","s3","s4","s5"].forEach(s => $(s).style.visibility = "visible");
+const ctr = id => { const r = $(id).getBoundingClientRect(); return [r.left - SR.left + r.width / 2, r.top - SR.top + r.height / 2]; };
+const CHK = ctr("chk"), SW = ctr("sw");
+["s1","s2","s3","s4","s5"].forEach(s => $(s).style.visibility = "hidden");
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH, light: [[0, 1e9]], rail: false,
+  avatar: { x: 690, y: 1380, w: 360, in: 0, look: "street", style: { shirt: "#111114", print: "#2F55E6" } },
+  poses: [[0, "shrug"], [at("already"), "stop"], [T.s2, "three"], [at("Find"), "one"], [at("Place"), "two"], [at("Check"), "thumbs"], [T.s3, "present"], [at("hours."), "think"], [T.s4, "typing"], [at("No", 0), "stop"], [T.s5, "point_cam"], [at("free,"), "double_thumbs"]], autoPoses: {} });
+window.seek = t => {
+  R.frame(t);
+  F.slots(t, [["s1", 0, T.s2], ["s2", T.s2, T.s3], ["s3", T.s3, T.s4], ["s4", T.s4, T.s5], ["s5", T.s5, 99]]);
+  F.cutCurve("s1", "s2", t, T.s2, { dir: "up", travel: 160 }); F.cutCurve("s2", "s3", t, T.s3, { dir: "up", travel: 160 }); F.rackFocus("s3", "s4", t, T.s4); F.cutCurve("s4", "s5", t, T.s5, { dir: "up", travel: 160 });
+  R.speedyFrame(t);
+  // frame: rule draws in, ticks fill per chapter
+  $("rule").style.width = (E.expoOut(prog(t, 0.1, 0.8)) * 940) + "px"; M.ticks("ticks", t, [0.3, T.s2, T.s3, T.s4, T.s5]); R.note("foot", t, 0.6, T.stop + 0.4);
+  // S1 — word pair, the ₹4,999 checkout rises, then TEARS on "already here"
+  M.pair("p1", "Stop paying.", "for *tutorials.*", t, 0.05);
+  M.fly("chk", t, 0.55, { y: 220, s: 0.92, r: 2 }, { f: 2.1, z: 0.62 }); $("chk").style.visibility = ""; const tp = M.tear("chk", t, at("already"), { d: 1.0 });
+  if (tp > 0) M.ring("mgFx", t, at("already"), { x: CHK[0], y: CHK[1], r: 260, d: 0.6, cool: true });
+  F.shake("cam", t, at("already"), { amp: 8, d: 0.35, sfx: false });
+  // S2 — three tools: rows deal in, each un-dims on its word, the accent number counts
+  M.pair("p2", "Three free tools.", "One better *edit.*", t, T.s2 + 0.05);
+  [["i1", at("Find")], ["i2", at("Place")], ["i3", at("Check")]].forEach(([id, a], i) => { M.fly(id, t, T.s2 + 0.5 + i * 0.12, { x: -60, s: 0.96 }, { f: 2.4, z: 0.6 });
+    $(id).classList.toggle("dim", t >= at("Find") && t < a); if (t >= a) M.underline($(id).querySelector("span:not(.ic)"), t, a); });
+  // S3 — Post. every day. / hours → minutes, bars drop
+  M.pair("p3", "Post.", "*every* day.", t, T.s3 + 0.05); $("sub3").style.opacity = clamp((t - at("without")) / 0.2);
+  M.swap("sw", t, at("hours.") + 0.1); M.ring("mgFx", t, at("hours.") + 0.3, { x: SW[0], y: SW[1], r: 150, d: 0.55, cool: true });
+  // S4 — made from code: the code types in a paper card, tags fly in
+  M.pair("p4", "This whole reel", "was made from *code.*", t, T.s4 + 0.05); F.code("codeT", CODE, t, T.s4 + 0.4, { cps: 60 });
+  [["t1", at("No", 0)], ["t2", at("No", 1)], ["t3", at("timeline.") + 0.25]].forEach(([id, a]) => M.fly(id, t, a, { y: 30, s: 0.6 }, { f: 2.8, z: 0.5 }));
+  // S5 — CTA: the comment, then the DM
+  M.pair("p5", "Comment", "*EDITOR.*", t, T.s5 + 0.05); M.fly("cm", t, T.s5 + 0.5, { y: 50, s: 0.9 }, { f: 2.5, z: 0.55 });
+  M.fly("dm", t, at("send") + 0.2, { y: -60, s: 0.9 }, { f: 2.3, z: 0.6 }); F.sheen("dm", t, at("send") + 0.7);
+};
+window.seek(0);
+</script></body></html>

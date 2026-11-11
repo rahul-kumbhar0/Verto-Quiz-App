@@ -1,0 +1,11 @@
+All from github.com/Gathin23/cleanyourtv README (read 28 Oct 2026) unless noted:
+- Origin: 17 Oct 2026, owner posted before/after of parents' TV cleaned by Claude Code over Wi-Fi; "It reached 7.4M views" (X)
+- "170+ TV models from 200+ contributors in four days"; was called tv-vibehack until the 19th
+- 43.1k stars, 5.3k forks, MIT (GitHub search page, 28 Oct)
+- Steps: back up -> disable (pm disable-user) telemetry/ad services/content rows/preloads -> install small native launcher as home
+- "Nothing is uninstalled, so a restore script can undo every step"; record kept in ~/.cleanyourtv/; tools/restore.sh
+- One prompt: paste PROMPT.md + TV model; "takes about fifteen minutes"
+- Needs: Android TV / Google TV (launcher needs Android 8+), dev options (tap Build 7x), USB/network debugging, same Wi-Fi, a coding agent (Claude Code, Codex, Gemini CLI) or run commands yourself
+- Most-tested brands: TCL (76), Sony (40), Xiaomi (32)
+- NOT supported: Samsung (Tizen), LG (webOS) - "no ADB"; Fire TV debloat-only; some China-market TCL refuse launchers
+- Risk: network ADB is "plaintext on port 5555", "any device on the LAN gets a shell" on some firmware -> turn debugging off after; firmware updates can re-enable packages

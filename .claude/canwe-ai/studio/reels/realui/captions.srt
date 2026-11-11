@@ -1,0 +1,36 @@
+1
+00:00:00,150 --> 00:00:01,469
+I connected Claude to
+
+2
+00:00:01,341 --> 00:00:02,623
+one free GitHub repo.
+
+3
+00:00:02,881 --> 00:00:03,994
+It's called freehire.
+
+4
+00:00:04,265 --> 00:00:04,948
+3.5K stars.
+
+5
+00:00:05,209 --> 00:00:06,369
+Then I typed one
+
+6
+00:00:06,244 --> 00:00:07,269
+line into Claude.
+
+7
+00:00:07,533 --> 00:00:08,846
+It searched live jobs,
+
+8
+00:00:08,884 --> 00:00:10,270
+and found 37 internships.
+
+9
+00:00:10,550 --> 00:00:12,111
+Comment JOBS for my setup.
+

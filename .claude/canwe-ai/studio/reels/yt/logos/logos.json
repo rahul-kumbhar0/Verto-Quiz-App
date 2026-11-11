@@ -1,0 +1,47 @@
+{
+ "YouTube": {
+  "file": "logos/youtube.svg",
+  "white": "logos/youtube-white.svg",
+  "word": null,
+  "title": "YouTube",
+  "hex": "#FF0000",
+  "dark": false,
+  "source": "iconify-logos:youtube-icon"
+ },
+ "Google Cloud": {
+  "file": "logos/googlecloud.svg",
+  "white": "logos/googlecloud-white.svg",
+  "word": null,
+  "title": "Google Cloud",
+  "hex": "#4285F4",
+  "dark": false,
+  "source": "lobehub:googlecloud-color"
+ },
+ "Claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "GitHub": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ },
+ "Google": {
+  "file": "logos/google.svg",
+  "white": "logos/google-white.svg",
+  "word": null,
+  "title": "Google",
+  "hex": "#4285F4",
+  "dark": false,
+  "source": "lobehub:google-color"
+ }
+}

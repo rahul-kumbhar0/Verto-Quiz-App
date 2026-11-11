@@ -1,0 +1,258 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>FABLE</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.sc2{position:absolute;inset:0;visibility:hidden}
+/* ===== hero: the MODEL LADDER rack (Haiku → Fable), price per bay ===== */
+#rk{position:absolute;left:230px;top:690px;width:620px;border-radius:22px;background:linear-gradient(180deg,#1c1e24,#121318);border:2px solid #2c2f37;box-shadow:0 40px 80px -20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);padding:18px 18px 10px}
+#rk .hd{display:flex;align-items:center;gap:14px;height:52px;padding:0 14px;margin-bottom:12px;border-radius:10px;background:linear-gradient(180deg,#d9dbe0,#b9bcc4);color:#16181d;font:800 26px Inter}
+#rk .hd i{width:34px;height:34px;background:url(logos/claude.svg) center/contain no-repeat}
+#rk .hd small{display:block;font:600 15px "JetBrains Mono",monospace;color:#4b4f59;margin-top:-4px}
+.bay{position:relative;height:86px;margin-bottom:10px;border-radius:12px;background:linear-gradient(180deg,#22252c,#181a1f);border:1.5px solid #30333b;display:flex;align-items:center;gap:16px;padding:0 18px}
+.bay .scr{width:26px;height:60px;border-radius:5px;background:repeating-linear-gradient(180deg,#3a3d46 0 4px,#24272e 4px 8px)}
+.bay .nm{flex:1;font:800 30px Inter;color:#9aa0aa;letter-spacing:.5px}.bay .nm small{display:block;font:600 16px "JetBrains Mono",monospace;color:#6b7079;margin-top:2px}
+.bay .pr{font:800 30px "JetBrains Mono",monospace;color:#E8EAEE}.bay .pr s{color:#ff6b6b}
+.bay .led{width:16px;height:16px;border-radius:50%;background:#3a3d46}
+.bay.hot{border-color:#D97757;box-shadow:0 0 0 3px rgba(217,119,87,.25),0 0 40px rgba(217,119,87,.25)}.bay.hot .nm{color:#F3F1EC}.bay.hot .led{background:#D97757;box-shadow:0 0 14px #D97757}
+.bay.on .led{background:#3ECF8E;box-shadow:0 0 14px #3ECF8E}
+#task{position:absolute;left:0;top:0;padding:12px 20px;border-radius:14px;background:#F3F1EC;color:#16181d;font:800 24px Inter;box-shadow:0 18px 36px -16px rgba(0,0,0,.6);opacity:0;z-index:6;white-space:nowrap}
+#task.hard{background:#D97757;color:#1a0e08}
+#spot{position:absolute;left:0;top:0;width:520px;height:520px;border-radius:50%;background:radial-gradient(closest-side,rgba(255,236,200,.22),transparent);pointer-events:none;opacity:0;z-index:5}
+.hl2{position:absolute;font:700 30px "JetBrains Mono",monospace;color:#D7DAE0;white-space:nowrap;opacity:0}.hl2 em{font-style:normal;color:#F0A585}
+/* 1,000 agents -> OS boot */
+#mass{position:absolute;left:110px;top:700px;width:860px;display:grid;grid-template-columns:repeat(40,1fr);gap:4px}
+#mass i{display:block;aspect-ratio:1;border-radius:3px;background:#D97757;opacity:0}
+#os{position:absolute;left:190px;top:760px;width:700px;height:420px;border-radius:22px;background:linear-gradient(160deg,#16181d,#0b0c0f);border:2px solid #2c2f37;box-shadow:0 40px 80px -24px rgba(0,0,0,.7);opacity:0;overflow:hidden}
+#os .bar{height:46px;display:flex;align-items:center;gap:8px;padding:0 18px;background:#1d2027;font:700 18px "JetBrains Mono",monospace;color:#8c909a}#os .bar i{width:13px;height:13px;border-radius:50%;background:#3a3d46}
+#os pre{margin:0;padding:18px 24px;font:600 22px/1.6 "JetBrains Mono",monospace;color:#9ad7b0;white-space:pre}
+#days{position:absolute;right:120px;top:700px;padding:12px 22px;border-radius:999px;background:#D97757;color:#1a0e08;font:900 34px "JetBrains Mono",monospace;opacity:0}
+/* gadgets */
+.gd{position:absolute;top:760px;width:245px;height:330px;border-radius:24px;background:#15171c;border:1.5px solid #2a2d35;box-shadow:0 30px 60px -24px rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;opacity:0}
+.gd .ic{font-size:96px;line-height:1}.gd b{font:800 30px Inter;color:#E8EAEE;text-align:center;line-height:1.2}
+.gd .ok{position:absolute;right:-14px;top:-14px;width:54px;height:54px;border-radius:50%;background:#3ECF8E;color:#06281a;font:900 32px Inter;display:grid;place-items:center;opacity:0}
+/* cost bars (light) */
+.cb{position:absolute;left:150px;width:780px}
+.cb .lb{display:flex;justify-content:space-between;font:800 34px Inter;color:#16181d;margin-bottom:12px}.cb .lb span{font:700 30px "JetBrains Mono",monospace;color:#6b625b}
+.cb .tr{height:74px;border-radius:18px;background:rgba(0,0,0,.06);overflow:hidden}.cb .tr i{display:block;height:100%;width:0;border-radius:18px}
+#x2{position:absolute;left:690px;top:1100px;padding:14px 28px;border-radius:999px;background:#16181d;color:#fff;font:900 46px "JetBrains Mono",monospace;opacity:0}
+/* pro (light) */
+.pc{position:absolute;border-radius:26px;background:#fff;border:1.5px solid #e2e4e8;box-shadow:0 30px 60px -26px rgba(30,30,40,.4);opacity:0}
+#pro{left:140px;top:700px;width:800px;padding:28px 32px}
+#pro .t{display:flex;align-items:center;gap:16px;font:900 40px Inter;color:#16181d}#pro .t i{width:52px;height:52px;background:url(logos/claude.svg) center/contain no-repeat}
+#pro .row{display:flex;align-items:center;gap:14px;margin-top:20px;font:700 30px Inter;color:#16181d}#pro .row b{width:42px;height:42px;border-radius:50%;background:#3ECF8E;color:#06281a;display:grid;place-items:center;font:900 24px Inter;flex:none}
+#pro .row s{color:#9aa0aa}#pro .row em{font-style:normal;color:#D97757;font-weight:900}
+#cal{left:140px;top:950px;width:380px;padding:0;overflow:hidden;text-align:center}
+#cal .m{background:#D97757;color:#fff;font:900 26px Inter;padding:10px}#cal .d{font:900 96px/1.1 "JetBrains Mono",monospace;color:#16181d}#cal .s{font:600 20px "JetBrains Mono",monospace;color:#7a7f8a;padding-bottom:14px}
+#use{left:540px;top:950px;width:320px;padding:26px}
+#use .l{font:800 26px Inter;color:#16181d}#use .tr{margin-top:16px;height:40px;border-radius:12px;background:rgba(0,0,0,.07);overflow:hidden}#use .tr i{display:block;height:100%;width:0;background:#D97757}
+#use .n{margin-top:10px;font:800 30px "JetBrains Mono",monospace;color:#16181d}
+#use .rs{margin-top:14px;display:inline-flex;align-items:center;gap:10px;padding:10px 18px;border-radius:999px;background:#16181d;color:#fff;font:800 22px Inter;opacity:0}#use .rs b{display:inline-block}
+/* catch (dark, red rail) */
+.ck{position:absolute;left:140px;width:800px;border-radius:24px;background:#15171c;border:1.5px solid #3a1d1d;opacity:0}
+#free{top:700px;padding:26px 30px}
+#free .t{font:900 34px Inter;color:#F3F1EC}#free .row{display:flex;align-items:center;gap:16px;margin-top:16px;font:700 28px Inter;color:#9ea2ab}
+#free .row b{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font:900 22px Inter;flex:none}
+#free .row.y b{background:#3ECF8E33;color:#3ECF8E}#free .row.n b{background:#ff5a5a22;color:#ff5a5a;border:2px solid #ff5a5a}#free .row.n{color:#F3F1EC}
+#scam{left:140px;top:700px;width:470px;padding:22px;border-color:#5a2d2d}
+#scam .url{font:700 20px "JetBrains Mono",monospace;color:#ff8a8a;background:#2a1414;border-radius:10px;padding:8px 12px}
+#scam .big{margin-top:16px;font:900 38px Inter;color:#fff;line-height:1.15}#scam .big em{font-style:normal;color:#ffd166}
+#scam .btn{margin-top:16px;height:60px;border-radius:14px;background:#ff5a5a;display:grid;place-items:center;font:900 26px Inter;color:#fff}
+#who{left:690px;top:760px;width:250px;height:250px;border-radius:30px;background:#111;border:2px dashed #ff5a5a;display:grid;place-items:center;font:900 92px Inter;color:#ff5a5a;opacity:0}
+#mine{left:180px;top:1090px;width:330px;padding:16px 20px;border-radius:18px;background:#F3F1EC;color:#16181d;font:700 22px "JetBrains Mono",monospace;opacity:0;position:absolute}
+#warn{position:absolute;left:0;right:0;top:1150px;text-align:center;opacity:0}#warn span{display:inline-block;padding:14px 26px;border-radius:999px;background:#ff5a5a;color:#fff;font:900 30px Inter}
+/* CTA */
+#ig2{position:absolute;left:300px;top:690px;width:480px;height:560px;border-radius:46px;background:#0b0b0d;border:7px solid #23252b;overflow:hidden;box-shadow:0 40px 80px -24px rgba(0,0,0,.6);opacity:0}
+#ig2 .scr{position:absolute;inset:0;background:radial-gradient(70% 50% at 50% 40%,#3a2216,#0b0b0d)}
+#ig2 .ttl{position:absolute;left:0;right:0;top:170px;text-align:center;font:900 44px Inter;color:#fff;line-height:1.1}#ig2 .ttl em{font-style:normal;color:#F0A585}
+#ig2 .cm{position:absolute;left:18px;right:18px;bottom:22px;height:66px;border-radius:999px;background:rgba(255,255,255,.95);display:flex;align-items:center;padding:0 22px;font:800 30px Inter;color:#16181d}
+#ig2 .cm .snd{margin-left:auto;width:48px;height:48px;border-radius:50%;background:#D97757;display:grid;place-items:center;color:#1a0e08;font:900 24px Inter}
+#dm2{position:absolute;left:150px;top:880px;width:780px;padding:22px 26px;border-radius:24px;background:#fff;border:1.5px solid #e2e4e8;box-shadow:0 30px 60px -22px rgba(0,0,0,.45);font:600 30px Inter;color:#16181d;opacity:0;display:flex;gap:18px;align-items:center}
+#dm2 .av{width:64px;height:64px;border-radius:50%;background:#1E4FD8 url(canwe-logo.svg) center/cover;flex:none}#dm2 b{display:block;font:800 26px "JetBrains Mono",monospace;color:#D97757;margin-bottom:4px}
+#wires{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none;z-index:4}
+#wires path{fill:none;stroke:rgba(255,90,90,.45);stroke-width:3;stroke-dasharray:10 8}#wires .pk{fill:#ffd166}
+.fn2{position:absolute;left:50%;top:1176px;transform:translateX(-50%);max-width:640px;padding:6px 16px;border-radius:18px;background:rgba(255,246,236,.9);font:600 19px "JetBrains Mono",monospace;color:#6b625b;text-align:center;z-index:9;opacity:0}
+body.red #rail .fill,body.red #rail .ch.done i,body.red #rail .ch.on i{background:#ff5a5a;border-color:#ff5a5a}
+#stamp{position:absolute;left:340px;top:1075px;padding:14px 26px;border:6px solid #D97757;border-radius:18px;color:#F0A585;font:900 46px Inter;letter-spacing:1px;transform:rotate(-8deg);opacity:0;z-index:7;background:rgba(15,15,17,.75);white-space:nowrap}
+#stamp small{display:block;font:700 18px "JetBrains Mono",monospace;color:#d7dae0;letter-spacing:0;margin-top:2px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <svg id="wires" viewBox="0 0 1080 1920"></svg>
+
+  <!-- persistent hero: the model ladder -->
+  <div id="spot"></div>
+  <div id="rk" data-qa="texture">
+    <div class="hd"><i></i><div>Claude models<small>price · $ per 1M input tokens</small></div></div>
+    <div class="bay" id="bay0"><div class="scr"></div><div class="nm">Haiku 5.5<small>fast + cheap</small></div><div class="pr">$0.10</div><div class="led"></div></div>
+    <div class="bay" id="bay1"><div class="scr"></div><div class="nm">Sonnet 5.5<small>everyday</small></div><div class="pr">$2</div><div class="led"></div></div>
+    <div class="bay" id="bay2"><div class="scr"></div><div class="nm">Opus 5.5<small>start here</small></div><div class="pr">$4</div><div class="led"></div></div>
+    <div class="bay" id="bay3"><div class="scr"></div><div class="nm">Fable 5.2<small>new · 9 Nov</small></div><div class="pr" id="fp">$8</div><div class="led"></div></div>
+  </div>
+  <div id="task">your task</div>
+  <div id="stamp">FREE THIS WEEK*<small>*on Claude Pro · till 16 Nov</small></div>
+  <section class="sc2" id="sA">
+    <div class="hl2" id="hlA" style="left:80px;top:1060px">new <em>→</em></div>
+  </section>
+
+  <section class="sc2" id="sOS"><div id="mass"></div>
+    <div id="os"><div class="bar" data-qa="texture"><i></i><i></i><i></i><span>prototype OS · built by 1,000+ agents</span></div><pre id="osp" data-qa="texture"></pre></div>
+    <div id="days">8 days</div></section>
+
+  <section class="sc2" id="sG">
+    <div class="gd" id="g1" style="left:70px"><div class="ic">🔊</div><b>voice-assistant<br>hub</b><div class="ok">✓</div></div>
+    <div class="gd" id="g2" style="left:337px"><div class="ic">📞</div><b>USB<br>speakerphone</b><div class="ok">✓</div></div>
+    <div class="gd" id="g3" style="left:604px"><div class="ic">🐣</div><b>handheld<br>virtual pet</b><div class="ok">✓</div></div>
+  </section>
+
+  <section class="sc2" id="sC">
+    <div class="cb" style="top:760px"><div class="lb">Opus 5.5<span>$4 in · $20 out</span></div><div class="tr"><i id="c1" style="background:#9aa0aa"></i></div></div>
+    <div class="cb" style="top:930px"><div class="lb">Fable 5.2<span>$8 in · $40 out</span></div><div class="tr"><i id="c2" style="background:#D97757"></i></div></div>
+    <div id="x2">×2</div>
+  </section>
+
+  <section class="sc2" id="sP">
+    <div class="pc" id="pro"><div class="t"><i></i>Claude Pro</div>
+      <div class="row"><b>✓</b>Fable 5.2 · <s>extra cost</s> <em>included</em></div></div>
+    <div class="pc" id="cal"><div class="m">NOVEMBER</div><div class="d" id="cald">9</div><div class="s">ends 11:59 pm PT</div></div>
+    <div class="pc" id="use"><div class="l">weekly limit on Fable</div><div class="tr"><i id="usef"></i></div><div class="n" id="usen">0%</div><div class="rs" id="rs"><b id="rsi">↺</b> +1 free reset</div></div>
+  </section>
+
+  <section class="sc2" id="sK">
+    <div class="ck" id="free"><div class="t">Claude Free plan</div>
+      <div class="row y"><b>✓</b>Sonnet, chat, files</div>
+      <div class="row n" id="fr"><b>✕</b>Fable 5.2: not included</div></div>
+  </section>
+
+  <section class="sc2" id="sS">
+    <div class="ck" id="scam"><div class="url">free-fable-key.xyz</div><div class="big">FREE Fable 5.2<br><em>API KEY</em> 🔥</div><div class="btn">Paste your prompt</div></div>
+    <div class="ck" id="who">?</div>
+    <div id="mine">your prompt · your code · your files</div>
+    <div id="warn"><span>⚠ Skip them</span></div>
+  </section>
+
+  <section class="sc2" id="sZ">
+    <div id="ig2"><div class="scr"></div><div class="ttl">Fable 5.2<br><em>free this week?</em></div><div class="cm"><span id="cmt"></span><span id="cmph" style="color:#9aa0aa;font-weight:600">Add a comment…</span><div class="snd" id="snd">↑</div></div></div>
+    <div id="dm2"><div class="av"></div><div><b>@canwe.ai</b>How to switch to Fable + the deadline 👇</div></div>
+  </section>
+
+  <div class="fn2" id="fn"></div>
+  <div class="mg-layer" id="mgFx" style="position:absolute;inset:0;pointer-events:none;z-index:6"></div>
+  <div id="rail" data-qa="texture"></div>
+  <div id="kin"></div>
+  <div id="avatar"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, prog, lerp, clamp, $ } = R, E = R.ease, F = R.fx, M = R.mg;
+const T = { look: at("But only"), why: at("First,"), os: at("A thousand"), gad: at("It designed"), cost: at("Normally"), pro: at("But if"), use: at("Up to"),
+            cat: at("Now, the"), free: at("On the"), scam: at("And those"), skip: at("Skip"), use2: at("Even"), cta: at("Comment"), end: R.voiceEnd() };
+window.REEL_DURATION = +(T.end + 1.8).toFixed(2);
+const hash = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+{ const m = $("mass"); for (let i = 0; i < 1000; i++) m.appendChild(document.createElement("i")); }
+const OS = `[ ok ] kernel loaded\n[ ok ] drivers: storage, display, input\n[ ok ] file system mounted\n[ .. ] starting login screen\n\nfableOS prototype — booted on a real laptop`;
+const SVG = $("wires"), NS = "http://www.w3.org/2000/svg";
+const WP = (() => { const p = document.createElementNS(NS, "path"); p.setAttribute("d", "M345 1090 C 345 900, 820 1150, 815 1010"); SVG.appendChild(p); return p; })();
+const dots = []; for (let k = 0; k < 4; k++) { const c = document.createElementNS(NS, "circle"); c.setAttribute("r", 9); c.setAttribute("class", "pk"); SVG.appendChild(c); dots.push(c); }
+function defocus(outEl, inEl, t, cut, o = {}) {
+  const d = o.d ?? 0.32, a = $(outEl), b = $(inEl); R.cue("swish", cut - d * 0.5, { soft: true });
+  if (t < cut - d || t > cut + d + 0.05) return;
+  if (t < cut) { const p = prog(t, cut - d, d); if (a) { a.style.filter = `grayscale(${p}) blur(${(p * 14).toFixed(1)}px)`; a.style.opacity = 1 - p * 0.9; } if (b) b.style.opacity = 0; }
+  else { const p = E.out3(prog(t, cut, d)); if (a) a.style.opacity = 0; if (b) { b.style.visibility = "visible"; b.style.opacity = p; b.style.filter = p < 1 ? `grayscale(${1 - p}) blur(${((1 - p) * 12).toFixed(1)}px)` : ""; b.style.transform = `scale(${lerp(0.96, 1, p)})`; } }
+}
+const box = id => { const r = $(id).getBoundingClientRect(), s = $("stage").getBoundingClientRect(); return [r.left - s.left, r.top - s.top, r.width, r.height]; };
+
+R.setup({ push: 0, scenes: [] });
+R.speedy({
+  emph: window.EMPH,
+  light: [[T.cost, T.cat], [T.use2, 999]],
+  chapters: [{ label: "why", at: T.why }, { label: "cost", at: T.cost }, { label: "pro", at: T.pro }, { label: "catch", at: T.cat }, { label: "use", at: T.use2, end: 999 }],
+  counter: { unit: "agents", steps: [[T.os + 0.2, 1000, "agents"], [at("eight"), 8, "days"], [at("three"), 3, "gadgets"], [at("twice"), 2, "× Opus price"], [at("16th."), 16, "Nov · deadline"], [at("half"), 50, "% weekly limit"], [T.free, 0, "on Free plan"], [T.use2, 4, "models"]] },
+  avatar: { x: 290, y: 1395, w: 500, in: -0.4, look: "street", style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" } },
+  poses: [[at("Even") - 0.1, "offer"], [at("free plan,") - 0.1, "stop"], [at("Skip"), "cross"], [at("strangers.") - 0.1, "worry"], [at("hardest") - 0.1, "show"]],
+  autoPoses: { gap: 0.9, minGap: 0.5, maxComedy: 3 },
+});
+
+window.seek = t => {
+  R.frame(t);
+  const S = [["sA", -1, T.why], ["sOS", T.os, T.gad], ["sG", T.gad, T.cost], ["sC", T.cost, T.pro], ["sP", T.pro, T.cat], ["sK", T.cat, T.scam], ["sS", T.scam, T.use2], ["sZ", T.cta, 99]];
+  S.forEach(([id, a, b]) => { const el = $(id), on = t >= a && t < b; el.style.visibility = on ? "visible" : "hidden"; el.style.opacity = on ? 1 : 0; el.style.filter = ""; el.style.transform = ""; });
+  defocus("sOS", "sG", t, T.gad); defocus("sG", "sC", t, T.cost); defocus("sC", "sP", t, T.pro); defocus("sP", "sK", t, T.cat); defocus("sK", "sS", t, T.scam);
+  R.speedyFrame(t);
+  document.body.classList.toggle("red", t >= T.cat && t < T.use2);
+  M.grid("mgGrid", t, { drift: 6 });
+
+  // ===== RACK: on screen for the hook (+ "where to look") and for the final advice =====
+  { const rk = $("rk"), onA = t < T.os, onB = t >= T.use2 - 0.1 && t < T.cta;
+    const op = onA ? 1 - prog(t, T.os - 0.3, 0.3) : onB ? prog(t, T.use2 - 0.1, 0.35) * (1 - prog(t, T.cta - 0.25, 0.25)) : 0;
+    const intro = M.spring(t, -0.5, { f: 1.7, z: 0.7 }), tilt = onA ? lerp(22, 6, E.out3(prog(t, -0.3, 2.0))) : 0;
+    rk.style.opacity = op; rk.style.transformOrigin = "50% 0";
+    rk.style.transform = `perspective(1400px) rotateX(${tilt.toFixed(2)}deg) rotateY(${(onA ? -8 + 5 * Math.sin(t * 0.7) : 0).toFixed(2)}deg) scale(${(lerp(0.86, 1, intro) * (onA ? 1 + 0.07 * E.inOut(prog(t, 0, 5.0)) : 1)).toFixed(3)})`;
+    // FABLE bay is hot in the hook; at "free this week" its price gets struck → "included*"
+    $("bay3").classList.toggle("hot", onA); const st = t >= at("free") && t < T.os;
+    $("fp").innerHTML = st ? `<s>$8</s> <span style="color:#3ECF8E">Pro: incl.</span>` : "$8";
+    if (t >= at("free")) R.cue("pop", at("free") + 0.05);
+    // HOOK MOTION: push-in, a ring + glow pop on the Fable bay at "Fable", the stamp slams on "free"
+    { const fa = at("Fable") - 0.05, b3 = box("bay3"); M.ring("mgFx", t, fa + 0.05, { x: b3[0] + b3[2] / 2, y: b3[1] + b3[3] / 2, r: 360, d: 0.7, sfx: true });
+      const pg = prog(t, fa, 0.5); $("bay3").style.filter = pg > 0 && pg < 1 ? `brightness(${(1 + 0.6 * Math.sin(Math.PI * pg)).toFixed(2)})` : "";
+      const sa = at("free") - 0.02, sp = prog(t, sa, 0.28), so = t < T.os ? 1 - prog(t, T.os - 0.3, 0.3) : 0;
+      $("stamp").style.opacity = t >= sa ? so : 0; $("stamp").style.transform = `rotate(-8deg) scale(${lerp(1.7, 1, E.out3(sp)).toFixed(3)})`;
+      F.shake("rk", t, sa + 0.26, { amp: 10, d: 0.35 }); R.cue("impact", sa + 0.26); F.flash(t, sa + 0.26, { max: 0.25, d: 0.25, sfx: false }); }
+    // "where to look": a spotlight sweeps the bays and stops on Fable
+    { const p = prog(t, T.look, 1.2), y = lerp(780, 1060, E.inOut(p)); $("spot").style.opacity = t >= T.look && t < T.os ? 1 - prog(t, T.os - 0.3, 0.3) : 0; $("spot").style.transform = `translate(280px,${(y - 260).toFixed(0)}px)`; }
+    M.fly("hlA", t, at("free") - 0.05, { x: 40, s: 0.9 }, { f: 3, z: 0.6 }); if (t >= T.os - 0.3) $("hlA").style.opacity = 1 - prog(t, T.os - 0.3, 0.2);
+    // final advice: "your task" lands on OPUS, then a "hardest job" card goes to FABLE
+    const tk = $("task"), aO = at("Opus,") - 0.2, aH = at("hardest") - 0.1;
+    if (t >= T.use2 && t < T.cta) { const b2 = box("bay2"), b3 = box("bay3"), p1 = E.inOut(prog(t, aO, 0.6)), p2 = E.inOut(prog(t, aH, 0.6)), hard = t >= aH;
+      tk.classList.toggle("hard", hard); tk.textContent = hard ? "your hardest job" : "your task";
+      const tx = hard ? lerp(b2[0] + b2[2] - 330, b3[0] + b3[2] - 330, p2) : lerp(820, b2[0] + b2[2] - 330, p1), ty = hard ? lerp(b2[1] + 18, b3[1] + 18, p2) : lerp(1250, b2[1] + 18, p1);
+      tk.style.opacity = 1 - prog(t, T.cta - 0.25, 0.25); tk.style.transform = `translate(${tx.toFixed(1)}px,${ty.toFixed(1)}px)`;
+      $("bay2").classList.toggle("on", t >= aO + 0.6); $("bay3").classList.toggle("on", t >= aH + 0.6); } else { tk.style.opacity = 0; $("bay2").classList.remove("on"); $("bay3").classList.remove("on"); }
+    R.cue("land", aO + 0.6); R.cue("land", aH + 0.6); }
+
+  // ===== 1,000 agents → the OS boots =====
+  { const ch = $("mass").children, a = T.os + 0.1, gather = prog(t, at("operating") - 0.1, 0.5);
+    for (let i = 0; i < 1000; i++) { const d = ch[i], ai = a + hash(i) * 0.9; d.style.opacity = t >= ai ? 1 - gather : 0; d.style.transform = `scale(${lerp(0.2, 1, M.spring(t, ai, { f: 3, z: 0.6 })).toFixed(2)})`; }
+    const oa = at("operating"); $("os").style.opacity = t >= oa ? E.out3(prog(t, oa, 0.35)) : 0; $("os").style.transform = `scale(${lerp(0.85, 1, M.spring(t, oa, { f: 2.4, z: 0.6 })).toFixed(3)})`;
+    F.code("osp", OS, t, oa + 0.2, { cps: 95, sfx: false }); R.cue("type", oa + 0.2, { t2: oa + 1.4 });
+    M.fly("days", t, at("eight") - 0.05, { y: 30, s: 0.6 }, { f: 2.8, z: 0.5 }); R.cue("tick", T.os + 0.15); R.cue("impact", oa); }
+
+  // ===== three gadgets, each gets its ✓ =====
+  { const a = T.gad + 0.05; [1, 2, 3].forEach(i => { M.fly("g" + i, t, a + (i - 1) * 0.18, { y: 80, s: 0.85 }, { f: 2.6, z: 0.6 });
+      const k = $("g" + i).querySelector(".ok"), ka = at("worked") - 0.1 + (i - 1) * 0.16; k.style.opacity = t >= ka ? 1 : 0; k.style.transform = `scale(${lerp(0.3, 1, M.spring(t, ka, { f: 3, z: 0.45 })).toFixed(3)})`; R.cue("pop", ka); }); }
+
+  // ===== cost: two bars, Fable is double =====
+  { $("c1").style.width = (E.out3(prog(t, at("twice") - 0.1, 0.6)) * 45) + "%"; $("c2").style.width = (E.out3(prog(t, at("Opus") + 0.1, 0.7)) * 90) + "%";
+    M.fly("x2", t, at("costs.") - 0.1, { x: 40, s: 0.5, r: 8 }, { f: 3, z: 0.45 }); R.cue("impact", at("costs.")); }
+
+  // ===== Pro: included, calendar runs to 16, usage meter to 50 %, one free reset =====
+  { M.fly("pro", t, T.pro + 0.05, { y: 50, s: 0.94 }, { f: 2.6, z: 0.6 }); M.fly("cal", t, at("until") - 0.15, { x: -60, s: 0.9 }, { f: 2.6, z: 0.6 });
+    const cd = Math.round(lerp(9, 16, E.out3(prog(t, at("November") - 0.1, 0.7)))); $("cald").textContent = cd; R.cue("tick", at("November"));
+    M.fly("use", t, T.use - 0.05, { x: 60, s: 0.9 }, { f: 2.6, z: 0.6 }); const up = E.out3(prog(t, at("half"), 0.7)); $("usef").style.width = (up * 50) + "%"; $("usen").textContent = Math.round(up * 50) + "% max";
+    const ra = at("reset.") - 0.2; $("rs").style.opacity = t >= ra ? 1 : 0; $("rsi").style.transform = `rotate(${(-360 * E.out3(prog(t, ra, 0.8))).toFixed(0)}deg)`; R.cue("click", ra); }
+
+  // ===== catch: free plan ✕ =====
+  { M.fly("free", t, T.cat + 0.05, { y: 50, s: 0.94 }, { f: 2.6, z: 0.6 }); const xa = at("all.", 0) - 0.15; $("fr").style.opacity = t >= T.free - 0.1 ? 1 : 0.25; F.shake("fr", t, xa, { amp: 8, d: 0.35 }); }
+
+  // ===== the "free key" site siphons your prompt =====
+  { M.fly("scam", t, T.scam + 0.05, { x: -60, s: 0.9 }, { f: 2.6, z: 0.6 }); F.glitch("scam", t, at("sites?") - 0.1, { amp: 9, d: 0.45 });
+    M.fly("mine", t, at("prompts") - 0.15, { y: 40, s: 0.85 }, { f: 2.6, z: 0.6 }); M.fly("who", t, at("strangers.") - 0.25, { x: 60, s: 0.6 }, { f: 2.6, z: 0.5 });
+    WP.style.opacity = t >= at("prompts") && t < T.use2 ? 1 : 0;
+    dots.forEach((c, k) => { const a0 = at("prompts") + k * 0.22, p = ((t - a0) / 0.9) % 1; if (t < a0 || t >= T.use2) { c.setAttribute("opacity", 0); return; } const pt = WP.getPointAtLength(WP.getTotalLength() * p); c.setAttribute("cx", pt.x); c.setAttribute("cy", pt.y); c.setAttribute("opacity", 1); });
+    M.fly("warn", t, at("Skip") - 0.05, { y: 30, s: 0.6 }, { f: 3, z: 0.45 }); R.cue("glitch", at("sites?") - 0.1); R.cue("impact", at("Skip")); }
+
+  // ===== CTA =====
+  { M.fly("ig2", t, T.cta + 0.05, { y: 80, s: 0.9 }, { f: 2.4, z: 0.6 }); const ty = T.cta + 0.4, sent = ty + 0.55;
+    if (t < sent) R.type("cmt", "FABLE", t, ty, 12); else $("cmt").textContent = ""; $("cmph").style.display = t < ty || t >= sent ? "" : "none"; R.press("snd", t, sent - 0.08);
+    const dm = at("DM"); $("dm2").style.opacity = t >= dm ? 1 : 0; $("dm2").style.transform = `translateY(${((1 - M.spring(t, dm, { f: 2.6, z: 0.55 })) * -120).toFixed(1)}px)`; R.cue("ding", dm); R.cue("swell", dm - 0.05); }
+
+  // ===== extra sound events (earshot density) =====
+  [0, 1, 2, 3].forEach(i => R.cue("pop", -0.2 + i * 0.12, { soft: true })); R.cue("swish", at("free") - 0.1);
+  for (let d = 0; d < 7; d++) R.cue("tick", at("November") - 0.1 + d * 0.1);
+  for (let k = 0; k < 6; k++) R.cue("tick", at("half") + k * 0.12);
+  [[T.pro, "land"], [at("until") - 0.15, "land"], [T.use - 0.05, "land"], [T.cat, "bigwhoosh"], [T.cat + 0.05, "land"], [T.scam + 0.05, "land"], [at("prompts") - 0.15, "tap"], [T.why, "whoosh"], [T.cost, "whoosh"], [T.use2, "whoosh"], [T.cta + 0.05, "land"], [at("gadgets,"), "tap"], [at("eight"), "pop"]].forEach(([a, k]) => R.cue(k, a));
+  for (let k = 0; k < 10; k++) R.cue("tick", T.os + 0.15 + k * 0.09);
+  const fn = t >= T.os && t < T.cost ? "Source: Anthropic, 9 Nov 2026 · prototype OS; devices designed with Diode" : t >= T.cost && t < T.pro ? "API list prices, platform.claude.com · 11 Nov 2026" : t >= T.pro && t < T.cat ? "Pro + standard Team, billing before 9 Nov · Anthropic support, launch offers" : t >= T.cat && t < T.scam ? "Anthropic support: Fable isn't on the Free plan" : t >= T.use2 && t < T.cta ? "Anthropic: “Start with Opus 5.5 for most work”" : "";
+  $("fn").textContent = fn; $("fn").style.opacity = fn ? 1 : 0;
+};
+window.seek(0);
+</script></body></html>

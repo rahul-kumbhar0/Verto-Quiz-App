@@ -1,0 +1,29 @@
+{
+ "Claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "Zerodha": {
+  "file": "logos/zerodha.svg",
+  "white": "logos/zerodha-white.svg",
+  "word": null,
+  "title": "Zerodha",
+  "hex": "#387ED1",
+  "dark": false,
+  "source": "simple-icons:zerodha"
+ },
+ "Google Sheets": {
+  "file": "logos/googlesheets.svg",
+  "white": "logos/googlesheets-white.svg",
+  "word": null,
+  "title": "Google Sheets",
+  "hex": "#34A853",
+  "dark": false,
+  "source": "simple-icons:googlesheets"
+ }
+}

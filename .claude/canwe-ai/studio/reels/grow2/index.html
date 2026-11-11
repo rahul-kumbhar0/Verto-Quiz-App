@@ -1,0 +1,284 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Claude made this reel — the exact setup</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.g2{position:absolute;inset:0;visibility:hidden}
+.g2-fn{position:absolute;left:50%;transform:translateX(-50%);top:1296px;white-space:nowrap;font:500 19px Inter;color:var(--ink-2);opacity:0;z-index:4;background:rgba(14,15,18,.88);border:1px solid var(--g-line);border-radius:999px;padding:6px 16px}
+.is-light .g2-fn{background:rgba(255,255,255,.9);color:var(--p-ink-2);border-color:var(--p-line)}
+/* hook: the render log of THIS reel */
+.g2-rlog{position:absolute;left:90px;top:660px;width:900px;z-index:3}
+.g2-rlog .ui-term{width:900px}.g2-rlog .tm-body{min-height:300px;font-size:24px}
+.g2-steps{position:absolute;left:70px;right:70px;top:660px;display:grid;grid-template-columns:1fr 1fr;gap:20px;z-index:4}
+.g2-steps .m-card{height:250px;padding:26px;display:flex;flex-direction:column;justify-content:space-between;opacity:0}
+.g2-steps .m-card b{font:900 64px Inter;color:var(--acc-hi);letter-spacing:-2px}
+.g2-steps .m-card span{font:800 34px Inter;color:var(--ink)}
+.g2-steps .lg{width:64px;height:64px;border-radius:16px;background:#F3F1EC;display:grid;place-items:center;align-self:flex-end;margin-top:-64px}
+.g2-steps .lg img{width:40px;height:40px}
+.wm2il,.g2-steps .lg .wm2il{font:900 26px Inter;letter-spacing:-1px;color:#16171A}
+/* step 1 terminal + skills */
+.g2-term{position:absolute;left:60px;top:640px;width:960px;z-index:3}
+.g2-term .ui-term{width:960px}.g2-term .tm-body{min-height:300px;font-size:23px}
+.g2-sk{position:absolute;left:50px;right:50px;top:1040px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;z-index:4}
+.g2-sk .m-chip{font:700 22px Mono;padding:8px 14px;opacity:0}
+/* step 2 claude chat */
+.g2-cl{position:absolute;left:33px;top:640px;transform-origin:0 0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(255,255,255,.08),0 50px 120px -20px rgba(0,0,0,.8);z-index:3}
+.g2-cl .ui-cl{height:560px}
+.g2-ext{position:absolute;right:56px;top:600px;display:flex;align-items:center;gap:10px;z-index:5;opacity:0}
+.g2-ext img{width:30px;height:30px}
+/* step 3 connectors (Claude settings, dark) */
+.g2-set{position:absolute;left:60px;top:640px;width:960px;height:560px;background:#262624;border-radius:18px;overflow:hidden;display:flex;font-family:Inter;color:#faf9f5;z-index:3;box-shadow:0 0 0 1.5px rgba(255,255,255,.08),0 50px 120px -20px rgba(0,0,0,.8)}
+.g2-nav{width:230px;padding:28px 18px;border-right:1px solid rgba(250,249,245,.07);font:500 19px Inter;color:#c2c0b6}
+.g2-nav div{padding:10px 14px;border-radius:10px}.g2-nav div.on{background:#30302e;color:#faf9f5}
+.g2-nav h5{font:500 24px SerifUI;color:#faf9f5;margin:0 0 18px 14px}
+.g2-list{flex:1;padding:30px 34px}
+.g2-list h4{font:500 30px SerifUI;margin:0 0 6px}.g2-list p{font:500 17px Inter;color:#9a978e;margin:0 0 22px}
+.g2-row{display:flex;align-items:center;gap:16px;padding:16px 18px;border:1px solid #3d3d3a;border-radius:14px;margin-bottom:12px;background:#2b2b29;opacity:0}
+.g2-row .ic{width:46px;height:46px;border-radius:12px;background:#F3F1EC;display:grid;place-items:center;flex:none}
+.g2-row .ic img{width:30px;height:30px}
+.g2-row b{display:block;font:700 21px Inter}.g2-row small{font:500 15px Inter;color:#9a978e}
+.g2-row .st{margin-left:auto;font:600 15px Inter;color:#7CC4A0;border:1px solid rgba(124,196,160,.4);border-radius:999px;padding:4px 12px}
+.g2-row.hot{border-color:rgba(217,119,87,.75);box-shadow:0 0 0 2px rgba(217,119,87,.35)}
+.g2-disc{position:absolute;left:0;right:0;top:1222px;text-align:center;z-index:6;opacity:0}
+.g2-disc .m-acc{font:900 34px Inter;padding:14px 26px;letter-spacing:-.5px}
+.g2-stick{position:absolute;right:70px;top:560px;font:900 34px Inter;padding:12px 22px;z-index:7;opacity:0;white-space:nowrap}
+/* step 3b counter */
+.g2-cnt{position:absolute;left:0;right:0;top:640px;text-align:center;z-index:3}
+.g2-cnt .t-hero{font-size:200px}
+.g2-chips{display:flex;justify-content:center;gap:14px;margin-top:26px}.g2-chips .m-chip{opacity:0}
+.g2-flow{position:absolute;left:0;top:0}
+.g2-bub{position:absolute;top:1080px;font:700 24px Inter;padding:14px 20px;border-radius:20px;z-index:4;opacity:0}
+/* step 4 video */
+.g2-code{position:absolute;left:70px;width:940px;top:640px;height:430px;padding:28px 30px;box-sizing:border-box;z-index:3;overflow:hidden}
+.g2-code .fx-code{font-size:22px}
+.g2-wave{position:absolute;left:70px;width:940px;top:1092px;height:120px;display:flex;align-items:center;gap:6px;padding:0 24px;box-sizing:border-box;z-index:3;opacity:0}
+.g2-wave i{flex:1;border-radius:4px;background:linear-gradient(180deg,#F0A585,#D97757)}
+.g2-wave .lab{position:absolute;left:24px;top:-34px;display:flex;align-items:center;gap:10px;font:700 20px Mono;color:var(--ink-2)}
+.g2-wave .lab span{width:30px;height:30px;border-radius:8px;background:#F3F1EC;display:grid;place-items:center}.g2-wave .lab img{width:20px}
+.g2-phone{position:absolute;z-index:5;background:#0B0C0E;border:6px solid #2B2E35;overflow:hidden;opacity:0;box-shadow:0 40px 90px -20px rgba(0,0,0,.8)}
+.g2-phone img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.g2-prog{position:absolute;left:640px;top:760px;width:360px;z-index:5;opacity:0}
+.g2-prog .bar{height:16px;border-radius:8px;background:#2B2E35;overflow:hidden}.g2-prog .bar i{display:block;height:100%;background:linear-gradient(90deg,#F0A585,#D97757);width:0}
+.g2-prog .n{font:900 64px Inter;color:var(--ink);letter-spacing:-2px;margin-bottom:10px}.g2-prog small{display:block;font:700 20px Mono;color:var(--ink-3);margin-top:10px}
+.g2-tl{position:absolute;left:640px;top:1040px;width:360px;height:150px;padding:16px;box-sizing:border-box;z-index:5;opacity:0}
+.g2-tl div{height:24px;border-radius:6px;margin:6px 0;background:#3B3F48}.g2-tl div:nth-child(2){width:70%;background:#454953}.g2-tl div:nth-child(3){width:85%;background:#33363E}
+.g2-tl b{position:absolute;inset:0;display:grid;place-items:center;font:900 40px Inter;color:var(--ink)}
+/* give (light) */
+.g2-give{position:absolute;left:70px;right:70px;top:640px;display:flex;flex-direction:column;gap:22px;z-index:3}
+.g2-give .m-paper{padding:24px 28px;opacity:0}
+.g2-give h4{font:800 30px Mono;color:var(--p-ink);margin:0 0 10px;display:flex;align-items:center;gap:12px}
+.g2-give h4 i{font-style:normal;font-size:34px}
+.g2-give p{font:500 23px/1.5 Mono;color:var(--p-ink-2);margin:0}
+.g2-give p b{color:#B4573A}
+/* catch: instagram share screen */
+.g2-ig{position:absolute;left:160px;width:760px;top:620px;height:620px;background:#000;border-radius:28px;overflow:hidden;z-index:3;font-family:Inter;color:#fff;box-shadow:0 0 0 1.5px rgba(255,255,255,.1),0 50px 120px -20px rgba(0,0,0,.85)}
+.g2-ig .hd{display:flex;align-items:center;justify-content:center;height:70px;font:700 24px Inter;border-bottom:1px solid #262626;position:relative}.g2-ig .hd span{position:absolute;left:24px;font-size:30px}
+.g2-ig .bd{display:flex;gap:20px;padding:24px}
+.g2-ig .th{width:200px;height:340px;border-radius:12px;overflow:hidden;position:relative;background:#111}.g2-ig .th img{width:100%;height:100%;object-fit:cover}
+.g2-ig .cap{flex:1;font:500 21px/1.45 Inter;color:#e0e0e0}
+.g2-ig .row{margin:0 24px;padding:16px 0;border-top:1px solid #262626;font:500 21px Inter;color:#e0e0e0;display:flex;justify-content:space-between}
+.g2-ig .share{position:absolute;left:24px;right:24px;bottom:24px;height:64px;border-radius:12px;background:#0095F6;display:grid;place-items:center;font:700 24px Inter}
+.g2-lock{position:absolute;left:300px;top:1160px;background:rgba(14,15,18,.94);border:1.5px solid var(--acc);color:var(--acc-hi);font:700 24px Inter;border-radius:12px;padding:10px 16px;opacity:0;z-index:6}
+/* CTA */
+.g2-cm{position:absolute;left:100px;right:100px;top:720px;padding:24px 26px;z-index:3}
+.g2-cm .row{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 25px Inter;color:var(--ink);opacity:0}
+.g2-cm .row i{width:46px;height:46px;border-radius:50%;flex:none}
+.g2-cm .row small{display:block;font:600 17px Inter;color:var(--ink-3)}
+.g2-cm .inp{display:flex;align-items:center;margin-top:12px;border:1.5px solid var(--g-line-hi);border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;min-height:36px}
+.g2-cm .inp .ph{color:var(--ink-3);font-weight:500}.g2-cm .inp .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:var(--acc);display:grid;place-items:center;color:#1A0E08;font-weight:900}
+.g2-dm{position:absolute;left:110px;right:110px;top:600px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7}
+.g2-dm img{width:56px;height:56px;border-radius:50%;background:#fff}.g2-dm b{display:block;font:700 22px Inter}.g2-dm span{font:500 21px Inter;color:var(--ink-2)}
+.g2-dm em{margin-left:auto;font:700 16px Mono;font-style:normal;color:var(--acc-hi);border:1px solid rgba(217,119,87,.5);border-radius:999px;padding:4px 10px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="g2" id="sHook">
+      <div class="g2-rlog" id="rlog"><div id="tmR"></div></div>
+      <div class="g2-steps" id="steps">
+        <div class="m-card" id="st1"><b>01</b><span>Skill pack</span><div class="lg"><img src="logos/claude.svg" alt=""></div></div>
+        <div class="m-card" id="st2"><b>02</b><span>Trends</span><div class="lg"><img src="logos/googlechrome.svg" alt=""></div></div>
+        <div class="m-card" id="st3"><b>03</b><span>DMs</span><div class="lg"><span class="wm2il">2il</span></div></div>
+        <div class="m-card" id="st4"><b>04</b><span>The video</span><div class="lg"><img src="logos/elevenlabs.svg" alt=""></div></div>
+      </div>
+      <div class="g2-fn" id="fn0">This reel's own render log</div>
+    </section>
+    <section class="g2" id="s1"><div class="g2-term"><div id="tm1"></div></div><div class="g2-sk" id="sk"></div>
+      <div class="g2-fn" id="fn1">github.com/Jakeschincariol/instagram-agent-skill · MIT · free · not affiliated</div></section>
+    <section class="g2" id="s2"><div class="g2-ext" id="ext"><img src="logos/googlechrome.svg" alt=""><span class="m-chip">Chrome extension · PullRows</span></div>
+      <div class="g2-cl" id="clw"><div id="cl"></div></div>
+      <div class="g2-fn" id="fn2">Real trend scan, 1 Nov 2026 · views are the tool's estimates</div></section>
+    <section class="g2" id="s3"><svg class="mg-svg" id="s3svg"></svg>
+      <div class="g2-set"><div class="g2-nav"><h5>Settings</h5><div>General</div><div>Account</div><div>Privacy</div><div>Capabilities</div><div class="on">Connectors</div></div>
+        <div class="g2-list"><h4>Connectors</h4><p>Allow Claude to reference other apps and services.</p>
+          <div class="g2-row hot" id="r2il"><span class="ic"><span class="wm2il" style="font-size:18px">2il</span></span><div><b>2il.in</b><small>Instagram comment → DM automations</small></div><span class="st">Connected</span></div>
+          <div class="g2-row" id="rpr"><span class="ic"><img src="logos/googlechrome.svg" alt=""></span><div><b>PullRows</b><small>Trends from your Chrome</small></div><span class="st">Connected</span></div>
+          <div class="g2-row" id="rel"><span class="ic"><img src="logos/elevenlabs.svg" alt=""></span><div><b>ElevenLabs</b><small>Voice</small></div><span class="st">Connected</span></div></div></div>
+      <div class="g2-disc" id="disc"><span class="m-acc">Our own tool · full disclosure</span></div>
+      <div class="g2-stick m-acc" id="stick">this reel = the promo 😄</div>
+      <div class="g2-fn" id="fn3">Claude → Settings → Connectors (recreated) · 2il.in is our own product</div></section>
+    <section class="g2" id="s3b"><svg class="mg-svg" id="s3bsvg"></svg>
+      <div class="g2-cnt"><div class="t-kicker">DMs sent in 7 days</div><div class="t-hero" id="odo"></div>
+        <div class="g2-chips" id="chips"><span class="m-chip">12 automations live</span><span class="m-chip">1,964 contacts</span><span class="m-chip acc">via 2il.in</span></div></div>
+      <div class="g2-bub m-card" id="bubC" style="left:90px">💬 “REEL”</div><div class="g2-bub m-glass" id="bubD" style="right:90px">📩 DM sent</div>
+      <div class="g2-fn" id="fn3b">2il.in dashboard for @canwe.ai · 7 days to 2 Nov 2026</div></section>
+    <section class="g2" id="s4">
+      <div class="g2-code m-card" id="code"><div class="fx-code" id="codeT"></div></div>
+      <div class="g2-wave m-card" id="wave"><div class="lab"><span><img src="logos/elevenlabs.svg" alt=""></span>voice · Shlok · ElevenLabs v3</div></div>
+      <div class="g2-phone" id="phone"><img src="hook.png" alt=""></div>
+      <div class="g2-prog" id="prog"><div class="n" id="frm">0</div><div class="bar"><i id="bar"></i></div><small id="frmL">frames rendered</small></div>
+      <div class="g2-tl m-card" id="tl"><div></div><div></div><div></div><b id="tlb">editor</b></div>
+      <div class="g2-fn" id="fn4">Real code from this reel · rendered with Playwright + ffmpeg</div></section>
+    <section class="g2" id="sGive"><div class="g2-give">
+      <div class="m-paper" id="gv1"><h4><i>📁</i>reel-script-writer</h4><p>10 scored hooks · <b>audio tags</b> · lint · caption + DM copy</p></div>
+      <div class="m-paper" id="gv2"><h4><i>📁</i>speedy-explainer-reel</h4><p>presenter · captions · <b>motion graphics</b> · real UI · 14 hook openers</p></div></div>
+      <div class="g2-fn" id="fn5">Free download in the guide · licences included</div></section>
+    <section class="g2" id="sCatch">
+      <div class="g2-ig"><div class="hd"><span>‹</span>New reel</div>
+        <div class="bd"><div class="th"><img src="hook.png" alt=""></div><div class="cap">Claude made this reel. Here's the exact setup 👇<br><br>Comment REEL…</div></div>
+        <div class="row"><span>Tag people</span><span>›</span></div><div class="row"><span>Add music</span><span>›</span></div>
+        <div class="share" id="share">Share</div></div>
+      <div class="g2-lock" id="lock">🔒 Claude can't press this</div>
+    </section>
+    <section class="g2" id="sCta"><svg class="mg-svg" id="ctsvg" style="z-index:8"><circle id="ctHead" class="mg-head" r="9"/></svg>
+      <div class="g2-cm m-card" id="cm"><div class="t-kicker" style="margin-bottom:8px">comments</div>
+        <div class="row" id="r1"><i style="background:#8FA3BF"></i><div><small>riya · 2m</small>REEL</div></div>
+        <div class="row" id="r2"><i style="background:#7A3A26"></i><div><small>arjun · 1m</small>REEL how is this real 😭</div></div>
+        <div class="row" id="r3"><i style="background:linear-gradient(135deg,#F0A585,#D97757)"></i><div><small>you · now</small>REEL</div></div>
+        <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+      <div class="g2-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! 4 steps + the video skills 🎬</span></div><em>via 2il.in</em></div>
+    </section>
+  </div>
+  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div><svg class="mg-svg" id="topsvg" style="z-index:9"></svg>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, U = R.ui, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const T = { s1: at("Step one."), four: at("Four steps."), s2: at("Step two."), s3: at("Step three."), s3b: at("In seven days"), s4: at("Step four."),
+  give: at("And the skills"), cat: at("It never"), cta: at("Comment"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 1.8).toFixed(2);
+const FRAMES = Math.round(window.REEL_DURATION * 30);
+// ---------- real UI ----------
+U.terminal("tmR", { title: "~/canwe/reels/grow2 — claude" });
+U.terminal("tm1", { title: "~/canwe — claude" });
+const SK = ["/ig-reel", "/ig-viral", "/ig-caption", "/ig-carousel", "/ig-story", "/ig-profile", "/ig-plan", "/ig-human", "/ig-comment", "/ig-reply", "/ig-dm", "/ig-repurpose", "/ig-audit"];
+$("sk").innerHTML = SK.map((s, i) => `<span class="m-chip${i === 0 || i === 1 ? " acc" : ""}" id="sk${i}">${s}</span>`).join("");
+U.claudeChat("cl", { title: "Instagram trends", initial: "C", model: "Claude", tool: { name: "PullRows", fn: "trends_find" },
+  answer: ["This month on <b>#claudeai</b>, one format is winning: <b>“Claude made this video.”</b>", "Top 3 reels: <b>~1.8M</b>, <b>~1.3M</b> and <b>~1.0M</b> views.",
+           "Your angle: show the real pipeline behind it."] });
+const CODE = `// this reel, scene 4 (real code)
+window.seek = t => {
+  R.frame(t);
+  F.slots(t, scenes);
+  M.iris("sHook", "s1", t, T.s1);
+  M.grid("mgGrid", t, { pulse });
+  R.speedyFrame(t);
+};`;
+$("wave").insertAdjacentHTML("beforeend", Array.from({ length: 56 }, (_, i) => `<i id="wv${i}"></i>`).join(""));
+// ---------- probes ----------
+const SR = $("stage").getBoundingClientRect();
+const SCN = ["sHook", "s1", "s2", "s3", "s3b", "s4", "sGive", "sCatch", "sCta"];
+SCN.forEach(s => $(s).style.visibility = "visible");
+const box = id => { const r = $(id).getBoundingClientRect(); return { x: r.left - SR.left, y: r.top - SR.top, w: r.width, h: r.height }; };
+const ctr = id => { const b = box(id); return [b.x + b.w / 2, b.y + b.h / 2]; };
+const CODEB = box("code"), R2IL = ctr("r2il"), SHARE = ctr("share"), SND = ctr("snd"), DMB = box("dm"), DMI = [DMB.x + 48, DMB.y + DMB.h / 2];
+const CHIP = SK.map((_, i) => ctr("sk" + i)), BC = ctr("bubC"), BD = ctr("bubD");
+SCN.forEach(s => $(s).style.visibility = "hidden");
+const PHONE = { x: 120, y: 650, w: 330, h: 586, r: 40 };
+// ---------- setup ----------
+F.beats({ bpm: 136, groove_in: 0.0, dur: 80 });
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH, light: [[T.give, T.cat]],
+  chapters: [{ label: "skills", at: T.s1 }, { label: "trends", at: T.s2 }, { label: "DMs", at: T.s3 }, { label: "video", at: T.s4, end: T.cta }],
+  counter: { unit: "steps", steps: [[T.s1, 1, "of 4"], [T.s2, 2, "of 4"], [T.s3, 3, "of 4"], [T.s4, 4, "of 4"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0, look: "street", style: { shirt: "#2B2E35", print: "#D97757" } },
+  poses: [[0, "point_up"], ...window.PINS.map(([p, n]) => [at(p), n])], autoPoses: {} });
+
+window.seek = t => {
+  R.frame(t);
+  F.slots(t, [["sHook", 0, T.s1], ["s1", T.s1, T.s2], ["s2", T.s2, T.s3], ["s3", T.s3, T.s3b], ["s3b", T.s3b, T.s4], ["s4", T.s4, T.give], ["sGive", T.give, T.cat], ["sCatch", T.cat, T.cta], ["sCta", T.cta, 99]]);
+  M.iris("sHook", "s1", t, T.s1 - 0.1, { x: 260, y: 790, d: 0.5 }); F.cutCurve("s1", "s2", t, T.s2); F.cutCurve("s2", "s3", t, T.s3);
+  F.zoomCut("s3", "s3b", t, T.s3b); F.cutCurve("s3b", "s4", t, T.s4); F.rackFocus("s4", "sGive", t, T.give); F.cutCurve("sGive", "sCatch", t, T.cat); F.inverseZoom("sCatch", "sCta", t, T.cta);
+  R.speedyFrame(t);
+  F.shake("cam", t, at("1,135") + 0.05, { amp: 14, d: 0.5, sfx: false });
+  const pulse = F.pulse(t, { decay: 7 });
+  M.grid("mgGrid", t, { pulse, light: t >= T.give && t < T.cat, drift: 8,
+    waves: [[0.3, 540, 800, 1.2], [T.s1 - 0.1, 260, 790], [T.s3 + 0.4, R2IL[0], R2IL[1]], [at("1,135") + 0.05, 540, 860, 1.7], [at("I press") + 0.2, SHARE[0], SHARE[1], 1.1], [at("DM you") + 0.45, DMI[0], DMI[1]]] });
+
+  // HOOK — opener #3: he THROWS this reel's render log onto the screen; then the 4 steps are dealt
+  const thr = -0.12, land = 0.3, from = { x: 700 - 540, y: 1500 - 820, r: -24, s: 0.16 };
+  M.trail("rlog", t, tt => M.flyT(tt, thr, from, { f: 2.3, z: 0.55 }) + ` scale(${1 - 0.12 * E.power2InOut(prog(tt, T.four - 0.1, 0.4))})`, { n: 3, lag: 0.035, a: 0.25 });
+  $("rlog").style.opacity = t < thr ? 0 : 1 - 0.75 * prog(t, T.four - 0.1, 0.3);
+  F.shake("cam", t, land, { amp: 16, sfx: false }); M.ring("mgFx", t, land, { x: 540, y: 820, r: 520, d: 0.7, sfx: true }); F.flash(t, land, { max: 0.2, sfx: false });
+  U.termPlay("tmR", t, [{ t: 0.05, kind: "cmd", text: "node render.mjs grow2/index.html video.mp4" },
+    { t: 0.75, kind: "ok", text: `${FRAMES.toLocaleString("en-US")} frames · motion blur ×3` }, { t: 1.0, kind: "ok", text: "voice: Shlok · ElevenLabs v3" },
+    { t: 1.25, kind: "ok", text: "captions · music · sfx mixed" }, { t: 1.5, kind: "claude", text: "claude-made-this-reel.mp4 ✓" }], { cps: 60 });
+  ["st1", "st2", "st3", "st4"].forEach((id, i) => M.fly(id, t, T.four + i * 0.1, { x: (i % 2 ? 1 : -1) * 120, y: 200, r: (i % 2 ? 8 : -8), s: 0.7 }, { f: 2.3, z: 0.55 }));
+  R.note("fn0", t, 0.9, T.four - 0.1);
+
+  // STEP 1 — one command in Claude Code; the 13 skills fly out of the terminal with echo trails
+  const a1 = T.s1 + 0.25;
+  U.termPlay("tm1", t, [{ t: a1, kind: "cmd", text: "/plugin marketplace add Jakeschincariol/instagram-agent-skill" },
+    { t: at("One command") + 0.5, kind: "ok", text: "marketplace added · instagram-agent-skill" }, { t: at("Thirteen") - 0.05, kind: "claude", text: "13 skills ready · from /ig-reel to /ig-audit" }], { cps: 44 });
+  if (t >= T.s1 - 0.2 && t < T.s2 + 0.4) SK.forEach((_, i) => { const a2 = at("Thirteen") + i * 0.045, c = $("sk" + i), fr = { x: 300 - CHIP[i][0], y: 860 - CHIP[i][1], r: F.hash(i) * 30, s: 0.3 };
+    c.style.opacity = t < a2 ? 0 : 1; M.trail(c, t, tt => M.flyT(tt, a2, fr, { f: 2.2, z: 0.6 }), { n: 3, lag: 0.03, a: 0.28 }); });
+  M.ring("mgFx", t, at("Thirteen"), { x: 300, y: 860, r: 220, d: 0.6 });
+  R.note("fn1", t, T.s1 + 0.6, T.s2 - 0.3);
+
+  // STEP 2 — the real Claude chat calls the trends tool; answer streams with real (dated) numbers
+  const ep = M.spring(t, T.s2 + 0.15, { f: 2.4, z: 0.55 }); $("ext").style.opacity = t > T.s2 + 0.15 ? 1 : 0; $("ext").style.transform = `translateY(${(1 - ep) * -30}px)`;
+  $("clw").style.transform = `scale(${lerp(1.22, 1.18, E.expoOut(prog(t, T.s2, 0.6)))})`;
+  U.claudePlay("cl", t, { text: "What's blowing up on #claudeai this month?", at: T.s2 + 0.3, cps: 38, toolDur: 0.6, wps: 30 });
+  R.note("fn2", t, T.s2 + 0.8, T.s3 - 0.3);
+
+  // STEP 3 — Claude's connectors page: 2il.in connected (ring + scribble), disclosure slams, "this reel = the promo" sticker
+  [["r2il", T.s3 + 0.35], ["rpr", T.s3 + 0.5], ["rel", T.s3 + 0.62]].forEach(([id, a2]) => M.fly(id, t, a2, { x: 60, s: 0.95 }, { f: 2.6, z: 0.6 }));
+  M.ring("mgFx", t, T.s3 + 0.4, { x: R2IL[0], y: R2IL[1], r: 260, d: 0.6 });
+  const dp = M.spring(t, at("Full disclosure"), { f: 2.6, z: 0.45 }); $("disc").style.opacity = t >= at("Full disclosure") ? 1 : 0; $("disc").style.transform = `scale(${lerp(0.5, 1, dp)}) rotate(${(1 - dp) * -6}deg)`;
+  if (t >= T.s3 && t < T.s3b + 0.3) { M.path("s3svg", "scr", M.ellipse(R2IL[0] - 40, R2IL[1], 380, 62, 5), "mg-line scrib"); M.draw("scr", t, at("Yes, this reel") + 0.1, 0.45, { ease: "power2InOut" }); }
+  const sp = M.spring(t, at("promote") - 0.05, { f: 2.6, z: 0.45 }); $("stick").style.opacity = t >= at("promote") - 0.05 ? 1 : 0; $("stick").style.transform = `rotate(${4 + (1 - sp) * 10}deg) scale(${lerp(0.4, 1, sp)})`;
+  R.note("fn3", t, T.s3 + 0.6, T.s3b - 0.3);
+
+  // STEP 3b — the real number: 1,135 DMs in 7 days, comments → DMs packets, the impact stack
+  F.odometer("odo", t, at("1,135") - 0.1, 0.9, 1135);
+  M.rays("s3bsvg", t, at("1,135") + 0.05, { x: 540, y: 860, r0: 250, len: 110, n: 16, d: 0.65 }); M.ring("mgFx", t, at("1,135") + 0.05, { x: 540, y: 860, r: 560, d: 0.9, sfx: true });
+  [...$("chips").children].forEach((c, i) => M.fly(c, t, at("DMs for me") + 0.1 + i * 0.15, { y: 40, s: 0.6 }, { f: 2.5, z: 0.5 }));
+  ["bubC", "bubD"].forEach((id, i) => M.fly(id, t, T.s3b + 0.2 + i * 0.15, { y: 40, s: 0.7 }, { f: 2.4, z: 0.55 }));
+  if (t >= T.s3b - 0.2 && t < T.s4 + 0.4) { const fl = M.path("s3bsvg", "fl", `M${BC[0] + 90},${BC[1]} C${BC[0] + 260},${BC[1] + 120} ${BD[0] - 260},${BD[1] + 120} ${BD[0] - 90},${BD[1]}`, "mg-line acc");
+    M.draw(fl, t, T.s3b + 0.35, 0.4); M.flow(fl, t, { n: 6, speed: 1.4, from: T.s3b + 0.6, to: T.s4 }); }
+  R.note("fn3b", t, T.s3b + 0.5, T.s4 - 0.3);
+
+  // STEP 4 — the code types, the voice waveform plays, the code card MORPHS into a phone that renders frames; "editor" is struck
+  F.code("codeT", CODE, t, T.s4 + 0.2, { cps: 70 });
+  $("wave").style.opacity = clamp((t - at("adds the voice") + 0.1) / 0.2);
+  for (let i = 0; i < 56; i++) { const on = t > at("adds the voice"), h = on ? 14 + 80 * Math.abs(F.noise(i * 0.7 + t * 6)) * (0.4 + 0.6 * Math.abs(Math.sin(i * 0.37))) : 6; $("wv" + i).style.height = h + "px"; }
+  const mA = at("renders"), mp = t >= mA ? M.morph("code", t, mA, { ...CODEB, r: 28 }, PHONE, { f: 1.9, z: 0.75, sfx: false }) : 0;
+  if (t < mA) Object.assign($("code").style, { left: CODEB.x + "px", top: CODEB.y + "px", width: CODEB.w + "px", height: CODEB.h + "px", borderRadius: "28px", filter: "" });
+  $("codeT").style.opacity = 1 - clamp(mp * 3); $("phone").style.opacity = t >= mA ? clamp((mp - 0.7) / 0.3) : 0; Object.assign($("phone").style, { left: PHONE.x + "px", top: PHONE.y + "px", width: PHONE.w + "px", height: PHONE.h + "px", borderRadius: PHONE.r + "px" });
+  if (t >= mA) $("wave").style.opacity = 1 - clamp((t - mA) / 0.25);
+  const rp = clamp((t - mA - 0.2) / 1.1); $("prog").style.opacity = clamp((t - mA - 0.1) / 0.2); $("bar").style.width = rp * 100 + "%"; $("frm").textContent = Math.round(rp * FRAMES).toLocaleString("en-US");
+  M.fly("tl", t, at("No editor.") - 0.1, { y: 40, s: 0.8 }, { f: 2.6, z: 0.5 }); M.strike("tlb", t, at("editor.") + 0.1, { d: 0.25 });
+  R.note("fn4", t, T.s4 + 0.6, T.give - 0.3);
+
+  // GIVE (light) — the two skill folders are dealt, then fly toward you
+  [["gv1", T.give + 0.15], ["gv2", T.give + 0.3]].forEach(([id, a2], i) => { const p = M.fly(id, t, a2, { x: (i ? 1 : -1) * 200, y: 120, r: (i ? 6 : -6), s: 0.8 }, { f: 2.2, z: 0.6 });
+    const toYou = E.power2InOut(prog(t, at("giving") , 0.5)); if (toYou > 0) $(id).style.transform += ` scale(${1 + 0.08 * Math.sin(Math.PI * toYou)})`; });
+  F.sheen("gv1", t, at("giving") + 0.1); F.sheen("gv2", t, at("giving") + 0.25);
+  R.note("fn5", t, T.give + 0.5, T.cat - 0.3);
+
+  // CATCH — Instagram share screen; Claude is locked out; YOU press Share
+  const lk = E.backOut(prog(t, at("never") - 0.05, 0.4), 1.5); $("lock").style.opacity = clamp(prog(t, at("never") - 0.05, 0.2) * 5) * (1 - prog(t, at("I press") - 0.15, 0.2)); $("lock").style.transform = `scale(${lerp(0.7, 1, lk)})`;
+  M.ring("mgFx", t, at("never"), { x: 450, y: 1185, r: 140, d: 0.6, cool: true });
+  R.press("share", t, at("press") + 0.1); M.ring("mgFx", t, at("press") + 0.1, { x: SHARE[0], y: SHARE[1], r: 260, d: 0.7 });
+
+  // CTA — comment REEL, a packet travels along a drawn path to the DM that 2il.in sends
+  [["r1", T.cta + 0.15], ["r2", T.cta + 0.3]].forEach(([id, a2]) => M.fly(id, t, a2, { x: -60, s: 0.9 }, { f: 2.4, z: 0.6 }));
+  const tyA = T.cta + 0.4, sent = tyA + 0.5, dmA = at("DM you");
+  if (t < sent) R.type("cty", "REEL", t, tyA, 12); else $("cty").textContent = "";
+  $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.1);
+  M.fly("r3", t, sent, { y: 40, s: 0.9 }, { f: 2.6, z: 0.55 });
+  if (t >= T.cta) { const ln = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(ln, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
+  R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 });
+};
+window.seek(0);
+</script></body></html>

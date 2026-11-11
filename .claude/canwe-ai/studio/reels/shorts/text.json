@@ -1,0 +1,36 @@
+{
+ "step": 0.5,
+ "safe": {
+  "top": 288,
+  "bottom": 1248,
+  "left": 64.8,
+  "right": 864
+ },
+ "unsafe": [],
+ "small": [
+  {
+   "t": 5.5,
+   "text": "github.com/JayWebtech/autoshorts",
+   "id": "url",
+   "px": 27
+  },
+  {
+   "t": 5.5,
+   "text": "Long video in → AI ranks the viral moments → vertical 9:16 clips out. Free, local-first.",
+   "id": "P",
+   "px": 33
+  },
+  {
+   "t": 26,
+   "text": "🔒 Private",
+   "id": "v1",
+   "px": 28
+  },
+  {
+   "t": 35.5,
+   "text": "with DeepSeek",
+   "id": "SMALL",
+   "px": 33
+  }
+ ]
+}

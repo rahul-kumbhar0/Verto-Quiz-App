@@ -1,0 +1,94 @@
+[
+ {
+  "type": "pop",
+  "t": 4.219,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 18.754,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 3.072,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.026,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.299,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 6.163,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 7.8629999999999995,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 9.263,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 10.462,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.989,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 12.642,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 14.744,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 16.543,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 18.634,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 3.8339999999999996
+ },
+ {
+  "type": "swish",
+  "t": 10.27
+ },
+ {
+  "type": "swish",
+  "t": 16.351
+ },
+ {
+  "type": "type",
+  "t": 13.042,
+  "t2": 16.208666666666666
+ }
+]

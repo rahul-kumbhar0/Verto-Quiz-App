@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["guess", "Enter", "tokens#1", "list of numbers", "50,257", "stream", "predicting", "TOKENS#2"], "bold": ["day one", "3/4", "numbers#2", "all again", "different", "follow"]};
+window.PINS = [["how it picks.", "explain"], ["looking things up.", "point_cam"]];

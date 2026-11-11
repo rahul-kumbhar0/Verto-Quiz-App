@@ -1,0 +1,207 @@
+[
+ {
+  "type": "pop",
+  "t": 7.091,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.291,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 17.663,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 22.453000000000003,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": -1,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0.752,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 3.2039999999999997,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 5.305,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 6.632,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 10.077,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.777,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.004000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 14.295,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.651000000000002,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 18.781,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 22.413,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 24.375,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 26.219,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 29.295,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 30.604,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 33.429,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 36.547000000000004,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 37.905,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 6.552
+ },
+ {
+  "type": "swish",
+  "t": 11.221
+ },
+ {
+  "type": "swish",
+  "t": 15.579
+ },
+ {
+  "type": "whoosh",
+  "t": 19.538
+ },
+ {
+  "type": "swish",
+  "t": 27.173
+ },
+ {
+  "type": "impact",
+  "t": 34.581,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 2.556
+ },
+ {
+  "type": "impact",
+  "t": 1.782,
+  "soft": true
+ },
+ {
+  "type": "impact",
+  "t": 2.646,
+  "soft": true
+ },
+ {
+  "type": "impact",
+  "t": 2.616,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 11.631,
+  "t2": 13.889064516129032
+ },
+ {
+  "type": "type",
+  "t": 24.75,
+  "t2": 26.33695652173913
+ },
+ {
+  "type": "impact",
+  "t": 26.644000000000002,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 27.721,
+  "t2": 28.003447360000003
+ },
+ {
+  "type": "swish",
+  "t": 28.724
+ },
+ {
+  "type": "click",
+  "t": 29.774
+ },
+ {
+  "type": "impact",
+  "t": 29.824,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 34.981,
+  "t2": 35.338142857142856
+ },
+ {
+  "type": "click",
+  "t": 35.381
+ },
+ {
+  "type": "pop",
+  "t": 36.245
+ }
+]

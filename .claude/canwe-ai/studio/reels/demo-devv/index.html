@@ -1,0 +1,332 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>DEVV demo</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+/* ===== speedy_devv "Let's design GitHub" grammar: one running example, one hero that ACCUMULATES, planted mascot ===== */
+.sc2{position:absolute;inset:0;visibility:hidden}
+.hz{position:absolute;left:0;right:0;top:680px;height:610px}                 /* the hero zone */
+.mono{font-family:"JetBrains Mono",Mono,monospace}
+/* the persistent hero: the reel rack (our "Spokes") */
+#rk{position:absolute;left:250px;top:690px;width:580px;border-radius:22px;background:linear-gradient(180deg,#1c1e24,#121318);border:2px solid #2c2f37;box-shadow:0 40px 80px -20px rgba(0,0,0,.6),inset 0 1px 0 rgba(255,255,255,.06);padding:18px 18px 10px}
+#rk .hd{display:flex;align-items:center;gap:14px;height:52px;padding:0 14px;margin-bottom:12px;border-radius:10px;background:linear-gradient(180deg,#d9dbe0,#b9bcc4);color:#16181d;font:800 26px Inter}
+#rk .hd i{width:34px;height:34px;background:url(logos/claude.svg) center/contain no-repeat}
+#rk .hd small{display:block;font:600 15px "JetBrains Mono",monospace;color:#4b4f59;margin-top:-4px}
+#rk .hd b{margin-left:auto;font:800 20px "JetBrains Mono",monospace;color:#16181d}
+.bay{position:relative;height:78px;margin-bottom:10px;border-radius:10px;background:linear-gradient(180deg,#22252c,#181a1f);border:1.5px solid #30333b;display:flex;align-items:center;gap:16px;padding:0 16px}
+.bay .scr{width:26px;height:56px;border-radius:5px;background:repeating-linear-gradient(180deg,#3a3d46 0 4px,#24272e 4px 8px)}
+.bay .nm{width:120px;font:800 21px "JetBrains Mono",monospace;color:#8c909a;letter-spacing:1px}
+.bay .ct{flex:1;height:44px;border-radius:7px;background:#101115;border:1px solid #262930;overflow:hidden;position:relative;font:600 17px "JetBrains Mono",monospace;color:#9ad7b0;padding:0 12px;display:flex;align-items:center;gap:10px;white-space:nowrap}
+.bay .ct .fl{position:absolute;left:0;top:0;bottom:0;width:0;background:linear-gradient(90deg,rgba(62,207,142,.0),rgba(62,207,142,.22))}
+.bay .led{width:16px;height:16px;border-radius:50%;background:#3a3d46;box-shadow:inset 0 1px 2px rgba(0,0,0,.6)}
+.bay.on .led{background:#3ECF8E;box-shadow:0 0 14px #3ECF8E}.bay.on .nm{color:#E8EAEE}
+.bay .ck{position:absolute;right:-14px;top:-12px;width:34px;height:34px;border-radius:50%;background:#3ECF8E;color:#06281a;font:900 22px Inter;display:grid;place-items:center;opacity:0;transform:scale(.3)}
+#rkGlow{position:absolute;left:220px;top:660px;width:640px;height:560px;border-radius:40px;background:radial-gradient(closest-side,rgba(62,207,142,.18),transparent);opacity:0}
+/* hook labels around the rack (the opening GitHub stack) */
+.hl2{position:absolute;font:700 25px "JetBrains Mono",monospace;color:#D7DAE0;white-space:nowrap;opacity:0}.hl2 em{font-style:normal;color:#F0A585}
+.is-light .hl2{color:#1d1f24}
+#wires{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none;z-index:4}
+#wires path{fill:none;stroke:rgba(255,255,255,.16);stroke-width:2.5}
+.is-light #wires path{stroke:rgba(0,0,0,.16)}
+#wires .pk{fill:#3ECF8E}#wires .ring{fill:none;stroke:#fff;stroke-width:4}.is-light #wires .ring{stroke:#16181d}
+/* phone playing THIS reel */
+#ph{position:absolute;left:390px;top:700px;width:300px;height:560px;border-radius:44px;background:#0b0b0d;border:7px solid #23252b;box-shadow:0 40px 80px -24px rgba(0,0,0,.7);overflow:hidden}
+#ph img{width:100%;height:100%;object-fit:cover}
+#ph .rec{position:absolute;left:16px;top:20px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.65);font:800 15px "JetBrains Mono",monospace;color:#fff}#ph .rec i{display:inline-block;width:9px;height:9px;border-radius:50%;background:#ff3b3b;margin-right:7px}
+/* artifacts stack (light) */
+.art{position:absolute;left:170px;width:740px;height:150px;border-radius:22px;background:#fff;border:1.5px solid #e2e4e8;box-shadow:0 26px 50px -24px rgba(30,30,40,.35);display:flex;align-items:center;gap:26px;padding:0 30px;opacity:0}
+.art .ic{width:92px;height:92px;border-radius:18px;display:grid;place-items:center;font:900 40px Inter;color:#fff}
+.art b{display:block;font:800 34px Inter;color:#16181d}.art small{font:600 21px "JetBrains Mono",monospace;color:#7a7f8a}
+.art .by{margin-left:auto;display:flex;align-items:center;gap:10px;font:700 20px "JetBrains Mono",monospace;color:#7a7f8a}.art .by i{width:30px;height:30px;background:url(logos/claude.svg) center/contain no-repeat}
+/* numbers: odometer + mass grid + comment wall */
+#odo{position:absolute;left:0;right:0;top:690px;text-align:center;font:800 150px/1 "JetBrains Mono",monospace;color:#16181d;letter-spacing:-4px}
+#odoL{position:absolute;left:0;right:0;top:850px;text-align:center;font:600 26px "JetBrains Mono",monospace;color:#7a7f8a}
+#mass{position:absolute;left:90px;top:910px;width:900px;height:360px;display:grid;grid-template-columns:repeat(30,1fr);gap:6px}
+#mass i{display:block;aspect-ratio:1;border-radius:50%;opacity:0}
+#wall{position:absolute;left:70px;top:910px;width:940px;height:370px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+#wall div{height:58px;border-radius:14px;background:#fff;border:1.5px solid #e2e4e8;display:flex;align-items:center;gap:10px;padding:0 14px;font:800 22px Inter;color:#16181d;opacity:0;box-shadow:0 10px 20px -14px rgba(0,0,0,.3)}
+#wall div i{width:28px;height:28px;border-radius:50%;flex:none}
+/* step heroes */
+.card{position:absolute;border-radius:22px;background:#15171c;border:1.5px solid #2a2d35;box-shadow:0 30px 60px -24px rgba(0,0,0,.6);color:#E8EAEE;opacity:0}
+.is-light .card{background:#fff;border-color:#e2e4e8;color:#16181d;box-shadow:0 26px 50px -24px rgba(30,30,40,.35)}
+.card .tt{display:flex;align-items:center;gap:12px;padding:16px 22px;border-bottom:1.5px solid rgba(127,127,127,.18);font:700 22px "JetBrains Mono",monospace;color:#8c909a}
+.rl{position:absolute;top:700px;width:150px;height:266px;border-radius:18px;background-size:cover;background-position:center;border:3px solid #2a2d35;box-shadow:0 20px 40px -18px rgba(0,0,0,.6);opacity:0}
+#cnode{position:absolute;left:470px;top:1050px;width:140px;height:140px;border-radius:36px;background:#F3F1EC;display:grid;place-items:center;box-shadow:0 0 0 10px rgba(217,119,87,.12),0 30px 60px -20px rgba(0,0,0,.6);opacity:0}
+#cnode i{width:84px;height:84px;background:url(logos/claude.svg) center/contain no-repeat}
+#pat{position:absolute;left:0;right:0;top:1220px;text-align:center;opacity:0}#pat span{display:inline-block;margin:0 6px;padding:10px 18px;border-radius:999px;background:#F0A585;color:#1a0e08;font:800 22px Inter}
+#hooks .row{display:flex;align-items:center;gap:14px;height:44px;padding:0 22px;font:600 21px "JetBrains Mono",monospace}
+#hooks .row b{width:420px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:600}
+#hooks .row .bar{flex:1;height:12px;border-radius:6px;background:rgba(127,127,127,.18);overflow:hidden}#hooks .row .bar i{display:block;height:100%;width:0;background:#9aa0aa}
+#hooks .row em{width:46px;text-align:right;font-style:normal;font-weight:800}
+#hooks .row.win{background:rgba(62,207,142,.12)}#hooks .row.win .bar i{background:#3ECF8E}#hooks .row.win em{color:#1f9d63}
+#wave{position:absolute;left:110px;top:780px;width:860px;height:260px;display:flex;align-items:center;gap:7px}
+#wave i{flex:1;border-radius:6px;background:#16181d;opacity:.85}
+.chip2{position:absolute;padding:14px 24px;border-radius:999px;font:800 28px Inter;background:#fff;border:1.5px solid #e2e4e8;color:#16181d;box-shadow:0 18px 36px -20px rgba(0,0,0,.35);opacity:0;display:flex;align-items:center;gap:12px}
+.chip2 img{height:30px}
+#frames{position:absolute;left:110px;top:860px;width:700px;display:grid;grid-template-columns:repeat(6,1fr);gap:10px}
+#frames i{display:block;aspect-ratio:9/16;border-radius:10px;background-size:cover;background-position:center;opacity:0;border:2px solid #2a2d35}
+#code{left:90px;top:700px;width:900px;height:140px;padding:0}
+#code pre{margin:0;padding:14px 22px;font:600 22px/1.45 "JetBrains Mono",monospace;white-space:pre}
+#hfTag{left:370px;top:1150px;background:#16181d;color:#fff;border-color:#2a2d35}
+#cover5{left:170px;top:720px;width:300px;height:520px;padding:0;overflow:hidden;background-size:cover;background-position:center}
+#post5{left:520px;top:760px;width:390px;padding:24px}
+#post5 .pb{margin-top:20px;height:70px;border-radius:16px;background:#D97757;display:grid;place-items:center;font:900 30px Inter;color:#1a0e08}
+#post5 .ln{height:16px;border-radius:8px;background:rgba(127,127,127,.2);margin:12px 0}
+/* catch */
+.ck{position:absolute;left:150px;width:780px;height:120px;border-radius:22px;background:#15171c;border:1.5px solid #3a1d1d;display:flex;align-items:center;gap:22px;padding:0 28px;font:800 34px Inter;color:#F3F1EC;opacity:0}
+.ck .x{width:56px;height:56px;border-radius:50%;background:#ff5a5a22;border:2px solid #ff5a5a;color:#ff5a5a;display:grid;place-items:center;font:900 30px Inter}
+.ck small{display:block;font:600 21px "JetBrains Mono",monospace;color:#9ea2ab;margin-top:4px}
+body.red #rail .fill,body.red #rail .ch.done i,body.red #rail .ch.on i{background:#ff5a5a;border-color:#ff5a5a}
+/* CTA */
+#ig2{left:300px;top:690px;width:480px;height:600px;border-radius:46px;background:#000;border:7px solid #23252b;overflow:hidden;padding:0}
+#ig2 img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+#ig2 .cm{position:absolute;left:18px;right:18px;bottom:22px;height:66px;border-radius:999px;background:rgba(255,255,255,.95);display:flex;align-items:center;padding:0 22px;font:700 28px Inter;color:#16181d}
+#ig2 .cm .snd{margin-left:auto;width:48px;height:48px;border-radius:50%;background:#D97757;display:grid;place-items:center;color:#1a0e08;font:900 24px Inter}
+#dm2{position:absolute;left:150px;top:880px;width:780px;padding:22px 26px;border-radius:24px;background:#fff;border:1.5px solid #e2e4e8;box-shadow:0 30px 60px -22px rgba(0,0,0,.45);font:600 25px Inter;color:#16181d;opacity:0;display:flex;gap:18px;align-items:center}
+#dm2 .av{width:64px;height:64px;border-radius:50%;background:#1E4FD8 url(canwe-logo.svg) center/cover;flex:none}
+#dm2 b{display:block;font:800 22px "JetBrains Mono",monospace;color:#D97757;margin-bottom:4px}
+.fn2{position:absolute;left:50%;top:1212px;transform:translateX(-50%);padding:6px 16px;border-radius:999px;background:rgba(255,246,236,.9);font:600 18px "JetBrains Mono",monospace;color:#6b625b;white-space:nowrap;z-index:9;opacity:0}
+.hl2{font-size:30px}#pat{top:1170px!important}#pat span{font-size:28px}
+.art{left:200px!important;width:680px!important}.chip2{font-size:32px}#odoL{font-size:32px}
+.fn2{max-width:640px;white-space:normal!important;text-align:center;border-radius:18px;line-height:1.35}
+.fn2{top:1176px!important}.hl2{font-size:34px}
+.art small{font-size:26px}.art .by{font-size:24px}.ck small{font-size:26px}#dm2{font-size:30px}#dm2 b{font-size:28px}#pat span{font-size:32px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam">
+  <svg id="wires" viewBox="0 0 1080 1920"></svg>
+
+  <!-- HOOK: the reel rack with labels (= the opening GitHub stack) -->
+  <section class="sc2" id="sA">
+    <div class="hl2" id="hlA" style="left:84px;top:760px">trends <em>→</em></div>
+    <div class="hl2" id="hlB" style="left:870px;top:830px"><em>←</em> 10 hooks</div>
+    <div class="hl2" id="hlC" style="left:72px;top:900px">ElevenLabs <em>→</em></div>
+    <div class="hl2" id="hlD" style="left:870px;top:930px"><em>←</em> render</div>
+    <div class="hl2" id="hlE" style="left:84px;top:1040px">you post <em>→</em></div>
+  </section>
+
+  <!-- the persistent hero (lives across scenes; fills bay by bay) -->
+  <div id="rkGlow"></div>
+  <div id="rk" data-qa="texture">
+    <div class="hd"><i></i><div>reel #64<small>canwe.ai · this reel</small></div><b id="rkN">0 of 5</b></div>
+    <div class="bay" id="bay0"><div class="scr"></div><div class="nm">IDEA</div><div class="ct"><i class="fl"></i><span id="ct0"></span></div><div class="led"></div><div class="ck">✓</div></div>
+    <div class="bay" id="bay1"><div class="scr"></div><div class="nm">SCRIPT</div><div class="ct"><i class="fl"></i><span id="ct1"></span></div><div class="led"></div><div class="ck">✓</div></div>
+    <div class="bay" id="bay2"><div class="scr"></div><div class="nm">VOICE</div><div class="ct"><i class="fl"></i><span id="ct2"></span></div><div class="led"></div><div class="ck">✓</div></div>
+    <div class="bay" id="bay3"><div class="scr"></div><div class="nm">VIDEO</div><div class="ct"><i class="fl"></i><span id="ct3"></span></div><div class="led"></div><div class="ck">✓</div></div>
+    <div class="bay" id="bay4"><div class="scr"></div><div class="nm">POST</div><div class="ct"><i class="fl"></i><span id="ct4"></span></div><div class="led"></div><div class="ck">✓</div></div>
+  </div>
+
+  <!-- "you're watching one": the phone plays THIS reel -->
+  <section class="sc2" id="sB"><div id="ph" data-qa="texture"><img id="phimg" src="v1f/f001.jpg" alt=""><div class="rec"><i></i>THIS REEL</div></div></section>
+
+  <!-- the three artifacts Claude made (light) -->
+  <section class="sc2" id="sC">
+    <div class="art" id="a1" style="top:720px"><div class="ic" style="background:#1E4FD8">✎</div><div><b>script.md</b><small>134 words · 10 hooks scored</small></div><div class="by"><i></i>Claude</div></div>
+    <div class="art" id="a2" style="top:900px"><div class="ic" style="background:#D97757">Aa</div><div><b>captions.srt</b><small>124 words · timed to the voice</small></div><div class="by"><i></i>Claude</div></div>
+    <div class="art" id="a3" style="top:1080px"><div class="ic" style="background:#16181d">▦</div><div><b>every frame</b><small>1,359 frames · 30 fps</small></div><div class="by"><i></i>Claude</div></div>
+  </section>
+
+  <!-- numbers: odometer + the crowd, then the comment wall (light) -->
+  <section class="sc2" id="sD">
+    <div id="odo">0</div><div id="odoL">followers · first week</div>
+    <div id="mass"></div><div id="wall" data-qa="texture"></div>
+  </section>
+
+  <!-- 1 IDEA: 5 top reels -> packets -> Claude -> the pattern (dark) -->
+  <section class="sc2" id="s1">
+    <div class="rl" id="r0" style="left:70px"></div><div class="rl" id="r1" style="left:260px"></div><div class="rl" id="r2" style="left:450px"></div><div class="rl" id="r3" style="left:640px"></div><div class="rl" id="r4" style="left:830px"></div>
+    <div id="cnode"><i></i></div>
+    <div id="pat"><span>number hook</span><span>one keyword</span><span>≈ 40 s</span></div>
+  </section>
+
+  <!-- 2 SCRIPT: ten hooks scored, one wins (light) -->
+  <section class="sc2" id="s2"><div class="card" id="hooks" data-qa="texture" style="left:110px;top:690px;width:860px"><div class="tt">hooks.md · scored /12</div></div></section>
+
+  <!-- 3 VOICE (light) -->
+  <section class="sc2" id="s3">
+    <div id="wave"></div>
+    <div class="chip2" id="v11" style="left:150px;top:1090px"><img src="logos/elevenlabs-white.svg" style="filter:invert(1)" alt="">ElevenLabs</div>
+    <div class="chip2" id="v12" style="left:520px;top:1090px">[curious] [softly]</div>
+  </section>
+
+  <!-- 4 VIDEO: scene code -> frames fill -> HyperFrames (dark) -->
+  <section class="sc2" id="s4">
+    <div class="card" id="code"><pre id="codep" data-qa="texture"></pre></div>
+    <div id="frames"></div>
+    <div class="chip2" id="hfTag">Free tool: HyperFrames</div>
+  </section>
+
+  <!-- 5 POST (light) -->
+  <section class="sc2" id="s5">
+    <div class="card" id="cover5"></div>
+    <div class="card" id="post5"><div style="font:800 28px Inter">New reel</div><div class="ln" style="width:90%"></div><div class="ln" style="width:70%"></div><div class="ln" style="width:80%"></div><div class="pb" id="shareB" data-qa="ok">Share</div></div>
+  </section>
+
+  <!-- CATCH (dark, rail turns red) -->
+  <section class="sc2" id="sK">
+    <div class="ck" id="k1" style="top:760px"><div class="x">!</div><div>A paid Claude plan<small>the free tier won't run this</small></div></div>
+    <div class="ck" id="k2" style="top:920px"><div class="x">!</div><div>Reel #1 = practice<small>expect a rough first one</small></div></div>
+  </section>
+
+  <!-- CTA (light) -->
+  <section class="sc2" id="sZ">
+    <div class="card" id="ig2"><img id="igimg" src="v1f/f060.jpg" alt=""><div class="cm" data-qa="texture"><span id="cmt"></span><span id="cmph" style="color:#9aa0aa;font-weight:600">Add a comment…</span><div class="snd" id="snd">↑</div></div></div>
+    <div id="dm2"><div class="av"></div><div><b>@canwe.ai</b>Here's every prompt, step by step 👇</div></div>
+  </section>
+  </div>
+
+  <div class="fn2" id="fn"></div>
+  <div class="mg-layer" id="mgFx" style="position:absolute;inset:0;pointer-events:none;z-index:6"></div>
+  <div id="rail"></div>
+  <div id="kin"></div>
+  <div id="avatar"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, prog, lerp, clamp, $ } = R, E = R.ease, F = R.fx, M = R.mg;
+const T = { watch: at("And you're"), list: at("The script,"), num: at("2,000"), comm: at("Over"), sys: at("Here's the whole"), s1: at("One. Claude"), s2: at("Two. It"), s3: at("Three. The"),
+            s4: at("Four. Claude"), s5: at("Five. Captions"), cat: at("The catch?"), cta: at("Comment"), end: R.voiceEnd() };
+window.REEL_DURATION = +(T.end + 1.8).toFixed(2);
+const hash = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+
+// --- build repeated DOM once ---
+{ const m = $("mass"), cols = ["#F0A585", "#D97757", "#7aa2ff", "#3ECF8E", "#c4b5fd", "#fcd34d", "#94a3b8"]; for (let i = 0; i < 300; i++) { const d = document.createElement("i"); d.style.background = cols[i % 7]; m.appendChild(d); } }
+{ const w = $("wall"), C = ["#F0A585", "#7aa2ff", "#3ECF8E", "#c4b5fd", "#fcd34d"], K = ["VIDEO", "JOBS", "GROW", "YOUTUBE", "LINK", "VIDEO", "KITE", "MEM", "VIDEO", "JOBS", "GROW", "LINK", "VIDEO", "JOBS", "YOUTUBE", "GROW", "VIDEO", "LINK", "JOBS", "VIDEO"];
+  K.forEach((k, i) => { const d = document.createElement("div"); d.innerHTML = `<i style="background:${C[i % 5]}"></i>${k}`; w.appendChild(d); }); }
+["a3", "a7", "a12", "a15", "a19"].forEach((c, i) => { $("r" + i).style.backgroundImage = `url(covers_all/${c}.jpg)`; });
+{ const H = [["I automated my reels with Claude.", 11, 1], ["Claude made this reel.", 10, 0], ["5 steps to automate reels", 9, 0], ["Your editor is a prompt now", 8, 0], ["I stopped editing reels", 8, 0],
+             ["Stop paying for editing courses.", 6, 0], ["This reel edited itself", 7, 0], ["45 seconds, zero editing", 7, 0], ["Claude + HyperFrames = reels", 6, 0], ["The free reel pipeline", 5, 0]];
+  $("hooks").insertAdjacentHTML("beforeend", H.map(([h, s, w], i) => `<div class="row${w ? " win" : ""}" id="hk${i}"><b>${h}</b><div class="bar"><i></i></div><em>${s}</em></div>`).join("")); }
+{ const w = $("wave"); for (let i = 0; i < 56; i++) w.appendChild(document.createElement("i")); }
+{ const f = $("frames"); [12, 40, 70, 105, 150, 200, 30, 55, 90, 125, 170, 230].forEach(k => { const d = document.createElement("i"); d.style.backgroundImage = `url(v1f/f${String(k).padStart(3, "0")}.jpg)`; f.appendChild(d); }); }
+$("cover5").style.backgroundImage = "url(covers_all/a20.jpg)";
+const CODE = `scene("s4", t => {\n  fly("phone", at("renders"))\n  render("reel.mp4", 30)\n})`;
+
+// --- wires + packets (the push travelling through the system) ---
+const SVG = $("wires"), NS = "http://www.w3.org/2000/svg";
+const wire = (id, d) => { const p = document.createElementNS(NS, "path"); p.id = id; p.setAttribute("d", d); SVG.appendChild(p); return p; };
+const DOCK = { x: 846, y: 1352, s: 0.37 };
+const BAYY = i => 690 + 18 + 52 + 12 + i * 88 + 39;           // centre of bay i (big rack)
+const DBY = i => DOCK.y + (18 + 52 + 12 + i * 88 + 39) * DOCK.s; // centre of bay i (docked)
+const W = { in: [0, 1, 2, 3, 4].map(i => wire("wi" + i, `M540 1215 C 700 1215, 760 ${DBY(i)}, ${DOCK.x + 4} ${DBY(i)}`)),
+            r: [0, 1, 2, 3, 4].map(i => wire("wr" + i, `M${145 + i * 190} 966 C ${145 + i * 190} 1010, 540 1000, 540 1050`)) };
+const dots = {}; const dot = (k, cls = "pk", r = 7) => dots[k] || (dots[k] = (() => { const c = document.createElementNS(NS, "circle"); c.setAttribute("r", r); c.setAttribute("class", cls); SVG.appendChild(c); return c; })());
+function packet(k, path, t, a, d, o = {}) { const c = dot(k, o.ring ? "ring" : "pk", o.r || 7), p = prog(t, a, d), L = path.getTotalLength(), q = (o.ease || E.inOut)(p);
+  if (p <= 0 || p >= 1) { c.setAttribute("opacity", 0); return; } const pt = path.getPointAtLength(L * q); c.setAttribute("cx", pt.x); c.setAttribute("cy", pt.y); c.setAttribute("opacity", 1); }
+const showWires = (list, t, a, b) => list.forEach((p, i) => { const v = t >= a && t < b ? Math.min(1, (t - a) * 4, (b - t) * 4) : 0; p.style.opacity = v;
+  const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L * (1 - E.out3(prog(t, a + i * 0.05, 0.4))); });
+
+// --- DEFOCUS MORPH (the reference's hero swap): out -> grey + blur, in <- grey + blur + 0.96 scale ---
+function defocus(outEl, inEl, t, cut, o = {}) {
+  const d = o.d ?? 0.32, a = $(outEl), b = $(inEl);
+  R.cue("swish", cut - d * 0.5, { soft: true });
+  if (t < cut - d || t > cut + d + 0.05) return;
+  if (t < cut) { const p = prog(t, cut - d, d); if (a) { a.style.filter = `grayscale(${p}) blur(${(p * 14).toFixed(1)}px)`; a.style.opacity = 1 - p * 0.9; } if (b) b.style.opacity = 0; }
+  else { const p = E.out3(prog(t, cut, d)); if (a) a.style.opacity = 0; if (b) { b.style.visibility = "visible"; b.style.opacity = p; b.style.filter = p < 1 ? `grayscale(${1 - p}) blur(${((1 - p) * 12).toFixed(1)}px)` : ""; b.style.transform = `scale(${lerp(0.96, 1, p)})`; } }
+}
+
+R.setup({ push: 0, scenes: [] });
+const L = (a, b) => [a, b];
+R.speedy({
+  emph: window.EMPH,
+  light: [[T.list, T.sys], [T.s2, T.s4], [T.s5, T.cat], [T.cta, 999]],
+  chapters: [{ label: "idea", at: T.s1 }, { label: "script", at: T.s2 }, { label: "voice", at: T.s3 }, { label: "video", at: T.s4 }, { label: "post", at: T.s5, end: 999 }],
+  counter: { unit: "followers", steps: [[T.s1, 5, "top reels read"], [at("ten"), 10, "hooks scored"], [T.s3, 1, "voice take"], [at("renders"), 1359, "frames"], [T.s5, 1, "post"], [T.cat, 2, "catches"]] },
+  avatar: { x: 290, y: 1395, w: 500, in: -0.4, look: "street", style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" } },
+  poses: "auto", autoPoses: { gap: 0.9, minGap: 0.5, maxComedy: 3 },
+});
+
+window.seek = t => {
+  R.frame(t);
+  // scene slots
+  const S = [["sA", -1, T.watch], ["sB", T.watch, T.list], ["sC", T.list, T.num], ["sD", T.num, T.sys], ["s1", T.s1, T.s2], ["s2", T.s2, T.s3], ["s3", T.s3, T.s4], ["s4", T.s4, T.s5], ["s5", T.s5, T.cat], ["sK", T.cat, T.cta], ["sZ", T.cta, 99]];
+  S.forEach(([id, a, b]) => { const el = $(id), on = t >= a && t < b; el.style.visibility = on ? "visible" : "hidden"; el.style.opacity = on ? 1 : 0; el.style.filter = ""; el.style.transform = ""; });
+  // the rack is on screen in the hook and during the system walk-through; it parks small at the top-right while a step hero works
+  const rkOn = t < T.watch || (t >= T.sys && t < T.cta);
+  defocus("sA", "sB", t, T.watch); defocus("sB", "sC", t, T.list); defocus("sC", "sD", t, T.num); defocus("sD", "s1", t, T.s1);
+  defocus("s1", "s2", t, T.s2); defocus("s2", "s3", t, T.s3); defocus("s3", "s4", t, T.s4); defocus("s4", "s5", t, T.s5); defocus("s5", "sK", t, T.cat); defocus("sK", "sZ", t, T.cta);
+  R.speedyFrame(t);
+  document.body.classList.toggle("red", t >= T.cat && t < T.cta);
+  M.grid("mgGrid", t, { pulse: F.pulse ? 0 : 0, drift: 6 });
+
+  // ===== RACK: the persistent hero. Big in the hook + at "the whole system"; docks during each step; recap at the end of POST =====
+  { const rk = $("rk"); const big = t < T.watch ? 1 : t >= T.sys && t < T.s1 + 0.4 ? 1 : t >= at("post") && t < T.cat ? 1 : 0;
+    const dockP = (t >= T.s1 + 0.4 && t < at("post")) ? E.inOut(prog(t, T.s1 + 0.1, 0.5)) * (1 - E.inOut(prog(t, at("post") - 0.35, 0.4))) : 0;
+    let op = 0; if (t < T.watch) op = 1 - prog(t, T.watch - 0.25, 0.25); else if (t >= T.sys && t < T.cta) op = Math.min(prog(t, T.sys, 0.35), 1 - prog(t, T.cat - 0.2, 0.3));
+    const intro = M.spring(t, -0.6, { f: 1.6, z: 0.7 });
+    const tilt = t < T.watch ? lerp(26, 10, E.out3(prog(t, -0.4, 2.2))) : 0;
+    rk.style.opacity = op;
+    const hookS = t < T.watch ? 1.04 : 1;
+    rk.style.transformOrigin = "0 0";
+    rk.style.transform = `translate(${(dockP * (DOCK.x - 250)).toFixed(1)}px,${(dockP * (DOCK.y - 690)).toFixed(1)}px) perspective(1400px) rotateX(${tilt.toFixed(2)}deg) rotateY(${(t < T.watch ? -10 + 6 * Math.sin(t * 0.6) : 0).toFixed(2)}deg) scale(${(lerp(0.85, 1, intro) * hookS * lerp(1, DOCK.s, dockP)).toFixed(3)})`;
+    $("rkGlow").style.opacity = big && op > 0.5 ? 0.9 : 0;
+    // bays fill on each step's landing word
+    const FILL = [[at("pattern."), "pattern: number hook · 1 keyword"], [at("pick"), "hook #1 · score 11/12"], [at("tags."), "voice.mp3 · 44.8 s"], [at("video."), "reel.mp4 · 1,359 frames"], [at("post it."), "posted · @canwe.ai"]];
+    let n = 0; FILL.forEach(([a, txt], i) => { const on = t >= a && t < T.cta; if (on) n++; const b = $("bay" + i); b.classList.toggle("on", on);
+      const p = prog(t, a, 0.6); b.querySelector(".fl").style.width = (on ? E.out3(p) * 100 : 0) + "%"; $("ct" + i).textContent = on ? txt.slice(0, Math.ceil(txt.length * clamp(p * 1.6))) : "";
+      const ck = b.querySelector(".ck"), cp = M.spring(t, a + 0.25, { f: 3, z: 0.5 }); ck.style.opacity = on ? Math.min(1, (t - a - 0.25) * 6) : 0; ck.style.transform = `scale(${lerp(0.3, 1, cp)})`;
+      R.cue("click", a); R.cue("pop", a + 0.25, { soft: true });
+      packet("bp" + i, W.in[i], t, a - 0.55, 0.55, { ring: true, r: 9 }); });
+    $("rkN").textContent = `${n} of 5`;
+    showWires(W.in, t, T.s1 + 0.5, at("post") - 0.3);
+    
+  }
+  // hook labels draw in around the rack (the opening GitHub-stack labels)
+  ["hlA", "hlB", "hlC", "hlD", "hlE"].forEach((id, i) => { const a = 0.15 + i * 0.12; M.fly(id, t, a, { x: i % 2 ? 40 : -40, s: 0.9 }, { f: 3, z: 0.6 }); if (t >= T.watch - 0.25) $(id).style.opacity = 1 - prog(t, T.watch - 0.25, 0.2); });
+
+  // ===== B: the phone plays this reel =====
+  { const a = T.watch, k = clamp(Math.floor((t - a) * 30), 0, 239); $("phimg").src = `v1f/f${String(k + 1).padStart(3, "0")}.jpg`; M.fly("ph", t, a, { y: 120, s: 0.85 }, { f: 2.4, z: 0.6 }); }
+
+  // ===== C: the three artifacts land as they are named (the mascot counts 1-2-3) =====
+  [["a1", at("script,")], ["a2", at("captions,")], ["a3", at("every")]].forEach(([id, a]) => { M.fly(id, t, a - 0.05, { y: 60, s: 0.92 }, { f: 2.8, z: 0.55 }); R.cue("land", a + 0.05); });
+  { const a = at("made"); [1, 2, 3].forEach(i => { const by = $("a" + i).querySelector(".by"); by.style.opacity = t >= a + i * 0.08 ? 1 : 0.15; }); }
+
+  // ===== D: odometers + the crowd + the comment wall =====
+  { const a1 = T.num - 0.05, a2 = T.comm + 0.1, two = t >= a2 - 0.15;
+    if (!two) F.odometer("odo", t, a1, 0.9, 2000, { fmt: x => Math.round(x).toLocaleString("en-US") + "+" }); else F.odometer("odo", t, a2, 0.9, 3000, { fmt: x => Math.round(x).toLocaleString("en-US") + "+" });
+    $("odoL").textContent = two ? "comments · last 30 days" : "followers · first week";
+    [...$("mass").children].forEach((d, i) => { const a = a1 + 0.2 + hash(i) * 0.9; d.style.opacity = t >= a && !two ? 1 : 0; d.style.transform = `scale(${lerp(0.2, 1, M.spring(t, a, { f: 3, z: 0.5 }))})`; });
+    [...$("wall").children].forEach((d, i) => { const a = a2 + 0.15 + i * 0.045; d.style.opacity = t >= a ? 1 : 0; d.style.transform = `translateY(${((1 - M.spring(t, a, { f: 3, z: 0.6 })) * 40).toFixed(1)}px)`; if (i % 3 === 0) R.cue("tick", a); }); }
+
+  // ===== 1 IDEA: reels -> packets -> Claude -> the pattern =====
+  { const into = at("finds"); for (let i = 0; i < 5; i++) { const a = T.s1 + 0.2 + i * 0.09; M.fly("r" + i, t, a, { y: 80, s: 0.8, r: (i - 2) * 6 }, { f: 2.6, z: 0.6 }); packet("ip" + i, W.r[i], t, into - 0.4 + i * 0.06, 0.6, { r: 8 }); }
+    showWires(W.r, t, T.s1 + 0.6, T.s2 - 0.1); M.fly("cnode", t, at("reads") , { y: 60, s: 0.6 }, { f: 2.6, z: 0.55 });
+    const pa = at("pattern.") - 0.1; M.fly("pat", t, pa, { y: 30, s: 0.7 }, { f: 2.8, z: 0.5 }); M.ring("mgFx", t, into + 0.25, { x: 540, y: 1120, r: 220, d: 0.6, sfx: true }); }
+
+  // ===== 2 SCRIPT: ten hook rows score in, the winner holds =====
+  { M.fly("hooks", t, T.s2 + 0.05, { y: 60, s: 0.95 }, { f: 2.6, z: 0.6 }); const a = at("scores") - 0.1;
+    for (let i = 0; i < 10; i++) { const r = $("hk" + i), b = r.querySelector(".bar i"), sc = +r.querySelector("em").textContent, p = E.out3(prog(t, a + i * 0.07, 0.5));
+      b.style.width = (p * sc / 12 * 100) + "%"; r.style.opacity = t < at("pick") ? 1 : (r.classList.contains("win") ? 1 : 1 - 0.65 * prog(t, at("pick"), 0.3)); R.cue("tick", a + i * 0.07); } }
+
+  // ===== 3 VOICE: the waveform speaks, tags land =====
+  { [...$("wave").children].forEach((b, i) => { const on = clamp((t - T.s3 - 0.1 - i * 0.01) / 0.15), env = 0.25 + 0.75 * Math.abs(Math.sin(i * 0.41 + t * 5.1) * Math.sin(i * 0.13 - t * 2.7)), mid = 1 - Math.abs(i - 28) / 34;
+      b.style.height = (12 + 220 * env * mid * on).toFixed(1) + "px"; b.style.opacity = on * 0.9; });
+    M.fly("v11", t, at("ElevenLabs,") - 0.05, { x: -80, s: 0.8 }, { f: 2.6, z: 0.5 }); M.fly("v12", t, at("tags.") - 0.3, { x: 80, s: 0.8 }, { f: 2.6, z: 0.5 }); }
+
+  // ===== 4 VIDEO: code types, frames fill the grid like Actions jobs, the free tool =====
+  { M.fly("code", t, T.s4 + 0.05, { y: 50, s: 0.95 }); F.code("codep", CODE, t, T.s4 + 0.3, { cps: 44 });
+    const r0 = at("renders") - 0.1; [...$("frames").children].forEach((d, i) => { const a = r0 + i * 0.06; d.style.opacity = t >= a ? 1 : 0; d.style.transform = `scale(${lerp(0.5, 1, M.spring(t, a, { f: 3, z: 0.55 }))})`; R.cue("pop", a, { soft: true }); });
+    M.fly("hfTag", t, at("HyperFrames.") - 0.3, { y: 30, s: 0.8 }, { f: 2.6, z: 0.5 }); }
+
+  // ===== 5 POST =====
+  { M.fly("cover5", t, T.s5 + 0.05, { x: -60, s: 0.9, r: -4 }, { f: 2.6, z: 0.6 }); M.fly("post5", t, at("cover.") - 0.1, { x: 60, s: 0.9 }, { f: 2.6, z: 0.6 }); R.press("shareB", t, at("post it."));
+    if (t >= at("post")) { const p = E.inOut(prog(t, at("post") - 0.2, 0.4)); $("s5").style.opacity = 1 - p; } }
+
+  // ===== CATCH =====
+  [["k1", at("paid") - 0.15], ["k2", at("practice.") - 0.35]].forEach(([id, a]) => { M.fly(id, t, a, { x: -60, s: 0.9 }, { f: 2.6, z: 0.6 }); R.cue("tock", a); });
+
+  // ===== CTA: comment VIDEO -> the DM arrives =====
+  { M.fly("ig2", t, T.cta + 0.05, { y: 80, s: 0.9 }, { f: 2.4, z: 0.6 }); const ty = T.cta + 0.45, sent = ty + 0.55;
+    if (t < sent) R.type("cmt", "VIDEO", t, ty, 12); else $("cmt").textContent = ""; $("cmph").style.display = t < ty || t >= sent ? "" : "none"; R.press("snd", t, sent - 0.08);
+    const k = clamp(Math.floor((t - T.cta) * 30) + 60, 0, 239); $("igimg").src = `v1f/f${String(k + 1).padStart(3, "0")}.jpg`;
+    const dm = at("DM"); $("dm2").style.opacity = t >= dm ? 1 : 0; $("dm2").style.transform = `translateY(${((1 - M.spring(t, dm, { f: 2.6, z: 0.55 })) * -120).toFixed(1)}px)`; R.cue("ding", dm); }
+
+  // the big moments: the system appears (hit), the recap lands (riser -> hit), the DM (swell)
+  R.cue("impact", T.sys + 0.05); R.cue("riser", at("post") - 0.8, { t2: at("post") }); R.cue("impact", at("post")); R.cue("swell", at("DM") - 0.05);
+  // footnotes (provenance)
+  const fn = t < T.watch ? "" : t >= T.num && t < T.sys ? "Followers: Instagram, first week · comments: our DM dashboard, 30 days" : t >= T.s1 && t < T.s2 ? "Sample reels from @canwe.ai" : t >= T.s4 && t < T.s5 ? "HyperFrames v0.9.15 (Apache-2.0) tested by us · not sponsored" : "";
+  $("fn").textContent = fn; $("fn").style.opacity = fn ? 1 : 0;
+};
+document.getElementById('rail').dataset.qa='texture';
+window.seek(0);
+</script></body></html>

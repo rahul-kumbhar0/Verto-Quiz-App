@@ -1,0 +1,21 @@
+{
+ "marks": [
+  {
+   "at": 8,
+   "db": 2.0
+  },
+  {
+   "at": 21,
+   "db": 0.0
+  },
+  {
+   "at": 65,
+   "db": -2.5
+  },
+  {
+   "at": 73,
+   "db": 0.0
+  }
+ ],
+ "note": "word index -> gain dB; holds until the next mark; dynamics.py applies it after pace.py"
+}

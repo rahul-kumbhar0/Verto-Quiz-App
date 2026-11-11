@@ -1,0 +1,250 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Claude Max free for open source</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- OSS reel (classes prefixed os-) ---- */
+.os-plan{position:absolute;left:110px;right:110px;top:650px;border-radius:34px;background:#17191D;border:2px solid #2A2D33;padding:34px 40px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.os-plan .hd{display:flex;align-items:center;gap:18px;font:800 40px Inter;color:#fff}
+.os-plan .hd .lgo{--s:70px}
+.os-plan .hd small{display:block;font:700 22px Mono;letter-spacing:2px;color:#D97757;margin-top:4px}
+.os-price{position:relative;display:inline-block;margin-top:26px;font:900 130px/1 Inter;letter-spacing:-5px;color:#fff}
+.os-price span{font:700 40px Inter;letter-spacing:0;color:#9AA0A8}
+.os-price s{position:absolute;left:-10px;right:-10px;top:52%;height:12px;border-radius:6px;background:#FF5A5F;transform-origin:0 50%;transform:scaleX(0)}
+.os-free{position:absolute;right:40px;top:150px;padding:8px 26px;border:7px solid #3ECF8E;border-radius:18px;color:#3ECF8E;font:900 76px Inter;letter-spacing:4px;background:rgba(6,33,15,.9);transform:rotate(-8deg);opacity:0}
+.os-months{display:flex;gap:14px;margin-top:34px}
+.os-months i{flex:1;height:86px;border-radius:18px;background:#22252B;border:2px solid #2E3238;font:800 20px/1.1 Inter;color:#6B7079;font-style:normal;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.os-months i b{font:900 30px Inter}
+.os-months i.on{background:#13261D;border-color:#3ECF8E;color:#3ECF8E;box-shadow:0 0 24px rgba(62,207,142,.35)}
+.os-fn{position:absolute;left:0;right:0;top:1290px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+.os-fn.dk{color:#777}
+.os-total{position:absolute;left:0;right:0;top:1130px;text-align:center;opacity:0}
+.os-total span{display:inline-block;font:900 72px Inter;letter-spacing:-2px;color:#06210f;background:#3ECF8E;border-radius:24px;padding:10px 34px;box-shadow:0 18px 50px rgba(62,207,142,.4)}
+.os-total small{display:block;margin-top:12px;font:700 26px Inter;color:#C9CDD2}
+/* open source = public code */
+.os-repo{position:absolute;left:150px;right:150px;top:700px;border-radius:30px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:28px 32px;opacity:0;font-family:Inter}
+.os-repo .hd{display:flex;align-items:center;gap:14px;font:800 34px Inter;color:#111}
+.os-repo .hd .lgo{--s:56px}
+.os-repo .hd em{font-style:normal;margin-left:auto;font:700 20px Inter;color:#15803D;border:2px solid #3ECF8E;border-radius:999px;padding:4px 14px}
+.os-code{margin-top:20px;border-radius:16px;background:#0D1117;padding:18px 22px;font:500 24px/1.6 Mono;color:#C9D1D9}
+.os-code b{color:#FF7B72;font-weight:500}.os-code u{text-decoration:none;color:#79C0FF}.os-code q{quotes:none;color:#A5D6FF}
+.os-users{position:absolute;left:90px;right:90px;top:1150px;display:flex;justify-content:center;gap:14px}
+.os-users i{width:74px;height:74px;border-radius:50%;opacity:0;display:grid;place-items:center;font:800 26px Inter;color:#fff;font-style:normal;box-shadow:0 8px 20px rgba(0,0,0,.12)}
+/* criteria */
+.os-crit{position:absolute;left:70px;right:70px;top:680px;display:flex;flex-direction:column;gap:14px}
+.os-crit .hd{text-align:center;font:800 34px Inter;color:#fff;opacity:0}
+.os-crit .hd b{color:#06210f;background:#3ECF8E;border-radius:12px;padding:2px 14px}
+.os-c{height:106px;border-radius:24px;background:#17191D;border:2px solid #2A2D33;display:flex;align-items:center;gap:20px;padding:0 24px;opacity:0;font-family:Inter}
+.os-c .ic{display:flex;gap:6px;flex:none;width:140px;justify-content:center}
+.os-c .ic .lgo{--s:62px}
+.os-c b{display:block;font:900 38px Inter;letter-spacing:-1px;color:#fff}
+.os-c span{display:block;font:600 22px Inter;color:#9AA0A8;margin-top:2px}
+.os-c.sm{height:90px}.os-c.sm b{font-size:30px}
+.os-c.on{border-color:#3ECF8E;background:#13261D}
+/* student */
+.os-stu{position:absolute;left:0;right:0;top:700px;text-align:center;opacity:0}
+.os-stu .card{display:inline-block;width:640px;border-radius:34px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.10);padding:30px 36px;font-family:Inter}
+.os-stu .card .e{font-size:110px;line-height:1}
+.os-stu .card b{display:block;margin-top:10px;font:900 46px Inter;color:#111}
+.os-stu .card span{display:block;margin-top:8px;font:800 34px Mono;color:#E5484D}
+.os-stu .row{display:flex;justify-content:center;gap:14px;margin-top:22px}
+.os-stu .row i{width:76px;height:76px;border-radius:18px;background:#FFE4E4;border:2px solid #FF8A8D;color:#E5484D;font:900 36px/72px Inter;font-style:normal}
+/* path: PR card + 100 merged squares */
+.os-pr{position:absolute;left:90px;right:90px;top:640px;height:150px;border-radius:26px;background:#17191D;border:2px solid #2A2D33;display:flex;align-items:center;gap:20px;padding:0 26px;opacity:0;font-family:Inter;z-index:3}
+.os-pr .lgo{--s:62px}
+.os-pr b{display:block;font:800 32px Inter;color:#fff}.os-pr span{display:block;font:600 22px Inter;color:#9AA0A8;margin-top:4px}
+.os-pr em{margin-left:auto;font-style:normal;font:800 26px Inter;color:#fff;background:#8250DF;border-radius:999px;padding:10px 22px;opacity:0}
+.os-grid{position:absolute;left:190px;top:830px;width:700px;display:grid;grid-template-columns:repeat(10,1fr);gap:10px}
+.os-grid i{height:34px;border-radius:9px;background:#22252B}
+.os-grid i.on{background:#8250DF;box-shadow:0 0 14px rgba(130,80,223,.5)}
+.os-pct{position:absolute;left:190px;width:700px;top:1265px;display:flex;justify-content:space-between;align-items:baseline;opacity:0;font-family:Inter}
+.os-pct b{font:900 64px Inter;color:#fff;letter-spacing:-2px}.os-pct span{font:700 28px Inter;color:#B392F0}
+/* week + start small */
+.os-wk{position:absolute;left:110px;right:110px;top:640px;border-radius:30px;background:#fff;border:2px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.08);padding:26px 30px;opacity:0;font-family:Inter;text-align:center}
+.os-wk small{display:block;font:700 22px Mono;letter-spacing:2px;color:#8250DF}
+.os-wk b{display:block;margin-top:6px;font:900 84px/1 Inter;letter-spacing:-3px;color:#111}
+.os-wk span{display:block;margin-top:8px;font:600 26px Inter;color:#777}
+.os-chips{position:absolute;left:60px;right:60px;top:960px;display:flex;justify-content:center;gap:18px}
+.os-chips div{border-radius:24px;background:#fff;border:2px solid var(--l-line);box-shadow:0 14px 34px rgba(0,0,0,.08);padding:20px 24px;opacity:0;font:800 34px Inter;color:#111;display:flex;align-items:center;gap:12px;white-space:nowrap}
+.os-chips div i{font-style:normal;font-size:38px}
+.os-chips .gfi{color:#fff;background:#7057FF;border-color:#5A3FE0}
+.os-ns{position:absolute;left:0;right:0;top:1130px;text-align:center;opacity:0}
+.os-ns span{display:inline-block;font:900 50px Inter;color:#E5484D;border:6px solid #E5484D;border-radius:18px;padding:6px 26px;transform:rotate(-4deg);background:#FFF5F5}
+/* apply */
+.os-app{position:absolute;left:110px;right:110px;top:650px;border-radius:34px;background:#17191D;border:2px solid #2A2D33;padding:34px 38px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.os-app .hd{display:flex;align-items:center;gap:16px;font:800 36px Inter;color:#fff}
+.os-app .hd .lgo{--s:60px}
+.os-app .q{margin-top:26px;font:700 24px Mono;letter-spacing:1px;color:#9AA0A8}
+.os-app .fld{margin-top:10px;min-height:120px;border-radius:18px;background:#0D0F12;border:2px solid #2E3238;padding:16px 20px;font:600 28px/1.4 Inter;color:#E6E6E8}
+.os-app .fld .cur{display:inline-block;width:3px;height:30px;background:#D97757;vertical-align:middle;margin-left:3px}
+.os-app .btn{display:inline-block;margin-top:24px;font:800 32px Inter;color:#fff;background:#D97757;border-radius:18px;padding:16px 34px}
+/* CTA (same as prompt reel) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#3ECF8E,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="os-plan" id="plan"><div class="hd" id="phd"></div>
+      <div class="os-price" id="price">$200<span>/month</span><s id="strike"></s></div>
+      <div class="os-free" id="free">FREE</div>
+      <div class="os-months" id="months"></div></div>
+    <div class="os-fn" id="fn1">Claude Max 20x · $200/month on the web · claude.com</div>
+  </section>
+  <section class="scene" id="sValue">
+    <div class="bars" id="bars" style="left:90px;top:650px;width:900px;height:430px"></div>
+    <div class="os-total" id="total"><span id="tot">$0</span><small>6 months × $200 · about ₹1 lakh</small></div>
+  </section>
+  <section class="scene" id="sOSS">
+    <div class="os-repo" id="repo"><div class="hd" id="rhd"></div>
+      <div class="os-code"><b>import</b> <u>your_library</u><br><b>def</b> <u>resize</u>(img): ...<br><q>"MIT License · free to use"</q></div></div>
+    <div class="os-users" id="users"></div>
+  </section>
+  <section class="scene" id="sCrit">
+    <div class="os-crit"><div class="hd" id="chd">You need <b>ONE</b> of these</div>
+      <div class="os-c" id="c1"><div class="ic" id="ic1"></div><div><b>200,000+ downloads</b><span>a month, across npm / PyPI / crates.io</span></div></div>
+      <div class="os-c" id="c2"><div class="ic" id="ic2"></div><div><b>500+ projects</b><span>depend on your code</span></div></div>
+      <div class="os-c" id="c3"><div class="ic" id="ic3"></div><div><b>Core maintainer</b><span>CPython, Node.js, Kubernetes…</span></div></div>
+      <div class="os-c" id="c4"><div class="ic" id="ic4"></div><div><b>20+ outside contributors</b><span>merged into your repo, last 12 months</span></div></div>
+      <div class="os-c sm" id="c5"><div class="ic" style="font-size:44px">🛡️</div><div><b>Critical infrastructure</b><span>OpenSSF score ≥ 0.4</span></div></div></div>
+  </section>
+  <section class="scene" id="sStu">
+    <div class="os-stu" id="stu"><div class="card"><div class="e">🎓</div><b>A student today?</b><span>usually 0 of these</span>
+      <div class="row"><i>✗</i><i>✗</i><i>✗</i><i>✗</i></div></div></div>
+  </section>
+  <section class="scene" id="sPath">
+    <div class="os-pr" id="pr"><span id="prl"></span><div><b>Fix broken link in README</b><span>#4821 · into someone else's repo</span></div><em id="mrg">Merged</em></div>
+    <div class="os-grid" id="grid"></div>
+    <div class="os-pct" id="pct"><b id="pcn">0</b><span>merged PRs · last 12 months</span></div>
+  </section>
+  <section class="scene" id="sWeek">
+    <div class="os-wk" id="wk"><small>100 PRs ÷ 52 WEEKS</small><b>≈ 2 a week</b><span>small, real fixes add up</span></div>
+    <div class="os-chips"><div id="ch1"><i>📄</i>Docs</div><div id="ch2"><i>🧪</i>Tests</div><div class="gfi" id="ch3">good first issue</div></div>
+    <div class="os-ns" id="ns"><span>Real fixes. Not spam.</span></div>
+    <div class="os-fn dk" id="fn3">Spammy PRs get closed, and maintainers notice.</div>
+  </section>
+  <section class="scene" id="sApply">
+    <div class="os-app" id="app"><div class="hd" id="ahd"></div>
+      <div class="q">DON'T FIT EXACTLY?</div>
+      <div class="fld"><span id="atx"></span><i class="cur" id="acur"></i></div>
+      <div class="btn" id="abtn">Apply now</div></div>
+    <div class="os-fn" id="fn4">claude.com/contact-sales/claude-for-oss</div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Kabir · 2m</small><b>OSS</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Meera · 1m</small><b>OSS</b> 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Arjun · 40s</small><b>OSS</b> starting this week</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#3ECF8E,#3B82F6)"></i><div><small>you · now</small><b>OSS</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>apply link + your first-10-PRs plan 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>OSS</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+R.$("phd").innerHTML = R.lg("claude", { s: 70 }) + `<div>Claude Max 20x<small>THE TOP PLAN</small></div>`;
+R.$("months").innerHTML = Array.from({ length: 6 }, (_, i) => `<i><b>${i + 1}</b>month</i>`).join("");
+R.$("rhd").innerHTML = R.lg("github", { s: 56 }) + "your-library<em>Public</em>";
+const UC = ["#F59E0B", "#8B5CF6", "#10B981", "#3B82F6", "#EF4444", "#EC4899", "#14B8A6", "#6366F1"];
+R.$("users").innerHTML = UC.map((c, i) => `<i style="background:${c}">${"ASRMKPNJ"[i]}</i>`).join("");
+R.$("ic1").innerHTML = R.lg("npm", { s: 62 }) + R.lg("pypi", { s: 62 });
+R.$("ic2").innerHTML = R.lg("github", { s: 62 });
+R.$("ic3").innerHTML = R.lg("python", { s: 62 }) + R.lg("kubernetes", { s: 62 });
+R.$("ic4").innerHTML = R.lg("github", { s: 62 });
+R.$("prl").outerHTML = R.lg("github", { s: 62 });
+R.$("ahd").innerHTML = R.lg("anthropic", { s: 60 }) + "Claude for Open Source";
+R.$("grid").innerHTML = Array.from({ length: 100 }, () => "<i></i>").join("");
+const T = { value: at("That's Claude Max"), oss: at("But only for"), crit: at("You need one"), stu: at("Sounds impossible"), path: at("But one path"),
+  week: at("That's about two"), apply: at("Not sure you"), cta: at("Comment OSS"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.value, enter: "none" }, { id: "sValue", s: T.value, e: T.oss, enter: "push" },
+  { id: "sOSS", s: T.oss, e: T.crit, enter: "blurzoom" }, { id: "sCrit", s: T.crit, e: T.stu, enter: "swing" },
+  { id: "sStu", s: T.stu, e: T.path, enter: "blurzoom" }, { id: "sPath", s: T.path, e: T.week, enter: "push" },
+  { id: "sWeek", s: T.week, e: T.apply, enter: "blurzoom" }, { id: "sApply", s: T.apply, e: T.cta, enter: "swing" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "blurzoom" } ] });
+R.speedy({
+  light: [[T.oss, T.crit], [T.stu, T.path], [T.week, T.apply], [T.cta, 999]],
+  emph: window.EMPH,
+  counter: { unit: "months free", steps: [[at("months.") - 0.3, 6, "months free"], [at("$1,200"), 1200, "$ worth"], [at("100") - 0.1, 100, "PRs to merge"], [at("week."), 2, "PRs a week"]] },
+  chapters: [{ label: "the offer", at: 0.2 }, { label: "who gets it", at: T.crit }, { label: "your path", at: T.path }, { label: "apply", at: T.apply, end: T.cta }],
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", accessory: "headset", style: { shirt: "#24292F", shirtLine: "#0D1117", under: "#3B434B", string: "#D97757", lens1: "#FDBA74", lens2: "#D97757" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {},
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK: the $200 plan → struck → FREE → 6 months light up
+  R.card("plan", t, { in: 0.1, y: 40 });
+  const sp = ease.out3(prog(t, at("Free,") - 0.15, 0.3)); R.$("strike").style.transform = `scaleX(${sp})`;
+  R.$("price").style.opacity = 1 - 0.45 * sp;
+  const fp = ease.spring(prog(t, at("Free,"), 0.45)); R.$("free").style.opacity = clamp(fp * 3); R.$("free").style.transform = `rotate(-8deg) scale(${lerp(2, 1, fp)})`; if (fp > 0) R.cue("pop", at("Free,"));
+  document.querySelectorAll("#months i").forEach((m, i) => { const a = at("months.") - 0.35 + i * 0.12; m.classList.toggle("on", t >= a); if (i === 0) R.cue("click", a, { soft: true }); });
+  R.note("fn1", t, at("$200 plan.") + 0.4, T.value);
+  // VALUE: price ladder, then × 6
+  R.bars("bars", t, { at: T.value, max: 270, rowH: 104, fmt: x => "$" + Math.round(x), bars: [
+    { label: "Free", value: 0.5, show: "$0", at: T.value + 0.05 },
+    { label: "Pro", value: 20, show: "$20", at: T.value + 0.2 },
+    { label: "Max 5x", value: 100, show: "$100", at: T.value + 0.35 },
+    { label: "Max 20x", logo: "claude", value: 200, show: "$200 / mo", hi: true, at: at("Max.") } ] });
+  R.card("total", t, { in: at("$1,200") - 0.1, y: 30 }); R.count("tot", t, at("$1,200") - 0.1, 0.9, 1200, { fmt: x => "$" + Math.round(x).toLocaleString("en-US") });
+  // OPEN SOURCE = public code anyone can use
+  R.card("repo", t, { in: T.oss + 0.1, y: 40 });
+  document.querySelectorAll("#users i").forEach((u, i) => pop(u, t, at("anyone") - 0.1 + i * 0.07, { from: 0.4 }));
+  // CRITERIA: one card per spoken option
+  R.rise("chd", t, T.crit + 0.1, { dy: 16 });
+  [["c1", at("200,000")], ["c2", at("500")], ["c3", at("maintainer") - 0.2], ["c4", at("20")], ["c5", at("20") + 0.6]].forEach(([id, a]) => {
+    R.rise(id, t, a - 0.12, { dy: 22 }); R.$(id).classList.toggle("on", t >= a && t < a + 1.6);
+  });
+  // STUDENT
+  pop("stu", t, T.stu + 0.05, { from: 0.7 });
+  // PATH: a merged PR, then 100 squares fill
+  R.card("pr", t, { in: T.path + 0.05, y: 30 });
+  const mp = ease.spring(prog(t, at("merged") - 0.05, 0.4)); R.$("mrg").style.opacity = clamp(mp * 3); R.$("mrg").style.transform = `scale(${lerp(1.6, 1, mp)})`; if (mp > 0) R.cue("ding", at("merged") - 0.05, { soft: true });
+  const g0 = at("100") - 0.1, g1 = at("accepted.") + 0.4, n = Math.round(100 * ease.inOut(prog(t, g0, g1 - g0)));
+  document.querySelectorAll("#grid i").forEach((g, i) => g.classList.toggle("on", i < n));
+  R.$("pcn").textContent = n; R.rise("pct", t, g0, { dy: 16 });
+  // WEEK: ≈ 2 a week, start small, not spam
+  R.card("wk", t, { in: T.week + 0.05, y: 30 });
+  [["ch1", at("Docs,")], ["ch2", at("tests,")], ["ch3", at("good first")]].forEach(([id, a]) => pop(id, t, a - 0.1, { from: 0.6 }));
+  const np = ease.spring(prog(t, at("Real fixes") - 0.05, 0.45)); R.$("ns").style.opacity = clamp(np * 3); R.$("ns").style.transform = `scale(${lerp(1.8, 1, np)})`; if (np > 0) R.cue("pop", at("Real fixes") - 0.05);
+  R.note("fn3", t, at("spam.") + 0.1, T.apply);
+  // APPLY: explain why
+  R.card("app", t, { in: T.apply + 0.05, y: 40 });
+  R.type("atx", "I maintain a small library used by 3 college clubs…", t, at("still") - 0.1, 30); R.$("acur").style.opacity = Math.floor(t * 2.5) % 2;
+  R.press("abtn", t, at("explain.") - 0.05);
+  R.note("fn4", t, at("apply and"), T.cta);
+  // CTA
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "OSS", tyA = at("Comment OSS") + 0.3, posted = R.end("Comment OSS") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 10); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("10 pull requests.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

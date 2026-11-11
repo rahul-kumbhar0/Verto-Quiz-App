@@ -1,0 +1,416 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Learn AI Engineering · Day 1 (v2 premium) — what happens after Enter</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- Day 1 v2, premium UI mode (classes prefixed d1-) ---- */
+.d1-card{position:absolute;left:120px;right:120px;border-radius:24px;background:#141417;border:1px solid rgba(255,255,255,.08);box-shadow:0 30px 80px rgba(0,0,0,.55);font-family:Inter;color:#EDEDF0;opacity:0;box-sizing:border-box}
+.is-light .d1-card{background:#fff;border-color:#E3E1DC;box-shadow:0 30px 70px rgba(0,0,0,.08);color:#16161A}
+.d1-hd{display:flex;align-items:center;gap:12px;padding:18px 24px;border-bottom:1px solid rgba(255,255,255,.07);font:600 22px Inter;color:#A1A1AA}
+.is-light .d1-hd{border-color:#EEECE7;color:#71717A}
+.d1-hd b{color:#EDEDF0;font-weight:700}.is-light .d1-hd b{color:#16161A}
+.d1-hd .r{margin-left:auto;font:700 16px Mono;letter-spacing:2px;color:#60A5FA}
+.d1-dots{display:flex;gap:8px}.d1-dots i{width:12px;height:12px;border-radius:50%;background:#3F3F46}
+.d1-fn{position:absolute;left:0;right:0;top:1330px;text-align:center;font:500 20px Inter;color:#71717A;opacity:0;z-index:4}
+/* hook: chat input */
+.d1-in{margin:28px 24px 26px;border-radius:18px;border:1px solid rgba(255,255,255,.1);background:#0E0E11;padding:22px 22px 22px 26px;display:flex;align-items:center;gap:16px;min-height:96px;position:relative}
+.d1-in .tx{flex:1;font:500 36px Inter;color:#fff;white-space:nowrap;position:relative}
+.d1-in .num{position:absolute;left:0;top:-6px;font:500 25px/1.35 Mono;color:#60A5FA;white-space:normal;width:560px}
+.d1-kbd{flex:none;font:700 22px Mono;color:#fff;background:#27272A;border:1px solid #3F3F46;border-bottom-width:4px;border-radius:12px;padding:10px 16px}
+.d1-ring{position:absolute;right:6px;top:50%;width:120px;height:120px;margin-top:-60px;border-radius:50%;border:3px solid #3B82F6;opacity:0}
+/* series card */
+.d1-pf{display:flex;align-items:center;gap:14px;padding:22px 26px 0}
+.d1-pf img{width:58px;height:58px;border-radius:50%;background:#fff}
+.d1-pf b{font:700 26px Inter;color:#fff}.d1-pf .v{width:20px;height:20px;border-radius:50%;background:#3B82F6;display:inline-block;margin-left:6px;vertical-align:-2px}
+.d1-pf .r{margin-left:auto;font:700 16px Mono;letter-spacing:2px;color:#60A5FA}
+.d1-dayb{padding:18px 26px 0;font:400 200px/0.95 Serif;font-style:italic;color:#fff;letter-spacing:-2px}
+.d1-dayb span{font-family:Inter;font-style:normal;font-weight:800;letter-spacing:-8px}
+.d1-sub{padding:6px 30px 0;font:600 30px Inter;color:#A1A1AA}.d1-sub b{color:#fff}
+.d1-trk{display:flex;gap:14px;padding:26px 26px 30px}
+.d1-trk i{flex:1;height:84px;border-radius:16px;background:#1C1C20;border:1px solid #2A2A30;display:grid;place-items:center;font:800 32px Inter;font-style:normal;color:#52525B;position:relative}
+.d1-trk i.on{background:#3B82F6;border-color:#3B82F6;color:#fff;box-shadow:0 0 40px rgba(59,130,246,.45)}
+/* tokens */
+.d1-sent{display:flex;justify-content:center;flex-wrap:wrap;padding:40px 20px 44px;gap:0}
+.d1-tk{position:relative;font:600 40px Inter;color:#fff;padding:10px 5px;border-radius:14px;white-space:pre;border:2px solid transparent}
+.d1-tk .id{position:absolute;left:50%;top:100%;margin-top:10px;transform:translateX(-50%);font:700 20px Mono;color:#60A5FA;opacity:0;white-space:nowrap}
+.d1-cnt{text-align:center;padding:0 0 30px;font:600 26px Inter;color:#A1A1AA;opacity:0}
+/* strip (running example, small) */
+.d1-strip{position:absolute;left:60px;right:60px;top:560px;display:flex;justify-content:center;gap:10px;opacity:0;z-index:3}
+.d1-strip .d1-tk{font-size:34px;padding:8px 12px}
+/* vocabulary table */
+.d1-tab{padding:6px 0 10px;font-family:Mono;height:500px;overflow:hidden;position:relative}
+.d1-row{display:flex;align-items:center;height:40px;padding:0 28px;font:500 26px Mono;color:#A1A1AA;border-bottom:1px solid rgba(255,255,255,.04)}
+.d1-row u{text-decoration:none;width:150px;color:#52525B}
+.d1-row.hit{background:rgba(59,130,246,.14);color:#fff;box-shadow:inset 3px 0 0 #3B82F6}
+.d1-row.hit u{color:#60A5FA}
+.d1-tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(transparent,#141417)}
+/* vectors */
+.d1-cols{position:absolute;left:60px;right:60px;top:700px;display:flex;justify-content:center;gap:12px}
+.d1-col{width:118px;display:flex;flex-direction:column;gap:8px;align-items:stretch}
+.d1-col i{font:500 20px Mono;font-style:normal;color:#D4D4D8;background:#141417;border:1px solid #27272A;border-radius:10px;text-align:center;padding:7px 0;opacity:0}
+.d1-col i.dim{color:#60A5FA;border-style:dashed}
+.d1-map{height:430px;position:relative}
+.d1-map .pt{position:absolute;display:flex;align-items:center;gap:10px;font:600 26px Inter;color:#D4D4D8;opacity:0;white-space:nowrap}
+.d1-map .pt i{width:16px;height:16px;border-radius:50%;background:#60A5FA;box-shadow:0 0 18px rgba(96,165,250,.7)}
+.d1-map .pt.c i{background:#F97316;box-shadow:0 0 18px rgba(249,115,22,.7)}
+.d1-map .ax{position:absolute;inset:30px;border-left:1px dashed #27272A;border-bottom:1px dashed #27272A}
+/* attention (light) */
+.d1-att{position:relative;height:330px}
+.d1-att .row{position:absolute;left:0;right:0;top:200px;display:flex;justify-content:center;gap:12px}
+.d1-att .d1-tk{font-size:34px;color:#16161A;padding:8px 12px}
+.d1-att svg{position:absolute;left:0;top:0;width:100%;height:220px;overflow:visible}
+.d1-att path{fill:none;stroke:#A1A1AA;stroke-width:2.5;stroke-linecap:round}
+.d1-att path.hot{stroke:#3B82F6;stroke-width:7}
+.d1-tag{position:absolute;left:0;right:0;top:300px;text-align:center;opacity:0}
+.d1-tag span{display:inline-block;font:400 40px Serif;font-style:italic;color:#1D4ED8;background:#DBEAFE;border-radius:999px;padding:6px 26px}
+.d1-paper{display:flex;gap:22px;align-items:center;padding:22px 26px}
+.d1-paper .pg{width:110px;height:140px;flex:none;border-radius:8px;background:#fff;border:1px solid #E3E1DC;box-shadow:0 8px 20px rgba(0,0,0,.08);padding:14px 12px;box-sizing:border-box}
+.d1-paper .pg i{display:block;height:6px;border-radius:3px;background:#E4E4E7;margin-bottom:8px}
+.d1-paper .pg i:first-child{height:10px;background:#16161A;width:80%}
+.d1-paper b{display:block;font:400 44px/1.05 Serif;font-style:italic;color:#16161A}
+.d1-paper small{display:block;margin-top:10px;font:600 21px Inter;color:#71717A}
+.d1-paper em{display:inline-block;margin-top:10px;font:700 18px Mono;font-style:normal;color:#1D4ED8;background:#DBEAFE;border-radius:8px;padding:4px 10px}
+/* scores */
+.d1-bars{padding:16px 28px 26px}
+.d1-bar{display:flex;align-items:center;gap:16px;height:66px}
+.d1-bar span{width:180px;font:600 30px Mono;color:#fff;white-space:pre}
+.d1-bar b{height:30px;border-radius:9px;background:#27272A}
+.d1-bar em{font:700 24px Mono;font-style:normal;color:#71717A}
+.d1-bar.top b{background:linear-gradient(90deg,#2563EB,#60A5FA);box-shadow:0 0 30px rgba(59,130,246,.45)}
+.d1-bar.top em{color:#93C5FD}
+.d1-bar.top span{color:#fff}
+.d1-loop{position:absolute;right:140px;top:690px;font:800 26px Mono;color:#60A5FA;opacity:0;z-index:5}
+.d1-tk.ans{border-color:#3B82F6;background:rgba(59,130,246,.15)}
+/* stream */
+.d1-msg{padding:22px 26px 30px}
+.d1-msg .u{margin-left:auto;width:fit-content;background:#27272A;border-radius:20px 20px 6px 20px;padding:12px 20px;font:500 28px Inter;color:#fff}
+.d1-msg p{margin:22px 0 0;font:500 32px/1.5 Inter;color:#E4E4E7;min-height:150px}
+.d1-msg p i{font-style:normal}.d1-msg p i.new{background:rgba(59,130,246,.3);border-radius:6px}
+/* temperature */
+.d1-sl{padding:26px 30px 6px}
+.d1-sl .tr{position:relative;height:10px;border-radius:5px;background:linear-gradient(90deg,#3B82F6,#F97316)}
+.d1-sl .kn{position:absolute;top:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:#fff;box-shadow:0 4px 14px rgba(0,0,0,.5)}
+.d1-sl .lb{display:flex;justify-content:space-between;margin-top:18px;font:600 20px Mono;color:#71717A}
+.d1-sl .val{font:800 28px Mono;color:#fff}
+.d1-two{display:flex;gap:16px;padding:6px 26px 26px}
+.d1-two div{flex:1;border-radius:16px;background:#0E0E11;border:1px solid #27272A;padding:14px 16px;font:500 24px/1.4 Inter;color:#E4E4E7;opacity:0}
+.d1-two small{display:block;font:700 15px Mono;letter-spacing:2px;color:#71717A;margin-bottom:6px}
+/* recap */
+.d1-rc{padding:30px 34px;display:flex;flex-direction:column;gap:22px}
+.d1-rc div{display:flex;align-items:center;gap:18px;font:600 38px Inter;opacity:0}
+.d1-rc .no{color:#71717A}.d1-rc .no s{text-decoration-thickness:3px}
+.d1-rc .yes b{font:400 54px Serif;font-style:italic;color:#fff}
+.d1-rc i{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;font:800 28px Inter;font-style:normal;flex:none}
+.d1-rc .no i{background:#3F1D1D;color:#F87171}.d1-rc .yes i{background:#14532D;color:#4ADE80}
+/* persistent progress card */
+#pg{position:absolute;left:120px;right:120px;top:1395px;border-radius:22px;background:#141417;border:1px solid rgba(255,255,255,.08);box-shadow:0 24px 60px rgba(0,0,0,.5);font-family:Inter;opacity:0;z-index:6}
+.is-light #pg{background:#fff;border-color:#E3E1DC;box-shadow:0 20px 50px rgba(0,0,0,.08)}
+#pg .h{display:flex;align-items:center;gap:12px;padding:14px 20px;font:600 21px Inter;color:#EDEDF0;border-bottom:1px solid rgba(255,255,255,.06)}
+.is-light #pg .h{color:#16161A;border-color:#EEECE7}
+#pg .h .st{margin-left:auto;font:700 15px Mono;letter-spacing:1px;color:#FB923C;background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.35);border-radius:999px;padding:4px 12px}
+#pg .h .st.ok{color:#4ADE80;background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.35)}
+#pg .rows{padding:8px 20px 4px}
+#pg .rw{display:flex;align-items:center;gap:14px;height:36px;font:500 21px Inter;color:#71717A}
+#pg .rw.on{color:#EDEDF0}.is-light #pg .rw.on{color:#16161A}
+#pg .rw.done{color:#A1A1AA}
+#pg .rw i{width:22px;height:22px;border-radius:50%;border:2px solid #3F3F46;box-sizing:border-box;flex:none;display:grid;place-items:center;font:800 13px Inter;font-style:normal;color:#fff}
+#pg .rw.on i{border-color:#F97316;border-top-color:transparent}
+#pg .rw.done i{background:#22C55E;border-color:#22C55E}
+#pg .rw em{margin-left:auto;font:500 16px Mono;font-style:normal;color:#52525B}
+#pg .ft{display:flex;align-items:center;gap:14px;padding:6px 20px 14px}
+#pg .bar{flex:1;height:5px;border-radius:3px;background:#27272A;overflow:hidden}.is-light #pg .bar{background:#EEECE7}
+#pg .bar b{display:block;height:100%;width:0;background:#22C55E}
+#pg .ft span{font:500 15px Mono;color:#71717A}
+/* CTA */
+.d1-cm .lst{padding:6px 24px}
+.d1-cm .c{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 23px Inter;color:#E4E4E7;opacity:0}
+.d1-cm .c i{width:44px;height:44px;border-radius:50%;flex:none}
+.d1-cm .c small{display:block;font:600 16px Inter;color:#71717A}
+.d1-cm .ip{display:flex;align-items:center;gap:14px;margin:8px 20px 20px;border:1px solid #3F3F46;border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;color:#fff;min-height:40px}
+.d1-cm .ip .ph{color:#52525B;font-weight:500}
+.d1-cm .ip .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:#3B82F6;display:grid;place-items:center;color:#fff;font-size:22px}
+.d1-dm{position:absolute;left:150px;right:150px;top:560px;border-radius:20px;background:#1C1C20;border:1px solid #2A2A30;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7;box-shadow:0 20px 50px rgba(0,0,0,.6)}
+.d1-dm img{width:56px;height:56px;border-radius:50%;background:#fff}
+.d1-dm b{display:block;font:700 22px Inter;color:#fff}.d1-dm span{font:500 21px Inter;color:#A1A1AA}
+.d1-fl{display:flex;align-items:center;gap:14px;padding:20px 24px}
+.d1-fl img{width:64px;height:64px;border-radius:50%;background:#fff}
+.d1-fl b{display:block;font:700 26px Inter;color:#fff}.d1-fl small{font:500 19px Inter;color:#A1A1AA}
+.d1-fl .btn{margin-left:auto;font:700 23px Inter;color:#fff;background:#3B82F6;border-radius:12px;padding:12px 26px;white-space:nowrap}
+.d1-fl .btn.ing{background:#27272A;color:#E4E4E7}
+.premium.is-light .s-vig{background:radial-gradient(ellipse 80% 62% at 50% 45%,transparent 55%,rgba(0,0,0,.07) 100%)}
+</style></head>
+<body class="premium"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <section class="scene" id="sHook">
+    <div class="d1-card" id="chat" style="top:700px"><div class="d1-hd"><div class="d1-dots"><i></i><i></i><i></i></div><b>New chat</b><span class="r">AI ASSISTANT</span></div>
+      <div class="d1-in"><div class="tx"><span id="qtx"></span><div class="num" id="qnum"></div></div><span class="d1-kbd" id="kbd">⏎ Enter</span><div class="d1-ring" id="ring"></div></div></div>
+    <div class="d1-fn" id="fnH">Illustration · the real numbers are learned, not typed</div>
+  </section>
+
+  <section class="scene" id="sDay">
+    <div class="d1-card" id="series" style="top:600px">
+      <div class="d1-pf"><img src="canwe-logo.svg" alt=""><b>canwe.ai<span class="v"></span></b><span class="r">DAILY SERIES</span></div>
+      <div class="d1-dayb">Day <span>01</span></div>
+      <div class="d1-sub"><b>Learn AI Engineering</b> · from zero</div>
+      <div class="d1-trk" id="trk"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+    </div>
+  </section>
+
+  <section class="scene" id="sTok">
+    <div class="d1-card" id="tokc" style="top:690px"><div class="d1-hd"><b>Running example</b><span class="r" id="tokr">YOUR QUESTION</span></div>
+      <div class="d1-sent" id="sent"></div>
+      <div class="d1-cnt" id="cnt">small pieces of words, not letters, not whole words</div></div>
+    <div class="d1-fn" id="fn1">Split shown is illustrative · every model has its own tokenizer</div>
+  </section>
+
+  <section class="scene" id="sId">
+    <div class="d1-card" id="voc" style="top:720px"><div class="d1-hd"><b>Vocabulary</b><span class="r"><span id="vocn">0</span> ROWS</span></div>
+      <div class="d1-tab"><div id="tab"></div></div></div>
+    <div class="d1-fn" id="fn2">Row numbers illustrative · GPT-2 vocabulary size from its 2019 release</div>
+  </section>
+
+  <section class="scene" id="sVec">
+    <div class="d1-cols" id="cols"></div>
+    <div class="d1-card" id="map" style="top:700px"><div class="d1-hd"><b>Meaning map</b><span class="r">768 → 2D</span></div>
+      <div class="d1-map"><div class="ax"></div>
+        <div class="pt c" id="d1m1" style="left:120px;top:90px"><i></i>France</div><div class="pt" id="d1m2" style="left:250px;top:150px"><i></i>Germany</div><div class="pt" id="d1m3" style="left:90px;top:190px"><i></i>Italy</div>
+        <div class="pt c" id="d1m4" style="left:470px;top:110px"><i></i>Paris</div><div class="pt" id="d1m5" style="left:560px;top:190px"><i></i>Berlin</div><div class="pt" id="d1m6" style="left:450px;top:230px"><i></i>Rome</div>
+        <div class="pt" id="d1m7" style="left:360px;top:320px"><i></i>capital</div><div class="pt" id="d1m8" style="left:500px;top:340px"><i></i>city</div>
+        <div class="pt" id="d1m9" style="left:110px;top:330px"><i></i>banana</div></div></div>
+    <div class="d1-fn" id="fn3">Illustration · 768 numbers squeezed into 2D so you can see it</div>
+  </section>
+
+  <section class="scene" id="sAtt">
+    <div class="d1-card" id="attc" style="top:640px"><div class="d1-hd"><b>Attention</b><span class="r" style="color:#1D4ED8">EVERY TOKEN LOOKS BACK</span></div>
+      <div class="d1-att"><svg id="arcs"></svg><div class="row" id="arow"></div><div class="d1-tag" id="tag"><span>belong together</span></div></div></div>
+    <div class="d1-card" id="paper" style="top:1060px;left:150px;right:150px"><div class="d1-paper"><div class="pg"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div><b>Attention Is All You Need</b><small>Vaswani et al. · Google · 2017</small><em>arXiv:1706.03762</em></div></div></div>
+  </section>
+
+  <section class="scene" id="sPick">
+    <div class="d1-card" id="sc" style="top:700px"><div class="d1-hd"><b>Next token</b><span class="r">SCORES · ALL 50,257</span></div>
+      <div class="d1-bars">
+        <div class="d1-bar top" id="d1b1"><span id="d1l1">" Paris"</span><b id="d1bb1"></b><em id="d1be1"></em></div>
+        <div class="d1-bar" id="d1b2"><span id="d1l2">" The"</span><b id="d1bb2"></b><em id="d1be2"></em></div>
+        <div class="d1-bar" id="d1b3"><span id="d1l3">" It"</span><b id="d1bb3"></b><em id="d1be3"></em></div>
+        <div class="d1-bar" id="d1b4"><span id="d1l4">" France"</span><b id="d1bb4"></b><em id="d1be4"></em></div></div></div>
+    <div class="d1-loop" id="loop">↻ run <span id="lpn">1</span></div>
+    <div class="d1-fn" id="fn4">Scores illustrative</div>
+  </section>
+
+  <section class="scene" id="sStream">
+    <div class="d1-card" id="msg" style="top:690px"><div class="d1-hd"><div class="d1-dots"><i></i><i></i><i></i></div><b>New chat</b></div>
+      <div class="d1-msg"><div class="u">What's the capital of France?</div><p id="rep"></p></div></div>
+  </section>
+
+  <section class="scene" id="sTemp">
+    <div class="d1-card" id="tmp" style="top:640px"><div class="d1-hd"><b>temperature</b><span class="r"><span class="val" id="tv">0.2</span></span></div>
+      <div class="d1-sl"><div class="tr"><div class="kn" id="kn"></div></div><div class="lb"><span>safe</span><span>creative</span></div></div>
+      <div class="d1-bars" style="padding-top:4px">
+        <div class="d1-bar top"><span>" Paris"</span><b id="d1tb1"></b></div>
+        <div class="d1-bar"><span>" The"</span><b id="d1tb2"></b></div>
+        <div class="d1-bar"><span>" It"</span><b id="d1tb3"></b></div></div>
+      <div class="d1-two"><div id="ans1"><small>ASK #1</small>Paris.</div><div id="ans2"><small>ASK #2 · SAME QUESTION</small>The capital of France is Paris.</div></div></div>
+    <div class="d1-fn" id="fn5" style="top:1340px">Scores illustrative</div>
+  </section>
+
+  <section class="scene" id="sRecap">
+    <div class="d1-card" id="d1rc" style="top:760px"><div class="d1-rc">
+      <div class="no" id="d1rc1"><i>✕</i><s>looking it up</s></div>
+      <div class="yes" id="d1rc2"><i>✓</i><b>predicting the next piece</b></div></div></div>
+  </section>
+
+  <section class="scene" id="sCTA">
+    <div class="d1-card d1-cm" id="cm" style="top:690px"><div class="d1-hd"><b>Comments</b></div>
+      <div class="lst"><div class="c" id="d1c1"><i style="background:#F59E0B"></i><div><small>kavya · 2m</small>TOKENS</div></div>
+        <div class="c" id="d1c2"><i style="background:#8B5CF6"></i><div><small>aditya · 1m</small>TOKENS finally it makes sense</div></div>
+        <div class="c" id="d1c3"><i style="background:#10B981"></i><div><small>you · now</small>TOKENS</div></div></div>
+      <div class="ip"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+    <div class="d1-dm" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! Check your DMs 📩</span></div></div>
+    <div class="d1-card" id="fl" style="top:1200px"><div class="d1-fl"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><small>Learn AI Engineering · daily</small></div><span class="btn" id="btn">Follow</span></div></div>
+  </section>
+
+  <div id="pg"><div class="h">⏎ After you hit Enter<span class="st" id="pgst">running</span></div>
+    <div class="rows" id="pgr"></div>
+    <div class="ft"><div class="bar"><b id="pgb"></b></div><span id="pgn">step 1 of 5</span></div></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const $ = R.$;
+const Q = "What's the capital of France?";
+const TOK = ["What", "'s", " the", " capital", " of", " France", "?"];
+const TINT = ["#F43F5E", "#F59E0B", "#10B981", "#3B82F6", "#8B5CF6", "#0EA5E9", "#A3A3A3"];
+const IDS = ["2061", "338", "262", "3139", "286", "4881", "30"];
+const chip = (w, i, cls = "") => `<span class="d1-tk ${cls}" data-i="${i}">${w.replace(/ /g, " ")}<span class="id">#${IDS[i] || ""}</span></span>`;
+$("sent").innerHTML = TOK.map((w, i) => chip(w, i)).join("");
+$("arow").innerHTML = TOK.map((w, i) => chip(w.trim(), i)).join("");
+$("cols").innerHTML = TOK.map((w, i) => `<div class="d1-col" id="vc${i}">` + [0, 1, 2, 3, 4].map(k => `<i id="v${i}${k}">${((Math.sin(i * 7.3 + k * 3.1) * 0.9)).toFixed(2)}</i>`).join("") + `<i class="dim" id="v${i}5">…768</i></div>`).join("");
+const ROWS = [["0", "!"], ["1", "\""], ["2", "#"], ["⋮", ""], ["262", "·the"], ["286", "·of"], ["338", "'s"], ["2061", "What"], ["3139", "·capital"], ["4881", "·France"], ["⋮", ""], ["50,256", "<|endoftext|>"]];
+$("tab").innerHTML = ROWS.map(([n, w], k) => `<div class="d1-row" id="r${k}"><u>${n}</u>${w.replace(/</g, "&lt;")}</div>`).join("");
+const STEPS = [["Chop into tokens", "tokenizer"], ["Look up each ID", "50,257 rows"], ["ID → list of numbers", "768 each"], ["Attention", "looks back"], ["Score + pick next", "↻ repeat"]];
+$("pgr").innerHTML = STEPS.map(([a, b], k) => `<div class="rw" id="pr${k}"><i></i>${a}<em>${b}</em></div>`).join("");
+const ANS = [" Paris", ".", " It", "'s", " known", " for", " the", " Eiffel", " Tower"];
+const REP = ["Paris", " is", " the", " capital", " of", " France", ".", " It's", " known", " for", " the", " Eiffel", " Tower", "."];
+$("rep").innerHTML = REP.map(w => `<i>${w}</i>`).join("");
+
+const T = { day: at("learn AI"), fol: at("let's follow"), s1: at("step one"), s2: at("step two"), s3: at("step three"), smart: at("smart part") - 0.6,
+  s4: at("step four"), stream: at("that's why answers"), temp: at("one more trick"), recap: at("so AI isn't"), cta: at("comment tokens"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.01, scenes: [
+  { id: "sHook", s: 0, e: T.day, enter: "none" }, { id: "sDay", s: T.day, e: T.fol, enter: "blur" },
+  { id: "sTok", s: T.fol, e: T.s2, enter: "blur" }, { id: "sId", s: T.s2, e: T.s3, enter: "blur" },
+  { id: "sVec", s: T.s3, e: T.smart, enter: "blur" }, { id: "sAtt", s: T.smart, e: T.s4, enter: "blur" },
+  { id: "sPick", s: T.s4, e: T.stream, enter: "blur" }, { id: "sStream", s: T.stream, e: T.temp, enter: "blur" },
+  { id: "sTemp", s: T.temp, e: T.recap, enter: "blur" }, { id: "sRecap", s: T.recap, e: T.cta, enter: "blur" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "blur" } ] });
+R.speedy({ light: [[T.smart, T.s4]], emph: window.EMPH,
+  avatar: { x: 240, y: 1330, w: 600, in: 999, hide: [[0, 9999]] }, poses: [], autoPoses: {} });
+document.body.classList.add("premium");
+
+// persistent progress card: which step is active when
+const SA = [T.s1, T.s2, T.s3, at("looks back") - 0.3, T.s4];
+function progress(t) {
+  const pin = E2(prog(t, T.s1 - 0.4, 0.5)), pout = prog(t, T.cta - 0.3, 0.3);
+  const el = $("pg"); el.style.opacity = pin * (1 - pout); el.style.transform = `translateY(${(1 - pin) * 30 + pout * 30}px)`;
+  el.style.filter = pout > 0 ? `blur(${pout * 14}px)` : "";
+  // "whole thing again": steps re-run fast between whole-thing and stream
+  const re0 = at("whole thing"), re1 = T.stream;
+  let cur = -1; SA.forEach((a, k) => { if (t >= a) cur = k; });
+  let done = cur;                        // rows < cur are done
+  if (t >= re0 && t < re1) { const ph = ((t - re0) / 0.28) % 5; cur = Math.floor(ph); done = cur; }
+  if (t >= at("stream") - 0.1 && t < T.recap) { cur = 4; done = 4; }
+  const all = t >= T.recap;
+  STEPS.forEach((s, k) => {
+    const r = $("pr" + k), isDone = all || k < done, isOn = !all && k === cur;
+    r.className = "rw" + (isDone ? " done" : isOn ? " on" : "");
+    r.querySelector("i").textContent = isDone ? "✓" : "";
+    r.querySelector("i").style.transform = isOn ? `rotate(${t * 400}deg)` : "";
+  });
+  const n = all ? 5 : Math.max(0, cur) + (all ? 0 : 0);
+  $("pgb").style.width = (all ? 100 : Math.max(0, cur) / 5 * 100 + 10) + "%";
+  $("pgn").textContent = all ? "5 of 5 · done" : `step ${Math.max(1, cur + 1)} of 5`;
+  $("pgst").textContent = all ? "done" : "running"; $("pgst").className = "st" + (all ? " ok" : "");
+}
+const E2 = ease.inOut;
+let arcsBuilt = false;
+function buildArcs() {
+  const row = $("arow"), ch = [...row.children], svg = $("arcs"), W = row.offsetWidth;
+  const cx = ch.map(c => row.offsetLeft + c.offsetLeft + c.offsetWidth / 2);
+  let html = "";
+  for (let j = 1; j < ch.length; j++) for (let i = 0; i < j; i++) {
+    const x1 = cx[j], x2 = cx[i], h = 30 + (j - i) * 26;
+    const hot = (j === 5 && i === 3);
+    html += `<path id="ar${j}${i}" class="${hot ? "hot" : ""}" d="M${x1},195 C${x1},${195 - h} ${x2},${195 - h} ${x2},195"/>`;
+  }
+  svg.innerHTML = html;
+  svg.querySelectorAll("path").forEach(p => { const L = p.getTotalLength(); p.style.strokeDasharray = L; p.style.strokeDashoffset = L; p.dataset.l = L; });
+  arcsBuilt = true;
+}
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  document.querySelector(".s-bg").style.setProperty("--glow", (0.10 * prog(t, T.day, 0.6) * (1 - prog(t, T.fol, 0.4)) + 0.06 * prog(t, T.s4, 0.5)).toFixed(3));
+  // HOOK — the typed question dissolves into numbers, then comes back and Enter is pressed
+  R.card("chat", t, { in: 0.05, y: 30 });
+  R.type("qtx", Q, t, 0.15, 34);
+  const toNum = prog(t, at("numbers") - 0.25, 0.35) * (1 - prog(t, at("enter") - 0.7, 0.35));
+  const blurW = prog(t, at("not one") - 0.1, 0.4) * (1 - prog(t, at("enter") - 0.7, 0.35));
+  $("qtx").style.filter = `blur(${blurW * 10}px)`; $("qtx").style.opacity = 1 - toNum;
+  $("qnum").style.opacity = toNum; $("qnum").style.filter = `blur(${(1 - toNum) * 8}px)`;
+  $("qnum").textContent = "[ 0.12 −0.83 0.47 0.05 −0.31 0.09 0.66 0.21 0.58 −0.14 −0.72 … ]";
+  R.press("kbd", t, at("enter") - 0.08);
+  const rg = prog(t, at("enter"), 0.6); $("ring").style.opacity = rg > 0 && rg < 1 ? 1 - rg : 0; $("ring").style.transform = `scale(${0.6 + rg})`;
+  R.note("fnH", t, at("numbers"), at("so what"));
+  // DAY — series card + tracker (cell 1 lights on "day one")
+  R.card("series", t, { in: T.day + 0.02, y: 24 });
+  const tk = $("trk").children; [...tk].forEach((c, i) => { const on = i === 0 && t >= at("day one"); c.className = on ? "on" : ""; c.style.transform = i === 0 ? `scale(${1 + 0.08 * Math.sin(Math.PI * prog(t, at("day one"), 0.4))})` : ""; c.style.opacity = E2(prog(t, T.day + 0.2 + i * 0.06, 0.3)); });
+  if (t >= at("day one")) R.cue("ding", at("day one"));
+  // TOKENS — the question card splits into coloured pieces
+  R.card("tokc", t, { in: T.fol, y: 30 });
+  const split = E2(prog(t, at("chopped") - 0.05, 0.55));
+  $("sent").querySelectorAll(".d1-tk").forEach((c, i) => {
+    c.style.margin = `0 ${split * 4}px`; c.style.background = split > 0.02 ? hexa(TINT[i], 0.16 * split) : "transparent";
+    c.style.borderColor = hexa(TINT[i], 0.7 * split); c.style.transform = `translateY(${Math.sin(Math.PI * clamp(split * 1.2 - i * 0.03)) * -14}px)`;
+    if (split > 0) R.cue("pop", at("chopped") - 0.05 + i * 0.05, { soft: true });
+  });
+  $("tokr").textContent = t >= at("chopped") ? "TOKENIZER" : "YOUR QUESTION";
+  R.rise("cnt", t, at("small pieces"), { dy: 12, blur: 8 });
+  R.note("fn1", t, at("chopped") + 0.6, T.s2);
+  // running-example strip (stays from step two to step three)
+  const stripIn = E2(prog(t, T.s2, 0.4)), stripOut = prog(t, T.smart - 0.2, 0.3);
+  // IDs — vocabulary table scrolls, our rows light up; IDs drop under the chips
+  R.card("voc", t, { in: T.s2 + 0.05, y: 30 });
+  const hitA = at("gets an") - 0.1;
+  ROWS.forEach((r, k) => { const e = $("r" + k), hi = k >= 4 && k <= 9 && t >= hitA + (k - 4) * 0.12; e.className = "d1-row" + (hi ? " hit" : ""); e.style.opacity = E2(prog(t, T.s2 + 0.1 + k * 0.05, 0.3)); });
+  R.count("vocn", t, at("50,257") - 0.1, 1.0, 50257);
+  R.note("fn2", t, at("vocabulary"), T.s3);
+  // VECTORS — each chip grows a column of numbers, then the meaning map
+  const colsOut = prog(t, at("meaning") - 0.3, 0.3);
+  TOK.forEach((w, i) => { for (let k = 0; k < 6; k++) { const p = E2(prog(t, at("list of numbers") - 0.1 + k * 0.07 + i * 0.03, 0.3)); const e = $(`v${i}${k}`); e.style.opacity = p * (1 - colsOut); e.style.transform = `translateY(${(1 - p) * -14}px)`; } });
+  $("cols").style.filter = colsOut > 0 ? `blur(${colsOut * 12}px)` : "";
+  R.card("map", t, { in: at("meaning") - 0.15, y: 30 });
+  ["d1m1", "d1m2", "d1m3", "d1m4", "d1m5", "d1m6", "d1m7", "d1m8", "d1m9"].forEach((id, k) => R.rise(id, t, at("meaning") + 0.05 + k * 0.07, { dy: 10, d: 0.35 }));
+  R.note("fn3", t, at("meaning") + 0.3, T.smart);
+  // strip: visible during ID + vector steps
+  if (!$("strip")) { const s = document.createElement("div"); s.className = "d1-strip"; s.id = "strip"; s.innerHTML = TOK.map((w, i) => chip(w.trim(), i)).join(""); $("stage").appendChild(s); }
+  $("strip").style.opacity = stripIn * (1 - stripOut); $("strip").style.filter = stripOut > 0 ? `blur(${stripOut * 14}px)` : `blur(${(1 - stripIn) * 14}px)`;
+  $("strip").querySelectorAll(".d1-tk").forEach((c, i) => { c.style.background = hexa(TINT[i], 0.16); c.style.borderColor = hexa(TINT[i], 0.7);
+    const idp = E2(prog(t, hitA + Math.max(0, [7, 6, 4, 8, 5, 9, 9][i] - 4) * 0.12 + 0.2, 0.3)) * (1 - prog(t, at("list of numbers") - 0.3, 0.3)); c.querySelector(".id").style.opacity = i === 6 ? 0 : idp; });
+  $("strip").style.top = (t >= T.s3 ? 590 : 600) + "px";
+  // ATTENTION (light) — arcs look back; capital<->France gets the thick arc; the paper card
+  R.card("attc", t, { in: T.smart + 0.05, y: 30 });
+  if (t >= T.smart && !arcsBuilt) buildArcs();
+  if (arcsBuilt) {
+    $("arcs").querySelectorAll("path").forEach((p, k) => { const hot = p.classList.contains("hot");
+      const a = hot ? at("capital and") - 0.05 : at("looks back") + k * 0.035; const pr = E2(prog(t, a, hot ? 0.6 : 0.4));
+      p.style.strokeDashoffset = p.dataset.l * (1 - pr); p.style.opacity = hot ? 1 : 0.55 * (1 - 0.6 * prog(t, at("capital and"), 0.4)); });
+  }
+  $("arow").querySelectorAll(".d1-tk").forEach((c, i) => { const hot = (i === 3 || i === 5) && t >= at("capital and") - 0.05;
+    c.style.background = hot ? "#DBEAFE" : "#F4F4F5"; c.style.borderColor = hot ? "#3B82F6" : "transparent"; c.style.opacity = E2(prog(t, T.smart + 0.15 + i * 0.05, 0.3)); });
+  R.rise("tag", t, at("belong together") - 0.05, { dy: 12, blur: 10 });
+  R.card("paper", t, { in: at("google paper") - 0.2, y: 40 });
+  // SCORE + PICK — bars grow, Paris wins, gets appended, loop runs again
+  R.card("sc", t, { in: T.s4 + 0.05, y: 30 });
+  const A = at("scores every"), PCT = [91, 4, 2, 1];
+  const again = at("whole thing"), loops = t >= again ? Math.min(ANS.length - 1, Math.floor((t - again) / 0.32)) : 0;
+  const L2 = [[" Paris", " The", " It", " France"], [".", ",", " is", "!"], [" It", " The", " Paris", " Its"], ["'s", " is", " has", " was"], [" known", " also", " famous", " home"], [" for", " as", " to", " in"], [" the", " its", " being", " art"], [" Eiffel", " Louvre", " food", " river"], [" Tower", " tower", " Towers", " landmark"]];
+  const set = L2[loops]; [1, 2, 3, 4].forEach((k, i) => { $("d1l" + k).textContent = '"' + set[i] + '"';
+    const g = E2(prog(t, A + i * 0.1, 0.5)), jit = loops ? 0.8 + 0.2 * Math.abs(Math.sin(t * 9 + i)) : 1, v = PCT[i] * (i ? jit : 1);
+    $("d1bb" + k).style.width = g * v * 4.6 + "px"; $("d1be" + k).textContent = Math.round(g * v) + "%"; });
+  const win = prog(t, at("Paris wins") - 0.05, 0.4); $("d1b1").style.transform = `scale(${1 + 0.05 * Math.sin(Math.PI * win)})`; if (win > 0) R.cue("ding", at("Paris wins") - 0.05, { soft: true });
+  R.rise("loop", t, again, { dy: 10 }); $("lpn").textContent = loops + 1;
+  R.note("fn4", t, A + 0.4, T.stream);
+  // the strip gets the answer appended during "adds Paris" -> loop
+  if (!$("strip2")) { const s = document.createElement("div"); s.className = "d1-strip"; s.id = "strip2"; $("stage").appendChild(s); }
+  const addA = at("adds Paris"); const nAns = t < addA ? 0 : 1 + loops;
+  $("strip2").innerHTML = `<span class="d1-tk" style="font-size:28px;color:#A1A1AA">What's the capital of France?</span>` + ANS.slice(0, Math.min(nAns, 3)).map((w, i) => `<span class="d1-tk ans" style="font-size:28px">${w.replace(/ /g, " ")}</span>`).join("") + (nAns > 3 ? `<span class="d1-tk ans" style="font-size:28px">…</span>` : "");
+  $("strip2").style.top = "590px"; const s2i = E2(prog(t, T.s4 + 0.1, 0.4)) * (1 - prog(t, T.stream - 0.2, 0.3)); $("strip2").style.opacity = s2i; $("strip2").style.filter = `blur(${(1 - s2i) * 10}px)`;
+  // STREAM
+  R.card("msg", t, { in: T.stream + 0.05, y: 30 });
+  const sn = Math.floor((t - (at("stream") - 0.2)) / 0.11); $("rep").querySelectorAll("i").forEach((e, i) => { e.style.opacity = i < sn ? 1 : 0; e.className = i === sn - 1 ? "new" : ""; });
+  // TEMPERATURE — knob slides right, bars flatten, two different answers
+  R.card("tmp", t, { in: T.temp + 0.05, y: 30 });
+  const tp = E2(prog(t, at("temperature") - 0.1, 1.2)); $("kn").style.left = (12 + tp * 76) + "%"; $("tv").textContent = (0.2 + tp * 0.8).toFixed(1);
+  const g3 = E2(prog(t, T.temp + 0.2, 0.5)); [[90, 40], [6, 30], [4, 22]].forEach(([lo, hi], i) => $("d1tb" + (i + 1)).style.width = g3 * lerp(lo, hi, tp) * 5 + "px");
+  R.rise("ans1", t, at("same question") - 0.1, { dy: 12 }); R.rise("ans2", t, at("different answer") - 0.15, { dy: 12 });
+  R.note("fn5", t, T.temp + 0.4, T.recap);
+  // RECAP
+  R.card("d1rc", t, { in: T.recap + 0.05, y: 30 });
+  R.rise("d1rc1", t, at("looking anything") - 0.1, { dy: 14, blur: 8 }); R.rise("d1rc2", t, at("predicting") - 0.1, { dy: 14, blur: 8 });
+  // CTA — keyword typed into comments, DM lands, Follow pressed
+  R.card("cm", t, { in: T.cta - 0.02, y: 30 });
+  R.rise("d1c1", t, T.cta + 0.15, { dy: 12 }); R.rise("d1c2", t, T.cta + 0.3, { dy: 12 });
+  const tyA = at("comment tokens") + 0.35, sent = tyA + 0.75;
+  if (t < sent) { R.type("cty", "TOKENS", t, tyA, 12); } else $("cty").textContent = "";
+  $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.12);
+  $("d1c3").style.display = t >= sent ? "" : "none"; R.rise("d1c3", t, sent, { dy: 12 });
+  R.sheet("dm", t, at("DM") - 0.05, { dy: -120, d: 0.5 });
+  R.card("fl", t, { in: at("follow for") - 0.6, y: 30 });
+  R.press("btn", t, at("follow for")); const ing = t >= at("follow for") + 0.2; $("btn").textContent = ing ? "Following ✓" : "Follow"; $("btn").className = "btn" + (ing ? " ing" : "");
+  progress(t);
+};
+function hexa(h, a) { const n = parseInt(h.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; }
+window.seek(0);
+</script></body></html>

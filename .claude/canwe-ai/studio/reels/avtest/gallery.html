@@ -1,0 +1,10 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="speedy.css">
+<style>#av{position:absolute;left:140px;top:500px;width:800px;height:853px}.lab{position:absolute;left:0;right:0;top:300px;text-align:center;font:800 64px Inter;color:#fff}</style></head>
+<body><div id="stage"><div class="lab" id="lab"></div><div id="av"></div></div>
+<script src="engine.js"></script><script src="avatar.js"></script><script>
+Avatar.init(document.getElementById("av"), { look: "street" });
+const L = [["three","neutral"],["big","surprised"],["small","think"],["typing","think"],["celebrate","excited"],["wag","serious"],["clap","excited"],["lean_in","excited"],["shrug","unsure"],["think","think"],["thumbs","happy"],["stop","serious"]];
+window.seek = t => { const i = Math.min(L.length - 1, Math.floor(t)); const [p, e] = L[i];
+  document.getElementById("lab").textContent = p + " · " + e; Avatar.frame(t, p, 1, p, 0, { expr: e, exprPrev: e, exprP: 1, beat: 0 }); };
+window.seek(0);
+</script></body></html>

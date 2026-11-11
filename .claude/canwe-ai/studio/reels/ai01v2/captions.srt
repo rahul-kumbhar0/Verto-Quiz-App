@@ -1,0 +1,240 @@
+1
+00:00:00,150 --> 00:00:01,435
+AI has never read a
+
+2
+00:00:01,303 --> 00:00:02,519
+single word you typed.
+
+3
+00:00:02,777 --> 00:00:03,365
+Not one.
+
+4
+00:00:03,618 --> 00:00:04,964
+It only sees numbers .
+
+5
+00:00:05,209 --> 00:00:06,773
+So what actually happens when
+
+6
+00:00:06,649 --> 00:00:07,678
+you hit Enter ?
+
+7
+00:00:07,922 --> 00:00:09,621
+Learn AI engineering, day one.
+
+8
+00:00:09,874 --> 00:00:11,168
+Let's follow one question.
+
+9
+00:00:11,436 --> 00:00:12,937
+What's the capital of France?
+
+10
+00:00:13,199 --> 00:00:13,815
+Step one.
+
+11
+00:00:14,068 --> 00:00:14,991
+It gets chopped
+
+12
+00:00:14,875 --> 00:00:15,731
+into tokens .
+
+13
+00:00:15,975 --> 00:00:17,191
+Small pieces of words.
+
+14
+00:00:17,450 --> 00:00:18,067
+Step two.
+
+15
+00:00:18,320 --> 00:00:19,280
+Every token gets
+
+16
+00:00:19,156 --> 00:00:19,839
+an ID .
+
+17
+00:00:20,083 --> 00:00:21,193
+Its row number in
+
+18
+00:00:21,063 --> 00:00:22,322
+the model's vocabulary .
+
+19
+00:00:22,566 --> 00:00:23,728
+GPT-2 had 50,257 rows.
+
+20
+00:00:23,984 --> 00:00:24,652
+Step three.
+
+21
+00:00:24,911 --> 00:00:26,303
+Every ID becomes a long
+
+22
+00:00:26,179 --> 00:00:27,265
+list of numbers .
+
+23
+00:00:27,510 --> 00:00:28,786
+768 of them in GPT-2.
+
+24
+00:00:29,042 --> 00:00:30,120
+That list is the
+
+25
+00:00:29,993 --> 00:00:30,935
+token's meaning .
+
+26
+00:00:31,180 --> 00:00:32,600
+And here's the smart part.
+
+27
+00:00:32,856 --> 00:00:34,312
+Every token looks back at
+
+28
+00:00:34,182 --> 00:00:35,378
+the tokens before it.
+
+29
+00:00:35,628 --> 00:00:36,783
+So the model learns
+
+30
+00:00:36,665 --> 00:00:37,936
+that capital and France
+
+31
+00:00:37,818 --> 00:00:38,789
+belong together .
+
+32
+00:00:39,033 --> 00:00:40,321
+That's called attention .
+
+33
+00:00:40,566 --> 00:00:41,439
+It comes from
+
+34
+00:00:41,315 --> 00:00:42,953
+one Google paper, from 2017.
+
+35
+00:00:43,209 --> 00:00:43,852
+Step four.
+
+36
+00:00:44,108 --> 00:00:45,353
+The model scores every
+
+37
+00:00:45,231 --> 00:00:46,491
+token in its vocabulary.
+
+38
+00:00:46,764 --> 00:00:47,435
+Paris wins.
+
+39
+00:00:47,691 --> 00:00:48,562
+It adds Paris
+
+40
+00:00:48,440 --> 00:00:49,285
+to your text.
+
+41
+00:00:49,541 --> 00:00:50,417
+Then runs the
+
+42
+00:00:50,290 --> 00:00:51,275
+whole thing again.
+
+43
+00:00:51,534 --> 00:00:52,779
+For every single token.
+
+44
+00:00:53,038 --> 00:00:54,551
+That's why answers stream in.
+
+45
+00:00:54,801 --> 00:00:55,700
+One more trick.
+
+46
+00:00:55,959 --> 00:00:57,178
+It doesn't always pick
+
+47
+00:00:57,054 --> 00:00:57,924
+the top score.
+
+48
+00:00:58,183 --> 00:00:59,863
+A setting called temperature adds
+
+49
+00:00:59,739 --> 00:01:00,940
+a little randomness .
+
+50
+00:01:01,185 --> 00:01:02,680
+That's why the same question
+
+51
+00:01:02,568 --> 00:01:03,839
+gets a different answer.
+
+52
+00:01:04,100 --> 00:01:04,887
+So AI isn't
+
+53
+00:01:04,763 --> 00:01:05,815
+looking anything up.
+
+54
+00:01:06,065 --> 00:01:07,627
+It's predicting the next piece.
+
+55
+00:01:07,886 --> 00:01:09,063
+Really, really well.
+
+56
+00:01:09,319 --> 00:01:10,774
+Comment TOKENS and I'll DM
+
+57
+00:01:10,644 --> 00:01:11,909
+you a 15-minute exercise
+
+58
+00:01:11,797 --> 00:01:12,918
+to see it yourself.
+
+59
+00:01:13,185 --> 00:01:14,090
+And follow for
+
+60
+00:01:13,963 --> 00:01:14,888
+the full series.
+

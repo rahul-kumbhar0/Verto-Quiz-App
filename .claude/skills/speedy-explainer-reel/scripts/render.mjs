@@ -33,6 +33,7 @@ async function open() {
   await p.waitForFunction("typeof window.seek === 'function'", null, { timeout: 15000 }).catch(() => {});
   if (errors.length) { console.error("PAGE ERROR:", errors.join("\n")); process.exit(2); }
   await p.evaluate(() => document.fonts.ready);
+  await p.evaluate(() => window.__ready || null);
   await p.waitForTimeout(250);
   return p;
 }

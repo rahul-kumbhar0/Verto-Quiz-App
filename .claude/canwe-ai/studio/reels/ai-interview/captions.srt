@@ -1,0 +1,276 @@
+1
+00:00:00,000 --> 00:00:01,860
+Your coding interview is recording
+
+2
+00:00:01,710 --> 00:00:02,700
+more than your code.
+
+3
+00:00:02,890 --> 00:00:04,030
+So when someone pastes
+
+4
+00:00:03,880 --> 00:00:05,640
+an answer from ChatGPT,
+
+5
+00:00:05,740 --> 00:00:06,690
+how do companies
+
+6
+00:00:06,540 --> 00:00:07,560
+actually catch it?
+
+7
+00:00:07,770 --> 00:00:08,930
+First, the paste.
+
+8
+00:00:09,120 --> 00:00:10,670
+Platforms like HackerRank log
+
+9
+00:00:10,520 --> 00:00:11,610
+every paste and every
+
+10
+00:00:11,460 --> 00:00:12,670
+time you switch tabs.
+
+11
+00:00:12,800 --> 00:00:14,230
+Forty clean lines appearing
+
+12
+00:00:14,080 --> 00:00:15,100
+in one frame is
+
+13
+00:00:14,950 --> 00:00:16,220
+not how humans type.
+
+14
+00:00:16,320 --> 00:00:17,650
+Next, your typing rhythm.
+
+15
+00:00:17,500 --> 00:00:19,170
+Real coders type, pause,
+
+16
+00:00:19,020 --> 00:00:20,090
+delete and fix.
+
+17
+00:00:20,300 --> 00:00:21,280
+AI answers show
+
+18
+00:00:21,130 --> 00:00:21,980
+a long pause,
+
+19
+00:00:21,830 --> 00:00:22,880
+then a sudden burst
+
+20
+00:00:22,730 --> 00:00:23,800
+of perfect code.
+
+21
+00:00:23,990 --> 00:00:25,920
+HackerRank's model even flags deleting
+
+22
+00:00:25,770 --> 00:00:27,290
+a big block and retyping
+
+23
+00:00:27,140 --> 00:00:28,440
+it in an odd rhythm.
+
+24
+00:00:28,600 --> 00:00:29,780
+Then, the comparison.
+
+25
+00:00:29,910 --> 00:00:31,620
+CodeSignal checks your answer against
+
+26
+00:00:31,470 --> 00:00:33,150
+every submission on its platform
+
+27
+00:00:33,000 --> 00:00:34,690
+and solutions posted online,
+
+28
+00:00:34,840 --> 00:00:35,650
+and rolls it all
+
+29
+00:00:35,500 --> 00:00:36,930
+into one suspicion score.
+
+30
+00:00:37,140 --> 00:00:38,300
+A human reviewer still
+
+31
+00:00:38,150 --> 00:00:39,120
+makes the final call.
+
+32
+00:00:38,970 --> 00:00:40,490
+And it's rising.
+
+33
+00:00:40,610 --> 00:00:42,340
+CodeSignal says cheating attempts
+
+34
+00:00:42,190 --> 00:00:43,740
+jumped from 16% to
+
+35
+00:00:43,590 --> 00:00:45,270
+35% in one year.
+
+36
+00:00:45,120 --> 00:00:47,060
+But what about live interviews,
+
+37
+00:00:46,910 --> 00:00:48,290
+where the AI hides in
+
+38
+00:00:48,140 --> 00:00:49,590
+an invisible overlay that
+
+39
+00:00:49,440 --> 00:00:50,810
+screen share never sees?
+
+40
+00:00:51,020 --> 00:00:52,630
+That's where humans take over.
+
+41
+00:00:52,670 --> 00:00:54,260
+Interviewers watch your eyes drift
+
+42
+00:00:54,110 --> 00:00:55,100
+to the same spot,
+
+43
+00:00:54,950 --> 00:00:56,100
+the glow in your glasses,
+
+44
+00:00:55,950 --> 00:00:57,060
+and the long hmm
+
+45
+00:00:56,910 --> 00:00:58,190
+while the answer loads.
+
+46
+00:00:58,270 --> 00:00:59,190
+In one survey,
+
+47
+00:00:59,040 --> 00:01:01,070
+81% of Big Tech interviewers
+
+48
+00:01:00,920 --> 00:01:02,610
+had suspected AI cheating,
+
+49
+00:01:02,690 --> 00:01:04,570
+and 31% had caught someone.
+
+50
+00:01:04,420 --> 00:01:05,940
+Their best trick is simple.
+
+51
+00:01:06,120 --> 00:01:07,350
+One follow-up question.
+
+52
+00:01:07,460 --> 00:01:08,540
+Why this approach?
+
+53
+00:01:08,610 --> 00:01:09,470
+What breaks if
+
+54
+00:01:09,320 --> 00:01:10,490
+the input doubles?
+
+55
+00:01:10,630 --> 00:01:12,000
+The AI wrote the code,
+
+56
+00:01:11,850 --> 00:01:13,150
+but it can't explain it
+
+57
+00:01:13,000 --> 00:01:14,260
+for you in real time.
+
+58
+00:01:14,110 --> 00:01:15,620
+That's why Google brought
+
+59
+00:01:15,470 --> 00:01:16,840
+back an in-person round,
+
+60
+00:01:17,030 --> 00:01:18,790
+and Amazon asks candidates to
+
+61
+00:01:18,640 --> 00:01:20,190
+promise they won't use AI.
+
+62
+00:01:20,330 --> 00:01:21,700
+So use AI to prepare,
+
+63
+00:01:21,550 --> 00:01:22,520
+not to perform.
+
+64
+00:01:22,660 --> 00:01:23,550
+Think out loud,
+
+65
+00:01:23,400 --> 00:01:24,720
+even when you're stuck.
+
+66
+00:01:24,570 --> 00:01:25,870
+Follow for more breakdowns,
+
+67
+00:01:25,720 --> 00:01:26,610
+and send this to the
+
+68
+00:01:26,460 --> 00:01:28,300
+friend who keeps ChatGPT open
+
+69
+00:01:28,150 --> 00:01:29,100
+in the other tab.
+

@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["posts.#1", "skills.", "idea.", "formulas,", "humanizer.", "characters.", "comments,", "100,", "week.", "itself.", "source.", "POST#2"], "bold": ["Eleven", "one#2", "three", "21", "profile", "whole", "never", "I#4", "3,000", "setup,"]};
+window.PINS = [["my LinkedIn posts.", "point_cam"], ["Eleven Claude skills.", "two"], ["a full draft.", "explain"], ["even hidden characters.", "point_up"], ["my whole week.", "three"], ["I press post.", "stop"], ["Free. Open source.", "thumbs"], ["sound like you.", "point_cam"]];

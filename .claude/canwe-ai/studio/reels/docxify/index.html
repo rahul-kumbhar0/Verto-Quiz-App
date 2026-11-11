@@ -1,0 +1,260 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Docxify — the app exam forms can't reject</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- Docxify reel (classes prefixed dx-) ---- */
+/* HOOK: 3D photo slab + rejecting form */
+.dx-photo{position:absolute;left:150px;top:700px;width:420px;height:420px;opacity:0;perspective:1200px}
+.dx-photo .pl{position:absolute;inset:0;border-radius:26px;background:linear-gradient(160deg,#FFD66B 0%,#FF8E53 38%,#7C4DFF 100%);box-shadow:0 40px 90px rgba(0,0,0,.55), inset 0 0 0 10px #fff;transform:rotateX(10deg) rotateY(-16deg)}
+.dx-photo .pl i{position:absolute;left:46px;top:70px;width:84px;height:84px;border-radius:50%;background:#FFF3C4;box-shadow:0 0 40px #FFE28A}
+.dx-photo .pl b{position:absolute;left:0;right:0;bottom:0;height:150px;background:linear-gradient(180deg,transparent,rgba(20,24,40,.25)),linear-gradient(135deg,#2E7D5B 20%,#174D36);clip-path:polygon(0 100%,0 55%,30% 20%,55% 70%,75% 35%,100% 75%,100% 100%)}
+.dx-photo .tag{position:absolute;left:24px;bottom:-26px;font:700 26px Mono;color:#9AA0A8;background:#15171B;border:1.5px solid #2A2D33;border-radius:12px;padding:8px 16px}
+.dx-photo .sz{position:absolute;right:-30px;top:-34px;font:900 52px Inter;color:#fff;background:#C2410C;border-radius:18px;padding:10px 26px;box-shadow:0 18px 44px rgba(194,65,12,.5);transform:rotate(7deg)}
+.dx-form{position:absolute;right:90px;top:730px;width:360px;height:430px;border-radius:18px;background:#F7F4EC;box-shadow:0 34px 80px rgba(0,0,0,.5);opacity:0;font-family:Inter;padding:26px 24px;transform:rotate(3deg)}
+.dx-form small{display:block;font:800 21px Inter;letter-spacing:2px;color:#444;text-align:center}
+.dx-form .ln{height:13px;border-radius:7px;background:#D9D4C6;margin-top:16px}
+.dx-form .ph{width:120px;height:150px;border:3px dashed #9A937F;border-radius:10px;margin:18px auto 0;display:grid;place-items:center;font:700 19px Inter;color:#9A937F;text-align:center}
+.dx-stamp{position:absolute;right:60px;top:880px;padding:12px 28px;border:7px solid #DC2626;border-radius:16px;color:#DC2626;font:900 54px Inter;background:rgba(255,245,245,.92);transform:rotate(-9deg);opacity:0;z-index:5}
+/* PAIN: three bad options */
+.dx-opts{position:absolute;left:90px;right:90px;top:690px;display:flex;flex-direction:column;gap:18px}
+.dx-opt{height:140px;border-radius:24px;background:#17191D;border:1.5px solid #2A2D33;display:flex;align-items:center;gap:22px;padding:0 28px;opacity:0;font-family:Inter}
+.dx-opt i{font-style:normal;font-size:52px;flex:none}
+.dx-opt b{display:block;font:800 34px Inter;color:#fff}
+.dx-opt span{display:block;font:600 23px Inter;color:#9AA0A8;margin-top:4px}
+.dx-opt.bad b{color:#FF9A9E}
+.dx-rs{position:absolute;right:70px;top:640px;padding:12px 30px;border:6px solid #F59E0B;border-radius:18px;color:#F59E0B;font:900 64px Inter;background:rgba(42,31,10,.95);transform:rotate(8deg);opacity:0;z-index:5}
+/* TURN: rejections -> the app is born */
+.dx-rej{position:absolute;left:0;right:0;top:660px;text-align:center}
+.dx-rej span{display:inline-block;margin:0 14px;padding:10px 24px;border:5px solid #DC2626;border-radius:14px;color:#DC2626;font:900 40px Inter;background:rgba(40,12,12,.85);opacity:0}
+.dx-rej span:nth-child(1){transform:rotate(-7deg)}.dx-rej span:nth-child(2){transform:rotate(4deg)}.dx-rej span:nth-child(3){transform:rotate(-3deg)}
+.dx-appbox{position:absolute;left:410px;top:850px}
+.dx-free{position:absolute;left:0;right:0;top:1210px;text-align:center;opacity:0}
+.dx-free span{display:inline-block;font:900 46px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:12px 40px;box-shadow:0 0 50px rgba(62,207,142,.55)}
+/* DEMO: 3D phone + press inside the screen */
+.dx-ph3{position:absolute;left:250px;top:615px;width:580px;height:710px;opacity:0;perspective:1600px}
+.dx-ph3 .bodyy{position:absolute;inset:0;transform:rotateY(-14deg) rotateX(6deg);transform-style:preserve-3d}
+.dx-ph3 .edge{position:absolute;inset:0;border-radius:54px;background:#0B0C10;box-shadow:28px 34px 80px rgba(0,0,0,.18);transform:translateZ(-14px)}
+.dx-ph3 .scr{position:absolute;inset:10px;border-radius:46px;background:#101216;border:2px solid #23262D;overflow:hidden;font-family:Inter}
+.dx-ph3 .bar{height:92px;display:flex;align-items:center;gap:14px;padding:0 24px;background:#171A20;border-bottom:1px solid #23262D}
+.dx-ph3 .bar b{font:800 30px Inter;color:#fff}
+.dx-ph3 .bar .lgo img{border-radius:12px}
+.dx-file{margin:22px 20px 0;border-radius:18px;background:#1A1D23;border:1.5px solid #2A2D33;display:flex;align-items:center;gap:16px;padding:16px 18px;opacity:0}
+.dx-file i{font-style:normal;font-size:40px}
+.dx-file b{display:block;font:800 26px Inter;color:#fff}
+.dx-file span{display:block;font:700 21px Mono;color:#FF9A6B}
+.dx-btn{margin:20px 20px 0;height:86px;border-radius:18px;background:#6366F1;display:grid;place-items:center;font:800 27px Inter;color:#fff;opacity:0;position:relative}
+.dx-press{position:absolute;left:40px;right:40px;top:330px;height:270px;opacity:0}
+.dx-press .plate{position:absolute;left:0;right:0;height:46px;border-radius:12px;background:linear-gradient(180deg,#3A3F49,#20242B);box-shadow:0 10px 26px rgba(0,0,0,.5), inset 0 2px 0 #565D6B}
+.dx-press .pdoc{position:absolute;left:50%;top:50%;width:150px;height:190px;translate:-50% -50%;border-radius:14px;background:linear-gradient(160deg,#F43F5E,#BE123C);display:grid;place-items:center;font:900 40px Inter;color:#fff;box-shadow:0 16px 40px rgba(244,63,94,.4)}
+.dx-kb{position:absolute;left:0;right:0;bottom:-66px;text-align:center;font:900 50px Mono;color:#3ECF8E;text-shadow:0 0 30px rgba(62,207,142,.6)}
+.dx-ok{position:absolute;left:0;right:0;top:1348px;text-align:center;opacity:0;z-index:6}
+.dx-ok span{display:inline-block;font:800 34px Inter;color:#06210f;background:#3ECF8E;border-radius:999px;padding:14px 34px;box-shadow:0 18px 50px rgba(62,207,142,.4)}
+/* PRESETS (light) */
+.dx-pre{position:absolute;left:80px;right:80px;top:680px;display:flex;gap:20px}
+.dx-pc{flex:1;border-radius:24px;background:#fff;border:2px solid var(--l-line);box-shadow:0 20px 50px rgba(0,0,0,.08);padding:22px 20px;opacity:0;font-family:Inter;text-align:center}
+.dx-pc b{display:block;font:900 40px Inter;color:#111}
+.dx-pc small{display:block;font:700 19px Inter;color:#6366F1;letter-spacing:1px;margin-top:2px}
+.dx-pc .row{margin-top:16px;border-top:1.5px solid #EEE;padding-top:12px;font:700 23px Inter;color:#333}
+.dx-pc .row em{display:block;font:800 24px Mono;color:#15803D;font-style:normal;margin-top:2px}
+.dx-exact{position:absolute;left:0;right:0;top:1190px;text-align:center;opacity:0}
+.dx-exact span{display:inline-block;font:800 34px Inter;color:#fff;background:#6366F1;border-radius:999px;padding:14px 36px;box-shadow:0 18px 44px rgba(99,102,241,.35)}
+.dx-fn{position:absolute;left:0;right:0;top:1300px;text-align:center;font:600 22px Inter;color:#8E8E93;opacity:0}
+/* PRIV */
+.dx-shield{position:absolute;left:150px;top:760px;width:300px;height:300px;opacity:0}
+.dx-shield .ph{position:absolute;inset:40px;border-radius:34px;background:#17191D;border:2px solid #2A2D33;display:grid;place-items:center}
+.dx-shield .rng{position:absolute;inset:0;border-radius:50%;border:4px solid rgba(62,207,142,.8);box-shadow:0 0 40px rgba(62,207,142,.35)}
+.dx-cloud{position:absolute;right:150px;top:790px;width:260px;height:190px;opacity:0}
+.dx-cloud .c{position:absolute;inset:0;border-radius:90px;background:#1E2126;border:2px solid #2A2D33;display:grid;place-items:center;font-size:80px}
+.dx-cloud .x{position:absolute;inset:-10px;display:grid;place-items:center;font:900 150px Inter;color:#DC2626;text-shadow:0 0 30px rgba(220,38,38,.5)}
+.dx-zero{position:absolute;left:0;right:0;top:1060px;text-align:center;opacity:0;font:800 38px Inter;color:#fff}
+.dx-zero b{color:#3ECF8E}
+.dx-us{position:absolute;left:0;right:0;top:1170px;text-align:center;opacity:0}
+.dx-us span{display:inline-flex;align-items:center;gap:16px;font:800 32px Inter;color:#fff;background:#17191D;border:2px solid #6366F1;border-radius:999px;padding:12px 30px;box-shadow:0 16px 44px rgba(99,102,241,.35)}
+.dx-us img{width:52px;height:52px;border-radius:50%}
+/* CTA (house pattern) */
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#6366F1,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #6366F1;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(99,102,241,.35)}
+.endcta b{color:#6366F1}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+  <section class="scene" id="sHook">
+    <div class="floor" id="fl" style="left:90px;top:800px"></div>
+    <div class="dx-photo" id="photo"><div class="pl"><i></i><b></b></div><div class="tag">IMG_2024.jpg</div><div class="sz">4 MB</div></div>
+    <div class="dx-form" id="form"><small>SSC ONLINE FORM</small><div class="ph">UPLOAD<br>PHOTO</div><div class="ln"></div><div class="ln" style="width:70%"></div></div>
+    <div class="dx-stamp" id="stamp">✖ MAX 20 KB</div>
+  </section>
+  <section class="scene" id="sPain">
+    <div class="dx-opts">
+      <div class="dx-opt" id="o1"><i>✂️</i><div><b>Crop and pray</b><span>quality gone, still over the limit</span></div></div>
+      <div class="dx-opt bad" id="o2"><i>🌐</i><div><b>Some shady website</b><span>your documents on a stranger's server ⚠️</span></div></div>
+      <div class="dx-opt" id="o3"><i>🖥️</i><div><b>The cyber café run</b><span>stand in line for a 10-second job</span></div></div>
+    </div>
+    <div class="dx-rs" id="rs">₹50</div>
+  </section>
+  <section class="scene" id="sTurn">
+    <div class="dx-rej" id="rej"><span>✖ REJECTED</span><span>✖ REJECTED</span><span>✖ REJECTED</span></div>
+    <div class="floor" id="fl2" style="left:90px;top:960px"></div>
+    <div class="box3d dx-appbox" id="appbox"></div>
+    <div class="dx-free" id="freechip"><span>FREE · made in India</span></div>
+  </section>
+  <section class="scene" id="sDemo">
+    <div class="dx-ph3" id="ph3"><div class="bodyy"><div class="edge"></div><div class="scr">
+      <div class="bar"><span id="dxlg"></span><b>Docxify</b></div>
+      <div class="dx-file" id="file"><i>📄</i><div><b>Resume.pdf</b><span id="fsz">2.4 MB</span></div></div>
+      <div class="dx-btn" id="btn">Make it under 200 KB</div>
+      <div class="dx-press" id="press"><div class="plate" id="pTop" style="top:0"></div><div class="pdoc" id="pdoc">PDF</div><div class="plate" id="pBot" style="bottom:0"></div><div class="dx-kb" id="kb">2400 KB</div></div>
+    </div></div></div>
+    <div class="dx-ok" id="ok"><span>✓ under every portal's limit</span></div>
+  </section>
+  <section class="scene" id="sPre">
+    <div class="dx-pre">
+      <div class="dx-pc" id="p1"><b>SSC</b><small>PRESET</small><div class="row">photo<em>20–50 KB</em></div><div class="row">signature<em>10–20 KB</em></div></div>
+      <div class="dx-pc" id="p2"><b>IBPS</b><small>PRESET</small><div class="row">photo<em>20–50 KB</em></div><div class="row">signature<em>10–20 KB</em></div></div>
+      <div class="dx-pc" id="p3"><b>UPSC</b><small>PRESET</small><div class="row">photo<em>20–300 KB</em></div><div class="row">signature<em>20–300 KB</em></div></div>
+    </div>
+    <div class="dx-exact" id="exact"><span>no guessing — exact KB out 🎯</span></div>
+    <div class="dx-fn" id="fnPre">Limits from official exam notices — always re-check your form's instructions</div>
+  </section>
+  <section class="scene" id="sTools">
+    <div class="xv" id="xv" style="left:20px;top:560px;width:1040px;height:800px"></div>
+    <div class="dx-fn" id="fnX" style="top:1330px">Illustration — tool groups, not literal layers · 300+ tools per the Play Store listing</div>
+  </section>
+  <section class="scene" id="sPriv">
+    <div class="dx-shield" id="shield"><div class="rng"></div><div class="ph"><span style="font-size:90px">📱</span></div></div>
+    <div class="dx-cloud" id="cloud"><div class="c">☁️</div><div class="x" id="cx">✖</div></div>
+    <div class="dx-zero" id="zero"><b>0 uploads</b> · no account · no sign-up</div>
+    <div class="dx-us" id="us"><span><img src="canwe-logo.svg" alt="">our app — CanWe.tech 🇮🇳</span></div>
+  </section>
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Sneha · 2m</small><b>PDF</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Arjun · 1m</small><b>PDF</b> 🙏 SSC form closes Friday</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Zoya · 40s</small><b>PDF</b> my resume is 3 MB 😭</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#6366F1,#3B82F6)"></i><div><small>you · now</small><b>PDF</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>the app + exam size cheat sheet 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>PDF</b> 👇</span></div>
+  </section>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+R.$("dxlg").outerHTML = R.lg("img/docxify-icon.png", { s: 54 });
+
+const T = { pain: at("so you crop"), turn: at("we got rejected"), demo: at("Docxify"),
+  pre: at("exam presets"), tools: at("and its a full"), priv: at("all offline"),
+  cta: at("comment PDF"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.pain, enter: "none" }, { id: "sPain", s: T.pain, e: T.turn, enter: "push" },
+  { id: "sTurn", s: T.turn, e: T.demo, enter: "blurzoom" }, { id: "sDemo", s: T.demo, e: T.pre, enter: "push" },
+  { id: "sPre", s: T.pre, e: T.tools, enter: "push" }, { id: "sTools", s: T.tools, e: T.priv, enter: "blurzoom" },
+  { id: "sPriv", s: T.priv, e: T.cta, enter: "push" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.demo, T.tools], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "20 KB WALL", at: 0.2 }, { label: "THE FIX", at: T.turn },
+    { label: "DEMO", at: T.demo }, { label: "INSIDE", at: T.tools, end: T.cta }],
+  counter: { unit: "KB photo", steps: [
+    [at("4 MB") - 0.1, 4096, "KB photo"], [at("20 KB") - 0.1, 20, "KB allowed"],
+    [at("2.4 MB") - 0.1, 2400, "KB resume"], [at("198 KB") - 0.1, 198, "KB now ✓"],
+    [at("300+ tools") - 0.1, 300, "tools"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", style: { shirt: "#6366F1", shirtLine: "#4F46E5", print: "none" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {},
+});
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // HOOK — 3D photo slab assembles, form slams in, red stamp
+  R.rays("fl", t, 0.3); R.rings("fl", t, [0.35, at("20 KB")]);
+  const php = ease.spring(prog(t, 0.15, 0.7)); const ph = R.$("photo");
+  ph.style.opacity = clamp(php * 2); ph.style.transform = `scale(${lerp(0.6, 1, php)}) translateY(${lerp(80, 0, php)}px)`;
+  ph.querySelector(".pl").style.transform = `rotateX(10deg) rotateY(${-16 + Math.sin(t * 0.9) * 4}deg)`;
+  R.card("form", t, { in: at("SSC form") - 0.15, y: 46 });
+  const sp = ease.spring(prog(t, at("20 KB") - 0.05, 0.4)); R.$("stamp").style.opacity = clamp(sp * 3);
+  R.$("stamp").style.transform = `rotate(-9deg) scale(${lerp(2.1, 1, sp)})`; if (sp > 0) R.cue("pop", at("20 KB") - 0.05);
+  // PAIN — three bad options + the ₹50 tag
+  [["o1", at("crop")], ["o2", at("shady website") - 0.15], ["o3", at("cyber")]].forEach(([id, a]) => { R.rise(id, t, a, { dy: 20 }); R.cue("click", a, { soft: true }); });
+  const rp = ease.spring(prog(t, at("fifty rupees") - 0.1, 0.45)); R.$("rs").style.opacity = clamp(rp * 3);
+  R.$("rs").style.transform = `rotate(8deg) scale(${lerp(2.2, 1, rp)})`; if (rp > 0) R.cue("pop", at("fifty rupees") - 0.1);
+  // TURN — rejection stamps, then the 3D app cube is born
+  [0, 1, 2].forEach(i => { const a = at("rejected") + i * 0.35; const e = R.$("rej").children[i];
+    const p = ease.spring(prog(t, a, 0.35)); e.style.opacity = clamp(p * 3); e.style.scale = lerp(1.8, 1, p); if (p > 0) R.cue("click", a, { soft: true }); });
+  R.rays("fl2", t, at("ourselves") - 0.2, 0.3); R.rings("fl2", t, [at("ourselves") - 0.1]);
+  R.box("appbox", t, { at: at("ourselves") - 0.25, size: 260, icon: "img/docxify-icon.png", side: "docxify", spin: true });
+  R.rise("freechip", t, at("its free") - 0.1, { dy: 22 }); R.cue("ding", at("its free") - 0.1, { soft: true });
+  // DEMO — 3D phone; press squeezes the PDF; counter rolls down
+  const dp = ease.spring(prog(t, T.demo + 0.05, 0.7)); const p3 = R.$("ph3");
+  p3.style.opacity = clamp(dp * 2); p3.style.transform = `translateY(${lerp(90, 0, dp)}px) scale(${lerp(0.85, 1, dp)})`;
+  p3.querySelector(".bodyy").style.transform = `rotateY(${-14 + Math.sin(t * 0.7) * 3}deg) rotateX(6deg)`;
+  R.rise("file", t, at("resume") - 0.1, { dy: 16 });
+  R.rise("btn", t, at("one tap") - 0.35, { dy: 14 }); R.press("btn", t, at("one tap") + 0.05);
+  R.rise("press", t, at("one tap") + 0.1, { dy: 10 });
+  const sq = ease.inOut(prog(t, at("198 KB") - 0.65, 0.8));
+  R.$("pTop").style.top = lerp(0, 50, sq) + "px"; R.$("pBot").style.bottom = lerp(0, 50, sq) + "px";
+  const pd = R.$("pdoc"); pd.style.transform = `translate(-50%,-50%) scaleY(${lerp(1, 0.42, sq)}) scaleX(${lerp(1, 1.12, sq)})`;
+  const kbv = Math.round(lerp(2400, 198, ease.inOut(prog(t, at("198 KB") - 0.65, 0.9))));
+  R.$("kb").textContent = kbv + " KB"; R.$("fsz").textContent = kbv >= 1000 ? (kbv / 1000).toFixed(1) + " MB" : kbv + " KB";
+  R.cue("ding", at("198 KB") + 0.2, { soft: true });
+  R.rise("ok", t, at("under every") - 0.05, { dy: 18 });
+  // PRESETS
+  [["p1", at("exam presets") + 0.2], ["p2", at("exam presets") + 0.45], ["p3", at("exam presets") + 0.7]].forEach(([id, a]) => { R.rise(id, t, a, { dy: 24 }); R.cue("click", a, { soft: true }); });
+  R.rise("exact", t, at("exact KB") - 0.15, { dy: 18 });
+  R.note("fnPre", t, at("signature") - 0.1, T.tools);
+  // TOOLS — exploded 3D teardown of the app
+  const AX = at("and its a full");
+  R.xview("xv", t, { at: AX, w: 330, d: 620, tilt: [56, -30], explode: at("300+ tools") + 0.15, gap: 56,
+    labels: { x: 690, y0: 10, y1: 660, w: 350 },
+    parts: [
+      { name: "Docxify", gloss: "one app, 300+ tools", skin: "back", th: 12, at: AX + 0.2,
+        html: `<div style="position:absolute;inset:0;display:grid;place-items:center">${R.lg("img/docxify-icon.png", { s: 120 })}</div>` },
+      { name: "Scan", gloss: "camera → clean PDF", skin: "glass", th: 8, at: at("scan") },
+      { name: "Merge & split", gloss: "join or cut pages", skin: "screen", th: 8, at: at("merge") },
+      { name: "Sign & fill", gloss: "forms, stamps, signatures", skin: "plastic", th: 10, at: at("sign") },
+      { name: "PDF ⇄ Word", gloss: "500+ conversions", skin: "pcb", th: 10, at: at("PDF to word"), w: 150, d: 420, x: 90, y: 100,
+        html: `<div style="position:absolute;inset:0;display:grid;place-items:center">${R.lg("word", { white: true, s: 64 })}</div>` },
+      { name: "Aadhaar mask", gloss: "hide the number before sharing", skin: "battery", th: 12, at: at("Aadhaar masking"), w: 170, d: 360, x: 80, y: 130,
+        html: `<div class="lbl">XXXX-XXXX-1234</div>` },
+    ] });
+  R.note("fnX", t, at("300+ tools") + 0.3, T.priv);
+  // PRIV — shield phone, blocked cloud, disclosure chip
+  pop("shield", t, T.priv + 0.1, { from: 0.7 });
+  R.$("shield").querySelector(".rng").style.transform = `scale(${1 + Math.sin(t * 2.2) * 0.04})`;
+  R.card("cloud", t, { in: at("never leave") - 0.2, y: 20 });
+  const xp = ease.spring(prog(t, at("never leave") + 0.15, 0.4)); R.$("cx").style.opacity = clamp(xp * 3);
+  R.$("cx").style.scale = lerp(2, 1, xp); if (xp > 0) R.cue("pop", at("never leave") + 0.15);
+  R.rise("zero", t, at("leave your phone") + 0.1, { dy: 16 });
+  R.rise("us", t, at("full disclosure") - 0.1, { dy: 20 }); R.cue("ding", at("full disclosure"), { soft: true });
+  // CTA — house pattern
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const kw = "PDF", tyA = at("comment PDF") + 0.3, posted = R.end("comment PDF") + 0.3;
+  if (t < posted) R.type("ctx", kw, t, tyA, 9); else R.$("ctx").textContent = "";
+  R.$("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  R.$("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, R.end("cheat sheet") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

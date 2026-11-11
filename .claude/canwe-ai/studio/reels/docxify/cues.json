@@ -1,0 +1,222 @@
+[
+ {
+  "type": "whoosh",
+  "t": 4.398
+ },
+ {
+  "type": "whoosh",
+  "t": 10.037
+ },
+ {
+  "type": "whoosh",
+  "t": 14.741
+ },
+ {
+  "type": "whoosh",
+  "t": 22.463
+ },
+ {
+  "type": "whoosh",
+  "t": 29.019
+ },
+ {
+  "type": "whoosh",
+  "t": 37.38
+ },
+ {
+  "type": "whoosh",
+  "t": 42.713
+ },
+ {
+  "type": "pop",
+  "t": 10.383,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.809,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 22.383000000000003,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 45.309000000000005,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 47.077,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": -1,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0.013999999999999999,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 4.114,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 8.778,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 10.852,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.704,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.482000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 15.968000000000002,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 20.676,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 28.269,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 32.477,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 36.577,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 39.065000000000005,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 39.69,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 43.79,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 44.311,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 47.63,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 0.35
+ },
+ {
+  "type": "whoosh",
+  "t": 3.574
+ },
+ {
+  "type": "click",
+  "t": 5.343,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 6.340999999999999,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 8.13,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 12.891
+ },
+ {
+  "type": "ding",
+  "t": 13.604000000000001,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 18.263
+ },
+ {
+  "type": "ding",
+  "t": 19.134999999999998,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 22.663,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 22.913,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 23.163,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 31.482999999999997
+ },
+ {
+  "type": "pop",
+  "t": 37.480000000000004
+ },
+ {
+  "type": "ding",
+  "t": 40.444,
+  "soft": true
+ },
+ {
+  "type": "type",
+  "t": 43.013,
+  "t2": 43.346333333333334
+ },
+ {
+  "type": "click",
+  "t": 43.78
+ },
+ {
+  "type": "pop",
+  "t": 46.72
+ }
+]

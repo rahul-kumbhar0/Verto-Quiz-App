@@ -1,0 +1,1 @@
+window.EMPH = {"box": ["week.", "look.", "days.", "time.", "costs.#2", "16th.#1", "reset.", "all.#2", "strangers.", "job.#1", "FABLE#4", "ends."], "bold": []};

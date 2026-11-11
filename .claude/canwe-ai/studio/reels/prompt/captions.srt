@@ -1,0 +1,120 @@
+1
+00:00:00,000 --> 00:00:01,010
+I gave Claude
+
+2
+00:00:00,860 --> 00:00:02,170
+a fresher's resume,
+
+3
+00:00:02,020 --> 00:00:03,440
+and asked one question.
+
+4
+00:00:03,990 --> 00:00:05,060
+Which jobs is he
+
+5
+00:00:04,910 --> 00:00:07,030
+actually qualified for, right now?
+
+6
+00:00:07,630 --> 00:00:08,900
+It named five jobs.
+
+7
+00:00:09,190 --> 00:00:10,210
+Data analyst.
+
+8
+00:00:10,500 --> 00:00:12,040
+Business analyst trainee.
+
+9
+00:00:12,390 --> 00:00:13,760
+Junior Python developer.
+
+10
+00:00:14,190 --> 00:00:14,870
+Honestly?
+
+11
+00:00:15,070 --> 00:00:16,000
+Kind of crazy.
+
+12
+00:00:16,520 --> 00:00:17,680
+Then the smart part.
+
+13
+00:00:17,990 --> 00:00:19,050
+It listed the three
+
+14
+00:00:18,900 --> 00:00:20,020
+skills stopping him.
+
+15
+00:00:20,450 --> 00:00:21,600
+Advanced SQL.
+
+16
+00:00:21,980 --> 00:00:22,590
+Excel.
+
+17
+00:00:22,920 --> 00:00:24,000
+Basic stats.
+
+18
+00:00:24,260 --> 00:00:25,590
+And the exact keywords
+
+19
+00:00:25,440 --> 00:00:26,730
+recruiters search for,
+
+20
+00:00:26,730 --> 00:00:28,230
+that his resume was missing.
+
+21
+00:00:28,650 --> 00:00:30,330
+So you stop applying everywhere.
+
+22
+00:00:30,610 --> 00:00:32,170
+You apply where you fit,
+
+23
+00:00:32,170 --> 00:00:33,310
+and fix the gap.
+
+24
+00:00:33,670 --> 00:00:34,770
+It's one prompt.
+
+25
+00:00:34,830 --> 00:00:35,450
+Free.
+
+26
+00:00:35,780 --> 00:00:37,710
+Works in Claude or ChatGPT.
+
+27
+00:00:38,000 --> 00:00:39,150
+Comment PROMPT,
+
+28
+00:00:39,000 --> 00:00:39,990
+and I'll DM you
+
+29
+00:00:39,840 --> 00:00:41,120
+the exact prompt,
+
+30
+00:00:40,970 --> 00:00:41,980
+ready to copy.
+

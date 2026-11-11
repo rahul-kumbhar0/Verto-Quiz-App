@@ -1,0 +1,16 @@
+[
+ {
+  "type": "swish",
+  "t": 2.5999999999999996
+ },
+ {
+  "type": "impact",
+  "t": 18.6,
+  "soft": true
+ },
+ {
+  "type": "impact",
+  "t": 18.75,
+  "soft": true
+ }
+]

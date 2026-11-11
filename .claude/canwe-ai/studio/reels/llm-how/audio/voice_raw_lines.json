@@ -1,0 +1,112 @@
+[
+ {
+  "line": "Every answer ChatGPT gives you is written one piece at a time, and each piece is a guess.",
+  "start": 0.15,
+  "end": 5.848000000000001
+ },
+ {
+  "line": "So how does a guess sound so smart?",
+  "start": 6.268000000000001,
+  "end": 7.939
+ },
+ {
+  "line": "First, tokens.",
+  "start": 8.359,
+  "end": 9.352
+ },
+ {
+  "line": "Your message is chopped into tokens, small chunks of text.",
+  "start": 9.772,
+  "end": 13.209
+ },
+ {
+  "line": "A token is about three-quarters of a word.",
+  "start": 13.629,
+  "end": 16.082
+ },
+ {
+  "line": "Next, every token becomes a vector, a long list of numbers.",
+  "start": 16.502,
+  "end": 20.06
+ },
+ {
+  "line": "In G P T three, that list is twelve thousand two hundred eighty-eight numbers long.",
+  "start": 20.479999999999997,
+  "end": 25.448999999999998
+ },
+ {
+  "line": "Then, attention.",
+  "start": 25.869,
+  "end": 26.761
+ },
+ {
+  "line": "Each token looks back at every token before it and decides which ones matter.",
+  "start": 27.180999999999997,
+  "end": 31.74
+ },
+ {
+  "line": "In the river bank, bank pays attention to river, not money.",
+  "start": 32.16,
+  "end": 35.226
+ },
+ {
+  "line": "And that happens in ninety-six layers, one after another.",
+  "start": 35.646,
+  "end": 38.929
+ },
+ {
+  "line": "At the end, the model scores every token it knows, all fifty thousand two hundred fifty-seven of them, and picks a likely next one.",
+  "start": 39.349,
+  "end": 47.315999999999995
+ },
+ {
+  "line": "Then it adds that token to your message and runs the whole thing again.",
+  "start": 47.736,
+  "end": 51.644999999999996
+ },
+ {
+  "line": "For every single word.",
+  "start": 52.065,
+  "end": 53.388999999999996
+ },
+ {
+  "line": "So where do the numbers come from?",
+  "start": 53.809,
+  "end": 55.388
+ },
+ {
+  "line": "G P T three read three hundred billion tokens and learned by guessing the next one, nudging a hundred seventy-five billion weights to make the right guess more likely.",
+  "start": 55.808,
+  "end": 66.20200000000001
+ },
+ {
+  "line": "The idea came from an eight-author Google paper in twenty seventeen: Attention Is All You Need.",
+  "start": 66.622,
+  "end": 72.533
+ },
+ {
+  "line": "So here's how to use it.",
+  "start": 72.953,
+  "end": 74.22
+ },
+ {
+  "line": "It predicts what sounds right, not what is right.",
+  "start": 74.64,
+  "end": 77.143
+ },
+ {
+  "line": "So give it the facts, show it an example, and ask it to check its work.",
+  "start": 77.563,
+  "end": 81.35300000000001
+ },
+ {
+  "line": "Your chatbot is quietly guessing the next token, over and over, really well.",
+  "start": 81.77300000000001,
+  "end": 86.262
+ },
+ {
+  "line": "Follow for more breakdowns, and send this to the friend who thinks the AI is alive.",
+  "start": 86.682,
+  "end": 91.63000000000001
+ }
+]

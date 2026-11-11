@@ -1,0 +1,377 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Learn AI Engineering · Day 1 — what happens after Enter (3D)</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- Day 1 v3: house speedy style + 3D props (classes prefixed q3-) ---- */
+.q3-wrap{position:absolute;left:0;right:0;perspective:1700px;perspective-origin:50% 40%}
+.q3-g{position:absolute;left:50%;top:50%;transform-style:preserve-3d}
+/* generic 3D box: --w --h --d --c (front colour) */
+.q3-bx{position:absolute;transform-style:preserve-3d;width:var(--w);height:var(--h)}
+.q3-bx .fc{position:absolute;box-sizing:border-box}
+.q3-bx .fr{left:0;top:0;width:var(--w);height:var(--h);transform:translateZ(calc(var(--d) / 2));background:var(--c);border-radius:10px;display:grid;place-items:center;font:800 var(--fs,44px) Inter;color:#fff;white-space:pre;box-shadow:inset 0 2px 0 rgba(255,255,255,.25)}
+.q3-bx .tp{left:0;width:var(--w);height:var(--d);top:calc(var(--h) / 2 - var(--d) / 2);transform:rotateX(90deg) translateZ(calc(var(--h) / 2));background:var(--c);filter:brightness(1.35);border-radius:10px}
+.q3-bx .sd{top:0;height:var(--h);width:var(--d);left:calc(var(--w) / 2 - var(--d) / 2);transform:rotateY(90deg) translateZ(calc(var(--w) / 2));background:var(--c);filter:brightness(.62);border-radius:10px}
+.q3-fn{position:absolute;left:0;right:0;top:1300px;text-align:center;font:600 21px Inter;color:#8E8E93;opacity:0;z-index:4}
+/* hook: tilted chat window, letters flip into digits */
+.q3-chat{position:absolute;left:110px;right:110px;top:700px;border-radius:30px;background:#17191D;border:1.5px solid #2A2D33;padding:24px 26px 30px;opacity:0;font-family:Inter;box-shadow:0 40px 90px rgba(0,0,0,.6);transform-style:preserve-3d}
+.q3-chat .hd{display:flex;align-items:center;gap:12px;font:800 26px Inter;color:#fff;padding-bottom:16px;border-bottom:1px solid #2A2D33}
+.q3-chat .hd span{margin-left:auto;font:700 18px Mono;color:#6B7280;letter-spacing:2px}
+.q3-q{margin:26px 0 0;display:flex;align-items:center;gap:16px;border-radius:20px;background:#0F1013;border:1.5px solid #2A2D33;padding:20px 22px}
+.q3-q .tx{flex:1;font:700 38px Inter;color:#fff;white-space:nowrap}
+.q3-q .tx i{display:inline-block;font-style:normal;white-space:pre;backface-visibility:hidden}
+.q3-q .tx i.dg{font-family:Mono;color:#60A5FA}
+.q3-key{position:relative;flex:none;width:150px;height:84px;perspective:600px}
+.q3-key .cap{position:absolute;inset:0;border-radius:18px;background:linear-gradient(180deg,#3A3F49,#22262D);box-shadow:0 12px 0 #0B0C0F,0 20px 40px rgba(0,0,0,.6),inset 0 2px 0 #565D6B;display:grid;place-items:center;font:800 28px Inter;color:#fff;transform:rotateX(24deg)}
+/* day card (house) */
+.q3-pill{position:absolute;left:0;right:0;top:680px;text-align:center;opacity:0}
+.q3-pill span{display:inline-block;font:800 30px Mono;letter-spacing:4px;color:#F5B49C;border:2.5px solid #D97757;border-radius:999px;padding:12px 30px;background:rgba(217,119,87,.08)}
+.q3-day{position:absolute;left:0;right:0;top:770px;text-align:center;font:900 210px/1 Inter;color:#fff;letter-spacing:-6px;opacity:0}
+.q3-day b{color:#D97757}
+.q3-trk{position:absolute;left:180px;right:180px;top:1020px;display:flex;gap:14px;perspective:900px}
+.q3-trk i{flex:1;height:86px;border-radius:16px;background:#1C1E23;border:1.5px solid #2A2D33;display:grid;place-items:center;font:900 32px Inter;font-style:normal;color:#4B5058;opacity:0;transform:rotateX(30deg)}
+.q3-trk i.on{background:#D97757;border-color:#F5B49C;color:#fff;box-shadow:0 0 40px rgba(217,119,87,.55)}
+/* laser cut */
+.q3-laser{position:absolute;top:-30px;bottom:-30px;width:4px;margin-left:-2px;background:#fff;box-shadow:0 0 18px #60A5FA,0 0 40px #3B82F6;opacity:0;transform:translateZ(60px)}
+/* vocabulary shelf */
+.q3-dr .fr{justify-content:start;display:flex;align-items:center;gap:0;padding:0 22px;font:700 24px Mono;color:#C9CDD4}
+.q3-dr .fr u{text-decoration:none;width:150px;color:#6B7280}
+.q3-dr.hit .fr{color:#fff}.q3-dr.hit .fr u{color:#93C5FD}
+.q3-shelfL{position:absolute;font:800 22px Mono;letter-spacing:2px;color:#9CA3AF;transform:translateZ(80px)}
+.q3-tag{position:absolute;left:50%;bottom:100%;margin-bottom:12px;transform:translateX(-50%) translateZ(30px);font:800 20px Mono;color:#93C5FD;background:#0F1A2E;border:1.5px solid #3B82F6;border-radius:8px;padding:3px 8px;opacity:0;white-space:nowrap}
+/* skyline + point space */
+.q3-floor{position:absolute;transform-style:preserve-3d;background-image:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px);background-size:60px 60px;border:1.5px solid rgba(255,255,255,.12);border-radius:12px}
+.q3-vl{position:absolute;font:800 22px Mono;color:#fff;white-space:nowrap}
+.q3-pt{position:absolute;transform-style:preserve-3d}
+.q3-pt .bb{position:absolute;left:-14px;top:-14px;display:flex;align-items:center;gap:12px;white-space:nowrap;font:800 34px Inter;color:#E5E7EB}
+.q3-pt .bb i{width:28px;height:28px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#BFDBFE,#3B82F6 60%,#1E3A8A);box-shadow:0 0 22px rgba(59,130,246,.8)}
+.q3-pt.c .bb i{background:radial-gradient(circle at 35% 30%,#FED7AA,#D97757 60%,#7C2D12);box-shadow:0 0 22px rgba(217,119,87,.8)}
+.q3-ax{position:absolute;left:0;top:0;height:3px;background:rgba(255,255,255,.25);transform-origin:0 50%}
+/* attention (light) */
+.q3-att .fr{color:#111;font-size:34px}
+.q3-arcs{position:absolute;overflow:visible}
+.q3-arcs path{fill:none;stroke:#9CA3AF;stroke-width:3;stroke-linecap:round}
+.q3-arcs path.hot{stroke:#3B82F6;stroke-width:9;filter:drop-shadow(0 0 10px rgba(59,130,246,.7))}
+.q3-dot{position:absolute;width:22px;height:22px;margin:-11px 0 0 -11px;border-radius:50%;background:#fff;box-shadow:0 0 0 5px #3B82F6,0 0 26px #3B82F6;opacity:0}
+.q3-tog{position:absolute;left:0;right:0;top:1020px;text-align:center;opacity:0}
+.q3-tog span{display:inline-block;font:800 38px Inter;color:#1D4ED8;background:#DBEAFE;border:3px solid #3B82F6;border-radius:999px;padding:10px 30px}
+.q3-paper{position:absolute;left:250px;top:1050px;width:580px;height:250px;opacity:0;perspective:1000px}
+.q3-paper .pg{position:absolute;inset:0;border-radius:14px;background:#fff;border:1.5px solid #E3E1DC;box-shadow:0 30px 60px rgba(0,0,0,.15);padding:24px 28px;box-sizing:border-box;transform-origin:50% 100%}
+.q3-paper b{display:block;font:900 34px/1.1 Inter;color:#111}
+.q3-paper small{display:block;margin-top:10px;font:600 22px Inter;color:#6B7280}
+.q3-paper em{display:inline-block;margin-top:14px;font:800 20px Mono;font-style:normal;color:#1D4ED8;background:#DBEAFE;border-radius:8px;padding:5px 12px}
+.q3-paper .ln{height:8px;border-radius:4px;background:#EEF0F3;margin-top:12px}
+/* score bars */
+.q3-bl{position:absolute;font:800 26px Mono;color:#fff;white-space:pre;text-align:center;width:200px;margin-left:-100px}
+.q3-bp{position:absolute;font:900 30px Mono;color:#93C5FD;width:200px;margin-left:-100px;text-align:center}
+.q3-loop{position:absolute;right:100px;top:770px;font:900 32px Mono;color:#D97757;opacity:0}
+/* strip (running example) */
+.q3-strip{position:absolute;left:40px;right:40px;top:680px;height:90px;perspective:1400px;opacity:0;z-index:3}
+.q3-strip .q3-g{top:45px}
+/* stream */
+.q3-msg{position:absolute;left:100px;right:100px;top:700px;border-radius:30px;background:#17191D;border:1.5px solid #2A2D33;padding:24px 26px;opacity:0;font-family:Inter;box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.q3-msg .u{margin-left:auto;width:fit-content;background:#2B5FD9;color:#fff;border-radius:22px 22px 6px 22px;padding:12px 20px;font:600 28px Inter}
+.q3-msg p{margin:22px 0 0;font:600 34px/1.5 Inter;color:#E8E8EC;min-height:170px}
+.q3-msg p i{font-style:normal}.q3-msg p i.new{background:rgba(217,119,87,.35);border-radius:6px}
+/* temperature */
+.q3-dial{position:absolute;left:390px;top:690px;width:300px;height:300px;perspective:900px}
+.q3-dial .disc{position:absolute;inset:0;border-radius:50%;background:radial-gradient(circle at 50% 40%,#3A3F49,#17191D 70%);box-shadow:0 22px 0 #0B0C0F,0 40px 60px rgba(0,0,0,.6),inset 0 2px 0 #5A606C;transform:rotateX(48deg)}
+.q3-dial .nd{position:absolute;left:146px;top:30px;width:8px;height:120px;border-radius:4px;background:linear-gradient(#F5B49C,#D97757);transform-origin:50% 100%;box-shadow:0 0 16px rgba(217,119,87,.8)}
+.q3-dial .tk{position:absolute;left:0;right:0;top:-46px;text-align:center;font:800 26px Mono;color:#fff}
+.q3-dial .lo,.q3-dial .hi{position:absolute;top:220px;font:800 20px Mono;color:#9CA3AF}.q3-dial .lo{left:-40px}.q3-dial .hi{right:-70px}
+.q3-ans{position:absolute;top:1170px;width:430px;border-radius:22px;background:#17191D;border:1.5px solid #2A2D33;padding:16px 18px;opacity:0;font:600 26px/1.4 Inter;color:#E8E8EC;box-sizing:border-box}
+.q3-ans small{display:block;font:800 16px Mono;letter-spacing:2px;color:#D97757;margin-bottom:6px}
+/* recap */
+.q3-pred{position:absolute;left:0;right:0;top:900px;text-align:center;opacity:0}
+.q3-pred span{display:inline-flex;align-items:center;gap:16px;font:900 46px Inter;color:#fff;background:#17191D;border:3px solid #D97757;border-radius:999px;padding:16px 40px;box-shadow:0 20px 50px rgba(217,119,87,.3)}
+.q3-pred s{color:#6B7280;text-decoration-thickness:5px}
+/* CTA (house pattern from Day 1 v1) */
+.cmts{position:absolute;left:110px;top:680px;width:860px;height:620px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}
+.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#D97757,#3B82F6);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}
+.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:660px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#fff;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:1320px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 60px Inter;color:#111;background:#fff;border:5px solid #D97757;border-radius:26px;padding:12px 36px;box-shadow:0 20px 50px rgba(217,119,87,.35)}
+.endcta b{color:#D97757}
+</style></head>
+<body><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <section class="scene" id="sHook">
+    <div class="q3-chat" id="chat"><div class="hd"><span style="margin:0;color:#fff;font:800 26px Inter;letter-spacing:0">New chat</span><span>AI ASSISTANT</span></div>
+      <div class="q3-q"><div class="tx" id="qtx"></div><div class="q3-key"><div class="cap" id="kcap">⏎ Enter</div></div></div></div>
+    <div class="q3-fn" id="fnH">Illustration · the real numbers are learned, not typed</div>
+  </section>
+
+  <section class="scene" id="sDay">
+    <div class="q3-pill" id="pill"><span>LEARN AI ENGINEERING</span></div>
+    <div class="q3-day" id="day">DAY <b>1</b></div>
+    <div class="q3-trk" id="trk"><i>1</i><i>2</i><i>3</i><i>4</i><i>5</i><i>6</i><i>7</i></div>
+  </section>
+
+  <section class="scene" id="sTok">
+    <div class="q3-wrap" style="top:660px;height:520px"><div class="q3-g" id="tokG"></div></div>
+    <div class="q3-fn" id="fn1" style="top:1180px">Split shown is illustrative · every model has its own tokenizer</div>
+  </section>
+
+  <section class="scene" id="sId">
+    <div class="q3-wrap" style="top:800px;height:520px"><div class="q3-g" id="shelfG"></div></div>
+    <div class="q3-fn" id="fn2" style="top:1290px">Row numbers illustrative · vocabulary size from the GPT-2 release (2019)</div>
+  </section>
+
+  <section class="scene" id="sVec">
+    <div class="q3-wrap" style="top:790px;height:520px"><div class="q3-g" id="skyG"></div></div>
+    <div class="q3-fn" id="fn3" style="top:1290px">Values illustrative · real ones are learned in training</div>
+  </section>
+
+  <section class="scene" id="sMap">
+    <div class="q3-wrap" style="top:660px;height:640px"><div class="q3-g" id="mapG"></div></div>
+    <div class="q3-fn" id="fn3b" style="top:1290px">Illustration · 768 numbers squeezed into 3D so you can see it</div>
+  </section>
+
+  <section class="scene" id="sAtt">
+    <div class="q3-wrap" style="top:660px;height:360px"><div class="q3-g" id="attG"></div></div>
+    <div class="q3-tog" id="tog"><span>capital + France = belong together</span></div>
+    <div class="q3-paper" id="paper"><div class="pg" id="pgp"><b>Attention Is All You Need</b><small>Vaswani et al. · Google · 2017</small><em>arXiv:1706.03762</em><div class="ln"></div><div class="ln" style="width:80%"></div></div></div>
+  </section>
+
+  <section class="scene" id="sPick">
+    <div class="q3-wrap" style="top:800px;height:520px"><div class="q3-g" id="barG"></div></div>
+    <div class="q3-loop" id="loop">↻ run <span id="lpn">1</span></div>
+    <div class="q3-fn" id="fn4" style="top:1290px">Scores illustrative</div>
+  </section>
+
+  <section class="scene" id="sStream">
+    <div class="q3-msg" id="msg"><div class="u">What's the capital of France?</div><p id="rep"></p></div>
+  </section>
+
+  <section class="scene" id="sTemp">
+    <div class="q3-dial" id="dial"><div class="tk">temperature <span id="tv">0.2</span></div><div class="disc"></div><div class="nd" id="nd"></div><div class="lo">safe</div><div class="hi">creative</div></div>
+    <div class="q3-wrap" style="top:860px;height:300px"><div class="q3-g" id="tbarG"></div></div>
+    <div class="q3-ans" id="ans1" style="left:90px"><small>ASK #1</small>Paris.</div>
+    <div class="q3-ans" id="ans2" style="right:90px"><small>ASK #2 · SAME QUESTION</small>The capital of France is Paris.</div>
+  </section>
+
+  <section class="scene" id="sRecap">
+    <div class="q3-pred" id="pred"><span><s>looking it up</s> predicting ✅</span></div>
+  </section>
+
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Kavya · 2m</small><b>TOKENS</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Aditya · 1m</small><b>TOKENS</b> finally it makes sense 🙏</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#D97757,#3B82F6)"></i><div><small>you · now</small><b>TOKENS</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx2"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname">canwe.ai</b><span>your Day 1 exercise 🧠📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>TOKENS</b> 👇</span></div>
+  </section>
+
+  <div class="q3-strip" id="strip"><div class="q3-g" id="stripG"></div></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, prog, ease, lerp, clamp } = R;
+const $ = R.$, IO = ease.inOut;
+const Q = "What's the capital of France?";
+const TOK = ["What", "'s", "the", "capital", "of", "France", "?"];
+const COL = ["#E11D48", "#F59E0B", "#10B981", "#3B82F6", "#8B5CF6", "#0EA5E9", "#6B7280"];
+const IDS = ["2061", "338", "262", "3139", "286", "4881", "30"];
+const box = (o) => `<div class="q3-bx ${o.cls || ""}" id="${o.id || ""}" style="--w:${o.w}px;--h:${o.h}px;--d:${o.d}px;--c:${o.c};${o.fs ? `--fs:${o.fs}px;` : ""}${o.st || ""}"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr">${o.html || ""}</div></div>`;
+const tw = (w, k = 25, pad = 34) => pad + k * w.length;
+const hexa = (h, a) => { const n = parseInt(h.slice(1), 16); return `rgba(${n >> 16},${(n >> 8) & 255},${n & 255},${a})`; };
+
+// HOOK chars
+$("qtx").innerHTML = [...Q].map((c, i) => `<i data-c="${c}" data-d="${"7305918264"[i % 10]}">${c}</i>`).join("");
+// TOKENS: 7 blocks laid side by side (one slab), lasers at the seams
+const TW = TOK.map(w => tw(w)); const TOT = TW.reduce((a, b) => a + b, 0);
+{ let x = -TOT / 2, html = "";
+  TOK.forEach((w, i) => { html += box({ id: "tb" + i, w: TW[i], h: 104, d: 50, c: "#2A2D33", html: w, st: `left:${x}px;top:-52px` }); x += TW[i]; if (i < TOK.length - 1) html += `<div class="q3-laser" id="lz${i}" style="left:${x}px"></div>`; });
+  $("tokG").innerHTML = html; }
+// STRIP: small blocks (running example) + answer slots
+const SW = TOK.map(w => tw(w, 17, 26)); const ANS = [" Paris", ".", " It", "'s", " known", " for"];
+function stripHTML(nAns) {
+  const words = TOK.concat(ANS.slice(0, nAns).map(s => s.trim())); const ws = words.map(w => tw(w, 17, 26)); const gap = 10;
+  const tot = ws.reduce((a, b) => a + b, 0) + gap * (words.length - 1); let x = -tot / 2, html = "";
+  words.forEach((w, i) => { const ans = i >= TOK.length; html += box({ w: ws[i], h: 62, d: 30, fs: 28, c: ans ? "#2563EB" : COL[i], html: w + (i < TOK.length ? `<span class="q3-tag" id="tg${i}">#${IDS[i]}</span>` : ""), st: `left:${x}px;top:-31px;${ans && i === words.length - 1 ? "--new:1" : ""}` }); x += ws[i] + gap; });
+  return html;
+}
+// SHELF: drawers
+const ROWS = [["0", "!"], ["1", "\""], ["2", "#"], ["⋮", ""], ["262", "the"], ["286", "of"], ["338", "'s"], ["2061", "What"], ["3139", "capital"], ["4881", "France"], ["⋮", ""], ["50,256", "<|endoftext|>"]];
+const HIT = { 4: 2, 5: 4, 6: 1, 7: 0, 8: 3, 9: 5 };
+$("shelfG").innerHTML = ROWS.map(([n, w], k) => box({ id: "dr" + k, cls: "q3-dr", w: 560, h: 34, d: 70, c: "#1F2228", html: `<u>${n}</u>${w.replace(/</g, "&lt;")}`, st: `left:-280px;top:${-240 + k * 40}px` })).join("") +
+  `<div class="q3-shelfL" style="left:-280px;top:-290px">VOCABULARY · <span id="vocn">0</span> ROWS</div>`;
+// SKYLINE: 7 columns x 6 bars on a floor
+const VAL = (i, k) => Math.sin(i * 7.3 + k * 3.1) * 0.9;
+{ let html = `<div class="q3-floor" style="left:-420px;top:-200px;width:840px;height:400px;transform:rotateX(90deg)"></div>`;
+  TOK.forEach((w, i) => { for (let k = 0; k < 6; k++) { const v = VAL(i, k); html += `<div class="q3-bx q3-vb" id="vb${i}${k}" data-v="${v}" style="--w:52px;--h:10px;--d:52px;--c:${v >= 0 ? "#3B82F6" : "#D97757"};left:${-370 + i * 116}px;top:0;transform:translate3d(0,0,${150 - k * 62}px)"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr"></div></div>`; }
+    html += `<div class="q3-vl" style="left:${-370 + i * 116 - 10}px;top:30px;transform:translateZ(230px)">${w}</div>`; });
+  html += `<div class="q3-vl" id="v768" style="left:-190px;top:-400px;font-size:30px;color:#93C5FD;opacity:0">…768 numbers per token</div>`;
+  $("skyG").innerHTML = html; }
+// MEANING SPACE: points in 3D
+const PTS = [["France", -240, -120, 120, 1], ["Germany", -120, -30, 240, 0], ["Italy", -300, 60, 20, 0], ["Paris", 190, -150, 100, 1], ["Berlin", 290, -60, 220, 0], ["Rome", 170, 30, 0, 0], ["capital", 20, 180, -170, 0], ["city", 230, 190, -120, 0], ["banana", -280, 200, -230, 0]];
+$("mapG").innerHTML = `<div class="q3-floor" style="left:-300px;top:-300px;width:600px;height:600px;transform:translateY(200px) rotateX(90deg)"></div>` +
+  `<div class="q3-ax" style="width:300px;transform:translate3d(-300px,200px,0)"></div><div class="q3-ax" style="width:400px;transform:translate3d(-300px,200px,0) rotateZ(-90deg)"></div><div class="q3-ax" style="width:300px;transform:translate3d(-300px,200px,0) rotateY(-90deg)"></div>` +
+  PTS.map(([n, x, y, z, c], k) => `<div class="q3-pt ${c ? "c" : ""}" id="pt${k}" data-x="${x}" data-y="${y}" data-z="${z}"><div class="bb"><i></i>${n}</div></div>`).join("");
+// ATTENTION: white blocks + arcs in the same tilted plane
+const AW = TOK.map(w => tw(w, 20, 30)); const AG = 14, ATOT = AW.reduce((a, b) => a + b, 0) + AG * 6; const AX = []; { let x = -ATOT / 2; AW.forEach(w => { AX.push(x + w / 2); x += w + AG; }); }
+{ let x = -ATOT / 2, html = "";
+  TOK.forEach((w, i) => { html += box({ id: "ab" + i, cls: "q3-att", w: AW[i], h: 70, d: 40, fs: 32, c: "#FFFFFF", html: w, st: `left:${x}px;top:40px` }); x += AW[i] + AG; });
+  let paths = ""; for (let j = 1; j < 7; j++) for (let i = 0; i < j; i++) { const h = 40 + (j - i) * 34; paths += `<path id="ar${j}${i}" class="${j === 5 && i === 3 ? "hot" : ""}" d="M${AX[j] + 500},300 C${AX[j] + 500},${300 - h} ${AX[i] + 500},${300 - h} ${AX[i] + 500},300"/>`; }
+  html += `<svg class="q3-arcs" style="left:-500px;top:-260px;width:1000px;height:300px;transform:translateZ(20px)">${paths}</svg><div class="q3-dot" id="adot"></div>`;
+  $("attG").innerHTML = html; }
+// SCORE BARS (isometric)
+const BL = [" Paris", " The", " It", " France"], PCT = [91, 4, 2, 1];
+$("barG").innerHTML = `<div class="q3-floor" style="left:-380px;top:-200px;width:760px;height:400px;transform:rotateX(90deg)"></div>` + BL.map((l, i) => `<div class="q3-bx" id="sb${i}" style="--w:120px;--h:10px;--d:120px;--c:${i ? "#3A3F49" : "#3B82F6"};left:${-300 + i * 170}px;top:0"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr"></div></div><div class="q3-bl" id="sl${i}" style="left:${-240 + i * 170}px;top:20px;transform:translateZ(90px)">"${l}"</div><div class="q3-bp" id="sp${i}" style="left:${-240 + i * 170}px;transform:translateZ(60px)"></div>`).join("");
+$("tbarG").innerHTML = `<div class="q3-floor" style="left:-300px;top:-150px;width:600px;height:300px;transform:rotateX(90deg)"></div>` + BL.slice(0, 3).map((l, i) => `<div class="q3-bx" id="tq${i}" style="--w:110px;--h:10px;--d:110px;--c:${i ? "#3A3F49" : "#3B82F6"};left:${-240 + i * 170}px;top:0"><div class="fc tp"></div><div class="fc sd"></div><div class="fc fr"></div></div><div class="q3-bl" style="left:${-185 + i * 170}px;top:20px;transform:translateZ(80px);font-size:22px">"${l}"</div>`).join("");
+const REP = ["Paris", " is", " the", " capital", " of", " France", ".", " It's", " known", " for", " the", " Eiffel", " Tower", "."];
+$("rep").innerHTML = REP.map(w => `<i>${w}</i>`).join("");
+
+const T = { day: at("learn AI"), fol: at("let's follow"), s1: at("step one"), s2: at("step two"), s3: at("step three"), mean: at("that list") - 0.2, smart: at("smart part") - 0.6,
+  s4: at("step four"), stream: at("that's why answers"), temp: at("one more trick"), recap: at("so AI isn't"), cta: at("comment tokens"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.day, enter: "none" }, { id: "sDay", s: T.day, e: T.fol, enter: "blurzoom" },
+  { id: "sTok", s: T.fol, e: T.s2, enter: "blur" }, { id: "sId", s: T.s2, e: T.s3, enter: "blur" },
+  { id: "sVec", s: T.s3, e: T.mean, enter: "blur" }, { id: "sMap", s: T.mean, e: T.smart, enter: "blurzoom" },
+  { id: "sAtt", s: T.smart, e: T.s4, enter: "blur" }, { id: "sPick", s: T.s4, e: T.stream, enter: "blur" },
+  { id: "sStream", s: T.stream, e: T.temp, enter: "push" }, { id: "sTemp", s: T.temp, e: T.recap, enter: "blur" },
+  { id: "sRecap", s: T.recap, e: T.cta, enter: "blurzoom" }, { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.smart, T.s4], [T.cta, 999]],
+  emph: window.EMPH,
+  chapters: [{ label: "TOKENS", at: T.s1 }, { label: "IDS", at: T.s2 }, { label: "NUMBERS", at: T.s3 }, { label: "ATTENTION", at: T.smart }, { label: "PREDICT", at: T.s4, end: T.cta }],
+  counter: { unit: "rows", steps: [[at("50,257") - 0.1, 50257, "vocab rows"], [at("768") - 0.1, 768, "numbers / token"], [at("whole thing"), 1, "tokens written"]] },
+  avatar: { x: 240, y: 1330, w: 600, in: 0.15, look: "hoodie", accessory: "grad", style: { shirt: "#D97757", shirtLine: "#B4573A", print: "none" } },
+  poses: [[0.15, "surprised"], ...window.PINS.map(([p, n]) => [at(p), n])], autoPoses: {},
+});
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+  // ---------- HOOK: tilted chat floats; letters flip into digits on "numbers", flip back before Enter ----------
+  R.card("chat", t, { in: 0.05, y: 40 });
+  $("chat").style.transform += ` perspective(1600px) rotateX(${10 - 4 * Math.sin(t * 0.8)}deg) rotateY(${-12 + 5 * Math.sin(t * 0.6)}deg)`;
+  const nA = Math.ceil(Q.length * clamp((t - 0.1) / 1.1));
+  const f1 = at("numbers") - 0.35, f2 = at("enter") - 0.9;
+  $("qtx").querySelectorAll("i").forEach((e, i) => {
+    e.style.opacity = i < nA ? 1 : 0;
+    const a = prog(t, f1 + i * 0.022, 0.32), b = prog(t, f2 + i * 0.015, 0.28);
+    const p = a - b;                                   // 0 = letter, 1 = digit
+    const ang = 180 * (a < 1 ? a : 1 - b);
+    const digit = (a >= 0.5 && b < 0.5);
+    const ch = e.dataset.c === " " ? " " : (digit ? e.dataset.d : e.dataset.c);
+    if (e.textContent !== ch) e.textContent = ch; e.classList.toggle("dg", digit);
+    e.style.transform = `rotateX(${ang > 90 ? ang - 180 : ang}deg)`;
+  });
+  if (t > f1) R.cue("whoosh", f1, { soft: true });
+  const kp = prog(t, at("enter") - 0.05, 0.35), press = Math.sin(Math.PI * kp);
+  $("kcap").style.transform = `rotateX(24deg) translateY(${press * 10}px)`; $("kcap").style.boxShadow = `0 ${12 - press * 9}px 0 #0B0C0F,0 20px 40px rgba(0,0,0,.6),inset 0 2px 0 #565D6B`;
+  if (kp > 0) R.cue("click", at("enter") - 0.05);
+  R.note("fnH", t, at("numbers"), f2);
+  // ---------- DAY ----------
+  R.rise("pill", t, T.day + 0.05, { dy: 20 }); pop("day", t, T.day + 0.2, { from: 0.6 });
+  [...$("trk").children].forEach((c, i) => { const p = IO(prog(t, T.day + 0.35 + i * 0.05, 0.4)); c.style.opacity = p; c.style.transform = `rotateX(${30 - 30 * p}deg) translateY(${(1 - p) * 30}px)`;
+    const on = i === 0 && t >= at("day one"); c.className = on ? "on" : ""; if (on) c.style.transform += ` scale(${1 + 0.1 * Math.sin(Math.PI * prog(t, at("day one"), 0.4))})`; });
+  if (t >= at("day one")) R.cue("ding", at("day one"), { soft: true });
+  // ---------- TOKENS: slab → laser cuts → 7 coloured 3D blocks fan out ----------
+  const cutA = at("chopped") - 0.35, split = IO(prog(t, at("chopped") - 0.05, 0.6));
+  const spin = 0.5 * Math.sin(t * 0.7);
+  $("tokG").style.transform = `rotateX(${-18 - 4 * split}deg) rotateY(${-24 + 18 * IO(prog(t, T.fol, 1.2)) + spin * 4}deg) scale(${lerp(0.92, 1, IO(prog(t, T.fol, 0.6)))})`;
+  TOK.forEach((w, i) => {
+    const e = $("tb" + i), mid = i - 3;
+    e.style.setProperty("--c", split > 0.4 ? COL[i] : "#2A2D33");
+    e.style.transform = `translate3d(${mid * 22 * split}px, ${Math.sin(Math.PI * clamp(split * 1.3 - Math.abs(mid) * 0.05)) * -40 + Math.sin(t * 2 + i) * 6 * split}px, ${split * (i % 2 ? 40 : -20)}px) rotateZ(${mid * 3 * split}deg)`;
+    if (i < 6) { const lp = prog(t, cutA + i * 0.04, 0.35); $("lz" + i).style.opacity = Math.sin(Math.PI * lp); }
+    if (split > 0) R.cue("pop", at("chopped") - 0.05 + i * 0.05, { soft: true });
+  });
+  R.note("fn1", t, at("chopped") + 0.6, T.s2);
+  // ---------- running-example strip (IDs → numbers, and again in PICK) ----------
+  const nAns = t < at("adds Paris") ? 0 : t < at("whole thing") ? 1 : Math.min(ANS.length, 1 + Math.floor((t - at("whole thing")) / 0.45));
+  const key = String(nAns); if ($("stripG").dataset.k !== key) { $("stripG").innerHTML = stripHTML(nAns); $("stripG").dataset.k = key; }
+  const sIn = Math.max(IO(prog(t, T.s2, 0.4)) * (1 - prog(t, T.mean - 0.25, 0.3)), IO(prog(t, T.s4 + 0.05, 0.4)) * (1 - prog(t, T.stream - 0.25, 0.3)));
+  $("strip").style.opacity = sIn; $("strip").style.filter = sIn < 1 ? `blur(${(1 - sIn) * 14}px)` : "";
+  $("stripG").style.transform = `rotateX(-16deg) rotateY(${-10 + 3 * Math.sin(t * 0.7)}deg) scale(${nAns > 3 ? 0.86 : 1})`;
+  $("stripG").querySelectorAll(".q3-tag").forEach((g, i) => { const k = +Object.keys(HIT).find(r => HIT[r] === i) || 0; const p = i === 6 ? 0 : IO(prog(t, at("gets an") - 0.1 + (k - 4) * 0.14 + 0.25, 0.3)) * (1 - prog(t, T.s3, 0.3)); g.style.opacity = p; g.style.transform = `translateX(-50%) translateZ(30px) translateY(${(1 - p) * 14}px)`; });
+  if (nAns > 0) { const last = $("stripG").lastElementChild; const pp = prog(t, nAns === 1 ? at("adds Paris") : at("whole thing") + (nAns - 1) * 0.45, 0.35); last.style.transform = `translateY(${(1 - IO(pp)) * -160}px) translateZ(${(1 - pp) * 200}px) rotateX(${(1 - pp) * 60}deg)`; }
+  // ---------- IDS: vocabulary shelf, drawers slide out for our tokens ----------
+  $("shelfG").style.transform = `rotateX(-10deg) rotateY(${28 - 6 * IO(prog(t, T.s2, 2))}deg)`;
+  const hitA = at("gets an") - 0.1;
+  ROWS.forEach((r, k) => { const e = $("dr" + k), p = IO(prog(t, T.s2 + 0.1 + k * 0.04, 0.35)); const h = HIT[k] != null; const out = h ? IO(prog(t, hitA + (k - 4) * 0.14, 0.35)) : 0;
+    e.style.opacity = p; e.classList.toggle("hit", out > 0.5); e.style.setProperty("--c", out > 0.5 ? "#1E3A8A" : "#1F2228"); e.style.transform = `translate3d(${(1 - p) * 80}px,0,${out * 70}px)`;
+    if (out > 0) R.cue("pop", hitA + (k - 4) * 0.14, { soft: true }); });
+  R.count("vocn", t, at("50,257") - 0.1, 1.0, 50257);
+  R.note("fn2", t, at("vocabulary") + 0.2, T.s3);
+  // ---------- NUMBERS: each token grows a row of 3D bars (a skyline) ----------
+  $("skyG").style.transform = `rotateX(-28deg) rotateY(${-30 + 8 * Math.sin(t * 0.5)}deg) translateY(60px)`;
+  TOK.forEach((w, i) => { for (let k = 0; k < 6; k++) { const e = $(`vb${i}${k}`), v = +e.dataset.v, g = IO(prog(t, at("list of numbers") - 0.15 + i * 0.05 + k * 0.04, 0.5)); const hgt = Math.max(6, Math.abs(v) * 220 * g + 6 * g);
+    e.style.setProperty("--h", hgt + "px"); e.style.height = hgt + "px"; e.style.top = (v >= 0 ? -hgt : 0) + "px"; e.style.opacity = g > 0 ? 1 : 0; } });
+  R.rise("v768", t, at("768") - 0.1, { dy: 16 });
+  R.note("fn3", t, at("list of numbers") + 0.8, T.mean);
+  // ---------- MEANING: rotating 3D point space, related words cluster ----------
+  const yaw = -30 + (t - T.mean) * 14;
+  $("mapG").style.transform = `rotateX(-14deg) rotateY(${yaw}deg)`;
+  PTS.forEach((p, k) => { const e = $("pt" + k), g = E3(prog(t, T.mean + 0.2 + k * 0.08, 0.5));
+    e.style.transform = `translate3d(${+e.dataset.x * g}px,${+e.dataset.y * g}px,${+e.dataset.z * g}px) rotateY(${-yaw}deg) rotateX(14deg)`; e.style.opacity = g; });
+  R.note("fn3b", t, T.mean + 0.6, T.smart);
+  // ---------- ATTENTION (light): arcs look back; capital↔France beam + travelling dot; the 2017 paper ----------
+  const lift = IO(prog(t, at("google paper") - 0.3, 0.6));
+  $("attG").style.transform = `translateY(${40 - lift * 40}px) rotateX(${-12}deg) rotateY(${-14 + 4 * Math.sin(t * 0.6)}deg) scale(${1.2 - 0.12 * lift})`;
+  TOK.forEach((w, i) => { const e = $("ab" + i), p = IO(prog(t, T.smart + 0.15 + i * 0.05, 0.35)); const hot = (i === 3 || i === 5) && t >= at("capital and") - 0.05;
+    e.style.opacity = p; e.style.setProperty("--c", hot ? "#DBEAFE" : "#FFFFFF"); e.querySelector(".fr").style.color = hot ? "#1D4ED8" : "#111"; e.querySelector(".fr").style.border = hot ? "3px solid #3B82F6" : "1.5px solid #E3E1DC";
+    e.style.transform = `translateZ(${hot ? 26 * IO(prog(t, at("capital and"), 0.4)) : 0}px)`; });
+  document.querySelectorAll("#attG path").forEach((p, k) => { const L = p.getTotalLength(); const hot = p.classList.contains("hot"); const a = hot ? at("capital and") - 0.05 : at("looks back") + k * 0.04; const pr = IO(prog(t, a, hot ? 0.6 : 0.45));
+    p.style.strokeDasharray = L; p.style.strokeDashoffset = L * (1 - pr); p.style.opacity = hot ? 1 : 0.7 * (1 - 0.65 * prog(t, at("capital and"), 0.4)); });
+  { const hp = document.querySelector("#attG path.hot"), L = hp.getTotalLength(), dp = (t - at("belong together")) * 0.9; const on = t >= at("belong together") && t < T.s4;
+    const pt = hp.getPointAtLength(L * (dp % 1)); $("adot").style.opacity = on ? 1 : 0; $("adot").style.left = (pt.x - 500) + "px"; $("adot").style.top = (pt.y - 260) + "px"; $("adot").style.transform = "translateZ(24px)"; }
+  R.rise("tog", t, at("belong together") - 0.05, { dy: 14, blur: 10 }); $("tog").style.opacity *= 1 - prog(t, at("google paper") - 0.4, 0.3);
+  const pp = prog(t, at("google paper") - 0.2, 0.7); $("paper").style.opacity = clamp(pp * 3); $("pgp").style.transform = `rotateX(${(1 - E3(pp)) * 70 + 8}deg) rotateZ(${-3 + 2 * Math.sin(t)}deg)`;
+  if (pp > 0) R.cue("whoosh", at("google paper") - 0.2);
+  // ---------- PICK: isometric score bars; Paris wins; loop ----------
+  $("barG").style.transform = `rotateX(-24deg) rotateY(${-28 + 6 * Math.sin(t * 0.5)}deg) translateY(80px)`;
+  const A = at("scores every"), again = at("whole thing"); const loops = t >= again ? Math.floor((t - again) / 0.45) : 0;
+  const L2 = [BL, [".", ",", " is", "!"], [" It", " The", " Paris", " Its"], ["'s", " is", " has", " was"], [" known", " also", " famous", " home"], [" for", " as", " to", " in"]];
+  const set = L2[Math.min(loops, L2.length - 1)];
+  BL.forEach((l, i) => { const e = $("sb" + i), g = IO(prog(t, A + i * 0.1, 0.6)), jit = loops ? 0.7 + 0.3 * Math.abs(Math.sin(t * 7 + i * 2)) : 1; const v = PCT[i] * (i ? jit : 1) * g;
+    const hgt = Math.max(4, v * 3.4); e.style.setProperty("--h", hgt + "px"); e.style.height = hgt + "px"; e.style.top = -hgt + "px"; e.style.opacity = g > 0 ? 1 : 0;
+    $("sl" + i).textContent = `"${set[i]}"`; $("sp" + i).textContent = g > 0 ? Math.round(v) + "%" : ""; $("sp" + i).style.top = (-hgt - 50) + "px"; });
+  const win = prog(t, at("Paris wins") - 0.05, 0.5); $("sb0").style.setProperty("--c", win > 0 ? `hsl(217 ${80 + 10 * Math.sin(t * 6)}% ${55 + 8 * Math.sin(Math.PI * win)}%)` : "#3B82F6");
+  if (win > 0) R.cue("ding", at("Paris wins") - 0.05);
+  R.rise("loop", t, again, { dy: 10 }); $("lpn").textContent = loops + 1;
+  R.note("fn4", t, A + 0.4, T.stream);
+  // ---------- STREAM ----------
+  R.card("msg", t, { in: T.stream + 0.05, y: 30 });
+  const sn = Math.floor((t - (at("stream") - 0.25)) / 0.1); $("rep").querySelectorAll("i").forEach((e, i) => { e.style.opacity = i < sn ? 1 : 0; e.className = i === sn - 1 ? "new" : ""; });
+  // ---------- TEMPERATURE: 3D dial turns, bars flatten, two answers ----------
+  R.rise("dial", t, T.temp + 0.05, { dy: 30 });
+  const tp = IO(prog(t, at("temperature") - 0.1, 1.2)); $("nd").style.transform = `rotateX(48deg) rotateZ(${-70 + 140 * tp}deg)`; $("tv").textContent = (0.2 + tp * 0.8).toFixed(1);
+  $("tbarG").style.transform = `rotateX(-24deg) rotateY(-26deg) translateY(70px)`;
+  [[88, 42], [7, 30], [4, 24]].forEach(([lo, hi], i) => { const g = IO(prog(t, T.temp + 0.3 + i * 0.1, 0.5)), hgt = Math.max(4, g * lerp(lo, hi, tp) * 2.6), e = $("tq" + i); e.style.setProperty("--h", hgt + "px"); e.style.height = hgt + "px"; e.style.top = -hgt + "px"; e.style.opacity = g > 0 ? 1 : 0; });
+  R.rise("ans1", t, at("same question") - 0.1, { dy: 16 }); R.rise("ans2", t, at("different answer") - 0.15, { dy: 16 });
+  // ---------- RECAP ----------
+  pop("pred", t, at("looking anything") - 0.1, { from: 0.7 });
+  // ---------- CTA (house) ----------
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25]].forEach(([id, a]) => R.rise(id, t, a, { dy: 16 }));
+  const tyA = at("comment tokens") + 0.3, posted = R.end("comment tokens") + 0.5;
+  if (t < posted) R.type("ctx2", "TOKENS", t, tyA, 10); else $("ctx2").textContent = "";
+  $("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  $("cm4").style.display = t >= posted ? "" : "none"; R.rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, at("follow for") - 0.1, { from: 0.6 });
+};
+const E3 = ease.spring || ease.inOut;
+window.seek(0);
+</script></body></html>

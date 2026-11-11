@@ -1,0 +1,29 @@
+{
+ "Claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "ChatGPT": {
+  "file": "logos/openai.svg",
+  "white": "logos/openai-white.svg",
+  "word": null,
+  "title": "ChatGPT",
+  "hex": null,
+  "dark": false,
+  "source": "iconify-logos:openai-icon"
+ },
+ "Gemini": {
+  "file": "logos/gemini.svg",
+  "white": "logos/gemini-white.svg",
+  "word": null,
+  "title": "Gemini",
+  "hex": null,
+  "dark": false,
+  "source": "lobehub:gemini-color"
+ }
+}

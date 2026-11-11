@@ -1,0 +1,152 @@
+1
+00:00:00,000 --> 00:00:01,512
+I automated my YouTube
+
+2
+00:00:01,362 --> 00:00:02,540
+channel with Claude.
+
+3
+00:00:02,505 --> 00:00:03,645
+Now a free repo
+
+4
+00:00:03,495 --> 00:00:04,931
+makes my Shorts too.
+
+5
+00:00:05,219 --> 00:00:06,017
+Step one.
+
+6
+00:00:05,867 --> 00:00:06,664
+A free GitHub
+
+7
+00:00:06,514 --> 00:00:08,160
+repo called AutoShorts.
+
+8
+00:00:08,010 --> 00:00:08,836
+I drop in
+
+9
+00:00:08,686 --> 00:00:09,760
+one long video.
+
+10
+00:00:09,724 --> 00:00:11,036
+That's it.
+
+11
+00:00:10,886 --> 00:00:11,779
+Step two.
+
+12
+00:00:11,667 --> 00:00:13,274
+It writes down every word,
+
+13
+00:00:13,124 --> 00:00:14,283
+and Claude reads the
+
+14
+00:00:14,133 --> 00:00:15,274
+whole thing and picks
+
+15
+00:00:15,124 --> 00:00:16,769
+the moments worth posting.
+
+16
+00:00:16,743 --> 00:00:17,617
+Step three.
+
+17
+00:00:17,467 --> 00:00:18,217
+It cuts them
+
+18
+00:00:18,067 --> 00:00:20,369
+into vertical Shorts, with captions.
+
+19
+00:00:20,267 --> 00:00:21,693
+A whole stack of Shorts,
+
+20
+00:00:21,543 --> 00:00:22,655
+from one video.
+
+21
+00:00:22,990 --> 00:00:24,321
+And my YouTube setup from
+
+22
+00:00:24,171 --> 00:00:25,712
+part one uploads them,
+
+23
+00:00:25,562 --> 00:00:26,521
+as private.
+
+24
+00:00:26,429 --> 00:00:28,664
+So I still press publish.
+
+25
+00:00:28,514 --> 00:00:30,255
+But here's the catch.
+
+26
+00:00:30,105 --> 00:00:31,388
+It crops the centre,
+
+27
+00:00:31,238 --> 00:00:32,007
+so stay in the
+
+28
+00:00:31,857 --> 00:00:33,083
+middle of your frame.
+
+29
+00:00:33,019 --> 00:00:34,150
+Good results need a
+
+30
+00:00:34,000 --> 00:00:35,283
+cheap API key,
+
+31
+00:00:35,171 --> 00:00:36,493
+a few cents a video.
+
+32
+00:00:36,457 --> 00:00:38,321
+And its installer isn't signed,
+
+33
+00:00:38,171 --> 00:00:39,493
+so only download it from
+
+34
+00:00:39,343 --> 00:00:41,750
+the repo's own Releases page.
+
+35
+00:00:41,638 --> 00:00:43,188
+Comment SHORTS and I'll DM
+
+36
+00:00:43,038 --> 00:00:44,188
+you the free setup,
+
+37
+00:00:44,038 --> 00:00:44,921
+every step,
+
+38
+00:00:44,771 --> 00:00:46,474
+plus the exact settings.
+

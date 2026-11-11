@@ -1,0 +1,74 @@
+[
+ {
+  "type": "pop",
+  "t": 1.512,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 4.185
+ },
+ {
+  "type": "pop",
+  "t": -1,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0.03,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 1.592,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 3.477,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 6.244,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 9.135,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.208,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 5.0169999999999995
+ },
+ {
+  "type": "impact",
+  "t": 10.55,
+  "soft": true
+ },
+ {
+  "type": "click",
+  "t": 4.614999999999999
+ },
+ {
+  "type": "type",
+  "t": 5.558999999999999,
+  "t2": 6.858999999999999
+ },
+ {
+  "type": "click",
+  "t": 7.058999999999999
+ },
+ {
+  "type": "type",
+  "t": 8.459,
+  "t2": 10.035923076923076,
+  "soft": true
+ }
+]

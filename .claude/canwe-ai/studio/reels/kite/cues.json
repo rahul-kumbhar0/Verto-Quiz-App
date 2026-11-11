@@ -1,0 +1,194 @@
+[
+ {
+  "type": "pop",
+  "t": 5.225,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.063,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 36.158,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 1.48,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 2.762,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 5.305,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 7.933,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.690000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 13.023000000000001,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 14.476,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 16.965999999999998,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 18.762,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 21.947,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 26.095,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 28.813,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 31.39,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 34.076,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 37.943,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 41.371,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 8.676
+ },
+ {
+  "type": "swish",
+  "t": 15.208
+ },
+ {
+  "type": "swish",
+  "t": 19.751
+ },
+ {
+  "type": "swish",
+  "t": 27.084
+ },
+ {
+  "type": "impact",
+  "t": 38.667,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 3.852
+ },
+ {
+  "type": "impact",
+  "t": 4.352,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 28.933,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 29.113,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 29.293,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 29.473,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 29.653,
+  "soft": true
+ },
+ {
+  "type": "swish",
+  "t": 32.49
+ },
+ {
+  "type": "pop",
+  "t": 18.895
+ },
+ {
+  "type": "swish",
+  "t": 33.926
+ },
+ {
+  "type": "swish",
+  "t": 34.326
+ },
+ {
+  "type": "impact",
+  "t": 34.986
+ },
+ {
+  "type": "pop",
+  "t": 6.245
+ },
+ {
+  "type": "type",
+  "t": 39.067,
+  "t2": 39.352714285714285
+ },
+ {
+  "type": "click",
+  "t": 39.417
+ },
+ {
+  "type": "pop",
+  "t": 40.274
+ }
+]

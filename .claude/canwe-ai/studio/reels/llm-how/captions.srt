@@ -1,0 +1,256 @@
+1
+00:00:00,160 --> 00:00:02,510
+Every answer ChatGPT gives
+
+2
+00:00:02,360 --> 00:00:03,330
+you is written one
+
+3
+00:00:03,180 --> 00:00:04,260
+piece at a time,
+
+4
+00:00:04,470 --> 00:00:05,360
+and each piece
+
+5
+00:00:05,210 --> 00:00:05,970
+is a guess.
+
+6
+00:00:06,268 --> 00:00:06,868
+So how does a
+
+7
+00:00:06,718 --> 00:00:07,998
+guess sound so smart?
+
+8
+00:00:08,369 --> 00:00:09,469
+First, tokens.
+
+9
+00:00:09,772 --> 00:00:10,572
+Your message is
+
+10
+00:00:10,422 --> 00:00:11,782
+chopped into tokens,
+
+11
+00:00:11,882 --> 00:00:13,332
+small chunks of text.
+
+12
+00:00:13,639 --> 00:00:14,799
+A token is about
+
+13
+00:00:14,649 --> 00:00:16,209
+three-quarters of a word.
+
+14
+00:00:16,512 --> 00:00:16,982
+Next,
+
+15
+00:00:16,832 --> 00:00:18,592
+every token becomes a vector,
+
+16
+00:00:18,732 --> 00:00:20,182
+a long list of numbers.
+
+17
+00:00:20,470 --> 00:00:22,030
+In GPT-3,
+
+18
+00:00:22,210 --> 00:00:23,020
+that list is
+
+19
+00:00:22,870 --> 00:00:25,510
+12,288 numbers long.
+
+20
+00:00:25,869 --> 00:00:26,879
+Then, attention.
+
+21
+00:00:27,181 --> 00:00:28,721
+Each token looks back at
+
+22
+00:00:28,571 --> 00:00:30,481
+every token before it and
+
+23
+00:00:30,331 --> 00:00:31,841
+decides which ones matter.
+
+24
+00:00:32,150 --> 00:00:33,100
+In the river bank,
+
+25
+00:00:32,950 --> 00:00:34,760
+bank pays attention to river,
+
+26
+00:00:34,610 --> 00:00:35,320
+not money.
+
+27
+00:00:35,586 --> 00:00:36,516
+And that happens
+
+28
+00:00:36,366 --> 00:00:37,846
+in 96 layers,
+
+29
+00:00:38,046 --> 00:00:39,056
+one after another.
+
+30
+00:00:39,349 --> 00:00:40,119
+At the end,
+
+31
+00:00:39,969 --> 00:00:41,459
+the model scores every
+
+32
+00:00:41,309 --> 00:00:42,549
+token it knows,
+
+33
+00:00:42,779 --> 00:00:45,579
+all 50,257 of them,
+
+34
+00:00:45,769 --> 00:00:46,389
+and picks a
+
+35
+00:00:46,239 --> 00:00:47,449
+likely next one.
+
+36
+00:00:47,736 --> 00:00:49,126
+Then it adds that token
+
+37
+00:00:48,976 --> 00:00:50,786
+to your message and runs
+
+38
+00:00:50,636 --> 00:00:51,726
+the whole thing again.
+
+39
+00:00:52,065 --> 00:00:53,525
+For every single word.
+
+40
+00:00:53,819 --> 00:00:54,579
+So where do the
+
+41
+00:00:54,429 --> 00:00:55,509
+numbers come from?
+
+42
+00:00:55,808 --> 00:00:59,458
+GPT-3 read 300 billion tokens
+
+43
+00:00:59,618 --> 00:01:00,848
+and learned by guessing
+
+44
+00:01:00,698 --> 00:01:01,508
+the next one,
+
+45
+00:01:01,828 --> 00:01:04,928
+nudging 175 billion weights to make
+
+46
+00:01:04,778 --> 00:01:06,328
+the right guess more likely.
+
+47
+00:01:06,612 --> 00:01:07,962
+The idea came from an
+
+48
+00:01:07,812 --> 00:01:10,562
+eight-author Google paper in 2017:
+
+49
+00:01:10,842 --> 00:01:12,662
+Attention Is All You Need.
+
+50
+00:01:12,963 --> 00:01:13,813
+So here's how
+
+51
+00:01:13,663 --> 00:01:14,323
+to use it.
+
+52
+00:01:14,640 --> 00:01:16,270
+It predicts what sounds right,
+
+53
+00:01:16,350 --> 00:01:17,280
+not what is right.
+
+54
+00:01:17,573 --> 00:01:18,763
+So give it the facts,
+
+55
+00:01:18,863 --> 00:01:20,093
+show it an example,
+
+56
+00:01:19,943 --> 00:01:20,643
+and ask it to
+
+57
+00:01:20,493 --> 00:01:21,413
+check its work.
+
+58
+00:01:21,763 --> 00:01:23,153
+Your chatbot is quietly
+
+59
+00:01:23,003 --> 00:01:24,373
+guessing the next token,
+
+60
+00:01:24,583 --> 00:01:26,383
+over and over, really well.
+
+61
+00:01:26,692 --> 00:01:28,302
+Follow for more breakdowns,
+
+62
+00:01:28,422 --> 00:01:29,272
+and send this to
+
+63
+00:01:29,122 --> 00:01:30,512
+the friend who thinks
+
+64
+00:01:30,362 --> 00:01:31,752
+the AI is alive.
+

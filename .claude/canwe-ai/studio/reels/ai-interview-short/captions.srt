@@ -1,0 +1,168 @@
+1
+00:00:00,000 --> 00:00:01,920
+Your coding interview is recording
+
+2
+00:00:01,770 --> 00:00:02,860
+more than your code.
+
+3
+00:00:02,800 --> 00:00:03,940
+So how do companies
+
+4
+00:00:03,790 --> 00:00:05,520
+catch ChatGPT answers?
+
+5
+00:00:05,470 --> 00:00:06,790
+First, the paste.
+
+6
+00:00:06,640 --> 00:00:08,430
+Platforms log every paste
+
+7
+00:00:08,280 --> 00:00:09,590
+and every tab switch.
+
+8
+00:00:09,440 --> 00:00:10,720
+Forty clean lines in
+
+9
+00:00:10,570 --> 00:00:11,720
+one frame is not
+
+10
+00:00:11,570 --> 00:00:12,660
+how humans type.
+
+11
+00:00:12,510 --> 00:00:14,150
+Next, your typing rhythm.
+
+12
+00:00:14,060 --> 00:00:15,260
+Real coders type,
+
+13
+00:00:15,110 --> 00:00:16,350
+pause and fix.
+
+14
+00:00:16,200 --> 00:00:17,430
+AI answers show
+
+15
+00:00:17,280 --> 00:00:18,310
+a long pause,
+
+16
+00:00:18,160 --> 00:00:19,380
+then a sudden burst
+
+17
+00:00:19,230 --> 00:00:20,280
+of perfect code.
+
+18
+00:00:20,130 --> 00:00:21,490
+Then, the comparison.
+
+19
+00:00:21,370 --> 00:00:22,990
+CodeSignal checks your answer
+
+20
+00:00:22,840 --> 00:00:24,470
+against every submission and
+
+21
+00:00:24,320 --> 00:00:25,930
+solutions posted online,
+
+22
+00:00:25,780 --> 00:00:26,660
+then gives you
+
+23
+00:00:26,510 --> 00:00:27,730
+one suspicion score.
+
+24
+00:00:27,690 --> 00:00:28,640
+On a live call,
+
+25
+00:00:28,490 --> 00:00:30,500
+interviewers watch your eyes drift
+
+26
+00:00:30,350 --> 00:00:31,500
+to the same spot,
+
+27
+00:00:31,350 --> 00:00:32,700
+and the long hmm
+
+28
+00:00:32,550 --> 00:00:33,770
+while the answer loads.
+
+29
+00:00:33,620 --> 00:00:34,820
+But their best trick
+
+30
+00:00:34,670 --> 00:00:36,250
+is one follow-up question.
+
+31
+00:00:36,140 --> 00:00:37,180
+Why this approach?
+
+32
+00:00:37,030 --> 00:00:38,000
+What breaks if
+
+33
+00:00:37,850 --> 00:00:39,000
+the input doubles?
+
+34
+00:00:38,850 --> 00:00:40,180
+The AI wrote the code,
+
+35
+00:00:40,030 --> 00:00:41,180
+but it can't explain
+
+36
+00:00:41,030 --> 00:00:41,650
+it for you.
+
+37
+00:00:41,530 --> 00:00:43,180
+So use AI to prepare,
+
+38
+00:00:43,080 --> 00:00:44,050
+not to perform.
+
+39
+00:00:43,960 --> 00:00:44,530
+Follow,
+
+40
+00:00:44,380 --> 00:00:45,330
+and send this to the
+
+41
+00:00:45,180 --> 00:00:47,130
+friend who keeps ChatGPT open
+
+42
+00:00:46,980 --> 00:00:47,900
+in the other tab.
+

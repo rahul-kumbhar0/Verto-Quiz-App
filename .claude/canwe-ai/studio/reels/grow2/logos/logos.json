@@ -1,0 +1,47 @@
+{
+ "Claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "Instagram": {
+  "file": "logos/instagram.svg",
+  "white": "logos/instagram-white.svg",
+  "word": null,
+  "title": "Instagram",
+  "hex": "#FF0069",
+  "dark": false,
+  "source": "iconify-logos:instagram-icon"
+ },
+ "GitHub": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ },
+ "ElevenLabs": {
+  "file": "logos/elevenlabs.svg",
+  "white": "logos/elevenlabs-white.svg",
+  "word": null,
+  "title": "ElevenLabs",
+  "hex": "#000000",
+  "dark": true,
+  "source": "iconify-logos:elevenlabs-icon"
+ },
+ "Google Chrome": {
+  "file": "logos/googlechrome.svg",
+  "white": "logos/googlechrome-white.svg",
+  "word": null,
+  "title": "Google Chrome",
+  "hex": "#4285F4",
+  "dark": false,
+  "source": "simple-icons:googlechrome"
+ }
+}

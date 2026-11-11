@@ -1,0 +1,123 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Hiring freshers this week</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="mg.css">
+<style>
+body{background:linear-gradient(170deg,#FFF6EC 0%,#FFE9DD 55%,#F3E8FF 100%)}
+body.look .s-bg,body.look .s-bg::before{background:none!important;background-color:transparent!important}
+body.look .s-vig{background:radial-gradient(ellipse 85% 65% at 50% 45%,transparent 62%,rgba(120,70,40,.10) 100%)!important}
+#bgfx{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.blob{position:absolute;width:900px;height:900px;border-radius:50%;filter:blur(110px)}
+#bl1{background:radial-gradient(circle,rgba(255,160,120,.5),transparent 65%)}
+#bl2{background:radial-gradient(circle,rgba(110,220,185,.4),transparent 65%)}
+#bl3{background:radial-gradient(circle,rgba(170,150,255,.38),transparent 65%)}
+#floorW{position:absolute;left:-540px;right:-540px;bottom:-60px;height:900px;perspective:700px;perspective-origin:50% 0%}
+#floor{position:absolute;inset:0;transform:rotateX(68deg);transform-origin:50% 0%;background-image:linear-gradient(rgba(217,119,87,.30) 2px,transparent 2px),linear-gradient(90deg,rgba(217,119,87,.30) 2px,transparent 2px);background-size:120px 120px;-webkit-mask-image:linear-gradient(transparent,#000 40%)}
+.sec{position:absolute;inset:0;visibility:hidden;font-family:Inter}
+/* hook */
+#hk .kick{position:absolute;left:0;right:0;top:420px;text-align:center}
+#hk .kick span{display:inline-block;font:800 30px "JetBrains Mono",monospace;letter-spacing:4px;color:#fff;background:#D97757;border-radius:999px;padding:14px 32px;box-shadow:0 14px 34px -12px rgba(217,119,87,.8)}
+#hk h1{position:absolute;left:50px;right:50px;top:540px;text-align:center;font:900 124px/1.04 Inter;letter-spacing:-5px;color:#16161A;margin:0}
+#hk h1 em{font-style:normal;color:#C2552F}
+#hk .sub{position:absolute;left:0;right:0;top:1120px;text-align:center;font:700 44px Inter;color:#5B5149}
+/* company cards */
+.cc{position:absolute;left:90px;right:90px;top:620px;height:560px;border-radius:36px;background:#16161A;color:#F3F1EC;padding:54px 58px;box-shadow:0 60px 120px -30px rgba(80,40,20,.55);opacity:0}
+.cc .n{font:900 44px "JetBrains Mono",monospace;color:#F0A585}
+.cc h2{margin:26px 0 0;font:900 96px/1.02 Inter;letter-spacing:-4px}
+.cc .role{margin-top:26px;font:700 44px Inter;color:#C9C5BC}
+.cc .city{margin-top:14px;font:700 38px Inter;color:#8A877F;display:flex;align-items:center;gap:12px}
+.cc .ok{position:absolute;right:52px;top:50px;font:800 26px "JetBrains Mono",monospace;color:#1A9C5B;background:rgba(26,156,91,.14);border:1.5px solid rgba(26,156,91,.45);border-radius:999px;padding:10px 20px}
+#ctr{position:absolute;right:80px;top:522px;font:900 46px "JetBrains Mono",monospace;color:#C2552F;opacity:0}
+#hd2{position:absolute;left:0;right:0;top:420px;text-align:center;font:900 66px Inter;letter-spacing:-2px;color:#16161A;opacity:0}
+#pile{position:absolute;left:110px;right:60px;top:1250px;height:420px}
+.pc{position:absolute;left:0;height:62px;border-radius:14px;background:#fff;box-shadow:0 12px 26px -12px rgba(80,40,20,.35);display:flex;align-items:center;gap:12px;padding:0 22px;font:800 26px Inter;color:#16161A;opacity:0;white-space:nowrap}
+.pc i{font-style:normal;font:800 22px "JetBrains Mono",monospace;color:#1A9C5B}
+/* CTA */
+#cta h1{position:absolute;left:60px;right:60px;top:560px;text-align:center;font:900 120px/1.05 Inter;letter-spacing:-5px;color:#16161A;margin:0}
+#cta .kw{position:relative;display:inline-block;color:#16161A;padding:0 20px}
+#cta .kw b{position:absolute;inset:-6px 0 2px;border:5px solid #3B82F6;background:rgba(59,130,246,.16);border-radius:10px;z-index:-1}
+#cta .sub{position:absolute;left:0;right:0;top:980px;text-align:center;font:700 46px Inter;color:#5B5149}
+#cta .brand{position:absolute;left:0;right:0;top:1180px;display:flex;justify-content:center;align-items:center;gap:16px;font:800 40px Inter;color:#16161A}
+#cta .brand img{width:72px;height:72px;border-radius:50%;background:#fff;box-shadow:0 10px 24px -8px rgba(80,40,20,.4)}
+#fn{position:absolute;left:0;right:0;top:1740px;text-align:center;font:600 19px "JetBrains Mono",monospace;color:#7A6F66;letter-spacing:1px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div id="bgfx"><i class="blob" id="bl1"></i><i class="blob" id="bl2"></i><i class="blob" id="bl3"></i><div id="floorW"><div id="floor"></div></div></div>
+  <canvas id="mgGrid" class="mg-grid" width="1080" height="1920" style="opacity:.25"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="sec" id="hk">
+      <div class="kick"><span>LAST 7 DAYS · INDIA</span></div>
+      <h1>Companies hiring <em>freshers</em> this week</h1>
+      <div class="sub">…that nobody applies to 👀</div>
+    </section>
+    <section class="sec" id="list">
+      <div id="hd2">Checked open <span style="color:#C2552F">today</span> ✓</div>
+      <div id="ctr">1/10</div>
+      <div id="cards"></div>
+      <div id="pile"></div>
+    </section>
+    <section class="sec" id="cta">
+      <h1>Comment <span class="kw"><b></b>HIRE</span></h1>
+      <div class="sub">full list + apply links in your DM 📩</div>
+      <div class="brand"><img src="canwe-logo.svg" alt="">@canwe.ai</div>
+    </section>
+  </div>
+  <div id="fn"></div>
+  <div class="mg-layer" id="mgFx"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="engine.js"></script><script src="fx.js"></script><script src="mg.js"></script>
+<script>
+const R = Reel, F = R.fx, M = R.mg, { prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const CO = [
+  ["Cisco", "SW Development Test Engineer", "Bengaluru"],
+  ["Zendesk", "Software Engineer I", "Pune"],
+  ["New Relic", "Software Engineer 1", "Hyderabad"],
+  ["American Express", "Infrastructure Engineer I", "Bengaluru"],
+  ["Gartner", "Associate Data Analyst", "Gurgaon"],
+  ["SolarWinds", "Associate Software Engineer", "Bangalore"],
+  ["Kaseya", "Software Engineer I", "Pune"],
+  ["Franklin Templeton", "Associate Software Engineer", "Hyderabad"],
+  ["Verisk", "SDET I", "Hyderabad"],
+  ["Labcorp", "Associate Data Analyst", "Bengaluru"]];
+const HOOK = 2.8, PER = 1.55, LIST0 = HOOK, CTA = HOOK + CO.length * PER + 0.3;
+window.REEL_DURATION = +(CTA + 4.2).toFixed(2);
+const hash = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+(() => { const c = $("cards"), p = $("pile");
+  CO.forEach(([n, r, ct], i) => { const d = document.createElement("div"); d.className = "cc"; d.id = "cc" + i;
+    d.innerHTML = `<div class="n">${String(i + 1).padStart(2, "0")} / 10</div><span class="ok">OPEN ✓</span><h2>${n}</h2><div class="role">${r}</div><div class="city">📍 ${ct} · fresher</div>`; c.appendChild(d);
+    const q = document.createElement("div"); q.className = "pc"; q.id = "pc" + i; q.innerHTML = `<i>✓</i>${n}`; p.appendChild(q); });
+})();
+F.beats({ bpm: 136, groove_in: 0, dur: 60 });
+R.setup({ push: 0, scenes: [] });
+window.seek = t => {
+  R.frame(t);
+  [["bl1", 0.13, 0, 250, 500], ["bl2", 0.09, 2.1, 650, 1150], ["bl3", 0.11, 4.2, 150, 1450]].forEach(([id, w, ph, x0, y0]) => { $(id).style.transform = `translate(${(x0 - 450 + Math.sin(t * w * 6.28 + ph) * 260).toFixed(1)}px,${(y0 - 450 + Math.cos(t * w * 5.1 + ph) * 220).toFixed(1)}px)`; });
+  $("floor").style.backgroundPosition = `0px ${(t * 70 % 120).toFixed(1)}px`;
+  F.slots(t, [["hk", 0, LIST0], ["list", LIST0, CTA], ["cta", CTA, 99]]);
+  F.zoomCut("hk", "list", t, LIST0); F.inverseZoom("list", "cta", t, CTA);
+  // hook
+  { const k = M.spring(t, 0.02, { f: 2.6, z: 0.5 }); $("hk").querySelector(".kick span").style.transform = `scale(${lerp(0.6, 1, k)})`;
+    M.rise($("hk").querySelector("h1"), "Companies hiring *freshers* this week", t, 0.15, { stagger: 0.07, f: 2.1, z: 0.66 });
+    const s = M.spring(t, 1.3, { f: 2.4, z: 0.5 }); const sub = $("hk").querySelector(".sub"); sub.style.opacity = t < 1.3 ? 0 : 1; sub.style.transform = `translateY(${(1 - s) * 40}px)`;
+    if (t >= 1.25 && t < 2.2) F.shake("cam", t, 1.3, { amp: 5, d: 0.25 }); }
+  // cards
+  $("hd2").style.opacity = t >= LIST0 ? 1 : 0; $("ctr").style.opacity = t >= LIST0 ? 1 : 0;
+  let cur = clamp(Math.floor((t - LIST0) / PER), 0, CO.length - 1); if (t >= LIST0) $("ctr").textContent = (cur + 1) + "/10";
+  CO.forEach((_, i) => { const a = LIST0 + i * PER, b = a + PER, card = $("cc" + i);
+    if (t < a || i < cur - 1) { card.style.opacity = 0; }
+    else { const p = M.spring(t, a, { f: 2.6, z: 0.55 }), out = E.power3In(prog(t, b, 0.22));
+      card.style.opacity = t < a ? 0 : 1 - out;
+      card.style.transform = `translateY(${((1 - p) * 420 - out * 180).toFixed(1)}px) rotate(${((1 - p) * (i % 2 ? 5 : -5)).toFixed(2)}deg) scale(${(lerp(0.85, 1, p) * (1 - out * 0.12)).toFixed(3)})`;
+      if (t >= a && t < a + 0.3) R.cue("pop", a); }
+    const pc = $("pc" + i), pa = a + PER * 0.75, pp = M.spring(t, pa, { f: 2.8, z: 0.55 });
+    const col = i % 2, row = Math.floor(i / 2);
+    pc.style.opacity = t < pa ? 0 : 1; pc.style.left = (col * 470) + "px"; pc.style.top = (row * 78) + "px";
+    pc.style.transform = `translateY(${(1 - pp) * 60}px) scale(${lerp(0.6, 1, pp).toFixed(3)}) rotate(${(hash(i) * 4 - 2).toFixed(2)}deg)`; pc.style.zIndex = i; });
+  // cta
+  { const p = M.spring(t, CTA + 0.1, { f: 2.3, z: 0.55 }); const h = $("cta").querySelector("h1"); h.style.opacity = t < CTA ? 0 : 1; h.style.transform = `scale(${lerp(0.7, 1, p).toFixed(3)})`;
+    const s = M.spring(t, CTA + 0.5, { f: 2.5, z: 0.5 }); const sub = $("cta").querySelector(".sub"); sub.style.opacity = t < CTA + 0.5 ? 0 : 1; sub.style.transform = `translateY(${(1 - s) * 40}px)`;
+    const b = M.spring(t, CTA + 0.9, { f: 2.5, z: 0.5 }); const br = $("cta").querySelector(".brand"); br.style.opacity = t < CTA + 0.9 ? 0 : 1; br.style.transform = `scale(${lerp(0.7, 1, b).toFixed(3)})`;
+    M.ring("mgFx", t, CTA + 0.15, { x: 540, y: 700, r: 420, d: 0.7, sfx: true }); }
+  $("fn").textContent = "LIVE POSTINGS VIA FREEHIRE (OPEN SOURCE) · CHECKED 6 NOV 2026 · LISTINGS CLOSE ANYTIME";
+};
+window.seek(0);
+</script></body></html>

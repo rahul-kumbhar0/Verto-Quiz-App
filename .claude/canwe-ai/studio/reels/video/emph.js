@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["courses.", "steps.", "pattern.", "seconds.", "laptop.", "command.#1", "frame.", "yourself.", "practice.", "VIDEO#2", "step.#2"], "bold": ["describe"]};
+window.PINS = [["for video-editing courses.", "stop"], ["the 5 steps.", "point_up"], ["finds the pattern.", "explain"], ["under 45 seconds.", "three"], ["on your laptop.", "present"], ["builds every frame.", "typing"], ["post it yourself.", "thumbs"], ["reel takes practice.", "stop"], ["step by step.", "wave"]];

@@ -1,0 +1,136 @@
+1
+00:00:00,000 --> 00:00:01,160
+Placement season.
+
+2
+00:00:01,114 --> 00:00:02,702
+Zero offers.
+
+3
+00:00:02,552 --> 00:00:03,855
+So I let Claude apply.
+
+4
+00:00:04,162 --> 00:00:05,483
+Here's every step.
+
+5
+00:00:05,333 --> 00:00:06,112
+Step one.
+
+6
+00:00:05,962 --> 00:00:07,493
+Add Playwright to Claude.
+
+7
+00:00:07,343 --> 00:00:09,026
+Microsoft's free browser tool,
+
+8
+00:00:08,876 --> 00:00:11,102
+39,000 stars, one command.
+
+9
+00:00:11,076 --> 00:00:12,179
+Now Claude can open
+
+10
+00:00:12,029 --> 00:00:13,121
+a careers page,
+
+11
+00:00:12,971 --> 00:00:14,474
+read the form, and type.
+
+12
+00:00:14,324 --> 00:00:15,055
+Step two.
+
+13
+00:00:14,905 --> 00:00:16,083
+Give it your resume.
+
+14
+00:00:15,933 --> 00:00:17,026
+This week alone,
+
+15
+00:00:16,876 --> 00:00:19,017
+901 fresher jobs went up
+
+16
+00:00:18,867 --> 00:00:20,302
+on company sites in India.
+
+17
+00:00:20,276 --> 00:00:21,598
+Claude scores each one
+
+18
+00:00:21,448 --> 00:00:22,617
+against your resume,
+
+19
+00:00:22,467 --> 00:00:24,150
+and keeps the real matches.
+
+20
+00:00:24,029 --> 00:00:24,940
+Step three.
+
+21
+00:00:24,790 --> 00:00:25,912
+It fills the form.
+
+22
+00:00:25,857 --> 00:00:27,521
+Name, college, projects,
+
+23
+00:00:27,371 --> 00:00:28,912
+even "why this company."
+
+24
+00:00:28,762 --> 00:00:29,931
+Then it stops.
+
+25
+00:00:29,876 --> 00:00:31,674
+Right before Submit.
+
+26
+00:00:31,524 --> 00:00:33,036
+That's a rule I typed,
+
+27
+00:00:32,886 --> 00:00:33,817
+not a setting.
+
+28
+00:00:33,714 --> 00:00:35,131
+So I read every form.
+
+29
+00:00:35,029 --> 00:00:36,521
+I press submit.
+
+30
+00:00:36,371 --> 00:00:37,655
+Company sites only.
+
+31
+00:00:37,610 --> 00:00:39,064
+LinkedIn bans bots.
+
+32
+00:00:38,914 --> 00:00:40,255
+Comment APPLY and I'll
+
+33
+00:00:40,105 --> 00:00:41,236
+DM you the setup,
+
+34
+00:00:41,086 --> 00:00:42,445
+plus the exact prompt.
+

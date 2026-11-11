@@ -1,0 +1,186 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Placement season. Zero offers. So I let Claude apply.</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.ap{position:absolute;inset:0;visibility:hidden}
+.ap-fn{position:absolute;left:50%;transform:translateX(-50%);top:1296px;white-space:nowrap;font:500 19px Inter;color:var(--ink-2);opacity:0;z-index:4;background:rgba(14,15,18,.88);border:1px solid var(--g-line);border-radius:999px;padding:6px 16px}
+/* careers-page application form (Workday/Greenhouse-style, light page inside a browser) */
+.ap-br{position:absolute;left:40px;width:1000px;top:640px;transform-origin:50% 100%;z-index:3}
+.ap-br .br-page{background:#fff;height:552px;position:relative}
+.frm{padding:26px 34px;font-family:Inter;color:#1a1a1a}
+.frm h3{font:700 26px Inter;margin:0 0 4px}.frm .co{font:500 16px Inter;color:#6b6b6b;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.frm .co i{width:22px;height:22px;border-radius:5px;background:#0A66C2;display:inline-block}
+.frm .fld{margin-bottom:12px}.frm label{display:block;font:600 14px Inter;color:#444;margin-bottom:4px}
+.frm .in{border:1.5px solid #d9d9d9;border-radius:8px;padding:10px 12px;font:500 18px Inter;color:#1a1a1a;min-height:22px;background:#fff;position:relative}
+.frm .in.ta{min-height:52px;font-size:16px;line-height:1.45}
+.frm .in.on{border-color:#2F55E6;box-shadow:0 0 0 3px rgba(47,85,230,.15)}
+.frm .in .cur{display:inline-block;width:2px;height:20px;background:#1a1a1a;vertical-align:-4px}
+.frm .two{display:flex;gap:14px}.frm .two .fld{flex:1}
+.frm .sub{position:absolute;right:34px;bottom:16px;background:#2F55E6;color:#fff;font:700 18px Inter;border-radius:8px;padding:12px 26px}
+.frm .up{display:flex;align-items:center;gap:10px;border:1.5px dashed #c9c9c9;border-radius:8px;padding:10px 12px;font:600 15px Inter;color:#444}
+.frm .up b{font:700 12px Mono;color:#fff;background:#1a1a1a;border-radius:4px;padding:2px 6px}
+.ap-cursor{position:absolute;z-index:9;width:36px;height:36px;opacity:0;filter:drop-shadow(0 6px 10px rgba(0,0,0,.45))}
+.ap-lock{position:absolute;background:rgba(14,15,18,.94);border:1.5px solid var(--acc);color:var(--acc-hi);font:700 24px Inter;border-radius:12px;padding:10px 16px;opacity:0;z-index:9}
+.ap-rule{position:absolute;left:120px;width:840px;top:1248px;padding:18px 22px;z-index:6;opacity:0}
+.ap-rule .fx-code{font-size:23px}
+/* step tiles */
+.ap-steps{position:absolute;left:70px;right:70px;top:1080px;display:flex;gap:16px;z-index:5}
+.ap-steps .m-card{flex:1;height:190px;padding:20px;display:flex;flex-direction:column;justify-content:space-between;opacity:0}
+.ap-steps b{font:900 50px Inter;color:var(--acc-hi);letter-spacing:-2px}.ap-steps span{font:800 26px/1.15 Inter;color:var(--ink)}
+.ap-steps .lg{position:absolute;right:18px;top:20px;width:50px;height:50px;border-radius:13px;background:#F3F1EC;display:grid;place-items:center}.ap-steps .lg img{width:30px;height:30px}
+/* step 1 terminal + browser tools */
+.ap-term{position:absolute;left:60px;top:640px;width:960px;z-index:3}.ap-term .ui-term{width:960px}.ap-term .tm-body{min-height:240px;font-size:22px}
+.ap-tools{position:absolute;left:60px;right:60px;top:960px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;z-index:4}
+.ap-tools .m-chip{font:700 22px Mono;padding:8px 14px;opacity:0}
+.ap-ms{position:absolute;left:0;right:0;top:1180px;display:flex;justify-content:center;gap:12px;z-index:4}
+.ap-ms .m-chip{opacity:0;display:inline-flex;align-items:center;gap:10px}.ap-ms .m-chip img{width:26px;height:26px}
+/* step 2 resume + 901 + matches */
+.ap-res{position:absolute;left:80px;top:640px;width:300px;height:400px;padding:22px;z-index:4;opacity:0}
+.ap-res .t-kicker{font-size:18px}.ap-res i{display:block;height:12px;border-radius:6px;background:#2B2E35;margin:10px 0}.ap-res i.w{width:70%}.ap-res i.a{background:var(--acc);width:45%}
+.ap-901{position:absolute;left:420px;right:60px;top:640px;text-align:left;z-index:4}
+.ap-901 .t-hero{font-size:150px}.ap-901 .t-kicker{margin-top:6px}
+.ap-match{position:absolute;left:80px;right:60px;top:1060px;display:flex;flex-direction:column;gap:10px;z-index:4}
+.ap-match .m-card{display:flex;align-items:center;gap:14px;padding:12px 18px;font:600 23px Inter;opacity:0}
+.ap-match .m-card small{font:500 17px Inter;color:var(--ink-3);display:block}
+.ap-match .sc{margin-left:auto;font:800 26px Inter;color:var(--acc-hi);background:rgba(217,119,87,.14);border-radius:999px;padding:4px 14px}
+.ap-match .m-card.lo{opacity:.4}.ap-match .m-card.lo .sc{color:var(--ink-3);background:#2B2E35}
+.ap-flow{position:absolute;left:0;top:0}
+/* linkedin chip */
+.ap-li{position:absolute;left:0;right:0;top:1258px;display:flex;justify-content:center;z-index:6}
+.ap-li .m-chip{font:700 26px Inter;opacity:0;display:inline-flex;align-items:center;gap:12px;border-color:rgba(224,122,111,.6);color:#F2B5AE}
+.ap-li .m-chip img{width:28px;height:28px}
+/* CTA */
+.ap-cm{position:absolute;left:100px;right:100px;top:720px;padding:24px 26px;z-index:3}
+.ap-cm .row{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 25px Inter;color:var(--ink);opacity:0}
+.ap-cm .row i{width:46px;height:46px;border-radius:50%;flex:none}.ap-cm .row small{display:block;font:600 17px Inter;color:var(--ink-3)}
+.ap-cm .inp{display:flex;align-items:center;margin-top:12px;border:1.5px solid var(--g-line-hi);border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;min-height:36px}
+.ap-cm .inp .ph{color:var(--ink-3);font-weight:500}.ap-cm .inp .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:var(--acc);display:grid;place-items:center;color:#1A0E08;font-weight:900}
+.ap-dm{position:absolute;left:110px;right:110px;top:600px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7}
+.ap-dm img{width:56px;height:56px;border-radius:50%;background:#fff}.ap-dm b{display:block;font:700 22px Inter}.ap-dm span{font:500 21px Inter;color:var(--ink-2)}
+.ap-dm em{margin-left:auto;font:700 16px Mono;font-style:normal;color:var(--acc-hi);border:1px solid rgba(217,119,87,.5);border-radius:999px;padding:4px 10px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="ap" id="sHook">
+      <div class="headline" id="hl"></div>
+      <div class="ap-br" id="brw"><div id="br"><div class="frm"><h3>Software Engineer, Graduate · Bengaluru</h3><div class="co"><i></i>Careers · Apply</div>
+        <div class="two"><div class="fld"><label>Full name</label><div class="in" id="f1"></div></div><div class="fld"><label>Email</label><div class="in" id="f2"></div></div></div>
+        <div class="fld"><label>College · degree · year</label><div class="in" id="f3"></div></div>
+        <div class="fld"><label>Resume</label><div class="up" id="f4"><b>PDF</b><span id="f4t">Upload your resume</span></div></div>
+        <div class="fld"><label>Why this company?</label><div class="in ta" id="f5"></div></div>
+        <div class="sub" id="subBtn">Submit application</div></div></div></div>
+      <svg class="ap-cursor" id="cur" viewBox="0 0 24 24"><path d="M4 2l16 9-7 2-3 7z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <div class="ap-lock" id="lock">🔒 stops here. I press Submit.</div>
+      <div class="ap-rule m-card" id="rule"><div class="fx-code" id="ruleT"></div></div>
+      <div class="ap-steps" id="steps">
+        <div class="m-card" id="st1"><b>01</b><span>Playwright<br>in Claude</span><div class="lg"><img src="logos/microsoft.svg" alt=""></div></div>
+        <div class="m-card" id="st2"><b>02</b><span>Your<br>resume</span><div class="lg"><img src="logos/claude.svg" alt=""></div></div>
+        <div class="m-card" id="st3"><b>03</b><span>Fills the<br>form</span><div class="lg">📝</div></div></div>
+      <div class="ap-li"><span class="m-chip" id="liChip"><img src="logos/linkedin.svg" alt="">LinkedIn: no bots · company sites only</span></div>
+      <div class="ap-fn" id="fn0">Sample careers form, recreated · Claude types, you press Submit</div>
+    </section>
+    <section class="ap" id="s1"><div class="ap-term"><div id="tm1"></div></div><div class="ap-tools" id="tools"></div>
+      <div class="ap-ms"><span class="m-chip" id="ms1"><img src="logos/microsoft.svg" alt="">Microsoft · open source</span><span class="m-chip" id="ms2"><img src="logos/github.svg" alt="">39,100 ★</span><span class="m-chip acc" id="ms3">free</span></div>
+      <div class="ap-fn" id="fn1">github.com/microsoft/playwright-mcp · 39.1k ★ · Apache-2.0 (3 Nov 2026)</div></section>
+    <section class="ap" id="s2"><svg class="mg-svg" id="s2svg"></svg>
+      <div class="ap-res m-card" id="res"><div class="t-kicker">your resume</div><i class="a"></i><i></i><i class="w"></i><i></i><i class="w"></i><i></i></div>
+      <div class="ap-901"><div class="t-kicker">fresher jobs · India · this week</div><div class="t-hero" id="odo"></div><div class="t-kicker">company career sites</div></div>
+      <div class="ap-match" id="mt">
+        <div class="m-card" id="m1"><div>Graduate Software Engineer<small>Bengaluru · Python · SQL</small></div><span class="sc">92</span></div>
+        <div class="m-card" id="m2"><div>Data Analyst Intern<small>Pune · SQL · Excel</small></div><span class="sc">81</span></div>
+        <div class="m-card lo" id="m3"><div>Senior DevOps Engineer<small>5+ yrs · Kubernetes</small></div><span class="sc">14</span></div></div>
+      <div class="ap-fn" id="fn2">901 = freehire, India, intern + junior, 7 days to 3 Nov 2026 · scores illustrative</div></section>
+    <section class="ap" id="sCta"><svg class="mg-svg" id="ctsvg" style="z-index:8"><circle id="ctHead" class="mg-head" r="9"/></svg>
+      <div class="ap-cm m-card"><div class="t-kicker" style="margin-bottom:8px">comments</div>
+        <div class="row" id="r1"><i style="background:#8FA3BF"></i><div><small>priya · 2m</small>APPLY</div></div>
+        <div class="row" id="r2"><i style="background:#7A3A26"></i><div><small>aman · 1m</small>APPLY placement season is killing me</div></div>
+        <div class="row" id="r3"><i style="background:linear-gradient(135deg,#F0A585,#D97757)"></i><div><small>you · now</small>APPLY</div></div>
+        <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+      <div class="ap-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! The setup + the exact prompt 📝</span></div><em>via 2il.in</em></div>
+    </section>
+  </div>
+  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, U = R.ui, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const T = { twist: at("So I"), promise: at("Here's every"), s1: at("Step one."), s2: at("Step two."), s3: at("Step three."), stop: at("Then it"), catch2: at("That's a"), li: at("LinkedIn"), cta: at("Comment"), end: R.voiceEnd() };
+window.REEL_DURATION = +(T.end + 1.8).toFixed(2);
+U.browser("brw", { url: "careers.example-company.com/apply/graduate-engineer" }); U.terminal("tm1", { title: "~ — claude" });
+const TOOLS = ["browser_navigate", "browser_snapshot", "browser_fill_form", "browser_click", "browser_type", "browser_file_upload", "browser_select_option", "browser_take_screenshot"];
+$("tools").innerHTML = TOOLS.map((s, i) => `<span class="m-chip${[2, 3, 4].includes(i) ? " acc" : ""}" id="tl${i}">${s}</span>`).join("");
+const RULE = `// my rule, in the prompt
+Fill every field from resume.pdf.
+NEVER click Submit. Stop and show me.`;
+// probes
+const SR = $("stage").getBoundingClientRect(), SCN = ["sHook", "s1", "s2", "sCta"];
+SCN.forEach(s => $(s).style.visibility = "visible");
+const box = id => { const r = $(id).getBoundingClientRect(); return { x: r.left - SR.left, y: r.top - SR.top, w: r.width, h: r.height }; };
+const ctr = id => { const b = box(id); return [b.x + b.w / 2, b.y + b.h / 2]; };
+const FB = ["f1", "f2", "f3", "f4", "f5"].map(box), SUB = ctr("subBtn"), SND = ctr("snd"), DMB = box("dm"), DMI = [DMB.x + 48, DMB.y + DMB.h / 2], RES = ctr("res"), M1 = ctr("m1"), CHIP = TOOLS.map((_, i) => ctr("tl" + i));
+SCN.forEach(s => $(s).style.visibility = "hidden");
+F.beats({ bpm: 136, groove_in: 0.0, dur: 80 });
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH,
+  chapters: [{ label: "playwright", at: T.s1 }, { label: "resume", at: T.s2 }, { label: "the form", at: T.s3 }, { label: "the catch", at: T.stop, end: T.cta }],
+  avatar: { x: 240, y: 1330, w: 600, in: -0.5, look: "street", style: { shirt: "#1F2A44", print: "#D97757" }, accessory: "grad" },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
+const FILL = [["f1", "Elon Musk", T.s3 + 0.35], ["f2", "elon•••@gmail.com", T.s3 + 0.9], ["f3", "B.E. Computer · 2026", at("college")], ["f5", "Your graduate program ships to 40M users; my final-year project was a UPI reconciliation tool, so…", at("why this")]];
+const cursorTo = (t, keys) => { let k0 = keys[0], k1 = keys[0]; for (let i = 0; i < keys.length - 1; i++) if (t >= keys[i][0]) { k0 = keys[i]; k1 = keys[i + 1]; }
+  if (t >= keys[keys.length - 1][0]) k0 = k1 = keys[keys.length - 1]; const p = E.power2InOut(prog(t, k0[0], Math.max(0.01, k1[0] - k0[0]) * 0.6));
+  $("cur").style.transform = `translate(${lerp(k0[1], k1[1], p)}px,${lerp(k0[2], k1[2], p)}px)`; };
+
+window.seek = t => {
+  R.frame(t);
+  const hookSlot = t >= T.s3 ? [T.s3, T.cta] : [0, T.s1];   // the form section is used twice (hook + step 3): one slot entry at a time
+  F.slots(t, [["sHook", hookSlot[0], hookSlot[1]], ["s1", T.s1, T.s2], ["s2", T.s2, T.s3], ["sCta", T.cta, 99]]);
+  // the hook form section comes BACK for step 3 (same surface): slots handles it; seams
+  F.cutCurve("sHook", "s1", t, T.s1); F.cutCurve("s1", "s2", t, T.s2); F.zoomCut("s2", "sHook", t, T.s3); F.inverseZoom("sHook", "sCta", t, T.cta);
+  R.speedyFrame(t);
+  M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), drift: 8, waves: [[0.05, 540, 760, 0.9], [T.twist, 540, 900, 1.2], [at("901") + 0.1, 760, 760, 1.5], [at("fills") + 0.1, 540, 900, 1.3], [at("Submit.") + 0.1, SUB[0], SUB[1], 1.2], [at("DM you") + 0.45, DMI[0], DMI[1]]] });
+  const inHook = t < T.s1, inS3 = t >= T.s3 && t < T.cta;
+  // HOOK — headline over the blurred form; the twist brings the form forward and the first field types itself; the steps deal on the promise
+  M.headline("hl", "Placement season.|*Zero* offers.", t, { at: -0.45, out: T.twist - 0.1 });
+  const fw = inHook ? E.expoOut(prog(t, T.twist - 0.1, 0.6)) : 1;
+  $("brw").style.transform = `translateY(${lerp(140, 0, fw)}px) scale(${lerp(0.88, 1, fw)})`; $("brw").style.filter = fw < 1 ? `blur(${((1 - fw) * 8).toFixed(1)}px)` : ""; $("brw").style.opacity = lerp(0.4, 1, fw);
+  ["st1", "st2", "st3"].forEach((id, i) => { const a = T.promise + 0.1 + i * 0.1; if (inHook) M.fly(id, t, a, { y: 160, r: (i - 1) * 6, s: 0.7 }, { f: 2.3, z: 0.55 }); else $(id).style.opacity = 0; });
+  R.note("fn0", t, T.promise + 0.3, T.s1 - 0.3); if (inS3) R.note("fn0", t, T.s3 + 0.4, T.catch2 - 0.3);
+  // the form: in the hook only the name field types (a taste); in step 3 everything fills, the resume uploads, the cursor moves, then STOPS at Submit
+  const typeIn = (id, text, a, cps = 28) => { const n = clamp(Math.floor((t - a) * cps), 0, text.length), el = $(id); el.innerHTML = text.slice(0, n) + (t >= a && n < text.length ? '<span class="cur"></span>' : ""); el.classList.toggle("on", t >= a - 0.1 && n < text.length); if (n > 0 && n < text.length) R.cue("type", a, { t2: a + text.length / cps, soft: true }); };
+  if (inHook) { typeIn("f1", "Elon Musk", T.twist + 0.25); ["f2", "f3", "f5"].forEach(id => { $(id).innerHTML = ""; $(id).classList.remove("on"); }); $("f4t").textContent = "Upload your resume"; $("f4").style.borderColor = ""; }
+  if (inS3) { FILL.forEach(([id, txt, a]) => typeIn(id, txt, a, id === "f5" ? 40 : 26)); const up = t >= at("projects,"); $("f4t").textContent = up ? "resume.pdf · uploaded ✓" : "Upload your resume"; $("f4").style.borderColor = up ? "#2F55E6" : ""; if (up) R.cue("pop", at("projects,"), { soft: true }); }
+  // cursor: hook = parked; step 3 = field to field, then to Submit where it stops (lock + cool ring)
+  const curVis = inS3 && t >= T.s3 + 0.2; $("cur").style.opacity = curVis ? 1 : 0;
+  if (curVis) cursorTo(t, [[T.s3 + 0.2, FB[0].x + 60, FB[0].y + 20], [T.s3 + 0.85, FB[1].x + 60, FB[1].y + 20], [at("college") - 0.05, FB[2].x + 60, FB[2].y + 20], [at("projects,") - 0.05, FB[3].x + 80, FB[3].y + 18], [at("why this") - 0.05, FB[4].x + 60, FB[4].y + 24], [T.stop - 0.1, SUB[0] - 30, SUB[1] - 10]]);
+  const lk = M.spring(t, at("Submit.") - 0.05, { f: 2.6, z: 0.5 }); $("lock").style.left = (SUB[0] - 420) + "px"; $("lock").style.top = (SUB[1] - 90) + "px";
+  $("lock").style.opacity = inS3 && t >= at("Submit.") - 0.05 ? 1 : 0; $("lock").style.transform = `scale(${lerp(0.6, 1, lk)})`;
+  if (inS3) M.ring("mgFx", t, at("Submit.") - 0.05, { x: SUB[0], y: SUB[1], r: 200, d: 0.65, cool: true });
+  // the rule, shown as code on "That's a rule I typed"; then I press Submit (ring + flash)
+  $("rule").style.opacity = inS3 ? clamp((t - T.catch2) / 0.2) * (1 - prog(t, at("press") - 0.2, 0.2)) : 0; if (inS3) F.code("ruleT", RULE, t, T.catch2 + 0.1, { cps: 70 });
+  if (inS3) { R.press("subBtn", t, at("press") + 0.1); M.ring("mgFx", t, at("press") + 0.1, { x: SUB[0], y: SUB[1], r: 300, d: 0.7 }); F.flash(t, at("submit.", 1) + 0.05, { max: 0.16, sfx: false }); }
+  // STEP 1 — one command, the browser tools fly out, Microsoft / 39k / free chips
+  U.termPlay("tm1", t, [{ t: T.s1 + 0.2, kind: "cmd", text: "claude mcp add playwright npx @playwright/mcp@latest" }, { t: at("one command") + 0.3, kind: "ok", text: "playwright · connected · 21 browser tools" }], { cps: 46 });
+  if (t >= T.s1 - 0.2 && t < T.s2 + 0.4) TOOLS.forEach((_, i) => { const a = at("open") - 0.2 + i * 0.05, c = $("tl" + i), fr = { x: 300 - CHIP[i][0], y: 800 - CHIP[i][1], r: F.hash(i) * 30, s: 0.3 }; c.style.opacity = t < a ? 0 : 1; M.trail(c, t, tt => M.flyT(tt, a, fr, { f: 2.2, z: 0.6 }), { n: 3, lag: 0.03, a: 0.28 }); });
+  [["ms1", at("Microsoft's")], ["ms2", at("39,000")], ["ms3", at("free")]].forEach(([id, a]) => M.fly(id, t, a, { y: 40, s: 0.6 }, { f: 2.6, z: 0.5 }));
+  R.note("fn1", t, T.s1 + 0.6, T.s2 - 0.3);
+  // STEP 2 — resume card, 901 odometer (impact), packets resume → matches, the matches score in
+  M.fly("res", t, T.s2 + 0.2, { x: -120, s: 0.85, r: -4 }, { f: 2.3, z: 0.6 });
+  F.odometer("odo", t, at("901") - 0.05, 0.8, 901); M.rays("s2svg", t, at("901") + 0.05, { x: 760, y: 760, r0: 200, len: 90, n: 14, d: 0.6 }); M.ring("mgFx", t, at("901") + 0.05, { x: 760, y: 760, r: 420, d: 0.8, sfx: true }); F.shake("cam", t, at("901") + 0.05, { amp: 10, d: 0.4, sfx: false });
+  if (t >= T.s2 - 0.2 && t < T.s3 + 0.4) { const ln = M.path("s2svg", "fl", M.curve(RES[0], RES[1] + 200, M1[0] - 200, M1[1] - 40, 0.5), "mg-line acc"); M.draw(ln, t, at("scores") - 0.1, 0.4); M.flow(ln, t, { n: 5, speed: 1.3, from: at("scores") + 0.2, to: T.s3 }); }
+  [["m1", at("scores") + 0.3], ["m2", at("scores") + 0.45], ["m3", at("scores") + 0.6]].forEach(([id, a]) => { const p = M.fly(id, t, a, { x: 80, s: 0.92 }, { f: 2.5, z: 0.6 }); if (id === "m3") $(id).style.opacity = Math.min(+$(id).style.opacity || 0, 0.4); });
+  [...$("mt").querySelectorAll(".sc")].forEach((s, i) => { const v = [92, 81, 14][i], p = E.expoOut(prog(t, at("keeps") - 0.1 + i * 0.1, 0.6)); s.textContent = Math.round(v * p); });
+  R.note("fn2", t, T.s2 + 0.6, T.s3 - 0.3);
+  // LinkedIn chip on the catch 2
+  if (inS3) M.fly("liChip", t, T.li + 0.1, { y: 40, s: 0.6 }, { f: 2.6, z: 0.5 }); else $("liChip").style.opacity = 0;
+  // CTA
+  [["r1", T.cta + 0.15], ["r2", T.cta + 0.3]].forEach(([id, a]) => M.fly(id, t, a, { x: -60, s: 0.9 }, { f: 2.4, z: 0.6 }));
+  const tyA = T.cta + 0.4, sent = tyA + 0.5, dmA = at("DM you");
+  if (t < sent) R.type("cty", "APPLY", t, tyA, 14); else $("cty").textContent = "";
+  $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.1); M.fly("r3", t, sent, { y: 40, s: 0.9 }, { f: 2.6, z: 0.55 });
+  if (t >= T.cta) { const ln = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(ln, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
+  R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 });
+};
+window.seek(0);
+</script></body></html>

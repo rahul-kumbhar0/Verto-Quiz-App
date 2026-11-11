@@ -1,0 +1,17 @@
+{"merge": [
+  [["two","point","four"], "2.4"],
+  [["one","ninety","eight"], "198"],
+  [["three","hundred","plus"], "300+"],
+  [["four"], "4"],
+  [["twenty"], "20"],
+  [["m","b"], "MB"],
+  [["k","b"], "KB"],
+  [["s","s","c"], "SSC"],
+  [["i","b","p","s"], "IBPS"],
+  [["u","p","s","c"], "UPSC"],
+  [["p","d","f"], "PDF"],
+  [["d","m"], "DM"],
+  [["docxify"], "Docxify"],
+  [["aadhaar"], "Aadhaar"],
+  [["cafe"], "café"]
+]}

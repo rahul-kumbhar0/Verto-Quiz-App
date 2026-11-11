@@ -1,0 +1,242 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>I automated my YouTube channel with Claude</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="props.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+.yt{position:absolute;inset:0;visibility:hidden}
+.yt-fn{position:absolute;left:50%;transform:translateX(-50%);top:1296px;white-space:nowrap;font:500 19px Inter;color:var(--ink-2);opacity:0;z-index:4;background:rgba(14,15,18,.88);border:1px solid var(--g-line);border-radius:999px;padding:6px 16px}
+.is-light .yt-fn{background:rgba(255,255,255,.92);color:var(--p-ink-2);border-color:var(--p-line)}
+/* YouTube Studio (dark) */
+.ys{position:absolute;left:50px;width:980px;top:640px;transform-origin:50% 100%;background:#282828;border-radius:18px;overflow:hidden;font-family:Roboto,Inter;color:#fff;z-index:3;box-shadow:0 0 0 1.5px rgba(255,255,255,.08),0 50px 120px -20px rgba(0,0,0,.85)}
+.ys-top{height:64px;display:flex;align-items:center;gap:12px;padding:0 22px;border-bottom:1px solid #3f3f3f;background:#1f1f1f}
+.ys-top img{height:26px}.ys-top b{font:700 22px Inter;letter-spacing:-.5px}.ys-top span{margin-left:auto;width:36px;height:36px;border-radius:50%;background:#fff url(canwe-logo.svg) center/cover}
+.ys-h{padding:20px 24px 8px;font:600 26px Inter}.ys-tabs{display:flex;gap:28px;padding:0 24px;border-bottom:1px solid #3f3f3f;font:600 17px Inter;color:#aaa}
+.ys-tabs i{font-style:normal;padding:12px 0}.ys-tabs i.on{color:#fff;box-shadow:inset 0 -3px 0 #fff}
+.ys-row{display:flex;align-items:center;gap:18px;padding:16px 24px;border-bottom:1px solid #3a3a3a;font:500 18px Inter}
+.ys-row .th{width:66px;height:116px;border-radius:8px;overflow:hidden;background:#111;flex:none;position:relative}.ys-row .th img{width:100%;height:100%;object-fit:cover}
+.ys-row .t{flex:1}.ys-row .t b{display:block;font:600 20px Inter;margin-bottom:6px}.ys-row .t small{color:#aaa;font:500 16px Inter}
+.ys-row .vis{display:flex;align-items:center;gap:8px;color:#aaa;font:500 17px Inter;min-width:170px}
+.ys-row .vis.pub{color:#3ea6ff}
+.ys-row.new{background:rgba(217,119,87,.08)}
+.ys-badge{display:inline-block;font:700 14px Mono;color:#F0A585;border:1px solid rgba(217,119,87,.5);border-radius:999px;padding:2px 8px;margin-left:8px}
+.ys-ghost .t b{background:#3f3f3f;color:transparent;border-radius:6px;width:70%}.ys-ghost .t small{background:#353535;color:transparent;border-radius:6px}
+/* step tiles */
+.yt-steps{position:absolute;left:70px;right:70px;top:1040px;display:flex;gap:16px;z-index:5}
+.yt-steps .m-card{flex:1;height:200px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;opacity:0}
+.yt-steps b{font:900 54px Inter;color:var(--acc-hi);letter-spacing:-2px}.yt-steps span{font:800 27px/1.15 Inter;color:var(--ink)}
+.yt-steps .lg{position:absolute;right:20px;top:22px;width:52px;height:52px;border-radius:14px;background:#F3F1EC;display:grid;place-items:center}.yt-steps .lg img{width:32px;height:32px}
+/* step 1 */
+.yt-term{position:absolute;left:60px;top:640px;width:960px;z-index:3}.yt-term .ui-term{width:960px}.yt-term .tm-body{min-height:250px;font-size:22px}
+.yt-sk{position:absolute;left:50px;right:50px;top:930px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;z-index:4}
+.yt-sk .m-chip{font:700 22px Mono;padding:8px 14px;opacity:0}
+.yt-chk{position:absolute;left:90px;right:90px;top:1080px;display:flex;gap:14px;justify-content:center;z-index:4}
+.yt-chk .m-chip{font:800 24px Inter;opacity:0}.yt-chk .m-chip.on{background:rgba(217,119,87,.16);border-color:rgba(217,119,87,.6);color:var(--acc-hi)}
+/* step 2: Google Cloud console (light) */
+.gc{position:absolute;left:50px;width:980px;top:620px;height:640px;background:#fff;border-radius:16px;overflow:hidden;font-family:Roboto,Inter;color:#202124;z-index:3;box-shadow:0 0 0 1px #dadce0,0 40px 90px -24px rgba(40,30,20,.35)}
+.gc-top{height:60px;display:flex;align-items:center;gap:12px;padding:0 20px;border-bottom:1px solid #dadce0}
+.gc-top img{height:28px}.gc-top b{font:500 22px Inter;color:#5f6368}
+.gc-proj{margin-left:16px;display:flex;align-items:center;gap:8px;border:1px solid #dadce0;border-radius:8px;padding:6px 12px;font:500 18px Inter;color:#202124}
+.gc-proj i{font-style:normal;width:10px;height:10px;border-radius:50%;background:#1a73e8}
+.gc-crumb{padding:16px 24px 0;font:500 16px Inter;color:#5f6368}
+.gc-card{margin:16px 24px;border:1px solid #dadce0;border-radius:12px;padding:22px;display:flex;gap:20px;align-items:center}
+.gc-card .lg{width:72px;height:72px;border-radius:14px;background:#fff;border:1px solid #eee;display:grid;place-items:center;flex:none}.gc-card .lg img{width:46px}
+.gc-card h3{font:500 28px Inter;margin:0 0 6px}.gc-card p{font:500 17px Inter;color:#5f6368;margin:0}
+.gc-btn{margin-left:auto;background:#1a73e8;color:#fff;font:600 19px Inter;border-radius:8px;padding:12px 26px;letter-spacing:.5px;white-space:nowrap}
+.gc-btn.done{background:#e6f4ea;color:#137333}
+.gc-dlg{position:absolute;left:150px;right:150px;top:300px;background:#fff;border-radius:12px;box-shadow:0 24px 60px rgba(0,0,0,.25),0 0 0 1px #dadce0;padding:24px 26px;opacity:0}
+.gc-dlg h4{font:500 24px Inter;margin:0 0 14px}.gc-dlg label{display:block;font:500 15px Inter;color:#5f6368;margin-bottom:6px}
+.gc-sel{border:1px solid #1a73e8;border-radius:6px;padding:12px 14px;font:500 19px Inter;display:flex;justify-content:space-between;box-shadow:0 0 0 1px #1a73e8}
+.gc-steps{display:flex;gap:10px;margin:14px 24px 0}.gc-steps span{font:600 15px Inter;color:#5f6368;border:1px solid #dadce0;border-radius:999px;padding:6px 12px;opacity:.45}
+.gc-steps span.on{opacity:1;color:#1a73e8;border-color:#1a73e8;background:#e8f0fe}
+.yt-file{position:absolute;left:470px;top:1000px;width:140px;z-index:6;opacity:0;text-align:center}
+.yt-file .doc{width:110px;height:136px;margin:0 auto;border-radius:10px;background:linear-gradient(180deg,#FBFAF7,#EEEBE5);border:2px solid #DDD8CE;position:relative;box-shadow:0 20px 40px -10px rgba(40,30,20,.35)}
+.yt-file .doc::after{content:"{ }";position:absolute;inset:0;display:grid;place-items:center;font:900 34px Mono;color:#B4573A}
+.yt-file small{display:block;margin-top:8px;font:700 17px Mono;color:var(--p-ink)}
+.yt-warn{position:absolute;left:0;right:0;top:1200px;text-align:center;z-index:6;opacity:0}
+.yt-warn span{font:700 21px Inter;color:#9a3412;background:#fff7ed;border:1.5px solid #fdba74;border-radius:999px;padding:8px 16px}
+/* step 3: Google sign-in + connected */
+.gs{position:absolute;left:170px;width:740px;top:640px;background:#fff;border-radius:16px;padding:30px 34px;font-family:Roboto,Inter;color:#202124;z-index:4;box-shadow:0 30px 80px -20px rgba(0,0,0,.6);opacity:0}
+.gs img.g{height:30px}.gs h3{font:400 30px Inter;margin:14px 0 6px}.gs p{font:500 18px Inter;color:#5f6368;margin:0 0 18px}
+.gs .acc{display:flex;align-items:center;gap:12px;border:1px solid #dadce0;border-radius:999px;padding:8px 16px 8px 8px;width:fit-content;font:500 18px Inter}
+.gs .acc i{width:34px;height:34px;border-radius:50%;background:#fff url(canwe-logo.svg) center/cover;border:1px solid #eee}
+.gs ul{margin:18px 0;padding:0 0 0 22px;font:500 17px/1.7 Inter;color:#3c4043}
+.gs .row{display:flex;justify-content:flex-end;gap:12px}.gs .row span{font:600 18px Inter;border-radius:999px;padding:10px 22px;color:#1a73e8}.gs .row span.al{background:#1a73e8;color:#fff}
+.yt-conn{position:absolute;left:110px;right:110px;top:1110px;display:flex;align-items:center;gap:16px;padding:16px 20px;z-index:5;opacity:0}
+.yt-conn .ic{width:48px;height:48px;border-radius:12px;background:#F3F1EC;display:grid;place-items:center}.yt-conn .ic img{width:30px}
+.yt-conn b{font:700 23px Inter}.yt-conn small{display:block;font:500 16px Inter;color:var(--ink-3)}.yt-conn em{margin-left:auto;font:600 17px Inter;font-style:normal;color:#7CC4A0;border:1px solid rgba(124,196,160,.45);border-radius:999px;padding:5px 14px}
+/* step 4: claude chat */
+.yt-cl{position:absolute;left:33px;top:620px;transform-origin:0 0;border-radius:18px;overflow:hidden;box-shadow:0 0 0 1.5px rgba(255,255,255,.08),0 50px 120px -20px rgba(0,0,0,.8);z-index:3}
+.yt-cl .ui-cl{height:560px}
+.yt-tools{position:absolute;left:80px;right:80px;top:1010px;display:flex;flex-direction:column;gap:10px;z-index:5}
+.yt-tools div{display:flex;align-items:center;gap:12px;font:600 21px Mono;color:var(--ink-2);background:rgba(20,22,26,.92);border:1px solid var(--g-line-hi);border-radius:12px;padding:10px 16px;opacity:0}
+.yt-tools div b{color:#7CC4A0;margin-left:auto}
+/* catch */
+.yt-vis{position:absolute;left:150px;right:150px;top:640px;background:#282828;border-radius:16px;padding:22px 26px;font-family:Roboto,Inter;color:#fff;z-index:3;box-shadow:0 40px 100px -20px rgba(0,0,0,.8)}
+.yt-vis h4{font:600 24px Inter;margin:0 0 14px}
+.yt-opt{display:flex;align-items:center;gap:14px;padding:14px 12px;border-radius:10px;font:500 21px Inter}
+.yt-opt i{width:24px;height:24px;border-radius:50%;border:2.5px solid #aaa;flex:none;position:relative}
+.yt-opt.sel i{border-color:#3ea6ff}.yt-opt.sel i::after{content:"";position:absolute;inset:4px;border-radius:50%;background:#3ea6ff}
+.yt-opt small{display:block;color:#aaa;font:500 16px Inter}
+.yt-q{position:absolute;left:150px;right:150px;top:1050px;z-index:4;opacity:0;padding:18px 22px}
+.yt-q .bar{display:flex;gap:6px;margin:10px 0}.yt-q .bar i{flex:1;height:22px;border-radius:5px;background:#2B2E35}.yt-q .bar i.on{background:linear-gradient(180deg,#F0A585,#D97757)}
+.yt-q .l{display:flex;justify-content:space-between;font:700 18px Mono;color:var(--ink-3)}.yt-q .n{font:900 40px Inter;color:var(--ink)}
+/* CTA */
+.yt-cm{position:absolute;left:100px;right:100px;top:720px;padding:24px 26px;z-index:3}
+.yt-cm .row{display:flex;gap:14px;align-items:center;padding:10px 0;font:500 25px Inter;color:var(--ink);opacity:0}
+.yt-cm .row i{width:46px;height:46px;border-radius:50%;flex:none}.yt-cm .row small{display:block;font:600 17px Inter;color:var(--ink-3)}
+.yt-cm .inp{display:flex;align-items:center;margin-top:12px;border:1.5px solid var(--g-line-hi);border-radius:999px;padding:12px 14px 12px 22px;font:600 26px Inter;min-height:36px}
+.yt-cm .inp .ph{color:var(--ink-3);font-weight:500}.yt-cm .inp .snd{margin-left:auto;width:42px;height:42px;border-radius:50%;background:var(--acc);display:grid;place-items:center;color:#1A0E08;font-weight:900}
+.yt-dm{position:absolute;left:110px;right:110px;top:600px;display:flex;align-items:center;gap:16px;padding:16px 20px;opacity:0;z-index:7}
+.yt-dm img{width:56px;height:56px;border-radius:50%;background:#fff}.yt-dm b{display:block;font:700 22px Inter}.yt-dm span{font:500 21px Inter;color:var(--ink-2)}
+.yt-dm em{margin-left:auto;font:700 16px Mono;font-style:normal;color:var(--acc-hi);border:1px solid rgba(217,119,87,.5);border-radius:999px;padding:4px 10px}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><canvas id="mgGrid" class="mg-grid" width="1080" height="1920"></canvas><div class="s-vig"></div>
+  <div id="cam">
+    <section class="yt" id="sHook">
+      <div class="headline" id="hl"></div>
+      <div class="ys" id="ys1"><div class="ys-top"><img src="logos/youtube.svg" alt=""><b>Studio</b><span></span></div>
+        <div class="ys-h">Channel content · canwe.ai</div><div class="ys-tabs"><i>Videos</i><i class="on">Shorts</i><i>Live</i></div>
+        <div class="ys-row new" id="ysNew"><div class="th"><img src="thumb.png" alt=""></div><div class="t"><b>I automated my YouTube with Claude<span class="ys-badge">via Claude</span></b><small>Uploaded just now</small></div><div class="vis">🔒 Private</div></div>
+        <div class="ys-row ys-ghost"><div class="th"></div><div class="t"><b>.</b><small>.</small></div><div class="vis">—</div></div></div>
+      <div class="yt-steps" id="steps">
+        <div class="m-card" id="st1"><b>01</b><span>Skill<br>pack</span><div class="lg"><img src="logos/github.svg" alt=""></div></div>
+        <div class="m-card" id="st2"><b>02</b><span>Google<br>Cloud</span><div class="lg"><img src="logos/googlecloud.svg" alt=""></div></div>
+        <div class="m-card" id="st3"><b>03</b><span>Connect<br>Claude</span><div class="lg"><img src="logos/claude.svg" alt=""></div></div></div>
+      <div class="yt-fn" id="fn0">canwe.ai's YouTube Studio · the upload lands private</div></section>
+    <section class="yt" id="s1"><div class="yt-term"><div id="tm1"></div></div><div class="yt-sk" id="sk"></div>
+      <div class="yt-chk"><span class="m-chip" id="ck1">✓ 5 scored hooks</span><span class="m-chip" id="ck2">✓ title + thumbnail</span><span class="m-chip" id="ck3">✓ SEO</span></div>
+      <div class="yt-fn" id="fn1">github.com/Jakeschincariol/youtube-agent-skill · 4.3k ★ (3 Nov 2026) · MIT · not affiliated</div></section>
+    <section class="yt" id="s2">
+      <div class="gc"><div class="gc-top"><img src="logos/googlecloud.svg" alt=""><b>Google Cloud</b><div class="gc-proj" id="proj"><i></i><span id="projN">Select a project</span> ▾</div></div>
+        <div class="gc-steps"><span id="gs1">1 · New project</span><span id="gs2">2 · Enable API</span><span id="gs3">3 · Desktop login</span><span id="gs4">4 · Download</span></div>
+        <div class="gc-crumb">APIs &amp; Services › Library › YouTube Data API v3</div>
+        <div class="gc-card"><div class="lg"><img src="logos/youtube.svg" alt=""></div><div><h3>YouTube Data API v3</h3><p>Google Enterprise API · The YouTube Data API lets you upload and manage videos</p></div><span class="gc-btn" id="en">ENABLE</span></div>
+        <div class="gc-dlg" id="dlg"><h4>Create OAuth client ID</h4><label>Application type *</label><div class="gc-sel">Desktop app <span>▾</span></div>
+          <label style="margin-top:14px">Name</label><div class="gc-sel" style="border-color:#dadce0;box-shadow:none">canwe-claude</div></div></div>
+      <div class="yt-file" id="file"><div class="doc"></div><small>client_secret.json</small></div>
+      <div class="yt-warn" id="warn"><span>⚠️ Never share this file</span></div>
+      <div class="yt-fn" id="fn2">Google Cloud console (recreated) · consent screen: add your channel's Google account as a test user</div></section>
+    <section class="yt" id="s3">
+      <div class="gs" id="gs"><img class="g" src="logos/google.svg" alt=""><h3>canwe-claude wants to access your Google Account</h3>
+        <div class="acc"><i></i>canwe.ai</div><ul><li>Manage your YouTube account</li><li>See your YouTube Analytics reports</li></ul>
+        <div class="row"><span>Cancel</span><span class="al" id="allow">Allow</span></div></div>
+      <div class="yt-conn m-card" id="conn"><span class="ic"><img src="logos/youtube.svg" alt=""></span><div><b>YouTube</b><small>connector (MCP) · your own Google login</small></div><em>Connected</em></div>
+      <div class="yt-fn" id="fn3">Google sign-in, once · the token stays on your computer</div></section>
+    <section class="yt" id="s4"><svg class="mg-svg" id="s4svg"></svg>
+      <div class="yt-cl" id="clw"><div id="cl"></div></div>
+      <div class="yt-tools" id="tools"><div>⏺ /yt-script · 5 hooks scored <b>✓</b></div><div>⏺ render · speedy-explainer-reel <b>✓</b></div><div>⏺ youtube · upload_video (private) <b>✓</b></div></div>
+      <div class="yt-fn" id="fn4">The flow on our channel · uploads land private</div></section>
+    <section class="yt" id="sCatch">
+      <div class="yt-vis" id="vis"><h4>Visibility</h4>
+        <div class="yt-opt" id="oPriv"><i></i><div>Private<small>Only you can watch</small></div></div>
+        <div class="yt-opt" id="oUnl"><i></i><div>Unlisted<small>Anyone with the link</small></div></div>
+        <div class="yt-opt" id="oPub"><i></i><div>Public<small>Everyone can watch</small></div></div></div>
+      <div class="yt-q m-card" id="quota"><div class="l"><span>daily quota · 10,000 units</span><span>1 upload = 1,600</span></div><div class="bar" id="qbar"></div><div class="n" id="qn">0 uploads</div></div>
+      <div class="yt-fn" id="fn5">YouTube API: unverified projects upload as private until audited · default quota</div></section>
+    <section class="yt" id="sCta"><svg class="mg-svg" id="ctsvg" style="z-index:8"><circle id="ctHead" class="mg-head" r="9"/></svg>
+      <div class="yt-cm m-card"><div class="t-kicker" style="margin-bottom:8px">comments</div>
+        <div class="row" id="r1"><i style="background:#8FA3BF"></i><div><small>neha · 2m</small>YOUTUBE</div></div>
+        <div class="row" id="r2"><i style="background:#7A3A26"></i><div><small>rahul · 1m</small>YOUTUBE need this for my channel</div></div>
+        <div class="row" id="r3"><i style="background:linear-gradient(135deg,#F0A585,#D97757)"></i><div><small>you · now</small>YOUTUBE</div></div>
+        <div class="inp"><span id="cty"></span><span class="ph" id="cph">Add a comment…</span><span class="snd" id="snd">↑</span></div></div>
+      <div class="yt-dm m-glass" id="dm"><img src="canwe-logo.svg" alt=""><div><b>canwe.ai</b><span>Sent! Every step + the exact screens 📺</span></div><em>via 2il.in</em></div>
+    </section>
+  </div>
+  <div class="mg-layer" id="mgFx"></div><div class="mg-iris" id="irisRing"></div>
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div><div id="fxOverlay"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, F = R.fx, U = R.ui, M = R.mg, { at, prog, clamp, lerp } = R, $ = R.$, E = R.ease;
+const T = { too: at("Here's how"), s1: at("Step one."), s2: at("Step two."), s3: at("Step three."), s4: at("Now I type"), cat: at("But here's"), cta: at("Comment"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 1.8).toFixed(2);
+U.terminal("tm1", { title: "~/canwe — claude" });
+const SK = ["/yt-script", "/yt-package", "/yt-seo", "/yt-shorts", "/yt-edit", "/yt-comment", "/yt-plan", "/yt-viral", "/yt-retention", "/yt-chapters", "/yt-audit"];
+$("sk").innerHTML = SK.map((s, i) => `<span class="m-chip${i < 3 ? " acc" : ""}" id="sk${i}">${s}</span>`).join("");
+U.claudeChat("cl", { title: "YouTube Short", initial: "C", model: "Claude", tool: { name: "youtube", fn: "upload_video" },
+  answer: ["Done. Your Short <b>“I automated my YouTube with Claude”</b> is on <b>canwe.ai</b>.", "Title + thumbnail checked, description and tags written.", "It's <b>Private</b>: review it in Studio, then publish."] });
+$("qbar").innerHTML = Array.from({ length: 6 }, () => "<i></i>").join("");
+// probes
+const SR = $("stage").getBoundingClientRect(), SCN = ["sHook", "s1", "s2", "s3", "s4", "sCatch", "sCta"];
+SCN.forEach(s => $(s).style.visibility = "visible");
+const box = id => { const r = $(id).getBoundingClientRect(); return { x: r.left - SR.left, y: r.top - SR.top, w: r.width, h: r.height }; };
+const ctr = id => { const b = box(id); return [b.x + b.w / 2, b.y + b.h / 2]; };
+const NEW = ctr("ysNew"), EN = ctr("en"), ALLOW = ctr("allow"), PUB = ctr("oPub"), PRIV = ctr("oPriv"), SND = ctr("snd"), DMB = box("dm"), DMI = [DMB.x + 48, DMB.y + DMB.h / 2];
+const CHIP = SK.map((_, i) => ctr("sk" + i));
+SCN.forEach(s => $(s).style.visibility = "hidden");
+F.beats({ bpm: 136, groove_in: 0.0, dur: 80 });
+R.setup({ push: 0, scenes: [] });
+R.speedy({ emph: window.EMPH, light: [[T.s2, T.s3]],
+  chapters: [{ label: "skills", at: T.s1 }, { label: "google cloud", at: T.s2 }, { label: "connect", at: T.s3 }, { label: "demo", at: T.s4, end: T.cta }],
+  avatar: { x: 240, y: 1330, w: 600, in: -0.5, look: "classic", style: { shirt: "#E62117", shirtLine: "#A3170F" } },
+  poses: window.PINS.map(([p, n]) => [at(p), n]), autoPoses: {} });
+
+window.seek = t => {
+  R.frame(t);
+  F.slots(t, [["sHook", 0, T.s1], ["s1", T.s1, T.s2], ["s2", T.s2, T.s3], ["s3", T.s3, T.s4], ["s4", T.s4, T.cat], ["sCatch", T.cat, T.cta], ["sCta", T.cta, 99]]);
+  F.zoomCut("sHook", "s1", t, T.s1); F.rackFocus("s1", "s2", t, T.s2); M.iris("s2", "s3", t, T.s3 - 0.1, { x: EN[0], y: EN[1], d: 0.5 });
+  F.cutCurve("s3", "s4", t, T.s4); F.cutCurve("s4", "sCatch", t, T.cat); F.inverseZoom("sCatch", "sCta", t, T.cta);
+  R.speedyFrame(t);
+  const upl = at("canwe.ai") + 0.15;
+  F.shake("cam", t, upl, { amp: 14, d: 0.5, sfx: false });
+  M.grid("mgGrid", t, { pulse: F.pulse(t, { decay: 7 }), light: t >= T.s2 && t < T.s3, drift: 8,
+    waves: [[0.05, 540, 760, 0.9], [T.too + 0.25, NEW[0], NEW[1], 1.2], [at("Turn on") + 0.3, EN[0], EN[1]], [at("once") + 0.3, ALLOW[0], ALLOW[1]], [upl, 540, 900, 1.7], [at("press publish") + 0.2, PUB[0], PUB[1], 1.1], [at("DM you") + 0.45, DMI[0], DMI[1]]] });
+
+  // HOOK — frame 0 = the BIG headline (readable muted) over the blurred Studio; on "Here's how" it exits, the Studio comes forward,
+  // the Short "via Claude" slides in with a ring, then the 3 steps are dealt
+  M.headline("hl", "I automated my|*YouTube*|with Claude.", t, { at: -0.45, out: T.too - 0.15 });
+  const fw = E.expoOut(prog(t, T.too - 0.15, 0.6)); $("ys1").style.transform = `translateY(${lerp(150, 0, fw)}px) scale(${lerp(0.86, 1, fw)})`;
+  $("ys1").style.filter = fw < 1 ? `blur(${((1 - fw) * 8).toFixed(1)}px)` : ""; $("ys1").style.opacity = lerp(0.4, 1, fw);
+  M.fly("ysNew", t, T.too + 0.1, { x: -300, s: 0.9 }, { f: 2.4, z: 0.55 }); M.ring("mgFx", t, T.too + 0.25, { x: NEW[0], y: NEW[1], r: 360, d: 0.7, sfx: true });
+  ["st1", "st2", "st3"].forEach((id, i) => M.fly(id, t, T.too + 0.55 + i * 0.1, { y: 160, r: (i - 1) * 6, s: 0.7 }, { f: 2.3, z: 0.55 }));
+  R.note("fn0", t, T.too + 0.7, T.s1 - 0.3);
+
+  // STEP 1 — the real install; 11 skills fly out; the three that matter light on their words
+  const a1 = T.s1 + 0.2;
+  U.termPlay("tm1", t, [{ t: a1, kind: "cmd", text: "/plugin marketplace add Jakeschincariol/youtube-agent-skill" },
+    { t: a1 + 1.4, kind: "cmd", text: "/plugin install youtube-agent" }, { t: at("Eleven") - 0.05, kind: "claude", text: "11 skills ready · /yt-script to /yt-audit" }], { cps: 48 });
+  if (t >= T.s1 - 0.2 && t < T.s2 + 0.4) SK.forEach((_, i) => { const a2 = at("Eleven") + i * 0.045, c = $("sk" + i), fr = { x: 300 - CHIP[i][0], y: 820 - CHIP[i][1], r: F.hash(i) * 30, s: 0.3 };
+    c.style.opacity = t < a2 ? 0 : 1; M.trail(c, t, tt => M.flyT(tt, a2, fr, { f: 2.2, z: 0.6 }), { n: 3, lag: 0.03, a: 0.28 }); });
+  [["ck1", at("hooks,")], ["ck2", at("thumbnail,")], ["ck3", at("SEO.")]].forEach(([id, a2]) => { M.fly(id, t, a2 - 0.1, { y: 40, s: 0.7 }, { f: 2.6, z: 0.5 }); $(id).classList.toggle("on", t >= a2 + 0.1); });
+  R.note("fn1", t, T.s1 + 0.6, T.s2 - 0.3);
+
+  // STEP 2 (light) — Google Cloud: new project drops in, ENABLE pressed, Desktop app dialog, client_secret.json flies out
+  const np = at("New project."); $("projN").textContent = t >= np + 0.2 ? "canwe-youtube" : "Select a project"; if (t >= np + 0.2) M.fly("proj", t, np + 0.2, { y: -20, s: 0.9 }, { f: 3, z: 0.5 }); else $("proj").style.transform = "";
+  [["gs1", np], ["gs2", at("Turn on")], ["gs3", at("desktop")], ["gs4", at("download")]].forEach(([id, a2]) => $(id).classList.toggle("on", t >= a2));
+  const ena = at("Turn on") + 0.45; R.press("en", t, ena); $("en").classList.toggle("done", t >= ena + 0.25); $("en").textContent = t >= ena + 0.25 ? "✓ API ENABLED" : "ENABLE";
+  M.ring("mgFx", t, ena + 0.05, { x: EN[0], y: EN[1], r: 200, d: 0.6, cool: true });
+  M.fly("dlg", t, at("desktop") - 0.2, { y: 60, s: 0.92 }, { f: 2.4, z: 0.6 }); if (t >= at("download")) $("dlg").style.opacity = 1 - prog(t, at("download") + 0.2, 0.25);
+  const fa = at("download") + 0.15; M.trail("file", t, tt => M.flyT(tt, fa, { x: 0, y: -380, r: -20, s: 0.4 }, { f: 2.2, z: 0.5 }), { n: 3, lag: 0.035, a: 0.25 }); $("file").style.opacity = t >= fa ? 1 : 0;
+  const wp = M.spring(t, at("one file.") + 0.25, { f: 2.6, z: 0.5 }); $("warn").style.opacity = t >= at("one file.") + 0.25 ? 1 : 0; $("warn").style.transform = `scale(${lerp(0.6, 1, wp)})`;
+  R.note("fn2", t, T.s2 + 0.6, T.s3 - 0.3);
+
+  // STEP 3 — Google sign-in once → Allow → YouTube connected in Claude
+  M.fly("gs", t, T.s3 + 0.2, { y: 80, s: 0.9 }, { f: 2.3, z: 0.62 }); const al = at("once") + 0.25; R.press("allow", t, al); M.ring("mgFx", t, al + 0.05, { x: ALLOW[0], y: ALLOW[1], r: 160, d: 0.55 });
+  if (t >= al + 0.3) $("gs").style.opacity = 1 - 0.65 * prog(t, al + 0.3, 0.3);
+  M.fly("conn", t, al + 0.35, { y: 60, s: 0.85 }, { f: 2.6, z: 0.5 }); F.sheen("conn", t, al + 0.7);
+  R.note("fn3", t, T.s3 + 0.6, T.s4 - 0.3);
+
+  // STEP 4 — the demo: one sentence → script → render → upload (tool chain), the upload lands with the impact stack
+  $("clw").style.transform = `scale(${lerp(1.22, 1.18, E.expoOut(prog(t, T.s4, 0.6)))})`;
+  U.claudePlay("cl", t, { text: "Make a Short from my latest reel", at: T.s4 + 0.15, cps: 40, toolDur: 0.6, wps: 30 });
+  [at("scripts it"), at("titles it"), at("uploads it")].forEach((a2, i) => M.fly($("tools").children[i], t, a2, { x: 80, s: 0.9 }, { f: 2.6, z: 0.6 }));
+  M.rays("s4svg", t, upl, { x: 540, y: 1150, r0: 200, len: 100, n: 16, d: 0.6 }); M.ring("mgFx", t, upl, { x: 540, y: 1150, r: 520, d: 0.85, sfx: true }); F.flash(t, upl, { max: 0.18, sfx: false });
+  R.note("fn4", t, T.s4 + 0.6, T.cat - 0.3);
+
+  // CATCH — Visibility: Private is forced (cool ring); I pick Public; quota meter fills to 6 uploads
+  const pubA = at("press publish") + 0.1; $("oPriv").classList.toggle("sel", t < pubA); $("oPub").classList.toggle("sel", t >= pubA);
+  M.ring("mgFx", t, at("private.") - 0.1, { x: PRIV[0], y: PRIV[1], r: 180, d: 0.6, cool: true }); R.press("oPub", t, pubA - 0.1); M.ring("mgFx", t, pubA, { x: PUB[0], y: PUB[1], r: 220, d: 0.65 });
+  M.fly("quota", t, at("six") - 0.3, { y: 60, s: 0.85 }, { f: 2.4, z: 0.55 }); const qn = Math.min(6, Math.floor(clamp((t - at("six") + 0.1) / 0.7) * 6.99));
+  [...$("qbar").children].forEach((q, i) => q.classList.toggle("on", i < qn)); $("qn").textContent = `≈ ${qn} uploads / day`;
+  R.note("fn5", t, T.cat + 0.5, T.cta - 0.3);
+
+  // CTA — comment YOUTUBE, packet path → the DM sent by 2il.in
+  [["r1", T.cta + 0.15], ["r2", T.cta + 0.3]].forEach(([id, a2]) => M.fly(id, t, a2, { x: -60, s: 0.9 }, { f: 2.4, z: 0.6 }));
+  const tyA = T.cta + 0.4, sent = tyA + 0.6, dmA = at("DM you");
+  if (t < sent) R.type("cty", "YOUTUBE", t, tyA, 14); else $("cty").textContent = "";
+  $("cph").style.display = (t < tyA || t >= sent) ? "" : "none"; R.press("snd", t, sent - 0.1); M.fly("r3", t, sent, { y: 40, s: 0.9 }, { f: 2.6, z: 0.55 });
+  if (t >= T.cta) { const ln = M.path("ctsvg", "ctln", M.curve(SND[0], SND[1], DMI[0], DMI[1], 0.6), "mg-line acc"); M.draw(ln, t, sent, Math.max(0.3, dmA + 0.1 - sent), { head: "ctHead", ease: "power2InOut", out: dmA + 0.4, outD: 0.35 }); }
+  R.sheet("dm", t, dmA + 0.1, { dy: -140, d: 0.5 }); M.ring("mgFx", t, dmA + 0.45, { x: DMI[0], y: DMI[1], r: 150, d: 0.6 });
+};
+window.seek(0);
+</script></body></html>

@@ -1,0 +1,367 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>SHORTS</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="ui.css"><link rel="stylesheet" href="mg.css">
+<style>
+/* ===== SHORTS: one continuous 3D world, a flying camera, solid objects ===== */
+#bgDeep{position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 42%,#2a1712 0%,#120c0b 55%,#070607 100%)}
+#bgRed{position:absolute;inset:0;background:radial-gradient(70% 55% at 50% 42%,#3a0f12 0%,#14070a 60%,#070405 100%);opacity:0}
+#w3root{z-index:3}
+.w3-face{box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+.pane{font-family:Inter;color:#E8EAEE}
+.mono{font-family:"JetBrains Mono",monospace}
+.hide0{opacity:0}
+/* hook */
+#yt .w3-front{display:grid;place-items:center}
+#yt .tri{width:0;height:0;border-left:78px solid #fff;border-top:48px solid transparent;border-bottom:48px solid transparent;margin-left:14px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+#sh3d{font:900 150px/1 Inter;letter-spacing:-6px}
+#free3d{font:900 86px/1 Inter;letter-spacing:-2px}
+.phone .w3-front{display:flex;flex-direction:column}
+.phone .scr{flex:1;margin:12px;border-radius:26px;background-size:cover;background-position:center;position:relative;overflow:hidden}
+.phone .tag{position:absolute;left:12px;top:12px;padding:6px 12px;border-radius:999px;font:900 18px Inter;letter-spacing:1px}
+.phone .lab{position:absolute;left:0;right:0;bottom:16px;text-align:center;font:900 26px Inter;color:#fff;text-shadow:0 2px 8px rgba(0,0,0,.7)}
+/* repo + app */
+#repo .w3-front{padding:26px 30px}
+#repo .url{font:700 28px "JetBrains Mono",monospace;color:#9aa0aa}
+#repo h1{margin:14px 0 6px;font:900 54px Inter;color:#fff;letter-spacing:-1px}
+#repo p{margin:0;font:600 26px/1.35 Inter;color:#b9bdc6}
+#repo .row{display:flex;gap:12px;margin-top:16px}#repo .row span{padding:8px 14px;border-radius:999px;background:#22252c;font:800 20px "JetBrains Mono",monospace;color:#E8EAEE}
+#app .w3-front{display:flex}
+#app .side{width:230px;background:#101216;border-right:1.5px solid #262930;padding:18px}
+#app .brand{display:flex;align-items:center;gap:10px;font:900 24px Inter;color:#fff}#app .brand i{width:34px;height:34px;border-radius:9px;background:#3ECF8E}
+#app .imp{margin-top:18px;height:52px;border-radius:12px;background:#3ECF8E;color:#06281a;display:grid;place-items:center;font:900 20px Inter}
+#app .proj{margin-top:14px;padding:10px 12px;border-radius:10px;border:1.5px solid #3ECF8E;font:700 17px "JetBrains Mono",monospace;color:#E8EAEE;opacity:0}
+#app .main{flex:1;padding:18px 20px}
+#app .tabs{display:flex;gap:10px}#app .tabs span{flex:1;height:40px;border-radius:10px;background:#1b3a2b;color:#9ae6bf;display:grid;place-items:center;font:800 17px Inter}
+#app .lines{margin-top:16px}#app .lines div{display:flex;gap:14px;padding:9px 0;font:600 19px Inter;color:#cfd3da;border-bottom:1px solid #22252c;opacity:0}#app .lines b{font:700 16px "JetBrains Mono",monospace;color:#7d838d;width:58px}
+#vid .w3-front{position:relative;overflow:hidden}
+.scn{position:absolute;inset:0;background:linear-gradient(160deg,#5b2a1c,#20120f 60%,#0e0a0a)}
+.scn .desk{position:absolute;left:0;right:0;bottom:0;height:22%;background:#2b1a14}
+.scn .p{position:absolute;bottom:18%;width:120px;height:210px}.scn .p .hd{width:80px;height:80px;border-radius:50%;background:#e8b48f;margin:0 auto}.scn .p .bd{margin-top:8px;height:120px;border-radius:50px 50px 10px 10px;background:#D97757}
+.scn .p.b .bd{background:#5a7bd9}
+.scn .mic{position:absolute;bottom:22%;width:10px;height:90px;background:#999;border-radius:4px}
+#vid .bar{position:absolute;left:0;right:0;bottom:0;height:40px;background:rgba(0,0,0,.55);display:flex;align-items:center;gap:12px;padding:0 14px;font:700 17px "JetBrains Mono",monospace;color:#fff}
+#vid .bar i{flex:1;height:5px;border-radius:3px;background:linear-gradient(90deg,#ff3b3b 4%,#444 4%)}
+/* transcript river */
+.tr .w3-front{display:flex;align-items:center;gap:16px;padding:0 24px;font:700 30px Inter;color:#d6d9df;white-space:nowrap}
+.tr .w3-front b{display:none;font:700 20px "JetBrains Mono",monospace;color:#7d838d}
+.tr.hot .w3-front{color:#fff}
+.tr .sc{margin-left:auto;padding:6px 14px;border-radius:999px;background:#D97757;color:#1a0e08;font:900 22px "JetBrains Mono",monospace;opacity:0}
+#spark{font-size:0}#spark .w3-front{display:grid;place-items:center}#spark .w3-front i{width:120px;height:120px;background:url(logos/claude.svg) center/contain no-repeat;filter:drop-shadow(0 0 22px rgba(217,119,87,.9))}
+#beam{width:24px;height:900px;background:linear-gradient(180deg,rgba(240,165,133,0),rgba(240,165,133,.55),rgba(240,165,133,0));filter:blur(6px)}
+#tl .w3-front{display:flex;align-items:flex-end;gap:5px;padding:10px 14px}#tl .w3-front i{flex:1;background:#3a3d46;border-radius:3px 3px 0 0}
+#tl .w3-front i.pk{background:#D97757;box-shadow:0 0 12px rgba(217,119,87,.8)}
+/* clips */
+.clip .w3-front{position:relative;overflow:hidden;border-radius:22px}
+.clip .crop{position:absolute;inset:0;overflow:hidden}
+.clip .crop .scn{left:50%;width:395%;transform:translateX(-50%)}
+.clip .cap{position:absolute;left:12px;right:12px;bottom:26px;text-align:center;font:900 34px/1.1 Inter;color:#fff;text-shadow:0 3px 0 #000,0 0 12px rgba(0,0,0,.6)}
+.clip .cap em{font-style:normal;color:#ffd166}
+.clip .no{position:absolute;left:12px;top:12px;padding:6px 12px;border-radius:999px;background:rgba(0,0,0,.6);font:900 18px "JetBrains Mono",monospace;color:#fff}
+.clip .yt{position:absolute;right:12px;top:12px;width:44px;height:30px;border-radius:8px;background:#ff0033;display:grid;place-items:center}.clip .yt:after{content:"";border-left:13px solid #fff;border-top:8px solid transparent;border-bottom:8px solid transparent;margin-left:3px}
+/* upload */
+#up .w3-front{padding:24px 28px}
+#up .h{display:flex;align-items:center;gap:14px;font:900 40px Inter;color:#fff}#up .h i{width:52px;height:36px;border-radius:9px;background:#ff0033;display:grid;place-items:center}#up .h i:after{content:"";border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent;margin-left:3px}
+#up .it{display:flex;align-items:center;gap:14px;margin-top:16px;padding:12px 14px;border-radius:14px;background:#1b1d23}
+#up .it .th{width:44px;height:78px;border-radius:8px;background:linear-gradient(160deg,#5b2a1c,#0e0a0a)}
+#up .it .nm{flex:1;font:700 27px Inter;color:#E8EAEE}#up .it .nm u{display:block;margin-top:10px;height:8px;border-radius:4px;background:#2a2d35;text-decoration:none;overflow:hidden}#up .it .nm u i{display:block;height:100%;width:0;background:#3ECF8E}
+#up .it .pv{padding:8px 14px;border-radius:999px;background:#2a2d35;font:800 26px Inter;color:#cfd3da;opacity:0}
+#up .pub{margin-top:18px;height:70px;border-radius:16px;background:#3a3d46;color:#9aa0aa;display:grid;place-items:center;font:900 38px Inter}
+#up .pub.on{background:#3ECF8E;color:#06281a;box-shadow:0 0 40px rgba(62,207,142,.5)}
+/* catch */
+#frame16 .w3-front{position:relative;overflow:hidden}
+#frame16 .scn{background:linear-gradient(160deg,#e9d5c6,#b98f7a 70%)}#frame16 .scn .desk{background:#6b4a3a}#frame16 .scn .p{transform:scale(1.35);transform-origin:bottom center}#frame16 .scn .p.a{left:14%}#frame16 .scn .p.b{left:66%}
+#crop .w3-front{background:transparent;border:6px solid #ff5a5a;box-shadow:0 0 0 2000px rgba(0,0,0,.45),0 0 30px rgba(255,90,90,.6)}
+#cut{font:900 30px Inter;color:#fff;background:#ff5a5a;padding:10px 18px;border-radius:999px;white-space:nowrap}
+.coin .w3-front{display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:24px;text-align:center}
+.coin b{font:900 40px "JetBrains Mono",monospace;color:#fff}.coin small{margin-top:6px;font:700 28px Inter;color:#cfd3da}
+#dlg .w3-front{padding:24px 26px}
+#dlg .t{font:900 38px Inter;color:#fff}#dlg p{margin:10px 0 0;font:600 28px/1.3 Inter;color:#cfd3da}
+#dlg .bt{display:flex;gap:12px;margin-top:18px}#dlg .bt span{flex:1;height:60px;border-radius:12px;display:grid;place-items:center;font:800 26px Inter;background:#2a2d35;color:#E8EAEE}#dlg .bt span.r{background:#ff5a5a;color:#fff}
+#rel .w3-front{padding:22px 26px;display:flex;align-items:center;gap:18px}
+#rel b{width:56px;height:56px;border-radius:50%;background:#3ECF8E;color:#06281a;display:grid;place-items:center;font:900 32px Inter;flex:none}
+#rel span{font:800 32px Inter;color:#fff}#rel small{display:block;font:700 28px "JetBrains Mono",monospace;color:#9aa0aa;margin-top:4px}
+/* CTA */
+#ig .w3-front{position:relative;overflow:hidden;border-radius:44px;background:#0b0b0d}
+#ig .scr{position:absolute;inset:14px;border-radius:32px;background:url(img/part1.jpg) center/cover;filter:brightness(.6)}
+#ig .cm{position:absolute;left:24px;right:24px;bottom:30px;height:80px;border-radius:999px;background:rgba(255,255,255,.95);display:flex;align-items:center;padding:0 22px;font:800 38px Inter;color:#16181d}
+#ig .cm .snd{margin-left:auto;width:46px;height:46px;border-radius:50%;background:#D97757;color:#1a0e08;display:grid;place-items:center;font:900 22px Inter}
+#dm2{position:absolute;left:90px;top:860px;width:740px;padding:22px 26px;border-radius:24px;background:#fff;box-shadow:0 30px 60px -22px rgba(0,0,0,.6);font:600 34px Inter;color:#16181d;opacity:0;display:flex;gap:18px;align-items:center;z-index:6}
+#dm2 .av{width:64px;height:64px;border-radius:50%;background:#1E4FD8 url(canwe-logo.svg) center/cover;flex:none}#dm2 b{display:block;font:800 32px "JetBrains Mono",monospace;color:#D97757;margin-bottom:4px}
+.fn2{position:absolute;left:50%;top:1176px;transform:translateX(-50%);max-width:660px;padding:6px 16px;border-radius:18px;background:rgba(20,16,15,.82);border:1px solid rgba(255,255,255,.08);font:600 26px "JetBrains Mono",monospace;color:#cfc8c2;text-align:center;z-index:9;opacity:0}
+#flash{position:absolute;inset:0;background:#fff;opacity:0;z-index:20;pointer-events:none}
+#grain{position:absolute;inset:0;z-index:5;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='160' height='160' filter='url(%23n)'/></svg>")}
+#vig2{position:absolute;inset:0;z-index:4;pointer-events:none;background:radial-gradient(75% 60% at 50% 45%,transparent 55%,rgba(0,0,0,.55) 100%)}
+body.red #rail .fill,body.red #rail .ch.done i,body.red #rail .ch.on i{background:#ff5a5a;border-color:#ff5a5a}
+.ft{position:absolute;inset:0;background-size:cover;background-position:center;background-color:#111}
+.fs .w3-front{position:relative;overflow:hidden;outline:3px solid #2a2d35;outline-offset:-3px}
+.fs .tcx{position:absolute;left:10px;bottom:10px;padding:4px 10px;border-radius:8px;background:rgba(0,0,0,.65);font:800 20px "JetBrains Mono",monospace;color:#fff}
+.fs .sc{position:absolute;right:10px;top:10px;padding:6px 14px;border-radius:999px;background:#D97757;color:#1a0e08;font:900 30px "JetBrains Mono",monospace;opacity:0}
+.fs.hot .w3-front{outline:5px solid #D97757;box-shadow:0 0 50px rgba(217,119,87,.75)}
+.chip .w3-front{display:flex;align-items:center;gap:8px;padding:0 14px}.chip b{font:800 18px "JetBrains Mono",monospace;color:#D97757}.chip i{height:10px;border-radius:5px;background:#cfd3da}
+.sl .w3-front{position:relative;overflow:hidden}.sl .ft{background-size:720px 405px}
+#sliceC.vert .w3-front{border-radius:20px;outline:4px solid #fff;outline-offset:-4px}
+#sliceC .cap2{position:absolute;left:8px;right:8px;bottom:22px;text-align:center;font:900 26px/1.1 Inter;color:#fff;text-shadow:0 3px 0 #000,0 0 14px rgba(0,0,0,.8)}
+#sliceC .cap2 span{display:inline-block;margin:0 4px}#sliceC .cap2 span.k{color:#ffd166}
+#sliceC .yt2{position:absolute;right:10px;top:10px;width:44px;height:30px;border-radius:8px;background:#ff0033;opacity:0}
+.blade{width:10px;height:440px;position:relative}.blade i{position:absolute;inset:0;border-radius:5px;background:linear-gradient(#fff,#ffe1d4);box-shadow:0 0 24px #fff,0 0 70px #D97757;transform-origin:top center}
+</style></head>
+<body class="look"><div id="stage">
+  <div id="bgDeep"></div><div id="bgRed"></div>
+  <div id="w3root"></div>
+
+  <!-- ===== 3D objects (moved into the world by W3.obj) ===== -->
+  <div id="yt"><div class="tri"></div></div>
+  <div id="sh3d"></div>
+  <div id="free3d"></div>
+  <div class="phone" id="ph1"><div class="scr" style="background-image:url(img/part1.jpg)"><span class="tag" style="background:#F3F1EC;color:#16181d">PART 1</span></div></div>
+  <div class="phone" id="ph2"><div class="scr" style="background:linear-gradient(160deg,#D97757,#5b2a1c)"><span class="tag" style="background:#16181d;color:#F0A585">PART 2</span><div class="lab">Shorts ⚡</div></div></div>
+
+  <div id="repo"><div class="url">github.com/JayWebtech/autoshorts</div><h1>AutoShorts</h1><p>Long video in → AI ranks the viral moments → vertical 9:16 clips out. Free, local-first.</p><div class="row" data-qa="texture"><span>⭐ 1,494</span><span>Tauri · Rust</span><span>Claude · DeepSeek</span></div></div>
+  <div id="app"><div class="side" data-qa="texture"><div class="brand"><i></i>AutoShorts</div><div class="imp">⬆ Import recording</div><div class="proj" id="proj">▶ canwe_podcast_ep12.mp4</div></div>
+    <div class="main"><div class="tabs" data-qa="texture"><span>Transcript</span><span>Moments</span><span>Cut</span><span>Captions</span></div>
+      <div class="lines" id="alines" data-qa="texture"><div><b>0:05</b>I automated my YouTube with Claude.</div><div><b>0:10</b>Wait. The whole channel?</div><div><b>0:14</b>Every upload. I still press publish.</div><div><b>0:24</b>The first three seconds decide everything.</div></div></div></div>
+  <div id="vid"><div class="ft" id="vidft"></div><div class="bar" data-qa="texture">▶ <span id="vidname"></span> <i></i> <span id="vidlen"></span></div></div>
+
+  <div id="spark"></div><div id="beam"></div>
+
+  <div class="clip" data-qa="texture" id="c0"></div><div class="clip" data-qa="texture" id="c1"></div><div class="clip" data-qa="texture" id="c2"></div><div class="clip" data-qa="texture" id="c3"></div><div class="clip" data-qa="texture" id="c4"></div>
+
+  <div id="up"><div class="h"><i></i>Uploads</div>
+    <div class="it"><div class="th"></div><div class="nm">Short #1 · I automated my YouTube<u><i id="u0"></i></u></div><span class="pv" id="v0" data-qa="texture">🔒 Private</span></div>
+    <div class="it"><div class="th"></div><div class="nm">Short #2 · The whole channel?<u><i id="u1"></i></u></div><span class="pv" id="v1">🔒 Private</span></div>
+    <div class="it"><div class="th"></div><div class="nm">Short #3 · The first three seconds<u><i id="u2"></i></u></div><span class="pv" id="v2">🔒 Private</span></div>
+    <div class="pub" id="pub">Publish</div></div>
+
+  <div id="frame16"><div class="ft" id="duoft"></div></div>
+  <div id="crop"></div><div id="cut">✂ centre crop cuts you off</div>
+  <div class="coin" id="k1"><b>$0.01–0.05</b><small>with Claude</small></div>
+  <div class="coin" id="k2"><b>&lt; $0.001</b><small>with DeepSeek</small></div>
+  <div id="dlg"><div class="t">⚠ Unsigned app</div><p>“AutoShorts” is from an unidentified developer. The README tells you to bypass this warning.</p><div class="bt" data-qa="texture"><span>Cancel</span><span class="r">Open anyway</span></div></div>
+  <div id="rel"><b>✓</b><div><span>Only from the repo's Releases page</span><small>…/autoshorts/releases</small></div></div>
+
+  <div id="ig"><div class="scr"></div><div class="cm"><span id="cmt"></span><span id="cmph" style="color:#9aa0aa;font-weight:600">Add a comment…</span><div class="snd" id="snd">↑</div></div></div>
+
+  <!-- ===== 2D overlay ===== -->
+  <div id="dm2"><div class="av"></div><div><b>@canwe.ai</b>The free setup, every step + settings 👇</div></div>
+  <div class="fn2" id="fn" data-qa="ok"></div>
+  <div class="mg-layer" id="mgFx" style="position:absolute;inset:0;pointer-events:none;z-index:6"></div>
+  <div id="vig2"></div><div id="grain"></div><div id="flash"></div>
+  <div id="rail" data-qa="texture"></div>
+  <div id="kin"></div>
+  <div id="avatar"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="ui.js"></script><script src="mg.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="emph.js"></script><script src="world3d.js"></script><script src="foot/manifest.js"></script><script src="foot.js"></script>
+<script>
+const R = Reel, { at, prog, lerp, clamp, $ } = R, E = R.ease, F = R.fx, M = R.mg, Z = W3.ease;
+const T = { now: at("Now"), s1: at("Step one."), drop: at("I drop"), s2: at("Step two."), claude: at("Claude reads"), picks: at("picks"), s3: at("Step three."), stack: at("stack"),
+            up: at("And my"), upl: at("uploads"), priv: at("private."), pub: at("publish."), cat: at("But here's"), crop: at("crops"), api: at("Good results"), inst: at("And its"), rel: at("Releases"),
+            cta: at("Comment"), end: R.voiceEnd() };
+window.REEL_DURATION = +(T.end + 1.6).toFixed(2);
+const hash = i => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+const invInOut = y => { let lo = 0, hi = 1; for (let k = 0; k < 24; k++) { const m = (lo + hi) / 2; if (Z.inOut(m) < y) lo = m; else hi = m; } return (lo + hi) / 2; };
+const sp = (t, a, o) => M.spring(t, a, o || { f: 2.4, z: 0.6 });
+
+// ---------- build the world ----------
+W3.init("w3root", { persp: 1100, origin: [540, 930] });
+// W3.floor({ y: 470, z: -1500, x: 7000, size: 20000 });
+W3.dust(90, { spread: [16000, 1600, 3200], center: [7200, -100, -900] });
+// hook
+W3.box("yt", { w: 300, h: 210, d: 70, r: 46, face: "linear-gradient(160deg,#ff3b4f,#d6001c)", side: "#8a0012" });
+const O = {};
+O.yt = W3.obj("yt", { x: 0, y: -170, z: 0 });
+W3.extrude("sh3d", "Shorts", { depth: 46, layers: 16, front: "#F3F1EC", side: "#a7543a" }); O.sh = W3.obj("sh3d", { x: 0, y: 70, z: 40 });
+W3.extrude("free3d", "FREE", { depth: 30, layers: 12, front: "#F0A585", side: "#7a3a26" }); O.free = W3.obj("free3d", { x: 250, y: -300, z: 160, rz: -10 });
+W3.box("ph1", { w: 200, h: 356, d: 18, r: 30, face: "#0b0b0d", side: "#1a1b20" }); O.ph1 = W3.obj("ph1", { x: -360, y: 40, z: -180, ry: 22 });
+W3.box("ph2", { w: 200, h: 356, d: 18, r: 30, face: "#0b0b0d", side: "#1a1b20" }); O.ph2 = W3.obj("ph2", { x: 360, y: 40, z: -180, ry: -22 });
+// step 1: repo + app + the long video
+W3.box("repo", { w: 700, h: 300, d: 16, r: 22, face: "#15171c", side: "#0b0c0f" }); O.repo = W3.obj("repo", { x: 2400, y: -260, z: -700 });
+W3.box("app", { w: 760, h: 450, d: 30, r: 22, face: "#16181d", side: "#0b0c0f" }); O.app = W3.obj("app", { x: 2400, y: 150, z: -760, rx: 8 });
+W3.box("vid", { w: 640, h: 360, d: 26, r: 18, face: "#0e0a0a", side: "#0a0a0c" }); O.vid = W3.obj("vid", { x: 2400, y: -700, z: -400 });
+// step 2: the long video becomes a film strip on the floor; Claude's light scans it; 4 moments lift out
+const ST = $("stage"), mk = (id, cls) => { const d = document.createElement("div"); d.id = id; d.className = cls || ""; d.dataset.qa = "texture"; ST.appendChild(d); return d; };
+const FSY = -170, PICK = [5, 7, 9, 11], SCORE = [92, 88, 95, 81];
+const LEN = (FOOT.meta.length || "50:07").split(":").map(Number), LENS = LEN.length === 3 ? LEN[0] * 3600 + LEN[1] * 60 + LEN[2] : LEN[0] * 60 + LEN[1];
+const tc = s => { s = Math.round(s); const h = Math.floor(s / 3600), m = Math.floor(s / 60) % 60, x = s % 60; return (h ? h + ":" + String(m).padStart(2, "0") : m) + ":" + String(x).padStart(2, "0"); };
+O.fs = []; for (let i = 0; i < 14; i++) { const d = mk("fs" + i, "fs"), k = PICK.indexOf(i);
+  const f = W3.box(d, { w: 384, h: 216, d: 10, r: 10, face: "#000", side: "#15161b" });
+  f.innerHTML = `<div class="ft" style="background-image:url(${k >= 0 ? FOOT.still("m" + (k < 2 ? k : k + 1), 0) : FOOT.still("strip", i)})"></div><span class="tcx">${tc(LENS * (i + 0.5) / 14)}</span>` + (k >= 0 ? `<span class="sc">${SCORE[k]}</span>` : "");
+  O.fs.push(W3.obj(d, { x: 4800 + (i - 3) * 330, y: FSY, z: -900, ry: -14 })); }
+O.chip = []; for (let i = 0; i < 10; i++) { const d = mk("ch" + i, "chip"), f = W3.box(d, { w: 300, h: 50, d: 6, r: 25, face: "rgba(20,22,28,.94)", side: "#0b0c0f" });
+  f.innerHTML = `<b>${tc(LENS * (i + 0.3) / 14)}</b>` + [0, 1, 2, 3].map(j => `<i style="width:${18 + 30 * hash(i * 7 + j)}px"></i>`).join("");
+  O.chip.push(W3.obj(d, { x: 4800 + (i % 2 ? 150 : -150), y: FSY - 60, z: -880 })); }
+W3.box("spark", { w: 150, h: 150, d: 8, r: 40, face: "#F3F1EC", side: "#c9c3ba" }); O.spark = W3.obj("spark", { x: 4800, y: -200, z: -900 });
+O.beam = W3.obj("beam", { x: 4800, y: 0, z: -900, dof: false });
+// step 3a: the best moment (16:9) gets two blade cuts; the sides fall away; the centre becomes a vertical Short with captions
+O.sl = ["L", "C", "R"].map((n, i) => { const d = mk("slice" + n, "sl"), w = i === 1 ? 228 : 246, off = [0, 246, 474][i];
+  const f = W3.box(d, { w, h: 405, d: 12, r: 0, face: "#000", side: "#15161b" });
+  f.innerHTML = `<div class="ft" style="background-position:-${off}px 0"></div>` + (i === 1 ? `<span class="yt2"></span><div class="cap2"></div>` : "");
+  return W3.obj(d, { x: 7200 + [-237, 0, 237][i], y: -60, z: -600, dof: i === 1 ? false : true }); });
+O.bl = [0, 1].map(i => { const d = mk("blade" + i, "blade"); d.innerHTML = "<i></i>"; return W3.obj(d, { x: 7200 + (i ? 114 : -114), y: -60, z: -585, dof: false }); });
+const CAPW = ((FOOT.meta.caps && FOOT.meta.caps[2]) || ["Captions", "burn", "in", "here"]).map(w => w.replace(/<\/?em>/g, ""));
+$("sliceC").querySelector(".cap2").innerHTML = CAPW.map((w, j) => `<span class="${j === CAPW.length - 1 ? "k" : ""}">${w}</span>`).join("");
+// step 3: five clip cards (centre crops of the same scene + captions)
+const CAP = ["Here's what <em>nobody</em> tells you", "One Short <em>changed everything</em>", "The <em>first 3 seconds</em>", "It <em>surprised</em> me", "Back to the <em>question</em>"];
+const BG = ["#5b2a1c", "#1c3a5b", "#3a1c5b", "#1c5b3a", "#5b4a1c"];
+O.c = []; for (let i = 0; i < 5; i++) { const f = W3.box("c" + i, { w: 230, h: 408, d: 14, r: 22, face: "#0e0a0a", side: "#15161b" });
+  f.innerHTML = `<div class="ft"></div><span class="no">#${i + 1}</span><span class="yt"></span><div class="cap">${i === 2 ? CAPW.join(" ") : (FOOT.meta.caps && FOOT.meta.caps[i]) ? FOOT.meta.caps[i].join(" ") : CAP[i]}</div>`;
+  O.c.push(W3.obj("c" + i, { x: 7200 + (i - 2) * 260, y: 380, z: -600, rx: 90 })); }
+// upload
+W3.box("up", { w: 680, h: 600, d: 22, r: 24, face: "#121318", side: "#0a0a0c" }); O.up = W3.obj("up", { x: 9600, y: 0, z: -500 });
+// catch
+W3.box("frame16", { w: 760, h: 428, d: 20, r: 16, face: "#0e0a0a", side: "#0a0a0c" }); O.f16 = W3.obj("frame16", { x: 12000, y: -40, z: -500 });
+W3.box("crop", { w: 241, h: 428, d: 2, face: "transparent", side: "transparent" }); O.crop = W3.obj("crop", { x: 12000 - 260, y: -40, z: -470, dof: false });
+O.cut = W3.obj("cut", { x: 12000, y: -215, z: -430 });
+W3.box("k1", { w: 300, h: 190, d: 40, r: 26, face: "linear-gradient(160deg,#D97757,#7a3a26)", side: "#5a2a1b" }); O.k1 = W3.obj("k1", { x: 12000 - 165, y: -40, z: -420, dof: false });
+W3.box("k2", { w: 300, h: 190, d: 40, r: 26, face: "linear-gradient(160deg,#3a3d46,#1d1f25)", side: "#121318" }); O.k2 = W3.obj("k2", { x: 12000 + 165, y: -40, z: -420, dof: false });
+W3.box("dlg", { w: 640, h: 300, d: 20, r: 22, face: "#1d1f25", side: "#0b0c0f" }); O.dlg = W3.obj("dlg", { x: 12000, y: -120, z: -440 });
+W3.box("rel", { w: 660, h: 130, d: 16, r: 22, face: "#122a1f", side: "#0b1510" }); O.rel = W3.obj("rel", { x: 12000, y: 200, z: -400 });
+// CTA
+W3.box("ig", { w: 400, h: 580, d: 22, r: 44, face: "#0b0b0d", side: "#1a1b20" }); O.ig = W3.obj("ig", { x: 14400, y: -60, z: -300 });
+document.querySelectorAll("#up .th").forEach((e, i) => e.style.background = `url(${FOOT.still("m" + [0, 1, 3][i], 0)}) center/cover`);
+const SH = [O.yt, O.app, O.up, O.ig].map(o => W3.shadow(o, { y: 470, a: 0.5 }));
+
+// ---------- the camera path (one continuous take; it flies between stations) ----------
+const CAM = [
+  { t: -0.5, x: 0, y: -40, z: 1500, ry: 0, rx: 0 },
+  { t: 1.6, x: 0, y: -40, z: 1050, ry: -6, ease: "out" },
+  { t: T.now + 0.1, x: 60, y: -40, z: 1240, ry: 4 },
+  { t: T.s1 - 0.1, x: 0, y: -40, z: 1180, ry: 0 },
+  { t: T.s1 + 0.55, x: 2400, y: -60, z: 520, ry: -2, ease: "expoInOut" },                     // fly to the repo
+  { t: T.drop + 0.2, x: 2420, y: -20, z: 440, ry: -1 },
+  { t: T.s2 - 0.1, x: 2400, y: 40, z: 300, ry: 2, rx: -6 },
+  { t: T.s2 + 0.6, x: 4800, y: -60, z: 350, ry: 0, rx: -8, ease: "expoInOut", focus: 900 },   // over the film strip
+  { t: T.picks - 0.05, x: 4800, y: -60, z: 250, ry: -3, rx: -8, focus: 1300, ease: "inOut" }, // the long video scrolls under Claude
+  { t: T.picks + 0.7, x: 4800, y: -150, z: 330, ry: 0, rx: 0, focus: 1000 },                 // 4 moments lift out
+  { t: T.s3 - 0.1, x: 4800, y: -150, z: 360, ry: 0, rx: 0, focus: 1000 },
+  { t: T.s3 + 0.6, x: 7200, y: 60, z: 470, ry: 0, rx: 0, ease: "expoInOut" },                // the best moment, 16:9
+  { t: at("vertical") + 0.25, x: 7200, y: 40, z: 450, ry: 0 },
+  { t: at("captions.") + 0.15, x: 7200, y: 30, z: 170, ry: -3, ease: "inOut" },              // push into the new Short
+  { t: at("A whole") - 0.05, x: 7200, y: 30, z: 200, ry: -2 },
+  { t: T.stack - 0.15, x: 7220, y: 60, z: 400, ry: 4, ease: "inOut" },
+  { t: T.up - 0.1, x: 7200, y: 40, z: 440, ry: -2 },
+  { t: T.up + 0.6, x: 9600, y: -40, z: 620, ry: 0, ease: "expoInOut" },                      // to the uploads
+  { t: T.pub + 0.4, x: 9610, y: 0, z: 480, ry: -1 },
+  { t: T.cat - 0.05, x: 9600, y: 0, z: 520, ry: 0 },
+  { t: T.cat + 0.5, x: 12000, y: -40, z: 600, ry: 0, ease: "expoInOut" },                    // the catch (red)
+  { t: T.api - 0.2, x: 12000, y: -40, z: 480, ry: 0 },
+  { t: T.inst + 0.2, x: 12000, y: -40, z: 560, ry: -4 },
+  { t: T.cta - 0.1, x: 12000, y: -20, z: 600, ry: 0 },
+  { t: T.cta + 0.6, x: 14400, y: -20, z: 760, ry: 0, ease: "expoInOut" },                    // CTA phone
+  { t: T.end + 2, x: 14400, y: -20, z: 640, ry: -4 },
+];
+
+R.setup({ push: 0, scenes: [] });
+R.speedy({
+  emph: window.EMPH,
+  chapters: [{ label: "step 1", at: T.s1 }, { label: "step 2", at: T.s2 }, { label: "step 3", at: T.s3 }, { label: "upload", at: T.up }, { label: "catch", at: T.cat, end: T.cta }],
+  counter: { unit: "", steps: [[at("AutoShorts."), 1494, "★ GitHub stars"], [T.drop, 1, "long video in"], [T.claude, 4, "moments picked"], [T.stack, 5, "sample Shorts"], [T.priv, 0, "public till you press"], [T.cat, 3, "catches"]] },
+  avatar: { x: 290, y: 1395, w: 500, in: -0.4, look: "street", style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" } },
+  poses: [[T.stack - 0.1, "big"], [at("isn't") - 0.1, "cross"], [T.api - 0.1, "shrug"]],
+  autoPoses: { gap: 0.9, minGap: 0.5, maxComedy: 3 },
+});
+
+window.seek = t => {
+  R.frame(t);
+  R.speedyFrame(t);
+  const red = t >= T.cat && t < T.cta; document.body.classList.toggle("red", red);
+  $("bgRed").style.opacity = t < T.cat - 0.2 ? 0 : t < T.cta ? E.inOut(prog(t, T.cat - 0.2, 0.5)) : 1 - prog(t, T.cta - 0.1, 0.5);
+
+  // ===== HOOK: YouTube block spins in, 3D "Shorts" rises, PART 1 / PART 2 phones, FREE slams =====
+  { const a = sp(t, -0.5, { f: 2.6, z: 0.62 });
+    W3.set(O.yt, { ry: lerp(-150, 0, a) + 8 * Math.sin(t * 0.9), rx: 10 * Math.sin(t * 0.7), s: lerp(0.4, 1, a) });
+    const s1 = sp(t, at("Shorts") - 0.1, { f: 2, z: 0.6 }); W3.set(O.sh, { y: lerp(420, 70, s1), rx: lerp(-60, 8, s1) + 4 * Math.sin(t * 0.8), ry: -8 * Math.sin(t * 0.5) });
+    O.sh.el.style.opacity = t >= at("Shorts") - 0.1 ? 1 : 0;
+    const pa = sp(t, T.now - 0.05), pb = sp(t, T.now + 0.25);
+    W3.set(O.ph1, { x: lerp(-900, -360, pa), ry: lerp(70, 22, pa) }); O.ph1.el.style.opacity = t >= T.now - 0.05 ? 1 : 0;
+    W3.set(O.ph2, { x: lerp(900, 360, pb), ry: lerp(-70, -22, pb), s: 1 + 0.04 * Math.sin(t * 6) * (t > T.now + 0.6 ? 1 : 0) }); O.ph2.el.style.opacity = t >= T.now + 0.25 ? 1 : 0;
+    const fa = at("free") - 0.05, fp = prog(t, fa, 0.28); W3.set(O.free, { z: lerp(900, 160, Z.out(fp)), rz: lerp(-40, -10, Z.out(fp)) }); O.free.el.style.opacity = t >= fa ? 1 : 0;
+    R.cue("impact", fa + 0.28); F.burst("mgFx", t, fa + 0.28, { n: 0, sfx: false }); }
+
+  // ===== STEP 1: repo card flips up, the long video drops INTO the app =====
+  { const ra = sp(t, T.s1 + 0.2); W3.set(O.repo, { rx: lerp(-90, 0, ra), y: lerp(-420, -260, ra) }); O.repo.el.style.opacity = t >= T.s1 + 0.2 ? 1 : 0;
+    const aa = sp(t, at("AutoShorts.") + 0.1); W3.set(O.app, { y: lerp(500, 150, aa), rx: lerp(50, 8, aa) }); O.app.el.style.opacity = t >= at("AutoShorts.") + 0.1 ? 1 : 0;
+    const v0 = T.drop - 0.25, vin = sp(t, v0, { f: 2.2, z: 0.7 }), fall = Z.in(prog(t, at("video.") - 0.05, 0.45));
+    W3.set(O.vid, { y: lerp(-760, -420, vin) + fall * 520, z: lerp(-400, -400, 1) + fall * -300, rx: fall * 70, s: lerp(1, 0.25, fall) });
+    O.vid.el.style.opacity = t < v0 ? 0 : 1 - prog(t, at("video.") + 0.35, 0.1); if (t >= v0 - 0.1 && t < at("video.") + 0.5) FOOT.paint("vidft", "wide", t - v0);
+    $("vidname").textContent = FOOT.meta.title || "long_episode.mp4"; $("vidlen").textContent = FOOT.meta.length || "50:07";
+    $("proj").style.opacity = t >= at("video.") + 0.35 ? 1 : 0; R.cue("land", at("video.") + 0.4); R.cue("whoosh", at("video.") - 0.05);
+    [...$("alines").children].forEach((d, i) => { const a = at("That's") + i * 0.12; d.style.opacity = t >= a ? 1 : 0; R.cue("tick", a); });
+    F.flash(t, at("video.") + 0.4, { max: 0.07, d: 0.18, sfx: false }); }
+
+  // ===== STEP 2: the long video runs like an editor timeline under Claude's playhead; every word pops out as a transcript chip; the best moments light up, then lift out =====
+  { const scr = 2700 * Z.inOut(prog(t, T.s2 + 0.35, T.picks - T.s2 - 0.2)), cx = 4800;
+    O.fs.forEach((o, i) => { const a = T.s2 + 0.1 + i * 0.04, p = sp(t, a, { f: 2.6, z: 0.6 }), k = PICK.indexOf(i);
+      let x = cx + (i - 3) * 330 - scr, y = lerp(FSY + 500, FSY, p), z = -900, ry = -14, rx = 0, s1 = 1;
+      if (k >= 0) { const ha = T.s2 + 0.35 + (T.picks - T.s2 - 0.2) * Math.min(1, Math.max(0, invInOut(((i - 3) * 330) / 2700))), la = T.picks + 0.05 + k * 0.1, lp = sp(t, la, { f: 2.0, z: 0.66 });
+        const hot = t >= ha; o.el.classList.toggle("hot", hot); o.el.querySelector(".sc").style.opacity = hot ? 1 : 0; R.cue("pop", ha);
+        if (hot) { const b = sp(t, ha, { f: 3, z: 0.4 }); y -= 40 * Math.sin(Math.min(1, b) * Math.PI); }
+        const gx = cx + (k % 2 ? 205 : -205), gy = -330 + Math.floor(k / 2) * 245, gz = -650;
+        x = lerp(x, gx, lp); y = lerp(y, gy, lp); z = lerp(z, gz, lp); ry = lerp(ry, 0, lp);
+        if (hot) FOOT.paint(o.el.querySelector(".ft"), "m" + (k < 2 ? k : k + 1), t - ha); R.cue("whoosh", la, { soft: true }); }
+      W3.set(o, { x, y, z, rx, ry, s: s1 }); o.el.style.opacity = t >= a ? (k < 0 && t > T.picks ? 1 - prog(t, T.picks, 0.35) : 1) : 0; });
+    O.chip.forEach((o, i) => { const a = at("writes") + i * 0.16, p = prog(t, a, 1.0); W3.set(o, { x: cx + (i % 2 ? 70 : -70) - 300 * p, y: lerp(FSY - 60, FSY - 300, Z.out(p)), z: -860, rz: (i % 2 ? 5 : -5) * p });
+      o.el.style.opacity = t >= a && p < 1 ? Math.min(1, p * 6) * (1 - prog(t, a + 0.7, 0.3)) : 0; R.cue("tick", a); });
+    const ca = T.claude - 0.15; W3.set(O.spark, { x: cx, y: FSY - 260 + 10 * Math.sin(t * 5), z: -880, ry: t * 140 % 360 });
+    O.spark.el.style.opacity = t >= ca && t < T.picks + 0.2 ? 1 : 0; W3.set(O.beam, { x: cx, y: FSY - 120, z: -890 }); O.beam.el.style.opacity = t >= ca && t < T.picks ? 0.9 : 0;
+    R.cue("riser", ca, { t2: ca + 1.2 }); R.cue("type", at("writes"), { t2: at("writes") + 1.2 }); R.cue("whoosh", ca); }
+
+  // ===== STEP 3: two blade cuts turn the 16:9 moment into a 9:16 Short; captions burn in; the rest of the Shorts fan in and stack =====
+  { const inA = T.s3 + 0.2, cutA = Math.max(at("cuts"), T.s3 + 0.75), fallA = cutA + 0.42, vA = at("vertical"), capA = at("captions.") - 0.3, hand = at("A whole") - 0.1;
+    O.sl.forEach((o, i) => { const p = sp(t, inA, { f: 2.4, z: 0.65 }); let x = 7200 + [-237, 0, 237][i], y = lerp(330, -60, p), z = -600, rx = lerp(85, 0, p), rz = 0, ry = 0, sc = 1;
+      if (i !== 1) { const g = Math.max(0, t - fallA), dir = i ? 1 : -1; y += 1500 * g * g; x += dir * 260 * g; rz = dir * 70 * g; rx += 50 * g; z -= 120 * g; }
+      else { const v = sp(t, vA - 0.05, { f: 2.2, z: 0.6 }); sc = lerp(1, 1.08, v); ry = 8 * Math.sin(Math.min(1, v) * Math.PI); z = lerp(-600, -560, v);
+        o.el.classList.toggle("vert", t >= vA - 0.05); }
+      W3.set(o, { x, y, z, rx, ry, rz, s: sc }); const live = t >= inA && (i === 1 ? t < hand + 0.05 : t < fallA + 0.9);
+      o.el.style.opacity = live ? (i === 1 ? 1 : 1 - prog(t, fallA + 0.45, 0.4)) : 0;
+      if (live) FOOT.paint(o.el.querySelector(".ft"), "m2", t - inA); });
+    O.bl.forEach((o, i) => { const a = cutA + i * 0.11, p = Z.out(prog(t, a, 0.2)); o.el.firstChild.style.transform = `scaleY(${p.toFixed(3)})`;
+      o.el.style.opacity = t >= a && t < fallA + 0.25 ? 1 - prog(t, fallA, 0.25) : 0; R.cue("swish", a); });
+    F.flash(t, cutA + 0.24, { max: 0.16, d: 0.16, sfx: false }); R.cue("impact", cutA + 0.24); R.cue("whoosh", fallA);
+    const capEl = $("sliceC").querySelector(".cap2"); [...capEl.children].forEach((w, j) => { const a = capA + j * 0.14, p = sp(t, a, { f: 3, z: 0.5 });
+      w.style.opacity = t >= a ? 1 : 0; w.style.transform = `scale(${lerp(1.6, 1, Math.min(1.2, p)).toFixed(3)})`; R.cue("pop", a); });
+    $("sliceC").querySelector(".yt2").style.opacity = t >= vA + 0.2 ? 1 : 0;
+    const ra = hand, st = T.stack - 0.02;
+    O.c.forEach((o, i) => { const a = ra + (i === 2 ? 0 : [0, 0.05, 0, 0.1, 0.15][i]), p = sp(t, a, { f: 2.6, z: 0.66 }), sp2 = Z.inOut(prog(t, st + i * 0.05, 0.55));
+      const from = { x: 7200 + (i - 2) * 900, y: -60 + (i % 2 ? 500 : -500), z: -300 }, arc = { x: 7200 + (i - 2) * 200, y: -60, z: -600 - Math.abs(i - 2) * 120, ry: -(i - 2) * 14 };
+      const x = i === 2 ? 7200 : lerp(from.x, arc.x, p), y = i === 2 ? -60 : lerp(from.y, arc.y, p), z = i === 2 ? -560 : lerp(from.z, arc.z, p), ry = i === 2 ? 0 : lerp(-(i - 2) * 50, arc.ry, p);
+      W3.set(o, { x: lerp(x, 7200 + (i - 2) * 6, sp2), y: lerp(y, -60 - i * 6, sp2), z: lerp(z, -560 + i * 22, sp2), ry: lerp(ry, -6 + i * 3, sp2), rx: sp2 * 4, rz: sp2 * (i - 2) * 2.5, s: i === 2 ? 1.08 : 1 });
+      const on = t >= a; o.el.style.opacity = on ? 1 : 0; if (on) FOOT.paint(o.el.querySelector(".ft"), "m" + i, t - a + (i === 2 ? t - inA - (t - a) : 0)); if (i !== 2) R.cue("land", a + 0.3, { soft: true }); });
+    R.cue("impact", st + 0.5); R.cue("bigwhoosh", ra); }
+
+  // ===== UPLOAD: three Shorts upload as PRIVATE, then I press Publish =====
+  { const ua = T.upl - 0.1; W3.set(O.up, { ry: lerp(-70, 0, sp(t, T.up + 0.25)) }); O.up.el.style.opacity = t >= T.up + 0.25 ? 1 : 0;
+    [0, 1, 2].forEach(i => { const a = ua + i * 0.22; $("u" + i).style.width = (Z.out(prog(t, a, 0.9)) * 100) + "%"; const pv = T.priv - 0.15 + i * 0.12; $("v" + i).style.opacity = t >= pv ? 1 : 0; R.cue("tick", pv); });
+    const pb = at("press") + 0.15; $("pub").classList.toggle("on", t >= pb); R.cue("click", pb); F.flash(t, pb, { max: 0.12, d: 0.2, sfx: false }); }
+
+  // ===== CATCH: the centre crop cuts the speaker; the cost; the unsigned installer =====
+  { const vis = (a, b) => t >= a && t < b; if (t >= T.cat && t < T.api) FOOT.paint("duoft", "duo", t - T.cat);
+    const fA = T.cat + 0.3, fB = T.api - 0.15; O.f16.el.style.opacity = vis(fA, fB) ? 1 : 0; O.crop.el.style.opacity = vis(T.crop - 0.1, fB) ? 1 : 0; O.cut.el.style.opacity = vis(at("centre,") + 0.3, fB) ? 1 : 0;
+    W3.set(O.f16, { rx: lerp(40, 0, sp(t, fA)) });
+    W3.set(O.crop, { x: lerp(12000 - 230, 12000, Z.inOut(prog(t, T.crop + 0.1, 0.5))) }); R.cue("swish", T.crop + 0.1);
+    W3.set(O.cut, { y: lerp(-300, -215, sp(t, at("centre,") + 0.3)) });
+    const kA = T.api - 0.1, kB = T.inst - 0.15; [O.k1, O.k2].forEach((o, i) => { const a = kA + 0.15 + i * 0.25, p = sp(t, a, { f: 2.4, z: 0.55 }); W3.set(o, { ry: lerp(180, 0, p) + 6 * Math.sin(t * 2 + i), y: lerp(-200, -40, p) }); o.el.style.opacity = vis(a, kB) ? 1 : 0; R.cue("pop", a); });
+    const dA = T.inst - 0.05, dB = T.rel - 0.25; W3.set(O.dlg, { rx: lerp(-80, 0, sp(t, dA)) }); O.dlg.el.style.opacity = vis(dA, T.cta - 0.1) ? (t >= dB ? 0.35 : 1) : 0;
+    F.glitch(O.dlg.el, t, at("signed,") - 0.05, { amp: 8, d: 0.4 }); R.cue("glitch", at("signed,") - 0.05);
+    const rA = T.rel - 0.25; W3.set(O.rel, { y: lerp(300, 10, sp(t, rA)) }); O.rel.el.style.opacity = vis(rA, T.cta - 0.1) ? 1 : 0; R.cue("ding", rA + 0.3); }
+
+  // ===== CTA =====
+  { W3.set(O.ig, { ry: lerp(-60, 0, sp(t, T.cta - 0.05)) + 3 * Math.sin(t) }); O.ig.el.style.opacity = t >= T.cta - 0.1 ? 1 : 0;
+    const ty = T.cta + 0.35, sent = ty + 0.6; if (t < sent) R.type("cmt", "SHORTS", t, ty, 12); else $("cmt").textContent = ""; $("cmph").style.display = t < ty || t >= sent ? "" : "none"; R.press("snd", t, sent - 0.08);
+    const dm = at("DM"); $("dm2").style.opacity = t >= dm ? 1 : 0; $("dm2").style.transform = `translateY(${((1 - sp(t, dm, { f: 2.6, z: 0.55 })) * -120).toFixed(1)}px)`; R.cue("ding", dm); R.cue("swell", dm - 0.05); }
+
+  // ===== extra sound events =====
+  O.fs.forEach((o, i) => R.cue("tick", T.s2 + 0.15 + i * 0.05)); for (let k = 0; k < 5; k++) R.cue("tick", at("moments") - 0.1 + k * 0.08);
+  R.cue("tap", T.api); R.cue("tap", T.api + 0.25); R.cue("whoosh", T.claude - 0.2); R.cue("pop", at("Shorts") - 0.05); R.cue("pop", T.now + 0.3); R.cue("land", T.s1 + 0.6); R.cue("land", at("AutoShorts.") + 0.4);
+  [0, 1, 2].forEach(i => R.cue("tick", T.upl - 0.1 + i * 0.22 + 0.9)); R.cue("tock", T.crop + 0.6); R.cue("tap", T.rel);
+  // ===== camera last (DOF/fog depend on final object positions) =====
+  W3.dustFrame(t);
+  const shake = t > T.stack + 0.5 && t < T.stack + 0.9 ? [F.noise(t * 40) * 10 * (1 - prog(t, T.stack + 0.5, 0.4)), F.noise(t * 40 + 9) * 8 * (1 - prog(t, T.stack + 0.5, 0.4))] : null;
+  W3.camera(t, CAM, { shake, dofK: 0.006, dofMax: 12 });
+  // sound for each camera flight
+  [T.s1, T.s2, T.s3, T.up, T.cat, T.cta].forEach(a => R.cue("whoosh", a + 0.05));
+
+  const fn = t >= T.s1 && t < T.s2 ? "UI recreated from the repo's README · sample: our own demo podcast · ⭐ checked 11 Nov 2026" : t >= T.s2 && t < T.up ? (FOOT.meta.credit || "Sample clips for illustration") : t >= T.api && t < T.inst ? "Prices from the AutoShorts README (DeepSeek / Claude)" : t >= T.inst && t < T.cta ? "The README tells you to bypass macOS / Windows warnings" : "";
+  $("fn").textContent = fn; $("fn").style.opacity = fn ? 1 : 0;
+};
+window.seek(0);
+</script></body></html>
