@@ -1,0 +1,6 @@
+KF.demo({ name: "tile-map", line: "A board of tiles filling in, with a live count", dur: 5, build(host) {
+  const a = KF.el("div", "kf-host", host); a.style.cssText = "left:60px;top:150px;width:460px;height:460px"; const b = KF.el("div", "kf-host", host); b.style.cssText = "left:560px;top:150px;width:460px;height:460px";
+  const A = KF.make("tile-map", a, { cols: 22, rows: 22, order: "scan", colors: [KF.C.green] }), B = KF.make("tile-map", b, { cols: 16, rows: 16, mask: "circle", order: "center", colors: ["#f2c14e", "#4b8bff", "#a78bfa", "#3ECF8E", "#D97757"], gap: 5 });
+  const num = KF.el("div", "", host); num.style.cssText = 'position:absolute;left:60px;top:650px;font:900 96px Inter;color:#F3F1EC'; const sub = KF.el("div", "", host, "tasks solved · <span style='color:#ff5a5a'>never solved before</span>"); sub.style.cssText = 'position:absolute;left:60px;top:770px;font:800 30px Inter;color:#8b8f98';
+  return t => { const sA = { fill: KF.ease.out(KF.prog(t, 0.2, 2.2)) * 0.82, bad: KF.prog(t, 2.6, 0.8) * 0.3, sweep: KF.prog(t, 2.6, 0.9) }; A.frame(t, sA); B.frame(t, { fill: KF.ease.inOut(KF.prog(t, 0.6, 3)) });
+    const c = A.count(sA); num.innerHTML = c.on + (c.bad ? ` <span style="color:#ff5a5a;font-size:60px">${c.bad}</span>` : ""); }; } });

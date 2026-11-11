@@ -1,0 +1,4 @@
+KF.demo({ name: "tracked-labels", line: "Labels with pointer lines that follow moving things", dur: 4, build(host) {
+  const { ctx, w, h, clear } = KF.canvas(host), pos = t => [[300 + 120 * Math.sin(t * 1.2), 420 + 60 * Math.cos(t * 0.9)], [720 + 90 * Math.cos(t), 560 + 80 * Math.sin(t * 1.4)], [520, 760 + 30 * Math.sin(t * 2)]];
+  const lb = KF.make("tracked-labels", host, { size: 30, labels: [{ text: "MICROPHONE", at: 0.4, anchor: t => pos(t)[0], dx: 90, dy: -120 }, { text: "SPEAKER", at: 1.0, anchor: t => pos(t)[1], dx: -110, dy: -130 }, { text: "CHIP", at: 1.6, out: 3.4, anchor: t => pos(t)[2], dx: 130, dy: 70 }] });
+  const col = [KF.C.gold, KF.C.sky, KF.C.green]; return t => { clear(); pos(t).forEach((p, i) => { ctx.fillStyle = KF.rgba(col[i], 0.18); ctx.beginPath(); ctx.arc(p[0], p[1], 90, 0, 7); ctx.fill(); ctx.fillStyle = col[i]; KF.rr(ctx, p[0] - 46, p[1] - 46, 92, 92, 24); ctx.fill(); }); lb.frame(t); }; } });

@@ -1,0 +1,3 @@
+KF.demo({ name: "grid-zoom", line: "Rows, columns, then a zoom into one crossing", dur: 5, build(host) {
+  const g = KF.make("grid-zoom", host, { cell: 72 }), lb = KF.make("tracked-labels", host, { size: 28, labels: [{ text: "ROW", at: 0.5, out: 2.6, anchor: [120, 6 * 72], dx: 60, dy: -70 }, { text: "COLUMN", at: 1.5, out: 2.6, anchor: [7.5 * 72, 200], dx: 90, dy: -60 }, { text: "CROSSING", at: 3.4, anchor: () => g.crossing(), dx: 150, dy: -150 }] });
+  return t => { g.frame(t, { row: 6, col: 7, rowP: KF.ease.out(KF.prog(t, 0.3, 0.9)), colP: KF.ease.out(KF.prog(t, 1.3, 0.9)), zoom: 1 + 3.4 * KF.ease.expo(KF.prog(t, 2.5, 1.1)), pulse: KF.prog(t, 2.4, 0.5) }); lb.frame(t); }; } });

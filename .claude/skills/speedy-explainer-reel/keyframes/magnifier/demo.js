@@ -1,0 +1,4 @@
+KF.demo({ name: "magnifier", line: "A lens that inspects another picture", dur: 5, build(host) {
+  const under = KF.el("div", "kf-host", host); under.style.cssText = "left:90px;top:60px;width:900px;height:900px"; const tm = KF.make("tile-map", under, { cols: 30, rows: 30, order: "random", colors: [KF.C.green, "#2fa672"], gap: 5 });
+  const over = KF.el("div", "kf-host", host); over.style.cssText = under.style.cssText; over.style.overflow = "visible"; const mg = KF.make("magnifier", over, { source: under.querySelector("canvas"), r: 170, zoom: 3 });
+  return t => { tm.frame(t, { fill: 0.9, bad: 0.08 }); const p = KF.ease.inOut(KF.prog(t, 0.6, 2.2)), found = t > 3.0; mg.frame(t, { show: KF.prog(t, 0.2, 0.4), x: KF.lerp(200, 620, p), y: KF.lerp(220, 560, p) + 40 * Math.sin(p * 6), ring: found ? KF.C.red : "#ffffff", zoom: found ? 3 + KF.ease.out(KF.prog(t, 3.0, 0.5)) : 3 }); }; } });
