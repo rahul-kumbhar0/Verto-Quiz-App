@@ -1,0 +1,116 @@
+<!doctype html><html><head><meta charset="utf-8"><title>SLOP test reel (keyframes only)</title>
+<link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+#stage{position:absolute;inset:0}
+.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
+#fn{position:absolute;left:0;right:0;top:1196px;text-align:center;font:600 24px "JetBrains Mono",monospace;color:#8b8f98}
+/* the two sample screens shown inside before-after (content for the demo, not a block) */
+.ui{position:absolute;inset:0;padding:44px;box-sizing:border-box;font-family:Inter}
+.slop{background:radial-gradient(120% 90% at 20% 0%,#7c3aed,#4c1d95 45%,#1e1b4b);color:#fff}
+.slop h2{margin:0 0 10px;font:900 58px/1.05 Inter;background:linear-gradient(90deg,#f0abfc,#a78bfa,#67e8f9);-webkit-background-clip:text;color:transparent;text-transform:uppercase}
+.slop p{margin:0 0 26px;font:700 28px Inter;opacity:.85}
+.slop .btn{display:inline-block;padding:20px 36px;border-radius:999px;background:linear-gradient(90deg,#ec4899,#8b5cf6);font:900 30px Inter;box-shadow:0 0 40px #d946ef,0 0 90px #8b5cf6}
+.slop .cards{display:flex;gap:16px;margin-top:40px}.slop .cards div{flex:1;padding:22px;border-radius:26px;background:rgba(255,255,255,.12);border:2px solid rgba(255,255,255,.3);font:800 26px Inter;box-shadow:0 0 30px rgba(167,139,250,.6)}
+.slop .cards div:nth-child(2){margin-top:28px}.slop .cards div:nth-child(3){margin-top:-8px}
+.clean{background:#F6F4EF;color:#16181d}
+.clean .k{font:700 22px "JetBrains Mono",monospace;color:#6b7280;margin-bottom:12px}
+.clean h2{margin:0 0 12px;font:900 58px/1.05 Inter;letter-spacing:-2px}.clean p{margin:0 0 26px;font:600 28px/1.35 Inter;color:#4b5563}
+.clean .btn{display:inline-block;padding:20px 32px;border-radius:14px;background:#16181d;color:#fff;font:800 28px Inter}
+.clean .cards{display:flex;gap:16px;margin-top:40px}.clean .cards div{flex:1;padding:22px;border-radius:16px;background:#fff;border:2px solid #e3e0d8;font:700 24px Inter;color:#374151}
+.clean .cards b{display:block;font:900 40px Inter;color:#16181d;margin-bottom:4px}
+</style></head><body><div id="stage">
+  <div id="flip" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="s1" class="scene kf-host"></div><div id="s2" class="scene kf-host"></div><div id="s3" class="scene kf-host"></div><div id="s4" class="scene kf-host"></div>
+  <div id="s5" class="scene kf-host"></div><div id="s6" class="scene kf-host"></div><div id="s7" class="scene kf-host" style="top:440px;height:900px"></div>
+  <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="rail" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
+  <div id="cap" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="fn" data-qa="ok"></div>
+  <div id="pres" class="kf-host" style="left:0;top:1290px;width:1080px;height:630px"></div>
+</div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
+<script>
+["captions","presenter","chapter-rail","before-after","tracked-labels","repo-card","agent-log","stage-flip","article-card","strike-row","props","ending-comment","light-wipe"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));
+</script>
+<script>
+// ---- word clock ----
+const W = window.WORDS.filter(w => w.type === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word); };
+const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
+const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id);
+const T = { purple: at("Purple"), glow: at("glowing"), emoji: at("emoji"), free: at("There's"), unslop: at("unslop"), stars: at("fourteen"), gh: at("GitHub"),
+  s1: at("Step", 1), audits: at("audits"), s2: at("Step", 2), dir: at("direction"), product: at("product"), s3: at("Step", 3), spacing: at("spacing"), colour: at("colour"), copy: at("copy"), type: at("type"),
+  catch: at("catch"), paid: at("paid"), good: at("good"), tells: at("tells"), cta: at("Comment"), slop: at("slop", 2), steps: at("steps") };
+// scene windows: [start, end]
+const S = { s1: [0, T.free - 0.15], s2: [T.free - 0.15, T.s1 - 0.1], s3: [T.s1 - 0.1, T.s2 - 0.1], s4: [T.s2 - 0.1, T.s3 - 0.1], s5: [T.s3 - 0.1, T.catch - 0.1], s6: [T.catch - 0.1, T.cta - 0.1], s7: [T.cta - 0.1, DUR] };
+
+// ---- blocks (built once) ----
+const cap = KF.make("captions", "cap", { words: W, keys: ["AI-made", "free", "unslop", "audits", "direction", "pass", "paid", "good", "slop,"], max: 4, size: 62 });
+const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" },
+  poses: [[0, "explain"], [T.purple - 0.1, "point_up"], [T.free - 0.1, "thumbs"], [T.stars - 0.1, "mindblown"], [T.s1 - 0.1, "one"], [T.s2 - 0.1, "two"], [T.s3 - 0.1, "three"], [T.catch - 0.1, "shrug"], [T.good - 0.2, "thumbs"], [T.cta - 0.1, "point_cam"]],
+  talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
+const rail = KF.make("chapter-rail", "rail", { steps: ["the slop", "step 1", "step 2", "step 3", "catch"], top: 0 });
+const flip = KF.make("stage-flip", "flip", { origin: [540, 900] });
+const wipe = KF.make("light-wipe", "wipe", { color: "#c4b5fd" });
+// S1 + S5: the same dashboard, AI-made vs unslopped
+const SLOP_UI = `<div class="ui slop"><h2>🚀 Supercharge your workflow ✨</h2><p>🔥 The ultimate AI-powered dashboard!!!</p><div class="btn">✨ Get Started Now 🚀</div><div class="cards"><div>📈 Growth</div><div>⚡ Speed</div><div>🤖 AI Magic</div></div></div>`;
+const CLEAN_UI = `<div class="ui clean"><div class="k">ORBIT · ANALYTICS</div><h2>See which pages actually convert.</h2><p>One number per page, updated every hour.</p><div class="btn">Open dashboard</div><div class="cards"><div><b>4.2%</b>conversion</div><div><b>1.8 s</b>median load</div><div><b>312</b>sign-ups</div></div></div>`;
+function dash(host, h = 640, top = 40) { const ba = KF.make("before-after", host, { labels: ["AI-made", "Unslopped"], w: 900, h, top }); ba.b.innerHTML = CLEAN_UI; ba.a.innerHTML = SLOP_UI; return ba; }
+const ba1 = dash("s1"), ba5 = dash("s5", 540, 0);
+const s1L = $("s1").querySelector("div"), lab = KF.make("tracked-labels", "s1", { size: 26, labels: [
+  { text: "PURPLE GRADIENT", at: T.purple, anchor: [210, 180], dx: 140, dy: -110 },
+  { text: "GLOWING BUTTON", at: T.glow, anchor: [450, 340], dx: 200, dy: -60 },
+  { text: "EMOJI ON EVERY LABEL", at: T.emoji, anchor: [190, 520], dx: 150, dy: 150 } ] });
+const repo = KF.make("repo-card", "s2", { owner: "heydamir", name: "unslop", desc: "A Claude skill that turns AI-looking screens into designed ones.", stars: 14424, chips: ["Claude Code", "Codex", "Free · CC BY 4.0"], top: 120 });
+const log = KF.make("agent-log", "s3", { prompt: "/unslop this dashboard", top: 20, steps: [
+  { verb: "Found", obj: "purple gradient", meta: "hero" }, { verb: "Found", obj: "glow on buttons", meta: "×3" }, { verb: "Found", obj: "emoji labels", meta: "×7" },
+  { verb: "Found", obj: "SHOUTY COPY", meta: "headline" }, { verb: "Found", obj: "uneven spacing", meta: "cards" } ] });
+const brief = KF.make("article-card", "s4", { theme: "light", site: "unslop · direction", date: "before any edit", headline: "Taken from *your product*, not a template", tags: ["character", "one accent colour", "signature detail"], lines: 4 });
+const passes = KF.make("strike-row", "s5", { size: 112, top: 562, items: [
+  { icon: "↔︎", label: "spacing", at: T.s3, tick: T.spacing }, { icon: "🎨", label: "colour", at: T.s3 + 0.1, tick: T.colour }, { icon: "✍️", label: "copy", at: T.s3 + 0.2, tick: T.copy }, { icon: "🔤", label: "type", at: T.s3 + 0.3, tick: T.type } ] });
+const lock = KF.make("props", "s6", { kind: "lock", size: 300, y: 200 });
+const lockTag = KF.el("div", "", $("s6"), "Needs Claude Code · paid plan"); lockTag.style.cssText = "position:absolute;left:0;right:0;top:400px;text-align:center;font:800 40px Inter;color:#F3F1EC";
+const good = KF.make("strike-row", "s6", { size: 150, top: 470, items: [{ icon: "🔨", label: "redesign", at: T.good - 0.6, strike: T.good + 0.1 }, { icon: "✨", label: "small fixes", at: T.good - 0.4, tick: T.tells }] });
+const cta = KF.make("ending-comment", "s7", { keyword: "SLOP", pill: "for the install steps", dm: "unslop: install steps for Claude Code 👇" });
+
+// ---- sound cues (the sound pass places real effects on these) ----
+const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
+cue("pop", 0.05, { soft: true }); [T.purple, T.glow, T.emoji].forEach(t => cue("pop", t)); cue("whoosh", S.s2[0]); cue("riser", T.stars - 0.8, { t2: T.stars }); cue("ding", T.gh);
+cue("whoosh", S.s3[0]); [0, 1, 2, 3, 4].forEach(i => cue("tick", T.audits + 0.1 + i * 0.32)); cue("type", T.s1 + 0.2, { t2: T.s1 + 0.9 });
+cue("swish", S.s4[0] + 0.1); cue("tap", T.dir); cue("whoosh", S.s5[0]); [T.spacing, T.colour, T.copy, T.type].forEach(t => cue("ding", t)); cue("swish", T.type + 0.2);
+cue("impact", T.catch); cue("click", T.paid); cue("glitch", T.good + 0.1); cue("ding", T.tells); cue("swell", T.cta - 0.1); cue("type", T.cta + 0.4, { t2: T.cta + 0.9 }); cue("click", T.cta + 1.05); cue("ding", T.slop + 0.5);
+[[T.purple, 0], [T.glow, 1], [T.emoji, 2]].forEach(([x]) => cue("swish", x + 0.15, { soft: true }));
+[T.s3, T.s3 + 0.1, T.s3 + 0.2, T.s3 + 0.3].forEach(x => cue("pop", x + 0.05, { soft: true })); [T.spacing, T.colour, T.copy, T.type].forEach(x => cue("swish", x + 0.05, { soft: true }));
+for (let k = 0; k < 8; k++) cue("tick", T.stars - 0.55 + k * 0.15, { soft: true }); cue("pop", S.s3[0] + 0.3); cue("pop", T.good - 0.6); cue("pop", T.good - 0.4); cue("land", S.s6[0] + 0.3);
+cue("whoosh", S.s6[0]); cue("whoosh", S.s7[0]); cue("tap", 0.3); cue("swish", 1.2, { soft: true }); cue("pop", T.dir + 0.3, { soft: true }); cue("tap", T.product);
+W.forEach((x, i) => { if (/[.!?]$/.test(x.w)) cue("tick", x.e + 0.02, { soft: true }); });
+window.__cues = cues;
+
+// ---- the frame ----
+window.seek = t => {
+  const on = k => t >= S[k][0] && t < S[k][1];
+  ["s1", "s2", "s3", "s4", "s5", "s6", "s7"].forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
+    if (v) { const pin = E.out(P(t, a, 0.35)), pout = P(t, b - 0.25, 0.25); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
+  // background: light only for "step two" (the direction brief)
+  flip.frame(t, { p: P(t, S.s4[0] - 0.1, 0.4) * (1 - P(t, S.s4[1] - 0.2, 0.35)), origin: [540, 900] });
+  const light = t > S.s4[0] + 0.1 && t < S.s4[1] - 0.05; $("cap").style.filter = light ? "invert(1) hue-rotate(180deg)" : "none";
+  wipe.frame(t, { p: P(t, S.s2[0] - 0.25, 0.5) });
+  // hook: the AI-made dashboard with a peek at the fix, then the three tells get labelled
+  if (on("s1")) { const peek = Math.sin(Math.PI * P(t, 0.25, 1.6)); ba1.frame(t, { show: P(t, 0, 0.35), x: 1 - 0.32 * peek }); lab.frame(t); }
+  if (on("s2")) repo.frame(t, { show: P(t, S.s2[0], 0.6), count: E.inOut(P(t, T.stars - 0.6, 1.2)), starred: 0 });
+  if (on("s3")) log.frame(t, { show: P(t, S.s3[0], 0.4), n: 5 * P(t, T.audits, T.s2 - T.audits - 0.5) });
+  if (on("s4")) brief.frame(t, { show: P(t, S.s4[0] + 0.2, 0.5), body: P(t, S.s4[0] + 0.5, 0.8), mark: E.inOut(P(t, T.product - 0.3, 0.6)) });
+  if (on("s5")) { const steps = [T.spacing, T.colour, T.copy, T.type].filter(x => t >= x).length, x = 1 - steps / 4 + 0.0; ba5.frame(t, { show: P(t, S.s5[0], 0.4), x: KF.lerp(1, x, E.out(P(t, [T.spacing, T.colour, T.copy, T.type][Math.max(0, steps - 1)], 0.35))) - (steps ? 0 : 0) }); passes.frame(t); }
+  if (on("s6")) { lock.frame(t, { show: P(t, S.s6[0], 0.5), p: 0 }); lockTag.style.opacity = P(t, T.paid - 0.2, 0.3) * (1 - P(t, T.good - 0.7, 0.3)); $("s6").firstChild.style.opacity = 1 - P(t, T.good - 0.7, 0.3); good.frame(t); }
+  if (on("s7")) cta.frame(t, { show: P(t, S.s7[0], 0.6), typed: P(t, T.cta + 0.4, 0.5), sent: P(t, T.cta + 1.0, 0.3), dm: P(t, T.slop + 0.4, 0.9) });
+  // loop-back: the last second fades back into the opening dashboard
+  const lb = KF.loopBack(t, DUR, 1.0); if (lb.mix > 0) { const e = $("s1"); e.style.display = ""; e.style.opacity = lb.mix; e.style.transform = "none"; ba1.frame(0, { show: 1, x: 1 }); lab.frame(-1); $("s7").style.opacity = 1 - lb.mix; }
+  const ch = t < S.s3[0] ? (t < S.s2[0] ? 0.5 : 0.9) : t < S.s4[0] ? 1.5 : t < S.s5[0] ? 2.5 : t < S.s6[0] ? 3.5 : 4.5;
+  rail.frame(t, { at: Math.min(ch, 4.9), alert: t >= S.s6[0] && t < S.s7[0], value: t < S.s2[0] ? 3 : t < S.s3[0] ? 14424 : t < S.s4[0] ? Math.min(5, Math.floor(5 * P(t, T.audits, T.s2 - T.audits - 0.5) + 0.0001)) : t < S.s5[0] ? 1 : t < S.s6[0] ? [T.spacing, T.colour, T.copy, T.type].filter(x => t >= x).length : 2,
+    label: t < S.s2[0] ? "signs of slop" : t < S.s3[0] ? "★ GitHub stars" : t < S.s4[0] ? "issues found" : t < S.s5[0] ? "direction" : t < S.s6[0] ? "passes done" : "catches" });
+  $("rail").style.opacity = t >= S.s7[0] ? 1 - P(t, S.s7[0], 0.3) : 1;
+  cap.frame(t); pres.frame(t);
+  $("fn").textContent = t < S.s2[0] ? "Sample screens made for this reel" : on("s2") ? "github.com/heydamir/unslop · ★ checked 11 Nov 2026" : on("s4") ? "Illustration of the skill's 'direction' step" : "";
+};
+window.seek(0);
+</script></body></html>

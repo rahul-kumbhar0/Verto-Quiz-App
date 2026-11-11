@@ -1,0 +1,10 @@
+Your project looks AI-made, and people can tell.
+Purple gradients, glowing buttons, an emoji on every label.
+There's a free Claude skill for this.
+It's called unslop, and it has fourteen thousand stars on GitHub.
+Step one, it audits your screen and lists every sign of slop.
+Step two, it picks a direction from your actual product.
+Step three, it fixes the screen pass by pass, spacing, colour, copy and type.
+The catch, you need Claude Code, which is paid.
+And if your screen is already good, it just tells you.
+Comment slop, and I'll send you the install steps.
