@@ -169,3 +169,5 @@ Catches for GAME: needs Claude Code (paid plan) + Git + Python 3; directors requ
 | 6 | (GAME pt 2) | "244 pixel-art effects, and a Claude skill that makes more." | patch-gg/pixelfx · 6,237★ · MIT | pairs with GAME |
 DROPPED: morluto/rea (★ inconsistent: 445,600 OSSInsight vs 30.1k trendshift; binary RE is legally grey) · Switch emulators + omniget course downloader (piracy) · sherlock (finds people by username: stalking risk) · Claude Personal Finance (US-only).
 Trend signal: the month's top movers are "understand how X works" tools (craft-anything +4.7k, rea-video) and agent SKILLS (unslop, mattpocock/skills, google/elephant-goldfish-model, janestreet/agent_skills, cloudflare/security-audit-skill).
+
+## 11 Nov — owner-suggested: CLIPS (JayWebtech/autoshorts, 1,494★, NO license, unsigned builds) → drafts/clips/facts.md. Verdict: good fit (video-automation formula) but needs a real test on the owner's laptop + the 6 catches.
