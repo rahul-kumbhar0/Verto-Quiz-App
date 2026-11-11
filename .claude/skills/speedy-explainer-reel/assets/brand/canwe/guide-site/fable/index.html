@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude Fable 5.2 this week: who gets it, how to switch · canwe.ai</title>
+<meta name="description" content="Claude Fable 5.2 is included at no extra cost on Claude Pro until 16 Nov 2026. Who's eligible, how to switch in the app and Claude Code, which job to give it, and 3 prompts.">
+<meta property="og:title" content="Claude Fable 5.2 is 'free' this week. Here's the honest version.">
+<meta property="og:description" content="Pro + standard Team · until 16 Nov, 11:59 pm PT · not on the free plan · skip the 'free API key' sites.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Claude Fable 5.2 is free this week. <span class="sel"><i></i><b>If you're on Pro.</b></span></h1>
+  <p class="lead">Anthropic's newest model launched on 9 Nov 2026. For one week it's included in Claude Pro at no extra cost. Below: who qualifies, how to switch, which job to give it, and the traps to skip.</p>
+  <div class="chips"><span class="chip">ends 16 Nov · 11:59 pm PT</span><span class="chip">= Tue 17 Nov · 1:29 pm IST</span><span class="chip">not on the Free plan</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>Am I eligible?</a>
+    <a href="#s2"><small>02</small>How to switch</a>
+    <a href="#s3"><small>03</small>Fable or Opus?</a>
+    <a href="#s4"><small>04</small>3 prompts</a>
+    <a href="#s5"><small>05</small>Traps to skip</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Am I eligible? (check in 10 seconds)</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Claude Pro or a standard Team seat</strong>, with paid billing in place <b>before 9 Nov 2026, 10:00 am PT</b>: Fable 5.2 is included for the week, for up to <b>50% of your weekly usage limit</b>, plus <b>one Fable limit reset</b>. Both end <b>16 Nov, 11:59 pm PT</b>.</div></li>
+      <li><b>2</b><div><strong>Max, Ultra, premium Team seats</strong>: you get 1 to 3 Fable resets (by how long you've subscribed), valid until 8 Mar 2027.</div></li>
+      <li><b>3</b><div><strong>Free plan</strong>: Fable isn't available at all. Subscribing today may also not qualify for this week's offer (billing had to start before 9 Nov).</div></li>
+      <li><b>4</b><div><strong>After the week</strong> (or once you've used the 50%): Fable moves to usage credits if you've turned them on. Unused allowance doesn't carry over.</div></li>
+    </ul>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>How to switch to Fable 5.2</h2>
+    <p><b>Claude app or claude.ai</b> (web, desktop, phone): open a new chat → tap the <b>model picker</b> → choose <b>Fable 5.2</b>.</p>
+    <p><b>Claude Code</b>: update first (Fable 5.2 needs version <b>2.1.321 or later</b>), then switch with the model command:</p>
+    <div class="code pad"><button class="cp">Copy</button>claude update</div>
+    <div class="code pad"><button class="cp">Copy</button>/model claude-fable-5-2</div>
+    <p style="color:var(--mute);font-size:15px">Developers on the API: the model id is <b>claude-fable-5-2</b>, priced $8 per million input tokens and $40 per million output tokens (Opus 5.5 is $4 / $20).</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Fable or Opus? Give Fable your hardest job only</h2>
+    <p>Anthropic's own advice: <b>"Start with Claude Opus 5.5 for most work, and move up to Fable or Mythos for the most ambitious tasks."</b> Fable uses your allowance faster, so spend it where it counts.</p>
+    <div class="feat">
+      <div><span>⚡</span><div><b>Give Fable:</b> a big build or refactor that keeps failing, a long research or analysis task with many steps, a hard bug you've been stuck on for days, a project plan for something ambitious.</div></div>
+      <div><span>✅</span><div><b>Keep on Opus 5.5 (or Sonnet):</b> emails, summaries, notes, resume edits, everyday questions, small code fixes.</div></div>
+      <div><span>🧪</span><div><b>What it showed at launch</b> (Anthropic, 9 Nov): 1,000+ Fable agents built a prototype operating system in 8 days; ~1,000 agents formalized the proof of Fermat's Last Theorem in 30 hours; it designed 3 devices that worked without electrical fixes.</div></div>
+    </div>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>3 prompts for your hardest task</h2>
+    <h3>1 · The stuck project</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>I've been stuck on this for days. Here is the goal, what I tried, and the errors I got: [paste]. First, list every possible cause, ranked by likelihood, with a quick test for each. Then fix the most likely one and explain what you changed in simple words. Don't change anything outside what's needed.</div>
+    <h3>2 · The big plan</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>I want to build [project] in [time]. I'm a [student / fresher] who knows [skills]. Make a realistic step-by-step plan: milestones, what to learn at each step, the free tools to use, and the 3 places beginners usually get stuck. Ask me 3 questions first if anything is unclear.</div>
+    <h3>3 · The deep review</h3>
+    <div class="code prompt pad"><button class="cp">Copy</button>Review my [project / code / report] like a strict senior. Find the 10 most important problems, ordered by impact. For each: what's wrong, why it matters, and the exact fix. End with the 3 changes that would improve it the most this week.</div>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>Traps to skip</h2>
+    <div class="feat">
+      <div><span>🚫</span><div><b>"Free Fable API key" sites and videos.</b> A shared key or proxy means your prompts, code and files pass through a stranger's server. Not worth it.</div></div>
+      <div><span>🎬</span><div><b>"Free for 72 hours" tool offers.</b> Some apps advertise their own free trial next to the Fable launch. That's their product, not free Fable, and some renew into a paid plan. Read before you sign up.</div></div>
+      <div><span>📅</span><div><b>Mind the time zone.</b> 16 Nov, 11:59 pm PT is <b>Tuesday 17 Nov, 1:29 pm in India</b>.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more Claude tips with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Not affiliated with Anthropic. Sources (read 11 Nov 2026): anthropic.com "Introducing Claude Fable 5.2 and Claude Mythos 5.2" (9 Nov 2026); support.claude.com "Claude Fable 5.2 launch offers" and "Claude Fable models on your plan"; platform.claude.com pricing. Offer terms can change — check Anthropic's support page before you rely on them.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
