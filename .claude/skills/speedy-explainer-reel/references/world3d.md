@@ -17,3 +17,9 @@ Use when a reel should feel like the camera FLIES through a world of real 3D obj
 - Fake UI text (chips, tabs, transcript rows, flying clips) → `data-qa="texture"`; footnotes → `data-qa="ok"`.
 - Engine collisions: never use class `.scene` (speedy.css hides it) or ids `b0…`.
 - Cues inside `if (t >= a)` never export: call `R.cue` unconditionally. Add ticks per row/item to reach 18–30 fx/10 s.
+
+## Real footage inside the world (foot.js + foot_prep.py, SHORTS v2)
+- `python3 tools/foot_prep.py foot/spec.json foot` cuts any MP4 into 15 fps JPG sets (`wide`, `strip` stills, moments `m0…m4`, `duo` two-person wide shot) + `foot/manifest.js` (title, length, credit, caps per moment).
+- Page: `<script src="foot/manifest.js"></script><script src="foot.js"></script>`; frames are preloaded + decoded (`window.__ready`, render.mjs waits for it). `FOOT.paint(el, "m2", t - start)` per frame; `FOOT.still(set, i)` for thumbnails.
+- Explainer beats built on it: player → editor-timeline film strip scrolling under Claude's playhead (transcript chips pop out, moments light up with scores, lift into a 2×2 grid) → two glowing blade cuts + flash, the 16:9 sides fall with gravity, the centre becomes a 9:16 Short, captions burn in word by word → fan → stack. Catch: crop window over the `duo` shot.
+- Captions on real people must be their real words (transcribe the clip); never invent quotes.
