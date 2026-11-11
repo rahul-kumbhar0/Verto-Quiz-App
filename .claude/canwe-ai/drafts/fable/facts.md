@@ -15,3 +15,12 @@
 - IG @heyhellorecruiter "Okay, I know MCP server sounds like something only developers care about." 146K likes / 57K shares in 2 h (career framing for non-devs).
 - IG @auraguy.ai Founder skill "test your idea on 100 fake customers for free" 3,130 comments / 10.8K shares.
 - YT Shorts: Varun Mayya "Anthropic just released Claude Fable 5.2" 213K in 15 h; Hinglish "8 din mein OS bana diya" 7.5% engagement; Fable-vs-Opus animation test ($38.80 vs $18.88).
+
+## "Where is Fable 5.2 free?" — checked 11 Nov (web search + official pages; cursor.com, github.blog, kingy.ai, pasqualepillitteri.it blocked here, PullRows dropped)
+- ONLY real offer = Anthropic's own: Pro + standard Team get Fable 5.2 at NO EXTRA COST through 16 Nov 11:59 pm PT, up to 50% of weekly limits + 1 Fable limit reset (support 17506494; MakeUseOf, Notebookcheck, ARY News agree). Needs paid billing before 9 Nov 10am PT → someone subscribing TODAY may NOT be eligible (say "if you were already on Pro").
+- Free plan: NO Fable at all (support 15424964: "Fable models aren't available on the Free plan").
+- Higgsfield "72-hour free trial": its OWN video models via MCP, not Fable; auto-renews into paid Ultra unless cancelled (third-party report). Not a Fable offer — don't present as one.
+- YouTube "FREE Fable API key / free on Experiment Labs": unverified; free-key sites = risk (proxies log prompts/keys). Do not promote.
+- Airtel × Perplexity free Pro year: ENDED Jan 2026. Not applicable.
+- Cursor / GitHub Copilot: Fable 5.2 listed (Copilot Pro+/Max/Business/Enterprise, usage-billed) per search summaries; no free promo found; their trial terms unverified (sites blocked) → not in the reel.
+- "Settings > Usage > Limit resets > Reset for free" path: blog-only, NOT on the official page → don't state the menu path.
