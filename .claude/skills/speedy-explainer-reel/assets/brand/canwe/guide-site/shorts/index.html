@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>AutoShorts: turn one long video into Shorts (free repo setup) · canwe.ai</title>
+<meta name="description" content="AutoShorts is a free GitHub repo that turns one long video into vertical Shorts with captions. Safe download, setup, settings, cost and the catches.">
+<meta property="og:title" content="One long video → a stack of Shorts. The free AutoShorts setup.">
+<meta property="og:description" content="Safe download · FFmpeg · API keys (a few cents a video) · centre-crop tip · the catches.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>One long video in. <span class="sel"><i></i><b>A stack of Shorts out.</b></span></h1>
+  <p class="lead">AutoShorts is a free GitHub repo (a desktop app you install). You drop in a long video, it writes a transcript, an AI picks the moments worth posting, and it cuts them into vertical 9:16 Shorts with captions. Here's the safe setup, the settings, the real cost and the catches.</p>
+  <div class="chips"><span class="chip">free repo · github.com/JayWebtech/autoshorts</span><span class="chip">Mac · Windows · Linux</span><span class="chip">a few cents a video</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>Download it safely</a>
+    <a href="#s2"><small>02</small>Install FFmpeg</a>
+    <a href="#s3"><small>03</small>Add your API keys</a>
+    <a href="#s4"><small>04</small>Make your Shorts</a>
+    <a href="#s5"><small>05</small>Upload as private</a>
+    <a href="#s6"><small>06</small>The catches</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Download it from the Releases page only</h2>
+    <p>Open the repo's own Releases page and pick the file for your computer: <b>.dmg</b> on Mac (Apple Silicon or Intel), <b>.msi / .exe</b> on Windows, <b>.deb / .AppImage</b> on Linux.</p>
+    <div class="code pad"><button class="cp">Copy</button>https://github.com/JayWebtech/autoshorts/releases</div>
+    <p style="color:var(--mute);font-size:15px">The installer isn't signed, so your computer will warn you (macOS Gatekeeper, Windows SmartScreen). That warning is why the source matters: never install a copy from a Drive link, a Telegram file or a "mod" site.</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Install FFmpeg (it does the cutting)</h2>
+    <p><b>Mac</b> (with Homebrew):</p>
+    <div class="code pad"><button class="cp">Copy</button>brew install ffmpeg</div>
+    <p><b>Windows</b>:</p>
+    <div class="code pad"><button class="cp">Copy</button>winget install ffmpeg</div>
+    <p><b>Linux</b> (Ubuntu/Debian):</p>
+    <div class="code pad"><button class="cp">Copy</button>sudo apt install ffmpeg</div>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Add your API keys (the settings I'd use)</h2>
+    <div class="feat">
+      <div><span>🎙️</span><div><b>Transcription: Deepgram key.</b> Writes down every word with timestamps.</div></div>
+      <div><span>🧠</span><div><b>Picking the moments: Claude or DeepSeek.</b> The repo's README puts Claude at about <b>$0.01–0.05 per video</b> and DeepSeek at <b>under $0.001</b>. Claude for better picks, DeepSeek for the cheapest.</div></div>
+      <div><span>💻</span><div><b>Fully offline mode (Ollama + local Whisper)</b> is free, but the README itself says small local models are generally not good at finding viral moments. Use it only to test.</div></div>
+    </div>
+    <p style="color:var(--mute);font-size:15px">Whichever cloud you pick gets your transcript. Don't run private or client videos through it without permission.</p>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>Make your Shorts</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Import one long video</strong> (a podcast, a talk, a tutorial). Talking videos work best.</div></li>
+      <li><b>2</b><div><strong>Let it transcribe and rank the moments.</strong> The ranking is an AI guess, not a promise: watch each clip before you post it.</div></li>
+      <li><b>3</b><div><strong>Export the 9:16 clips with captions.</strong> Check the captions for wrong words, names and numbers.</div></li>
+    </ul>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>Upload as private, then press publish yourself</h2>
+    <p>If you set up our YouTube automation from part one, have it upload the new Shorts as <b>private</b>. Nothing goes public until you watch it and press <b>publish</b>. Want part one? Read the <a href="/youtube/">YouTube guide</a>.</p>
+  </section>
+
+  <section id="s6">
+    <div class="step">STEP 06</div><h2>The catches</h2>
+    <div class="feat">
+      <div><span>🎯</span><div><b>It crops the centre.</b> No face tracking, so stay in the middle of your frame when you record (two people side by side will get cut off).</div></div>
+      <div><span>🔐</span><div><b>Unsigned installer.</b> Only from the Releases page above.</div></div>
+      <div><span>📄</span><div><b>No licence on the repo.</b> The code is public and the app is free to use, but that's not the same as "open source", so don't copy its code into your own product.</div></div>
+      <div><span>💸</span><div><b>"Free" = free app.</b> Good results need the small API cost above.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more free AI tools, with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Not affiliated with AutoShorts, Anthropic, DeepSeek or Deepgram. Facts from the AutoShorts README and repo (checked 11 Nov 2026): 1,494 ★, installers on GitHub Releases, prices as the README states them. Prices and features can change — check the repo before you rely on them.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>
