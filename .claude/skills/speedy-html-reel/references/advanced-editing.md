@@ -68,6 +68,9 @@ seams (each only touches its own window), THEN in-scene motion.
 | `R.fx.dive(out,in,t,at,{origin,d})` (alias zoomThrough) | object becomes the world: dive into a point, next scene grows out of it | riser + impact |
 | `R.fx.flash(t,at,{color,max,d})` / `R.fx.leak(t,at,{color,max,d})` | full-frame flash / warm light leak (one `#fxOverlay`, auto-created) | impact cue on flash |
 | `R.fx.glitch(el,t,at,{amp,d})` | RGB split + slice jitter | glitch cue |
+| `R.fx.plate(el,t,keys,{grade,k,drift})` | photoreal hero still filmed by a camera: keys `[{t,x,y,s,r,focus,ease}]`, DIRECTIONAL motion blur along the velocity (whip pan streaks sideways). el = `.fx-plate` with one `<img>`, needs an id | swish on fast moves |
+| `R.fx.zoomChain(el,t,a,b,{k,ease})` | infinite zoom through nested plates (`.fx-zchain` with N `<img>`; image i = the centre detail of i-1 at 1/k size), feathered masks so there is no seam | riser |
+| `R.fx.portal(out,in,t,at,box,{d,dark,hold})` | dark⇄light chapter flip: a rounded card `{x,y,w,h,r}` grows to fill the frame in the next theme (grid locked to the stage); start R.speedy `light` at `at+d` | swish |
 | `R.fx.flip(el,t,at,{axis,dir,d,back})` | 3D card flip `.fx-flip > .fx-card > .fx-front + .fx-back` | swish cue |
 | `R.fx.sheen(el,t,at,{d})` | specular light sweep across a card | — |
 | `R.fx.dof(list,focusZ,{k,max})` | depth-of-field blur by distance | — |

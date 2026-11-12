@@ -1,6 +1,6 @@
 # Writing a SPEEDY script (the part that decides whether the reel works)
 
-Length: 60–160 s. Pace ≈2.6 words/s → 150–420 words. Both reference reels are long for Reels and
+Length: 34–140 s. Pace ≈3.4 words/s (measured on 9 reference reels: 3.1–3.85, avg 3.45) → ~115–470 words. Both reference reels are long for Reels and
 hold because every 2 seconds something new is said AND shown. If you cannot show it, cut it.
 
 ## 1. Pick the format

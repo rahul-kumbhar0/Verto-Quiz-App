@@ -24,3 +24,10 @@
 .fx-burst{position:absolute;width:0;height:0;pointer-events:none;z-index:9}
 .fx-pt{position:absolute;left:-7px;top:-7px;width:14px;height:14px;border-radius:3px;opacity:0}
 .fx-w{display:inline-block;will-change:transform}.fx-w.h{color:var(--acc,#D97757)}
+
+/* ---- photo plates · infinite zoom · portal flip (9-reel scan, 11 Nov 2026; fx.js R.fx.plate/zoomChain/portal) ---- */
+.fx-plate,.fx-zchain{position:absolute;inset:0;overflow:hidden;background:#0B0C0E}
+.fx-plate img,.fx-zchain img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,filter}
+.fx-plate::after{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 85% 70% at 50% 46%,transparent 52%,rgba(8,9,11,.62) 100%),linear-gradient(rgba(8,9,11,.55),transparent 22%,transparent 72%,rgba(8,9,11,.7))}
+#fxPortal{position:absolute;display:none;pointer-events:none;background-size:60px 60px}

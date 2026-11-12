@@ -1,0 +1,1097 @@
+{
+ "words": [
+  {
+   "text": "Your",
+   "start": 0.0,
+   "end": 0.24,
+   "type": "word"
+  },
+  {
+   "text": "touchpad",
+   "start": 0.24,
+   "end": 0.68,
+   "type": "word"
+  },
+  {
+   "text": "can't",
+   "start": 0.68,
+   "end": 0.98,
+   "type": "word"
+  },
+  {
+   "text": "see",
+   "start": 0.98,
+   "end": 1.14,
+   "type": "word"
+  },
+  {
+   "text": "your",
+   "start": 1.14,
+   "end": 1.3,
+   "type": "word"
+  },
+  {
+   "text": "finger.",
+   "start": 1.3,
+   "end": 1.56,
+   "type": "word"
+  },
+  {
+   "text": "It",
+   "start": 1.8,
+   "end": 1.92,
+   "type": "word"
+  },
+  {
+   "text": "feels",
+   "start": 1.92,
+   "end": 2.16,
+   "type": "word"
+  },
+  {
+   "text": "it",
+   "start": 2.16,
+   "end": 2.48,
+   "type": "word"
+  },
+  {
+   "text": "stealing",
+   "start": 2.48,
+   "end": 2.88,
+   "type": "word"
+  },
+  {
+   "text": "electricity.",
+   "start": 2.88,
+   "end": 3.4,
+   "type": "word"
+  },
+  {
+   "text": "So",
+   "start": 3.9,
+   "end": 3.98,
+   "type": "word"
+  },
+  {
+   "text": "how",
+   "start": 3.98,
+   "end": 4.14,
+   "type": "word"
+  },
+  {
+   "text": "does",
+   "start": 4.14,
+   "end": 4.32,
+   "type": "word"
+  },
+  {
+   "text": "that",
+   "start": 4.32,
+   "end": 4.52,
+   "type": "word"
+  },
+  {
+   "text": "work?",
+   "start": 4.52,
+   "end": 4.76,
+   "type": "word"
+  },
+  {
+   "text": "Under",
+   "start": 5.04,
+   "end": 5.2,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 5.2,
+   "end": 5.36,
+   "type": "word"
+  },
+  {
+   "text": "surface",
+   "start": 5.36,
+   "end": 5.72,
+   "type": "word"
+  },
+  {
+   "text": "sits",
+   "start": 5.88,
+   "end": 6.04,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 6.04,
+   "end": 6.12,
+   "type": "word"
+  },
+  {
+   "text": "grid",
+   "start": 6.12,
+   "end": 6.32,
+   "type": "word"
+  },
+  {
+   "text": "of",
+   "start": 6.32,
+   "end": 6.52,
+   "type": "word"
+  },
+  {
+   "text": "copper",
+   "start": 6.52,
+   "end": 6.74,
+   "type": "word"
+  },
+  {
+   "text": "wires.",
+   "start": 6.74,
+   "end": 7.12,
+   "type": "word"
+  },
+  {
+   "text": "Rows",
+   "start": 7.5,
+   "end": 7.64,
+   "type": "word"
+  },
+  {
+   "text": "one",
+   "start": 7.64,
+   "end": 7.86,
+   "type": "word"
+  },
+  {
+   "text": "way,",
+   "start": 7.86,
+   "end": 8.12,
+   "type": "word"
+  },
+  {
+   "text": "columns",
+   "start": 8.44,
+   "end": 8.44,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 8.44,
+   "end": 8.74,
+   "type": "word"
+  },
+  {
+   "text": "other.",
+   "start": 8.74,
+   "end": 8.94,
+   "type": "word"
+  },
+  {
+   "text": "Every",
+   "start": 9.16,
+   "end": 9.4,
+   "type": "word"
+  },
+  {
+   "text": "crossing",
+   "start": 9.4,
+   "end": 9.7,
+   "type": "word"
+  },
+  {
+   "text": "is",
+   "start": 9.7,
+   "end": 9.94,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 9.94,
+   "end": 10.08,
+   "type": "word"
+  },
+  {
+   "text": "tiny",
+   "start": 10.08,
+   "end": 10.34,
+   "type": "word"
+  },
+  {
+   "text": "capacitor,",
+   "start": 10.34,
+   "end": 10.84,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 11.1,
+   "end": 11.16,
+   "type": "word"
+  },
+  {
+   "text": "spot",
+   "start": 11.16,
+   "end": 11.38,
+   "type": "word"
+  },
+  {
+   "text": "that",
+   "start": 11.38,
+   "end": 11.62,
+   "type": "word"
+  },
+  {
+   "text": "holds",
+   "start": 11.62,
+   "end": 11.88,
+   "type": "word"
+  },
+  {
+   "text": "charge.",
+   "start": 11.88,
+   "end": 12.16,
+   "type": "word"
+  },
+  {
+   "text": "Now",
+   "start": 12.42,
+   "end": 12.54,
+   "type": "word"
+  },
+  {
+   "text": "Sofia",
+   "start": 12.54,
+   "end": 12.84,
+   "type": "word"
+  },
+  {
+   "text": "rests",
+   "start": 12.84,
+   "end": 13.16,
+   "type": "word"
+  },
+  {
+   "text": "one",
+   "start": 13.16,
+   "end": 13.44,
+   "type": "word"
+  },
+  {
+   "text": "finger",
+   "start": 13.44,
+   "end": 13.7,
+   "type": "word"
+  },
+  {
+   "text": "on",
+   "start": 13.7,
+   "end": 13.92,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 13.92,
+   "end": 14.06,
+   "type": "word"
+  },
+  {
+   "text": "pad.",
+   "start": 14.06,
+   "end": 14.22,
+   "type": "word"
+  },
+  {
+   "text": "Her",
+   "start": 15.18,
+   "end": 15.34,
+   "type": "word"
+  },
+  {
+   "text": "skin",
+   "start": 15.34,
+   "end": 15.62,
+   "type": "word"
+  },
+  {
+   "text": "conducts,",
+   "start": 15.62,
+   "end": 16.04,
+   "type": "word"
+  },
+  {
+   "text": "so",
+   "start": 16.24,
+   "end": 16.3,
+   "type": "word"
+  },
+  {
+   "text": "it",
+   "start": 16.3,
+   "end": 16.44,
+   "type": "word"
+  },
+  {
+   "text": "pulls",
+   "start": 16.44,
+   "end": 16.64,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 16.64,
+   "end": 16.82,
+   "type": "word"
+  },
+  {
+   "text": "little",
+   "start": 16.82,
+   "end": 17.04,
+   "type": "word"
+  },
+  {
+   "text": "charge",
+   "start": 17.04,
+   "end": 17.36,
+   "type": "word"
+  },
+  {
+   "text": "away",
+   "start": 17.36,
+   "end": 17.62,
+   "type": "word"
+  },
+  {
+   "text": "from",
+   "start": 17.62,
+   "end": 17.82,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 17.82,
+   "end": 18.0,
+   "type": "word"
+  },
+  {
+   "text": "crossings",
+   "start": 18.0,
+   "end": 18.32,
+   "type": "word"
+  },
+  {
+   "text": "underneath.",
+   "start": 18.32,
+   "end": 18.82,
+   "type": "word"
+  },
+  {
+   "text": "Then",
+   "start": 19.34,
+   "end": 19.46,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 19.46,
+   "end": 19.64,
+   "type": "word"
+  },
+  {
+   "text": "chip",
+   "start": 19.64,
+   "end": 19.8,
+   "type": "word"
+  },
+  {
+   "text": "checks",
+   "start": 19.8,
+   "end": 20.06,
+   "type": "word"
+  },
+  {
+   "text": "every",
+   "start": 20.06,
+   "end": 20.46,
+   "type": "word"
+  },
+  {
+   "text": "crossing,",
+   "start": 20.46,
+   "end": 20.9,
+   "type": "word"
+  },
+  {
+   "text": "up",
+   "start": 21.12,
+   "end": 21.24,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 21.24,
+   "end": 21.38,
+   "type": "word"
+  },
+  {
+   "text": "two",
+   "start": 21.38,
+   "end": 21.494,
+   "type": "word"
+  },
+  {
+   "text": "hundred",
+   "start": 21.494,
+   "end": 21.76,
+   "type": "word"
+  },
+  {
+   "text": "times",
+   "start": 21.76,
+   "end": 22.02,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 22.02,
+   "end": 22.24,
+   "type": "word"
+  },
+  {
+   "text": "second,",
+   "start": 22.24,
+   "end": 22.5,
+   "type": "word"
+  },
+  {
+   "text": "and",
+   "start": 22.72,
+   "end": 22.88,
+   "type": "word"
+  },
+  {
+   "text": "hunts",
+   "start": 22.88,
+   "end": 23.08,
+   "type": "word"
+  },
+  {
+   "text": "for",
+   "start": 23.08,
+   "end": 23.28,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 23.28,
+   "end": 23.42,
+   "type": "word"
+  },
+  {
+   "text": "dip.",
+   "start": 23.42,
+   "end": 23.56,
+   "type": "word"
+  },
+  {
+   "text": "But",
+   "start": 23.92,
+   "end": 24.08,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 24.08,
+   "end": 24.2,
+   "type": "word"
+  },
+  {
+   "text": "typical",
+   "start": 24.2,
+   "end": 24.46,
+   "type": "word"
+  },
+  {
+   "text": "pad",
+   "start": 24.46,
+   "end": 24.8,
+   "type": "word"
+  },
+  {
+   "text": "has",
+   "start": 24.8,
+   "end": 25.04,
+   "type": "word"
+  },
+  {
+   "text": "just",
+   "start": 25.04,
+   "end": 25.26,
+   "type": "word"
+  },
+  {
+   "text": "sixteen",
+   "start": 25.26,
+   "end": 25.68,
+   "type": "word"
+  },
+  {
+   "text": "wires",
+   "start": 25.68,
+   "end": 26.0,
+   "type": "word"
+  },
+  {
+   "text": "across.",
+   "start": 26.0,
+   "end": 26.4,
+   "type": "word"
+  },
+  {
+   "text": "So",
+   "start": 26.94,
+   "end": 27.42,
+   "type": "word"
+  },
+  {
+   "text": "it",
+   "start": 27.42,
+   "end": 27.58,
+   "type": "word"
+  },
+  {
+   "text": "compares",
+   "start": 27.58,
+   "end": 27.92,
+   "type": "word"
+  },
+  {
+   "text": "how",
+   "start": 27.92,
+   "end": 28.22,
+   "type": "word"
+  },
+  {
+   "text": "much",
+   "start": 28.22,
+   "end": 28.4,
+   "type": "word"
+  },
+  {
+   "text": "each",
+   "start": 28.4,
+   "end": 28.62,
+   "type": "word"
+  },
+  {
+   "text": "wire",
+   "start": 28.62,
+   "end": 28.9,
+   "type": "word"
+  },
+  {
+   "text": "lost,",
+   "start": 28.9,
+   "end": 29.22,
+   "type": "word"
+  },
+  {
+   "text": "and",
+   "start": 29.5,
+   "end": 29.6,
+   "type": "word"
+  },
+  {
+   "text": "pins",
+   "start": 29.6,
+   "end": 29.82,
+   "type": "word"
+  },
+  {
+   "text": "her",
+   "start": 29.82,
+   "end": 30.0,
+   "type": "word"
+  },
+  {
+   "text": "finger",
+   "start": 30.0,
+   "end": 30.2,
+   "type": "word"
+  },
+  {
+   "text": "to",
+   "start": 30.2,
+   "end": 30.44,
+   "type": "word"
+  },
+  {
+   "text": "one",
+   "start": 30.44,
+   "end": 30.617,
+   "type": "word"
+  },
+  {
+   "text": "nine-hundred-sixtieth",
+   "start": 30.617,
+   "end": 31.74,
+   "type": "word"
+  },
+  {
+   "text": "of",
+   "start": 31.74,
+   "end": 31.88,
+   "type": "word"
+  },
+  {
+   "text": "an",
+   "start": 31.88,
+   "end": 32.04,
+   "type": "word"
+  },
+  {
+   "text": "inch.",
+   "start": 32.04,
+   "end": 32.28,
+   "type": "word"
+  },
+  {
+   "text": "Now",
+   "start": 32.56,
+   "end": 32.64,
+   "type": "word"
+  },
+  {
+   "text": "she",
+   "start": 32.64,
+   "end": 32.84,
+   "type": "word"
+  },
+  {
+   "text": "clicks.",
+   "start": 32.84,
+   "end": 33.06,
+   "type": "word"
+  },
+  {
+   "text": "On",
+   "start": 33.34,
+   "end": 33.44,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 33.44,
+   "end": 33.54,
+   "type": "word"
+  },
+  {
+   "text": "MacBook,",
+   "start": 33.54,
+   "end": 33.9,
+   "type": "word"
+  },
+  {
+   "text": "that",
+   "start": 34.14,
+   "end": 34.28,
+   "type": "word"
+  },
+  {
+   "text": "click",
+   "start": 34.28,
+   "end": 34.46,
+   "type": "word"
+  },
+  {
+   "text": "is",
+   "start": 34.46,
+   "end": 34.64,
+   "type": "word"
+  },
+  {
+   "text": "fake.",
+   "start": 34.64,
+   "end": 34.88,
+   "type": "word"
+  },
+  {
+   "text": "The",
+   "start": 35.12,
+   "end": 35.22,
+   "type": "word"
+  },
+  {
+   "text": "pad",
+   "start": 35.22,
+   "end": 35.46,
+   "type": "word"
+  },
+  {
+   "text": "never",
+   "start": 35.46,
+   "end": 35.72,
+   "type": "word"
+  },
+  {
+   "text": "moves.",
+   "start": 35.72,
+   "end": 36.04,
+   "type": "word"
+  },
+  {
+   "text": "Four",
+   "start": 36.34,
+   "end": 36.52,
+   "type": "word"
+  },
+  {
+   "text": "force",
+   "start": 36.52,
+   "end": 36.78,
+   "type": "word"
+  },
+  {
+   "text": "sensors",
+   "start": 36.78,
+   "end": 37.18,
+   "type": "word"
+  },
+  {
+   "text": "feel",
+   "start": 37.18,
+   "end": 37.46,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 37.46,
+   "end": 37.62,
+   "type": "word"
+  },
+  {
+   "text": "press,",
+   "start": 37.62,
+   "end": 37.86,
+   "type": "word"
+  },
+  {
+   "text": "and",
+   "start": 38.04,
+   "end": 38.1,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 38.1,
+   "end": 38.2,
+   "type": "word"
+  },
+  {
+   "text": "magnet",
+   "start": 38.2,
+   "end": 38.38,
+   "type": "word"
+  },
+  {
+   "text": "taps",
+   "start": 38.38,
+   "end": 38.76,
+   "type": "word"
+  },
+  {
+   "text": "back",
+   "start": 38.76,
+   "end": 39.02,
+   "type": "word"
+  },
+  {
+   "text": "sideways.",
+   "start": 39.02,
+   "end": 39.4,
+   "type": "word"
+  },
+  {
+   "text": "Her",
+   "start": 39.66,
+   "end": 39.76,
+   "type": "word"
+  },
+  {
+   "text": "brain",
+   "start": 39.76,
+   "end": 39.96,
+   "type": "word"
+  },
+  {
+   "text": "fills",
+   "start": 39.96,
+   "end": 40.18,
+   "type": "word"
+  },
+  {
+   "text": "in",
+   "start": 40.18,
+   "end": 40.38,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 40.38,
+   "end": 40.48,
+   "type": "word"
+  },
+  {
+   "text": "click.",
+   "start": 40.48,
+   "end": 40.7,
+   "type": "word"
+  },
+  {
+   "text": "It",
+   "start": 41.1,
+   "end": 41.24,
+   "type": "word"
+  },
+  {
+   "text": "all",
+   "start": 41.24,
+   "end": 41.46,
+   "type": "word"
+  },
+  {
+   "text": "started",
+   "start": 41.46,
+   "end": 41.8,
+   "type": "word"
+  },
+  {
+   "text": "in",
+   "start": 41.8,
+   "end": 42.08,
+   "type": "word"
+  },
+  {
+   "text": "nineteen",
+   "start": 42.08,
+   "end": 42.391,
+   "type": "word"
+  },
+  {
+   "text": "ninety-four,",
+   "start": 42.391,
+   "end": 42.78,
+   "type": "word"
+  },
+  {
+   "text": "with",
+   "start": 43.28,
+   "end": 43.44,
+   "type": "word"
+  },
+  {
+   "text": "Cirque's",
+   "start": 43.44,
+   "end": 43.86,
+   "type": "word"
+  },
+  {
+   "text": "GlidePoint",
+   "start": 43.86,
+   "end": 44.34,
+   "type": "word"
+  },
+  {
+   "text": "in",
+   "start": 44.34,
+   "end": 44.56,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 44.56,
+   "end": 44.7,
+   "type": "word"
+  },
+  {
+   "text": "PowerBook",
+   "start": 44.7,
+   "end": 45.14,
+   "type": "word"
+  },
+  {
+   "text": "five",
+   "start": 45.14,
+   "end": 45.322,
+   "type": "word"
+  },
+  {
+   "text": "hundred.",
+   "start": 45.322,
+   "end": 45.64,
+   "type": "word"
+  },
+  {
+   "text": "So",
+   "start": 45.98,
+   "end": 46.14,
+   "type": "word"
+  },
+  {
+   "text": "your",
+   "start": 46.14,
+   "end": 46.3,
+   "type": "word"
+  },
+  {
+   "text": "touchpad",
+   "start": 46.3,
+   "end": 46.76,
+   "type": "word"
+  },
+  {
+   "text": "is",
+   "start": 46.76,
+   "end": 46.92,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 46.92,
+   "end": 47.2,
+   "type": "word"
+  },
+  {
+   "text": "grid",
+   "start": 47.2,
+   "end": 47.26,
+   "type": "word"
+  },
+  {
+   "text": "that",
+   "start": 47.26,
+   "end": 47.5,
+   "type": "word"
+  },
+  {
+   "text": "feels",
+   "start": 47.5,
+   "end": 47.82,
+   "type": "word"
+  },
+  {
+   "text": "charge",
+   "start": 47.82,
+   "end": 48.2,
+   "type": "word"
+  },
+  {
+   "text": "vanish,",
+   "start": 48.2,
+   "end": 48.58,
+   "type": "word"
+  },
+  {
+   "text": "and",
+   "start": 48.88,
+   "end": 49.0,
+   "type": "word"
+  },
+  {
+   "text": "a",
+   "start": 49.0,
+   "end": 49.12,
+   "type": "word"
+  },
+  {
+   "text": "fake",
+   "start": 49.12,
+   "end": 49.38,
+   "type": "word"
+  },
+  {
+   "text": "click",
+   "start": 49.38,
+   "end": 49.66,
+   "type": "word"
+  },
+  {
+   "text": "that",
+   "start": 49.66,
+   "end": 49.86,
+   "type": "word"
+  },
+  {
+   "text": "fools",
+   "start": 49.86,
+   "end": 50.08,
+   "type": "word"
+  },
+  {
+   "text": "your",
+   "start": 50.08,
+   "end": 50.28,
+   "type": "word"
+  },
+  {
+   "text": "brain.",
+   "start": 50.28,
+   "end": 50.54,
+   "type": "word"
+  },
+  {
+   "text": "Comment",
+   "start": 50.86,
+   "end": 51.0,
+   "type": "word"
+  },
+  {
+   "text": "TOUCH,",
+   "start": 51.0,
+   "end": 51.3,
+   "type": "word"
+  },
+  {
+   "text": "and",
+   "start": 51.54,
+   "end": 51.66,
+   "type": "word"
+  },
+  {
+   "text": "I'll",
+   "start": 51.66,
+   "end": 51.88,
+   "type": "word"
+  },
+  {
+   "text": "DM",
+   "start": 51.88,
+   "end": 52.04,
+   "type": "word"
+  },
+  {
+   "text": "you",
+   "start": 52.04,
+   "end": 52.24,
+   "type": "word"
+  },
+  {
+   "text": "the",
+   "start": 52.24,
+   "end": 52.36,
+   "type": "word"
+  },
+  {
+   "text": "full",
+   "start": 52.36,
+   "end": 52.6,
+   "type": "word"
+  },
+  {
+   "text": "breakdown.",
+   "start": 52.6,
+   "end": 52.96,
+   "type": "word"
+  }
+ ],
+ "text": "Your touchpad can't see your finger. It feels it stealing electricity. So how does that work? Under the surface sits a grid of copper wires. Rows one way, columns the other. Every crossing is a tiny capacitor, a spot that holds charge. Now Sofia rests one finger on the pad. Her skin conducts, so it pulls a little charge away from the crossings underneath. Then the chip checks every crossing, up to two hundred times a second, and hunts for the dip. But a typical pad has just sixteen wires across. So it compares how much each wire lost, and pins her finger to one nine-hundred-sixtieth of an inch. Now she clicks. On a MacBook, that click is fake. The pad never moves. Four force sensors feel the press, and a magnet taps back sideways. Her brain fills in the click. It all started in nineteen ninety-four, with Cirque's GlidePoint in the PowerBook five hundred. So your touchpad is a grid that feels charge vanish, and a fake click that fools your brain. Comment TOUCH, and I'll DM you the full breakdown."
+}

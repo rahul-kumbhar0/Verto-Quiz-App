@@ -1,0 +1,310 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>How a laptop touchpad works</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css"><link rel="stylesheet" href="props.css">
+<style>
+/* ---- touchpad reel (classes prefixed tp-) · speedy-hidden-mechanism · canwe.ai ----
+   Motion grammar from the 9-reel scan: photoreal plate + camera (push / pull-back), infinite zoom
+   into the sensor, portal flips dark⇄light, impact stack on the ONE biggest number (1/960). */
+.tp-dim{position:absolute;inset:0;background:#0B0C0E;opacity:0;pointer-events:none}
+.tp-arcs{position:absolute;left:0;top:0;width:1080px;height:1920px;pointer-events:none}
+.tp-arcs path{fill:none;stroke:var(--acc-hi);stroke-width:3;stroke-linecap:round;filter:drop-shadow(0 0 8px var(--acc))}
+.tp-wires{position:absolute;left:0;top:0;width:1080px;height:1920px}
+.tp-wires line{stroke-width:5;stroke-linecap:round}
+.tp-wires .row{stroke:var(--acc)} .tp-wires .col{stroke:var(--cool)}
+.tp-x{position:absolute;width:26px;height:26px;margin:-13px 0 0 -13px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 6px rgba(243,241,236,.18),0 0 24px var(--acc-glow);opacity:0}
+.tp-call{position:absolute;left:240px;top:1150px;width:600px;height:110px;border-radius:22px;background:rgba(17,18,22,.92);border:1.5px solid var(--g-line-hi);
+  display:flex;align-items:center;justify-content:center;gap:16px;font:600 32px Inter;color:var(--ink);opacity:0}
+.tp-call b{color:var(--acc-hi)}
+.tp-card{position:absolute;left:110px;top:640px;width:860px;height:620px;border-radius:30px;background:var(--p-raise);border:1.5px solid var(--p-line);
+  box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0}
+.tp-card .hd{position:absolute;left:30px;right:30px;top:22px;display:flex;align-items:center;font:600 26px Inter;color:var(--p-ink-2)}
+.tp-card .hd b{margin-left:auto;font:700 30px Mono;color:var(--p-ink);display:flex;align-items:baseline} .tp-card .hd b > span{font:500 24px Mono;color:var(--p-ink-2)}
+.tp-hz{font:700 34px/1 Mono;font-style:normal;color:var(--acc);display:inline-flex;overflow:hidden;height:1em}
+.tp-cell{position:absolute;width:114px;height:125px;display:grid;place-items:center;font:600 30px Mono;color:var(--p-ink)}
+.tp-cell::before{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--p-line)}
+.tp-cell span{position:relative;top:30px}
+.tp-cell.lo span{color:var(--acc);font-weight:700}
+.tp-gl{position:absolute;background:var(--p-line)}
+.tp-scan{position:absolute;left:30px;width:800px;height:125px;border-radius:14px;background:rgba(217,119,87,.13);border:2px solid rgba(217,119,87,.45);opacity:0}
+.tp-sel{position:absolute;width:120px;height:120px;border:3px solid #3B82F6;border-radius:10px;background:rgba(59,130,246,.10);opacity:0}
+.tp-sel::before,.tp-sel::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:#3B82F6}
+.tp-sel::before{left:-8px;top:-8px}.tp-sel::after{right:-8px;bottom:-8px}
+.tp-q{position:absolute;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);opacity:0}
+.tp-wl{position:absolute;top:760px;width:6px;height:300px;margin-left:-3px;border-radius:3px;background:var(--cool-lo);opacity:0}
+.tp-wn{position:absolute;top:1070px;width:44px;margin-left:-22px;text-align:center;font:600 22px Mono;color:var(--p-ink-2);font-style:normal;opacity:0}
+.tp-bar{position:absolute;bottom:860px;width:30px;margin-left:-15px;border-radius:8px 8px 3px 3px;background:var(--acc);height:0}
+.tp-bar i{position:absolute;left:50%;top:-38px;transform:translateX(-50%);font:700 22px Mono;color:var(--p-ink);font-style:normal;white-space:nowrap}
+.tp-w16{position:absolute;left:110px;top:650px;font:600 30px Inter;color:var(--p-ink-2);opacity:0}.tp-w16 b{font:700 64px Mono;color:var(--p-ink);margin-right:14px}
+.tp-mark{position:absolute;top:1105px;width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-bottom:26px solid var(--cool-lo);margin-left:-18px;opacity:0}
+.tp-mark b{position:absolute;left:-90px;top:30px;width:180px;text-align:center;font:600 22px Inter;color:var(--p-ink-2)}
+.tp-big{position:absolute;left:0;right:0;top:1120px;text-align:center;opacity:0}
+.tp-big span{display:inline-block;padding:10px 34px;border-radius:24px;background:var(--p-ink);color:var(--p-raise);font:800 82px Mono;letter-spacing:-2px}
+.tp-big small{display:block;margin-top:6px;font:600 26px Inter;color:var(--p-ink-2)}
+.tp-burst{position:absolute;left:519px;top:1080px}
+.tp-xv{position:absolute;left:40px;top:600px;width:1000px;height:720px;--accent:var(--acc)}
+.tp-xv .xp.on .xf.top{box-shadow:inset 0 0 0 3px var(--acc),0 0 46px var(--acc-glow)}
+.tp-fs{position:absolute;width:14%;height:16%;border-radius:8px;background:var(--acc);box-shadow:0 0 18px var(--acc-glow)}
+.tp-fake{position:absolute;left:0;right:0;top:520px;text-align:center;opacity:0}
+.tp-fake span{display:inline-block;padding:6px 26px;border:5px solid var(--bad);border-radius:14px;color:var(--bad);font:900 50px Inter;letter-spacing:6px;transform:rotate(-6deg)}
+.tp-side{position:absolute;left:300px;top:1235px;font:700 40px Inter;color:var(--acc-hi);opacity:0}
+.tp-brain{position:absolute;left:0;right:0;top:1240px;text-align:center;opacity:0}
+.tp-brain span{display:inline-block;padding:14px 30px;border-radius:999px;background:var(--g-raise);border:1.5px solid var(--g-line-hi);font:600 34px Inter;color:var(--ink)}
+.tp-hist{position:absolute;left:110px;top:640px;width:860px;border-radius:30px;background:var(--g-raise);border:1.5px solid var(--g-line-hi);padding:36px 40px;opacity:0}
+.tp-yr{font:800 150px/1 Mono;color:var(--ink);letter-spacing:-4px}
+.tp-row{display:flex;gap:22px;align-items:flex-start;margin-top:30px;opacity:0}
+.tp-row i{flex:none;width:16px;height:16px;margin-top:12px;border-radius:50%;background:var(--acc)}
+.tp-row b{display:block;font:700 36px Inter;color:var(--ink)} .tp-row span{font:500 27px Inter;color:var(--ink-2)}
+.tp-chip{position:absolute;left:110px;right:110px;padding:22px 30px;border-radius:24px;background:rgba(17,18,22,.9);border:1.5px solid var(--g-line-hi);font:600 34px Inter;color:var(--ink);opacity:0}
+.tp-chip b{color:var(--acc-hi);margin-right:12px;font-family:Mono}
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#D97757,#7A3A26);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:360px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <!-- HOOK · photoreal laptop, camera pushed in on the pad, finger hovering, charge arcs -->
+  <section class="scene" id="sHook">
+    <div class="fx-plate" id="pl1"><img src="img/laptop.jpg" alt=""></div>
+    <svg class="tp-arcs" id="arcs" viewBox="0 0 1080 1920"></svg>
+    <div class="finger" id="fg1"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+  </section>
+
+  <!-- GRID · infinite zoom laptop → glass → copper electrodes, then the grid is drawn -->
+  <section class="scene" id="sGrid">
+    <div class="fx-zchain" id="zc"><img src="img/laptop.jpg" alt=""><img src="img/glass.jpg" alt=""><img src="img/grid.jpg" alt=""></div>
+    <div class="tp-dim" id="dimG"></div>
+    <svg class="tp-wires" id="wires" viewBox="0 0 1080 1920"></svg>
+    <div id="xs"></div>
+    <div class="tp-call" id="call"><b>capacitor</b> = holds a tiny charge</div>
+    <div class="note l" id="nG" style="top:1300px">Illustration · typical pads: 16 × 12 wires</div>
+  </section>
+
+  <!-- SENSE (light) · Sofia's finger pulls charge, readings dip, the chip scans -->
+  <section class="scene" id="sSense">
+    <div class="tp-card" id="card"><div class="hd">touch controller<b><em class="tp-hz" id="hz">0</em><span>&nbsp;scans/s</span></b></div><div id="cells"></div>
+      <div class="tp-scan" id="scan"></div><div class="tp-sel" id="dipSel"></div></div>
+    <div id="qs"></div>
+    <div class="finger" id="fg2"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+    <div class="note r" id="nS" style="top:1300px">Readings simplified for illustration.</div>
+  </section>
+
+  <!-- WIRES (light) · only 16 wires → compare the losses → 1/960 inch -->
+  <section class="scene" id="sWire">
+    <div class="tp-w16" id="w16"><b id="w16n">0</b>wires across</div>
+    <div id="wl"></div>
+    <div class="tp-mark" id="mark"><b>Sofia's finger</b></div>
+    <div class="tp-burst" id="burst"></div>
+    <div class="tp-big" id="big"><span>1/960″</span><small>pinpointed between two wires</small></div>
+    <div class="note l" id="nW" style="top:1300px">≈ 960 counts per inch (Cirque patent)</div>
+  </section>
+
+  <!-- CLICK (dark) · the pad never moves: exploded Force Touch trackpad -->
+  <section class="scene" id="sClick">
+    <div class="tp-fake" id="fake"><span>FAKE CLICK</span></div>
+    <div class="xv tp-xv" id="xv"></div>
+    <div class="tp-side" id="side">⟵ tap ⟶</div>
+    <div class="tp-brain" id="brain"><span>🧠 your brain hears: “click”</span></div>
+    <div class="note r" id="nC" style="top:1300px">Force Touch trackpad (MacBook, 2015+) · layers simplified</div>
+  </section>
+
+  <!-- 1994 · credibility -->
+  <section class="scene" id="sHist">
+    <div class="tp-hist" id="hist"><div class="tp-yr" id="yr">0</div>
+      <div class="tp-row" id="h1"><i></i><div><b>Cirque GlidePoint</b><span>the first widely available touchpad</span></div></div>
+      <div class="tp-row" id="h2"><i></i><div><b>Apple PowerBook 500</b><span>16 May 1994 · a trackpad replaces the trackball</span></div></div></div>
+    <div class="note l" id="nH" style="top:1300px">Source: Wikipedia “Touchpad”, Apple launch coverage</div>
+  </section>
+
+  <!-- RECAP · arrival back on the laptop -->
+  <section class="scene" id="sRecap">
+    <div class="fx-plate" id="pl2"><img src="img/laptop_full.jpg" alt=""></div>
+    <div class="tp-chip" id="r1" style="top:1040px"><b>1</b>a grid that feels charge vanish</div>
+    <div class="tp-chip" id="r2" style="top:1150px"><b>2</b>a fake click that fools your brain</div>
+  </section>
+
+  <!-- CTA (light) · comment → DM -->
+  <section class="scene" id="sCTA">
+    <div class="cmts" id="cmts"><div class="h">Comments</div>
+      <div class="cm" id="cm1"><i style="background:#F59E0B"></i><div><small>Riya · 2m</small><b>TOUCH</b></div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm2"><i style="background:#8B5CF6"></i><div><small>Ankit · 1m</small><b>TOUCH</b> wait the click is fake??</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm3"><i style="background:#10B981"></i><div><small>Tara · 40s</small><b>TOUCH</b> 🤯</div><span class="hrt">♡</span></div>
+      <div class="cm" id="cm4"><i style="background:linear-gradient(135deg,#D97757,#7A3A26)"></i><div><small>you · now</small><b>TOUCH</b></div><span class="hrt" style="color:#FF3B5C">♥</span></div>
+      <div class="inp"><i></i><div class="box"><span id="ctx"></span><span class="ph" id="cph2">Add a comment…</span></div><span class="post" id="postBtn">Post</span></div>
+    </div>
+    <div class="dm" id="dm"><div class="av"><img src="canwe-logo.svg" alt="" style="width:100%;height:100%;border-radius:50%"></div><div><b class="bname"></b><span>the full touchpad breakdown 📩</span></div><em>now</em></div>
+    <div class="endcta" id="endcta"><span>Comment <b>TOUCH</b> 👇</span></div>
+  </section>
+
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="props.js"></script><script src="emph.js"></script>
+<script>
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp, $ } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+
+const T = { so: at("So how"), under: at("Under the"), rows: at("Rows one way"), cols: at("columns"), cross: at("Every crossing"), cap: at("capacitor"),
+  sofia: at("Now Sofia"), onpad: at("finger on the pad"), pulls: at("pulls"), chip: at("Then the chip"), n200: at("200"), dip: at("dip"),
+  but: at("But a typical"), n16: at("16"), lost: at("each wire lost"), pins: at("pins her finger"), n960: at("1/960"),
+  clicks: at("Now she clicks"), fake: at("fake"), moves: at("never moves"), four: at("Four"), magnet: at("magnet"), side: at("taps back sideways"), brain: at("Her brain"),
+  y1994: at("It all started"), glide: at("GlidePoint"), pb: at("PowerBook"), recap: at("So your touchpad"), g2: at("grid that feels"), fc: at("fake click"),
+  cta: at("Comment TOUCH"), stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+const PD = 0.6;                                             // portal duration
+
+R.setup({ push: 0.012, scenes: [
+  { id: "sHook", s: 0, e: T.under, enter: "none" },
+  { id: "sGrid", s: T.under, e: T.sofia + PD + 0.02, enter: "none" },
+  { id: "sSense", s: T.sofia + PD * 0.55, e: T.but, enter: "none" },
+  { id: "sWire", s: T.but, e: T.clicks + PD + 0.02, enter: "blurzoom" },
+  { id: "sClick", s: T.clicks + PD * 0.55, e: T.y1994, enter: "none" },
+  { id: "sHist", s: T.y1994, e: T.recap, enter: "blurzoom" },
+  { id: "sRecap", s: T.recap, e: T.cta, enter: "none" },
+  { id: "sCTA", s: T.cta, e: 999, enter: "swing" } ] });
+R.speedy({
+  light: [[T.sofia + PD, T.clicks + PD], [T.cta, 999]],
+  emph: window.EMPH,
+  avatar: { x: 240, y: 1330, w: 600, in: T.so },          // house "street" presenter; hidden through the hook (reference)
+  poses: [[T.n960 - 0.1, "hands_head"]], autoPoses: {},   // the ONE big number gets the big reaction
+  reactions: { maxGags: 0 },                             // no shades gag on the year 1994
+});
+
+// ---------- one-time builds ----------
+const GX = [220, 380, 540, 700, 860], GY = [700, 810, 920, 1030, 1140];
+R.$("wires").innerHTML = GY.map((y, i) => `<line class="row" id="rw${i}" x1="150" y1="${y}" x2="930" y2="${y}" pathLength="1"/>`).join("") +
+  GX.map((x, i) => `<line class="col" id="cl${i}" x1="${x}" y1="640" x2="${x}" y2="1200" pathLength="1"/>`).join("");
+R.$("xs").innerHTML = GY.flatMap((y, r) => GX.map((x, c) => `<i class="tp-x" id="x${r}_${c}" style="left:${x}px;top:${y}px"></i>`)).join("");
+const FC = [3, 1], cellXY = (c, r) => [30 + 114 * c, 90 + 125 * r];
+const target = (c, r) => { const d = Math.abs(c - FC[0]) + Math.abs(r - FC[1]); return d === 0 ? 62 : d === 1 ? (c === FC[0] ? 74 : 81) : d === 2 && c !== FC[0] && r !== FC[1] ? 90 : 100 - ((c * 7 + r * 3) % 3); };
+let ch = "";
+for (let i = 1; i < 7; i++) ch += `<i class="tp-gl" style="left:${30 + 114 * i}px;top:80px;width:1px;height:510px"></i>`;
+for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) { const [x, y] = cellXY(c, r); ch += `<div class="tp-cell${target(c, r) < 90 ? " lo" : ""}" style="left:${x}px;top:${y}px"><span id="v${c}_${r}">100</span></div>`; }
+R.$("cells").innerHTML = ch;
+const [sx, sy] = cellXY(FC[0], FC[1]); Object.assign(R.$("dipSel").style, { left: sx - 3 + "px", top: sy + 2 + "px" });
+const TIP = [110 + sx + 57, 640 + sy + 62];
+R.$("qs").innerHTML = Array.from({ length: 10 }, (_, i) => `<i class="tp-q" id="q${i}"></i>`).join("");
+const WX = i => 165 + i * 50, PEAK = 7.38, LOSS = i => Math.round(38 * Math.exp(-Math.pow(i - PEAK, 2) / 1.3));
+R.$("wl").innerHTML = Array.from({ length: 16 }, (_, i) => `<i class="tp-wl" id="wl${i}" style="left:${WX(i)}px"></i><i class="tp-wn" id="wn${i}" style="left:${WX(i)}px">${i + 1}</i>` +
+  `<i class="tp-bar" id="br${i}" style="left:${WX(i)}px">${LOSS(i) >= 15 ? `<i>−${LOSS(i)}%</i>` : ""}</i>`).join("");
+R.$("burst").style.left = WX(PEAK) + "px";
+const ARC0 = [560, 980];
+const FT = (tx, ty) => ({ x: tx + 337, y: ty - 6 });     // fingertip point -> R.finger key
+R.$("arcs").innerHTML = Array.from({ length: 6 }, (_, i) => `<path id="arc${i}" d=""/>`).join("");
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t);
+
+  // ===== HOOK: pushed-in on the pad → pull-back reveal on "So how" =====
+  R.fx.plate("pl1", t, [{ t: 0, s: 2.35, y: -40 }, { t: T.so - 0.1, s: 2.55, y: -60, ease: "power2InOut" }, { t: T.so + 0.75, s: 1.0, y: 0, ease: "expoInOut" }, { t: T.under, s: 1.0, y: 0 }]);
+  // R.finger's (x,y) is the knuckle pivot: the TIP lands at (x-337, y+6) because of the -22° tilt -> FT() converts a tip point
+  R.finger("fg1", t, Object.assign([{ t: 0.15, ...FT(ARC0[0] + 260, ARC0[1] + 520) }, { t: 0.75, ...FT(ARC0[0], ARC0[1] - 70) }, { t: at("stealing"), ...FT(ARC0[0], ARC0[1] - 70) },
+    { t: at("stealing") + 0.3, ...FT(ARC0[0], ARC0[1] - 50) }, { t: T.so, ...FT(ARC0[0], ARC0[1] - 60) }, { t: T.so + 0.45, ...FT(ARC0[0] + 300, ARC0[1] + 700) }], { out: T.so + 0.3 }));
+  const arcOn = prog(t, at("stealing") - 0.1, 0.15) * (1 - prog(t, T.so - 0.1, 0.25)), fr = Math.floor(t * 30);
+  for (let i = 0; i < 6; i++) {                        // charge arcs from the glass up into the fingertip
+    const el = R.$("arc" + i), x0 = ARC0[0] - 150 + i * 60 + R.fx.hash(fr * 7 + i) * 14, y0 = ARC0[1] + 90, x1 = ARC0[0] - 20 + i * 8, y1 = ARC0[1] - 50;
+    el.setAttribute("d", `M${x0} ${y0} Q${(x0 + x1) / 2 + R.fx.hash(fr * 3 + i) * 60} ${(y0 + y1) / 2 - 30} ${x1} ${y1}`);
+    el.style.opacity = arcOn * (0.45 + 0.55 * Math.abs(R.fx.hash(fr * 13 + i)));
+  }
+  R.cue("glitch", at("stealing"), { soft: true });
+
+  // ===== GRID: zoom through the glass into the copper, then draw rows / columns / crossings =====
+  R.fx.zoomChain("zc", t, T.under, T.under + 1.45, { k: 4 });
+  $("dimG").style.opacity = 0.62 * prog(t, T.rows - 0.3, 0.5);
+  GY.forEach((_, i) => { const el = $("rw" + i), p = ease.inOut(prog(t, T.rows + i * 0.08, 0.5)); el.style.strokeDasharray = 1; el.style.strokeDashoffset = 1 - p; });
+  GX.forEach((_, i) => { const el = $("cl" + i), p = ease.inOut(prog(t, T.cols + i * 0.08, 0.5)); el.style.strokeDasharray = 1; el.style.strokeDashoffset = 1 - p; });
+  R.cue("whoosh", T.rows, { soft: true });
+  GY.forEach((_, r) => GX.forEach((_, c) => pop("x" + r + "_" + c, t, T.cross + (r * 5 + c) * 0.035, { from: 0.2, sfx: r + c === 0 })));
+  pop("call", t, T.cap, { from: 0.7 });
+  R.note("nG", t, T.rows + 0.3, T.sofia);
+  R.fx.portal("sGrid", "sSense", t, T.sofia, { x: 240, y: 1150, w: 600, h: 110, r: 22 }, { d: PD });   // the callout opens into the light chapter
+
+  // ===== SENSE (light): finger rests, readings dip, chip scans 200×/s =====
+  R.card("card", t, { in: T.sofia + PD * 0.6, y: 50 });
+  R.finger("fg2", t, Object.assign([{ t: T.onpad - 0.5, ...FT(TIP[0] + 300, TIP[1] + 800) }, { t: T.onpad + 0.1, ...FT(TIP[0], TIP[1]) }, { t: T.but - 0.3, ...FT(TIP[0], TIP[1]) }, { t: T.but + 0.2, ...FT(TIP[0] + 300, TIP[1] + 900) }], { out: T.but - 0.1 }));
+  $("fg2").style.opacity = (+$("fg2").style.opacity || 0) * lerp(1, 0.32, ease.inOut(prog(t, T.chip, 0.5)));   // x-ray the finger so the readings stay legible
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) {
+    const d = Math.abs(c - FC[0]) + Math.abs(r - FC[1]);
+    count("v" + c + "_" + r, t, T.pulls + 0.1 + d * 0.12, 0.8, target(c, r), { from: 100 });
+  }
+  for (let i = 0; i < 10; i++) {                       // charge drifting from nearby crossings up into the fingertip
+    const c = FC[0] + [-1, 0, 1, -1, 1, 0, -2, 2, 0, -1][i], r = FC[1] + [0, 1, 0, 1, 1, 2, 0, 0, -1, -1][i], [x, y] = cellXY(clamp(c, 0, 6), clamp(r, 0, 3));
+    const a = T.pulls + (i % 5) * 0.32, p = ((t - a) % 1.6 + 1.6) % 1.6 / 1.6, live = t >= a && t < T.chip;
+    const el = $("q" + i); el.style.left = lerp(110 + x + 57, TIP[0], ease.inOut(p)) + "px"; el.style.top = lerp(640 + y + 62, TIP[1] - 20, ease.inOut(p)) + "px";
+    el.style.opacity = live ? Math.sin(Math.PI * p) : 0;
+  }
+  const scanOn = prog(t, T.chip, 0.2) * (1 - prog(t, T.but - 0.3, 0.2)), row = Math.floor(Math.max(0, t - T.chip) * 7) % 4;
+  Object.assign($("scan").style, { opacity: scanOn, top: 90 + 125 * row + "px" });
+  R.cue("type", T.chip, { t2: T.dip });
+  R.fx.odometer("hz", t, T.n200 - 0.05, 0.9, 200);
+  pop("dipSel", t, T.dip, { from: 1.3 });
+  R.note("nS", t, T.pulls + 0.4, T.but);
+
+  // ===== WIRES (light): 16 wires, compare losses, pin to 1/960 inch =====
+  rise("w16", t, T.n16 - 0.3, { dy: 20 }); count("w16n", t, T.n16 - 0.3, 0.6, 16);
+  for (let i = 0; i < 16; i++) {
+    rise("wl" + i, t, T.but + 0.2 + i * 0.03, { dy: 40 }); rise("wn" + i, t, T.n16 - 0.35 + i * 0.035, { dy: 14 });
+    const bp = ease.out3(prog(t, T.lost + Math.abs(i - PEAK) * 0.05, 0.6)), bl = $("br" + i).firstElementChild;
+    $("br" + i).style.height = (LOSS(i) * 6 * bp).toFixed(1) + "px"; if (bl) bl.style.opacity = clamp((bp - 0.6) * 3);
+  }
+  const mp = ease.out3(prog(t, T.pins, 0.55));
+  Object.assign($("mark").style, { left: lerp(540, WX(PEAK), mp) + "px", opacity: clamp(mp * 3) });
+  pop("big", t, T.n960 - 0.05, { from: 0.6 });
+  R.fx.shake("sWire", t, T.n960, { amp: 14, d: 0.5 });
+  R.fx.burst("burst", t, T.n960, { n: 16, r: 200 });
+  R.note("nW", t, T.n960 + 0.3, T.clicks);
+  R.fx.portal("sWire", "sClick", t, T.clicks, { x: 300, y: 1170, w: 480, h: 120, r: 24 }, { d: PD, dark: true });   // the 1/960 badge floods into the dark click chapter
+
+  // ===== CLICK (dark): fake click, exploded Force Touch trackpad =====
+  pop("fake", t, T.fake + 0.05, { from: 1.6, until: T.y1994 - 0.2 });
+  const corners = ["left:6%;top:8%", "right:6%;top:8%", "left:6%;bottom:8%", "right:6%;bottom:8%"].map(s => `<i class="tp-fs" style="${s}"></i>`).join("");
+  // xview measures its box when it first builds: only call it while its scene is displayed
+  if (t >= T.clicks + PD * 0.55 && t < T.y1994 + 0.4) R.xview("xv", t, { at: T.clicks + PD * 0.6, w: 400, d: 280, explode: T.moves - 0.1, gap: 64, tilt: [56, -30], labels: { x: 640, y0: 40, y1: 620, w: 330 },
+    parts: [ { name: "Glass", gloss: "what your finger touches", skin: "glass", th: 10, at: T.moves + 0.15 },
+             { name: "Sensor grid", gloss: "the copper crossings", skin: "pcb", th: 10, at: T.moves + 0.5 },
+             { name: "4 force sensors", gloss: "feel how hard you press", skin: "metal", th: 12, html: corners, at: T.four },
+             { name: "Taptic Engine", gloss: "a magnet that taps sideways", skin: "metal", w: 220, d: 110, th: 34, at: T.magnet } ],
+    focus: [[T.magnet + 0.15, 3], [T.brain, -1]] });
+  R.fx.shake("xv", t, T.side + 0.1, { amp: 12, d: 0.7, sfx: false }); R.cue("pop", T.side + 0.1, { soft: true });
+  rise("side", t, T.side, { dy: 10, until: T.brain });
+  pop("brain", t, T.brain + 0.1, { from: 0.7, until: T.y1994 - 0.2 });
+  R.note("nC", t, T.moves + 0.3, T.y1994);
+
+  // ===== 1994: credibility card, odometer year =====
+  R.card("hist", t, { in: T.y1994 + 0.05, y: 50 });
+  R.fx.odometer("yr", t, T.y1994 + 0.2, 1.1, 1994, { fmt: x => String(Math.round(x)) });
+  rise("h1", t, T.glide - 0.1, { dy: 22 }); rise("h2", t, T.pb - 0.1, { dy: 22 });
+  R.note("nH", t, T.pb + 0.3, T.recap);
+
+  // ===== RECAP: arrival (inverse zoom) back on the laptop =====
+  R.fx.inverseZoom("sHist", "sRecap", t, T.recap);
+  R.fx.plate("pl2", t, [{ t: T.recap, s: 1.06 }, { t: T.cta, s: 1.16, y: -30 }]);
+  rise("r1", t, T.g2 - 0.1, { dy: 30, blur: 8 }); rise("r2", t, T.fc - 0.1, { dy: 30, blur: 8 });
+
+  // ===== CTA (light): comment TOUCH → DM =====
+  R.card("cmts", t, { in: T.cta - 0.05, y: 60 });
+  [["cm1", T.cta + 0.1], ["cm2", T.cta + 0.25], ["cm3", T.cta + 0.4]].forEach(([id, a]) => rise(id, t, a, { dy: 16 }));
+  const tyA = T.cta + 0.3, posted = end("Comment TOUCH") + 0.3;
+  if (t < posted) R.type("ctx", "TOUCH", t, tyA, 10); else $("ctx").textContent = "";
+  $("cph2").style.display = (t < tyA || t >= posted) ? "" : "none";
+  R.press("postBtn", t, posted - 0.15);
+  $("cm4").style.display = t >= posted ? "" : "none"; rise("cm4", t, posted, { dy: 16 });
+  R.sheet("dm", t, at("DM"), { dy: -160, d: 0.5 });
+  pop("endcta", t, end("full breakdown.") + 0.1, { from: 0.6 });
+};
+window.seek(0);
+</script></body></html>

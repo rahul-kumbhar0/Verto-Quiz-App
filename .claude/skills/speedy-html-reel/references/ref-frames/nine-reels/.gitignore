@@ -1,0 +1,3 @@
+# third-party reel frames + verbatim transcripts stay local (repo is public)
+*.jpg
+transcripts/

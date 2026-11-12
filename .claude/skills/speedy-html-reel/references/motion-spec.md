@@ -76,3 +76,24 @@ change reads as one move. The headline is the only continuity across the cut.
 ## 8. Rhythm
 - A visible change every 1–2 s (word, pose, label); a transitions every 5–10 s; the camera never
   fully still (1–2 % push). The counter/matrix roll during, not after, the sentence.
+
+## 9. New from the 9-reel scan (12 Nov 2026)
+Measured on 9 more speedy_devv reels (34–137 s: co-op repo, tires, iPhone keyboard, PCA, touchscreen,
+DRAM, GitHub, Binance hack, meta): per-frame scene scores, 15 fps strips around the 3 biggest moves per
+reel, word-level transcripts. Full catalogue with timestamps: `ref-frames/nine-reels/KEYFRAMES-AND-MOTION.md`;
+keyframe sheets (one frame per beat) in the same folder.
+- **Rhythm:** a new visual every 2.6–3.5 s; pace **3.1–3.85 words/s (avg 3.45)** with a ≥0.3 s breath
+  every ~4 s. **Hard cuts are rare** (0 in 6 of 9 reels; peak scene score 0.10–0.30): every change is a move.
+- **Photoreal hero + camera** (tires, glove+phone, DRAM): ONE object, the camera pushes, pulls back to
+  reveal, or whip-pans with **directional** motion blur → `R.fx.plate(el,t,keys)` (photoreal still + keys
+  `{t,x,y,s,r,focus}`; SVG blur along the velocity). Plates: AI stills or product photos, graded graphite.
+- **Infinite zoom** through nested layers (chip → die → cells) → `R.fx.zoomChain(el,t,a,b,{k})`.
+- **Portal theme flip**: a rounded card grows to fill the frame in the next theme → `R.fx.portal(out,in,t,at,box,{dark})`;
+  time R.speedy's `light` range to start at `at + d`.
+- **Shrink into a device**: the whole scene shrinks into a phone screen and becomes its content (M.morph the
+  scene wrapper into the screen box). **Persistent hero**: the object stays, only its screen content swaps.
+- **Data morph**: a dot cloud bursts into thumbnails / a chart dissolves into flying clusters (the data IS the seam).
+- **Photo + value badges**: the one real cut goes to a full-bleed photo; $ badges pop around a point with blur.
+- **Presenter**: first entrance slides up from the bottom edge; may sink/peek on data-heavy beats.
+- Captions confirmed on all 9: spoken word bold white, earlier words thin grey, **future words not shown**,
+  one selection box per phrase that stays lit; inline emoji only when it IS the object.

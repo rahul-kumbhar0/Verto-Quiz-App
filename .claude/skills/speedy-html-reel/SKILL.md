@@ -82,7 +82,7 @@ lint, caption/cover/DM package); then apply the speedy-specific rules below (bea
 glosses, markup).
 Pick the preset (table above: tool demo / hidden mechanism / system design), fill the beat sheet (every row has a line, a
 stage object and a pose), then write `script.md` with the emphasis markup: `[box]` on the one
-keyword per phrase, `*bold*` on 1–2 structure words, optional `{pose}` pins. Pace ≈3.0 w/s (ElevenLabs Shlok; 2.6 for voice-studio).
+keyword per phrase, `*bold*` on 1–2 structure words, optional `{pose}` pins. Pace ≈3.4 w/s — the reference average (9 reels: 3.1–3.85); the cloned voice (generate_voiceover) lands at ~3.4 naturally.
 ```bash
 python3 $W/tools/mark_script.py $P/script.md $P      # -> narration.txt, emph.json, poses.json
 ```
@@ -129,7 +129,17 @@ missing, a rail label wrapping, a pose that points at nothing, a `phrase not fou
 ## 4. Voice → real timings
 Write `narration_spoken.txt`: ONE SENTENCE PER LINE, numbers and acronyms spelled the way they
 are said ("twelve thousand two hundred eighty-eight", "G P T three"); `display.json` merges them
-back to "12,288" / "GPT-3" on screen. Default route, no questions — the **voice-studio** skill
+back to "12,288" / "GPT-3" on screen.
+**Owner's own cloned voice (preferred when the `generate_voiceover` MCP tool is available):** send the
+whole spoken text in one call (`language:"en"`, `model:"multi"`, `exaggeration:0.5`), poll `get_voiceover`
+until `done`, download the mp3, then align it to the known text (whisper word timings mapped onto your
+tokens; needs `pip install faster-whisper`):
+```bash
+ffmpeg -i vo.mp3 -ar 48000 -ac 1 $P/audio/voice_raw.wav
+cd $P && python3 $W/tools/align_known.py audio/voice_raw.wav narration_spoken.txt words.json   # prints matched/total, w/s, pauses
+```
+It lands at ~3.4 w/s with natural stops every ~4 s, so `pace.py` is not needed (worked example:
+`assets/examples/touchpad-reel/`, 53 s, 168/182 words matched exactly). Otherwise the **voice-studio** skill
 (local, offline, no credits; voice `house` = the brand narrator):
 ```bash
 VS=<voice-studio skill folder>
@@ -200,7 +210,9 @@ stock puppet was used.
 - `references/hook-openers.md` — **the first 1.5 s**: 14 built hook openers (topic gag, reaction + rewind, grab the proof, sidekick, thought bubble, full frame 0, big face, flash-forward, split, bright frame, script hooks, freeze frame, promise counter, loop) with how each is built; demo `assets/examples/hook-gallery/`
 - `references/motion-graphics.md` — **edit level 3, motion graphics**: `mg.js` kit (springs, speed ramps, trim-path draw, packets, iris/morph seams, masked word rise, marker + strike, echo trails, shockwave rings, rays, gauges, living dot grid), the scene recipes and the per-reel checklist; demo `assets/examples/mg-demo/` (the LinkedIn reel rebuilt)
 - `references/advanced-editing.md` — **edit level 2**: the 12 rules (camera never locked, cuts on beats, transition = meaning, signature shot, layered sound design, real motion blur) + the `fx.js` kit API (`R.fx.cam/whip/zoomThrough/flip/flash/leak/glitch/shake/sheen/letters/odometer/scramble/code/burst/beats`); demo `assets/examples/fx-demo/`. READ IT for every new reel
-- `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence
+- `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence; §9 = the 9-reel scan (rhythm 3.45 w/s, a beat every ~3 s, almost no hard cuts, photo plates + camera, infinite zoom, portal flips)
+- `references/ref-frames/nine-reels/` — 9 more reference reels taken apart: one keyframe per beat (sheets), `KEYFRAMES-AND-MOTION.md` (numbers, 13-move catalogue with timestamps), word-timed transcripts
+- `assets/examples/touchpad-reel/` — "How a laptop touchpad works": photo plates (`R.fx.plate`), infinite zoom into the sensor (`R.fx.zoomChain`), two portal flips (`R.fx.portal`), exploded Force Touch pad, owner's cloned voice + `align_known.py`
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls
 - `references/avatar.md` — pose library, timing, recolouring, PNG character mode
 - `references/ref-frames/` — contact sheets, key frames, pose catalogue of the references

@@ -216,6 +216,92 @@
     if (o.sfx !== false) R.cue("pop", at);
   };
 
+  // ---------- PHOTO PLATES · INFINITE ZOOM · PORTAL FLIP (from the 9-reel scan, 11 Nov 2026) ----------
+  // The 3D-hero reels (tires, glove+phone, DRAM) never cut: one photoreal object, a camera that
+  // pushes / pulls back / whips across it with DIRECTIONAL motion blur, layers you zoom through, and
+  // dark⇄light flips where a card grows into the next theme. references/motion-spec.md §9.
+  const svgNS = "http://www.w3.org/2000/svg";
+  const dirBlur = id => {
+    let f = document.getElementById(id);
+    if (!f) {
+      let s = document.getElementById("fxDefs");
+      if (!s) { s = document.createElementNS(svgNS, "svg"); s.id = "fxDefs"; s.setAttribute("width", 0); s.setAttribute("height", 0); s.style.position = "absolute"; document.body.appendChild(s); }
+      f = document.createElementNS(svgNS, "filter"); f.id = id;
+      ["x", "y"].forEach(k => f.setAttribute(k, "-25%")); ["width", "height"].forEach(k => f.setAttribute(k, "150%"));
+      const g = document.createElementNS(svgNS, "feGaussianBlur"); g.setAttribute("stdDeviation", "0 0"); f.appendChild(g); s.appendChild(f);
+    }
+    return f.firstChild;
+  };
+  /** plate: a photoreal still (AI render / product photo) as the hero, filmed by a camera WITH INTENT.
+   *  el = .fx-plate wrapper (needs an id) holding one <img>. keys: [{t, x, y, s, r, focus, ease}]
+   *  x/y = pan px, s = zoom (keep ≥ 1.06 so edges never show), r = roll deg, focus = lens blur px.
+   *  Blur follows the velocity DIRECTION (SVG feGaussianBlur), so a whip pan streaks sideways and a
+   *  pull-back smears radially-ish, like the reference. Moves faster than ~220 px in < 0.6 s cue a swish. */
+  F.plate = (el, t, keys, o = {}) => {
+    el = $(el); if (!el || !keys.length) return; const img = el.querySelector("img") || el;
+    const val = tt => {
+      let k0 = keys[0], k1 = keys[0], p = 0;
+      for (let i = 0; i < keys.length - 1; i++) if (tt >= keys[i].t) { k0 = keys[i]; k1 = keys[i + 1]; p = clamp((tt - k0.t) / Math.max(0.001, k1.t - k0.t)); }
+      if (tt >= keys[keys.length - 1].t) { k0 = k1 = keys[keys.length - 1]; p = 1; }
+      const e = (E[k1.ease || "power2InOut"] || E.power2InOut)(p), g = (k, d) => lerp(k0[k] ?? d, k1[k] ?? k0[k] ?? d, e);
+      return { x: g("x", 0), y: g("y", 0), s: g("s", 1.08), r: g("r", 0), f: g("focus", 0) };
+    };
+    const a = val(t), b = val(t - 1 / 30);
+    const dx = o.drift === false ? 0 : noise(t * 0.5) * 6, dy = o.drift === false ? 0 : noise(t * 0.45 + 7) * 5;
+    img.style.transformOrigin = o.origin || "50% 50%";
+    img.style.transform = `translate(${(a.x + dx).toFixed(1)}px,${(a.y + dy).toFixed(1)}px) rotate(${a.r.toFixed(2)}deg) scale(${a.s.toFixed(4)})`;
+    const vx = a.x - b.x, vy = a.y - b.y, vs = (a.s - b.s) * 900, k = (o.k ?? 0.42) / Math.max(1, a.s);
+    const sx = Math.min(40, Math.max(0, Math.abs(vx) - 3) * k + Math.abs(vs) * 0.22), sy = Math.min(40, Math.max(0, Math.abs(vy) - 3) * k + Math.abs(vs) * 0.22);
+    const parts = [];
+    if (o.mblur !== false && el.id && sx + sy > 0.4) { dirBlur("mb_" + el.id).setAttribute("stdDeviation", `${sx.toFixed(1)} ${sy.toFixed(1)}`); parts.push(`url(#mb_${el.id})`); }
+    if (a.f > 0.3) parts.push(`blur(${a.f.toFixed(1)}px)`);
+    if (o.grade !== "") parts.push(o.grade || "saturate(.86) contrast(1.05)");   // graphite grade (look.md); "" = untouched
+    img.style.filter = parts.join(" ");
+    keys.forEach((kk, i) => { if (i && kk.whoosh !== false && kk.t - keys[i - 1].t < 0.6 &&
+      Math.hypot((kk.x || 0) - (keys[i - 1].x || 0), (kk.y || 0) - (keys[i - 1].y || 0)) + Math.abs((kk.s ?? 1.08) - (keys[i - 1].s ?? 1.08)) * 400 > 220) R.cue("swish", keys[i - 1].t); });
+  };
+  /** infinite zoom through nested plates (chip → die → cells → one bit). el = .fx-zchain with N <img>:
+   *  image i is the detail at the CENTRE of image i-1 at 1/k of its size (compose the stills that way).
+   *  The camera runs from layer 0 to layer N-1 between a and b; inner layers feather in through an
+   *  elliptical mask that opens as they grow, so there is never a seam. Riser cue under the dive. */
+  F.zoomChain = (el, t, a, b, o = {}) => {
+    el = $(el); if (!el) return; const imgs = [...el.querySelectorAll("img")], k = o.k ?? 4, N = imgs.length;
+    const ez = E[o.ease || "power2InOut"] || E.power2InOut, U = tt => (N - 1) * ez(prog(tt, a, b - a));
+    const u = U(t), S = Math.pow(k, u);
+    imgs.forEach((im, i) => {
+      const s = S / Math.pow(k, i);
+      im.style.transformOrigin = "50% 50%"; im.style.transform = `scale(${s.toFixed(4)})`;
+      im.style.display = s > 60 || s < 0.02 ? "none" : "";
+      if (i === 0) return;
+      const X = lerp(40, 100, clamp((s - 0.45) / 0.6));   // mask opens from a soft centre to full frame
+      const m = `radial-gradient(ellipse 72% 72% at 50% 50%, #000 ${X.toFixed(1)}%, transparent 100%)`;
+      im.style.maskImage = m; im.style.webkitMaskImage = m; im.style.opacity = clamp((s - 1 / k) / 0.35);
+    });
+    const v = Math.abs(u - U(t - 1 / 30)) * 30;   // layers per second
+    el.style.filter = v > 0.5 ? `blur(${Math.min(9, (v - 0.5) * 5).toFixed(1)}px)` : "";
+    if (o.sfx !== false) R.cue("riser", a, { t2: b });
+  };
+  /** portal: a rounded card grows from box {x,y,w,h,r} (the card on screen) to fill the frame in the
+   *  NEXT theme — the reference's dark⇄light chapter flip (9222, 18413). Paints #fxPortal just above
+   *  the canvas, grid locked to the stage. Outgoing scene sinks + blurs, incoming rises out of it.
+   *  o.dark:true floods to the dark canvas (light→dark). Start R.speedy's light range at at + d. */
+  F.portal = (outEl, inEl, t, at, box, o = {}) => {
+    let P = $("fxPortal");
+    if (!P) { P = document.createElement("div"); P.id = "fxPortal"; (document.querySelector(".s-light") || document.querySelector(".s-bg")).after(P); }
+    const d = o.d ?? 0.6, p = prog(t, at, d), e = E.expoInOut(p), id = "portal" + at, hold = o.hold ?? 0.3;
+    if (o.sfx !== false) R.cue("swish", at);
+    if (p > 0 && t < at + d + hold) {
+      const x = lerp(box.x, 0, e), y = lerp(box.y, 0, e);
+      P.dataset.owner = id; P.className = o.dark ? "s-bg" : "s-light";
+      Object.assign(P.style, { display: "block", opacity: 1, zIndex: 1, left: x + "px", top: y + "px", width: lerp(box.w, 1080, e) + "px", height: lerp(box.h, 1920, e) + "px",
+        borderRadius: lerp(box.r ?? 28, 0, e) + "px", backgroundPosition: `${-x - 1}px ${-y - 1}px`, boxShadow: `0 40px 90px rgba(0,0,0,${(0.5 * (1 - e)).toFixed(2)})` });
+    } else if (P.dataset.owner === id) { P.style.display = "none"; P.dataset.owner = ""; }
+    const A = $(outEl), B = $(inEl);
+    if (A && p > 0 && p < 1) { A.style.transform = `scale(${1 - 0.07 * e})`; A.style.opacity = 1 - clamp(p * 1.8); A.style.filter = `blur(${(e * 12).toFixed(1)}px)`; }
+    const q0 = at + d * 0.55;
+    if (B && t >= q0 && t < q0 + 0.55) { const q = E.expoOut(prog(t, q0, 0.5)); B.style.transform = `translateY(${((1 - q) * 70).toFixed(1)}px) scale(${lerp(0.95, 1, q).toFixed(4)})`; B.style.opacity = q; B.style.filter = q < 1 ? `blur(${((1 - q) * 14).toFixed(1)}px)` : ""; }
+  };
+
   // ---------- BEAT SYNC ----------
   /** beat grid from the music.json you pass to music.py: R.fx.beats({bpm, groove_in}) */
   F.beats = (cfg) => { const b = 60 / cfg.bpm, g = cfg.groove_in || 0, out = []; for (let i = 0; g + i * b < (cfg.dur || 120); i++) out.push(+(g + i * b).toFixed(3)); F._beats = out; F._beat = b; return out; };
