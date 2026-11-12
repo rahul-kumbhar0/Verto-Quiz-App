@@ -20,7 +20,7 @@ body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font
 <script>["captions","presenter","chapter-rail","hero-stat","repo-card","flow-nodes","tracked-labels","agent-log","strike-row","ending-comment","light-wipe"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));</script>
 <script>
 // ---- word clock ----
-const W = window.WORDS.filter(w => w.type === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const W = window.WORDS.filter(w => (w.type || "word") === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
 const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word + " #" + n); };
 const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
 const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id), C = KF.C;
@@ -30,7 +30,7 @@ const T = { starred: at("starred"), free1: at("free", 1), heres: at("Here's", 1)
 const S = { s1: [0, T.s1 - 0.1], s2: [T.s1 - 0.1, T.s3 - 0.1], s4: [T.s3 - 0.1, T.catch - 0.15], s5: [T.catch - 0.15, T.cta - 0.1], s6: [T.cta - 0.1, DUR] };
 
 // ---- blocks ----
-const cap = KF.make("captions", "cap", { words: W, keys: ["free.", "answering.", "Code.", "Groq.", "bill.", "catch.", "weaker.", "it.", "FREE"], max: 4, size: 62 });
+const cap = KF.make("captions", "cap", { words: W, keys: ["free.", "answering.", "Code.", "Groq.", "bill!", "catch.", "weaker.", "it.", "FREE,"], max: 4, size: 62 });
 const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#D97757", chain: "#F2C14E", lens1: "#F0A585", lens2: "#D97757" },
   poses: [[0, "point_cam"], [T.heres - 0.1, "think"], [T.s1 - 0.1, "one"], [T.fcc - 0.1, "offer"], [T.s2 - 0.1, "two"], [T.nvidia - 0.1, "three"], [T.s3 - 0.1, "three"], [T.zero - 0.2, "thumbs"], [T.catch - 0.1, "stop"], [T.notclaude - 0.1, "shrug"], [T.company - 0.1, "cross"], [T.cta - 0.1, "point_cam"]],
   talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
@@ -40,7 +40,7 @@ const wipe = KF.make("light-wipe", "wipe", { color: "#7fd0ff" });
 const stat = KF.make("hero-stat", "s1", { from: 0, to: 68932, prefix: "★ ", label: "people starred this on GitHub", top: 40, size: 170, glow: C.gold });
 // the hero: one pipeline that grows through steps 1–3 (Claude Code app → Free Claude Code on your laptop → free models)
 const pipe = KF.make("flow-nodes", "pipe", { nodes: [
-  { id: "app", label: "Claude Code", sub: "the app you open", x: 540, y: 70, color: C.accent, at: T.answering - 0.4 },
+  { id: "app", label: "Claude Code", sub: "the app you open", x: 540, y: 70, color: C.accent, at: T.heres + 0.2 },
   { id: "fcc", label: "Free Claude Code", sub: "runs on your laptop", x: 540, y: 250, color: C.blue, at: T.fcc - 0.1, w: 420 },
   { id: "nv", label: "NVIDIA", sub: "free key", x: 230, y: 440, color: C.green, at: T.nvidia - 0.05, w: 270, h: 120 },
   { id: "go", label: "Google", sub: "free key", x: 540, y: 440, color: C.gold, at: T.google - 0.05, w: 270, h: 120 },
@@ -60,7 +60,7 @@ const cta = KF.make("ending-comment", "s6", { keyword: "FREE", pill: "for the se
 
 // ---- sound cues ----
 const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
-cue("riser", 0.05, { t2: 1.4 }); for (let k = 0; k < 10; k++) cue("tick", 0.2 + k * 0.12, { soft: true }); cue("impact", T.free1); cue("whoosh", T.heres); cue("pop", T.answering - 0.4);
+cue("riser", 0.05, { t2: 1.4 }); for (let k = 0; k < 10; k++) cue("tick", 0.2 + k * 0.12, { soft: true }); cue("impact", T.free1); cue("whoosh", T.heres); cue("pop", T.heres + 0.2); cue("pop", T.heres + 0.4, { soft: true });
 cue("whoosh", S.s2[0]); cue("land", S.s2[0] + 0.35); for (let k = 0; k < 6; k++) cue("tick", T.repo - 0.4 + k * 0.15, { soft: true }); cue("ding", T.repo + 0.5); cue("pop", T.fcc); cue("swish", T.fcc + 0.3, { soft: true });
 cue("tap", T.key); [T.nvidia, T.google, T.groq].forEach(x => { cue("pop", x); cue("swish", x + 0.2, { soft: true }); });
 cue("whoosh", S.s4[0]); cue("type", T.s3 + 0.2, { t2: T.s3 + 0.8 }); [0, 1, 2, 3].forEach(i => cue("tick", T.open + 0.3 + i * 0.45)); cue("ding", T.bill);
@@ -78,9 +78,9 @@ window.seek = t => {
   // hook: count up, then the question "what's actually answering?"
   if (on("s1")) { stat.frame(t, { p: E.out(P(t, 0.05, 1.6)), show: 1 - P(t, T.heres - 0.2, 0.3) }); }
   // the pipeline: visible from "answering" until the catch, moves aside while the repo card / session are on screen
-  const pv = t >= T.answering - 0.45 && t < S.s5[0], pe = $("pipe"); pe.style.display = pv ? "" : "none";
+  const pv = t >= T.heres + 0.15 && t < S.s5[0], pe = $("pipe"); pe.style.display = pv ? "" : "none";
   if (pv) { const repoUp = t >= S.s2[0] && t < T.fcc - 0.2, sessUp = t >= S.s4[0]; pe.style.opacity = repoUp || sessUp ? 0 : 1 - P(t, S.s5[0] - 0.25, 0.25);
-    pipe.frame(t, { active: t < T.fcc ? ["app"] : t < T.nvidia ? ["fcc"] : ["nv", "go", "gq"] }); qm.style.opacity = t < T.fcc - 0.2 ? P(t, T.answering - 0.2, 0.3) : 0; }
+    pipe.frame(t, { active: t < T.fcc ? ["app"] : t < T.nvidia ? ["fcc"] : ["nv", "go", "gq"] }); qm.style.opacity = t < T.fcc - 0.2 ? P(t, T.heres + 0.35, 0.3) : 0; }
   if (t >= S.s2[0] && t < T.fcc - 0.2) { $("s2").style.display = ""; repo.frame(t, { show: P(t, S.s2[0], 0.6), count: E.inOut(P(t, T.repo - 0.6, 1.0)) }); $("s2").style.opacity = 1 - P(t, T.fcc - 0.45, 0.25); } else $("s2").style.display = "none";
   wipe.frame(t, { p: P(t, S.s4[0] - 0.3, 0.55) });
   if (on("s4")) { sess.frame(t, { show: P(t, S.s4[0], 0.4), n: 4 * P(t, T.open, T.same - T.open + 0.4) }); bill.frame(t, { p: 1, show: E.back(P(t, T.zero - 0.15, 0.3)) }); }
