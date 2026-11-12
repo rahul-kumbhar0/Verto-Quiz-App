@@ -71,7 +71,7 @@ Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block fold
 
 | Block | What it shows |
 |---|---|
-| [`props`](props/) | Small drawn objects used as metaphors. One block, pick the object with `kind`. |
+| [`props`](props/) | Realistic metaphor objects, each with its own multi-stage action. Materials are lit from the top-left (brushed steel, gold, glass, plastic, paper), every object stands on a soft floor shadow and gets a rim light. |
 
 ## E. Transitions and effects
 
