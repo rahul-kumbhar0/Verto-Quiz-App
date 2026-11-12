@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Free Claude Code: setup, free keys and the catch · canwe.ai</title>
+<meta name="description" content="Free Claude Code is an open-source tool that runs the Claude Code app on free AI models. Safe install, which free key to get, the settings, and what to keep off it.">
+<meta property="og:title" content="Claude Code for free? Here's what's actually answering.">
+<meta property="og:description" content="The app is Claude Code. The brain is a free model. Setup, free keys, settings and the catches.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Claude Code for free. <span class="sel"><i></i><b>The brain isn't Claude.</b></span></h1>
+  <p class="lead">Free Claude Code is an open-source tool (68,932 ★ on GitHub, 12 Nov 2026) that runs on your laptop. You open the normal Claude Code app, and the tool sends your requests to a free AI model instead of Claude. Here's the setup, which free key to get, and what to keep off it.</p>
+  <div class="chips"><span class="chip">github.com/Alishahryar1/free-claude-code</span><span class="chip">Mac · Windows · Linux</span><span class="chip">not from Anthropic</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>How it works</a>
+    <a href="#s2"><small>02</small>Install it safely</a>
+    <a href="#s3"><small>03</small>Get a free key</a>
+    <a href="#s4"><small>04</small>Open Claude Code</a>
+    <a href="#s5"><small>05</small>The catches</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>How it works (10 seconds)</h2>
+    <div class="feat">
+      <div><span>💻</span><div><b>The app:</b> Claude Code (or Codex, Cline, OpenCode and 8 more coding apps).</div></div>
+      <div><span>🔀</span><div><b>The middle:</b> Free Claude Code, running on your laptop. It catches every request the app sends.</div></div>
+      <div><span>🧠</span><div><b>The brain:</b> a model from the provider you pick, like NVIDIA, Google or Groq, on their free tier. Not Claude.</div></div>
+    </div>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Install it (check the script first)</h2>
+    <p><b>Mac / Linux.</b> The install is one line that downloads a script and runs it. Before running anything like that, look at what it does. This one has a dry run that only prints its commands:</p>
+    <div class="code pad"><button class="cp">Copy</button>curl -fsSL "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.sh" | sh -s -- --dry-run</div>
+    <p>Happy with it? Run it for real:</p>
+    <div class="code pad"><button class="cp">Copy</button>curl -fsSL "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.sh" | sh</div>
+    <p><b>Windows (PowerShell):</b></p>
+    <div class="code pad"><button class="cp">Copy</button>& ([scriptblock]::Create((irm "https://raw.githubusercontent.com/Alishahryar1/free-claude-code/main/scripts/install.ps1")))</div>
+    <p style="color:var(--mute);font-size:15px">It installs <b>uv</b> (a Python tool manager), then asks which coding apps you want. Pick only <b>Claude Code</b> if that's all you use; it comes from Anthropic's own installer.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Get a free key (the settings)</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>Start it.</strong> Windows / Mac: open <b>Free Claude Code</b> from your apps. Linux: run <code>fcc-server</code> and keep that terminal open. The <b>Admin</b> page opens.</div></li>
+      <li><b>2</b><div><strong>Default (the project's own pick): NVIDIA.</strong> Make a key at <b>build.nvidia.com/settings/api-keys</b>. In Admin → <b>Providers</b> → <b>NVIDIA NIM</b> → <b>Add key</b> → paste → <b>Save</b>. Leave the model on the default (<code>nvidia/nemotron-3-ultra-550b-a55b</code>) → <b>Apply</b>.</div></li>
+      <li><b>3</b><div><strong>Backups:</strong> a <b>Google AI Studio</b> key (aistudio.google.com/apikey) or a <b>Groq</b> key (console.groq.com/keys), added the same way. Turn on fallback so it switches when one runs out.</div></li>
+      <li><b>4</b><div><strong>Optional:</strong> in Admin, turn on <b>Proxy Authentication</b> so nothing else on your network can use your proxy.</div></li>
+    </ul>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>Open Claude Code like normal</h2>
+    <p><b>VS Code:</b> install the Claude Code extension, then in Admin → <b>Integrations</b> → <b>Connect</b> on its card, and reload VS Code. In the terminal, use the launcher the installer added. Same commands as always. Your answers now come from the free model.</p>
+    <p style="color:var(--mute);font-size:15px">To go back to real Claude, click <b>Disconnect</b> on the same card.</p>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>The catches</h2>
+    <div class="feat">
+      <div><span>🧠</span><div><b>It's not Claude.</b> Free models are good for practice and small fixes. On long, hard tasks they're weaker. For your hardest work, real Claude is still better.</div></div>
+      <div><span>🏢</span><div><b>Your code goes to the provider you pick.</b> Read their data rules, because free tiers may keep or use what you send. Never put company or client code through it. Practice projects only.</div></div>
+      <div><span>⏳</span><div><b>Free limits belong to the providers.</b> They can shrink or end any time. The tool's "1.3 billion free tokens a month" is a total across providers, not a promise.</div></div>
+      <div><span>📄</span><div><b>Not from Anthropic.</b> It's an independent open-source project (AGPL licence).</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more free AI tools, with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Not affiliated with Free Claude Code, Anthropic, NVIDIA, Google or Groq. Facts from the project's README and install script (checked 12 Nov 2026). Free tiers and features can change — check the repo before you rely on them.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

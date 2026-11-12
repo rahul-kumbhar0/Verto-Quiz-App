@@ -1,0 +1,8 @@
+Sixty eight thousand people starred a repo that runs Claude Code for free. Here's what's actually answering.
+Step one. Install a free GitHub repo called Free Claude Code.
+Step two. Get a free key, from NVIDIA, Google or Groq.
+Step three. Open Claude Code like normal. Same app, same commands, zero bill.
+But here's the catch.
+The brain isn't Claude. It's a free model, so hard tasks come out weaker.
+And your code goes to whichever company you pick, so keep private projects off it.
+Comment FREE and I'll DM you the setup, plus the exact settings.
