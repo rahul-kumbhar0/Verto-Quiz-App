@@ -37,6 +37,14 @@
   KF.asset = p => KF.base + "_assets/" + p;
   KF.img = url => { const im = new Image(); im.src = url; window.__ready = Promise.all([window.__ready, im.decode().catch(() => {})]); return im; };
   KF.covers = (n = 24) => Array.from({ length: n }, (_, i) => KF.asset("covers/c" + String(i + 1).padStart(2, "0") + ".jpg"));
+  /** multi-key animation: KF.keys(t, [[time, value, ease?], …]) → value at t (numbers or equal-length arrays). ease names: out in inOut expo back (applies to the segment that ENDS at that key). */
+  KF.keys = (t, K) => { if (t <= K[0][0]) return K[0][1]; for (let i = 1; i < K.length; i++) if (t <= K[i][0]) { const a = K[i - 1], b = K[i], p = (KF.ease[b[2]] || (x => x))(KF.prog(t, a[0], b[0] - a[0])); return Array.isArray(a[1]) ? a[1].map((v, k) => lerp(v, b[1][k], p)) : lerp(a[1], b[1], p); } return K[K.length - 1][1]; };
+  /** a burst of sparks at (x, y) starting at t0: deterministic, with gravity and fade. opts { n, color, speed, life, g, size, seed, spread: [a0, a1] radians } */
+  KF.sparks = (ctx, t, t0, x, y, o = {}) => { const d = t - t0, life = o.life || 0.7; if (d < 0 || d > life) return; const n = o.n || 18, sp = o.speed || 420, g = o.g ?? 900, a0 = (o.spread || [0, 6.283])[0], a1 = (o.spread || [0, 6.283])[1]; ctx.save(); ctx.globalCompositeOperation = "lighter";
+    for (let i = 0; i < n; i++) { const sd = (o.seed || 1) * 31 + i, an = lerp(a0, a1, KF.hash(sd)), v = sp * (0.35 + 0.65 * KF.hash(sd + 0.3)), px = x + Math.cos(an) * v * d, py = y + Math.sin(an) * v * d + 0.5 * g * d * d, k = 1 - d / life, r = (o.size || 5) * (0.5 + KF.hash(sd + 0.7)) * k;
+      ctx.fillStyle = KF.rgba(o.color || "#ffd166", k); ctx.beginPath(); ctx.arc(px, py, r, 0, 7); ctx.fill(); ctx.strokeStyle = KF.rgba(o.color || "#ffd166", 0.5 * k); ctx.lineWidth = r * 0.8; ctx.beginPath(); ctx.moveTo(px, py); ctx.lineTo(px - Math.cos(an) * v * 0.04, py - Math.sin(an) * v * 0.04 - g * d * 0.04); ctx.stroke(); } ctx.restore(); };
+  /** a soft light band sweeping across a rectangle (glass / metal sheen). p 0..1 */
+  KF.sheen = (ctx, x, y, w, h, p, a = 0.35) => { if (p <= 0 || p >= 1) return; const cx = x - w * 0.4 + (w * 1.8) * p, g = ctx.createLinearGradient(cx - w * 0.25, y, cx + w * 0.25, y + h * 0.4); g.addColorStop(0, "rgba(255,255,255,0)"); g.addColorStop(0.5, `rgba(255,255,255,${a})`); g.addColorStop(1, "rgba(255,255,255,0)"); ctx.save(); ctx.globalCompositeOperation = "lighter"; ctx.fillStyle = g; ctx.fillRect(x, y, w, h); ctx.restore(); };
   KF.define = (name, fn) => (KF.blocks[name] = fn);
   KF.make = (name, host, opts) => { if (!KF.blocks[name]) throw new Error("KF block not loaded: " + name); return KF.blocks[name](KF.host(host), opts || {}); };
   KF.demo = d => KF.demos.push(d);

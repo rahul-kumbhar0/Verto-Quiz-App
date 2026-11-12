@@ -1,11 +1,11 @@
-/* multiply-field: one thing becomes a whole field of them, laid back in perspective with depth haze ("that's 180 full stadiums", 700 agents, 5,000 students).
- * The items are drawn pictures, not icons: "stadium" (stands, crowd, striped pitch, floodlights), "person" (6 different people), "phone" (lit screens), "laptop".
- * opts:  { n: how many, glyph: "stadium"|"person"|"phone"|"laptop" | draw: (ctx, variant) => {} (your own 400×300 drawing), cols, tilt: 0..1 }
- * state: { p: 0..1 (0 = one big item, 1 = the full field), show: 0..1 } · api: frame(t, state) · count(state) → how many are on screen (for a counter) */
+/* multiply-field: one thing becomes a whole field of them on a real 3D ground: the camera starts close on ONE item, then cranes up and pulls back while the rest drop in around it, with shadows, depth haze and floodlight glow ("that's 180 full stadiums", 700 agents, 5,000 students).
+ * The items are drawn pictures: "stadium" (stands, crowd, striped pitch, floodlights, wall height), "person" (6 different people), "phone" (lit screens), "laptop".
+ * opts:  { n: how many, glyph: "stadium"|"person"|"phone"|"laptop" | draw: (ctx, variant) => {} (your own 400×300 drawing), flat: true if the drawing is seen from above (stadium) }
+ * state: { p: 0..1 (0 = one item close-up, 1 = the full field from the air), show: 0..1 } · api: frame(t, state) · count(state) → how many are on screen (for a counter) */
 KF.define("multiply-field", (host, o) => {
-  const { ctx, w, h, clear } = KF.canvas(host), n = o.n || 180, cols = o.cols || Math.ceil(Math.sqrt(n * 0.62)), rows = Math.ceil(n / cols), g = o.glyph || "stadium", tilt = o.tilt ?? 0.55, AW = 400, AH = 300, H = KF.hash;
+  const { ctx, w, h, clear } = KF.canvas(host), n = o.n || 180, g = o.glyph || "stadium", tilt = o.tilt ?? 0.55, AW = 400, AH = 300, H = KF.hash;
   const ART = {
-    stadium(c, v) { c.translate(200, 158); c.scale(1, 0.72); c.fillStyle = "rgba(0,0,0,.45)"; c.beginPath(); c.ellipse(0, 26, 196, 150, 0, 0, 7); c.fill();
+    stadium(c, v) { c.translate(200, 150);
       const st = c.createRadialGradient(0, 0, 70, 0, 0, 190); st.addColorStop(0, "#56617f"); st.addColorStop(0.55, "#3a425c"); st.addColorStop(1, "#232a40"); c.fillStyle = st; KF.rr(c, -186, -150, 372, 300, 130); c.fill(); c.strokeStyle = "#8f9bb8"; c.lineWidth = 5; c.stroke();
       for (let r = 0; r < 3; r++) { c.strokeStyle = `rgba(255,255,255,${0.10 + r * 0.05})`; c.lineWidth = 2; KF.rr(c, -168 + r * 20, -134 + r * 19, 336 - r * 40, 268 - r * 38, 112 - r * 18); c.stroke(); }
       const cc = ["#ff5a5a", "#F2C14E", "#7fd0ff", "#ffffff", "#3ECF8E", "#D97757"]; for (let i = 0; i < 520; i++) { const a = H(i * 3 + v) * 6.283, rr = 0.62 + 0.34 * H(i * 7 + v), x = Math.cos(a) * 176 * rr, y = Math.sin(a) * 140 * rr; if (Math.abs(x) < 116 && Math.abs(y) < 76) continue; c.fillStyle = cc[i % 6]; c.globalAlpha = 0.55; c.fillRect(x, y, 3, 3); } c.globalAlpha = 1;
@@ -23,12 +23,25 @@ KF.define("multiply-field", (host, o) => {
       const cc = ["#c792ea", "#a5e075", "#7fd0ff", "#F2C14E", "#cfd6e4"]; for (let i = 0; i < 9; i++) { c.fillStyle = cc[(i + v) % 5]; KF.rr(c, 96 + (i % 3) * 12, 64 + i * 15, 60 + 110 * H(i * 5 + v), 7, 3); c.fill(); }
       c.fillStyle = "#3a3f4a"; c.beginPath(); c.moveTo(40, 232); c.lineTo(360, 232); c.lineTo(336, 216); c.lineTo(64, 216); c.closePath(); c.fill(); c.fillStyle = "#262a33"; KF.rr(c, 40, 232, 320, 14, 7); c.fill(); },
   };
-  const NV = g === "stadium" ? 3 : 6, sprites = Array.from({ length: NV }, (_, v) => { const cv = document.createElement("canvas"); cv.width = AW; cv.height = AH; const c = cv.getContext("2d"); (o.draw || ART[g] || ART.stadium)(c, v); return cv; });
-  const rowScale = j => KF.lerp(1 - tilt * 0.6, 1, j / Math.max(1, rows - 1)), slot = k => { const i = k % cols, j = Math.floor(k / cols), rw = w * 0.94 * rowScale(j), s = rw / cols; let y = h * 0.17; for (let q = 0; q < j; q++) y += (w * 0.94 * rowScale(q) / cols) * 0.6; return [w / 2 - rw / 2 + (i + 0.5) * s, y + s * 0.37, s * 1.02, j]; };
-  const draw = (k, x, y, s, a) => { if (a <= 0) return; ctx.globalAlpha = a; ctx.drawImage(sprites[k % NV], x - s / 2, y - s * 0.375, s, s * 0.75); };
-  return { frame(t, s = {}) { clear(); const p = KF.clamp(s.p ?? 1), a = KF.clamp(s.show ?? 1), e = KF.ease.inOut(KF.clamp(p * 3)), shown = 1 + (n - 1) * KF.ease.in(KF.clamp((p - 0.18) / 0.82));
-      for (let k = 1; k < n; k++) { const q = KF.clamp(shown - k); if (q <= 0) break; const [x, y, sz, j] = slot(k), haze = 0.72 + 0.28 * (j / Math.max(1, rows - 1)); draw(k, x, y - (1 - KF.ease.out(q)) * 30, sz * (0.6 + 0.4 * KF.ease.back(q)), a * Math.min(1, q * 2) * haze); }
-      const [x0, y0, s0] = slot(0); draw(0, KF.lerp(w / 2, x0, e), KF.lerp(h * 0.47, y0, e), KF.lerp(w * 0.8, s0, e), a * KF.lerp(1, 0.72, e)); ctx.globalAlpha = 1;
-      const fog = ctx.createLinearGradient(0, h * 0.12, 0, h * 0.5); fog.addColorStop(0, "rgba(12,12,15,.9)"); fog.addColorStop(1, "rgba(12,12,15,0)"); ctx.fillStyle = fog; ctx.globalAlpha = e; ctx.fillRect(0, 0, w, h * 0.5); ctx.globalAlpha = 1; },
-    count: (s = {}) => Math.round(1 + (n - 1) * KF.ease.in(KF.clamp(((s.p ?? 1) - 0.18) / 0.82))) };
+  const flat = o.flat ?? g === "stadium", NV = flat ? 3 : 6, sprites = Array.from({ length: NV }, (_, v) => { const cv = document.createElement("canvas"); cv.width = AW; cv.height = AH; const c = cv.getContext("2d"); (o.draw || ART[g] || ART.stadium)(c, v); return cv; });
+  const dark = sprites.map(sp => { const cv = document.createElement("canvas"); cv.width = AW; cv.height = AH; const c = cv.getContext("2d"); c.drawImage(sp, 0, 0); c.globalCompositeOperation = "source-in"; c.fillStyle = "#0d1020"; c.fillRect(0, 0, AW, AH); return cv; });
+  // items on a square grid, ordered from the centre outwards so the field grows around the first one
+  const side = Math.ceil(Math.sqrt(n)), cells = []; for (let i = 0; i < side; i++) for (let j = 0; j < side; j++) cells.push([i - (side - 1) / 2, j - (side - 1) / 2]);
+  cells.sort((a, b) => Math.hypot(a[0], a[1]) - Math.hypot(b[0], b[1]) || a[1] - b[1]); const c0 = cells[0], P = cells.slice(0, n).map((c, k) => ({ x: (c[0] - c0[0]) * 1.18, z: (c[1] - c0[1]) * 1.18, k, r: Math.hypot(c[0], c[1]) })), R = P[n - 1].r * 1.18 + 1;
+  let pr = () => null;
+  return { frame(t, s = {}) { clear(); const p = KF.clamp(s.p ?? 1), a = KF.clamp(s.show ?? 1), e = KF.ease.inOut(p), shown = 1 + (n - 1) * KF.ease.in(KF.clamp((p - 0.12) / 0.8));
+      // camera: low and close → high and far, with a slow orbit
+      const D = KF.lerp(flat ? 1.9 : 2.4, R * 2.15, e), Hc = KF.lerp(flat ? 1.7 : 0.7, R * 1.55, e), yaw = 0.25 * Math.sin(t * 0.25) * e + 0.12 * (1 - e), cy = Math.cos(yaw), sy = Math.sin(yaw), L = Math.hypot(D, Hc), fz = D / L, fy = -Hc / L, F = w * 1.15, squash = Hc / L;
+      const proj = (x, y, z) => { const X = x * cy - z * sy, Z = x * sy + z * cy + D, Y = y - Hc, zv = Y * fy + Z * fz, yv = Y * fz - Z * fy; return zv > 0.05 ? [w / 2 + F * X / zv, h * 0.6 - F * yv / zv, F / zv, zv] : null; }; pr = proj;
+      const sky = ctx.createLinearGradient(0, 0, 0, h); sky.addColorStop(0, "#05060a"); sky.addColorStop(0.5, "#0b0d16"); sky.addColorStop(1, "#10131f"); ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
+      ctx.strokeStyle = "rgba(140,160,220,.07)"; ctx.lineWidth = 1; for (let i = -side; i <= side; i++) { let A = proj(i * 1.18 + 0.59, 0, -R), B = proj(i * 1.18 + 0.59, 0, R); if (A && B) { ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke(); } A = proj(-R, 0, i * 1.18 + 0.59); B = proj(R, 0, i * 1.18 + 0.59); if (A && B) { ctx.beginPath(); ctx.moveTo(A[0], A[1]); ctx.lineTo(B[0], B[1]); ctx.stroke(); } }
+      const items = []; for (const it of P) { const q = KF.clamp(shown - it.k); if (q <= 0) continue; const drop = it.k === 0 ? 0 : (1 - KF.ease.out(q)) * 1.6, sc = it.k === 0 ? 1 : KF.keys(q, [[0, 0.3], [0.6, 1.14, "out"], [1, 1, "inOut"]]), g0 = proj(it.x, 0, it.z), top = proj(it.x, drop, it.z); if (g0 && top) items.push({ it, q, g0, top, sc }); }
+      items.sort((A, B) => B.g0[3] - A.g0[3]); const far = D + R;
+      for (const { it, q, g0, top, sc } of items) { const sz = g0[2] * 1.06 * sc, fog = KF.clamp(1 - (g0[3] - D * 0.6) / (far * 1.25)) , al = a * Math.min(1, q * 2.5) * (0.35 + 0.65 * fog), v = it.k % NV;
+        ctx.globalAlpha = al * 0.55 * (1 - 0.6 * KF.clamp(top[1] < g0[1] ? (g0[1] - top[1]) / 200 : 0)); ctx.fillStyle = "#000"; ctx.beginPath(); ctx.ellipse(g0[0], g0[1] + sz * 0.02, sz * 0.5, sz * 0.5 * squash * (flat ? 0.78 : 0.22), 0, 0, 7); ctx.fill(); ctx.globalAlpha = al;
+        if (flat) { const hh = sz * 0.75 * squash, wall = sz * 0.07 * (1 - squash * 0.6); for (let i = 3; i >= 1; i--) ctx.drawImage(dark[v], top[0] - sz / 2, top[1] - hh / 2 + wall * i / 3, sz, hh); ctx.drawImage(sprites[v], top[0] - sz / 2, top[1] - hh / 2, sz, hh);
+          if (sz > 90) { ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = al * (0.5 + 0.2 * Math.sin(t * 9 + it.k)); [[-0.37, -0.28], [0.37, -0.28], [-0.37, 0.28], [0.37, 0.28]].forEach(([dx, dy]) => { const gx = top[0] + dx * sz, gy = top[1] + dy * sz * squash, gr = sz * 0.2, gl = ctx.createRadialGradient(gx, gy, 0, gx, gy, gr); gl.addColorStop(0, "rgba(255,250,225,.85)"); gl.addColorStop(1, "rgba(255,250,225,0)"); ctx.fillStyle = gl; ctx.fillRect(gx - gr, gy - gr, 2 * gr, 2 * gr); }); ctx.globalCompositeOperation = "source-over"; } }
+        else ctx.drawImage(sprites[v], top[0] - sz / 2, top[1] - sz * 0.75 * 0.94, sz, sz * 0.75); }
+      ctx.globalAlpha = 1; const hz = ctx.createLinearGradient(0, 0, 0, h * 0.42); hz.addColorStop(0, "rgba(5,6,10,.95)"); hz.addColorStop(1, "rgba(5,6,10,0)"); ctx.fillStyle = hz; ctx.globalAlpha = 0.4 + 0.6 * e; ctx.fillRect(0, 0, w, h * 0.42); ctx.globalAlpha = 1; },
+    count: (s = {}) => Math.round(1 + (n - 1) * KF.ease.in(KF.clamp(((s.p ?? 1) - 0.12) / 0.8))) };
 });

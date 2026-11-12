@@ -1,6 +1,6 @@
 # canwe.ai keyframes
 
-Reusable scene blocks for our reels: 43 folders. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
+Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
 
 **Rule:** every block is a pure function of time. Build it once with `KF.make(name, host, opts)`, then call `frame(t, state)` on every `seek(t)`. No clocks, no randomness, so a render always comes out the same.
 
@@ -22,6 +22,7 @@ Reusable scene blocks for our reels: 43 folders. Each block folder has `block.js
 - `_assets/covers/c01…c24.jpg`: 24 of our own reel covers (270×480). `KF.covers()` returns their URLs; `thumb-wall` uses them by default.
 - `_assets/frames.jpg`: 96 real frames from 8 of our finished reels (12×8 sheet, 54×96 each); `frame-wall` uses it by default.
 - Refresh them when new reels ship (ffmpeg commands in RECORD.md, KEYFRAMES section). `KF.asset(path)` / `KF.img(url)` load anything else you add there.
+- Advanced helpers in `kf.js`: `KF.keys(t, [[time, value, ease], …])` (multi-stage motion: wind-up, overshoot, settle), `KF.sparks(ctx, t, t0, x, y, opts)` (impact sparks), `KF.sheen(ctx, x, y, w, h, p)` (light sweeping across glass). Put a `finish` block on top of every scene for grain, vignette, bloom and handheld drift.
 - Realism rule (group C onward): real pictures over placeholders, drawn objects over emoji, numbers only if they are true.
 
 ## A. Diagram blocks
@@ -59,12 +60,12 @@ Reusable scene blocks for our reels: 43 folders. Each block folder has `block.js
 
 | Block | What it shows |
 |---|---|
-| [`hero-stat`](hero-stat/) | One huge number that counts up like a real odometer: every digit is a wheel that turns, the fast ones blur, and it settles with a small bounce and a glow. |
-| [`multiply-field`](multiply-field/) | One thing becomes a whole field of them, laid back in perspective with depth haze ("that's 180 full stadiums", 700 agents, 5,000 students). |
-| [`frame-wall`](frame-wall/) | A wall of tiny REAL video frames streaming past in rows ("over 5,000 frames, one by one", every photo, every commit). |
-| [`thumb-wall`](thumb-wall/) | Rows of real vertical video covers drifting past in opposite directions, laid back in perspective ("the videos on this account", a body of work, a feed). |
-| [`strike-row`](strike-row/) | A row of things, each crossed out with a red marker stroke ("no camera, no drawing, no editing"), or ticked in green. |
-| [`before-after`](before-after/) | Two pictures behind a sliding divider with a glass handle, like a real comparison slider (old vs new, without vs with, slow vs fast). |
+| [`hero-stat`](hero-stat/) | One huge number on a real mechanical counter. Every digit is a wheel in its own housing (curved shading top and bottom, like a car odometer); the wheels spin with blur, land one after another from the left with a click-bounce, then a light sweeps across the glass and sparks fly. |
+| [`multiply-field`](multiply-field/) | One thing becomes a whole field of them on a real 3D ground: the camera starts close on ONE item, then cranes up and pulls back while the rest drop in around it, with shadows, depth haze and floodlight glow ("that's 180 full stadiums", 700 agents, 5,000 students). |
+| [`frame-wall`](frame-wall/) | A wall of thousands of REAL video frames, seen at an angle like a wall of prints: rows recede into the distance, far rows are out of focus, a light sweeps across, and one frame can fly out of the wall toward the camera ("over 5,000 frames, one by one"). |
+| [`thumb-wall`](thumb-wall/) | Rows of real vertical video covers drifting past at three depths (far row small and soft, near row big), with glass reflections; one cover can lift out, straighten up and start PLAYING like a real reel (progress bar, like / comment / share buttons, a heart pop). |
+| [`strike-row`](strike-row/) | A row of solid tiles holding illustrated objects. Each one drops in with a bounce, then gets crossed out by a rough red marker stroke that hits hard (the tile recoils and tilts, sparks fly, the object goes grey), or gets a green tick with a sparkle ("no camera, no drawing, no editing"). |
+| [`before-after`](before-after/) | Two pictures behind a sliding divider with a glass handle, like a real comparison slider; a fingertip presses the handle and drags it (old vs new, without vs with, slow vs fast). |
 
 ## D. Metaphor props
 
@@ -95,6 +96,7 @@ Reusable scene blocks for our reels: 43 folders. Each block folder has `block.js
 | [`ending-comment`](ending-comment/) | The "Comment KEYWORD" ending: big call to action, the keyword typed into a comment box and sent, then our DM reply drops in. |
 | [`loop-back`](loop-back/) | The reel ends on its own first frame, so the replay is seamless (helper `KF.loopBack`, no block.js). |
 | [`cover`](cover/) | The reel cover (grid thumbnail): kicker pill, big headline with one phrase in the blue selection box, a footer line, over a darkened still. |
+| [`finish`](finish/) | The camera-lens layer that makes drawn scenes feel filmed: film grain, a vignette, a faint lens bloom and (optional) a slow handheld drift you apply to your scene. |
 | [`podcast-set`](podcast-set/) | Our own two-person demo podcast, to use as sample footage (see its README). |
 
 ## Known limits

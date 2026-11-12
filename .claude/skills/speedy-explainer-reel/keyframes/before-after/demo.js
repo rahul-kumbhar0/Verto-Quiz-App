@@ -1,3 +1,3 @@
-KF.demo({ name: "before-after", group: "C", line: "Two versions behind a real comparison slider", dur: 5, build(host) {
+KF.demo({ name: "before-after", group: "C", line: "A finger drags a real comparison slider", dur: 6, build(host) {
   const ba = KF.make("before-after", host, { labels: ["Still loading", "Loaded"], w: 760, h: 860, top: 60 }), A = KF.make("product-page", ba.a, { top: 0, w: 760 }), B = KF.make("product-page", ba.b, { top: 0, w: 760 });
-  return t => { A.frame(t, { load: 0.1, ms: 1400, slow: true }); B.frame(t, { load: 1, ms: 180 }); ba.frame(t, { show: KF.prog(t, 0, 0.5), x: 0.5 + 0.36 * Math.sin((t - 0.6) * 1.4) * KF.prog(t, 0.6, 0.5) }); }; } });
+  return t => { A.frame(t, { load: 0.1, ms: 1400, slow: true }); B.frame(t, { load: 1, ms: 180 }); const x = KF.keys(t, [[0, 0.5], [1.4, 0.5], [2.6, 0.14, "inOut"], [3.1, 0.14], [4.6, 0.86, "inOut"], [5.2, 0.86], [5.9, 0.5, "inOut"]]); ba.frame(t, { show: KF.prog(t, 0, 0.5), x, touch: KF.prog(t, 0.8, 0.5) * (1 - KF.prog(t, 5.5, 0.4)) }); }; } });

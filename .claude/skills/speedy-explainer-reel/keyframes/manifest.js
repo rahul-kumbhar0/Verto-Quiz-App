@@ -5,5 +5,5 @@ window.KF_MANIFEST = [
   ["C", "hero-stat"], ["C", "multiply-field"], ["C", "frame-wall"], ["C", "thumb-wall"], ["C", "strike-row"], ["C", "before-after"],
   ["D", "props"],
   ["E", "code-reveal"], ["E", "light-wipe"], ["E", "stage-flip"], ["E", "blade-cut"], ["E", "film-strip"], ["E", "clip-stack"],
-  ["F", "captions"], ["F", "presenter"], ["F", "chapter-rail"], ["F", "ending-follow"], ["F", "ending-comment"], ["F", "loop-back"], ["F", "cover"],
+  ["F", "captions"], ["F", "presenter"], ["F", "chapter-rail"], ["F", "ending-follow"], ["F", "ending-comment"], ["F", "loop-back"], ["F", "cover"], ["F", "finish"],
 ];

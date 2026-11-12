@@ -1,2 +1,3 @@
-KF.demo({ name: "strike-row", group: "C", line: "\"No camera, no drawing, no editing\"", dur: 4.5, build(host) {
-  const s = KF.make("strike-row", host, { items: [{ art: "camera", label: "camera", at: 0.2, strike: 0.9 }, { art: "tablet", label: "drawing", at: 0.6, strike: 1.6 }, { art: "timeline", label: "editing", at: 1.0, strike: 2.3 }, { art: "chat", label: "one sentence", at: 2.8, tick: 3.3 }], size: 200 }); return t => s.frame(t); } });
+KF.demo({ name: "strike-row", group: "C", line: "Each one drops in, then gets struck out", dur: 5, build(host) {
+  const s = KF.make("strike-row", host, { items: [{ art: "camera", label: "camera", at: 0.2, strike: 1.0 }, { art: "tablet", label: "drawing", at: 0.5, strike: 1.7 }, { art: "timeline", label: "editing", at: 0.8, strike: 2.4 }, { art: "chat", label: "one sentence", at: 3.0, tick: 3.6 }], size: 200 }), fb = KF.box(host, "left:0;top:0;width:1080px;height:1000px"), fin = KF.make("finish", fb, {});
+  return t => { s.frame(t); fin.frame(t, { flash: [1.16, 1.86, 2.56].reduce((a, x) => Math.max(a, t >= x && t < x + 0.12 ? 0.12 * (1 - (t - x) / 0.12) : 0), 0) }); }; } });

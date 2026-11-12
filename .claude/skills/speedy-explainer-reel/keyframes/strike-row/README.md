@@ -1,6 +1,6 @@
 # strike-row
 
-A row of things, each crossed out with a red marker stroke ("no camera, no drawing, no editing"), or ticked in green.
+A row of solid tiles holding illustrated objects. Each one drops in with a bounce, then gets crossed out by a rough red marker stroke that hits hard (the tile recoils and tilts, sparks fly, the object goes grey), or gets a green tick with a sparkle ("no camera, no drawing, no editing").
 
 ![preview](preview.jpg)
 
