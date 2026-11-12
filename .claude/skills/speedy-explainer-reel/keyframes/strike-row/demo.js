@@ -1,2 +1,2 @@
-KF.demo({ name: "strike-row", group: "C", line: "\"No camera, no drawing, no editing\"", dur: 4, build(host) {
-  const s = KF.make("strike-row", host, { items: [{ icon: "📷", label: "camera", at: 0.2, strike: 0.9 }, { icon: "✏️", label: "drawing", at: 0.6, strike: 1.6 }, { icon: "🎞️", label: "editing", at: 1.0, strike: 2.3 }, { icon: "💬", label: "one sentence", at: 2.7, tick: 3.2 }], size: 190 }); return t => s.frame(t); } });
+KF.demo({ name: "strike-row", group: "C", line: "\"No camera, no drawing, no editing\"", dur: 4.5, build(host) {
+  const s = KF.make("strike-row", host, { items: [{ art: "camera", label: "camera", at: 0.2, strike: 0.9 }, { art: "tablet", label: "drawing", at: 0.6, strike: 1.6 }, { art: "timeline", label: "editing", at: 1.0, strike: 2.3 }, { art: "chat", label: "one sentence", at: 2.8, tick: 3.3 }], size: 200 }); return t => s.frame(t); } });

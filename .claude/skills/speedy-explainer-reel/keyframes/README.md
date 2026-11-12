@@ -18,6 +18,12 @@ Reusable scene blocks for our reels: 43 folders. Each block folder has `block.js
 - Adding a block: new folder with `block.js` (header comment = its docs) + `demo.js`, add it to `manifest.js`.
 
 
+## Real material (`_assets/`)
+- `_assets/covers/c01…c24.jpg`: 24 of our own reel covers (270×480). `KF.covers()` returns their URLs; `thumb-wall` uses them by default.
+- `_assets/frames.jpg`: 96 real frames from 8 of our finished reels (12×8 sheet, 54×96 each); `frame-wall` uses it by default.
+- Refresh them when new reels ship (ffmpeg commands in RECORD.md, KEYFRAMES section). `KF.asset(path)` / `KF.img(url)` load anything else you add there.
+- Realism rule (group C onward): real pictures over placeholders, drawn objects over emoji, numbers only if they are true.
+
 ## A. Diagram blocks
 
 | Block | What it shows |
@@ -53,12 +59,12 @@ Reusable scene blocks for our reels: 43 folders. Each block folder has `block.js
 
 | Block | What it shows |
 |---|---|
-| [`hero-stat`](hero-stat/) | One huge glowing number that rolls up (views, users, money, "18.2M"). |
-| [`multiply-field`](multiply-field/) | One thing becomes a whole field of them ("that's 180 full stadiums", 700 agents, 5,000 people) laid back in perspective. |
-| [`frame-wall`](frame-wall/) | A wall of thousands of tiny frames streaming past ("over 5,000 frames, one by one", every photo, every commit). |
-| [`thumb-wall`](thumb-wall/) | Rows of vertical video covers drifting past in opposite directions ("the videos on this account", a body of work, a feed). |
-| [`strike-row`](strike-row/) | A row of things, each crossed out in red ("no camera, no drawing, no editing"), or ticked in green. |
-| [`before-after`](before-after/) | Two pictures side by side behind a sliding divider (old vs new, without vs with, slow vs fast). |
+| [`hero-stat`](hero-stat/) | One huge number that counts up like a real odometer: every digit is a wheel that turns, the fast ones blur, and it settles with a small bounce and a glow. |
+| [`multiply-field`](multiply-field/) | One thing becomes a whole field of them, laid back in perspective with depth haze ("that's 180 full stadiums", 700 agents, 5,000 students). |
+| [`frame-wall`](frame-wall/) | A wall of tiny REAL video frames streaming past in rows ("over 5,000 frames, one by one", every photo, every commit). |
+| [`thumb-wall`](thumb-wall/) | Rows of real vertical video covers drifting past in opposite directions, laid back in perspective ("the videos on this account", a body of work, a feed). |
+| [`strike-row`](strike-row/) | A row of things, each crossed out with a red marker stroke ("no camera, no drawing, no editing"), or ticked in green. |
+| [`before-after`](before-after/) | Two pictures behind a sliding divider with a glass handle, like a real comparison slider (old vs new, without vs with, slow vs fast). |
 
 ## D. Metaphor props
 

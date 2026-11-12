@@ -1,6 +1,6 @@
 # before-after
 
-Two pictures side by side behind a sliding divider (old vs new, without vs with, slow vs fast).
+Two pictures behind a sliding divider with a glass handle, like a real comparison slider (old vs new, without vs with, slow vs fast).
 
 ![preview](preview.jpg)
 

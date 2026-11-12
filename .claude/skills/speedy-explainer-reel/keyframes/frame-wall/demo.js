@@ -1,3 +1,3 @@
-KF.demo({ name: "frame-wall", group: "C", line: "Thousands of tiny frames streaming past", dur: 4, build(host) {
-  const f = KF.make("frame-wall", host, {}), num = KF.el("div", "", host); num.style.cssText = "position:absolute;left:50%;top:380px;transform:translateX(-50%);padding:10px 40px 20px;border-radius:30px;background:rgba(12,12,15,.86);text-align:center;font:900 150px Inter;color:#fff";
-  return t => { const p = KF.ease.out(KF.prog(t, 0.2, 2.6)); f.frame(t, { fill: p }); num.innerHTML = KF.fmt(Math.round(5070 * p)) + '<div style="font:800 34px Inter;color:#8b8f98;margin-top:-10px">frames</div>'; }; } });
+KF.demo({ name: "frame-wall", group: "C", line: "Thousands of real frames streaming past", dur: 5, build(host) {
+  const f = KF.make("frame-wall", host, {}), num = KF.el("div", "", host); num.style.cssText = "position:absolute;left:50%;top:360px;transform:translateX(-50%);padding:10px 44px 22px;border-radius:30px;background:rgba(12,12,15,.88);text-align:center;font:900 150px Inter;color:#fff;font-variant-numeric:tabular-nums";
+  return t => { const p = KF.ease.out(KF.prog(t, 0.2, 2.4)), fo = KF.prog(t, 3.4, 0.6); f.frame(t, { fill: p, dim: 0.5 * KF.prog(t, 3.2, 0.4), focus: fo }); num.style.opacity = 1 - fo; num.innerHTML = KF.fmt(Math.round(5070 * p)) + '<div style="font:800 34px Inter;color:#8b8f98;margin-top:-10px">frames</div>'; }; } });

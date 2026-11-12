@@ -32,6 +32,11 @@
   KF.ui = theme => (theme === "light" ? { bg: "#F6F4EF", card: "#ffffff", ink: "#16181d", mute: "#6b7280", line: "#e3e0d8", chip: "#eeebe4" } : { bg: "#0c0c0f", card: "#15171c", ink: "#F3F1EC", mute: "#8b8f98", line: "#2a2d35", chip: "#22252c" });
   /** loop-back: feed the opening scene this time during the last `tail` seconds so the reel ends on its first frame. → { t0: time for the opening scene, mix: 0..1 its opacity } */
   KF.loopBack = (t, dur, tail = 1.2) => { const a = dur - tail; return t < a ? { t0: null, mix: 0 } : { t0: (t - a) - tail, mix: KF.ease.inOut(KF.prog(t, a, tail * 0.7)) }; };
+  // shared real material lives in keyframes/_assets (our covers, a sheet of real reel frames)
+  KF.base = (document.currentScript && document.currentScript.src || "").replace(/[^/]*$/, "");
+  KF.asset = p => KF.base + "_assets/" + p;
+  KF.img = url => { const im = new Image(); im.src = url; window.__ready = Promise.all([window.__ready, im.decode().catch(() => {})]); return im; };
+  KF.covers = (n = 24) => Array.from({ length: n }, (_, i) => KF.asset("covers/c" + String(i + 1).padStart(2, "0") + ".jpg"));
   KF.define = (name, fn) => (KF.blocks[name] = fn);
   KF.make = (name, host, opts) => { if (!KF.blocks[name]) throw new Error("KF block not loaded: " + name); return KF.blocks[name](KF.host(host), opts || {}); };
   KF.demo = d => KF.demos.push(d);
