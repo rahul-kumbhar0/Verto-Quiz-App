@@ -97,3 +97,36 @@ keyframe sheets (one frame per beat) in the same folder.
 - **Presenter**: first entrance slides up from the bottom edge; may sink/peek on data-heavy beats.
 - Captions confirmed on all 9: spoken word bold white, earlier words thin grey, **future words not shown**,
   one selection box per phrase that stays lit; inline emoji only when it IS the object.
+
+## 10. Smoothness — measured targets (12 Nov 2026) + how to hit them
+Measured with `scripts/motion_profile.py` (optical flow on the hero band, every frame) on the 9 reference reels
+and on our first touchpad reel. Run it on every final: `python3 tools/motion_profile.py m.json out/<slug>.mp4`.
+
+| metric | reference | our v1 (touchpad) | target |
+|---|---|---|---|
+| moves / min | 23–52 (median ~34) | 12 | ≥ 30 |
+| camera moving (% frames) | 8–59 (3D-hero reels 52–59) | 5 | ≥ 30 (3D beats ≈ always) |
+| dead frames (nothing moves) | 3D reels 0.2–2 % · UI reels 24–56 % | 58 % | ≤ 30 % |
+| move length | 4–12 frames (3D reels 8–12) | 3 | 6–12 |
+| jerk (lower = smoother) | best 0.15–0.33 | 0.68 | ≤ 0.45 |
+
+**Velocity profile of an average reference move** (12 frames before the peak → 18 after): speed builds for 5–12
+frames, decays over 9–17 frames, and keeps a tail of 20–37 % of the peak for another ~0.5 s; the baseline never
+reaches zero. Ours went 0 → peak in 4 frames and stopped dead in 5. So:
+- **Seams = `R.fx.settle`** (default) or **`R.fx.portal`** (theme flip). Never a fade-out + fade-in: measured every
+  frame, the reference lands the next scene in ONE frame, full opacity, oversized + blurred, then settles ~0.4 s.
+- **The flood paints BEHIND the scenes** and the incoming content is already solid when it lands (a white card
+  fading in on an off-white canvas is invisible = an "empty" frame).
+- **Every scene has a camera** (`R.fx.rig` on a `.rig` wrapper, or `S.shots` in 3D): it re-frames on each beat
+  (0.6–0.9 s power2InOut) and keeps a slow push + drift in between.
+- **Entrances with long tails:** `R.card(..., {d: 0.4–0.75})`, `rise(..., {d: 0.6–0.75})`; things that move inside
+  a scene glide (the scan band eases between rows instead of jumping).
+- **Product beats in real 3D** (`stage3d.js`, references/stage3d.md): continuous camera moves + true motion blur.
+- Finals: `MBLUR=4`.
+
+Result on the touchpad reel rebuilt with all of the above (`assets/examples/touchpad-reel-3d/`, 12 Nov 2026):
+dead 58 → **13.5 %** · camera moving 5 → **49.7 %** · jerk 0.68 → **0.455** · move length 3 → 5–7 frames ·
+settle tail 0.10 → 0.26 (reference 0.20–0.37) · moves/min 12 → **17.4** (reference 23–52). The remaining gap is
+visual DENSITY, not smoothness: speedy puts ~2 visual events in every sentence (a label AND a camera/element move);
+storyboard two per sentence to close it. Per-phrase camera nudges (`R.fx.rig` beats, `S.nudges`) make the camera
+move on every caption page but are too slow to count as "moves" — keep them for life, not for the count.

@@ -70,7 +70,9 @@ seams (each only touches its own window), THEN in-scene motion.
 | `R.fx.glitch(el,t,at,{amp,d})` | RGB split + slice jitter | glitch cue |
 | `R.fx.plate(el,t,keys,{grade,k,drift})` | photoreal hero still filmed by a camera: keys `[{t,x,y,s,r,focus,ease}]`, DIRECTIONAL motion blur along the velocity (whip pan streaks sideways). el = `.fx-plate` with one `<img>`, needs an id | swish on fast moves |
 | `R.fx.zoomChain(el,t,a,b,{k,ease})` | infinite zoom through nested plates (`.fx-zchain` with N `<img>`; image i = the centre detail of i-1 at 1/k size), feathered masks so there is no seam | riser |
-| `R.fx.portal(out,in,t,at,box,{d,dark,hold})` | dark⇄light chapter flip: a rounded card `{x,y,w,h,r}` grows to fill the frame in the next theme (grid locked to the stage); start R.speedy `light` at `at+d` | swish |
+| `R.fx.portal(out,in,t,at,box,{d,dark,s0,settle})` | dark⇄light flip measured on 9222: the next theme FLOODS from a card in ~0.24 s (edge blur), BEHIND the scenes; outgoing is swallowed (scale + blur), incoming content arrives inside the flood (1.22× → 1, 18 px → 0). Start R.speedy `light` at `at+d` | swish |
+| `R.fx.settle(out,in,t,cut,{pre,d,s0,blur,origin})` | DEFAULT seam, measured on 14866: outgoing leans in 5 frames, incoming lands in ONE frame full-opacity at 1.38× + 22 px blur and settles on a 0.42 s expo tail; 2-frame ghost; never an empty frame | swish |
+| `R.fx.rig(el,t,shots,{push,drift,origin})` | a camera that is never locked: el = `.rig` wrapper inside a scene; shots `[{t,x,y,s,r,d,ease}]` re-frame on each beat, slow push + drift between, speed → blur | whoosh on big moves |
 | `R.fx.flip(el,t,at,{axis,dir,d,back})` | 3D card flip `.fx-flip > .fx-card > .fx-front + .fx-back` | swish cue |
 | `R.fx.sheen(el,t,at,{d})` | specular light sweep across a card | — |
 | `R.fx.dof(list,focusZ,{k,max})` | depth-of-field blur by distance | — |

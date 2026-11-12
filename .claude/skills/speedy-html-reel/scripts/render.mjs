@@ -23,7 +23,11 @@ function chromePath() {
 
 const [page, mode, ...rest] = process.argv.slice(2);
 const url = "file://" + path.resolve(page);
-const browser = await chromium.launch({ executablePath: chromePath() });
+// GPU WebGL (stage3d.js scenes): on Windows ANGLE/D3D11 is ~100x faster than SwiftShader (1.6 vs 190 ms/frame on a GTX 1650).
+// NO_GPU=1 forces software GL; CHROME_ARGS adds extra flags. file access lets ES-module scripts load from file://.
+const GPU = process.env.NO_GPU ? [] : process.platform === "win32" ? ["--use-angle=d3d11", "--enable-gpu", "--ignore-gpu-blocklist"]
+  : ["--use-angle=swiftshader", "--enable-unsafe-swiftshader"];
+const browser = await chromium.launch({ executablePath: chromePath(), args: ["--allow-file-access-from-files", ...GPU, ...(process.env.CHROME_ARGS || "").split(" ").filter(Boolean)] });
 
 async function open() {
   const p = await browser.newPage({ viewport: { width: 1080, height: 1920 }, deviceScaleFactor: 1 });

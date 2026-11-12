@@ -281,25 +281,79 @@
     el.style.filter = v > 0.5 ? `blur(${Math.min(9, (v - 0.5) * 5).toFixed(1)}px)` : "";
     if (o.sfx !== false) R.cue("riser", a, { t2: b });
   };
-  /** portal: a rounded card grows from box {x,y,w,h,r} (the card on screen) to fill the frame in the
-   *  NEXT theme — the reference's dark⇄light chapter flip (9222, 18413). Paints #fxPortal just above
-   *  the canvas, grid locked to the stage. Outgoing scene sinks + blurs, incoming rises out of it.
-   *  o.dark:true floods to the dark canvas (light→dark). Start R.speedy's light range at at + d. */
+  /** portal (measured on 9222 @30.9, every frame): the next theme FLOODS from a card in 2–3 frames, the outgoing
+   *  scene is swallowed (scale up + blur) and the incoming content is already arriving inside the flood —
+   *  never an empty canvas. box = the card on screen {x,y,w,h,r}; o.dark floods to the dark canvas.
+   *  Start R.speedy's light range at `at + d`. Defaults: d 0.24 s flood, incoming settles 0.45 s from 1.22× + 18 px blur. */
   F.portal = (outEl, inEl, t, at, box, o = {}) => {
     let P = $("fxPortal");
     if (!P) { P = document.createElement("div"); P.id = "fxPortal"; (document.querySelector(".s-light") || document.querySelector(".s-bg")).after(P); }
-    const d = o.d ?? 0.6, p = prog(t, at, d), e = E.expoInOut(p), id = "portal" + at, hold = o.hold ?? 0.3;
-    if (o.sfx !== false) R.cue("swish", at);
+    const d = o.d ?? 0.24, p = prog(t, at, d), e = E.expoInOut(p), id = "portal" + at, hold = o.hold ?? 0.12;
+    if (o.sfx !== false) R.cue("swish", at - 0.04);
+    const pv = prog(t - 1 / 30, at, d), vel = Math.abs(e - E.expoInOut(pv)) * 30;            // flood speed → edge blur
     if (p > 0 && t < at + d + hold) {
       const x = lerp(box.x, 0, e), y = lerp(box.y, 0, e);
       P.dataset.owner = id; P.className = o.dark ? "s-bg" : "s-light";
-      Object.assign(P.style, { display: "block", opacity: 1, zIndex: 1, left: x + "px", top: y + "px", width: lerp(box.w, 1080, e) + "px", height: lerp(box.h, 1920, e) + "px",
-        borderRadius: lerp(box.r ?? 28, 0, e) + "px", backgroundPosition: `${-x - 1}px ${-y - 1}px`, boxShadow: `0 40px 90px rgba(0,0,0,${(0.5 * (1 - e)).toFixed(2)})` });
+      Object.assign(P.style, { display: "block", opacity: 1, zIndex: 0,   // BEHIND the scenes: the content lands inside the flood left: x + "px", top: y + "px", width: lerp(box.w, 1080, e) + "px", height: lerp(box.h, 1920, e) + "px",
+        borderRadius: lerp(box.r ?? 28, 0, e) + "px", backgroundPosition: `${-x - 1}px ${-y - 1}px`, filter: vel > 0.5 ? `blur(${Math.min(10, vel * 2.2).toFixed(1)}px)` : "" });
     } else if (P.dataset.owner === id) { P.style.display = "none"; P.dataset.owner = ""; }
-    const A = $(outEl), B = $(inEl);
-    if (A && p > 0 && p < 1) { A.style.transform = `scale(${1 - 0.07 * e})`; A.style.opacity = 1 - clamp(p * 1.8); A.style.filter = `blur(${(e * 12).toFixed(1)}px)`; }
+    const A = $(outEl), B = $(inEl), sw = o.s0 ?? 1.22, ds = o.settle ?? 0.45;
+    if (A && t >= at - 0.06 && t < at + d) { const q = E.power3In(prog(t, at - 0.06, d + 0.06)); A.style.transformOrigin = `${box.x + box.w / 2}px ${box.y + box.h / 2}px`;
+      A.style.transform = `scale(${1 + 0.12 * q})`; A.style.opacity = 1 - q; A.style.filter = `blur(${(q * 14).toFixed(1)}px)`; A.style.visibility = "visible"; }
+    else if (A && t >= at + d && t < at + d + 0.1) { A.style.opacity = 0; A.style.visibility = "hidden"; }
     const q0 = at + d * 0.55;
-    if (B && t >= q0 && t < q0 + 0.55) { const q = E.expoOut(prog(t, q0, 0.5)); B.style.transform = `translateY(${((1 - q) * 70).toFixed(1)}px) scale(${lerp(0.95, 1, q).toFixed(4)})`; B.style.opacity = q; B.style.filter = q < 1 ? `blur(${((1 - q) * 14).toFixed(1)}px)` : ""; }
+    if (B && t >= q0 && t < q0 + ds + 0.05) { const q = E.expoOut(prog(t, q0, ds)); B.style.visibility = "visible"; B.style.transformOrigin = "540px 900px";
+      B.style.transform = `scale(${lerp(sw, 1, q).toFixed(4)})`; B.style.opacity = clamp(prog(t, q0, 0.06)); B.style.filter = q < 0.995 ? `blur(${(Math.pow(1 - q, 1.5) * 18).toFixed(1)}px)` : ""; }
+    else if (B && t >= at && t < q0) { B.style.opacity = 0; }
+  };
+  /** settle cut (measured on 14866 @72.6, every frame): the outgoing scene leans in for ~5 frames (scale +10 %,
+   *  blur 12 px), then the incoming scene lands in ONE frame — full opacity, oversized (1.38×) and blurred (22 px)
+   *  — and settles on a long expo tail (~0.42 s); the outgoing leaves a 2-frame ghost. No empty frame, ever.
+   *  Use it as the default scene boundary (with R.fx.slots + a .rig camera inside each scene). */
+  F.settle = (outEl, inEl, t, cut, o = {}) => {
+    const pre = o.pre ?? 0.16, d = o.d ?? 0.42, s0 = o.s0 ?? 1.38, b0 = o.blur ?? 22, [ox, oy] = o.origin || [540, 900];
+    if (o.sfx !== false) R.cue("swish", cut - pre);
+    if (t < cut - pre || t > cut + d + 0.04) return;
+    const A = $(outEl), B = $(inEl); [A, B].forEach(el => el && (el.style.transformOrigin = `${ox}px ${oy}px`));
+    if (t < cut) { const e = E.power3In(prog(t, cut - pre, pre)); seamSet(A, { s: 1 + 0.1 * e, a: 1, b: 12 * e }); seamSet(B, { a: 0 }); return; }
+    const q = E.expoOut(prog(t, cut, d)), g = 1 - prog(t, cut, 2 / 30);
+    seamSet(A, { s: 1.12, a: 0.45 * g, b: 14 }); seamSet(B, { s: lerp(s0, 1, q), a: 1, b: b0 * Math.pow(1 - q, 1.5) });
+    if (A && B && g > 0) A.style.zIndex = 2;   // ghost sits on top for its 2 frames
+    else if (A) A.style.zIndex = "";
+  };
+  /** caption page start times in [a, b) — the natural beat grid for camera nudges */
+  F.pageStarts = (a = 0, b = 1e9) => (window.CAPTION_PAGES || []).map(p => p[0].s).filter(s => s >= a && s < b);
+  /** rig: a camera that is NEVER locked (measured: the 3D-hero reels move 52–59 % of frames, ours moved 5 %).
+   *  el = a .rig wrapper INSIDE a scene (the scene itself is driven by slots/seams). shots: [{t, x, y, s, r, d, ease}]
+   *  — at each shot time the camera travels to that framing over d (default 0.8 s, power2InOut), then keeps a slow
+   *  push (o.push, default +3 %) and a few px of drift until the next shot. Speed → blur, big moves → whoosh. */
+  F.rig = (el, t, shots, o = {}) => {
+    el = $(el); if (!el || !shots.length) return;
+    const push = o.push ?? 0.03, drift = o.drift ?? 10, S = shots.map(k => ({ x: 0, y: 0, s: 1, r: 0, d: 0.8, ...k }));
+    const held = (i, tt) => { const k = S[i], st = k.t + k.d, en = i + 1 < S.length ? S[i + 1].t : st + 6, u = E.inOut(clamp((tt - st) / Math.max(0.3, en - st)));
+      return { x: k.x + drift * u, y: k.y - drift * 0.4 * u, s: k.s * (1 + push * u), r: k.r }; };
+    const val = tt => {
+      let i = 0; for (let j = 0; j < S.length; j++) if (tt >= S[j].t) i = j;
+      const k = S[i]; if (tt < k.t) return held(0, k.t - 1);          // before the first shot: its start framing
+      const p = (tt - k.t) / k.d;
+      if (i === 0 || p >= 1) return held(i, tt);
+      const A = held(i - 1, k.t), e = (E[k.ease || "power2InOut"] || E.power2InOut)(clamp(p));
+      return { x: lerp(A.x, k.x, e), y: lerp(A.y, k.y, e), s: lerp(A.s, k.s, e), r: lerp(A.r, k.r, e) };
+    };
+    // beat nudges (measured: the reference makes a distinct move every ~1.8 s): on every beat (default = each caption
+    // page start) the framing eases to a new deterministic offset, alternating sides so it never drifts away
+    const bt = o.beats === false ? [] : (o.beats || F.pageStarts(S[0].t, o.until ?? 1e9)), amp = o.amp ?? 34;
+    const nudge = tt => { let k = -1; for (let j = 0; j < bt.length; j++) if (tt >= bt[j]) k = j;
+      const N = j => j < 0 ? [0, 0, 0] : [Math.cos(j * 2.39) * amp, Math.sin(j * 1.71) * amp * 0.45, ((j % 3) - 1) * 0.018];
+      const e = k < 0 ? 0 : E.power2InOut(clamp((tt - bt[k]) / (o.beatD ?? 0.7))), A = N(k - 1), B = N(k);
+      return [lerp(A[0], B[0], e), lerp(A[1], B[1], e), lerp(A[2], B[2], e)]; };
+    const val2 = tt => { const v = val(tt), n = nudge(tt); return { x: v.x + n[0], y: v.y + n[1], s: v.s * (1 + n[2]), r: v.r }; };
+    const a = val2(t), b = val2(t - 1 / 30);
+    el.style.transformOrigin = o.origin || "540px 900px";
+    el.style.transform = `translate(${a.x.toFixed(1)}px,${a.y.toFixed(1)}px) rotate(${a.r.toFixed(2)}deg) scale(${a.s.toFixed(4)})`;
+    const sp = Math.hypot(a.x - b.x, a.y - b.y) + Math.abs(a.s - b.s) * 700;
+    el.style.filter = sp > 3 ? `blur(${Math.min(8, (sp - 3) * 0.3).toFixed(1)}px)` : "";
+    S.forEach((k, i) => { if (i && Math.hypot(k.x - S[i - 1].x, k.y - S[i - 1].y) + Math.abs(k.s - S[i - 1].s) * 600 > 160) R.cue("whoosh", k.t, { soft: true }); });
   };
 
   // ---------- BEAT SYNC ----------

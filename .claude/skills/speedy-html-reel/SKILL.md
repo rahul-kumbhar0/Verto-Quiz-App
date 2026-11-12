@@ -41,7 +41,12 @@ concept without a viewer stake gets nothing. When unsure, it is a tool-demo reel
   other creators are borrowed, never their look (`references/premium-ui-mode.md` header).
 - Look: `references/look.md` + `look.css` (`<body class="look">`): graphite materials, ONE terracotta accent, no candy colours.
 - Real UI: whenever the script says Claude/GitHub/a terminal, show the REAL interface (`references/real-ui.md`), not a generic card.
-- Editing: `references/advanced-editing.md` (HyperFrames-derived motion doctrine + fx kit), `MBLUR=3` on final renders.
+- Editing: `references/advanced-editing.md` (HyperFrames-derived motion doctrine + fx kit), `MBLUR=4` on final renders.
+- Smoothness (measured, 12 Nov 2026 — `references/motion-spec.md` §10): every scene boundary is `R.fx.settle` or
+  `R.fx.portal` (never fade-out/fade-in; no empty frame), every scene has a camera (`R.fx.rig` / `S.shots`), entrances
+  have long tails, and product beats are REAL 3D (`stage3d.js`, `references/stage3d.md`: laptop, finger, sensor grid,
+  exploded views; GPU WebGL via render.mjs). Check every final with `tools/motion_profile.py` against the targets
+  (≥ 30 moves/min, camera moving ≥ 30 %, moves 6–12 frames, jerk ≤ 0.45).
 - First frame (house default from 3 Nov 2026): a BIG headline on frame 0 (`<div class="headline" id="hl">` + `M.headline("hl", "I automated my|*YouTube*|with Claude.", t, {at:-0.45, out:<hero time>})`), readable with the sound off, the hero blurred behind it (`.hl-back` look), the presenter already on screen (`avatar.in:-0.5`). It exits on the first "here's how" word and the hero comes forward. Keep the hook screen to headline + hero + presenter: no rail counter, no footnote until the hero is up.
 - Paper editorial mode (optional, per reel): `references/paper-editorial.md`. Same presenter + voice + real UI, on warm paper with word-pair headlines and a numbered index. Use it for list/tool reels and "anti-course" hooks.
 - Motion graphics (edit level 3): `references/motion-graphics.md` + `mg.js`/`mg.css` (`R.mg`). Every reel gets the living
@@ -211,6 +216,8 @@ stock puppet was used.
 - `references/motion-graphics.md` — **edit level 3, motion graphics**: `mg.js` kit (springs, speed ramps, trim-path draw, packets, iris/morph seams, masked word rise, marker + strike, echo trails, shockwave rings, rays, gauges, living dot grid), the scene recipes and the per-reel checklist; demo `assets/examples/mg-demo/` (the LinkedIn reel rebuilt)
 - `references/advanced-editing.md` — **edit level 2**: the 12 rules (camera never locked, cuts on beats, transition = meaning, signature shot, layered sound design, real motion blur) + the `fx.js` kit API (`R.fx.cam/whip/zoomThrough/flip/flash/leak/glitch/shake/sheen/letters/odometer/scramble/code/burst/beats`); demo `assets/examples/fx-demo/`. READ IT for every new reel
 - `references/motion-spec.md` — measured animation spec: caption hot-words, the three motion-blurred transitions, finger/press feedback, pose cuts, CTA sequence; §9 = the 9-reel scan (rhythm 3.45 w/s, a beat every ~3 s, almost no hard cuts, photo plates + camera, infinite zoom, portal flips)
+- `references/stage3d.md` — REAL 3D heroes with three.js (`assets/template/stage3d.js`): page contract, builders (laptop, finger, sensorGrid, explodedPad, rbox + materials), GPU flags, rules
+- `scripts/motion_profile.py` — smoothness QA: dead %, camera %, pops, jerk, moves/min, move length vs the reference targets
 - `references/ref-frames/nine-reels/` — 9 more reference reels taken apart: one keyframe per beat (sheets), `KEYFRAMES-AND-MOTION.md` (numbers, 13-move catalogue with timestamps), word-timed transcripts
 - `assets/examples/touchpad-reel/` — "How a laptop touchpad works": photo plates (`R.fx.plate`), infinite zoom into the sensor (`R.fx.zoomChain`), two portal flips (`R.fx.portal`), exploded Force Touch pad, owner's cloned voice + `align_known.py`
 - `references/components.md` — template API, HTML snippets, scene recipes, pitfalls

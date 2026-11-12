@@ -1,0 +1,366 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>How a laptop touchpad works · v2</title>
+<link rel="stylesheet" href="speedy.css"><link rel="stylesheet" href="fx.css"><link rel="stylesheet" href="look.css">
+<style>
+/* ---- touchpad v2 (tp-) · REAL 3D heroes (stage3d.js) + rig cameras + settle/portal seams ----
+   Built against the measured motion profile of 9 speedy_devv reels: ≥30 moves/min, camera never locked,
+   moves 6–12 frames with long tails, no empty frame at a seam. */
+#s3{position:absolute;inset:0}
+#gl{position:absolute;inset:0;width:1080px;height:1920px}
+.ov{position:absolute;inset:0;pointer-events:none}
+.tp-arcs,.tp-lines{position:absolute;left:0;top:0;width:1080px;height:1920px;overflow:visible}
+.tp-arcs path{fill:none;stroke:var(--acc-hi);stroke-width:4.5;stroke-linecap:round;filter:drop-shadow(0 0 10px var(--acc))}
+.tp-lines path{fill:none;stroke:rgba(243,241,236,.55);stroke-width:2.5}
+.tp-lines circle{fill:#fff}
+.tp-call{position:absolute;width:600px;height:104px;border-radius:22px;background:rgba(17,18,22,.9);border:1.5px solid var(--g-line-hi);
+  display:flex;align-items:center;justify-content:center;gap:14px;font:600 32px Inter;color:var(--ink);opacity:0;backdrop-filter:blur(8px)}
+.tp-call b{color:var(--acc-hi)}
+.tp-lab{position:absolute;left:700px;width:320px;padding:12px 16px 12px 56px;border-radius:16px;background:rgba(22,23,26,.92);border:1.5px solid var(--g-line-hi);opacity:0}
+.tp-lab i{position:absolute;left:12px;top:12px;width:32px;height:32px;border-radius:50%;background:#2A2D33;color:#fff;font:700 18px/32px Inter;text-align:center;font-style:normal}
+.tp-lab b{display:block;font:800 26px Inter;color:#fff}.tp-lab span{display:block;font:500 19px/1.3 Inter;color:var(--ink-2);margin-top:2px}
+.tp-lab.on{border-color:var(--acc)}.tp-lab.on i{background:var(--acc)}
+.tp-fake{position:absolute;left:0;right:0;top:540px;text-align:center;opacity:0}
+.tp-fake span{display:inline-block;padding:6px 26px;border:5px solid var(--bad);border-radius:14px;color:var(--bad);font:900 50px Inter;letter-spacing:6px;transform:rotate(-6deg);background:rgba(11,12,14,.6)}
+.tp-side{position:absolute;font:700 40px Inter;color:var(--acc-hi);opacity:0;white-space:nowrap;margin-left:-80px}
+.tp-brain{position:absolute;left:0;right:0;top:1250px;text-align:center;opacity:0}
+.tp-brain span{display:inline-block;padding:14px 30px;border-radius:999px;background:var(--g-raise);border:1.5px solid var(--g-line-hi);font:600 34px Inter;color:var(--ink)}
+.tp-chip{position:absolute;left:110px;right:110px;padding:22px 30px;border-radius:24px;background:rgba(17,18,22,.9);border:1.5px solid var(--g-line-hi);font:600 34px Inter;color:var(--ink);opacity:0;backdrop-filter:blur(8px)}
+.tp-chip b{color:var(--acc-hi);margin-right:12px;font-family:Mono}
+.rig{position:absolute;inset:0}
+.tp-card{position:absolute;left:110px;top:640px;width:860px;height:620px;border-radius:30px;background:var(--p-raise);border:1.5px solid var(--p-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0}
+.tp-card .hd{position:absolute;left:30px;right:30px;top:22px;display:flex;align-items:center;font:600 26px Inter;color:var(--p-ink-2)}
+.tp-card .hd b{margin-left:auto;font:700 30px Mono;color:var(--p-ink);display:flex;align-items:baseline} .tp-card .hd b > span{font:500 24px Mono;color:var(--p-ink-2)}
+.tp-hz{font:700 34px/1 Mono;font-style:normal;color:var(--acc);display:inline-flex;overflow:hidden;height:1em}
+.tp-cell{position:absolute;width:114px;height:125px;display:grid;place-items:center;font:600 30px Mono;color:var(--p-ink)}
+.tp-cell::before{content:"";position:absolute;left:50%;top:50%;width:10px;height:10px;margin:-5px;border-radius:50%;background:var(--p-line)}
+.tp-cell span{position:relative;top:30px}.tp-cell.lo span{color:var(--acc);font-weight:700}
+.tp-gl{position:absolute;background:var(--p-line)}
+.tp-scan{position:absolute;left:30px;width:800px;height:125px;border-radius:14px;background:rgba(217,119,87,.13);border:2px solid rgba(217,119,87,.45);opacity:0}
+.tp-sel{position:absolute;width:120px;height:120px;border:3px solid #3B82F6;border-radius:10px;background:rgba(59,130,246,.10);opacity:0}
+.tp-sel::before,.tp-sel::after{content:"";position:absolute;width:14px;height:14px;border-radius:50%;background:#3B82F6}
+.tp-sel::before{left:-8px;top:-8px}.tp-sel::after{right:-8px;bottom:-8px}
+.tp-q{position:absolute;width:12px;height:12px;margin:-6px;border-radius:50%;background:var(--acc);box-shadow:0 0 12px var(--acc);opacity:0}
+.tp-wl{position:absolute;top:760px;width:6px;height:300px;margin-left:-3px;border-radius:3px;background:var(--cool-lo);opacity:0}
+.tp-wn{position:absolute;top:1070px;width:44px;margin-left:-22px;text-align:center;font:600 22px Mono;color:var(--p-ink-2);font-style:normal;opacity:0}
+.tp-bar{position:absolute;bottom:860px;width:30px;margin-left:-15px;border-radius:8px 8px 3px 3px;background:var(--acc);height:0}
+.tp-bar i{position:absolute;left:50%;top:-38px;transform:translateX(-50%);font:700 22px Mono;color:var(--p-ink);font-style:normal;white-space:nowrap}
+.tp-w16{position:absolute;left:110px;top:650px;font:600 30px Inter;color:var(--p-ink-2);opacity:0}.tp-w16 b{font:700 64px Mono;color:var(--p-ink);margin-right:14px}
+.tp-mark{position:absolute;top:1105px;width:0;height:0;border-left:18px solid transparent;border-right:18px solid transparent;border-bottom:26px solid var(--cool-lo);margin-left:-18px;opacity:0}
+.tp-mark b{position:absolute;left:-90px;top:30px;width:180px;text-align:center;font:600 22px Inter;color:var(--p-ink-2)}
+.tp-big{position:absolute;left:0;right:0;top:1120px;text-align:center;opacity:0}
+.tp-big span{display:inline-block;padding:10px 34px;border-radius:24px;background:var(--p-ink);color:var(--p-raise);font:800 82px Mono;letter-spacing:-2px}
+.tp-big small{display:block;margin-top:6px;font:600 26px Inter;color:var(--p-ink-2)}
+.tp-burst{position:absolute;left:519px;top:1080px}
+.tp-hist{position:absolute;left:110px;top:640px;width:860px;border-radius:30px;background:var(--g-raise);border:1.5px solid var(--g-line-hi);padding:36px 40px;opacity:0}
+.tp-yr{font:800 150px/1 Mono;color:var(--ink);letter-spacing:-4px}
+.tp-row{display:flex;gap:22px;align-items:flex-start;margin-top:30px;opacity:0}
+.tp-row i{flex:none;width:16px;height:16px;margin-top:12px;border-radius:50%;background:var(--acc)}
+.tp-row b{display:block;font:700 36px Inter;color:var(--ink)} .tp-row span{font:500 27px Inter;color:var(--ink-2)}
+.cmts{position:absolute;left:110px;top:660px;width:860px;height:640px;border-radius:30px;background:#fff;border:1.5px solid var(--l-line);box-shadow:0 30px 70px rgba(0,0,0,.12);overflow:hidden;opacity:0;font-family:Inter}
+.cmts .h{height:70px;text-align:center;font:700 26px/70px Inter;color:#111;border-bottom:1px solid #EEE}
+.cm{display:flex;align-items:center;gap:16px;padding:16px 28px;opacity:0}
+.cm i{width:56px;height:56px;border-radius:50%;flex:none}
+.cm div{font:500 24px Inter;color:#111}.cm div small{display:block;font:600 18px Inter;color:#999}
+.cm b{font-weight:800}.cm .hrt{margin-left:auto;color:#ccc;font-size:26px}
+.cmts .inp{position:absolute;left:0;right:0;bottom:0;height:96px;border-top:1px solid #EEE;display:flex;align-items:center;gap:16px;padding:0 24px}
+.cmts .inp i{width:52px;height:52px;border-radius:50%;background:linear-gradient(135deg,#D97757,#7A3A26);flex:none}
+.cmts .inp .box{flex:1;height:58px;border-radius:29px;border:1.5px solid #E2E2E6;display:flex;align-items:center;padding:0 22px;font:600 26px Inter;color:#111}
+.cmts .inp .box .ph{color:#AAA;font-weight:500}.cmts .inp .post{font:700 25px Inter;color:#3B82F6}
+.dm{position:absolute;left:150px;top:640px;width:780px;height:120px;border-radius:28px;background:rgba(30,30,34,.96);box-shadow:0 20px 50px rgba(0,0,0,.35);display:flex;align-items:center;gap:18px;padding:0 24px;opacity:0;z-index:6}
+.dm .av{width:72px;height:72px;border-radius:50%;background:#1E4FD8;flex:none;border:3px solid #fff;overflow:hidden}
+.dm b{display:block;font:700 24px Inter;color:#fff}.dm span{font:500 22px Inter;color:#D0D0D6}
+.dm em{position:absolute;right:24px;top:16px;font:500 18px Inter;color:#999;font-style:normal}
+.endcta{position:absolute;left:0;right:0;top:360px;text-align:center;opacity:0;z-index:7}
+.endcta span{display:inline-block;font:800 64px Inter;color:#111;background:#fff;border:5px solid #3B82F6;border-radius:26px;padding:12px 40px;box-shadow:0 20px 50px rgba(59,130,246,.35)}
+.endcta b{color:#3B82F6}
+.igp{position:absolute;left:70px;top:600px;width:940px;height:600px;border-radius:34px;background:#0C0C0E;border:1.5px solid #26272B;box-shadow:0 40px 90px rgba(0,0,0,.55);opacity:0;font-family:Inter;color:#F5F5F5}
+.igp .ring{position:absolute;left:40px;top:40px;width:176px;height:176px;border-radius:50%;background:conic-gradient(from 200deg,#FEDA75,#FA7E1E,#D62976,#962FBF,#4F5BD5,#FEDA75);padding:7px}
+.igp .ring i{display:block;width:100%;height:100%;border-radius:50%;background:#0C0C0E;padding:6px}
+.igp .ring img{display:block;width:100%;height:100%;border-radius:50%;object-fit:cover}
+.igp .nm{position:absolute;left:256px;top:46px;font:800 50px Inter;letter-spacing:-.5px}.igp .nm span{font-weight:500;margin-left:18px;color:#ddd}
+.igp .sb{position:absolute;left:256px;top:118px;font:500 29px Inter;color:#E8E8E8}
+.igp .st{position:absolute;left:256px;top:168px;font:500 29px Inter;color:#E8E8E8;white-space:nowrap}.igp .st b{font-weight:800;color:#fff}.igp .st em{font-style:normal;margin-right:30px}
+.igp .cat{position:absolute;left:40px;top:258px;font:500 27px Inter;color:#A8A8A8}
+.igp .bio{position:absolute;left:40px;top:300px;font:500 29px/1.42 Inter;color:#F0F0F0}.igp .bio .mo{color:#A8A8A8}
+.igp .bt{position:absolute;top:478px;height:78px;border-radius:16px;display:grid;place-items:center;font:700 30px Inter}
+.igp .fol{left:40px;width:420px;background:#0095F6;color:#fff}.igp .fol.on{background:#363636}
+.igp .msg{left:480px;width:420px;background:#363636;color:#fff}
+.igp .p1{position:absolute;left:470px;top:150px;font:800 34px Inter;color:#3ECF8E;opacity:0}
+.flw{position:absolute;left:0;right:0;top:478px;text-align:center;opacity:0;z-index:7}
+.flw span{display:inline-block;font:800 60px Inter;color:#fff;background:#0095F6;border-radius:24px;padding:12px 38px;box-shadow:0 20px 50px rgba(0,149,246,.35)}
+</style></head>
+<body class="look"><div id="stage">
+  <div class="s-bg"></div><div class="s-light"></div><div class="s-vig"></div>
+
+  <!-- REAL 3D: hook · dive into the sensor · exploded Force Touch pad · recap (one canvas, 2D overlays pinned by projection) -->
+  <section class="scene" id="s3" style="display:block">
+    <canvas id="gl" width="1080" height="1920"></canvas>
+    <div class="ov">
+      <svg class="tp-arcs" id="arcs" viewBox="0 0 1080 1920"></svg>
+      <div class="tp-call" id="call"><b>capacitor</b> = holds a tiny charge</div>
+      <div class="note l" id="nG" style="top:1300px">Illustration · typical pads: 16 × 12 wires</div>
+      <div class="tp-fake" id="fake"><span>FAKE CLICK</span></div>
+      <svg class="tp-lines" id="xl" viewBox="0 0 1080 1920"></svg>
+      <div class="tp-lab" id="lb0"><i>1</i><b>Glass</b><span>what your finger touches</span></div>
+      <div class="tp-lab" id="lb1"><i>2</i><b>Sensor grid</b><span>the copper crossings</span></div>
+      <div class="tp-lab" id="lb2"><i>3</i><b>4 force sensors</b><span>feel how hard you press</span></div>
+      <div class="tp-lab" id="lb3"><i>4</i><b>Taptic Engine</b><span>a magnet that taps sideways</span></div>
+      <div class="tp-side" id="side">⟵ tap ⟶</div>
+      <div class="tp-brain" id="brain"><span>🧠 your brain hears: “click”</span></div>
+      <div class="note r" id="nC" style="top:1300px">Force Touch trackpad (MacBook, 2015+) · layers simplified</div>
+      <div class="tp-chip" id="r1" style="top:1040px"><b>1</b>a grid that feels charge vanish</div>
+      <div class="tp-chip" id="r2" style="top:1150px"><b>2</b>a fake click that fools your brain</div>
+    </div>
+  </section>
+
+  <!-- SENSE (light) -->
+  <section class="scene" id="sSense"><div class="rig" id="rgS">
+    <div class="tp-card" id="card"><div class="hd">touch controller<b><em class="tp-hz" id="hz">0</em><span>&nbsp;scans/s</span></b></div><div id="cells"></div>
+      <div class="tp-scan" id="scan"></div><div class="tp-sel" id="dipSel"></div></div>
+    <div id="qs"></div>
+    <div class="finger" id="fg2"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+  </div><div class="note r" id="nS" style="top:1300px">Readings simplified for illustration.</div></section>
+
+  <!-- WIRES (light) -->
+  <section class="scene" id="sWire"><div class="rig" id="rgW">
+    <div class="tp-w16" id="w16"><b id="w16n">0</b>wires across</div>
+    <div id="wl"></div>
+    <div class="tp-mark" id="mark"><b>Sofia's finger</b></div>
+    <div class="tp-burst" id="burst"></div>
+    <div class="tp-big" id="big"><span>1/960″</span><small>pinpointed between two wires</small></div>
+  </div><div class="note l" id="nW" style="top:1300px">≈ 960 counts per inch (Cirque patent)</div></section>
+
+  <!-- 1994 -->
+  <section class="scene" id="sHist"><div class="rig" id="rgH">
+    <div class="tp-hist" id="hist"><div class="tp-yr" id="yr">0</div>
+      <div class="tp-row" id="h1"><i></i><div><b>Cirque GlidePoint</b><span>the first widely available touchpad</span></div></div>
+      <div class="tp-row" id="h2"><i></i><div><b>Apple PowerBook 500</b><span>16 May 1994 · a trackpad replaces the trackball</span></div></div></div>
+  </div><div class="note l" id="nH" style="top:1300px">Source: Wikipedia “Touchpad”, Apple launch coverage</div></section>
+
+  <!-- CTA (dark, the owner's real Instagram profile) · tap Follow -->
+  <section class="scene" id="sCTA"><div class="rig" id="rgC">
+    <div class="igp" id="igp">
+      <div class="ring"><i><img src="canwe-logo.svg" alt=""></i></div>
+      <div class="nm">canwe.ai<span>···</span></div>
+      <div class="sb">canwe.ai | AI &amp; Tech Explained</div>
+      <div class="st"><em><b>14</b> posts</em><em><b id="fcnt">3,022</b> followers</em><em><b>4</b> following</em></div>
+      <div class="p1" id="plus1">+1</div>
+      <div class="cat">Digital creator</div>
+      <div class="bio">AI &amp; tech explained in 60 sec 🇮🇳<br>How tech works · AI tools · Coding interviews<br>For students, freshers &amp; devs 💻<br>📩 DM for… <span class="mo">more</span></div>
+      <div class="bt fol" id="followBtn">Follow</div><div class="bt msg">Message</div>
+    </div>
+    <div class="finger" id="fgC"><div class="shadow"></div><div class="skin"></div><div class="nail"></div><div class="crease" style="top:420px"></div><div class="crease" style="top:640px"></div></div>
+  </div><div class="flw" id="flw"><span>Follow @canwe.ai 👆</span></div></section>
+
+  <div id="rail"></div><div id="kin"></div><div id="avatar"></div><div id="grain"></div>
+</div>
+<script src="captions.js"></script><script src="engine.js"></script><script src="fx.js"></script><script src="avatar.js"></script><script src="speedy.js"></script><script src="emph.js"></script>
+<script type="module">
+import { stage, ease as E3, prog as P3 } from "./stage3d.js";
+const R = Reel, { at, end, rise, pop, count, prog, ease, lerp, clamp, $ } = R;
+const BRAND = { name: "canwe.ai", logo: "canwe-logo.svg" };
+document.querySelectorAll(".bname").forEach(e => (e.textContent = BRAND.name));
+
+const T = { stealing: at("stealing"), so: at("So how"), under: at("Under the"), rows: at("Rows one way"), cols: at("columns"), cross: at("Every crossing"), cap: at("capacitor"),
+  sofia: at("Now Sofia"), onpad: at("finger on the pad"), pulls: at("pulls"), chip: at("Then the chip"), n200: at("200"), dip: at("dip"),
+  but: at("But a typical"), n16: at("16"), lost: at("each wire lost"), pins: at("pins her finger"), n960: at("1/960"),
+  clicks: at("Now she clicks"), fake: at("fake"), moves: at("never moves"), four: at("Four"), magnet: at("magnet"), side: at("taps back sideways"), brain: at("Her brain"),
+  y1994: at("It all started"), glide: at("GlidePoint"), pb: at("PowerBook"), recap: at("So your touchpad"), g2: at("grid that feels"), fc: at("fake click"),
+  cta: at("Follow canwe.ai"), press: at("canwe.ai") + 0.1, stop: R.voiceEnd() };
+window.REEL_DURATION = +(T.stop + 2.2).toFixed(2);
+const PD = 0.24;                                                     // portal flood (measured 2–3 frames + edge)
+
+R.setup({ scenes: [] });                                             // scenes run on slots + seams (advanced-editing §1)
+R.speedy({ light: [[T.sofia + PD, T.clicks + PD]], emph: window.EMPH,
+  avatar: { x: 240, y: 1330, w: 600, in: T.so }, poses: [[T.n960 - 0.1, "hands_head"]], autoPoses: {}, reactions: { maxGags: 0 } });
+
+// ================= REAL 3D =================
+const S = await stage($("gl"));
+const V = (x, y, z) => new S.THREE.Vector3(x, y, z);
+const lap = S.laptop(); S.scene.add(lap.group);
+const PT = lap.padTop;                                               // (0, 0.131, 0.62)
+const fg = S.finger(); fg.rotation.set(-0.5, 0, 0.22); S.scene.add(fg);
+const grid = S.sensorGrid(16, 10, 1.3, 0.82); grid.group.position.set(0, 0.1215, 0.62); S.scene.add(grid.group);
+const glow = new S.THREE.Mesh(new S.THREE.CircleGeometry(0.07, 40), S.mat.glow(0xf0a585)); glow.rotation.x = -Math.PI / 2; glow.position.set(PT.x + 0.04, PT.y + 0.002, PT.z + 0.04); S.scene.add(glow);
+const XO = -7;                                                       // the exploded pad lives off to the side
+const xp = S.explodedPad(); xp.group.position.set(XO, 0.25, 0); xp.group.rotation.y = -0.35; S.scene.add(xp.group);
+const NODE = 4 * 16 + 7;                                             // the crossing we zoom into (row 4, col 7)
+const NW = grid.nodePos[NODE].clone().add(grid.group.position);
+const TIP0 = V(PT.x + 0.04, PT.y + 0.04, PT.z + 0.04);
+
+S.shots([
+  { t: 0, pos: [1.25, 0.88, 2.75], look: [0.02, 0.17, 0.6], fov: 30 },                       // macro across the glass to the fingertip
+  { t: T.so - 0.05, pos: [1.0, 0.72, 2.3], look: [0.03, 0.16, 0.6], ease: "power2InOut" },     // slow push through the hook
+  { t: T.so + 0.95, pos: [0.05, 4.3, 4.95], look: [0, 0.25, 0.15], ease: "expoInOut" },          // pull-back reveal (reference 95064 @3)
+  { t: T.under, pos: [0.25, 4.1, 4.7], look: [0, 0.25, 0.2], ease: "linear" },                   // drift on the beauty
+  { t: T.under + 1.35, pos: [0.02, 2.05, 1.78], look: [0, 0.12, 0.62], ease: "expoInOut" },        // dive onto the pad, glass melts away
+  { t: T.cap - 0.1, pos: [0.06, 1.78, 1.6], look: [0, 0.12, 0.6], ease: "linear" },              // creep while the grid lights
+  { t: T.cap + 0.75, pos: [NW.x + 0.08, 1.0, NW.z + 0.78], look: [NW.x, 0.12, NW.z], ease: "power2InOut" },   // push into one crossing
+  { t: T.sofia + 0.4, pos: [NW.x + 0.06, 0.9, NW.z + 0.7], look: [NW.x, 0.12, NW.z], ease: "linear" },
+  { t: T.clicks, pos: [XO + 1.2, 2.5, 3.1], look: [XO, 0.3, 0], ease: "linear" },              // exploded Force Touch pad
+  { t: T.moves, pos: [XO + 0.6, 2.6, 3.2], look: [XO, 0.35, 0], ease: "linear" },
+  { t: T.moves + 1.0, pos: [XO - 1.25, 3.9, 5.0], look: [XO, 1.1, 0], ease: "expoInOut" },        // explode: pull out + rise
+  { t: T.four + 0.75, pos: [XO - 0.95, 3.25, 4.25], look: [XO, 1.05, 0], ease: "power2InOut" },
+  { t: T.magnet + 0.8, pos: [XO + 0.3, 3.0, 4.3], look: [XO + 0.4, 0.95, 0], ease: "power2InOut" },   // follow the Taptic Engine out
+  { t: T.brain + 0.9, pos: [XO - 0.4, 4.0, 5.2], look: [XO, 1.05, 0], ease: "power2InOut" },
+  { t: T.y1994 + 0.3, pos: [XO - 0.55, 4.1, 5.4], look: [XO, 1.05, 0], ease: "linear" },
+  { t: T.recap - 0.01, pos: [1.9, 3.5, 4.2], look: [0, 0.3, 0.2], ease: "linear" },             // recap: beauty orbit
+  { t: T.cta + 0.3, pos: [-1.3, 3.3, 4.6], look: [0, 0.35, 0.2], ease: "power2InOut" },
+]);
+
+// a distinct camera move on every caption phrase (reference: one every ~1.8 s); keyed shots stay the backbone
+S.nudges([...R.fx.pageStarts(0.5, T.sofia), ...R.fx.pageStarts(T.clicks + 0.3, T.y1994), ...R.fx.pageStarts(T.recap + 0.3, T.cta)], { amp: 0.07 });
+
+// ================= 2D builds (light chapters) =================
+const FC = [3, 1], cellXY = (c, r) => [30 + 114 * c, 90 + 125 * r];
+const target = (c, r) => { const d = Math.abs(c - FC[0]) + Math.abs(r - FC[1]); return d === 0 ? 62 : d === 1 ? (c === FC[0] ? 74 : 81) : d === 2 && c !== FC[0] && r !== FC[1] ? 90 : 100 - ((c * 7 + r * 3) % 3); };
+let ch = "";
+for (let i = 1; i < 7; i++) ch += `<i class="tp-gl" style="left:${30 + 114 * i}px;top:80px;width:1px;height:510px"></i>`;
+for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) { const [x, y] = cellXY(c, r); ch += `<div class="tp-cell${target(c, r) < 90 ? " lo" : ""}" style="left:${x}px;top:${y}px"><span id="v${c}_${r}">100</span></div>`; }
+$("cells").innerHTML = ch;
+const [sx, sy] = cellXY(FC[0], FC[1]); Object.assign($("dipSel").style, { left: sx - 3 + "px", top: sy + 2 + "px" });
+const TIP = [110 + sx + 57, 640 + sy + 62], FT = (tx, ty) => ({ x: tx + 337, y: ty - 6 });
+$("qs").innerHTML = Array.from({ length: 10 }, (_, i) => `<i class="tp-q" id="q${i}"></i>`).join("");
+const WX = i => 165 + i * 50, PEAK = 7.38, LOSS = i => Math.round(38 * Math.exp(-Math.pow(i - PEAK, 2) / 1.3));
+$("wl").innerHTML = Array.from({ length: 16 }, (_, i) => `<i class="tp-wl" id="wl${i}" style="left:${WX(i)}px"></i><i class="tp-wn" id="wn${i}" style="left:${WX(i)}px">${i + 1}</i>` +
+  `<i class="tp-bar" id="br${i}" style="left:${WX(i)}px">${LOSS(i) >= 15 ? `<i>−${LOSS(i)}%</i>` : ""}</i>`).join("");
+$("burst").style.left = WX(PEAK) + "px";
+$("arcs").innerHTML = Array.from({ length: 7 }, (_, i) => `<path id="arc${i}" d=""/>`).join("");
+$("xl").innerHTML = [0, 1, 2, 3].map(i => `<path id="ll${i}" d=""/><circle id="lc${i}" r="7"/>`).join("");
+// reframe helper: pull point P toward the centre by k while zooming to s (rig origin 540,900)
+const focus = (P, s, k = 0.55) => { const tx = P[0] + (540 - P[0]) * k, ty = P[1] + (900 - P[1]) * k; return { x: tx - (540 + (P[0] - 540) * s), y: ty - (900 + (P[1] - 900) * s), s }; };
+
+// visibility windows (an element may own several) + seams
+const WIN = { s3: [[0, T.sofia + PD + 0.05], [T.clicks, T.y1994 + 0.08], [T.recap - 0.2, T.cta + 0.1]], sSense: [[T.sofia, T.but + 0.08]],
+  sWire: [[T.but - 0.2, T.clicks + PD + 0.05]], sHist: [[T.y1994 - 0.2, T.recap + 0.08]], sCTA: [[T.cta - 0.2, 999]] };
+const slots = t => Object.entries(WIN).forEach(([id, ws]) => { const el = $(id), on = ws.some(([a, b]) => t >= a && t < b);
+  el.style.display = "block"; el.style.visibility = on ? "visible" : "hidden"; el.style.opacity = on ? 1 : 0; el.style.transform = ""; el.style.filter = ""; el.style.zIndex = ""; });
+const gate = (id, a, b, t) => { $(id).style.visibility = t >= a && t < b ? "" : "hidden"; };
+const boxOf = id => { const e = $(id), r = e.getBoundingClientRect(), s = $("stage").getBoundingClientRect(), k = s.width / 1080 || 1; return { x: (r.left - s.left) / k, y: (r.top - s.top) / k, w: r.width / k, h: r.height / k, r: 22 }; };
+let CALLBOX = { x: 240, y: 1150, w: 600, h: 104, r: 22 }, BIGBOX = { x: 300, y: 1120, w: 480, h: 130, r: 24 }, CHIPBOX = { x: 110, y: 1150, w: 860, h: 80, r: 24 };
+
+window.seek = t => {
+  R.frame(t); R.speedyFrame(t); slots(t);
+
+  // ---------- 3D set A: hook → pull-back → dive → grid ----------
+  const inA = t < T.sofia + 0.5, inB = t >= T.clicks - 0.1 && t < T.y1994 + 0.3, inRec = t >= T.recap - 0.3;
+  lap.group.visible = inA || inRec; xp.group.visible = inB;
+  const dip = Math.sin(Math.PI * P3(t, T.stealing, 0.7)) * 0.025, lift = E3.inOut(P3(t, T.so - 0.05, 0.75));
+  fg.visible = inA && t < T.so + 0.9; fg.position.set(TIP0.x + lift * 0.4, TIP0.y - dip + lift * 1.6 + Math.sin(t * 2.1) * 0.004, TIP0.z + lift * 0.3);
+  glow.material.opacity = 0.42 * P3(t, T.stealing - 0.1, 0.3) * (1 - P3(t, T.so, 0.4)) * (0.8 + 0.2 * Math.sin(t * 23));
+  glow.scale.setScalar(1 + 0.4 * P3(t, T.stealing, 1.2));
+  const gf = E3.inOut(P3(t, T.under + 0.25, 0.9)); lap.pad.material.opacity = inRec ? 1 : 1 - 0.94 * gf; lap.pad.material.depthWrite = gf < 0.5 || inRec;
+  grid.group.visible = inA && t >= T.under;
+  for (let i = 0; i < 10; i++) grid.setRow(i, E3.out3(P3(t, T.rows + i * 0.06, 0.45)));
+  for (let j = 0; j < 16; j++) grid.setCol(j, E3.out3(P3(t, T.cols + j * 0.035, 0.45)));
+  for (let k = 0; k < 160; k++) grid.setNode(k, k === NODE ? 0.55 * P3(t, T.cross + k * 0.006, 0.3) + 0.45 * P3(t, T.cap, 0.3) : 0.55 * E3.out3(P3(t, T.cross + k * 0.006, 0.3)));
+  grid.halo.position.copy(grid.nodePos[NODE]).add(V(0, 0.003, 0)); grid.halo.material.opacity = 0.85 * P3(t, T.cap, 0.4) * (0.75 + 0.25 * Math.sin(t * 9));
+  grid.halo.scale.setScalar(1 + 0.6 * E3.out3(P3(t, T.cap, 0.8)));
+
+  // ---------- 3D set B: exploded Force Touch pad ----------
+  xp.setExplode(E3.expoInOut(P3(t, T.moves - 0.05, 1.0)) * 0.98 + 0.02 * Math.sin(t * 1.3));
+  xp.sensors.forEach((m, i) => m.emissive.setRGB(0.85, 0.47, 0.34).multiplyScalar(1.4 * E3.out3(P3(t, T.four + i * 0.12, 0.35))));
+  const out = E3.expoInOut(P3(t, T.magnet, 0.8)), dt = t - T.side, buzz = dt > 0 ? Math.sin(dt * 2 * Math.PI * 7) * Math.exp(-dt * 2.6) : 0;
+  xp.taptic.position.x = out * 0.95 + buzz * 0.06 * out; xp.glass.position.x = buzz * 0.012;
+  xp.tapticGlow.emissive.setRGB(0.85, 0.47, 0.34).multiplyScalar(1.2 * out * (0.6 + 0.4 * Math.abs(buzz)));
+  R.cue("pop", T.side + 0.05, { soft: true }); R.cue("whoosh", T.moves, { soft: true });
+
+  S.render(t);
+
+  // ---------- 2D overlays pinned to 3D ----------
+  const fr = Math.floor(t * 30), tipS = S.project(fg.position);
+  const arcOn = P3(t, T.stealing - 0.1, 0.15) * (1 - P3(t, T.so - 0.1, 0.25));
+  for (let i = 0; i < 7; i++) {
+    const a = (i / 6 - 0.5) * 2.2, gp = S.project([TIP0.x + Math.cos(a) * 0.09, PT.y, TIP0.z + Math.sin(a) * 0.05]), el = $("arc" + i);
+    const mx = (gp[0] + tipS[0]) / 2 + R.fx.hash(fr * 3 + i) * 40, my = (gp[1] + tipS[1]) / 2 - 30 + R.fx.hash(fr * 7 + i) * 20;
+    el.setAttribute("d", `M${gp[0].toFixed(1)} ${gp[1].toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${tipS[0].toFixed(1)} ${(tipS[1] + 8).toFixed(1)}`);
+    el.style.opacity = arcOn * (0.45 + 0.55 * Math.abs(R.fx.hash(fr * 13 + i)));
+  }
+  R.cue("glitch", T.stealing, { soft: true });
+  const nS = S.project(NW); Object.assign($("call").style, { left: clamp(nS[0] - 300, 40, 440) + "px", top: Math.min(1180, nS[1] + 120) + "px" });
+  pop("call", t, T.cap + 0.1, { from: 0.35 }); CALLBOX = { x: parseFloat($("call").style.left), y: parseFloat($("call").style.top), w: 600, h: 104, r: 22 };
+  R.note("nG", t, T.rows + 0.3, T.sofia);
+  gate("call", T.cap - 0.2, T.sofia + PD + 0.05, t);
+  const LAY = [[xp.glass, 0.62, T.moves + 0.15], [xp.grid.group, 0.6, T.moves + 0.5], [xp.frame, 0.62, T.four], [xp.taptic, 0.3, T.magnet]];
+  LAY.forEach(([obj, dx, a], i) => {
+    const wp = V(dx, 0.02, 0.2); obj.localToWorld(wp); const p = S.project(wp), ly = 650 + i * 150, lb = $("lb" + i);
+    const v = E3.out3(P3(t, a, 0.45)) * (t < T.y1994 - 0.1 ? 1 : 0); lb.style.top = ly + "px"; lb.style.opacity = v; lb.style.transform = `translateX(${(1 - v) * 200}px)`;
+    lb.classList.toggle("on", i === 3 ? t >= T.magnet && t < T.brain : i === 2 ? t >= T.four && t < T.magnet : false);
+    $("ll" + i).setAttribute("d", `M${p[0].toFixed(1)} ${p[1].toFixed(1)} L${((p[0] + 700) / 2).toFixed(1)} ${ly + 30} L700 ${ly + 30}`); $("ll" + i).style.opacity = v;
+    $("lc" + i).setAttribute("cx", p[0]); $("lc" + i).setAttribute("cy", p[1]); $("lc" + i).style.opacity = v;
+    R.cue("pop", a, { soft: true });
+  });
+  pop("fake", t, T.fake + 0.05, { from: 1.6 }); gate("fake", T.fake - 0.1, T.y1994, t);
+  const tp = S.project(xp.taptic.getWorldPosition(V(0, 0, 0))); Object.assign($("side").style, { left: Math.min(tp[0] - 120, 560) + "px", top: tp[1] + 60 + "px" });
+  rise("side", t, T.side, { dy: 60, d: 0.6, until: T.brain });
+  pop("brain", t, T.brain + 0.1, { from: 0.35 }); gate("brain", T.brain - 0.1, T.y1994, t);
+  R.note("nC", t, T.moves + 0.3, T.y1994);
+  rise("r1", t, T.g2 - 0.1, { dy: 140, blur: 10, d: 0.8 }); rise("r2", t, T.fc - 0.1, { dy: 140, blur: 10, d: 0.8 }); CHIPBOX = boxOf("r2");
+
+  // ---------- SENSE (light) ----------
+  R.fx.rig("rgS", t, [{ t: T.sofia, s: 1 }, { t: T.onpad - 0.3, ...focus([540, 950], 1.05) }, { t: T.pulls - 0.1, ...focus(TIP, 1.13) },
+    { t: T.chip - 0.1, s: 1, d: 0.7 }, { t: T.n200 - 0.25, ...focus([860, 680], 1.08, 0.28) }, { t: T.dip - 0.2, ...focus(TIP, 1.16) }]);
+  R.card("card", t, { in: T.sofia - 0.05, y: 160, d: 0.55 });
+  R.finger("fg2", t, Object.assign([{ t: T.onpad - 0.6, ...FT(TIP[0] + 300, TIP[1] + 800) }, { t: T.onpad + 0.15, ...FT(TIP[0], TIP[1]) }, { t: T.but - 0.3, ...FT(TIP[0], TIP[1]) }, { t: T.but + 0.2, ...FT(TIP[0] + 300, TIP[1] + 900) }], { out: T.but - 0.1 }));
+  $("fg2").style.opacity = (+$("fg2").style.opacity || 0) * lerp(1, 0.32, ease.inOut(prog(t, T.chip, 0.6)));
+  for (let r = 0; r < 4; r++) for (let c = 0; c < 7; c++) count("v" + c + "_" + r, t, T.pulls + 0.1 + (Math.abs(c - FC[0]) + Math.abs(r - FC[1])) * 0.12, 0.9, target(c, r), { from: 100 });
+  for (let i = 0; i < 10; i++) {
+    const c = FC[0] + [-1, 0, 1, -1, 1, 0, -2, 2, 0, -1][i], r = FC[1] + [0, 1, 0, 1, 1, 2, 0, 0, -1, -1][i], [x, y] = cellXY(clamp(c, 0, 6), clamp(r, 0, 3));
+    const a = T.pulls + (i % 5) * 0.32, p = ((t - a) % 1.6 + 1.6) % 1.6 / 1.6, live = t >= a && t < T.chip, el = $("q" + i);
+    el.style.left = lerp(110 + x + 57, TIP[0], ease.inOut(p)) + "px"; el.style.top = lerp(640 + y + 62, TIP[1] - 20, ease.inOut(p)) + "px"; el.style.opacity = live ? Math.sin(Math.PI * p) : 0;
+  }
+  const sp = Math.max(0, t - T.chip) * 7, row = Math.floor(sp), fy = (row % 4) + ease.inOut(clamp((sp - row) * 2.2));   // the scan band GLIDES between rows
+  Object.assign($("scan").style, { opacity: prog(t, T.chip, 0.25) * (1 - prog(t, T.but - 0.3, 0.2)), top: 90 + 125 * (fy >= 4 ? fy - 4 : fy) + "px" });
+  R.cue("type", T.chip, { t2: T.dip });
+  R.fx.odometer("hz", t, T.n200 - 0.05, 0.9, 200);
+  pop("dipSel", t, T.dip, { from: 1.3 });
+  R.note("nS", t, T.pulls + 0.4, T.but);
+
+  // ---------- WIRES (light) ----------
+  const MK = [WX(PEAK), 1105];
+  R.fx.rig("rgW", t, [{ t: T.but, s: 1 }, { t: T.n16 - 0.2, ...focus([540, 900], 1.04) }, { t: T.lost - 0.2, ...focus([WX(PEAK), 930], 1.1) },
+    { t: T.pins - 0.05, ...focus(MK, 1.2) }, { t: T.n960 - 0.12, s: 0.98, d: 0.35, ease: "expoOut" }]);
+  rise("w16", t, T.n16 - 0.3, { dy: 110, d: 0.75 }); count("w16n", t, T.n16 - 0.3, 0.7, 16);
+  for (let i = 0; i < 16; i++) {
+    rise("wl" + i, t, T.but - 0.05 + i * 0.03, { dy: 200, d: 0.8 }); rise("wn" + i, t, T.n16 - 0.35 + i * 0.035, { dy: 80, d: 0.65 });
+    const bp = ease.out3(prog(t, T.lost + Math.abs(i - PEAK) * 0.05, 0.75)), bl = $("br" + i).firstElementChild;
+    $("br" + i).style.height = (LOSS(i) * 6 * bp).toFixed(1) + "px"; if (bl) bl.style.opacity = clamp((bp - 0.6) * 3);
+  }
+  const mp = R.ease.expoOut(prog(t, T.pins, 0.7));
+  Object.assign($("mark").style, { left: lerp(540, WX(PEAK), mp) + "px", opacity: clamp(mp * 3) });
+  pop("big", t, T.n960 - 0.05, { from: 0.3 }); BIGBOX = boxOf("big");
+  R.fx.shake("rgW", t, T.n960, { amp: 14, d: 0.5 });
+  R.fx.burst("burst", t, T.n960, { n: 16, r: 200 });
+  R.note("nW", t, T.n960 + 0.3, T.clicks);
+
+  // ---------- 1994 ----------
+  R.fx.rig("rgH", t, [{ t: T.y1994, s: 1 }, { t: T.glide - 0.2, s: 1.04, y: -10 }, { t: T.pb - 0.2, s: 1.07, y: -30 }]);
+  R.card("hist", t, { in: T.y1994 - 0.12, y: 180, d: 0.75 });
+  R.fx.odometer("yr", t, T.y1994 + 0.1, 1.1, 1994, { fmt: x => String(Math.round(x)) });
+  rise("h1", t, T.glide - 0.1, { dy: 120, d: 0.75 }); rise("h2", t, T.pb - 0.1, { dy: 120, d: 0.75 });
+  R.note("nH", t, T.pb + 0.3, T.recap);
+
+  // ---------- CTA (dark): the real profile, finger taps Follow → Following, 3,022 → 3,023 ----------
+  const FB = [70 + 40 + 210, 600 + 478 + 39];                       // Follow button centre (stage px)
+  R.fx.rig("rgC", t, [{ t: T.cta - 0.2, s: 1 }, { t: T.press - 0.35, ...focus(FB, 1.07, 0.3) }, { t: T.press + 0.9, s: 1.0, d: 0.9 }]);
+  R.card("igp", t, { in: T.cta - 0.05, y: 160, d: 0.55 });
+  R.finger("fgC", t, Object.assign([{ t: T.cta + 0.05, ...FT(FB[0] + 300, FB[1] + 760) }, { t: T.press - 0.08, ...FT(FB[0], FB[1]) }, { t: T.press, ...FT(FB[0], FB[1]), press: true },
+    { t: T.press + 1.0, ...FT(FB[0], FB[1]) }, { t: T.press + 1.5, ...FT(FB[0] + 320, FB[1] + 900) }], { out: T.press + 1.15 }));
+  R.press("followBtn", t, T.press);
+  const followed = t >= T.press + 0.18, fbtn = $("followBtn");
+  fbtn.textContent = followed ? "Following ▾" : "Follow"; fbtn.classList.toggle("on", followed);
+  count("fcnt", t, T.press + 0.2, 0.35, 3023, { from: 3022 });
+  R.plusone("plus1", t, T.press + 0.2);
+  pop("flw", t, end("like this.") + 0.15, { from: 0.3 });
+
+  // ---------- SEAMS (last; each only touches its own window) ----------
+  R.fx.portal("s3", "sSense", t, T.sofia, CALLBOX, { d: PD });                // the callout floods into the light chapter
+  R.fx.settle("sSense", "sWire", t, T.but);
+  R.fx.portal("sWire", "s3", t, T.clicks, BIGBOX, { d: PD, dark: true });     // the 1/960 badge floods back to dark 3D
+  R.fx.settle("s3", "sHist", t, T.y1994);
+  R.fx.settle("sHist", "s3", t, T.recap, { s0: 1.28 });
+  R.fx.settle("s3", "sCTA", t, T.cta);                                       // dark → dark: settle onto the profile
+};
+window.seek(0);
+</script>
+</body></html>

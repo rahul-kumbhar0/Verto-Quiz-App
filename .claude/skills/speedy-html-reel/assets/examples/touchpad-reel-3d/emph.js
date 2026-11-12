@@ -1,0 +1,2 @@
+window.EMPH = {"box": ["finger#1", "electricity", "work?", "grid#1", "columns", "capacitor", "finger#2", "pulls", "200", "dip", "16", "1/960", "MacBook", "fake#1", "Four", "magnet", "click#2", "1994", "GlidePoint", "grid#2", "fake#2", "Follow"], "bold": ["stealing", "Under", "crossing#1", "Sofia", "conducts", "Then", "But", "So#3", "clicks", "moves", "brain#1", "vanish", "breakdowns"]};
+window.PINS = [];
