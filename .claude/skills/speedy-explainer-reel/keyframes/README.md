@@ -77,12 +77,12 @@ Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block fold
 
 | Block | What it shows |
 |---|---|
-| [`code-reveal`](code-reveal/) | The picture dissolves into the code that draws it ("all of this was written by Claude"), then back. |
-| [`light-wipe`](light-wipe/) | A glowing bar that sweeps across the picture to change scenes. |
-| [`stage-flip`](stage-flip/) | The background flips between dark and light as a circle growing from a point (marks a new chapter; light = real screens, dark = diagrams). |
-| [`blade-cut`](blade-cut/) | Two glowing blades slice a wide picture; the sides fall away and the middle becomes a vertical clip ("it cuts them into Shorts", crop, trim). |
-| [`film-strip`](film-strip/) | A long video shown as a strip of frames running under a playhead; the best moments light up with a score ("the AI picks the moments"). |
-| [`clip-stack`](clip-stack/) | Vertical clips fan out in an arc, then drop onto one stack ("a whole stack of Shorts from one video", outputs piling up). |
+| [`code-reveal`](code-reveal/) | The picture breaks into blocks that flip, one by one, into a real code editor showing the code that draws it ("all of this was written by Claude"); a glitch at the turn; then it can fold back. |
+| [`light-wipe`](light-wipe/) | An anamorphic light streak crosses the picture to change scenes: a bright core line, a wide horizontal lens streak, flare ghosts, colour fringing at the edge and sparkles left in its wake. |
+| [`stage-flip`](stage-flip/) | The background changes between dark and light to mark a new chapter (light = real screens, dark = diagrams). |
+| [`blade-cut`](blade-cut/) | Two steel blades slash down through a wide shot (with motion trails and sparks where they bite), a flash, the side pieces tip over and fall away in 3D with shadows, and the middle rises as a vertical clip with a white rim and glow ("it cuts them into Shorts", crop, trim). |
+| [`film-strip`](film-strip/) | A long video as a real strip of film: dark celluloid with sprocket holes, frame numbers and grain, holding REAL frames (default: our own reel frames), curving away in perspective as it runs under a glowing playhead. The best moments get bracketed, light up with a score and lift out of the strip. |
+| [`clip-stack`](clip-stack/) | Real vertical clips fly in and fan out in a 3D arc (each card has thickness, a shadow and a glass glint), then collapse onto one neat pile with a bounce ("a whole stack of Shorts from one video", outputs piling up). |
 | [`world-camera`](world-camera/) | A 3D world with a camera that flies between stations (engine `world3d.js`, see its README). |
 
 ## F. Structure, endings and extras

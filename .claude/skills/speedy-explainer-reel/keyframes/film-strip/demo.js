@@ -1,1 +1,2 @@
-KF.demo({ name: "film-strip", group: "E", line: "A long video under a playhead; the best moments light up", dur: 5, build(host) { const f = KF.make("film-strip", host, {}); return t => f.frame(t, { show: KF.prog(t, 0, 0.4), scroll: KF.prog(t, 0.4, 3.2) * 0.86, lift: KF.ease.out(KF.prog(t, 3.8, 0.6)) }); } });
+KF.demo({ name: "film-strip", group: "E", line: "Real film runs under a playhead; the best moments lift out", dur: 6, build(host) { const f = KF.make("film-strip", host, {}); const fb = KF.box(host, "left:0;top:0;width:1080px;height:1000px"), fin = KF.make("finish", fb, {});
+  return t => { f.frame(t, { show: KF.prog(t, 0, 0.4), scroll: KF.prog(t, 0.4, 3.8) * 0.66, lift: KF.ease.out(KF.prog(t, 4.4, 0.7)) }); fin.frame(t, {}); }; } });

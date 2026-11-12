@@ -1,3 +1,3 @@
-KF.demo({ name: "blade-cut", group: "E", line: "Two blades cut a wide shot into a vertical clip", dur: 4, build(host) {
-  const b = KF.make("blade-cut", host, {}), cap = KF.el("div", "", b.center, "The first<br>three seconds"); cap.style.cssText = "position:absolute;left:6px;right:6px;bottom:20px;text-align:center;font:900 30px/1.1 Inter;color:#fff;text-shadow:0 3px 0 #000";
-  return t => { b.frame(t, { show: KF.prog(t, 0, 0.4), cut: KF.prog(t, 0.9, 0.5), fall: Math.max(0, t - 1.5), grow: KF.prog(t, 1.7, 0.7) }); cap.style.opacity = KF.prog(t, 2.3, 0.3); }; } });
+KF.demo({ name: "blade-cut", group: "E", line: "Steel blades slice a wide shot into a vertical clip", dur: 5, build(host) {
+  const b = KF.make("blade-cut", host, { bg: `url(${KF.asset("covers/c01.jpg")}) center/cover` }), cap = KF.el("div", "", b.center, "1 video →<br>a stack of Shorts"); cap.style.cssText = "position:absolute;left:6px;right:6px;bottom:22px;text-align:center;font:900 30px/1.1 Inter;color:#fff;text-shadow:0 3px 0 #000"; const fb = KF.box(host, "left:0;top:0;width:1080px;height:1000px"), fin = KF.make("finish", fb, {});
+  return t => { b.frame(t, { show: KF.prog(t, 0, 0.4), cut: KF.prog(t, 0.9, 0.55), fall: Math.max(0, t - 1.55), grow: KF.prog(t, 1.8, 0.9) }); cap.style.opacity = KF.prog(t, 2.6, 0.3); fin.frame(t, {}); }; } });
