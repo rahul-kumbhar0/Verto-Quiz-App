@@ -362,4 +362,5 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Real event: Microsoft 365 outage (Outlook, Teams, OneDrive, Copilot) from 12 Nov, still going 13 Nov (CNN, NBC; Microsoft says not a breach).
 - Poster v2 `studio/reels/msmeme/poster.png` (1080×1350, HTML beside it; v1 kept as poster.v1.*). Joke: rule of three, Claude keeps offering the broken apps: check your inbox → OUTLOOK IS DOWN → "You're absolutely right! quick Teams call" → TEAMS IS ALSO DOWN → "save the fix to your OneDrive" → 💀.
 - v3 (current poster.png; v2 kept as poster.v2.*): headline "Microsoft at 3 AM:", big red "🔥 everything is on fire" pill, punchline row in yellow, our mascot as the 💀 sender. Self-rating: v1 5.5, v2 8, v3 9.
-- Rule: no real CEO face or name in fake images, no Microsoft logos. Post while the outage is live; delete or leave it once it has been fixed for 2+ days.
+- v3.1 (current poster.png; plain v3 kept as poster.v3.*): small Microsoft four-square logo before the headline, drawn in CSS. Owner asked for it. Satire label stays.
+- Rule: no real CEO face or name in fake images. Microsoft logo only small, next to the word, never made to look like an official post. Post while the outage is live; delete or leave it once it has been fixed for 2+ days.
