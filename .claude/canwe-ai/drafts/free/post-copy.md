@@ -22,6 +22,6 @@ The app is Claude Code. The brain is a free model. Great for practice, not for y
 ## YouTube Short title
 Claude Code for FREE? Here's what's actually answering #shorts
 ## Cover
-kicker "FREE GITHUB REPO · 69.4K ★" · headline "Claude Code for {free}. Kind of." · foot "The app is Claude Code. The brain isn't." → out/cover.png
+kicker "FREE GITHUB REPO · 69.4K ★" · headline "Claude Code for {free}. Kind of." · two real screenshots: the GitHub page (69.4k stars boxed) and Claude Code's /model picker (free model boxed red, "brain: a free model") · foot "The app is Claude Code. The brain isn't." · presenter pointing up → reels/free/cover2.html → studio/finals/free-cover.png
 ## Automation
 #84 FREE on @canwe.ai, created OFF, exact keyword FREE, follow gate, guide https://canwe-guides.vercel.app/free/ (live, dpl_Mc7siMKkqPHMR64oq5WDcExDWRRZ). On "uploaded": lock to the new media id + activate (FREE is a common word: never leave it on all reels).
