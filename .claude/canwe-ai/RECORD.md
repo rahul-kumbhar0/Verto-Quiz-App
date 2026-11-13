@@ -360,5 +360,5 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 
 ## 13 Nov 2026 · MEME poster: Microsoft outage
 - Real event: Microsoft 365 outage (Outlook, Teams, OneDrive, Copilot) from 12 Nov, still going 13 Nov (CNN, NBC; Microsoft says not a breach).
-- Poster `studio/reels/msmeme/poster.png` (1080×1350, HTML source beside it). Format: "Microsoft engineers, hour 12 of the outage:" + a Claude chat ("fix it. no mistakes. and DON'T tell copilot." → "let me check your inbox…" → "BRO."). Labelled "meme · satire, not a real chat".
+- Poster v2 `studio/reels/msmeme/poster.png` (1080×1350, HTML beside it; v1 kept as poster.v1.*). Joke: rule of three, Claude keeps offering the broken apps: check your inbox → OUTLOOK IS DOWN → "You're absolutely right! quick Teams call" → TEAMS IS ALSO DOWN → "save the fix to your OneDrive" → 💀.
 - Rule: no real CEO face or name in fake images, no Microsoft logos. Post while the outage is live; delete or leave it once it has been fixed for 2+ days.
