@@ -54,6 +54,7 @@ Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block fold
 | [`folder-window`](folder-window/) | A file-explorer window whose files appear one by one ("with this folder…", project structure, what's inside the download). |
 | [`agent-log`](agent-log/) | An AI agent's activity log ticking through its steps ("Searched the web… Created script.txt… Made voice.mp3"). |
 | [`prompt-box`](prompt-box/) | An AI chat input being typed into and sent ("just one sentence"). |
+| [`real-screen`](real-screen/) | A REAL screenshot shown in a device frame (phone, browser or app window) that scrolls, zooms into exact spots and draws highlight boxes on them, so viewers see the actual page, button or line ("this is the repo", "click here", "this is the model it really uses"). |
 | [`product-page`](product-page/) | A shop / app page in a browser that loads (skeleton → content), with a load timer ("the page took 1.4 s", pricing, "what the user sees"). |
 
 ## C. Number and comparison blocks
