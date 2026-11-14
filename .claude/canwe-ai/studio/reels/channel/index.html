@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8"><title>CHANNEL: youtube-agent-skill</title>
+<link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+#stage{position:absolute;inset:0}
+.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
+#fn{position:absolute;left:0;right:0;top:1206px;text-align:center;font:600 24px "JetBrains Mono",monospace;color:#8b8f98}
+#red{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 45%,#3a1214,#0c0c0f 70%);opacity:0}
+/* hook: the eleven commands */
+.chips{position:absolute;left:30px;right:30px;top:226px;display:flex;flex-wrap:wrap;justify-content:center;gap:18px 16px}
+.chip{height:80px;padding:0 22px;border-radius:20px;background:#17191f;border:2px solid #2c3039;color:#F3F1EC;font:700 34px "JetBrains Mono",monospace;display:flex;align-items:center;box-shadow:0 14px 30px -12px rgba(0,0,0,.8)}
+.chip b{color:#D97757;font-weight:700}
+.yt{position:absolute;left:440px;top:56px;width:200px;height:140px;border-radius:38px;background:linear-gradient(#ff3b30,#d81f14);box-shadow:0 20px 50px -14px rgba(255,40,30,.6),inset 0 2px 0 rgba(255,255,255,.35)}
+.yt:after{content:"";position:absolute;left:78px;top:38px;border-left:58px solid #fff;border-top:32px solid transparent;border-bottom:32px solid transparent}
+.bub{position:absolute;padding:18px 30px;border-radius:30px 30px 30px 8px;background:#fff;color:#16181d;font:800 40px Inter;box-shadow:0 24px 50px -14px rgba(0,0,0,.8);white-space:nowrap}
+.bub small{display:block;font:600 22px Inter;color:#6b7280;margin-top:2px}
+/* Claude Code session window content */
+.cc{position:absolute;inset:0;background:#141413;color:#e8e6dc;font:700 30px/1.35 "JetBrains Mono",monospace;padding:22px 26px}
+.cc .pr{display:flex;gap:14px;background:#262624;border-radius:10px;padding:12px 18px;margin-bottom:18px;font-size:38px}.cc .pr i{font-style:normal;color:#8c8a82}.cc .pr b{color:#d97757;font-weight:700}
+.cc .hd{color:#8c8a82;font-size:24px;margin:0 0 10px 4px}
+.cc .row{display:flex;align-items:center;gap:16px;height:84px;padding:0 16px;border-radius:12px;font:600 29px Inter;white-space:nowrap}
+.cc .row:nth-child(odd){background:rgba(255,255,255,.035)}.cc .row .tx{flex:1;overflow:hidden;text-overflow:ellipsis}
+.cc .row .bar{width:190px;height:16px;border-radius:8px;background:#2c2b28;overflow:hidden;flex:none}.cc .row .bar u{display:block;height:100%;border-radius:8px}
+.cc .row .n{width:92px;text-align:right;font:700 34px "JetBrains Mono",monospace;flex:none}
+.cc .tag{flex:none;padding:6px 14px;border-radius:8px;font:800 24px Inter}.cc .tc{font:700 30px "JetBrains Mono",monospace;color:#b5b3a8;width:250px;flex:none}
+.cc .ok{color:#4eba65;font-size:28px;margin:16px 4px 0}
+.tl{position:relative;height:54px;border-radius:10px;background:repeating-linear-gradient(90deg,#3a4a66 0 3px,#2a3550 3px 9px);margin:4px 0 18px;overflow:hidden}.tl i{position:absolute;top:0;bottom:0;background:rgba(242,85,90,.85)}
+</style></head><body><div id="stage">
+  <div id="red"></div>
+  <div id="world" style="position:absolute;inset:0">
+  <div id="s1" class="scene kf-host"></div><div id="s2" class="scene kf-host"></div><div id="s2b" class="scene kf-host"></div><div id="s3" class="scene kf-host"></div><div id="s4" class="scene kf-host"></div>
+  <div id="s5" class="scene kf-host"></div><div id="s6" class="scene kf-host"></div><div id="s6b" class="scene kf-host"></div><div id="s7" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:440px;height:900px"></div>
+  </div>
+  <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="rail" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
+  <div id="cap" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="fn" data-qa="ok"></div>
+  <div id="pres" class="kf-host" style="left:0;top:1290px;width:1080px;height:630px"></div>
+  <div id="fin" class="kf-host" style="left:0;top:0;width:1080px;height:1920px;pointer-events:none"></div>
+</div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
+<script>["captions","presenter","chapter-rail","prompt-box","strike-row","ending-comment","light-wipe","finish","real-screen"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));</script>
+<script>
+// ---- word clock ----
+const W = window.WORDS.filter(w => (w.type || "word") === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?:]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word + " #" + n); };
+const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
+const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id), C = KF.C;
+const T = { every: at("Everyone's"), heres: at("Here's", 1), called: at("called"), agent: at("Agent"), paste: at("Paste"), installs: at("installs"),
+  t1: at("Type", 1), five: at("five"), scored: at("scored"), full: at("full"), t2: at("Type", 2), transcript: at("transcript"), dead: at("dead"), filler: at("filler"), retakes: at("retakes"),
+  t3: at("Type", 3), finds: at("finds"), beat: at("beat"), but: at("But"), skip: at("skip"), never1: at("never", 1), edits: at("edits"), never2: at("never", 2), uploads: at("uploads"),
+  still: at("still"), record: at("record"), cut: at("cut", 2), post: at("post"), and: at("And", 3), rough: at("rough"), promise: at("promise"), author: at("author"), cta: at("Comment"), dm: at("DM") };
+const S = { s1: [0, T.called - 0.15], s2: [T.called - 0.15, T.paste - 0.1], s2b: [T.paste - 0.1, T.t1 - 0.12], s3: [T.t1 - 0.12, T.t2 - 0.12], s4: [T.t2 - 0.12, T.t3 - 0.12], s5: [T.t3 - 0.12, T.but - 0.15],
+  s6: [T.but - 0.15, T.and - 0.15], s7: [T.and - 0.15, T.cta - 0.1], s8: [T.cta - 0.1, DUR] };
+
+// ---- blocks ----
+// captions show the real command ("/yt-script"), not the spoken letters "Y T script"
+const CW = []; for (let i = 0; i < W.length; i++) { if (W[i].w === "Y" && W[i + 1] && W[i + 1].w === "T") { CW.push({ w: "/yt-" + W[i + 2].w, s: W[i].s, e: W[i + 2].e }); i += 2; } else CW.push(W[i]); }
+const cap = KF.make("captions", "cap", { words: CW, keys: ["channel.", "do.", "Agent.", "installs.", "script.", "retakes.", "skip.", "uploads.", "post.", "promise.", "CHANNEL,"], max: 4, size: 62 });
+const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#1D1E23", shirtLine: "#0B0C0F", print: "#ff3b30", chain: "#F2C14E", lens1: "#ff8a80", lens2: "#ff3b30" },
+  poses: [[0, "present"], [T.every - 0.1, "shrug"], [T.heres - 0.1, "point_cam"], [T.called - 0.1, "offer"], [T.paste - 0.1, "one"], [T.t1 - 0.1, "present"], [T.five - 0.1, "explain"], [T.t2 - 0.1, "two"], [T.dead - 0.1, "three"], [T.t3 - 0.1, "think"], [T.beat - 0.1, "thumbs"], [T.but - 0.1, "stop"], [T.never1 - 0.1, "cross"], [T.still - 0.1, "explain"], [T.and - 0.1, "shrug"], [T.author - 0.1, "point_cam"], [T.cta - 0.1, "point_cam"]],
+  talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
+const rail = KF.make("chapter-rail", "rail", { steps: ["the claim", "install", "script", "edit", "viral", "catch"], top: 0 });
+const wipe = KF.make("light-wipe", "wipe", { color: "#ffd8a8" }), fin = KF.make("finish", "fin", { grain: 0.55, vignette: 0.45 });
+
+// S1 hook: the eleven commands (names from the repo's README), then what the viral reels claim
+const CMD = ["script", "package", "edit", "comment", "plan", "viral", "retention", "shorts", "seo", "chapters", "audit"], s1 = $("s1"); KF.el("div", "yt", s1);
+const chipBox = KF.el("div", "chips", s1), chips = CMD.map(c => KF.el("div", "chip", chipBox, `<b>/yt-</b>${c}`));
+const BUB = [["“runs your whole channel”", 90, 210, -3], ["“edits your videos”", 470, 370, 2], ["“posts for you”", 200, 530, -2]], bubs = BUB.map(([tx, x, y]) => { const e = KF.el("div", "bub", s1, `${tx}<small data-qa="texture">what the viral reels say</small>`); e.style.left = x + "px"; e.style.top = y + "px"; return e; });
+// S2: the real GitHub page on a phone, then the link pasted into Claude
+const gh = KF.make("real-screen", "s2", { src: "real/gh-full.png", natural: [860, 11542], frame: "phone", w: 600, vh: 600, top: 0 });
+const LINK = "github.com/Jakeschincariol/youtube-agent-skill  Install this skill", pb = KF.make("prompt-box", "s2b", { text: LINK, top: 150, w: 960 });
+const okTag = KF.el("div", "", $("s2b"), "✓ 11 skills installed"); okTag.style.cssText = "position:absolute;left:0;right:0;top:520px;text-align:center;font:800 44px Inter;color:#4eba65";
+// S3–S5: one Claude Code window per command (sample output, drawn from what the README says each skill returns)
+const win = (id, cmd, arg, body) => { const dv = KF.device("window", $(id), { w: 1000, h: 716, title: "claude — ~/my-channel" }); dv.el.style.left = "40px"; dv.el.style.top = "10px"; dv.screen.innerHTML = `<div class="cc"><div class="pr"><i>&gt;</i><span><b class="cm"></b><span class="ar" style="color:#8c8a82"></span></span></div>${body}</div>`; dv.cmd = "/yt-" + cmd; dv.arg = arg; dv.rows = [...dv.screen.querySelectorAll(".row")]; return dv; };
+const bar = (v, c) => `<span class="bar"><u style="width:${v}%;background:${c}"></u></span>`;
+const HOOKS = [["You're revising wrong. Here's the fix.", 78], ["I studied 10 hours a day. It failed.", 71], ["Why toppers never re-read notes", 64], ["Stop highlighting. Do this.", 58], ["My study routine for 2026", 41]];
+const w3 = win("s3", "script", " how I study for exams", `<div class="hd" data-qa="texture">5 hooks, scored</div><div>${HOOKS.map(([h, v]) => `<div class="row"><span class="tx">${h}</span>${bar(v, v >= 72 ? "#4eba65" : v >= 55 ? "#f5a524" : "#f2555a")}<span class="n" style="color:${v >= 72 ? "#4eba65" : v >= 55 ? "#f5a524" : "#f2555a"}">${v}</span></div>`).join("")}</div><div class="ok">● full script written · beats marked</div>`);
+const CUTS = [["00:14 → 00:19", "DEAD AIR", "#f2555a", "5 s of silence"], ["00:41", "FILLER", "#f5a524", "“basically” ×3"], ["01:07 → 01:15", "RETAKE", "#4b8bff", "keep take 2"], ["02:30 → 02:34", "DEAD AIR", "#f2555a", "4 s of silence"]];
+const w4 = win("s4", "edit", " transcript.srt", `<div class="tl" data-qa="texture"><i style="left:9%;width:4%"></i><i style="left:27%;width:1.500%;background:rgba(245,165,36,.9)"></i><i style="left:44%;width:6%;background:rgba(75,139,255,.9)"></i><i style="left:81%;width:3%"></i></div><div class="hd" data-qa="texture">cut list</div><div>${CUTS.map(([tc, tg, c, n]) => `<div class="row"><span class="tc">${tc}</span><span class="tag" style="background:${c}22;color:${c}">${tg}</span><span class="tx" style="color:#b5b3a8">${n}</span></div>`).join("")}</div>`);
+const VIR = [["How I cleared GATE in 4 months", 6.2], ["My 5 a.m. study vlog", 3.8], ["Notes that got me 9.4 CGPA", 2.9], ["Day in my life: final year", 1.1]];
+const w5 = win("s5", "viral", " study vlogs", `<div class="hd" data-qa="texture">ranked by how far each video beat its own channel</div><div>${VIR.map(([h, v], i) => `<div class="row"><span class="tx">${h}</span>${bar(Math.min(100, v * 16), i === 0 ? "#4eba65" : "#6b7280")}<span class="n" style="color:${i === 0 ? "#4eba65" : "#e8e6dc"}">${v.toFixed(1)}×</span></div>`).join("")}</div><div class="ok">● why #1 worked: title, hook, structure</div>`);
+// S6 the catch: what it never does, then what is still your job
+const nope = KF.make("strike-row", "s6", { size: 230, top: 20, items: [{ art: "timeline", label: "edits your video", at: T.but + 0.25, strike: T.edits + 0.1 }, { icon: "⬆️", label: "uploads", at: T.but + 0.5, strike: T.uploads + 0.1 }] });
+const yours = KF.make("strike-row", "s6b", { size: 190, top: 400, items: [{ art: "camera", label: "record", at: T.still - 0.1, tick: T.record + 0.15 }, { art: "timeline", label: "cut", at: T.still + 0.05, tick: T.cut + 0.1 }, { icon: "📲", label: "post", at: T.still + 0.2, tick: T.post + 0.1 }] });
+// S7: the author's own fine print, real screenshot
+const fp = KF.make("real-screen", "s7", { src: "real/gh-full.png", natural: [860, 11542], frame: "phone", w: 600, vh: 600, top: 0 });
+const cta = KF.make("ending-comment", "s8", { size: 92, keyword: "CHANNEL", pill: "link + install line + all 11 commands", dm: "YouTube Agent: link, install line, 11 commands 👇" });
+
+// ---- sound cues ----
+const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
+cue("riser", 0.02, { t2: 0.5 }); CMD.slice(3).forEach((_, i) => cue("pop", 0.15 + i * 0.18, { soft: i % 2 === 1 })); cue("whoosh", T.every - 0.1); BUB.forEach((_, i) => cue("pop", T.every + 0.1 + i * 0.3)); cue("swish", T.heres); cue("impact", at("do") + 0.1);
+cue("whoosh", S.s2[0]); cue("land", S.s2[0] + 0.35); cue("pop", T.agent); cue("whoosh", S.s2b[0]); cue("type", T.paste + 0.15, { t2: at("Claude", 2) + 0.3 }); cue("click", T.installs - 0.1); cue("ding", T.installs + 0.3);
+[[S.s3, T.t1, [T.five, T.five + 0.2, T.five + 0.4, T.scored, T.scored + 0.2], T.full], [S.s4, T.t2, [T.transcript + 0.3, T.dead, T.filler, T.retakes], null], [S.s5, T.t3, [T.finds, T.finds + 0.3, T.finds + 0.6, T.beat], T.beat + 0.4]].forEach(([s, ty, rows, dn]) => { cue("whoosh", s[0]); cue("type", ty + 0.05, { t2: ty + 0.65 }); cue("click", ty + 0.72); rows.forEach((x, i) => cue("pop", x, { soft: i % 2 === 1 })); if (dn) cue("ding", dn); });
+cue("impact", T.but); cue("pop", T.but + 0.3); cue("pop", T.but + 0.55); cue("glitch", T.edits + 0.1); cue("glitch", T.uploads + 0.1); [T.record, T.cut, T.post].forEach(x => cue("pop", x + 0.12)); cue("ding", T.post + 0.3);
+cue("whoosh", S.s7[0]); cue("land", S.s7[0] + 0.35); cue("swish", T.rough - 0.1); cue("pop", T.promise); cue("tap", T.author + 0.2);
+cue("swell", T.cta - 0.1); cue("type", T.cta + 0.4, { t2: T.cta + 0.9 }); cue("click", T.cta + 1.05); cue("ding", T.dm + 0.25);
+W.forEach(x => { if (/[.!?]$/.test(x.w)) cue("tick", x.e + 0.02, { soft: true }); });
+window.__cues = cues;
+
+// ---- the frame ----
+const sess = (dv, t, t0, times) => { const n = Math.round(P(t, t0 + 0.05, 0.6) * dv.cmd.length); dv.screen.querySelector(".cm").textContent = dv.cmd.slice(0, n); dv.screen.querySelector(".ar").textContent = n >= dv.cmd.length ? dv.arg : "";
+  dv.rows.forEach((r, i) => { const q = E.out(P(t, times[i], 0.28)); r.style.opacity = q; r.style.transform = `translateX(${((1 - q) * -30).toFixed(1)}px)`; const u = r.querySelector(".bar u"); if (u) u.style.transform = `scaleX(${E.out(P(t, times[i] + 0.1, 0.4)).toFixed(3)})`, u.style.transformOrigin = "0 50%"; });
+  dv.screen.querySelectorAll(".hd,.tl").forEach(e => (e.style.opacity = P(t, times[0] - 0.25, 0.25))); const ok = dv.screen.querySelector(".ok"); if (ok) ok.style.opacity = P(t, times[times.length - 1] + 0.45, 0.3); };
+window.seek = t => {
+  const on = k => t >= S[k][0] && t < S[k][1];
+  Object.keys(S).forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
+    if (v) { const pin = k === "s1" ? 1 : E.out(P(t, a, 0.35)), pout = P(t, b - 0.25, 0.25); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
+  $("red").style.opacity = P(t, T.but - 0.15, 0.3) * (1 - P(t, T.cta - 0.2, 0.3));
+  if (on("s1")) { const dim = P(t, T.every - 0.15, 0.3); chips.forEach((c, i) => { const q = i < 3 ? 1 : KF.spring(t, 0.12 + (i - 3) * 0.18, { f: 3, z: 0.55 }); c.style.opacity = Math.min(1, q * 2) * (1 - 0.72 * dim); c.style.transform = `scale(${(0.6 + 0.4 * q).toFixed(3)})`; c.style.filter = dim > 0 ? `blur(${(dim * 3).toFixed(1)}px)` : "none"; });
+    s1.firstChild.style.transform = `scale(${(1 + 0.04 * Math.sin(t * 5)).toFixed(3)})`; s1.firstChild.style.opacity = 1 - 0.6 * dim;
+    bubs.forEach((b, i) => { const q = KF.spring(t, T.every + 0.05 + i * 0.3, { f: 2.600, z: 0.5 }), wb = P(t, T.heres, 0.3); b.style.opacity = Math.min(1, q * 2.500); b.style.transform = `scale(${(0.5 + 0.5 * q).toFixed(3)}) rotate(${(BUB[i][3] + wb * 4 * Math.sin(t * 14 + i)).toFixed(2)}deg)`; }); }
+  if (on("s2")) gh.frame(t, { show: P(t, S.s2[0], 0.45), zoom: KF.keys(t, [[S.s2[0], 1], [T.agent - 0.2, 1.450, "inOut"]]), focus: KF.keys(t, [[S.s2[0], [430, 600]], [T.agent - 0.2, [300, 420], "inOut"]]), boxes: [{ x: 86, y: 334, w: 366, h: 58, p: P(t, T.agent - 0.2, 0.3), color: "#4b8bff", label: "the free repo" }] });
+  if (on("s2b")) { pb.frame(t, { show: P(t, S.s2b[0], 0.4), typed: P(t, T.paste + 0.15, at("Claude", 2) + 0.3 - T.paste - 0.15), send: P(t, T.installs - 0.15, 0.3) }); const q = KF.spring(t, T.installs + 0.25, { f: 2.600, z: 0.55 }); okTag.style.opacity = Math.min(1, q * 2); okTag.style.transform = `scale(${(0.7 + 0.3 * q).toFixed(3)})`; }
+  if (on("s3")) sess(w3, t, T.t1, [T.five, T.five + 0.2, T.five + 0.4, T.scored, T.scored + 0.2]);
+  if (on("s4")) sess(w4, t, T.t2, [T.transcript + 0.3, T.dead, T.filler, T.retakes]);
+  if (on("s5")) sess(w5, t, T.t3, [T.finds, T.finds + 0.3, T.finds + 0.6, T.beat]);
+  if (on("s6")) { nope.frame(t); $("s6").style.opacity = Math.min(parseFloat($("s6").style.opacity), 1); }
+  const yv = t >= T.still - 0.2 && t < S.s6[1]; $("s6b").style.display = yv ? "" : "none"; if (yv) { $("s6b").style.opacity = 1 - P(t, S.s6[1] - 0.25, 0.25); $("s6b").style.transform = "none"; yours.frame(t); }
+  if (on("s7")) fp.frame(t, { show: P(t, S.s7[0], 0.45), zoom: KF.keys(t, [[S.s7[0], 1.050], [T.rough - 0.2, 1.300, "inOut"]]), focus: KF.keys(t, [[S.s7[0], [430, 8700]], [T.rough - 0.2, [400, 9010], "inOut"]]), boxes: [{ x: 56, y: 8872, w: 694, h: 60, p: P(t, T.rough - 0.15, 0.35), color: "#F2C14E", label: "the author's own words" }] });
+  wipe.frame(t, { p: P(t, S.s3[0] - 0.3, 0.55) });
+  const dr = fin.drift(t, 0.9); $("world").style.transform = `translate(${dr[0].toFixed(1)}px,${dr[1].toFixed(1)}px) rotate(${dr[2].toFixed(3)}deg)`;
+  if (on("s8")) cta.frame(t, { show: P(t, S.s8[0], 0.6), typed: P(t, T.cta + 0.4, 0.5), sent: P(t, T.cta + 1.0, 0.3), dm: P(t, T.dm + 0.15, 0.9) });
+  const lb = KF.loopBack(t, DUR, 1.0); if (lb.mix > 0) { s1.style.display = ""; s1.style.opacity = lb.mix; s1.style.transform = "none"; chips.forEach(c => { c.style.opacity = 1; c.style.transform = "none"; c.style.filter = "none"; }); bubs.forEach(b => (b.style.opacity = 0)); s1.firstChild.style.opacity = 1; $("s8").style.opacity = 1 - lb.mix; }
+  const ch = t < S.s2[0] ? 0.5 : t < S.s3[0] ? 1.500 : t < S.s4[0] ? 2.500 : t < S.s5[0] ? 3.500 : t < S.s6[0] ? 4.500 : 5.500;
+  rail.frame(t, { at: Math.min(ch, 5.900), alert: on("s6") || on("s7"), value: t < S.s2[0] ? Math.min(11, Math.floor(P(t, 0.15, 2.200) * 11)) : t < S.s3[0] ? 1 : t < S.s4[0] ? 5 : t < S.s5[0] ? 4 : t < S.s6[0] ? 6.2 : [T.edits, T.uploads, T.promise].filter(x => t >= x).length,
+    label: t < S.s2[0] ? "skills" : t < S.s3[0] ? "link" : t < S.s4[0] ? "hooks" : t < S.s5[0] ? "cuts" : t < S.s6[0] ? "× normal" : "catches" });
+  $("rail").style.opacity = t >= S.s8[0] ? 1 - P(t, S.s8[0], 0.3) : 1;
+  cap.frame(t); pres.frame(t); fin.frame(t, {});
+  $("fn").textContent = t < T.every - 0.1 ? "The 11 commands, from the repo's README" : t < S.s2[0] ? "" : on("s2") ? "Real screenshot: github.com/Jakeschincariol/youtube-agent-skill" : on("s2b") ? "Free · MIT licence · not from Anthropic or YouTube" : on("s3") || on("s4") || on("s5") ? "Sample output, to show what each command returns" : on("s6") ? "From the README: “It does not publish.”" : on("s7") ? "Real screenshot: the repo's README, “The fine print”" : "";
+};
+window.seek(0);
+</script></body></html>

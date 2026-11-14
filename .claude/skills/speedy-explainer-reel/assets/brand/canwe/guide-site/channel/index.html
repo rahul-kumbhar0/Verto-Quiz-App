@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>YouTube Agent: 11 free Claude skills for your channel, and what they don't do · canwe.ai</title>
+<meta name="description" content="The YouTube Agent skill is a free pack of 11 Claude skills for scripts, cut lists, titles and niche research. The link, the install line, all 11 commands, and the fine print.">
+<meta property="og:title" content="11 free Claude skills for your YouTube channel. Here's what they really do.">
+<meta property="og:description" content="Scripts, cut lists, titles, niche research. It never edits or uploads for you. Link, install line and all 11 commands.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>11 free Claude skills for your YouTube channel. <span class="sel"><i></i><b>You still press upload.</b></span></h1>
+  <p class="lead">The YouTube Agent skill is a free, open-source pack (5,838 ★ on GitHub, 14 Nov 2026). It adds 11 commands to Claude that write your scripts, cut lists, titles and plans. It does not edit your video and it does not post for you. Here's the link, the install line, every command, and the fine print.</p>
+  <div class="chips"><span class="chip">github.com/Jakeschincariol/youtube-agent-skill</span><span class="chip">free · MIT licence</span><span class="chip">not from Anthropic or YouTube</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>Install it</a>
+    <a href="#s2"><small>02</small>Do this first</a>
+    <a href="#s3"><small>03</small>All 11 commands</a>
+    <a href="#s4"><small>04</small>A first week</a>
+    <a href="#s5"><small>05</small>The fine print</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Install it (pick one way)</h2>
+    <p><b>Easiest:</b> paste this into Claude.</p>
+    <div class="code pad"><button class="cp">Copy</button>https://github.com/Jakeschincariol/youtube-agent-skill
+
+Install this skill, then confirm /yt-script works.</div>
+    <p><b>In Claude Code (terminal):</b></p>
+    <div class="code pad"><button class="cp">Copy</button>git clone https://github.com/Jakeschincariol/youtube-agent-skill.git
+cp -r youtube-agent-skill/skills/yt-* ~/.claude/skills/</div>
+    <p><b>Or as a plugin, inside Claude Code:</b></p>
+    <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add Jakeschincariol/youtube-agent-skill
+/plugin install youtube-agent</div>
+    <p style="color:var(--mute);font-size:15px">No signup, no API key. Before you install any skill, open its files on GitHub and skim them. This pack is plain text instructions plus six small Python scripts.</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Do this first: your voice file</h2>
+    <p>Every command reads one file, <code>voice.md</code>, so the scripts sound like you. Without it you get generic scripts. Give Claude three of your own videos and say:</p>
+    <div class="code pad"><button class="cp">Copy</button>Write my voice.md from these three videos and save it to ~/.claude/youtube/voice.md</div>
+    <p style="color:var(--mute);font-size:15px">No videos yet? Copy the template from the repo (<code>templates/voice.md</code>) and fill it in. It takes about ten minutes.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>All 11 commands</h2>
+    <ul class="chk">
+      <li><b>1</b><div><strong>/yt-script</strong> One idea → five hooks from 21 formulas, each scored, then the full spoken script with the retention beats marked.</div></li>
+      <li><b>2</b><div><strong>/yt-package</strong> Title and thumbnail checked as a pair: too long, saying the same thing twice, too vague.</div></li>
+      <li><b>3</b><div><strong>/yt-edit</strong> Your transcript → a cut list with timecodes: dead air, filler words, retakes. You make the cuts.</div></li>
+      <li><b>4</b><div><strong>/yt-viral</strong> Videos in your niche, ranked by how far each one beat its own channel's normal views.</div></li>
+      <li><b>5</b><div><strong>/yt-retention</strong> Reads your retention export from YouTube Studio: the exact second people left and what you were saying.</div></li>
+      <li><b>6</b><div><strong>/yt-shorts</strong> Finds the Shorts inside a long video and writes a new first line for each.</div></li>
+      <li><b>7</b><div><strong>/yt-plan</strong> A week that fits the hours you have: one main video, one cheap one, three Shorts.</div></li>
+      <li><b>8</b><div><strong>/yt-comment</strong> Sorts your comments into four piles, drafts replies in your voice, says which one to pin.</div></li>
+      <li><b>9</b><div><strong>/yt-seo</strong> The description, the few tags worth having, and three searches the video should win.</div></li>
+      <li><b>10</b><div><strong>/yt-chapters</strong> Chapters from your transcript, checked against YouTube's rules so they show up.</div></li>
+      <li><b>11</b><div><strong>/yt-audit</strong> Looks at the whole channel and ends with ONE fix, not twenty.</div></li>
+    </ul>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>A first week (students, 5–6 hours)</h2>
+    <div class="feat">
+      <div><span>📅</span><div><b>Day 1:</b> <code>/yt-plan</code> with your real free hours, then <code>/yt-viral</code> for your niche (study vlogs, coding, placements).</div></div>
+      <div><span>✍️</span><div><b>Day 2:</b> <code>/yt-script</code> on one idea. Pick from the top two hooks. Read it out loud once and fix what doesn't sound like you.</div></div>
+      <div><span>🎥</span><div><b>Day 3:</b> record. Get the transcript (YouTube Studio or any free captions tool), run <code>/yt-edit</code>, cut by the list.</div></div>
+      <div><span>📦</span><div><b>Day 4:</b> <code>/yt-package</code>, <code>/yt-seo</code>, <code>/yt-chapters</code>. Upload it yourself.</div></div>
+      <div><span>📈</span><div><b>Day 7:</b> export retention from Studio, run <code>/yt-retention</code>, and use the one fix in the next video.</div></div>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="step">STEP 05</div><h2>The fine print (from the author's own README)</h2>
+    <div class="feat">
+      <div><span>🚫</span><div><b>It does not publish, and it does not edit.</b> It writes scripts, lists and plans. You record, cut and upload. Reels that say it "runs your channel on autopilot" are overselling it.</div></div>
+      <div><span>🎯</span><div><b>The hook score is a rough check, not a prediction.</b> The author tested it on 74 hooks: it spots clearly bad hooks, but it barely tells a creator's hits from their misses. A low score means look again. A high score promises nothing.</div></div>
+      <div><span>💻</span><div><b>Best in Claude Code</b> (needs a paid Claude plan). In normal Claude chat you can paste a single <code>SKILL.md</code>, but you lose the six Python tools behind the scores and cut lists.</div></div>
+      <div><span>📄</span><div><b>YouTube still wants your own work.</b> Use it to plan and write faster, then put your own ideas and voice in. Mass-produced copies of other channels get demoted.</div></div>
+      <div><span>🧪</span><div><b>We read every file but have not run a full channel on it.</b> The example screens in our reel are samples that show what each command returns.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more free AI tools, with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Not affiliated with the YouTube Agent skill, Anthropic or YouTube. Facts from the project's README and skill files (checked 14 Nov 2026). Features can change — check the repo before you rely on them.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

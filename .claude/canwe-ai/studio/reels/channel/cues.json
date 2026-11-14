@@ -1,0 +1,375 @@
+[
+ {
+  "type": "riser",
+  "t": 0.02,
+  "t2": 0.5
+ },
+ {
+  "type": "pop",
+  "t": 0.15,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 0.33,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0.51,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 0.69,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 0.87,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 1.05,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 1.23,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 1.41,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 2.891
+ },
+ {
+  "type": "pop",
+  "t": 3.091
+ },
+ {
+  "type": "pop",
+  "t": 3.391
+ },
+ {
+  "type": "pop",
+  "t": 3.691
+ },
+ {
+  "type": "swish",
+  "t": 4.357
+ },
+ {
+  "type": "impact",
+  "t": 5.359
+ },
+ {
+  "type": "whoosh",
+  "t": 5.91
+ },
+ {
+  "type": "land",
+  "t": 6.26
+ },
+ {
+  "type": "pop",
+  "t": 6.854
+ },
+ {
+  "type": "whoosh",
+  "t": 7.21
+ },
+ {
+  "type": "type",
+  "t": 7.46,
+  "t2": 8.512
+ },
+ {
+  "type": "click",
+  "t": 8.817
+ },
+ {
+  "type": "ding",
+  "t": 9.217
+ },
+ {
+  "type": "whoosh",
+  "t": 9.84
+ },
+ {
+  "type": "type",
+  "t": 10.01,
+  "t2": 10.610000000000001
+ },
+ {
+  "type": "click",
+  "t": 10.68
+ },
+ {
+  "type": "pop",
+  "t": 11.451,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 11.651,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 11.851,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 12.54,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 12.74,
+  "soft": false
+ },
+ {
+  "type": "ding",
+  "t": 13.21
+ },
+ {
+  "type": "whoosh",
+  "t": 14.047
+ },
+ {
+  "type": "type",
+  "t": 14.217,
+  "t2": 14.817
+ },
+ {
+  "type": "click",
+  "t": 14.887
+ },
+ {
+  "type": "pop",
+  "t": 15.572,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 16.869,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 17.448,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 17.823,
+  "soft": true
+ },
+ {
+  "type": "whoosh",
+  "t": 18.487
+ },
+ {
+  "type": "type",
+  "t": 18.657,
+  "t2": 19.256999999999998
+ },
+ {
+  "type": "click",
+  "t": 19.327
+ },
+ {
+  "type": "pop",
+  "t": 20.071,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 20.371,
+  "soft": true
+ },
+ {
+  "type": "pop",
+  "t": 20.671,
+  "soft": false
+ },
+ {
+  "type": "pop",
+  "t": 21.446,
+  "soft": true
+ },
+ {
+  "type": "ding",
+  "t": 21.846
+ },
+ {
+  "type": "impact",
+  "t": 22.81
+ },
+ {
+  "type": "pop",
+  "t": 23.11
+ },
+ {
+  "type": "pop",
+  "t": 23.36
+ },
+ {
+  "type": "glitch",
+  "t": 25.189
+ },
+ {
+  "type": "glitch",
+  "t": 26.448
+ },
+ {
+  "type": "pop",
+  "t": 27.709
+ },
+ {
+  "type": "pop",
+  "t": 28.245
+ },
+ {
+  "type": "pop",
+  "t": 28.682
+ },
+ {
+  "type": "ding",
+  "t": 28.862
+ },
+ {
+  "type": "whoosh",
+  "t": 29.176
+ },
+ {
+  "type": "land",
+  "t": 29.526
+ },
+ {
+  "type": "swish",
+  "t": 30.038
+ },
+ {
+  "type": "pop",
+  "t": 31.04
+ },
+ {
+  "type": "tap",
+  "t": 31.946
+ },
+ {
+  "type": "swell",
+  "t": 33.041
+ },
+ {
+  "type": "type",
+  "t": 33.541,
+  "t2": 34.041
+ },
+ {
+  "type": "click",
+  "t": 34.191
+ },
+ {
+  "type": "ding",
+  "t": 34.284
+ },
+ {
+  "type": "tick",
+  "t": 2.913,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 4.395,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 5.582,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 7.285,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 9.598,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 11.149,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 13.935,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 15.184,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 18.219,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 19.94,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 22.52,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 24.446,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 25.922,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 26.931,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 28.993,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 31.569,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 32.953,
+  "soft": true
+ },
+ {
+  "type": "tick",
+  "t": 37.304,
+  "soft": true
+ }
+]
