@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude watches a video and turns it into a skill: install steps, the prompt, the catch · canwe.ai</title>
+<meta name="description" content="The free Watch plugin lets Claude Code watch a video: frames plus a transcript with timestamps. Install steps, the exact prompt to turn a video into a reusable skill, and the catch.">
+<meta property="og:title" content="Claude watches the video for you">
+<meta property="og:description" content="Install steps, the exact prompt, and the catch.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Claude <span class="sel"><i></i><b>watches</b></span> the video. Then keeps it as a skill.</h1>
+  <p class="lead"><b>Watch</b> is a free, open-source plugin (MIT) that gives Claude Code a video as timestamped frames plus a transcript. After it has watched, you ask Claude to write what it learned into a skill file, and it can use those steps every time. Here are the install steps, the exact prompt, and the catch.</p>
+  <div class="chips"><span class="chip">free plugin</span><span class="chip">Claude Code only</span><span class="chip">YouTube links or your own files</span></div>
+  <nav class="toc">
+    <a href="#s1"><small>01</small>Install Watch</a>
+    <a href="#s2"><small>02</small>Watch your first video</a>
+    <a href="#s3"><small>03</small>Turn it into a skill</a>
+    <a href="#s4"><small>04</small>Ideas for students</a>
+    <a href="#s5"><small>05</small>The catch</a>
+  </nav>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>Install Watch</h2>
+    <p>The repo is <b>github.com/bradautomates/claude-video</b>. In the Claude desktop app:</p>
+    <ol>
+      <li>Click <b>Customize</b> in the sidebar, then <b>Plugins</b>.</li>
+      <li>Open <b>Add</b>, choose <b>Add marketplace</b>, then <b>Add from a repository</b>.</li>
+      <li>Paste the address below and click <b>Sync</b>.</li>
+      <li>Find <b>Watch</b> in the list and install it.</li>
+      <li>Start a <b>Code</b> session.</li>
+    </ol>
+    <div class="code pad"><button class="cp">Copy</button>https://github.com/bradautomates/claude-video</div>
+    <p>If you use Claude Code in a terminal, type these two lines inside Claude Code instead:</p>
+    <div class="code pad"><button class="cp">Copy</button>/plugin marketplace add bradautomates/claude-video</div>
+    <div class="code pad"><button class="cp">Copy</button>/plugin install watch@claude-video</div>
+    <p style="color:var(--mute);font-size:15px">Watch needs Python 3.10+, FFmpeg and yt-dlp on your computer. Ask Claude "check the watch skill's dependencies and help me install what's missing".</p>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>Watch your first video</h2>
+    <p>Paste a link and say what you want from it:</p>
+    <div class="code pad"><button class="cp">Copy</button>Use the watch skill on this video: [paste the YouTube link]. Give me the main steps it teaches, with timestamps.</div>
+    <p>The first run asks two setup questions. Choose <b>balanced</b> detail and <b>captions only</b> to start. You get a summary with timestamps, built from the video's frames and its captions.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>Turn it into a skill</h2>
+    <p>This is a prompt, not a button. After Claude has watched the video, paste:</p>
+    <div class="code pad"><button class="cp">Copy</button>Turn what this video teaches into a reusable skill. Write a SKILL.md with a clear name, a one-line description of when to use it, and numbered steps in plain words. Save it in my skills folder, then show me the file so I can check it.</div>
+    <p>Claude writes one file with the steps. Next time you ask for that kind of work, it follows them.</p>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>Ideas for students and freshers</h2>
+    <div class="feat">
+      <div><span>📄</span><div><b>A resume tutorial</b> becomes a resume skill that checks your resume the same way every time.</div></div>
+      <div><span>📊</span><div><b>An Excel or SQL video</b> becomes a skill that explains formulas the way that teacher does.</div></div>
+      <div><span>🎤</span><div><b>An interview-prep video</b> becomes a mock-interview skill with that format of questions.</div></div>
+      <div><span>📚</span><div><b>Your own class recording</b> becomes revision notes with timestamps.</div></div>
+    </div>
+  </section>
+
+  <section id="s5">
+    <div class="step">THE CATCH</div><h2>Read this before you try</h2>
+    <div class="feat">
+      <div><span>💻</span><div><b>It works in Claude Code only.</b> The plugin's own README says it does not work in the normal Claude chat or in Cowork. Claude Code needs a paid Claude plan.</div></div>
+      <div><span>⚠️</span><div><b>Claude learns the video's mistakes too.</b> A skill copies what the video says, right or wrong. Open the file and read every step.</div></div>
+      <div><span>☁️</span><div><b>The Gemini option sends the video to Google.</b> It is faster and uses a free Google key, but pick the local option for anything private.</div></div>
+      <div><span>©️</span><div><b>Learn from videos, don't repackage them.</b> Don't turn a paid course into a skill and share or sell it.</div></div>
+      <div><span>🎬</span><div><b>The screens in our reel are samples</b> we drew. We did not show a real creator's video.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more free AI tools, with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai. Watch is by bradautomates (github.com/bradautomates/claude-video, MIT). Not affiliated with the author, Anthropic or Google, not sponsored. Checked 14 Nov 2026.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

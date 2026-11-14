@@ -247,3 +247,4 @@ Budget: ≈ 800 ElevenLabs credits per reel → ≈ 8,800 for 11.
 
 - 14 Nov: **1 CONNECT is BUILT** (final, guide live, automation #89 OFF). Next in the queue: 2 EFFECTS.
 - 14 Nov: **2 EFFECTS is BUILT** (final, guide live, automation #90 OFF). Next: 3 LEARN.
+- 14 Nov: **3 LEARN is BUILT** (tool = bradautomates/claude-video "Watch", 20,780★ MIT; guide live, automation #93 OFF). Next: 4 FACELESS (needs the zip) or 5 IDEA.

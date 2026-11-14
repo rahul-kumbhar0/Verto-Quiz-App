@@ -1,0 +1,2 @@
+KF.demo({ name: "flip-cards", group: "E", line: "A video card turns over into what it becomes", dur: 5, build(host) {
+  const f = KF.make("flip-cards", host, { logo: KF.asset("logos/claude.svg"), top: 240, w: 470, h: 470, items: [{ title: "Resume tutorial", dur: "15:20", color: "#D97757", cmd: "/resume", at: 0.2, flip: 1.4 }, { title: "Excel formulas video", dur: "22:05", color: "#3ECF8E", cmd: "/excel", at: 0.5, flip: 2.8 }] }); return t => f.frame(t, { show: 1 }); } });

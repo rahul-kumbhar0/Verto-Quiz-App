@@ -1,0 +1,3 @@
+KF.demo({ name: "skill-file", group: "B", line: "A skill file gets written, saved, then one line is flagged", dur: 6, build(host) {
+  const s = KF.make("skill-file", host, { name: "resume-writer", desc: "Write a resume the way the video teaches", steps: ["Keep the resume to one page", "Put a number in every bullet", "Skills go at the top", "Add your photo and full address"], top: 160, h: 560 });
+  return t => s.frame(t, { show: KF.prog(t, 0, 0.4), typed: KF.prog(t, 0.3, 2.4), saved: KF.prog(t, 2.9, 0.3) * (1 - KF.prog(t, 4, 0.3)), read: t > 3.4 ? Math.min(3.99, (t - 3.4) / 0.3) : 0, bad: t > 4.4 ? 3 : undefined, badP: KF.prog(t, 4.4, 0.4) }); } });

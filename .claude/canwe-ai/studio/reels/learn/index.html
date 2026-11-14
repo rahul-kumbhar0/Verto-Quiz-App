@@ -1,0 +1,116 @@
+<!doctype html><html><head><meta charset="utf-8"><title>LEARN: Claude watches a video and makes a skill</title>
+<link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+#stage{position:absolute;inset:0}
+.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
+.fn{position:absolute;left:0;right:0;top:1226px;text-align:center;font:600 24px "JetBrains Mono",monospace;z-index:5}
+#red{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 45%,#3a1214,#0c0c0f 70%);opacity:0}
+.pill{position:absolute;padding:14px 28px;border-radius:999px;font:800 34px Inter;white-space:nowrap;box-shadow:0 16px 36px -14px rgba(0,0,0,.6)}
+.ct{position:absolute;width:160px;height:160px;border-radius:42px;background:#F4EFE6;display:grid;place-items:center;box-shadow:0 30px 60px -22px #000}.ct img{width:58%;height:58%}
+.cart{position:absolute;left:470px;top:600px;width:530px;height:170px;border-radius:30px;background:linear-gradient(160deg,#23262e,#121419);box-shadow:inset 0 0 0 4px #3ECF8E,0 0 60px -10px #3ECF8E,0 30px 60px -24px #000;color:#F3F1EC;transform-origin:0 50%}
+.cart b{position:absolute;left:30px;top:48px;font:700 56px "JetBrains Mono",monospace}.cart u{position:absolute;left:30px;top:16px;text-decoration:none;padding:4px 12px;border-radius:8px;background:#3ECF8E;color:#062414;font:800 19px "JetBrains Mono",monospace}.cart span{position:absolute;left:32px;bottom:18px;font:700 24px Inter;color:#9aa0a6}
+.cart i{position:absolute;right:-18px;top:-18px;padding:8px 18px;border-radius:999px;background:#F2C14E;color:#2b1d00;font:900 24px Inter;font-style:normal;box-shadow:0 10px 22px -8px #000}
+</style></head><body><div id="stage">
+  <div id="bg" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="red"></div>
+  <div id="world" style="position:absolute;inset:0;transform-origin:540px 900px">
+    <div id="s1" class="scene kf-host" style="top:440px;height:860px"><div id="s1v" class="kf-host" style="left:0;top:70px;width:1080px;height:520px"></div><div id="s1c" class="kf-host" style="left:0;top:0;width:1080px;height:860px"></div></div>
+    <div id="s2" class="scene kf-host"></div><div id="s3" class="scene kf-host"></div><div id="s4" class="scene kf-host"></div><div id="s5" class="scene kf-host"></div>
+    <div id="s7" class="scene kf-host"></div><div id="s7b" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:440px;height:900px"></div>
+  </div>
+  <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="railD" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div><div id="railL" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
+  <div id="capD" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div><div id="capL" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="fn" class="fn" data-qa="ok"></div>
+  <div id="pres" class="kf-host" style="left:0;top:1290px;width:1080px;height:630px"></div>
+  <div id="fin" class="kf-host" style="left:0;top:0;width:1080px;height:1920px;pointer-events:none"></div>
+</div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
+<script>["captions","presenter","chapter-rail","stage-flip","video-scan","skill-file","flip-cards","repo-card","prompt-box","strike-row","ending-comment","light-wipe","finish"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));</script>
+<script>
+const W = window.WORDS.filter(w => (w.type || "word") === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?:]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word + " #" + n); };
+const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
+const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id), C = KF.C;
+const T = { watch: at("watch"), and: at("And"), turn: at("turn"), skill: at("skill"), keeps: at("keeps"), its: at("It's"), watch2: at("Watch", 2), twenty: at("Twenty"), github: at("GitHub"), give: at("Give"), link: at("link"), pulls: at("pulls"), frames: at("frames"), transcript: at("transcript"), stamps: at("timestamps"),
+  then: at("Then"), turn2: at("turn", 2), skill2: at("skill", 2), claude2: at("Claude", 2), file: at("file"), uses: at("uses"), every: at("every"), a: at("resume") - 0.07, becomes: at("becomes"), an: at("An"), becomes2: at("becomes", 2),
+  now: at("Now", 2), only: at("only"), code: at("Code"), not: at("not"), chat: at("chat"), and4: at("And", 4), mistakes: at("mistakes"), so: at("So"), read: at("read"), cta: at("Comment"), dm: at("DM") };
+const S = { s1: [0, T.its - 0.12], s2: [T.its - 0.12, T.give - 0.12], s3: [T.give - 0.12, T.then - 0.12], s4: [T.then - 0.12, T.a - 0.12], s5: [T.a - 0.12, T.now - 0.15], s7: [T.now - 0.15, T.and4 - 0.15], s7b: [T.and4 - 0.15, T.cta - 0.1], s8: [T.cta - 0.1, DUR] };
+const LIGHT = [[S.s2[0], S.s4[0]]], isL = t => LIGHT.some(([a, b]) => t >= a + 0.25 && t < b - 0.05);
+const COL = ["#D97757", "#4b8bff", "#3ECF8E", "#F2C14E", "#a78bfa"];
+const SLIDES = [{ h: "Resume in<br>15 minutes", sub: "full tutorial", color: COL[0] }, { h: "1. Keep it to<br>one page", color: COL[1] }, { h: "2. A number in<br>every bullet", color: COL[2] }, { h: "3. Skills go<br>on top", color: COL[3] }, { h: "4. Match the<br>job post", color: COL[4] }];
+const STEPS = ["Keep the resume to one page", "Put a number in every bullet", "Skills go at the top", "Use the job post's exact words"];
+
+const KEYS = ["video.", "keeps.", "Watch.", "GitHub.", "link.", "transcript,", "timestamps.", "skill.", "file,", "time.", "skill!", "catch.", "Code,", "app.", "too.", "LEARN,"];
+const capD = KF.make("captions", "capD", { words: W, keys: KEYS, max: 4, size: 62 }), capL = KF.make("captions", "capL", { words: W, keys: KEYS, max: 4, size: 62, theme: "light" });
+const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#1e3a8a", shirtLine: "#0b1b4d", print: "#7fd0ff", chain: "#F2C14E", lens1: "#bae6fd", lens2: "#38bdf8" },
+  poses: [[0, "point_stage"], [T.and - 0.1, "think"], [T.skill - 0.1, "hold"], [T.its - 0.1, "explain"], [T.twenty - 0.1, "big"], [T.give - 0.1, "offer"], [T.pulls - 0.1, "present"], [T.stamps - 0.1, "pinch"], [T.then - 0.1, "point_cam"], [T.claude2 - 0.1, "typing"], [T.uses - 0.1, "thumbs"], [T.a - 0.05, "one"], [T.an - 0.1, "two"],
+    [T.now - 0.1, "stop"], [T.not - 0.1, "cross"], [T.and4 - 0.1, "worry"], [T.so - 0.1, "point_stage"], [T.cta - 0.1, "point_cam"]], talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
+const RS = ["watch", "plugin", "frames", "skill", "examples", "catch"], railD = KF.make("chapter-rail", "railD", { steps: RS, top: 0 }), railL = KF.make("chapter-rail", "railL", { steps: RS, top: 0, theme: "light" });
+const flip = KF.make("stage-flip", "bg", { origin: [540, 900] }), wipe = KF.make("light-wipe", "wipe", { color: "#bfe6ff" }), fin = KF.make("finish", "fin", { grain: 0.5, vignette: 0.4 });
+// S1 hook: Claude watches the video (frames stream into it) → a skill pops out and stays
+const v1 = KF.make("video-scan", "s1v", { solo: true, title: "How to write a resume (full tutorial)", channel: "Sample channel", dur: "15:20", slides: SLIDES }), sc1 = KF.canvas($("s1c"));
+const tile = KF.el("div", "ct", $("s1"), `<img src="logos/claude.svg">`); tile.style.cssText += ";left:220px;top:610px"; KF.img("logos/claude.svg");
+const cart = KF.el("div", "cart", $("s1"), `<u>SKILL.md</u><b>/resume</b><span>skill saved · used every time</span><i>kept ✓</i>`); cart.dataset.qa = "ok"; const kept = cart.querySelector("i");
+// S2 (light): the repo
+const repo = KF.make("repo-card", "s2", { owner: "bradautomates", name: "claude-video", desc: "Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.", stars: 20780, forks: 2207, chips: ["claude-code", "video", "agent-skills"], langs: [["Python", 100, "#3572A5"]], licence: "MIT license", w: 940, top: 0, h: 560 });
+const freeP = KF.el("div", "pill", $("s2"), "free · open source"); freeP.style.cssText += ";left:50%;top:610px;transform:translateX(-50%);background:#3ECF8E;color:#062414";
+// S3 (light): give it a link → frames + transcript
+const v3 = KF.make("video-scan", "s3", { theme: "light", cmd: "/watch https://youtu.be/your-video", title: "How to write a resume (full tutorial)", channel: "Sample channel", dur: "15:20", slides: SLIDES, frames: [{ t: "00:42", slide: 1 }, { t: "04:10", slide: 2 }, { t: "08:25", slide: 3 }, { t: "12:48", slide: 4 }],
+  lines: [{ t: "00:42", text: "Keep your resume to one page." }, { t: "04:10", text: "Put a number in every bullet." }, { t: "08:25", text: "Skills go at the top." }, { t: "12:48", text: "Use the job post's words." }] });
+// S4 (dark): "turn this into a skill" → the file gets written
+const pb = KF.make("prompt-box", "s4", { text: "Turn this into a skill I can reuse", top: 0, w: 960 }), sk = KF.make("skill-file", "s4", { name: "resume-writer", desc: "Write a resume the way the video teaches", steps: STEPS, top: 205, w: 960, h: 540, size: 26, title: "SKILL.md — resume-writer (sample)" });
+// S5 (dark): two examples flip from video to skill
+const fc = KF.make("flip-cards", "s5", { logo: "logos/claude.svg", top: 110, w: 470, h: 470, gap: 40, items: [{ title: "Resume tutorial", dur: "15:20", color: "#D97757", cmd: "/resume", at: S.s5[0] + 0.05, flip: T.becomes }, { title: "Excel formulas video", dur: "22:05", color: "#3ECF8E", cmd: "/excel", at: T.an - 0.1, flip: T.becomes2 }] });
+// S7 the catch
+const where = KF.make("strike-row", "s7", { size: 230, top: 150, items: [{ art: "laptop", label: "Claude Code", at: T.only - 0.2, tick: T.code + 0.2 }, { art: "chat", label: "chat app", at: T.not - 0.15, strike: T.chat + 0.1 }] });
+const sk2 = KF.make("skill-file", "s7b", { name: "resume-writer", desc: "Write a resume the way the video teaches", steps: [...STEPS, "Add your photo and full address"], top: 40, w: 960, h: 600, size: 26, title: "SKILL.md — resume-writer", flag: "the video said this · check it" });
+const cta = KF.make("ending-comment", "s8", { size: 112, keyword: "LEARN", pill: "install steps + the exact prompt", dm: "Watch plugin: install steps + the exact prompt 👇" });
+
+// ---- sound cues ----
+const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
+cue("riser", 0.02, { t2: 0.5 }); cue("swish", T.watch); [0, 1, 2, 3].forEach(i => cue("tick", T.watch + 0.35 + i * 0.3, { soft: true })); cue("swell", T.turn - 0.2); cue("impact", T.skill + 0.05); cue("ding", T.keeps + 0.1);
+cue("whoosh", S.s2[0]); cue("land", S.s2[0] + 0.35); cue("pop", T.watch2 + 0.1); cue("tick", T.twenty, { soft: true }); cue("ding", T.github);
+cue("whoosh", S.s3[0]); cue("type", T.give, { t2: T.link + 0.3 }); cue("click", T.link + 0.4); cue("glitch", T.pulls); [0, 1, 2, 3].forEach(i => cue("pop", T.frames + i * 0.18, { soft: i % 2 === 1 })); [0, 1, 2, 3].forEach(i => cue("tick", T.transcript + i * 0.24)); cue("ding", T.stamps + 0.2, { soft: true });
+cue("whoosh", S.s4[0]); cue("type", T.turn2 - 0.2, { t2: T.skill2 + 0.25 }); cue("click", T.skill2 + 0.35); cue("type", T.claude2, { t2: T.file + 0.3 }); cue("ding", T.uses); cue("pop", T.every + 0.1, { soft: true });
+cue("whoosh", S.s5[0]); cue("land", S.s5[0] + 0.3); cue("swish", T.becomes); cue("impact", T.becomes + 0.5); cue("pop", T.an); cue("swish", T.becomes2); cue("impact", T.becomes2 + 0.5);
+cue("impact", T.now); cue("pop", T.only - 0.1); cue("ding", T.code + 0.2); cue("pop", T.not - 0.1); cue("glitch", T.chat + 0.1); cue("whoosh", S.s7b[0]); cue("glitch", T.mistakes); cue("impact", T.mistakes + 0.3); [0, 1, 2].forEach(i => cue("tick", T.read + i * 0.2));
+cue("swell", T.cta - 0.1); cue("type", T.cta + 0.4, { t2: T.cta + 0.9 }); cue("click", T.cta + 1.05); cue("ding", T.dm + 0.25);
+window.__cues = cues;
+
+const spr = (e, q, extra = "") => { e.style.opacity = Math.min(1, q * 2); e.style.transform = `${extra} scale(${(0.6 + 0.4 * q).toFixed(3)})`; };
+const bz = (a, c, b, q) => { const u = 1 - q; return [u * u * a[0] + 2 * u * q * c[0] + q * q * b[0], u * u * a[1] + 2 * u * q * c[1] + q * q * b[1]]; };
+const stream = t => { const { ctx, clear } = sc1; clear(); const on = P(t, T.watch - 0.2, 0.3) * (1 - P(t, S.s1[1] - 0.3, 0.3)); if (on <= 0) return; const N = 9;
+  for (let i = 0; i < N; i++) { const q = ((t * 0.55 + i / N) % 1), p = bz([540 + (i % 3 - 1) * 150, 505], [540, 640], [330, 690], E.inOut(q)), w = 110 * (1 - q * 0.72), h = w * 9 / 16, a = Math.min(1, q * 6) * Math.min(1, (1 - q) * 5) * on;
+    ctx.save(); ctx.translate(p[0], p[1]); ctx.rotate((i % 2 ? 1 : -1) * 0.12 * (1 - q)); ctx.globalAlpha = a; ctx.shadowColor = "#7fd0ff"; ctx.shadowBlur = 18; ctx.fillStyle = "#12151b"; KF.rr(ctx, -w / 2, -h / 2, w, h, w * 0.1); ctx.fill(); ctx.shadowBlur = 0; ctx.fillStyle = COL[i % 5]; ctx.fillRect(-w / 2, -h / 2, w * 0.08, h);
+    ctx.fillStyle = "rgba(255,255,255,.85)"; ctx.fillRect(-w * 0.32, -h * 0.18, w * 0.5, h * 0.14); ctx.fillStyle = "rgba(255,255,255,.4)"; ctx.fillRect(-w * 0.32, h * 0.06, w * 0.36, h * 0.1); ctx.strokeStyle = "#7fd0ff"; ctx.lineWidth = 2; KF.rr(ctx, -w / 2, -h / 2, w, h, w * 0.1); ctx.stroke(); ctx.restore(); } };
+window.seek = t => {
+  const on = k => t >= S[k][0] && t < S[k][1];
+  Object.keys(S).forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
+    if (v) { const pin = k === "s1" ? 1 : E.out(P(t, a, 0.35)), pout = P(t, b - 0.22, 0.22); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
+  let fp = 0; LIGHT.forEach(([a, b]) => { fp = Math.max(fp, E.inOut(P(t, a - 0.1, 0.5)) * (1 - E.inOut(P(t, b - 0.3, 0.4)))); }); flip.frame(t, { p: fp, origin: [540, 900] });
+  const Lt = isL(t); $("capD").style.display = Lt ? "none" : ""; $("capL").style.display = Lt ? "" : "none"; $("railD").style.display = Lt ? "none" : ""; $("railL").style.display = Lt ? "" : "none"; $("fn").style.color = Lt ? "#6b7280" : "#8b8f98";
+  $("red").style.opacity = P(t, T.now - 0.15, 0.3) * (1 - P(t, T.cta - 0.2, 0.3));
+  if (on("s1")) { v1.frame(t, { show: 1, play: 0.06 + 0.9 * P(t, 0.1, S.s1[1] - 0.2), scan: 0.25 + 0.75 * P(t, T.watch - 0.2, 0.3) }); stream(t); const n = Math.max(0, Math.min(4, (t - T.watch) / 0.75));
+    tile.style.transform = `scale(${(1 + 0.05 * Math.abs(Math.sin(t * 4.2)) * P(t, T.watch, 0.3)).toFixed(3)})`; tile.style.boxShadow = `0 30px 60px -22px #000,0 0 ${(20 + n * 16).toFixed(0)}px ${KF.rgba("#7fd0ff", Math.min(0.9, 0.2 + n * 0.18))}`;
+    const q = KF.spring(t, T.skill - 0.12, { f: 2.6, z: 0.5 }); cart.style.opacity = Math.min(1, q * 2); cart.style.transform = `translateX(${((1 - q) * -90).toFixed(1)}px) scale(${(0.5 + 0.5 * q).toFixed(3)})`; spr(kept, KF.spring(t, T.keeps, { f: 3, z: 0.45 }), "rotate(8deg)"); }
+  if (on("s2")) { repo.frame(t, { show: P(t, S.s2[0], 0.4), count: E.out(P(t, T.twenty - 0.3, 1.0)), starred: P(t, T.github, 0.3) }); spr(freeP, KF.spring(t, at("free") - 0.05, { f: 2.6, z: 0.5 }), "translateX(-50%)"); }
+  if (on("s3")) v3.frame(t, { show: P(t, S.s3[0], 0.35), typed: P(t, T.give, T.link + 0.3 - T.give), play: 0.04 + 0.92 * E.inOut(P(t, T.pulls - 0.2, T.stamps + 0.5 - T.pulls)), scan: P(t, T.pulls - 0.15, 0.25) * (1 - P(t, T.stamps + 0.5, 0.3)), nF: Math.max(0, (t - T.frames + 0.1) / 0.2), nL: Math.max(0, (t - T.transcript + 0.05) / 0.26) });
+  if (on("s4")) { pb.frame(t, { show: P(t, S.s4[0], 0.35), typed: P(t, T.turn2 - 0.2, T.skill2 + 0.25 - T.turn2 + 0.2), send: 0 }); sk.frame(t, { show: P(t, T.claude2 - 0.3, 0.4), typed: P(t, T.claude2, T.file + 0.35 - T.claude2), saved: P(t, T.uses, 0.35), read: t > T.every ? 1 + ((t - T.every) / 0.22) % 4 : 0 }); }
+  if (on("s5")) fc.frame(t, { show: 1 });
+  if (on("s7")) where.frame(t);
+  if (on("s7b")) sk2.frame(t, { show: P(t, S.s7b[0], 0.4), typed: 1, bad: 4, badP: P(t, T.mistakes - 0.1, 0.4), read: t >= T.read ? Math.min(4.99, (t - T.read) / 0.2 + 0.01) : 0 });
+  if (on("s8")) cta.frame(t, { show: P(t, S.s8[0], 0.6), typed: P(t, T.cta + 0.4, 0.5), sent: P(t, T.cta + 1.0, 0.3), dm: P(t, T.dm + 0.15, 0.9) });
+  wipe.frame(t, { p: P(t, S.s4[0] - 0.3, 0.55) });
+  let kick = 0; [T.skill + 0.05, T.becomes + 0.5, T.becomes2 + 0.5, T.mistakes + 0.3].forEach(h => { const d = t - h; if (d >= 0 && d < 0.3) kick = Math.max(kick, 1 - d / 0.3); });
+  const dr = fin.drift(t, 0.9); $("world").style.transform = `translate(${dr[0].toFixed(1)}px,${dr[1].toFixed(1)}px) rotate(${dr[2].toFixed(3)}deg) scale(${(1 + 0.016 * kick).toFixed(4)})`;
+  const lb = KF.loopBack(t, DUR, 1.0); if (lb.mix > 0) { const e = $("s1"); e.style.display = ""; e.style.opacity = lb.mix; e.style.transform = "none"; v1.frame(0, { show: 1, play: 0.06, scan: 0.25 }); sc1.clear(); cart.style.opacity = 0; tile.style.transform = "none"; $("s8").style.opacity = 1 - lb.mix; }
+  const ch = on("s1") ? 0.5 : on("s2") ? 1.5 : on("s3") ? 2.5 : on("s4") ? 3.5 : on("s5") ? 4.5 : 5.5;
+  const rs = { at: Math.min(ch, 5.9), alert: on("s7") || on("s7b"), value: on("s1") ? 1 : on("s2") ? Math.floor(20.78 * E.out(P(t, T.twenty - 0.3, 1.0))) : on("s3") ? Math.min(4, Math.max(0, Math.floor((t - T.frames + 0.1) / 0.2))) : on("s4") ? Math.min(4, Math.max(0, Math.floor(4 * P(t, T.claude2 + 0.6, T.file - T.claude2 - 0.2)))) : on("s5") ? (t > T.becomes2 + 0.3 ? 2 : t > T.becomes + 0.3 ? 1 : 0) : 2,
+    label: on("s1") ? "video" : on("s2") ? "K stars" : on("s3") ? "frames" : on("s4") ? "steps" : on("s5") ? "skills" : "catches" };
+  (Lt ? railL : railD).frame(t, rs); $("railD").style.opacity = $("railL").style.opacity = t >= S.s8[0] ? 1 - P(t, S.s8[0], 0.3) : 1;
+  (Lt ? capL : capD).frame(t); pres.frame(t); fin.frame(t, {});
+  $("fn").textContent = on("s1") ? "Sample video and skill" : on("s2") ? "github.com/bradautomates/claude-video · 14 Nov 2026" : on("s3") || on("s4") ? "" : on("s5") ? "Examples, not real videos" : on("s7") ? "Its README: not in Claude Chat or Cowork" : on("s7b") ? "A skill copies the video, right or wrong" : "";
+};
+window.seek(0);
+</script></body></html>

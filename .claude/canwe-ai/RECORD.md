@@ -431,3 +431,15 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Finals: studio/finals/claude-effects.mp4 (own beat), _nomusic, _notlikeus (drop on "reels circle", dip under the catch), effects-cover.png. Sources: studio/reels/effects. Post copy: drafts/effects/post-copy.md.
 - Automation #90 EFFECTS (OFF, exact, all reels, follow gate, nudge 3 h). Guide /effects/ LIVE with all 51 names + hub line (dpl_CvKMLrJXYa9rwxF8ztp9xitCG9ps; hub index sha 17d5ab51…, effects bfff5a14…).
 - NEXT: owner posts → "uploaded" → lock #90 (and #89 CONNECT, #88 EDITOR) + ON. Then LEARN (queue item 3; tool still to identify and verify).
+
+## LEARN (14 Nov 2026): "Claude can now watch a video. And turn what it learns into a skill it keeps." — FINAL, Shlok voice
+- Topic 3 of the queue. Tool found + verified: github.com/bradautomates/claude-video, the "Watch" plugin (20,780★, 2,207 forks, MIT; README read 14 Nov). Facts: drafts/learn/facts.md. "Turn it into a skill" is a PROMPT after watching, not a Watch button (script says "Then say: turn this into a skill"). Not run by us; screens are drawn samples and labelled.
+- Voice: ElevenLabs flow SPALsjUL4V117uvfWLfH, ONE take, 666 credits, 47.4 s raw (slow take) → paced 34.7 s (tempo 1.13, 14 stops @ 0.32). Reel 36.3 s.
+- THREE NEW KEYFRAMES (library now 54 folders): `video-scan` (YouTube-style player, scan line, timestamped frames fly out, transcript lines stack; `solo` = player only), `skill-file` (SKILL.md typed with syntax colours, saved toast, lines read, one line flagged red), `flip-cards` (video thumbnail turns over in 3D into a skill cartridge).
+- Build: hook = player being scanned, mini frames stream into the Claude tile, a "/resume" skill cartridge pops out, "kept ✓". LIGHT: repo-card (real numbers) → video-scan with the /watch command typed, 4 frames + 4 transcript lines. DARK: prompt-box "Turn this into a skill I can reuse" → skill-file typed + saved toast → flip-cards (resume, Excel). Catch: strike-row (Claude Code ✓ / chat app ✗) → skill-file with a wrong step flagged "the video said this · check it". Ending-comment LEARN.
+- Bug to remember: `at("Now")` matched "can now watch" at 0.5 s and broke every scene after it. ALWAYS check the occurrence number for common words (now, and, a, the, it, skill).
+- QA 96/100, 0 fails (only warn: music stop-down not measured). Best score of the three.
+- Finals: studio/finals/claude-learn.mp4 (own beat), _nomusic, _notlikeus (drop on "skill" at 3.35 s, dip under the catch), learn-cover.png. Sources: studio/reels/learn. Post copy: drafts/learn/post-copy.md.
+- Automation #93 LEARN (OFF, exact, all reels, follow gate, nudge 3 h). Guide /learn/ LIVE + hub line (dpl_7RBHs5946EGZWwVVKHjio78e7N8d; hub index sha d53511f1…, learn bfe9c491…; effects page re-used by sha, so inline uploads do match the local files).
+- Waiting on the owner's "uploaded": #88 EDITOR, #89 CONNECT, #90 EFFECTS, #93 LEARN (all OFF, all reels).
+- NEXT: FACELESS (queue item 4) is blocked until the owner sends the faceless-shorts zip → otherwise go to 5 IDEA (Founder skill, Jakeschincariol/founder-skill 3,562★ MIT).

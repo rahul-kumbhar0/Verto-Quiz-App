@@ -1,0 +1,7 @@
+Claude can now watch a video. And turn what it learns into a skill it keeps.
+It's a free plugin called Watch. Twenty thousand stars on GitHub.
+Give it a YouTube link. It pulls the frames and the transcript, with timestamps.
+Then say: turn this into a skill. Claude writes the steps into one file, and uses them every time.
+A resume tutorial becomes a resume skill. An Excel video becomes an Excel skill!
+Now the catch. It only works in Claude Code, not the chat app. And Claude learns the video's mistakes too. So read the skill.
+Comment LEARN, I'll DM you the install steps and the exact prompt.

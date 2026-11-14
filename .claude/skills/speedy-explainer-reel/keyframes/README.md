@@ -1,6 +1,6 @@
 # canwe.ai keyframes
 
-Reusable scene blocks for our reels: 51 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
+Reusable scene blocks for our reels: 54 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
 
 **Rule:** every block is a pure function of time. Build it once with `KF.make(name, host, opts)`, then call `frame(t, state)` on every `seek(t)`. No clocks, no randomness, so a render always comes out the same.
 
@@ -62,6 +62,8 @@ Reusable scene blocks for our reels: 51 folders plus `_assets/`. Each block fold
 | [`laptop-frame`](laptop-frame/) | A MacBook (KF.device: thin black bezel, camera notch, aluminium front lip with the thumb scoop) whose lid opens, with your own content on the screen. |
 | [`permission-sheet`](permission-sheet/) | The "X wants to access your Y" consent screen you get when you connect an app, laid out like a Google / OAuth permission page (two app icons joined by a dotted link, account chip, list of permissions, note, Cancel and Allow). The rows can be read one by one and Allow can be pressed. |
 | [`clip-stage`](clip-stage/) | "Your video" as a framed vertical clip: a room behind the person (window light, shelf, plant, lamp glow) and on top a file chip plus a small editing timeline where a time range is selected and a playhead runs ("from 3 to 6 seconds"), and an "exported" chip. |
+| [`video-scan`](video-scan/) | An AI "watching" a video: a YouTube-style player plays a tutorial made of slides, a scan line sweeps the picture, timestamped frames fly out into a row underneath and timestamped transcript lines stack up beside it ("it pulls the frames and the transcript"). `solo: true` gives only the player. |
+| [`skill-file`](skill-file/) | A skill being written: an editor window with SKILL.md (front matter, then numbered steps) typed line by line with syntax colours, a "saved to …" toast, then lines read one by one and one line flagged as wrong (red, wavy underline, a warning tag). |
 | [`real-screen`](real-screen/) | A REAL screenshot shown in a device frame (phone, browser or app window) that scrolls, zooms into exact spots and draws highlight boxes on them, so viewers see the actual page, button or line ("this is the repo", "click here", "this is the model it really uses"). |
 | [`product-page`](product-page/) | A shop product page in a real browser window that loads (grey skeleton → content), with a load timer ("the page took 1.4 s", pricing, "what the user sees"). Laid out like a real store: nav with search and bag, thumbnail rail, rating, size picker, Add to Bag. |
 
@@ -94,6 +96,7 @@ Reusable scene blocks for our reels: 51 folders plus `_assets/`. Each block fold
 | [`film-strip`](film-strip/) | A long video as a real strip of film: dark celluloid with sprocket holes, frame numbers and grain, holding REAL frames (default: our own reel frames), curving away in perspective as it runs under a glowing playhead. The best moments get bracketed, light up with a score and lift out of the strip. |
 | [`clip-stack`](clip-stack/) | Real vertical clips fly in and fan out in a 3D arc (each card has thickness, a shadow and a glass glint), then collapse onto one neat pile with a bounce ("a whole stack of Shorts from one video", outputs piling up). |
 | [`face-fx`](face-fx/) | Creator-style video effects that follow a face, split into a layer behind the person and a layer in front: `orbit` (real reel covers circle the head), `spotlight` (lights drop, a cone keeps the person lit), `locked` (target brackets snap on and track), `stamp` (a red rubber stamp slams down). |
+| [`flip-cards`](flip-cards/) | Cards that turn over in 3D to show what a thing becomes: front = a video thumbnail (play button, title, duration), back = the result (a skill cartridge with a logo tile and a big command). Lift, spin, light flare, bounce. |
 | [`world-camera`](world-camera/) | A 3D world with a camera that flies between stations (engine `world3d.js`, see its README). |
 
 ## F. Structure, endings and extras
