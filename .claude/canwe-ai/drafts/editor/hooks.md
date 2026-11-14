@@ -11,4 +11,5 @@
 | 8 | Every reel on this page is edited by Claude. Here's a setup you can copy. | made by Claude | meta-proof | 9 |
 | 9 | You don't need Premiere Pro to edit reels anymore. | no Premiere | contrarian | 7 |
 | 10 | Two prompts, five tools, one skill: Claude edits your videos. | 2 · 5 · 1 | number stack | 9 |
-PICK #1 if CHANNEL is posted the day before (it's part 4). If not, use #3. Trial variants: #2, #8.
+NEW PICK (owner: "hook can be different", 14 Nov): "Claude edited this reel. No Premiere, no editor." (meta-proof: TRUE, every canwe.ai reel is made by Claude) → "Here's a setup you can copy. Two prompts, five free tools." Score 11.
+Other fresh options: "Show Claude a reel you like. It learns the edit." (10) · "Your next video editor is a chat box." (9) · "Stop paying for captions and cuts. Claude does them on your laptop." (10) · "Two prompts turn Claude into a video editor." (9). Trial variants: the "show Claude a reel" and "stop paying" lines.
