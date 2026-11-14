@@ -19,7 +19,8 @@ Free, open source (MIT). Screens in the reel are sample output. Not affiliated w
 #claudeai #youtubegrowth #aitools #claudecode #github
 
 ## Pinned comment
-Comment CHANNEL 👇 I'll DM the link + install line + all 11 commands. It writes and plans. You still upload.
+Comment CHANNEL 👇 I'll DM the link + install line + all 11 commands.
+It doesn't edit for you… but Claude can. Part 4: I made Claude do the cuts. Follow so you don't miss it.
 
 ## Cover text
 11 Claude skills for [YouTube] · "what they really do"
