@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Claude as your video editor: the setup, 5 free tools and the catch · canwe.ai</title>
+<meta name="description" content="Turn Claude into a video editor on your laptop: the desktop app, one prompt for the folders, one for five free tools (FFmpeg, Whisper, yt-dlp, Remotion, HyperFrames), a watch skill for your style. Credit: Saurabh Saini's tutorial.">
+<meta property="og:title" content="Claude edited this reel. Here's a setup you can copy.">
+<meta property="og:description" content="Two prompts, five free tools, one skill. The setup, what each tool does, and the catch.">
+<meta name="theme-color" content="#0F0F11">
+<link rel="icon" href="/logo.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body><div class="wrap">
+  <div class="top"><img class="logo" src="/logo.svg" alt="canwe.ai logo"><b>canwe.ai</b><span>free guide</span></div>
+  <h1>Claude as your <span class="sel"><i></i><b>video editor.</b></span> Two prompts, five free tools.</h1>
+  <p class="lead">You can set Claude up to cut your clips, add captions, music and motion graphics, and learn an editing style from reels you like. This setup is from <b>Saurabh Saini's</b> Hindi tutorial; the full video (with his prompts and his watch skill) is linked below. Here's the short version, what each tool does, and the catch.</p>
+  <div class="chips"><span class="chip">Claude desktop app</span><span class="chip">free, open-source tools</span><span class="chip">runs on your laptop</span></div>
+  <nav class="toc">
+    <a href="#s0"><small>00</small>The full tutorial</a>
+    <a href="#s1"><small>01</small>The app + folders</a>
+    <a href="#s2"><small>02</small>The 5 tools</a>
+    <a href="#s3"><small>03</small>The watch skill</a>
+    <a href="#s4"><small>04</small>Your first edit</a>
+    <a href="#s5"><small>05</small>The catch</a>
+  </nav>
+
+  <section id="s0">
+    <div class="step">START HERE</div><h2>Watch the full tutorial (Hindi, 9 min)</h2>
+    <p><b>"Claude Video Editing Tutorial: Setup from Scratch"</b> by Saurabh Saini. His exact prompts and the watch skill are linked in his video's description.</p>
+    <div class="code pad"><button class="cp">Copy</button>https://youtu.be/mrSslvR6aQw</div>
+    <p style="color:var(--mute);font-size:15px">We're not affiliated with him. Credit for this setup is his; the summary below is ours.</p>
+  </section>
+
+  <section id="s1">
+    <div class="step">STEP 01</div><h2>The Claude desktop app + one prompt for your folders</h2>
+    <p>Install the Claude desktop app, make an empty folder (for example <code>video-editor</code>) and open it in Claude's coding side. Then ask for a workspace. Something like:</p>
+    <div class="code pad"><button class="cp">Copy</button>Set up a video editing workspace in this folder: clips, references, style, music, exports, and a CLAUDE.md with the rules for how you edit.</div>
+  </section>
+
+  <section id="s2">
+    <div class="step">STEP 02</div><h2>One prompt installs five free tools</h2>
+    <div class="feat">
+      <div><span>✂️</span><div><b>FFmpeg</b> cuts, joins and exports the video.</div></div>
+      <div><span>💬</span><div><b>Whisper</b> turns your speech into text, so you get word-timed captions.</div></div>
+      <div><span>📥</span><div><b>yt-dlp</b> downloads reference reels so Claude can study them.</div></div>
+      <div><span>🎬</span><div><b>Remotion</b> and <b>HyperFrames</b> make motion graphics with code: titles, callouts, animated text.</div></div>
+    </div>
+    <div class="code pad"><button class="cp">Copy</button>Install FFmpeg, yt-dlp, Whisper, Remotion and HyperFrames for this workspace. Check each one works and tell me what you installed.</div>
+    <p style="color:var(--mute);font-size:15px">Installs take about 10–15 minutes. Read what Claude wants to run before you approve it.</p>
+  </section>
+
+  <section id="s3">
+    <div class="step">STEP 03</div><h2>The watch skill: teach it a style</h2>
+    <p>The watch skill (from his description) lets Claude study a reference reel and save what it learns, such as caption style, cut speed, music and sound, into your <code>style</code> folder. Next time you edit, it uses that file.</p>
+    <p style="color:var(--mute);font-size:15px">Get the skill file from his video's description, open it and read it before you add it.</p>
+  </section>
+
+  <section id="s4">
+    <div class="step">STEP 04</div><h2>Your first edit</h2>
+    <p>Drop your clip into <code>clips</code> and type what you want in plain English:</p>
+    <div class="code pad"><button class="cp">Copy</button>Edit clips/take1.mp4 in my saved style: cut the silences and filler words, add word-by-word captions with one keyword highlighted, add soft background music, export a 9:16 reel to exports/.</div>
+    <p>Watch the result, then tell it what to fix like you'd tell a human editor: "the captions are too low", "cut faster in the first 3 seconds".</p>
+  </section>
+
+  <section id="s5">
+    <div class="step">THE CATCH</div><h2>What nobody says in the viral reels</h2>
+    <div class="feat">
+      <div><span>🐢</span><div><b>It renders on your laptop.</b> A slow laptop means a slow edit. A 40-second reel with motion graphics can take several minutes.</div></div>
+      <div><span>©️</span><div><b>Only feed it clips you're allowed to use.</b> Study other people's reels for style, don't re-upload their footage or music.</div></div>
+      <div><span>💳</span><div><b>It runs through Claude's coding side</b> (Claude Code in the desktop app), which needs a paid Claude plan. The tools themselves are free.</div></div>
+      <div><span>👀</span><div><b>It's a first cut, not a finished film.</b> You still watch it and fix what looks off. The "14 minutes" in the tutorial is one creator's result.</div></div>
+    </div>
+  </section>
+
+  <div class="follow">
+    <div class="fl"><img src="/logo.svg" alt=""><h2 style="margin:0">Found this useful?</h2></div>
+    <p>Follow for more free AI tools, with the catches included.</p>
+    <a href="https://www.instagram.com/canwe.ai/" target="_blank" rel="noopener">Follow @canwe.ai →</a>
+  </div>
+  <footer>Made by canwe.ai · Setup credit: Saurabh Saini (YouTube, 7 Nov 2026). Not affiliated with him, Anthropic or the tool makers. The prompts here are our own short versions; his originals are in his video's description. Checked 14 Nov 2026.</footer>
+</div>
+<script src="/copy.js"></script>
+</body></html>

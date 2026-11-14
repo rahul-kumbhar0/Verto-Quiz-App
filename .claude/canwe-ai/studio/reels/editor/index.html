@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8"><title>EDITOR: Claude edits video</title>
+<link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+#stage{position:absolute;inset:0}
+.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
+.fn{position:absolute;left:0;right:0;top:1206px;text-align:center;font:600 24px "JetBrains Mono",monospace}
+#red{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 45%,#3a1214,#0c0c0f 70%);opacity:0}
+.big{position:absolute;display:flex;gap:26px;left:0;right:0;top:120px;justify-content:center}
+.big div{width:290px;height:330px;border-radius:34px;background:#fff;box-shadow:0 30px 60px -24px rgba(0,0,0,.35),0 0 0 1px rgba(0,0,0,.06);display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 40px Inter;color:#16181d}
+.big b{font:900 150px/1 Inter;letter-spacing:-6px;color:#D97757}
+.pill{position:absolute;padding:14px 28px;border-radius:999px;font:800 34px Inter;white-space:nowrap;box-shadow:0 16px 36px -14px rgba(0,0,0,.6)}
+.style{position:absolute;left:520px;top:70px;width:500px;border-radius:26px;background:#fff;box-shadow:0 30px 70px -26px rgba(0,0,0,.4),0 0 0 1px rgba(0,0,0,.07);padding:24px 28px;font:600 28px/1.4 Inter;color:#16181d}
+.style h4{margin:0 0 12px;font:700 26px "JetBrains Mono",monospace;color:#6b7280}.style p{margin:0 0 12px;display:flex;gap:12px}.style p i{font-style:normal;color:#3ECF8E}
+.arrow{position:absolute;left:452px;top:300px;font:900 70px Inter;color:#D97757}
+.tl{position:absolute;left:80px;right:80px;top:330px;height:120px;border-radius:18px;background:#15171c;box-shadow:0 0 0 2px #262a33;overflow:hidden}
+.tl i{position:absolute;top:14px;bottom:14px;border-radius:8px}
+.bar{position:absolute;left:110px;right:110px;top:480px;height:30px;border-radius:15px;background:#262a33;overflow:hidden}.bar i{position:absolute;left:0;top:0;bottom:0;background:linear-gradient(90deg,#f5a524,#ff8a3d);border-radius:15px}
+</style></head><body><div id="stage">
+  <div id="bg" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="red"></div>
+  <div id="world" style="position:absolute;inset:0">
+  <div id="s1" class="scene kf-host" style="top:440px;height:860px"></div><div id="s2" class="scene kf-host"></div><div id="s3" class="scene kf-host"></div><div id="s3b" class="scene kf-host"></div>
+  <div id="s4" class="scene kf-host"></div><div id="s5" class="scene kf-host"></div><div id="s6" class="scene kf-host"></div><div id="s6b" class="scene kf-host"></div>
+  <div id="s7" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:440px;height:900px"></div>
+  </div>
+  <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="railD" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div><div id="railL" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
+  <div id="capD" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div><div id="capL" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="fn" class="fn" data-qa="ok"></div>
+  <div id="pres" class="kf-host" style="left:0;top:1290px;width:1080px;height:630px"></div>
+  <div id="fin" class="kf-host" style="left:0;top:0;width:1080px;height:1920px;pointer-events:none"></div>
+</div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
+<script>["captions","presenter","chapter-rail","before-after","stage-flip","laptop-frame","prompt-box","folder-window","agent-log","phone-frame","film-strip","hero-stat","strike-row","ending-comment","light-wipe","finish"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));</script>
+<script>
+// ---- word clock ----
+const W = window.WORDS.filter(w => (w.type || "word") === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?:]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word + " #" + n); };
+const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
+const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id), C = KF.C;
+const T = { no: at("No"), learned: at("learned"), heres: at("Here's"), two: at("Two"), s1: at("Step", 1), one: at("One", 2), folders: at("folders"), s2: at("Step", 2), ffmpeg: at("FFmpeg"), whisper: at("Whisper"), remotion: at("Remotion"),
+  s3: at("Step", 3), show: at("Show"), saves: at("saves"), then: at("Then"), cut: at("cut"), music: at("music"), creator: at("creator"), fourteen: at("fourteen"), now: at("Now"), renders: at("renders"), slowEdit: at("slow", 2), only: at("only"), cta: at("Comment"), dm: at("DM") };
+const S = { s1: [0, T.heres - 0.15], s2: [T.heres - 0.15, T.s1 - 0.1], s3: [T.s1 - 0.1, T.one - 0.1], s3b: [T.one - 0.1, T.s2 - 0.1], s4: [T.s2 - 0.1, T.s3 - 0.1], s5: [T.s3 - 0.1, T.then - 0.1],
+  s6: [T.then - 0.1, T.creator - 0.15], s6b: [T.creator - 0.15, T.now - 0.15], s7: [T.now - 0.15, T.cta - 0.1], s8: [T.cta - 0.1, DUR] };
+// light chapters = the setup you can copy (steps 1 + 3 and the intro card); dark = the hook, step 2 (the terminal), the edit, the catch, the CTA
+const LIGHT = [[S.s2[0], S.s4[0]], [S.s5[0], S.s6[0]]], isL = t => LIGHT.some(([a, b]) => t >= a + 0.25 && t < b - 0.05);
+
+// ---- blocks ----
+const KEYS = ["reel.", "editor.", "like.", "tools.", "app.", "folders.", "graphics.", "style.", "music.", "minutes!", "catch.", "edit.", "use.", "EDITOR,"];
+const capD = KF.make("captions", "capD", { words: W, keys: KEYS, max: 4, size: 62 }), capL = KF.make("captions", "capL", { words: W, keys: KEYS, max: 4, size: 62, theme: "light" });
+const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#3b2a6b", shirtLine: "#1e1538", print: "#D97757", chain: "#F2C14E", lens1: "#c4b5fd", lens2: "#8b5cf6" },
+  poses: [[0, "point_cam"], [T.no - 0.1, "cross"], [T.learned - 0.1, "think"], [T.heres - 0.1, "present"], [T.two - 0.1, "two"], [T.s1 - 0.1, "one"], [T.one - 0.1, "offer"], [T.s2 - 0.1, "two"], [T.ffmpeg - 0.1, "three"], [T.s3 - 0.1, "three"], [T.show - 0.1, "point_cam"], [T.then - 0.1, "present"], [T.creator - 0.1, "thumbs"], [T.now - 0.1, "stop"], [T.renders - 0.1, "shrug"], [T.only - 0.1, "cross"], [T.cta - 0.1, "point_cam"]],
+  talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
+const STEPS = ["the edit", "app", "tools", "style", "your clip", "catch"], railD = KF.make("chapter-rail", "railD", { steps: STEPS, top: 0 }), railL = KF.make("chapter-rail", "railL", { steps: STEPS, top: 0, theme: "light" });
+const flip = KF.make("stage-flip", "bg", { origin: [540, 900] }), wipe = KF.make("light-wipe", "wipe", { color: "#ffd8a8" }), fin = KF.make("finish", "fin", { grain: 0.5, vignette: 0.4 });
+// S1 hook: before/after slider with REAL frames: left = our raw voice take (nothing edited), right = the finished CHANNEL reel Claude made
+const ba = KF.make("before-after", "s1", { labels: ["What I recorded", "What Claude made"], w: 450, h: 800, top: 10, radius: 36 });
+const imgIn = (host, src) => { const e = KF.el("div", "", host); e.style.cssText = `position:absolute;inset:0;background:url(${src}) center/cover`; KF.img(src); return e; }; imgIn(ba.b, "real/after.jpg"); imgIn(ba.a, "real/before.jpg");
+const stylePill = KF.el("div", "pill", $("s1"), "style learned from reels I like"); stylePill.style.cssText += ";left:50%;top:640px;transform:translateX(-50%);background:#D97757;color:#1a0e08;z-index:8";
+// S2 (light): 2 prompts · 5 free tools · 1 skill
+const big = KF.el("div", "big", $("s2"), `<div><b>2</b>prompts</div><div><b>5</b>free tools</div><div><b>1</b>skill</div>`), bigs = [...big.children];
+// S3 (light): the real laptop with the Claude desktop app; one prompt makes the folders
+const lap = KF.make("laptop-frame", "s3", { w: 900, top: 40, menubar: "Claude" }), pb = KF.make("prompt-box", lap.screen, { text: "Make a video editing workspace in this folder", top: 150, w: 760, theme: "dark" });
+const fw = KF.make("folder-window", "s3b", { title: "video-editor", top: 30, w: 900, files: [{ name: "clips", dir: true, note: "your raw videos" }, { name: "references", dir: true, note: "reels you like" }, { name: "style", dir: true, note: "what Claude learned" }, { name: "music", dir: true }, { name: "exports", dir: true, note: "finished reels" }, { name: "CLAUDE.md", note: "the rules" }] });
+// S4 (dark): the second prompt installs the tools (Claude Code style log)
+const log = KF.make("agent-log", "s4", { title: "claude — ~/video-editor", prompt: "Install the editing tools", top: 0, w: 960, welcome: false, steps: [{ verb: "Installed", obj: "FFmpeg", meta: "cuts + exports video", ing: "Installing" }, { verb: "Installed", obj: "Whisper", meta: "speech → captions", ing: "Installing" }, { verb: "Installed", obj: "Remotion", meta: "motion graphics", ing: "Installing" }, { verb: "Installed", obj: "HyperFrames", meta: "motion graphics", ing: "Installing" }, { verb: "Installed", obj: "yt-dlp", meta: "grabs reference reels", ing: "Installing" }] });
+// S5 (light): watch skill: a reel you like → style file
+const ph = KF.make("phone-frame", "s5", { w: 330, h: 676, screens: [{ kind: "custom" }] }); ph.device.el.style.left = "90px"; ph.device.el.style.top = "40px";
+imgIn(ph.screen(0), KF.asset("covers/c05.jpg")); const arrow = KF.el("div", "arrow", $("s5"), "→");
+const sty = KF.el("div", "style", $("s5"), `<h4>style/my-style.md</h4><p><i>✓</i>captions: 4 words, one boxed</p><p><i>✓</i>a new shot every 2–3 s</p><p><i>✓</i>music dips under the catch</p><p><i>✓</i>presenter at the bottom</p>`), styRows = [...sty.querySelectorAll("p")];
+const refPill = KF.el("div", "pill", $("s5"), "a reel you like"); refPill.style.cssText += ";left:130px;top:600px;background:#16181d;color:#fff;font-size:28px";
+// S6 (dark): your clip + one sentence → the timeline gets cut
+const pb2 = KF.make("prompt-box", "s6", { text: "Cut the silences, add captions and music", top: 20, w: 940 });
+const tl = KF.el("div", "tl", $("s6")), clips = [[0, 14, "#5a7bd9"], [16, 31, "#5a7bd9"], [33, 52, "#5a7bd9"], [55, 78, "#5a7bd9"], [80, 100, "#5a7bd9"]].map(([a, b, c]) => { const e = KF.el("i", "", tl); e.style.left = a + "%"; e.style.width = (b - a) + "%"; e.style.background = c; return e; });
+const gaps = [[14, 16], [31, 33], [52, 55], [78, 80]].map(([a, b]) => { const e = KF.el("i", "", tl); e.style.left = a + "%"; e.style.width = (b - a) + "%"; e.style.background = "#f2555a"; return e; });
+const capTrack = KF.el("div", "", $("s6")); capTrack.style.cssText = "position:absolute;left:80px;right:80px;top:470px;height:56px;border-radius:12px;background:rgba(242,193,78,.18);border:2px solid #F2C14E;font:700 24px Inter;color:#F2C14E;display:flex;align-items:center;padding-left:18px"; capTrack.textContent = "captions";
+const musTrack = KF.el("div", "", $("s6")); musTrack.style.cssText = "position:absolute;left:80px;right:80px;top:540px;height:56px;border-radius:12px;background:rgba(62,207,142,.15);border:2px solid #3ECF8E;font:700 24px Inter;color:#3ECF8E;display:flex;align-items:center;padding-left:18px"; musTrack.textContent = "music";
+const fourteen = KF.make("hero-stat", "s6b", { from: 0, to: 14, label: "minutes, one creator's reel", top: 140, size: 200, glow: C.accent, look: "glow" });
+// S7 (catch): the laptop renders slowly + only clips you're allowed to use
+const lap2 = KF.make("laptop-frame", "s7", { w: 520, x: 300, top: 40, menubar: false, wallpaper: "#111" }), rb = KF.el("div", "", lap2.screen); rb.style.cssText = "position:absolute;left:30px;right:30px;top:120px;font:700 26px 'JetBrains Mono',monospace;color:#e8e6dc";
+rb.innerHTML = `Rendering… <span class="pc">0%</span><div style="margin-top:16px;height:20px;border-radius:10px;background:#262a33;overflow:hidden"><i class="pb" style="display:block;height:100%;width:0;background:linear-gradient(90deg,#f5a524,#ff8a3d)"></i></div>`;
+const snail = KF.el("div", "pill", $("s7"), "slow laptop = slow edit"); snail.style.cssText += ";left:620px;top:120px;background:#f5a524;color:#1a0e08;font-size:30px";
+const rights = KF.make("strike-row", "s7", { size: 170, top: 400, items: [{ icon: "📥", label: "someone else's reel", at: T.only - 0.2, strike: T.only + 0.9 }, { art: "camera", label: "your own clips", at: T.only, tick: T.only + 1.2 }] });
+const cta = KF.make("ending-comment", "s8", { size: 104, keyword: "EDITOR", pill: "setup + 5 tools + the full tutorial", dm: "Claude video editor: setup, 5 tools, tutorial 👇" });
+
+// ---- sound cues ----
+const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
+cue("riser", 0.02, { t2: 0.4 }); cue("whoosh", 0.25); cue("tap", 0.9); cue("swish", 1.2); cue("swish", 2.4); cue("pop", T.learned + 0.2); cue("whoosh", S.s2[0]); cue("impact", S.s2[0] + 0.3);
+[T.heres + 0.35, T.two + 0.55, T.two + 1.1].forEach(x => cue("pop", x)); cue("whoosh", S.s3[0]); cue("land", S.s3[0] + 0.4); cue("type", T.s1 + 0.6, { t2: T.one - 0.2 }); cue("click", T.one - 0.15); cue("whoosh", S.s3b[0]);
+for (let i = 0; i < 6; i++) cue("pop", T.one + 0.2 + i * 0.28, { soft: i % 2 === 1 }); cue("whoosh", S.s4[0]); cue("type", T.s2 + 0.3, { t2: T.s2 + 0.9 }); [T.ffmpeg, T.whisper, T.remotion, T.remotion + 0.5, T.remotion + 0.9].forEach(x => cue("ding", x, { soft: true }));
+cue("whoosh", S.s5[0]); cue("land", S.s5[0] + 0.35); cue("swish", T.show + 0.3); [0, 1, 2, 3].forEach(i => cue("pop", T.saves + i * 0.3, { soft: i % 2 === 1 }));
+cue("whoosh", S.s6[0]); cue("type", T.then + 0.3, { t2: T.cut + 0.9 }); cue("click", T.cut + 1.0); [0, 1, 2, 3].forEach(i => cue("glitch", T.cut + 1.3 + i * 0.22)); cue("swish", T.music - 0.3); cue("swish", T.music);
+cue("whoosh", S.s6b[0]); cue("impact", T.fourteen + 0.2); cue("impact", T.now); cue("tick", T.renders, { soft: true }); cue("swish", T.slowEdit); cue("glitch", T.only + 0.9); cue("ding", T.only + 1.2);
+cue("swell", T.cta - 0.1); cue("type", T.cta + 0.4, { t2: T.cta + 0.9 }); cue("click", T.cta + 1.05); cue("ding", T.dm + 0.25);
+W.forEach(x => { if (/[.!?]$/.test(x.w)) cue("tick", x.e + 0.02, { soft: true }); });
+window.__cues = cues;
+
+// ---- the frame ----
+window.seek = t => {
+  const on = k => t >= S[k][0] && t < S[k][1];
+  Object.keys(S).forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
+    if (v) { const pin = k === "s1" ? 1 : E.out(P(t, a, 0.35)), pout = P(t, b - 0.25, 0.25); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
+  // dark ↔ light: the light grows from the middle as a circle at each light chapter, and shrinks back after
+  let fp = 0; LIGHT.forEach(([a, b]) => { fp = Math.max(fp, E.inOut(P(t, a - 0.1, 0.5)) * (1 - E.inOut(P(t, b - 0.35, 0.4)))); }); flip.frame(t, { p: fp, origin: [540, 900] });
+  const L = isL(t); $("capD").style.display = L ? "none" : ""; $("capL").style.display = L ? "" : "none"; $("railD").style.display = L ? "none" : ""; $("railL").style.display = L ? "" : "none"; $("fn").style.color = L ? "#6b7280" : "#8b8f98";
+  $("red").style.opacity = P(t, T.now - 0.15, 0.3) * (1 - P(t, T.cta - 0.2, 0.3));
+  if (on("s1")) { const x = KF.keys(t, [[0, 0.06], [0.4, 0.06], [1.5, 0.5, "inOut"], [2.6, 0.92, "inOut"], [3.3, 0.5, "inOut"]]); ba.frame(t, { show: 1, x, touch: P(t, 0.15, 0.35) * (1 - P(t, 3.3, 0.3)) }); const q = KF.spring(t, T.learned, { f: 2.4, z: 0.55 }); stylePill.style.opacity = Math.min(1, q * 2); stylePill.style.transform = `translateX(-50%) scale(${(0.6 + 0.4 * q).toFixed(3)})`; }
+  if (on("s2")) bigs.forEach((b, i) => { const q = KF.spring(t, [T.heres + 0.35, T.two + 0.55, T.two + 1.1][i], { f: 2.4, z: 0.5 }); b.style.opacity = Math.min(1, q * 2); b.style.transform = `translateY(${((1 - q) * 80).toFixed(1)}px) rotate(${((1 - q) * (i - 1) * 8).toFixed(2)}deg)`; });
+  if (on("s3")) { lap.frame(t, { show: P(t, S.s3[0], 0.5), open: P(t, S.s3[0] + 0.1, 0.8), glow: 0.4 }); pb.frame(t, { show: P(t, S.s3[0] + 0.6, 0.4), typed: P(t, T.s1 + 0.6, T.one - T.s1 - 0.8), send: P(t, T.one - 0.2, 0.3) }); }
+  if (on("s3b")) fw.frame(t, { show: P(t, S.s3b[0], 0.4), n: 6 * P(t, T.one + 0.2, 1.6), hot: t > T.folders ? 2 : undefined });
+  if (on("s4")) log.frame(t, { show: P(t, S.s4[0], 0.4), n: KF.keys(t, [[T.s2 + 0.9, 0], [T.ffmpeg + 0.3, 1, "out"], [T.whisper + 0.3, 2, "out"], [T.remotion + 0.3, 3, "out"], [T.remotion + 1.2, 5, "out"]]) });
+  if (on("s5")) { ph.frame(t, { show: P(t, S.s5[0], 0.5), tilt: -4 }); refPill.style.opacity = P(t, T.show, 0.3); arrow.style.opacity = P(t, T.show + 0.4, 0.3); arrow.style.transform = `translateX(${(Math.sin(t * 6) * 8).toFixed(1)}px)`;
+    sty.style.opacity = P(t, T.saves - 0.3, 0.35); sty.style.transform = `translateY(${((1 - E.out(P(t, T.saves - 0.3, 0.4))) * 50).toFixed(1)}px)`; styRows.forEach((r, i) => (r.style.opacity = P(t, T.saves + i * 0.3, 0.25))); }
+  if (on("s6")) { pb2.frame(t, { show: P(t, S.s6[0], 0.4), typed: P(t, T.then + 0.3, T.cut + 0.6 - T.then), send: P(t, T.cut + 0.9, 0.3) }); const cutP = P(t, T.cut + 1.2, 1.0);
+    gaps.forEach((g, i) => { const q = P(t, T.cut + 1.3 + i * 0.22, 0.25); g.style.opacity = 1 - q; g.style.transform = `scaleY(${(1 - q).toFixed(3)})`; }); clips.forEach((c, i) => (c.style.transform = `translateX(${(-cutP * i * 14).toFixed(1)}px)`));
+    tl.style.opacity = P(t, T.cut + 0.9, 0.3); capTrack.style.opacity = P(t, at("captions", 2), 0.3); capTrack.style.clipPath = `inset(0 ${((1 - E.out(P(t, at("captions", 2), 0.6))) * 100).toFixed(1)}% 0 0)`; musTrack.style.opacity = P(t, T.music, 0.3); musTrack.style.clipPath = `inset(0 ${((1 - E.out(P(t, T.music, 0.6))) * 100).toFixed(1)}% 0 0)`; }
+  if (on("s6b")) fourteen.frame(t, { p: P(t, T.fourteen - 0.5, 0.7), show: P(t, S.s6b[0], 0.3) });
+  if (on("s7")) { lap2.frame(t, { show: P(t, S.s7[0], 0.4), open: 1, glow: 0.2 }); const pr = Math.min(0.37, 0.37 * P(t, T.renders, 3.5)); rb.querySelector(".pb").style.width = (pr * 100).toFixed(1) + "%"; rb.querySelector(".pc").textContent = Math.round(pr * 100) + "%";
+    snail.style.opacity = P(t, T.slowEdit - 0.6, 0.3); rights.frame(t); }
+  if (on("s8")) cta.frame(t, { show: P(t, S.s8[0], 0.6), typed: P(t, T.cta + 0.4, 0.5), sent: P(t, T.cta + 1.0, 0.3), dm: P(t, T.dm + 0.15, 0.9) });
+  wipe.frame(t, { p: P(t, S.s6[0] - 0.3, 0.55) });
+  const dr = fin.drift(t, 0.9); $("world").style.transform = `translate(${dr[0].toFixed(1)}px,${dr[1].toFixed(1)}px) rotate(${dr[2].toFixed(3)}deg)`;
+  const lb = KF.loopBack(t, DUR, 1.0); if (lb.mix > 0) { const e = $("s1"); e.style.display = ""; e.style.opacity = lb.mix; e.style.transform = "none"; ba.frame(t, { show: 1, x: 0.06 }); stylePill.style.opacity = 0; $("s8").style.opacity = 1 - lb.mix; }
+  const ch = t < S.s2[0] ? 0.5 : t < S.s4[0] ? 1.5 : t < S.s5[0] ? 2.5 : t < S.s6[0] ? 3.5 : t < S.s7[0] ? 4.5 : 5.5;
+  const rs = { at: Math.min(ch, 5.9), alert: on("s7"), value: t < S.s2[0] ? 1 : t < S.s4[0] ? 2 : t < S.s5[0] ? Math.max(0, Math.min(5, Math.round(KF.keys(t, [[T.s2 + 0.9, 0], [T.remotion + 1.2, 5]])))) : t < S.s6[0] ? 1 : t < S.s7[0] ? 14 : 2,
+    label: t < S.s2[0] ? "reel" : t < S.s4[0] ? "prompts" : t < S.s5[0] ? "tools" : t < S.s6[0] ? "skill" : t < S.s7[0] ? "minutes" : "catches" };
+  (L ? railL : railD).frame(t, rs); $("railD").style.opacity = $("railL").style.opacity = t >= S.s8[0] ? 1 - P(t, S.s8[0], 0.3) : 1;
+  (L ? capL : capD).frame(t); pres.frame(t); fin.frame(t, {});
+  $("fn").textContent = t < S.s2[0] ? "Real frames: our raw voice take vs our finished reel" : on("s3") || on("s3b") || on("s4") ? "Setup from Saurabh Saini's tutorial (YouTube, 7 Nov 2026) · sample screens" : on("s5") ? "The “watch skill” from the same tutorial · sample screens" : on("s6b") ? "His claim, from the video's description" : on("s7") ? "Use your own clips, or ones you have rights to" : "";
+};
+window.seek(0);
+</script></body></html>
