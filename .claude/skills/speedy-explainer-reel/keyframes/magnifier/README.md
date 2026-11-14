@@ -1,6 +1,6 @@
 # magnifier
 
-A lens that travels over another picture and shows it enlarged (inspect, review, "look closer").
+A real magnifying glass (chrome rim, glass reflections and colour fringe, ferrule and ribbed black handle, soft shadow on the page) that travels over another picture and shows it enlarged (inspect, review, "look closer").
 
 ![preview](preview.jpg)
 

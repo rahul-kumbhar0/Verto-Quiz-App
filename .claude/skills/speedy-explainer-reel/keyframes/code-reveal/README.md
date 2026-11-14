@@ -4,7 +4,7 @@ The picture breaks into blocks that flip, one by one, into a real code editor sh
 
 ![preview](preview.jpg)
 
-- The editor has a title bar with tabs, line numbers, syntax colours, a current-line highlight and a blinking caret that types.
+- The editor is laid out like VS Code (Dark+ colours): title bar, tab row with file badges, breadcrumbs, line numbers, syntax colours, the blue status bar with a live "Ln, Col", a current-line highlight and a blinking caret that types.
 - `opts`: { code: "…" (your real source; a sample is used when missing), file: "Hook.tsx", size: font px, cell: block size px }
 - `state`: { p: 0..1 (0 = picture, 1 = editor fully over it), type: 0..1 (how much of the code has been typed), scroll: px } · api: frame(t, state)
 - Put this block's host ABOVE the scene it covers (same position and size).

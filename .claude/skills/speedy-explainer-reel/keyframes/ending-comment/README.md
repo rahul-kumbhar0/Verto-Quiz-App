@@ -1,6 +1,6 @@
 # ending-comment
 
-The "Comment KEYWORD" ending: big call to action, the keyword typed into a comment box and sent, then our DM reply drops in.
+The "Comment KEYWORD" ending: big call to action, the keyword typed into an Instagram comment sheet (emoji row, avatar, pill input, blue send) and sent, then our DM arrives as a phone notification from Instagram.
 
 ![preview](preview.jpg)
 

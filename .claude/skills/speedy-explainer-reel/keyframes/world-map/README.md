@@ -1,6 +1,6 @@
 # world-map
 
-A dotted world map with cities and routes that light up (CDN, servers, "your request travels from A to B", users everywhere).
+A dotted world map with real coastlines (the dots follow actual country outlines) with cities and routes that light up (CDN, servers, "your request travels from A to B", users everywhere).
 
 ![preview](preview.jpg)
 

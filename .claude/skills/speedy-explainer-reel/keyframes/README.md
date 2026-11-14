@@ -1,6 +1,6 @@
 # canwe.ai keyframes
 
-Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
+Reusable scene blocks for our reels: 45 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
 
 **Rule:** every block is a pure function of time. Build it once with `KF.make(name, host, opts)`, then call `frame(t, state)` on every `seek(t)`. No clocks, no randomness, so a render always comes out the same.
 
@@ -23,7 +23,9 @@ Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block fold
 - `_assets/frames.jpg`: 96 real frames from 8 of our finished reels (12×8 sheet, 54×96 each); `frame-wall` uses it by default.
 - Refresh them when new reels ship (ffmpeg commands in RECORD.md, KEYFRAMES section). `KF.asset(path)` / `KF.img(url)` load anything else you add there.
 - Advanced helpers in `kf.js`: `KF.keys(t, [[time, value, ease], …])` (multi-stage motion: wind-up, overshoot, settle), `KF.sparks(ctx, t, t0, x, y, opts)` (impact sparks), `KF.sheen(ctx, x, y, w, h, p)` (light sweeping across glass). Put a `finish` block on top of every scene for grain, vignette, bloom and handheld drift.
-- Realism rule (group C onward): real pictures over placeholders, drawn objects over emoji, numbers only if they are true.
+- Realism rule (all groups, 14 Nov 2026): every screen and object is drawn after the real thing. Check `../references/realism.md` before building or changing a block. Real pictures over placeholders, drawn objects over emoji, numbers only if they are true.
+- `KF.device("iphone" | "macbook" | "browser" | "window", parent, { w, … })` in `kf.js` gives real hardware and window chrome (titanium iPhone with Dynamic Island and status bar, MacBook with notch and opening lid, Chrome toolbar, macOS title bar). Every screen block is built on it; use it for any new screen. `KF.statusBar(time)` and `KF.sysIcons` give the iOS status icons.
+- `_assets/contact-sheet.jpg`: every block on one sheet. Remake it and all previews with `node scripts/kfall.mjs <dir>` after a change.
 
 ## A. Diagram blocks
 
@@ -38,24 +40,25 @@ Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block fold
 | [`point-cloud`](point-cloud/) | Clusters of dots in 3D space that the camera orbits (embeddings, customers, "things that are similar sit together"). |
 | [`tile-map`](tile-map/) | A board of small tiles that fill in (test results, chips on a wafer, seats, days, pixels, "N of them"). |
 | [`flow-nodes`](flow-nodes/) | Boxes joined by wires with packets travelling along them (request → server → database, a pipeline, "how X talks to Y"). |
-| [`magnifier`](magnifier/) | A lens that travels over another picture and shows it enlarged (inspect, review, "look closer"). |
+| [`magnifier`](magnifier/) | A real magnifying glass (chrome rim, glass reflections and colour fringe, ferrule and ribbed black handle, soft shadow on the page) that travels over another picture and shows it enlarged (inspect, review, "look closer"). |
 
 ## B. Real-screen blocks
 
 | Block | What it shows |
 |---|---|
-| [`phone-frame`](phone-frame/) | A phone with real-looking screens (lock screen, incoming call, settings page, or your own content). |
-| [`article-card`](article-card/) | A news / blog / report page with the headline marked up (the source of a claim, shown on screen). |
-| [`repo-card`](repo-card/) | A GitHub-style repo card with a live star count. |
-| [`deploy-list`](deploy-list/) | A list of jobs that go from "building" to "ready" one by one (deployments, uploads, exports, tests). |
-| [`dashboard`](dashboard/) | A gauge, a rolling total and a bar chart (traffic, revenue, usage: "the numbers went up"). |
-| [`world-map`](world-map/) | A dotted world map with cities and routes that light up (CDN, servers, "your request travels from A to B", users everywhere). |
-| [`calendar`](calendar/) | A month grid where days fill in (streaks, "40 days", deadlines, a date that matters). |
-| [`folder-window`](folder-window/) | A file-explorer window whose files appear one by one ("with this folder…", project structure, what's inside the download). |
-| [`agent-log`](agent-log/) | An AI agent's activity log ticking through its steps ("Searched the web… Created script.txt… Made voice.mp3"). |
-| [`prompt-box`](prompt-box/) | An AI chat input being typed into and sent ("just one sentence"). |
+| [`phone-frame`](phone-frame/) | An iPhone (KF.device: titanium band, Dynamic Island, status bar, home bar) with screens laid out like real iOS (lock screen, incoming call, settings page, or your own content). |
+| [`article-card`](article-card/) | A news / blog article in a real browser window (site bar with nav and Subscribe, section label, headline, byline with avatar and read time, readable body text) with the headline marked up (the source of a claim, shown on screen). |
+| [`repo-card`](repo-card/) | A GitHub repo page in a browser window, laid out like the real one (dark theme colours, owner / name, Public pill, Watch · Fork · Star buttons, description, topic pills, language bar) with a live star count. |
+| [`deploy-list`](deploy-list/) | A list of jobs that go from "building" to "ready" one by one (deployments, uploads, exports, tests), laid out like a hosting dashboard's Deployments page: black panel, hairline rows, status dot + label, branch and commit, age and avatar. |
+| [`dashboard`](dashboard/) | A monitoring dashboard panel (gauge with a tick scale, rolling total, bar chart on grid lines, time-range tabs, Live chip) (traffic, revenue, usage: "the numbers went up"). |
+| [`world-map`](world-map/) | A dotted world map with real coastlines (the dots follow actual country outlines) with cities and routes that light up (CDN, servers, "your request travels from A to B", users everywhere). |
+| [`calendar`](calendar/) | A month view laid out like the iOS / macOS Calendar app (red year link, big month title, weekday row, hairlines between weeks, event dots, today in a red circle) where days fill in (streaks, "40 days", deadlines, a date that matters). |
+| [`folder-window`](folder-window/) | A macOS Finder window in list view (sidebar, Name / Date Modified / Size columns, real folder and document icons, blue selection) whose files appear one by one ("with this folder…", project structure, what's inside the download). |
+| [`agent-log`](agent-log/) | A terminal window running a coding agent, laid out like Claude Code (the "> request" line, "● Tool(target)" steps with a "⎿ result" line under each, and the orange "✻ Working…" line while a step runs). |
+| [`prompt-box`](prompt-box/) | The Claude chat input being typed into and sent ("just one sentence"). Laid out like claude.ai: warm dark box, + and tools buttons, model name, orange send button. |
+| [`laptop-frame`](laptop-frame/) | A MacBook (KF.device: thin black bezel, camera notch, aluminium front lip with the thumb scoop) whose lid opens, with your own content on the screen. |
 | [`real-screen`](real-screen/) | A REAL screenshot shown in a device frame (phone, browser or app window) that scrolls, zooms into exact spots and draws highlight boxes on them, so viewers see the actual page, button or line ("this is the repo", "click here", "this is the model it really uses"). |
-| [`product-page`](product-page/) | A shop / app page in a browser that loads (skeleton → content), with a load timer ("the page took 1.4 s", pricing, "what the user sees"). |
+| [`product-page`](product-page/) | A shop product page in a real browser window that loads (grey skeleton → content), with a load timer ("the page took 1.4 s", pricing, "what the user sees"). Laid out like a real store: nav with search and bag, thumbnail rail, rating, size picker, Add to Bag. |
 
 ## C. Number and comparison blocks
 
@@ -93,8 +96,8 @@ Reusable scene blocks for our reels: 44 folders plus `_assets/`. Each block fold
 | [`captions`](captions/) | Word-by-word captions with one key word in a blue selection box (the house caption style). |
 | [`presenter`](presenter/) | The cartoon presenter (wraps avatar.js; load ../../assets/template/avatar.js before this block). |
 | [`chapter-rail`](chapter-rail/) | A thin progress rail with chapter dots and a live counter on the right (where am I in the video + the number that matters now). |
-| [`ending-follow`](ending-follow/) | The closing card: a profile with a Follow button that gets tapped, then a share sheet sending the reel to a friend ("follow for more, and send this to the friend who…"). |
-| [`ending-comment`](ending-comment/) | The "Comment KEYWORD" ending: big call to action, the keyword typed into a comment box and sent, then our DM reply drops in. |
+| [`ending-follow`](ending-follow/) | The closing card, laid out like the Instagram app: a profile (story-ring avatar, stats, bio, link, Follow / Message buttons, grid) with a Follow button that gets tapped, then a share sheet sending the reel to a friend ("follow for more, and send this to the friend who…"). |
+| [`ending-comment`](ending-comment/) | The "Comment KEYWORD" ending: big call to action, the keyword typed into an Instagram comment sheet (emoji row, avatar, pill input, blue send) and sent, then our DM arrives as a phone notification from Instagram. |
 | [`loop-back`](loop-back/) | The reel ends on its own first frame, so the replay is seamless (helper `KF.loopBack`, no block.js). |
 | [`cover`](cover/) | The reel cover (grid thumbnail): kicker pill, big headline with one phrase in the blue selection box, a footer line, over a darkened still. |
 | [`finish`](finish/) | The camera-lens layer that makes drawn scenes feel filmed: film grain, a vignette, a faint lens bloom and (optional) a slow handheld drift you apply to your scene. |

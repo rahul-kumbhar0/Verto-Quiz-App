@@ -1,6 +1,6 @@
 # dashboard
 
-A gauge, a rolling total and a bar chart (traffic, revenue, usage: "the numbers went up").
+A monitoring dashboard panel (gauge with a tick scale, rolling total, bar chart on grid lines, time-range tabs, Live chip) (traffic, revenue, usage: "the numbers went up").
 
 ![preview](preview.jpg)
 

@@ -364,3 +364,15 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - v3 (current poster.png; v2 kept as poster.v2.*): headline "Microsoft at 3 AM:", big red "🔥 everything is on fire" pill, punchline row in yellow, our mascot as the 💀 sender. Self-rating: v1 5.5, v2 8, v3 9.
 - v3.1 (current poster.png; plain v3 kept as poster.v3.*): small Microsoft four-square logo before the headline, drawn in CSS. Owner asked for it. Satire label stays.
 - Rule: no real CEO face or name in fake images. Microsoft logo only small, next to the word, never made to look like an official post. Post while the outage is live; delete or leave it once it has been fixed for 2+ days.
+
+## 14 Nov 2026 · KEYFRAMES realism pass, all groups A–F (owner: "each keyframe must look real, from the laptop to everything")
+- Method: pulled real photos (Openverse, CC) of each object and used our real screenshots, rendered ours beside them, listed the gaps, redrew. Web photos were too messy to paste into scenes, so they are references only (not committed). Rules + per-object checklist: `skills/speedy-explainer-reel/references/realism.md`.
+- New core: `KF.device("iphone"|"macbook"|"browser"|"window")` in `kf.js` (titanium iPhone with Dynamic Island + status bar, MacBook with notch and opening lid, Chrome toolbar, macOS title bar). All screen blocks now sit on it.
+- New block: `laptop-frame` (B). `real-screen` got `frame: "laptop"` and real phone/browser/window frames. Library is now 45 folders, 44 with code.
+- Rebuilt to match the real product: phone-frame (iOS lock, call, settings), repo-card (GitHub), folder-window (Finder), agent-log (Claude Code), prompt-box (claude.ai), calendar (iOS Calendar), product-page (store), article-card, deploy-list, dashboard, code-reveal (VS Code), ending-follow + ending-comment (Instagram), world-map (real coastlines).
+- Props: camera redrawn as a real DSLR; vault, rack, alarm, lock got real details. Finger got a nail, creases and print ridges; magnifier got a chrome rim and handle.
+- Left as they are (our own brand style, no real-world original): captions, presenter, chapter-rail, cover, finish, and the abstract diagrams (arcs, waves, point cloud, tiles, flow nodes).
+- Limits: text stays bigger than in real apps for phone readability; no real brand names on props; no verified badge unless the account has one; demo articles use made-up sites.
+- Check tools: `scripts/kfshot.mjs`, `scripts/kfall.mjs` (all 44 blocks, 0 errors), `scripts/kfsheet.py`. Sheet of everything: `keyframes/_assets/contact-sheet.jpg`.
+- Old reels are unaffected (each reel keeps its own `kf/` copy). New reels pick up the new look.
+- To do: before-after's finger and the sandbox robot are still simple; world-camera and podcast-set are docs only.

@@ -24,12 +24,22 @@ KF.define("cutaway-stage", (host, o) => {
     else { ctx.fillStyle = L.color || "#15171c"; ctx.fillRect(-w, y, 3 * w, L.h); }
     ctx.fillStyle = "rgba(0,0,0,.35)"; ctx.fillRect(-w, y + L.h - 1, 3 * w, 1);
   }
-  function finger(x, y, t) { ctx.save(); ctx.translate(x, y - 170); ctx.rotate(-0.62 + 0.012 * Math.sin(t * 1.3));
-    const g = ctx.createLinearGradient(-170, 0, 170, 0); g.addColorStop(0, "#c98f78"); g.addColorStop(0.35, "#f1c7ad"); g.addColorStop(0.75, "#eab89c"); g.addColorStop(1, "#b77f69");
-    ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(-170, -1500); ctx.lineTo(-170, 0); ctx.arc(0, 0, 170, Math.PI, 0, true); ctx.lineTo(170, -1500); ctx.closePath(); ctx.fill();
-    const sh = ctx.createRadialGradient(40, 40, 10, 0, 0, 190); sh.addColorStop(0, "rgba(255,235,220,.35)"); sh.addColorStop(1, "rgba(255,235,220,0)"); ctx.fillStyle = sh; ctx.beginPath(); ctx.arc(0, 0, 170, 0, 7); ctx.fill();
-    ctx.strokeStyle = "rgba(120,70,55,.25)"; ctx.lineWidth = 2; for (let i = 0; i < 3; i++) { ctx.beginPath(); ctx.arc(0, -330 - i * 16, 150 - i * 4, 0.25 * Math.PI, 0.75 * Math.PI); ctx.stroke(); }
-    ctx.restore(); }
+  function finger(x, y, t) { // a real fingertip: skin with a soft terminator, blush at the tip, a nail on the back edge, knuckle creases, faint print ridges, a cool rim light
+    ctx.save(); ctx.translate(x, y - 170); ctx.rotate(-0.62 + 0.012 * Math.sin(t * 1.3)); const body = () => { ctx.beginPath(); ctx.moveTo(-170, -1500); ctx.lineTo(-170, 0); ctx.arc(0, 0, 170, Math.PI, 0, true); ctx.lineTo(170, -1500); ctx.closePath(); };
+    const g = ctx.createLinearGradient(-170, 0, 170, 0); g.addColorStop(0, "#a8705c"); g.addColorStop(0.12, "#cf9a82"); g.addColorStop(0.4, "#f0c6ac"); g.addColorStop(0.7, "#eebda2"); g.addColorStop(0.92, "#d39f88"); g.addColorStop(1, "#b98471"); ctx.fillStyle = g; body(); ctx.fill(); ctx.save(); body(); ctx.clip();
+    const bl = ctx.createRadialGradient(-10, 60, 20, 0, 0, 260); bl.addColorStop(0, "rgba(232,120,104,.42)"); bl.addColorStop(0.6, "rgba(232,120,104,.14)"); bl.addColorStop(1, "rgba(232,120,104,0)"); ctx.fillStyle = bl; ctx.fillRect(-200, -260, 400, 460);
+    const sh = ctx.createRadialGradient(-50, -40, 10, -30, -20, 200); sh.addColorStop(0, "rgba(255,240,228,.34)"); sh.addColorStop(1, "rgba(255,240,228,0)"); ctx.fillStyle = sh; ctx.fillRect(-200, -260, 400, 460);
+    // print ridges on the pad (the side that touches the glass)
+    ctx.strokeStyle = "rgba(150,90,72,.13)"; ctx.lineWidth = 2; for (let i = 0; i < 16; i++) { ctx.beginPath(); ctx.ellipse(-64, -30, 18 + i * 9, 30 + i * 13, 0.12, Math.PI * 0.55, Math.PI * 1.75); ctx.stroke(); }
+    // nail, seen edge-on along the back of the finger
+    ctx.save(); ctx.beginPath(); ctx.ellipse(196, -176, 92, 176, 0, 0, 7); ctx.clip(); const ng = ctx.createLinearGradient(100, 0, 176, 0); ng.addColorStop(0, "#e9b7a6"); ng.addColorStop(0.35, "#f8dcd2"); ng.addColorStop(1, "#f3c9bc"); ctx.fillStyle = ng; ctx.fillRect(90, -370, 100, 400);
+    ctx.fillStyle = "rgba(255,255,255,.75)"; ctx.beginPath(); ctx.ellipse(196, -8, 92, 30, 0, 0, 7); ctx.fill(); ctx.fillStyle = "rgba(255,246,240,.55)"; ctx.beginPath(); ctx.ellipse(190, -330, 70, 40, 0, 0, 7); ctx.fill();
+    ctx.fillStyle = "rgba(255,255,255,.4)"; ctx.fillRect(128, -300, 7, 250); ctx.restore(); ctx.strokeStyle = "rgba(140,80,66,.4)"; ctx.lineWidth = 3; ctx.beginPath(); ctx.ellipse(196, -176, 92, 176, 0, Math.PI * 0.62, Math.PI * 1.38); ctx.stroke();
+    // knuckle creases: three main folds with finer ones between
+    for (let i = 0; i < 7; i++) { const main = i % 3 === 0, yy = -420 - i * 15; ctx.strokeStyle = `rgba(120,66,52,${main ? 0.34 : 0.14})`; ctx.lineWidth = main ? 3 : 1.500; ctx.beginPath(); ctx.moveTo(-150, yy + 10); ctx.bezierCurveTo(-70, yy + 26 + (i % 2) * 5, 50, yy + 24, 160, yy - 4); ctx.stroke(); if (main) { ctx.strokeStyle = "rgba(255,230,214,.22)"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(-150, yy + 15); ctx.bezierCurveTo(-70, yy + 31, 50, yy + 29, 160, yy + 1); ctx.stroke(); } }
+    // terminator on the shadow side + cool rim light from the screen
+    const tm = ctx.createLinearGradient(-170, 0, -70, 0); tm.addColorStop(0, "rgba(70,30,26,.42)"); tm.addColorStop(1, "rgba(70,30,26,0)"); ctx.fillStyle = tm; ctx.fillRect(-170, -1500, 110, 1700); const rl = ctx.createRadialGradient(0, 40, 120, 0, 0, 176); rl.addColorStop(0, "rgba(150,190,255,0)"); rl.addColorStop(1, "rgba(150,190,255,.34)"); ctx.fillStyle = rl; ctx.beginPath(); ctx.arc(0, 0, 172, 0.1 * Math.PI, 0.9 * Math.PI); ctx.lineTo(0, 0); ctx.fill();
+    ctx.restore(); ctx.restore(); }
   function pen(x, y, t) { ctx.save(); ctx.translate(x, y); ctx.rotate(0.5 + 0.01 * Math.sin(t * 1.1));
     const g = ctx.createLinearGradient(-46, 0, 46, 0); g.addColorStop(0, "#8a6a2c"); g.addColorStop(0.45, "#f2d488"); g.addColorStop(1, "#7a5a20");
     ctx.fillStyle = g; ctx.beginPath(); ctx.moveTo(0, 0); ctx.lineTo(46, -190); ctx.lineTo(-46, -190); ctx.closePath(); ctx.fill();
