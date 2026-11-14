@@ -2,8 +2,9 @@
 <link rel="stylesheet" href="kf/kf.css"><style>
 body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
 #stage{position:absolute;inset:0}
-.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
-.fn{position:absolute;left:0;right:0;top:1226px;text-align:center;font:600 24px "JetBrains Mono",monospace;z-index:5}
+.scene{position:absolute;left:0;top:374px;width:1080px;height:760px}
+#desk{position:absolute;left:70px;top:1438px;width:640px;height:46px;border-radius:14px;z-index:4}
+.fn{position:absolute;left:0;right:0;top:1078px;text-align:center;font:600 24px "JetBrains Mono",monospace;z-index:5}
 #red{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 45%,#3a1214,#0c0c0f 70%);opacity:0}
 .pill{position:absolute;padding:14px 28px;border-radius:999px;font:800 34px Inter;white-space:nowrap;box-shadow:0 16px 36px -14px rgba(0,0,0,.6)}
 .ct{position:absolute;width:160px;height:160px;border-radius:42px;background:#F4EFE6;display:grid;place-items:center;box-shadow:0 30px 60px -22px #000}.ct img{width:58%;height:58%}
@@ -14,15 +15,15 @@ body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font
   <div id="bg" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
   <div id="red"></div>
   <div id="world" style="position:absolute;inset:0;transform-origin:540px 900px">
-    <div id="s1" class="scene kf-host" style="top:440px;height:860px"><div id="s1v" class="kf-host" style="left:0;top:70px;width:1080px;height:520px"></div><div id="s1c" class="kf-host" style="left:0;top:0;width:1080px;height:860px"></div></div>
+    <div id="s1" class="scene kf-host" style="top:294px;height:860px"><div id="s1v" class="kf-host" style="left:0;top:70px;width:1080px;height:520px"></div><div id="s1c" class="kf-host" style="left:0;top:0;width:1080px;height:860px"></div></div>
     <div id="s2" class="scene kf-host"></div><div id="s3" class="scene kf-host"></div><div id="s4" class="scene kf-host"></div><div id="s5" class="scene kf-host"></div>
-    <div id="s7" class="scene kf-host"></div><div id="s7b" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:440px;height:900px"></div>
+    <div id="s7" class="scene kf-host"></div><div id="s7b" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:236px;height:900px"></div>
   </div>
   <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
-  <div id="railD" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div><div id="railL" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
-  <div id="capD" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div><div id="capL" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="railD" class="kf-host" style="left:0;top:150px;width:1080px;height:100px"></div><div id="railL" class="kf-host" style="left:0;top:150px;width:1080px;height:100px"></div>
+  <div id="capD" class="kf-host" style="left:0;top:244px;width:1080px;height:140px;overflow:visible"></div><div id="capL" class="kf-host" style="left:0;top:244px;width:1080px;height:140px;overflow:visible"></div>
   <div id="fn" class="fn" data-qa="ok"></div>
-  <div id="pres" class="kf-host" style="left:0;top:1290px;width:1080px;height:630px"></div>
+  <div id="pres" class="kf-host" style="left:-160px;top:1068px;width:1080px;height:382px"></div><div id="desk"></div>
   <div id="fin" class="kf-host" style="left:0;top:0;width:1080px;height:1920px;pointer-events:none"></div>
 </div>
 <script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
@@ -44,7 +45,7 @@ const STEPS = ["Add your LinkedIn profile", "Match the job post's keywords", "Ad
 
 const KEYS = ["video.", "keeps.", "Watch.", "GitHub.", "link.", "transcript,", "timestamps.", "skill.", "file,", "time.", "skill!", "catch.", "Code,", "app.", "too.", "LEARN,"];
 const capD = KF.make("captions", "capD", { words: W, keys: KEYS, max: 4, size: 62 }), capL = KF.make("captions", "capL", { words: W, keys: KEYS, max: 4, size: 62, theme: "light" });
-const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#1e3a8a", shirtLine: "#0b1b4d", print: "#7fd0ff", chain: "#F2C14E", lens1: "#bae6fd", lens2: "#38bdf8" },
+const pres = KF.make("presenter", "pres", { w: 440, y: 6, style: { shirt: "#1e3a8a", shirtLine: "#0b1b4d", print: "#7fd0ff", chain: "#F2C14E", lens1: "#bae6fd", lens2: "#38bdf8" },
   poses: [[0, "point_stage"], [T.and - 0.1, "think"], [T.skill - 0.1, "hold"], [T.its - 0.1, "explain"], [T.twenty - 0.1, "big"], [T.give - 0.1, "offer"], [T.pulls - 0.1, "present"], [T.stamps - 0.1, "pinch"], [T.then - 0.1, "point_cam"], [T.claude2 - 0.1, "typing"], [T.uses - 0.1, "thumbs"], [T.a - 0.05, "one"], [T.an - 0.1, "two"],
     [T.now - 0.1, "stop"], [T.not - 0.1, "cross"], [T.and4 - 0.1, "worry"], [T.so - 0.1, "point_stage"], [T.cta - 0.1, "point_cam"]], talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
 const RS = ["watch", "plugin", "frames", "skill", "examples", "catch"], railD = KF.make("chapter-rail", "railD", { steps: RS, top: 0 }), railL = KF.make("chapter-rail", "railL", { steps: RS, top: 0, theme: "light" });
@@ -57,7 +58,7 @@ const cart = KF.el("div", "cart", $("s1"), `<u>SKILL.md</u><b>/resume</b><span>s
 const repo = KF.make("repo-card", "s2", { owner: "bradautomates", name: "claude-video", desc: "Give Claude the ability to watch any video. /watch downloads, extracts frames, transcribes, hands it all to Claude.", stars: 20780, forks: 2207, chips: ["claude-code", "video", "agent-skills"], langs: [["Python", 100, "#3572A5"]], licence: "MIT license", w: 940, top: 0, h: 560 });
 const freeP = KF.el("div", "pill", $("s2"), "free · open source"); freeP.style.cssText += ";left:50%;top:610px;transform:translateX(-50%);background:#3ECF8E;color:#062414";
 // S3 (light): give it a link → frames + transcript
-const v3 = KF.make("video-scan", "s3", { theme: "light", cmd: "/watch https://youtu.be/Tt08KmFfIYQ", ...VID, slides: SLIDES, linesLabel: "what it found", frames: [{ t: "thumbnail", img: "real/resume.jpg" }, { t: "still 1", img: "real/still1.jpg" }, { t: "still 2", img: "real/still2.jpg" }, { t: "still 3", img: "real/still3.jpg" }],
+const v3 = KF.make("video-scan", "s3", { theme: "light", cmd: "/watch https://youtu.be/Tt08KmFfIYQ", frameW: 204, ...VID, slides: SLIDES, linesLabel: "what it found", frames: [{ t: "thumbnail", img: "real/resume.jpg" }, { t: "still 1", img: "real/still1.jpg" }, { t: "still 2", img: "real/still2.jpg" }, { t: "still 3", img: "real/still3.jpg" }],
   lines: [{ t: "01:59", text: "Add LinkedIn Profile" }, { t: "03:21", text: "Include the “Right” Keywords" }, { t: "04:41", text: "Add Measurable Results" }, { t: "06:02", text: "The Right Length" }] });
 // S4 (dark): "turn this into a skill" → the file gets written
 const pb = KF.make("prompt-box", "s4", { text: "Turn this into a skill I can reuse", top: 0, w: 960 }), sk = KF.make("skill-file", "s4", { name: "resume-5-rules", desc: "Check a resume with the video's 5 rules", steps: STEPS, top: 205, w: 960, h: 540, size: 26, title: "SKILL.md — from the 5 rules under Jeff Su's video (our sample)" });
@@ -89,7 +90,7 @@ window.seek = t => {
   Object.keys(S).forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
     if (v) { const pin = k === "s1" ? 1 : E.out(P(t, a, 0.35)), pout = P(t, b - 0.22, 0.22); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
   let fp = 0; LIGHT.forEach(([a, b]) => { fp = Math.max(fp, E.inOut(P(t, a - 0.1, 0.5)) * (1 - E.inOut(P(t, b - 0.3, 0.4)))); }); flip.frame(t, { p: fp, origin: [540, 900] });
-  const Lt = isL(t); $("capD").style.display = Lt ? "none" : ""; $("capL").style.display = Lt ? "" : "none"; $("railD").style.display = Lt ? "none" : ""; $("railL").style.display = Lt ? "" : "none"; $("fn").style.color = Lt ? "#6b7280" : "#8b8f98";
+  const Lt = isL(t); $("capD").style.display = Lt ? "none" : ""; $("capL").style.display = Lt ? "" : "none"; $("railD").style.display = Lt ? "none" : ""; $("railL").style.display = Lt ? "" : "none"; $("fn").style.color = Lt ? "#6b7280" : "#8b8f98"; $("desk").style.background = Lt ? "linear-gradient(#ffffff,#e9e6de)" : "linear-gradient(#2a2e39,#16181d)"; $("desk").style.boxShadow = Lt ? "0 18px 30px -14px rgba(0,0,0,.35),inset 0 2px 0 #fff" : "0 18px 30px -14px #000,inset 0 2px 0 rgba(255,255,255,.14)";
   $("red").style.opacity = P(t, T.now - 0.15, 0.3) * (1 - P(t, T.cta - 0.2, 0.3));
   if (on("s1")) { v1.frame(t, { show: 1, play: 0.06 + 0.9 * P(t, 0.1, S.s1[1] - 0.2), scan: 0.25 + 0.75 * P(t, T.watch - 0.2, 0.3) }); stream(t); const n = Math.max(0, Math.min(4, (t - T.watch) / 0.75));
     tile.style.transform = `scale(${(1 + 0.05 * Math.abs(Math.sin(t * 4.2)) * P(t, T.watch, 0.3)).toFixed(3)})`; tile.style.boxShadow = `0 30px 60px -22px #000,0 0 ${(20 + n * 16).toFixed(0)}px ${KF.rgba("#7fd0ff", Math.min(0.9, 0.2 + n * 0.18))}`;
