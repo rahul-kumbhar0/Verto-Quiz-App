@@ -1,0 +1,127 @@
+<!doctype html><html><head><meta charset="utf-8"><title>EFFECTS: 51 free video effects for Claude</title>
+<link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+#stage{position:absolute;inset:0}
+.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
+.fn{position:absolute;left:0;right:0;top:1226px;text-align:center;font:600 24px "JetBrains Mono",monospace;z-index:5}
+#red{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 45%,#3a1214,#0c0c0f 70%);opacity:0}
+.pill{position:absolute;padding:14px 28px;border-radius:999px;font:800 34px Inter;white-space:nowrap;box-shadow:0 16px 36px -14px rgba(0,0,0,.6)}
+#clipwrap{position:absolute;left:60px;top:740px;width:960px;height:1180px;border-radius:44px 44px 0 0;overflow:hidden}
+#cam{position:absolute;inset:0}#room,#fxB,#fxF,#chrome{position:absolute;left:0;top:0;width:960px;height:1180px}
+#pres{position:absolute;left:-60px;top:550px;width:1080px;height:630px;transform-origin:50% 100%}
+.chip{position:absolute;left:50%;top:0;display:flex;align-items:center;gap:16px;height:96px;padding:0 28px 0 12px;border-radius:22px;background:#fff;color:#16181d;font:800 32px "JetBrains Mono",monospace;box-shadow:0 30px 60px -20px rgba(0,0,0,.7);white-space:nowrap}
+.chip i{width:54px;height:72px;border-radius:10px;background:linear-gradient(160deg,#3a4254,#1a1d26);display:grid;place-items:center}.chip i:after{content:"";border-left:18px solid #fff;border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:5px}
+.tier{position:absolute;top:20px;width:440px;height:230px;border-radius:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;font:800 32px Inter;box-shadow:0 30px 60px -24px #000}
+.tier b{font:900 110px/1 Inter;letter-spacing:-4px}.tier small{font:700 24px "JetBrains Mono",monospace;margin-top:6px}
+</style></head><body><div id="stage">
+  <div id="bg" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="red"></div>
+  <div id="world" style="position:absolute;inset:0;transform-origin:540px 900px">
+    <div id="s1" class="scene kf-host" style="top:440px;height:860px"><div id="s1c" class="kf-host" style="left:0;top:0;width:1080px;height:330px"></div><div id="s1w" class="kf-host" style="left:0;top:340px;width:1080px;height:420px"></div><div id="s1x" class="kf-host" style="left:0;top:330px;width:1080px;height:500px"></div></div>
+    <div id="s2" class="scene kf-host"></div><div id="s2b" class="scene kf-host"></div>
+    <div id="pb" class="scene kf-host" style="top:532px;height:185px;overflow:visible"></div>
+    <div id="s7" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:440px;height:900px"></div>
+  </div>
+  <div id="clipwrap"><div id="cam"><div id="room"></div><div id="fxB"></div><div id="pres"></div><div id="fxF"></div></div><div id="chrome"></div></div>
+  <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="railD" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div><div id="railL" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
+  <div id="capD" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div><div id="capL" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="fn" class="fn" data-qa="ok"></div>
+  <div id="fin" class="kf-host" style="left:0;top:0;width:1080px;height:1920px;pointer-events:none"></div>
+</div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
+<script>["captions","presenter","chapter-rail","stage-flip","hero-stat","command-wall","strike-row","repo-card","agent-log","prompt-box","clip-stage","face-fx","ending-comment","light-wipe","finish"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));</script>
+<script>
+const W = window.WORDS.filter(w => (w.type || "word") === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?:]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word + " #" + n); };
+const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
+const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id), C = KF.C;
+const T = { free: at("free"), and: at("And"), edit: at("edit"), type: at("type"), name: at("name"), its: at("It's"), vibha: at("Vibha"), one: at("One"), installs: at("installs"), drop: at("Drop"), type2: at("type", 2), fx2: at("effects", 2), orbit: at("orbit"), three: at("three"), seconds: at("seconds"),
+  reels: at("reels"), circle: at("circle"), spot: at("Spotlight"), lights: at("lights"), lit: at("lit"), locked: at("Locked"), brackets: at("Brackets"), face: at("face"), reject: at("Reject"), red: at("red"), slams: at("slams"), down: at("down"),
+  now: at("Now"), these: at("These"), starter: at("starter"), no: at("No"), no2: at("no", 2), claude3: at("Claude", 3), paid: at("paid"), cta: at("Comment"), dm: at("DM") };
+const S = { s1: [0, T.its - 0.12], s2: [T.its - 0.12, T.one - 0.12], s2b: [T.one - 0.12, T.drop - 0.12], pb: [T.drop - 0.12, T.now - 0.15], s7: [T.now - 0.15, T.cta - 0.1], s8: [T.cta - 0.1, DUR] };
+const LIGHT = [[S.s2[0], S.pb[0]]], isL = t => LIGHT.some(([a, b]) => t >= a + 0.25 && t < b - 0.05);
+const NAMES = ["noise", "lineup", "locked-on", "orbit", "lean-in", "backdrop-word", "spotlight", "the-bill", "moody", "swipe", "todo", "comment-box", "tap", "pause-point", "uninstall", "reel-frame", "shortcut-rain", "reject-stamp", "countdown-flip", "rabbit-hole", "cover-star", "scribble", "glass-widgets", "red-collage", "split-headline", "pastel-word", "check-pills", "timeline", "headline-box", "profile-wall", "tier-list", "broll-split", "phone-fan", "dot-reveal", "headline-wall", "checklist", "liquid-glass-graph", "carousel-spin", "match-cut", "apple-toggles", "led-sign", "slow-push", "over-the-shoulder-zoom", "messages", "place-in-grid", "tape-label", "select-resize", "wave-trim", "huge-strike", "crayon-write", "fan-build"];
+// the four effects we show: command, when it is typed, when the effect starts, when it ends
+const FXS = [{ fx: "orbit", cmd: "/effects orbit from 3 to 6 seconds", ty: [T.fx2, T.seconds + 0.35], on: T.reels - 0.2, off: T.spot - 0.12, num: 4 }, { fx: "spotlight", cmd: "/effects spotlight", ty: [T.spot, T.spot + 0.6], on: T.lights - 0.05, off: T.locked - 0.12, num: 7 },
+  { fx: "locked", cmd: "/effects locked-on", ty: [T.locked, T.locked + 0.55], on: T.brackets - 0.1, off: T.reject - 0.12, num: 3 }, { fx: "stamp", cmd: '/effects reject-stamp on "no"', ty: [T.reject, T.red], on: T.slams, off: S.pb[1], num: 18 }];
+const FACE = [480, 664], FR = 150, HIT = T.slams + 0.18;
+
+const KEYS = ["free.", "edit.", "name.", "Vibha.", "it.", "orbit,", "seconds.", "head.", "Spotlight.", "lit.", "on.", "face.", "stamp.", "word!", "catch.", "versions.", "sound,", "captions,", "plan.", "EFFECTS,"];
+const capD = KF.make("captions", "capD", { words: W, keys: KEYS, max: 4, size: 62 }), capL = KF.make("captions", "capL", { words: W, keys: KEYS, max: 4, size: 62, theme: "light" });
+const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#7c2d12", shirtLine: "#431407", print: "#F2C14E", chain: "#F2C14E", lens1: "#fdba74", lens2: "#f97316" },
+  poses: [[0, "mindblown"], [T.free - 0.1, "thumbs"], [T.and - 0.1, "wag"], [T.type - 0.1, "typing"], [T.its - 0.1, "explain"], [T.vibha - 0.3, "point_side"], [T.one - 0.1, "one"], [T.drop - 0.1, "offer"], [T.type2 - 0.1, "typing"], [T.reels - 0.2, "look_far"], [T.spot - 0.1, "hold"], [T.lit - 0.2, "present"], [T.locked - 0.1, "neutral"], [T.brackets, "point_cam"], [T.reject - 0.1, "explain"], [HIT, "hands_head"],
+    [T.now - 0.1, "stop"], [T.these - 0.1, "small"], [T.no - 0.1, "shh"], [T.no2 - 0.1, "cross"], [T.claude3 - 0.1, "pinch"], [T.cta - 0.1, "point_cam"]], talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
+const STEPS = ["51 effects", "install", "orbit", "spotlight", "locked-on", "stamp", "catch"], railD = KF.make("chapter-rail", "railD", { steps: STEPS, top: 0 }), railL = KF.make("chapter-rail", "railL", { steps: STEPS, top: 0, theme: "light" });
+const flip = KF.make("stage-flip", "bg", { origin: [540, 900] }), wipe = KF.make("light-wipe", "wipe", { color: "#ffd8a8" }), fin = KF.make("finish", "fin", { grain: 0.5, vignette: 0.4 });
+// S1 hook: the counter lands on 51 over a moving wall of every effect name
+const stat = KF.make("hero-stat", "s1c", { from: 0, to: 51, label: "free video effects", top: 56, size: 160, glow: C.accent }), wall = KF.make("command-wall", "s1w", { names: NAMES, prefix: "/effects ", rows: 6, size: 32 });
+const noEdit = KF.make("strike-row", "s1x", { size: 210, top: 120, items: [{ art: "timeline", label: "no editing", at: T.and - 0.05, strike: T.edit }] });
+// S2 (light): the repo, then the one-line install
+const repo = KF.make("repo-card", "s2", { owner: "Vibha-Ramprakash", name: "claude-video-effects", desc: "51 free video effects for Claude Code: drop in a talking-head clip, type /effects orbit.", stars: 931, forks: 218, chips: ["claude-code", "video-effects", "reels"], langs: [["Python", 100, "#3572A5"]], licence: "No license file", w: 940, top: 0, h: 560 });
+const log = KF.make("agent-log", "s2b", { title: "claude — ~", prompt: "Install the skill from github.com/Vibha-Ramprakash/claude-video-effects", top: 20, w: 960, welcome: false, steps: [{ verb: "Cloned", obj: "claude-video-effects", meta: "→ ~/.claude/skills/effects", ing: "Cloning" }, { verb: "Loaded", obj: "51 effects", meta: "type /effects + a name", ing: "Loading" }] });
+// the clip chapters: prompt on top, "your video" below with our presenter in it, effects around his face
+const pbs = FXS.map(f => KF.make("prompt-box", "pb", { text: f.cmd, top: 0, w: 960 }));
+const once = KF.el("div", "pill", $("s2b"), "one line · about 2 minutes the first time"); once.style.cssText += ";left:50%;top:430px;transform:translateX(-50%);background:#D97757;color:#1a0e08";
+const clip = KF.make("clip-stage", $("room"), { chrome: $("chrome"), file: "myvideo.mp4", total: 10, radius: 44 }), fx = KF.make("face-fx", $("fxB"), { front: $("fxF"), word: "REJECTED" });
+const chip = KF.el("div", "chip", $("stage"), "<i></i>myvideo.mp4"); chip.dataset.qa = "ok";
+// S7 the catch
+const tA = KF.el("div", "tier", $("s7"), `free<b>51</b><small>starter versions</small>`), tB = KF.el("div", "tier", $("s7"), `her paid studio<b>220+</b><small>full versions</small>`); tA.style.cssText += ";left:80px;background:#fff;color:#16181d"; tB.style.cssText += ";left:560px;background:#15171c;color:#8b8f98;box-shadow:0 0 0 2px #2a2d35"; tA.querySelector("b").style.color = "#D97757"; [tA, tB].forEach(e => (e.dataset.qa = "ok"));
+const miss = KF.make("strike-row", "s7", { size: 190, top: 320, items: [{ art: "mic", label: "sound", at: T.no - 0.1, strike: T.no + 0.3 }, { art: "chat", label: "captions", at: T.no2 - 0.1, strike: T.no2 + 0.3 }, { art: "card", label: "paid Claude plan", at: T.claude3 - 0.1 }] });
+const cta = KF.make("ending-comment", "s8", { size: 96, keyword: "EFFECTS", pill: "install line + all 51 names", dm: "51 free effects: install line + all the names 👇" });
+
+// ---- sound cues ----
+const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
+cue("riser", 0.02, { t2: 0.5 }); cue("tick", 0.3, { soft: true }); cue("tick", 0.5, { soft: true }); cue("impact", 0.85); cue("ding", T.free + 0.1); cue("pop", T.and); cue("glitch", T.edit + 0.05); cue("swish", T.type - 0.1); cue("type", T.type, { t2: T.name + 0.3 }); cue("pop", T.name + 0.35);
+cue("whoosh", S.s2[0]); cue("land", S.s2[0] + 0.35); cue("tick", T.vibha, { soft: true }); cue("ding", T.vibha + 0.3, { soft: true }); cue("whoosh", S.s2b[0]); cue("type", T.one + 0.1, { t2: T.installs }); cue("ding", T.installs + 0.15, { soft: true }); cue("ding", T.installs + 0.55);
+cue("whoosh", S.pb[0]); cue("swish", T.drop + 0.1); cue("land", T.drop + 0.6); cue("whoosh", T.drop + 0.4);
+FXS.forEach((f, i) => { cue("type", f.ty[0], { t2: f.ty[1] }); cue("click", f.ty[1] + 0.08); });
+cue("swell", T.reels - 0.3); [0, 1, 2].forEach(i => cue("swish", T.reels + i * 0.4, { soft: true })); cue("glitch", T.lights); cue("impact", T.lights + 0.35); cue("ding", T.lit, { soft: true });
+cue("tick", T.brackets); cue("tick", T.brackets + 0.15); cue("click", T.brackets + 0.4); cue("ding", T.face, { soft: true }); cue("riser", HIT - 0.4, { t2: HIT }); cue("impact", HIT); cue("glitch", HIT + 0.08); cue("pop", T.down + 0.3);
+cue("impact", T.now); cue("pop", T.these + 0.1); cue("pop", T.starter + 0.1, { soft: true }); cue("glitch", T.no + 0.3); cue("glitch", T.no2 + 0.3); cue("pop", T.claude3); cue("tick", T.paid);
+cue("swell", T.cta - 0.1); cue("type", T.cta + 0.4, { t2: T.cta + 0.9 }); cue("click", T.cta + 1.05); cue("ding", T.dm + 0.25);
+window.__cues = cues;
+
+// ---- the frame ----
+const spr = (e, q, extra = "") => { e.style.opacity = Math.min(1, q * 2); e.style.transform = `${extra} scale(${(0.6 + 0.4 * q).toFixed(3)})`; };
+window.seek = t => {
+  const on = k => t >= S[k][0] && t < S[k][1];
+  Object.keys(S).forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
+    if (v) { const pin = k === "s1" ? 1 : E.out(P(t, a, 0.35)), pout = P(t, b - 0.22, 0.22); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
+  let fp = 0; LIGHT.forEach(([a, b]) => { fp = Math.max(fp, E.inOut(P(t, a - 0.1, 0.5)) * (1 - E.inOut(P(t, b - 0.3, 0.4)))); }); flip.frame(t, { p: fp, origin: [540, 900] });
+  const Lt = isL(t); $("capD").style.display = Lt ? "none" : ""; $("capL").style.display = Lt ? "" : "none"; $("railD").style.display = Lt ? "none" : ""; $("railL").style.display = Lt ? "" : "none"; $("fn").style.color = Lt ? "#6b7280" : "#b9bcc4";
+  $("red").style.opacity = P(t, T.now - 0.15, 0.3) * (1 - P(t, T.cta - 0.2, 0.3));
+  if (on("s1")) { const ty = P(t, T.type - 0.15, 0.4); stat.frame(t, { p: 0.3 + 0.7 * P(t, 0, 0.85), show: 1 }); wall.frame(t, { show: 1, speed: 1.5 - 0.9 * ty, dim: Math.max(P(t, T.and - 0.1, 0.25) * (1 - P(t, T.type - 0.3, 0.25)), ty * 0.8), hot: t >= T.type - 0.2 ? 3 : undefined, pick: E.out(P(t, T.type, 0.45)) });
+    $("s1x").style.opacity = P(t, T.and - 0.1, 0.15) * (1 - P(t, T.type - 0.3, 0.25)); noEdit.frame(t); }
+  if (on("s2")) repo.frame(t, { show: P(t, S.s2[0], 0.4), count: E.out(P(t, T.vibha - 0.4, 0.9)), starred: P(t, T.vibha + 0.3, 0.3) });
+  if (on("s2b")) spr(once, KF.spring(t, T.installs + 0.2, { f: 2.6, z: 0.55 }), "translateX(-50%)");
+  if (on("s2b")) log.frame(t, { show: P(t, S.s2b[0], 0.35), n: KF.keys(t, [[T.one + 0.3, 0], [T.installs + 0.15, 1, "out"], [T.installs + 0.6, 2, "out"]]) });
+  // ---- the clip: rises after the file drops, stays through the four effects ----
+  const cp = E.out(P(t, T.drop + 0.4, 0.55)) * (1 - E.in(P(t, S.pb[1] - 0.05, 0.35))), ci = on("pb") ? FXS.reduce((m, f, i) => (t >= f.ty[0] - 0.05 ? i : m), -1) : -1, cur = ci >= 0 ? FXS[ci] : null;
+  const rise = `translateY(${((1 - cp) * 1260).toFixed(1)}px)`; $("room").style.transform = $("chrome").style.transform = rise; $("room").style.display = $("chrome").style.display = cp > 0.001 ? "" : "none"; $("pres").style.transform = `scale(${(1 + 0.35 * cp).toFixed(4)})`;
+  const playing = cur && t >= cur.on && t < cur.off, orb = FXS[0]; clip.frame(t, { show: 1, range: t >= T.three - 0.1 && t < FXS[1].ty[0] ? [3, 6] : null, sel: P(t, T.three - 0.1, 0.5), play: t >= orb.on ? P(t, orb.on, orb.off - orb.on) : null, done: P(t, T.down + 0.3, 0.3), out: "myvideo_effects.mp4" });
+  // prompt boxes (one per command)
+  pbs.forEach((b, i) => { const f = FXS[i], vis = on("pb") && (i === ci || (ci < 0 && i === 0)); b.frame(t, { show: vis ? (i === 0 ? P(t, S.pb[0] + 0.05, 0.35) : 1) : 0, typed: P(t, f.ty[0], f.ty[1] - f.ty[0]), send: 0 }); });
+  // the dropped file
+  { const d = P(t, T.drop - 0.05, 0.5), gone = P(t, T.drop + 0.75, 0.25), y = KF.keys(t, [[T.drop - 0.05, 300], [T.drop + 0.4, 742, "in"], [T.drop + 0.52, 716, "out"], [T.drop + 0.62, 730, "inOut"]]); chip.style.display = on("pb") && gone < 1 ? "" : "none"; chip.style.opacity = Math.min(1, d * 3) * (1 - gone); chip.style.transform = `translate(-50%,${y.toFixed(1)}px) rotate(${((1 - E.out(d)) * -9).toFixed(2)}deg) scale(${(1 - 0.25 * gone).toFixed(3)})`; }
+  // effects around the face (the face rides up a little with the presenter's own bob, so follow gently)
+  const face = [FACE[0] + Math.sin(t * 1.3) * 3, FACE[1] + Math.sin(t * 2.1) * 3]; let cam = "";
+  if (cur && t >= cur.on - 0.3) { const p = P(t, cur.on, cur.fx === "spotlight" ? 0.45 : 0.6) * (1 - P(t, cur.off - 0.15, 0.15)); fx.frame(t, { fx: cur.fx, p, face, r: cur.fx === "stamp" ? 112 : FR, t0: HIT, at: [480, 1040] });
+    if (cur.fx === "locked") { const z = 1 + 0.2 * E.inOut(P(t, cur.on + 0.35, 0.5)) * (1 - P(t, cur.off - 0.2, 0.2)); cam = `scale(${z.toFixed(4)})`; }
+    if (cur.fx === "stamp") { const d = t - HIT; if (d >= 0 && d < 0.35) cam = `translate(${(Math.sin(d * 90) * 14 * (1 - d / 0.35)).toFixed(1)}px,${(Math.cos(d * 70) * 10 * (1 - d / 0.35)).toFixed(1)}px)`; } }
+  else fx.frame(t, {});
+  $("cam").style.transformOrigin = `${FACE[0]}px ${FACE[1]}px`; $("cam").style.transform = cam;
+  if (on("s7")) { spr(tA, KF.spring(t, T.these, { f: 2.6, z: 0.55 })); spr(tB, KF.spring(t, T.starter + 0.1, { f: 2.6, z: 0.55 })); miss.frame(t); }
+  if (on("s8")) cta.frame(t, { show: P(t, S.s8[0], 0.6), typed: P(t, T.cta + 0.4, 0.5), sent: P(t, T.cta + 1.0, 0.3), dm: P(t, T.dm + 0.15, 0.9) });
+  wipe.frame(t, { p: P(t, S.pb[0] - 0.3, 0.55) });
+  const dr = fin.drift(t, 0.9); $("world").style.transform = `translate(${dr[0].toFixed(1)}px,${dr[1].toFixed(1)}px) rotate(${dr[2].toFixed(3)}deg)`;
+  const lb = KF.loopBack(t, DUR, 1.0); if (lb.mix > 0) { const e = $("s1"); e.style.display = ""; e.style.opacity = lb.mix; e.style.transform = "none"; stat.frame(0, { p: 0.3, show: 1 }); wall.frame(t - DUR, { show: 1, speed: 1.5 }); $("s1x").style.opacity = 0; $("s8").style.opacity = 1 - lb.mix; }
+  const ch = on("s1") ? 0.5 : on("s2") || on("s2b") ? 1.5 : on("pb") ? Math.max(0, ci) + 2.5 : 6.5;
+  const rs = { at: Math.min(ch, 6.9), alert: on("s7"), value: on("s1") ? Math.round(51 * (0.3 + 0.7 * P(t, 0, 0.85))) : on("s2") || on("s2b") ? 1 : on("pb") ? (cur ? cur.num : 4) : on("s7") ? 3 : 51, label: on("s1") ? "effects" : on("s2") || on("s2b") ? "line" : on("pb") ? "of 51" : on("s7") ? "catches" : "names" };
+  (Lt ? railL : railD).frame(t, rs); $("railD").style.opacity = $("railL").style.opacity = t >= S.s8[0] ? 1 - P(t, S.s8[0], 0.3) : 1;
+  (Lt ? capL : capD).frame(t); pres.frame(t); fin.frame(t, {});
+  const f = $("fn"), inClip = on("pb") && cp > 0.5; f.style.top = inClip ? "850px" : "1226px"; f.style.textShadow = inClip ? "0 2px 10px #000,0 0 4px #000" : "none"; f.style.textAlign = inClip ? "left" : "center"; f.style.paddingLeft = inClip ? "86px" : "0";
+  f.textContent = on("s1") ? "Effect names from the repo's README" : on("s2") ? "github.com/Vibha-Ramprakash/claude-video-effects · 14 Nov 2026" : on("s2b") ? "Needs Claude Code · sample screen" : inClip ? (t < T.down + 0.2 ? "Our own recreation on our cartoon, not the tool's output" : "") : on("s7") ? "Her own notes say: starter versions, no sounds or captions" : "";
+};
+window.seek(0);
+</script></body></html>

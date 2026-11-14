@@ -417,3 +417,17 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Automation #89 CONNECT (OFF, exact, all reels, follow gate, nudge 3 h). Guide /connect/ LIVE + hub line (dpl_6junTeLnoPzdYo3gUUdcyU6DD2Jp; new hub index sha ee5f4246…, connect d2165f2b…).
 - Seen in the automation list today: #87 CHANNEL is already ON and locked to reel 18106350026200806; #88 EDITOR still OFF on all reels.
 - NEXT: owner posts CONNECT → "uploaded" → lock #89 to the media id + ON. Then EFFECTS (queue item 2).
+
+## EFFECTS (14 Nov 2026): "Fifty-one video effects, free. And you don't edit. You type the effect's name." — FINAL, Shlok voice
+- Topic 2 of the queue. Repo: Vibha-Ramprakash/claude-video-effects (931★, 218 forks, no standard licence, README read 14 Nov). Facts: drafts/effects/facts.md. We did NOT run the tool; the effects in the reel are OUR recreations on our presenter, labelled on screen ("Our own recreation on our cartoon, not the tool's output") and in the guide.
+- Voice: ElevenLabs flow Odbw5zoemc5TqsCuNl1q, ONE take, 635 credits, 38.2 s raw → paced 34.4 s (tempo 1.10, 13 stops @ 0.34). Reel 36.0 s.
+- Owner's brief: "use more keyframes, make it more animated". THREE NEW KEYFRAMES (library now 51 folders):
+  - `command-wall`: rows of command chips sliding at different speeds; one lights up, one is pulled out big.
+  - `face-fx`: effects that follow a face on a back layer + a front layer: orbit (real covers circle the head), spotlight, locked (brackets + scan line), stamp (slam, ink wear, ring, sparks).
+  - `clip-stage`: "your video" as a framed clip (room, file chip, timeline with a selected range + playhead, exported chip).
+- NEW LAYOUT TRICK: the presenter lives inside `#clipwrap > #cam` together with the room and the two fx layers, so in the effect chapters he becomes "the person in the video" (scaled 1.35, face at [480, 664] in the wrap, r 150) and effects go behind / in front of him; `#cam` zooms on lock-on and shakes on the stamp. Outside those chapters the room is hidden and he is the normal presenter.
+- Build: hook = hero-stat rolls to 51 over the command wall of all 51 real names → "no editing" struck out → "/effects orbit" chip pulled out. LIGHT: repo-card (real numbers) + agent-log install. DARK: file chip drops into the prompt box, the clip rises, then four commands are typed and play on him: orbit (timeline range 3–6 s), spotlight, locked-on, reject-stamp. Catch: 51 starters vs 220+ paid, strike-row sound + captions, paid Claude plan. Ending-comment EFFECTS.
+- QA 88/100, 0 fails (warns: densest burst at 19 %, SFX 33.7/10 s, stop-down not measured).
+- Finals: studio/finals/claude-effects.mp4 (own beat), _nomusic, _notlikeus (drop on "reels circle", dip under the catch), effects-cover.png. Sources: studio/reels/effects. Post copy: drafts/effects/post-copy.md.
+- Automation #90 EFFECTS (OFF, exact, all reels, follow gate, nudge 3 h). Guide /effects/ LIVE with all 51 names + hub line (dpl_CvKMLrJXYa9rwxF8ztp9xitCG9ps; hub index sha 17d5ab51…, effects bfff5a14…).
+- NEXT: owner posts → "uploaded" → lock #90 (and #89 CONNECT, #88 EDITOR) + ON. Then LEARN (queue item 3; tool still to identify and verify).

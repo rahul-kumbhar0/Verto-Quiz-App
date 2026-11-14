@@ -246,3 +246,4 @@ Still to find/verify: LEARN (which tool the @igao.ia reel uses), RANK (the other
 Budget: ≈ 800 ElevenLabs credits per reel → ≈ 8,800 for 11.
 
 - 14 Nov: **1 CONNECT is BUILT** (final, guide live, automation #89 OFF). Next in the queue: 2 EFFECTS.
+- 14 Nov: **2 EFFECTS is BUILT** (final, guide live, automation #90 OFF). Next: 3 LEARN.

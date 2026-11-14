@@ -1,6 +1,6 @@
 # canwe.ai keyframes
 
-Reusable scene blocks for our reels: 48 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
+Reusable scene blocks for our reels: 51 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
 
 **Rule:** every block is a pure function of time. Build it once with `KF.make(name, host, opts)`, then call `frame(t, state)` on every `seek(t)`. No clocks, no randomness, so a render always comes out the same.
 
@@ -61,6 +61,7 @@ Reusable scene blocks for our reels: 48 folders plus `_assets/`. Each block fold
 | [`prompt-box`](prompt-box/) | The Claude chat input being typed into and sent ("just one sentence"). Laid out like claude.ai: warm dark box, + and tools buttons, model name, orange send button. |
 | [`laptop-frame`](laptop-frame/) | A MacBook (KF.device: thin black bezel, camera notch, aluminium front lip with the thumb scoop) whose lid opens, with your own content on the screen. |
 | [`permission-sheet`](permission-sheet/) | The "X wants to access your Y" consent screen you get when you connect an app, laid out like a Google / OAuth permission page (two app icons joined by a dotted link, account chip, list of permissions, note, Cancel and Allow). The rows can be read one by one and Allow can be pressed. |
+| [`clip-stage`](clip-stage/) | "Your video" as a framed vertical clip: a room behind the person (window light, shelf, plant, lamp glow) and on top a file chip plus a small editing timeline where a time range is selected and a playhead runs ("from 3 to 6 seconds"), and an "exported" chip. |
 | [`real-screen`](real-screen/) | A REAL screenshot shown in a device frame (phone, browser or app window) that scrolls, zooms into exact spots and draws highlight boxes on them, so viewers see the actual page, button or line ("this is the repo", "click here", "this is the model it really uses"). |
 | [`product-page`](product-page/) | A shop product page in a real browser window that loads (grey skeleton → content), with a load timer ("the page took 1.4 s", pricing, "what the user sees"). Laid out like a real store: nav with search and bag, thumbnail rail, rating, size picker, Add to Bag. |
 
@@ -73,6 +74,7 @@ Reusable scene blocks for our reels: 48 folders plus `_assets/`. Each block fold
 | [`frame-wall`](frame-wall/) | A wall of thousands of REAL video frames, seen at an angle like a wall of prints: rows recede into the distance, far rows are out of focus, a light sweeps across, and one frame can fly out of the wall toward the camera ("over 5,000 frames, one by one"). |
 | [`thumb-wall`](thumb-wall/) | Rows of real vertical video covers drifting past at three depths (far row small and soft, near row big), with glass reflections; one cover can lift out, straighten up and start PLAYING like a real reel (progress bar, like / comment / share buttons, a heart pop). |
 | [`strike-row`](strike-row/) | A row of solid tiles holding illustrated objects. Each one drops in with a bounce, then gets crossed out by a rough red marker stroke that hits hard (the tile recoils and tilts, sparks fly, the object goes grey), or gets a green tick with a sparkle ("no camera, no drawing, no editing"). |
+| [`command-wall`](command-wall/) | A wall of command chips ("/effects orbit", "/effects spotlight", …) in rows sliding past at different speeds; one chip at a time lights up and one can be pulled out big in the middle ("51 effects", every command, a list of features or prompts). |
 | [`before-after`](before-after/) | Two pictures behind a sliding divider with a glass handle, like a real comparison slider; a fingertip presses the handle and drags it (old vs new, without vs with, slow vs fast). |
 
 ## D. Metaphor props
@@ -91,6 +93,7 @@ Reusable scene blocks for our reels: 48 folders plus `_assets/`. Each block fold
 | [`blade-cut`](blade-cut/) | Two steel blades slash down through a wide shot (with motion trails and sparks where they bite), a flash, the side pieces tip over and fall away in 3D with shadows, and the middle rises as a vertical clip with a white rim and glow ("it cuts them into Shorts", crop, trim). |
 | [`film-strip`](film-strip/) | A long video as a real strip of film: dark celluloid with sprocket holes, frame numbers and grain, holding REAL frames (default: our own reel frames), curving away in perspective as it runs under a glowing playhead. The best moments get bracketed, light up with a score and lift out of the strip. |
 | [`clip-stack`](clip-stack/) | Real vertical clips fly in and fan out in a 3D arc (each card has thickness, a shadow and a glass glint), then collapse onto one neat pile with a bounce ("a whole stack of Shorts from one video", outputs piling up). |
+| [`face-fx`](face-fx/) | Creator-style video effects that follow a face, split into a layer behind the person and a layer in front: `orbit` (real reel covers circle the head), `spotlight` (lights drop, a cone keeps the person lit), `locked` (target brackets snap on and track), `stamp` (a red rubber stamp slams down). |
 | [`world-camera`](world-camera/) | A 3D world with a camera that flies between stations (engine `world3d.js`, see its README). |
 
 ## F. Structure, endings and extras

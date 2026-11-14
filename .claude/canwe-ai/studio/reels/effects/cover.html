@@ -1,0 +1,17 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+.k{position:absolute;left:0;right:0;top:250px;text-align:center;z-index:5}.k span{display:inline-block;padding:12px 26px;border-radius:999px;background:#D97757;color:#1a0e08;font:900 34px Inter;letter-spacing:1px}
+h1{position:absolute;left:4%;right:4%;top:322px;margin:0;text-align:center;font:900 118px/1.02 Inter;letter-spacing:-5px;color:#fff;text-shadow:0 8px 40px rgba(0,0,0,.8);z-index:5}
+.sel{position:relative;display:inline-block;padding:0 .08em}.sel i{position:absolute;inset:8% -1% 4%;border:3px solid #4b8bff;background:rgba(75,139,255,.18)}.sel em{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #4b8bff}.sel b{position:relative;color:#F0A585}
+.cmd{position:absolute;left:50%;top:600px;transform:translateX(-50%);padding:16px 34px;border-radius:999px;background:#D97757;color:#1a0e08;font:700 44px "JetBrains Mono",monospace;white-space:nowrap;box-shadow:0 0 50px #D97757;z-index:5}
+#wrap{position:absolute;left:60px;top:740px;width:960px;height:1180px;border-radius:44px 44px 0 0;overflow:hidden}#wrap>div{position:absolute;left:0;top:0;width:960px;height:1180px}
+#pres{left:-60px!important;top:550px!important;width:1080px!important;height:630px!important;transform:scale(1.35);transform-origin:50% 100%}
+</style></head><body>
+<div class="k"><span>FREE CLAUDE SKILL</span></div>
+<h1>51 video effects. <span class="sel"><i></i><em style="left:-8px;top:2%"></em><em style="right:-8px;bottom:-2%"></em><b>Just type</b></span></h1>
+<div class="cmd">/effects orbit</div>
+<div id="wrap"><div id="room"></div><div id="fxB"></div><div id="pres"></div><div id="fxF"></div><div id="chrome"></div></div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="kf/presenter/block.js"></script><script src="kf/clip-stage/block.js"></script><script src="kf/face-fx/block.js"></script><script>
+const $ = id => document.getElementById(id), clip = KF.make("clip-stage", $("room"), { chrome: $("chrome"), radius: 44 }), fx = KF.make("face-fx", $("fxB"), { front: $("fxF") });
+const pr = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#7c2d12", shirtLine: "#431407", print: "#F2C14E", chain: "#F2C14E", lens1: "#fdba74", lens2: "#f97316" }, poses: [[0, "mindblown"]], talk: [] });
+window.__ready = Promise.resolve(window.__ready).then(() => { clip.frame(1, { show: 1, range: [3, 6], sel: 1, play: 0.4 }); fx.frame(2.2, { fx: "orbit", p: 1, face: [480, 664], r: 150 }); pr.frame(1, { mouth: 0.6, expr: "surprised" }); }); window.seek = () => {};</script></body></html>

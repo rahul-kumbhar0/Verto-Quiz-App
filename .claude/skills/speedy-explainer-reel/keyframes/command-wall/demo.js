@@ -1,0 +1,3 @@
+KF.demo({ name: "command-wall", group: "C", line: "A wall of commands; one gets picked", dur: 5, build(host) {
+  const N = ["noise", "lineup", "locked-on", "orbit", "lean-in", "backdrop-word", "spotlight", "the-bill", "moody", "swipe", "todo", "comment-box", "tap", "pause-point", "uninstall", "reel-frame", "shortcut-rain", "reject-stamp", "countdown-flip", "rabbit-hole", "cover-star", "scribble", "glass-widgets", "tier-list", "phone-fan", "dot-reveal", "led-sign", "slow-push"];
+  const w = KF.make("command-wall", host, { names: N, prefix: "/effects ", rows: 9 }); return t => w.frame(t, { show: KF.prog(t, 0, 0.6), speed: 1.5 - KF.prog(t, 3, 0.4), dim: KF.prog(t, 3, 0.4) * 0.8, hot: t > 2.9 ? 3 : undefined, pick: KF.prog(t, 3.1, 0.45) }); } });
