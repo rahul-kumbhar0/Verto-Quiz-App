@@ -11,7 +11,7 @@ A resume tutorial becomes a resume skill. An Excel video becomes an Excel skill.
 
 The catch: it only works in Claude Code, not the normal chat app. And Claude learns the video's mistakes too, so read the skill before you trust it.
 
-Screens in the reel are samples we drew. Not sponsored.
+Example videos shown: Jeff Su's "Write an Incredible Resume: 5 Golden Rules!" and freeCodeCamp.org's Excel course (thumbnails and YouTube stills, credited on screen). The skill file is our own sample. Not sponsored.
 
 [keywords: Claude watch video, Claude Code plugin, Claude skills, YouTube to skill, AI learns from YouTube, watch plugin, SKILL.md, AI tools for students, free AI tools, Claude tips]
 
@@ -22,6 +22,6 @@ Comment LEARN 👇 I'll DM the install steps + the exact prompt. Plugin: Watch b
 
 ## YouTube Shorts
 Title: Claude can now watch a video and keep it as a skill
-Description: The free Watch plugin for Claude Code. Install steps + the exact prompt: https://canwe-guides.vercel.app/learn/ · Sample screens. Not sponsored, not affiliated.
+Description: The free Watch plugin for Claude Code. Install steps + the exact prompt: https://canwe-guides.vercel.app/learn/ · Example videos: Jeff Su, freeCodeCamp.org. Not sponsored, not affiliated.
 
 ## DM: automation #93 LEARN (OFF, exact, follow gate) → /learn/

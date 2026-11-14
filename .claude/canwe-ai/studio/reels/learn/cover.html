@@ -13,5 +13,5 @@ h1{position:absolute;left:4%;right:4%;top:322px;margin:0;text-align:center;font:
 <div class="arr">↓</div><div class="cart"><u>SKILL.md</u><b>/resume</b><span>skill saved · used every time</span></div>
 <div id="pres" style="position:absolute;left:0;top:1340px;width:1080px;height:640px"></div>
 <script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="kf/presenter/block.js"></script><script src="kf/video-scan/block.js"></script><script>
-const v = KF.make("video-scan", "v", { solo: true, title: "How to write a resume (full tutorial)", dur: "15:20", slides: [{ h: "Resume in<br>15 minutes", sub: "full tutorial", color: "#D97757" }] }); v.frame(0.35, { show: 1, play: 0.3, scan: 1 });
+const v = KF.make("video-scan", "v", { solo: true, title: "Write an Incredible Resume: 5 Golden Rules!", channel: "Jeff Su", dur: "8:37", slides: [{ img: "real/resume.jpg" }] }); window.__ready = Promise.resolve(window.__ready).then(() => v.frame(0.35, { show: 1, play: 0.3, scan: 1 }));
 const pr = KF.make("presenter", "pres", { w: 600, y: 10, style: { shirt: "#1e3a8a", shirtLine: "#0b1b4d", print: "#7fd0ff", chain: "#F2C14E", lens1: "#bae6fd", lens2: "#38bdf8" }, poses: [[0, "point_stage"]], talk: [] }); pr.frame(1, { mouth: 0.6, expr: "happy" }); window.seek = () => {};</script></body></html>
