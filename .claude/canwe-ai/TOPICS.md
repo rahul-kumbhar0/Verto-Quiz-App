@@ -215,3 +215,20 @@ Verdict: strong topic (free-plan angle is new vs our EDITOR reel, which needs a 
 - Safety read (all 71 files listed, 7 Python scripts + engine JS scanned, nothing run): no network calls in the code beyond pip/Playwright installs in setup.py and a preview server on 127.0.0.1 only; deletes only its own temp folders (.chunks, .fonts) inside the project folder; no licence file (so "free to use", but not open source; don't re-host it). One note: setup.py retries pip with --break-system-packages if the normal install fails.
 - The 2 prompts are for the OTHER skill (faceless-shorts, not in this zip). Prompt 1 = upload one video to YouTube through Zapier + a Drive-synced folder. Prompt 2 = a daily 8 a.m. scheduled task that picks a topic, writes, renders and publishes PUBLIC with no questions asked, and asks where to turn on auto-approve. Risks: public posts nobody reviewed (facts, copyright, quality), YouTube's rules on mass-produced/repetitive content, Zapier free-plan limits (sponsor), the laptop must be on at 8 a.m. Safer variant for our guide: upload as PRIVATE (or unlisted), human approves, then publish.
 - This zip fits the EDITOR topic better than FACELESS: a real, checked, free skill for "Claude edits my talking-head video" (Hindi supported). FACELESS still needs the faceless-shorts zip.
+
+## NEXT 10 — plan from YouTube + Instagram scans, 14 Nov 2026 (views = tool readings/estimates; "verify" = read the repo/skill before scripting)
+Already built, post first: CHANNEL, EDITOR.
+| # | KEYWORD | topic | evidence | status |
+|---|---|---|---|---|
+| 1 | CONNECT | 5 free Claude connectors we really use | IG ~99K, 1.6K comments; owner's favourite; breaks the video streak | facts are ours; check each free tier |
+| 2 | EFFECTS | One clip, 7 edits: /effects skill (Vibha-Ramprakash/claude-video-effects) | IG ~1.2M, 63K comments, 80K shares (biggest share count seen) | verify repo |
+| 3 | FACELESS | Faceless Shorts skill on the free Claude plan (Nafay 3D) | YT 632K + a new video at 33K/day; IG topic up to ~1.9M | need the faceless-shorts zip; autopilot = risky, say so |
+| 4 | IDEA | Test a business idea on 100 fake customers (Founder skill) | IG ~245K, 12.6K shares; YT Short 23K in 2 d | verify repo (Jakeschincariol/founder-skill) |
+| 5 | TURBO | MoneyPrinterTurbo: type a topic, get a video (138K★) | IG ~916K + ~701K, 6–7K comments each | verify repo; needs terminal + Python |
+| 6 | CUT | AI Video Editor skill: cuts your mistakes, Hindi too | our EDITOR scan (9 reels 400K–1.6M); zip READ in full | verified; needs Claude Code, 16:9 |
+| 7 | CARTOON | Claude makes 2D cartoon Shorts in code | YT 99K in 6 d + 33K; "Ricks Clips" style | meta-proof (our reels are code-made); verify any skill named |
+| 8 | ULTRA | Claude's $200 plan free for 6 months: who really gets it | IG ~140K in 48 h | verified on Anthropic's pages |
+| 9 | DESIGN | 5 free tools so Claude stops making "AI-looking" websites | YT Short 12K in 40 h; ties to our SLOP test | verify the 5 repos |
+| 10 | LIMIT | Claude limit gone in 2 days? Graphify (140K★ claimed) | IG ~42K; Hinglish "limit khatam" Shorts rising | verify repo + the "70x" claim |
+Reserve: AGENCY (280 AI employees, ~98K), VOICE (free voice skill), day-trader skill (skip: money risk).
+Rules for all: one honest catch each; credit the maker; Hinglish trial versions for 2, 3, 6.
