@@ -29,3 +29,5 @@ Other fresh options: "Show Claude a reel you like. It learns the edit." (10) · 
 DECISION: "Claude edited this reel" is proven but now crowded (3+ big reels say it). The angle with the most comments + shares is STYLE FROM A REFERENCE REEL ("edits in your favourite creator's style", 1.0M, 54K shares; "7 different edits" 80K shares) — and it is exactly step 4 of Saurabh's setup (the watch skill). So the hook leads with that, and our meta-proof moves to line 2.
 FINAL HOOK: "Show Claude a reel you like. It learns that editing style." → "Every reel on this page is edited by Claude. Here's a setup you can copy."
 Build note: open on a BEFORE/AFTER (raw take vs finished reel, like @viashaan) — we have our own raw voice + plain frames vs the final CHANNEL reel. Hinglish version later (the Hindi/Hinglish winners are huge).
+
+FINAL HOOK (owner, 14 Nov): "Claude edited this reel." + style line 2.

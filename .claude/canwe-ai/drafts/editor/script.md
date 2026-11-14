@@ -1,8 +1,9 @@
-<curious> Show Claude a reel you like. It learns that editing [style.] {point_cam}
-<excited> Every reel on this page is edited by Claude. Here's a setup you can [copy.] {three}
+<curious> Claude edited this [reel.] {point_cam}
+<excited> No Premiere, no editor. And it learned the style from reels I [like.] {present}
+Here's a setup you can copy. Two prompts, five free [tools.] {three}
 <matter of fact> Step one. Get the Claude desktop app. One prompt makes your project [folders.] {one}
-Step two. A second prompt installs five free tools. FFmpeg cuts, Whisper writes captions, Remotion makes the [graphics.] {three}
-Step three. The watch skill. It studies the reel and saves the style to your [folder.] {think}
+Step two. A second prompt installs the tools. FFmpeg cuts, Whisper writes captions, Remotion makes the [graphics.] {three}
+Step three. The watch skill. Show Claude a reel you like, and it saves that editing [style.] {think}
 <excited> Then drop your clip and type: cut the silences, add captions and [music.] {present}
 A creator edited his reel this way in fourteen [minutes.] {thumbs}
 <serious> Now the catch. It renders on your laptop, so slow laptop, slow [edit.] {shrug}
