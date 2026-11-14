@@ -377,7 +377,7 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Old reels are unaffected (each reel keeps its own `kf/` copy). New reels pick up the new look.
 - To do: before-after's finger and the sandbox robot are still simple; world-camera and podcast-set are docs only.
 
-## CHANNEL (14 Nov 2026): "Eleven free Claude skills that run your YouTube channel. Everyone's posting about them. Here's what they really do." — BUILT on the scratch voice, waiting for a Shlok take
+## CHANNEL (14 Nov 2026): "Eleven free Claude skills that run your YouTube channel. Everyone's posting about them. Here's what they really do." — FINAL rendered 14 Nov, Shlok voice
 - Why: Instagram scan 14 Nov (TOPICS.md): the YouTube Agent skill is behind the biggest reels in our niche (one ~1.3M est.). Owner picked it over CONNECT (next) and ULTRA. Part 3 of YOUTUBE → SHORTS.
 - Topic: Jakeschincariol/youtube-agent-skill (5,838★, MIT; 11 commands /yt-script … /yt-audit + 6 Python tools). Facts, script, post copy: drafts/channel/. README + every SKILL.md read from a fresh clone. We did NOT run its tools (the session's safety check blocks running downloaded code), so the reel says what it does, never "I tested it"; the three command screens are labelled "Sample output".
 - Honest catch (from the README's own "fine print"): it does not publish, it does not edit video, the hook score is a heuristic. Viral reels overclaim → our angle.
@@ -388,4 +388,5 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Files: studio/reels/channel (page, cover, words, cues, real screenshot), studio/finals/claude-channel_scratchvoice.mp4 + _nomusic + channel-cover.png.
 - Automation #87 CHANNEL on @canwe.ai: OFF, exact match, follow gate, all reels → on "uploaded" lock it to the media id first (CHANNEL is a common word), then turn ON.
 - Guide /channel/ LIVE + hub line (dpl_5NmykiRuAVQWc6Bz59A3bs8f1G3F): install (3 ways), voice.md first, all 11 commands, a first week for students, the fine print.
-- NEXT: Shlok take after the ElevenLabs top-up (or the owner's own voice via dub.py / canwe-voice) → final render → post. Then CONNECT (5 free connectors we really use).
+- SHLOK TAKE (owner topped up, 14 Nov): the old flow was unreachable after the reconnect ("no access to this template", nothing charged); new flow INPRSOwqSy52XJWLf9Tn, ONE take, 781 credits, 44.6 s raw → paced 42.2 s (tempo 1.10, pause 0.12, 9 stops @ 0.38). Reel 43.8 s, QA 92/100, 0 fails (warns: busiest 5 s at 20 %; music dip not measured). Finals: studio/finals/claude-channel.mp4 + _nomusic + channel-cover.png (scratch-voice versions deleted). voice.mp3 in studio/reels/channel/audio.
+- NEXT: owner posts → on "uploaded" lock #87 to the media id and turn ON. Then CONNECT (5 free connectors we really use).
