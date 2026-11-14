@@ -1,0 +1,3 @@
+KF.demo({ name: "permission-sheet", group: "B", line: "The permission screen, read line by line, then Allow", dur: 5, light: true, build(host) {
+  const L = n => KF.asset("logos/" + n + ".svg"), p = KF.make("permission-sheet", host, { top: 120, whoLogo: L("claude"), appLogo: L("googledrive"), rows: [{ text: "See your Google Drive files" }, { text: "Search inside your files" }, { text: "All your files, not just one folder", warn: true }] });
+  return t => p.frame(t, { show: KF.prog(t, 0, 0.5), read: KF.keys(t, [[1, 0], [1.05, 1], [1.9, 1], [1.95, 2], [2.8, 2], [2.85, 3]]), allow: KF.prog(t, 4, 0.35) }); } });

@@ -1,6 +1,6 @@
 # canwe.ai keyframes
 
-Reusable scene blocks for our reels: 45 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
+Reusable scene blocks for our reels: 48 folders plus `_assets/`. Each block folder has `block.js` (the code), `demo.js` (a working example), `preview.jpg` and `README.md` (its options).
 
 **Rule:** every block is a pure function of time. Build it once with `KF.make(name, host, opts)`, then call `frame(t, state)` on every `seek(t)`. No clocks, no randomness, so a render always comes out the same.
 
@@ -20,6 +20,7 @@ Reusable scene blocks for our reels: 45 folders plus `_assets/`. Each block fold
 
 ## Real material (`_assets/`)
 - `_assets/covers/c01…c24.jpg`: 24 of our own reel covers (270×480). `KF.covers()` returns their URLs; `thumb-wall` uses them by default.
+- `_assets/logos/`: real app logos (Claude, Google Drive, Notion, Canva, GitHub, Vercel) for `connector-hub` and `permission-sheet`; fetch more with `scripts/brand_logos.mjs`.
 - `_assets/frames.jpg`: 96 real frames from 8 of our finished reels (12×8 sheet, 54×96 each); `frame-wall` uses it by default.
 - Refresh them when new reels ship (ffmpeg commands in RECORD.md, KEYFRAMES section). `KF.asset(path)` / `KF.img(url)` load anything else you add there.
 - Advanced helpers in `kf.js`: `KF.keys(t, [[time, value, ease], …])` (multi-stage motion: wind-up, overshoot, settle), `KF.sparks(ctx, t, t0, x, y, opts)` (impact sparks), `KF.sheen(ctx, x, y, w, h, p)` (light sweeping across glass). Put a `finish` block on top of every scene for grain, vignette, bloom and handheld drift.
@@ -40,6 +41,8 @@ Reusable scene blocks for our reels: 45 folders plus `_assets/`. Each block fold
 | [`point-cloud`](point-cloud/) | Clusters of dots in 3D space that the camera orbits (embeddings, customers, "things that are similar sit together"). |
 | [`tile-map`](tile-map/) | A board of small tiles that fill in (test results, chips on a wafer, seats, days, pixels, "N of them"). |
 | [`flow-nodes`](flow-nodes/) | Boxes joined by wires with packets travelling along them (request → server → database, a pipeline, "how X talks to Y"). |
+| [`plug-cable`](plug-cable/) | A real cable with a plug that drives into a socket: slack while unplugged, a wind-up and thrust, sparks and a shock ring on the hit, the socket LED turns green and light packets run along the cable (connect X to Y, "plug it in", a connector, an integration). |
+| [`connector-hub`](connector-hub/) | One hub tile in the middle and app tiles around it, joined by real cables. Each app starts grey with its plug hanging loose; at its time the plug drives in, the tile pops into colour and packets start running ("5 apps that plug into X", connectors, integrations, an MCP hub). Load `plug-cable/block.js` first. |
 | [`magnifier`](magnifier/) | A real magnifying glass (chrome rim, glass reflections and colour fringe, ferrule and ribbed black handle, soft shadow on the page) that travels over another picture and shows it enlarged (inspect, review, "look closer"). |
 
 ## B. Real-screen blocks
@@ -57,6 +60,7 @@ Reusable scene blocks for our reels: 45 folders plus `_assets/`. Each block fold
 | [`agent-log`](agent-log/) | A terminal window running a coding agent, laid out like Claude Code (the "> request" line, "● Tool(target)" steps with a "⎿ result" line under each, and the orange "✻ Working…" line while a step runs). |
 | [`prompt-box`](prompt-box/) | The Claude chat input being typed into and sent ("just one sentence"). Laid out like claude.ai: warm dark box, + and tools buttons, model name, orange send button. |
 | [`laptop-frame`](laptop-frame/) | A MacBook (KF.device: thin black bezel, camera notch, aluminium front lip with the thumb scoop) whose lid opens, with your own content on the screen. |
+| [`permission-sheet`](permission-sheet/) | The "X wants to access your Y" consent screen you get when you connect an app, laid out like a Google / OAuth permission page (two app icons joined by a dotted link, account chip, list of permissions, note, Cancel and Allow). The rows can be read one by one and Allow can be pressed. |
 | [`real-screen`](real-screen/) | A REAL screenshot shown in a device frame (phone, browser or app window) that scrolls, zooms into exact spots and draws highlight boxes on them, so viewers see the actual page, button or line ("this is the repo", "click here", "this is the model it really uses"). |
 | [`product-page`](product-page/) | A shop product page in a real browser window that loads (grey skeleton → content), with a load timer ("the page took 1.4 s", pricing, "what the user sees"). Laid out like a real store: nav with search and bag, thumbnail rail, rating, size picker, Add to Bag. |
 

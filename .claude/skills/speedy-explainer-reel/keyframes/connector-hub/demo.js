@@ -1,0 +1,4 @@
+KF.demo({ name: "connector-hub", group: "A", line: "Five apps plug into one hub", dur: 6, build(host) {
+  const L = n => KF.asset("logos/" + n + ".svg"), A = [["googledrive", "Google Drive", "#4285F4", 165, 250], ["notion", "Notion", "#F2C14E", 915, 250], ["canva", "Canva", "#7D2AE8", 165, 640], ["github", "GitHub", "#3fb950", 915, 640], ["vercel", "Vercel", "#ffffff", 540, 800]];
+  const hub = KF.make("connector-hub", host, { hub: { logo: L("claude"), y: 440, size: 200 }, tile: 160, apps: A.map((a, i) => ({ id: a[0], label: a[1], color: a[2], x: a[3], y: a[4], logo: L(a[0]), at: 1.2 + i * 0.35 })) });
+  return t => hub.frame(t, { blind: KF.prog(t, 0.3, 0.3) * (1 - KF.prog(t, 1, 0.2)), badgeAt: 3.2, hot: t > 4.4 ? ["github", "vercel"] : [], hotAt: 4.4, dim: t > 4.4 ? ["googledrive", "notion", "canva"] : [] }); } });

@@ -1,0 +1,203 @@
+<!doctype html><html><head><meta charset="utf-8"><title>CONNECT: 5 free Claude connectors</title>
+<link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:#0c0c0f;font-family:Inter}
+#stage{position:absolute;inset:0}
+.scene{position:absolute;left:0;top:520px;width:1080px;height:760px}
+.sc2{top:690px;height:590px}
+.fn{position:absolute;left:0;right:0;top:1226px;text-align:center;font:600 24px "JetBrains Mono",monospace;z-index:5}
+#red{position:absolute;inset:0;background:radial-gradient(90% 60% at 50% 45%,#3a1214,#0c0c0f 70%);opacity:0}
+.pill{position:absolute;padding:14px 28px;border-radius:999px;font:800 34px Inter;white-space:nowrap;box-shadow:0 16px 36px -14px rgba(0,0,0,.6)}
+/* the link strip: Claude tile ── cable ── app tile */
+.lt{position:absolute;top:17px;width:116px;height:116px;border-radius:30px;display:grid;place-items:center;box-shadow:0 22px 40px -18px rgba(0,0,0,.5),inset 0 0 0 1px rgba(0,0,0,.07)}.lt img{width:60%;height:60%;object-fit:contain}
+#lname{position:absolute;left:230px;width:600px;top:8px;text-align:center;font:700 26px "JetBrains Mono",monospace;white-space:nowrap}
+#lname i{display:inline-block;width:14px;height:14px;border-radius:50%;margin-right:12px;vertical-align:2px}
+.dev{position:absolute;left:60px;top:0}
+/* Google Drive */
+.gd{position:absolute;inset:0;display:flex;font-family:Inter;color:#1f1f1f;background:#f8fafd}
+.gd .sb{width:236px;padding:16px 14px;box-sizing:border-box}.gd .new{display:inline-flex;align-items:center;gap:12px;height:62px;padding:0 24px 0 18px;border-radius:18px;background:#fff;box-shadow:0 1px 3px rgba(60,64,67,.3),0 4px 8px 3px rgba(60,64,67,.15);font:600 24px Inter;margin-bottom:16px}
+.gd .new b{font:400 38px/1 Inter;color:#444}.gd .sb p{margin:0;height:46px;display:flex;align-items:center;padding:0 18px;border-radius:999px;font:500 22px Inter;color:#444}.gd .sb p.on{background:#c2e7ff;color:#001d35;font-weight:700}
+.gd .mn{flex:1;background:#fff;border-radius:20px;margin:12px 14px 12px 0;padding:14px 22px;position:relative;overflow:hidden}.gd h5{margin:0 0 6px;font:500 32px Inter}
+.gd .hd{display:flex;font:600 20px Inter;color:#5f6368;padding:8px 10px;border-bottom:1px solid #e3e3e3}.gd .hd span:first-child{flex:1}
+.gd .rw{display:flex;align-items:center;gap:16px;height:60px;padding:0 10px;border-bottom:1px solid #eee;font:500 25px Inter;border-radius:10px}.gd .rw span{flex:1}.gd .rw em{font:500 20px Inter;color:#5f6368;font-style:normal}
+.gd .ic{width:34px;height:40px;border-radius:5px;display:grid;place-items:center;color:#fff;font:800 12px Inter;flex:none}
+.ans{position:absolute;right:16px;bottom:14px;width:560px;border-radius:22px;background:#fff;box-shadow:0 24px 50px -16px rgba(0,0,0,.4),0 0 0 2px #D97757;padding:18px 20px;font:600 25px/1.32 Inter;color:#1f1f1f}
+.ans h6{margin:0 0 8px;display:flex;align-items:center;gap:10px;font:800 22px Inter;color:#D97757}.ans h6 img{width:28px;height:28px}.ans u{display:inline-block;margin-top:10px;padding:5px 12px;border-radius:8px;background:#fde7e4;color:#b3261e;font:700 20px Inter;text-decoration:none}
+/* Notion */
+.nt{position:absolute;inset:0;display:flex;font-family:Inter;color:#37352f;background:#fff}
+.nt .sb{width:262px;background:#f7f7f5;padding:16px 12px;box-sizing:border-box;border-right:1px solid #ecebe8}.nt .ws{display:flex;align-items:center;gap:10px;font:700 23px Inter;margin-bottom:12px}.nt .ws i{width:30px;height:30px;border-radius:7px;background:#D97757;color:#fff;font:800 18px Inter;display:grid;place-items:center;font-style:normal}
+.nt .sb p{margin:0;height:44px;display:flex;align-items:center;gap:10px;padding:0 10px;border-radius:8px;font:500 22px Inter;color:#5f5e5b;white-space:nowrap}.nt .sb p.new{background:#e8f0fe;color:#0b57d0;font-weight:700}
+.nt .mn{flex:1;position:relative;padding:26px 40px;overflow:hidden}.nt .se{position:absolute;left:40px;right:40px;top:26px;border-radius:16px;background:#fff;box-shadow:0 20px 50px -14px rgba(15,15,15,.35),0 0 0 1px rgba(15,15,15,.1);overflow:hidden}
+.nt .se .q{height:66px;display:flex;align-items:center;gap:14px;padding:0 20px;font:500 28px Inter;border-bottom:1px solid #ecebe8}.nt .se .q svg{width:28px;height:28px;flex:none}.nt .se .r{height:62px;display:flex;align-items:center;gap:14px;padding:0 20px;font:600 25px Inter}.nt .se .r em{margin-left:auto;font:500 20px Inter;color:#9b9a97;font-style:normal}
+.nt .pg h2{margin:8px 0 14px;font:800 46px/1.1 Inter;letter-spacing:-1px}.nt .pg .em{font-size:60px;line-height:1}.nt .pg p{margin:0 0 10px;display:flex;align-items:center;gap:14px;font:500 27px Inter}.nt .pg p i{width:24px;height:24px;border:2.5px solid #37352f;border-radius:5px;flex:none}
+/* Canva */
+.cv{position:absolute;inset:0;font-family:Inter;background:#ebecf0}.cv .tp{height:62px;background:linear-gradient(90deg,#00C4CC,#7D2AE8);display:flex;align-items:center;padding:0 22px;color:#fff;font:800 28px Inter;gap:18px}.cv .tp b{font:800 30px Inter;letter-spacing:-1px}
+.cv .tp span{margin-left:auto;background:#fff;color:#7D2AE8;border-radius:10px;padding:8px 20px;font:800 22px Inter}
+.cv .pr{position:absolute;left:50%;top:80px;transform:translateX(-50%);width:640px;height:64px;border-radius:999px;background:#fff;box-shadow:0 8px 24px -10px rgba(0,0,0,.35),0 0 0 2px #7D2AE8;display:flex;align-items:center;padding:0 26px;font:600 27px Inter;color:#1f1f1f;box-sizing:border-box}
+.cv .pr svg{width:30px;height:30px;margin-right:14px;flex:none}.cv .pgs{position:absolute;left:0;right:0;top:158px;display:flex;justify-content:center;gap:54px;transform:scale(.8);transform-origin:50% 0}
+.cv .pg{width:218px;height:300px;background:#fff;box-shadow:0 14px 34px -14px rgba(0,0,0,.4);position:relative;overflow:hidden}.cv .pg>*{position:absolute}
+/* GitHub commits */
+.gh{position:absolute;inset:0;background:#0d1117;color:#e6edf3;font-family:Inter;padding:18px 26px;box-sizing:border-box}.gh h5{margin:0 0 12px;display:flex;align-items:center;gap:14px;font:700 30px Inter}.gh h5 span{font:600 20px "JetBrains Mono",monospace;padding:5px 14px;border-radius:8px;background:#21262d;border:1px solid #30363d}
+.gh .dt{font:600 20px Inter;color:#8b949e;margin:0 0 8px}.gh .bx{border:1px solid #30363d;border-radius:10px;overflow:hidden}.gh .cm{display:flex;align-items:center;gap:16px;padding:12px 18px;border-bottom:1px solid #30363d;background:#0d1117}.gh .cm:last-child{border:0}
+.gh .cm img{width:40px;height:40px;border-radius:50%;background:#F4EFE6;padding:6px;box-sizing:border-box;flex:none}.gh .cm b{display:block;font:700 24px Inter;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:640px}.gh .cm small{font:500 19px Inter;color:#8b949e}.gh .cm code{margin-left:auto;font:600 19px "JetBrains Mono",monospace;color:#58a6ff;border:1px solid #30363d;border-radius:8px;padding:6px 12px}
+.url{position:absolute;left:50%;transform:translateX(-50%);padding:14px 28px;border-radius:16px;background:#0a0a0a;border:2px solid #3ecf8e;color:#ededed;font:700 30px "JetBrains Mono",monospace;white-space:nowrap;box-shadow:0 0 40px -6px #3ecf8e}
+.url i{display:inline-block;width:16px;height:16px;border-radius:50%;background:#3ecf8e;margin-right:14px}
+/* the catch: free-plan meter */
+.mt{position:absolute;left:150px;right:150px;top:130px;transform-origin:50% 40%;border-radius:30px;background:#15171c;box-shadow:0 0 0 2px #2a2d35,0 40px 80px -30px #000;padding:34px 40px;color:#F3F1EC;font-family:Inter}.mt h4{margin:0 0 6px;font:800 44px Inter}.mt p{margin:0 0 22px;font:600 26px Inter;color:#8b8f98}
+.mt .b{height:34px;border-radius:17px;background:#262a33;overflow:hidden}.mt .b i{display:block;height:100%;border-radius:17px}.mt .s{margin-top:18px;display:flex;justify-content:space-between;font:800 30px Inter}
+.mt .lg{display:flex;gap:16px;margin-top:26px}.mt .lg span{width:80px;height:80px;border-radius:20px;background:#fff;display:grid;place-items:center}.mt .lg img{width:56%;height:56%;object-fit:contain}
+</style></head><body><div id="stage">
+  <div id="bg" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="red"></div>
+  <div id="world" style="position:absolute;inset:0;transform-origin:540px 900px">
+  <div id="s1" class="scene kf-host" style="top:440px;height:860px"></div>
+  <div id="link" class="kf-host" style="left:0;top:526px;width:1080px;height:150px;overflow:visible"><div id="lcD" class="kf-host" style="left:0;top:0;width:1080px;height:150px;overflow:visible"></div><div id="lcL" class="kf-host" style="left:0;top:0;width:1080px;height:150px;overflow:visible"></div><div id="lname" data-qa="ok"></div></div>
+  <div id="s2" class="scene sc2 kf-host"></div><div id="s3" class="scene sc2 kf-host"></div><div id="s4" class="scene sc2 kf-host"></div><div id="s5" class="scene sc2 kf-host"></div><div id="s6" class="scene sc2 kf-host"></div>
+  <div id="s7" class="scene kf-host"></div><div id="s7b" class="scene kf-host"></div><div id="s8" class="scene kf-host" style="top:440px;height:900px"></div>
+  </div>
+  <div id="wipe" class="kf-host" style="left:0;top:0;width:1080px;height:1920px"></div>
+  <div id="railD" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div><div id="railL" class="kf-host" style="left:0;top:296px;width:1080px;height:100px"></div>
+  <div id="capD" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div><div id="capL" class="kf-host" style="left:0;top:390px;width:1080px;height:140px;overflow:visible"></div>
+  <div id="fn" class="fn" data-qa="ok"></div>
+  <div id="pres" class="kf-host" style="left:0;top:1290px;width:1080px;height:630px"></div>
+  <div id="fin" class="kf-host" style="left:0;top:0;width:1080px;height:1920px;pointer-events:none"></div>
+</div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="words.js"></script>
+<script>["captions","presenter","chapter-rail","stage-flip","plug-cable","connector-hub","permission-sheet","prompt-box","deploy-list","ending-comment","light-wipe","finish"].forEach(n => document.write('<script src="kf/' + n + '/block.js"><\/script>'));</script>
+<script>
+// ---- word clock ----
+const W = window.WORDS.filter(w => (w.type || "word") === "word").map(w => ({ w: w.text, s: w.start, e: w.end }));
+const at = (word, n = 1) => { let k = 0; for (const x of W) if (x.w.replace(/[.,!?:]/g, "").toLowerCase() === word.toLowerCase() && ++k === n) return x.s; throw new Error("no word " + word + " #" + n); };
+const END = W[W.length - 1].e, DUR = +(END + 1.6).toFixed(2); window.REEL_DURATION = DUR;
+const P = KF.prog, E = KF.ease, $ = id => document.getElementById(id), C = KF.C, L = n => "logos/" + n + ".svg";
+const T = { cant: at("can't"), files: at("files"), apps: at("apps"), until: at("Until"), plug: at("plug"), five: at("Five"), free: at("free"), two: at("Two"), run: at("run"),
+  one: at("One"), google: at("Google"), reads: at("reads"), pdfs: at("PDFs"), answers: at("answers"), two2: at("Two", 2), notion: at("Notion"), finds: at("finds"), writes: at("writes"),
+  three: at("Three"), canva: at("Canva"), type: at("Type"), poster: at("poster"), designs: at("designs"), four: at("Four"), github: at("GitHub"), every: at("Every"), saved: at("saved"),
+  five2: at("Five", 2), vercel: at("Vercel"), puts: at("puts"), live: at("live"), sentence: at("sentence"), now: at("Now"), freeP: at("Free", 2), limits: at("limits"), each: at("each"), sees: at("sees"), allow: at("allow"),
+  so: at("So"), read: at("read"), screen: at("screen"), cta: at("Comment"), dm: at("DM") };
+const S = { s1: [0, T.one - 0.12], s2: [T.one - 0.12, T.two2 - 0.12], s3: [T.two2 - 0.12, T.three - 0.12], s4: [T.three - 0.12, T.four - 0.12], s5: [T.four - 0.12, T.five2 - 0.12], s6: [T.five2 - 0.12, T.now - 0.15],
+  s7: [T.now - 0.15, T.each - 0.2], s7b: [T.each - 0.2, T.cta - 0.1], s8: [T.cta - 0.1, DUR] };
+// light = the three everyday apps (Drive, Notion, Canva); dark = the hub, the two we run this page on (GitHub, Vercel), the catch, the CTA
+const LIGHT = [[S.s2[0], S.s5[0]]], isL = t => LIGHT.some(([a, b]) => t >= a + 0.25 && t < b - 0.05);
+// the five connectors: one plug per chapter
+const CH = [{ k: "s2", id: "googledrive", name: "Google Drive", seat: T.google + 0.2, col: "#4285F4" }, { k: "s3", id: "notion", name: "Notion", seat: T.notion + 0.2, col: "#D97757" }, { k: "s4", id: "canva", name: "Canva", seat: T.canva + 0.2, col: "#7D2AE8" },
+  { k: "s5", id: "github", name: "GitHub", seat: T.github + 0.2, col: "#3fb950" }, { k: "s6", id: "vercel", name: "Vercel", seat: T.vercel + 0.16, col: "#ffffff" }];
+const HUBAT = i => T.plug + 0.08 + i * 0.13, HITS = [...CH.map((c, i) => HUBAT(i)), ...CH.map(c => c.seat)];
+
+// ---- blocks ----
+const KEYS = ["apps.", "in.", "connectors.", "page.", "Drive.", "PDFs,", "Notion.", "page,", "Canva.", "poster,", "GitHub.", "Claude.", "Vercel.", "sentence!", "catch.", "limits,", "allow.", "screen.", "CONNECT,"];
+const capD = KF.make("captions", "capD", { words: W, keys: KEYS, max: 4, size: 62 }), capL = KF.make("captions", "capL", { words: W, keys: KEYS, max: 4, size: 62, theme: "light" });
+const pres = KF.make("presenter", "pres", { w: 560, y: 40, style: { shirt: "#14532d", shirtLine: "#052e16", print: "#D97757", chain: "#F2C14E", lens1: "#86efac", lens2: "#22c55e" },
+  poses: [[0, "shrug"], [T.until - 0.1, "point_stage"], [T.five - 0.1, "five"], [T.two - 0.1, "two"], [T.one - 0.1, "one"], [T.reads - 0.1, "present"], [T.two2 - 0.1, "two"], [T.finds - 0.1, "explain"], [T.three - 0.1, "three"], [T.type - 0.1, "typing"], [T.designs - 0.1, "show"],
+    [T.four - 0.1, "four"], [T.every - 0.1, "point_cam"], [T.five2 - 0.1, "five"], [T.puts - 0.1, "present"], [T.sentence - 0.1, "one"], [T.now - 0.1, "stop"], [T.limits - 0.1, "small"], [T.each - 0.1, "wag"], [T.so - 0.1, "point_stage"], [T.cta - 0.1, "point_cam"]],
+  talk: W.map(x => [x.s - 0.02, x.e + 0.02]) });
+const STEPS = ["plug in", "Drive", "Notion", "Canva", "GitHub", "Vercel", "catch"], railD = KF.make("chapter-rail", "railD", { steps: STEPS, top: 0 }), railL = KF.make("chapter-rail", "railL", { steps: STEPS, top: 0, theme: "light" });
+const flip = KF.make("stage-flip", "bg", { origin: [940, 600] }), wipe = KF.make("light-wipe", "wipe", { color: "#b9f6d0" }), fin = KF.make("finish", "fin", { grain: 0.5, vignette: 0.4 });
+// S1 the hub: Claude in the middle, five apps unplugged → all five plug in
+const POS = [[165, 225], [915, 225], [165, 590], [915, 590], [540, 715]];
+const hub = KF.make("connector-hub", "s1", { hub: { logo: L("claude"), y: 385, size: 190 }, tile: 150, apps: CH.map((c, i) => ({ id: c.id, logo: L(c.id), label: c.name, x: POS[i][0], y: POS[i][1], at: HUBAT(i), color: c.col === "#D97757" ? "#F2C14E" : c.col })) });
+const blindPill = KF.el("div", "pill", $("s1"), "can't see your files"); blindPill.style.cssText += ";left:50%;top:268px;transform:translateX(-50%);background:#ff5a5a;color:#fff;z-index:6;font-size:30px";
+const twoPill = KF.el("div", "pill", $("s1"), "these two run @canwe.ai"); twoPill.style.cssText += ";left:50%;top:268px;transform:translateX(-50%);background:#3ECF8E;color:#062414;z-index:6;font-size:32px";
+// the link strip (chapters 1–5): Claude tile ── cable ── the app tile
+const lk = $("link"), cabD = KF.make("plug-cable", "lcD", { from: [204, 75], to: [856, 75], tone: "dark", sag: 40 }), cabL = KF.make("plug-cable", "lcL", { from: [204, 75], to: [856, 75], tone: "light", sag: 40 });
+const tileC = KF.el("div", "lt", lk, `<img src="${L("claude")}">`); tileC.style.cssText += ";left:82px;background:#F4EFE6";
+const tiles = CH.map(c => { const e = KF.el("div", "lt", lk, `<img src="${L(c.id)}">`); e.style.cssText += ";left:882px;background:#fff"; KF.img(L(c.id)); return e; });
+// S2 Google Drive (light)
+const dv = (id, kind, o) => { const d = KF.device(kind, $(id), { w: 960, h: 520, dark: false, ...o }); d.el.classList.add("dev"); return d; };
+const d2 = dv("s2", "browser", { url: "drive.google.com/drive/my-drive", tab: "My Drive", fav: "#4285F4" });
+const FILES = [["#4285F4", "≡", "DSA notes", "Nov 12"], ["#EA4335", "PDF", "OS-unit-3.pdf", "Nov 9"], ["#EA4335", "PDF", "DBMS-question-bank.pdf", "Nov 3"], ["#4285F4", "≡", "Interview questions", "Oct 28"]];
+d2.screen.innerHTML = `<div class="gd"><div class="sb"><div class="new"><b>+</b>New</div><p class="on">My Drive</p><p>Shared with me</p><p>Recent</p><p>Starred</p></div><div class="mn"><h5>My Drive</h5><div class="hd"><span>Name</span><span>Last modified</span></div>
+${FILES.map(f => `<div class="rw"><i class="ic" style="background:${f[0]}">${f[1]}</i><span>${f[2]}</span><em>${f[3]}</em></div>`).join("")}
+<div class="ans"><h6><img src="${L("claude")}">Claude · from your Drive</h6>Deadlock needs 4 conditions: mutual exclusion, hold and wait, no preemption, circular wait.<br><u>OS-unit-3.pdf · page 12</u></div></div></div>`;
+const gdRows = [...d2.screen.querySelectorAll(".rw")], ans = d2.screen.querySelector(".ans");
+// S3 Notion (light)
+const d3 = dv("s3", "window", { title: "Notion" }), SEARCH = "placement", TITLE = "Interview prep plan";
+d3.screen.innerHTML = `<div class="nt"><div class="sb"><div class="ws"><i>R</i>My workspace</div><p>📘 Semester notes</p><p>🎯 Placement prep</p><p>🧾 Project ideas</p><p>📅 Study plan</p><p class="new">📝 ${TITLE}</p></div>
+<div class="mn"><div class="pg"><div class="em">📝</div><h2></h2><p><i></i>Revise DSA: arrays, trees, graphs</p><p><i></i>2 mock interviews this week</p><p><i></i>Fix resume, add 2 projects</p><p><i></i>Apply to 5 companies a day</p></div>
+<div class="se"><div class="q"><svg viewBox="0 0 24 24" fill="none" stroke="#9b9a97" stroke-width="2.4" stroke-linecap="round"><circle cx="10.500" cy="10.500" r="6.500"/><path d="M15.500 15.500 21 21"/></svg><span></span></div><div class="r" style="background:#f1f1ef">🎯 Placement prep<em>edited 2 days ago</em></div><div class="r">📘 Semester notes<em>mentions “placement”</em></div></div></div></div>`;
+const nt = { se: d3.screen.querySelector(".se"), q: d3.screen.querySelector(".se .q span"), rs: [...d3.screen.querySelectorAll(".se .r")], pg: d3.screen.querySelector(".pg"), h: d3.screen.querySelector(".pg h2"), ps: [...d3.screen.querySelectorAll(".pg p")], nw: d3.screen.querySelector(".sb p.new") };
+// S4 Canva (light)
+const d4 = dv("s4", "browser", { url: "canva.com/design", tab: "Canva", fav: "#7D2AE8" }), ASK = "Resume for a CS fresher";
+d4.screen.innerHTML = `<div class="cv"><div class="tp"><b>Canva</b><span>Share</span></div><div class="pr"><svg viewBox="0 0 24 24" fill="#7D2AE8"><path d="M12 2l2.200 6.300L20.500 10.500l-6.300 2.200L12 19l-2.200-6.300L3.500 10.500l6.300-2.200z"/><circle cx="19.500" cy="18.500" r="2"/></svg><span></span></div>
+<div class="pgs"><div class="pg" id="cvA"></div><div class="pg" id="cvB"></div></div></div>`;
+const blk = (host, css, html = "") => { const e = KF.el("div", "", host, html); e.style.cssText = css; return e; }, cvA = $("cvA"), cvB = $("cvB");
+const partsA = [blk(cvA, "left:0;top:0;width:72px;height:300px;background:#1f3a5f"), blk(cvA, "left:14px;top:18px;width:44px;height:44px;border-radius:50%;background:#f2c14e"), blk(cvA, "left:86px;top:20px;font:800 19px Inter;color:#1f3a5f;white-space:nowrap", "AARAV SHARMA"), blk(cvA, "left:86px;top:46px;font:600 11px Inter;color:#667", "B.Tech CSE · 2026"),
+  ...[78, 150, 222].map(y => blk(cvA, `left:86px;top:${y}px;width:60px;height:9px;border-radius:5px;background:#D97757`)), ...[96, 110, 124, 168, 182, 196, 240, 254, 268].map((y, i) => blk(cvA, `left:86px;top:${y}px;width:${[118, 104, 90][i % 3]}px;height:6px;border-radius:3px;background:#cfd4dc`)), ...[90, 110, 130, 150].map(y => blk(cvA, `left:12px;top:${y}px;width:48px;height:5px;border-radius:3px;background:rgba(255,255,255,.55)`))];
+const partsB = [blk(cvB, "left:0;top:0;width:218px;height:300px;background:linear-gradient(160deg,#7D2AE8,#00C4CC)"), blk(cvB, "left:-40px;top:170px;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.16)"), blk(cvB, "left:130px;top:-30px;width:120px;height:120px;border-radius:50%;background:#F2C14E"),
+  blk(cvB, "left:16px;top:70px;font:900 34px/1 Inter;color:#fff;letter-spacing:-1px", "HACK<br>NIGHT"), blk(cvB, "left:16px;top:150px;font:800 15px Inter;color:#fff", "24 hours · 30 teams"), blk(cvB, "left:16px;top:244px;padding:7px 14px;border-radius:999px;background:#fff;font:800 13px Inter;color:#7D2AE8", "Register now")];
+[...partsA, ...partsB].forEach(e => (e.dataset.qa = "texture")); const cvQ = d4.screen.querySelector(".pr span");
+// S5 GitHub (dark): real commit titles from our repo
+const d5 = dv("s5", "browser", { url: "github.com", tab: "Commits", fav: "#e6edf3", dark: true });
+const COMMITS = [["EDITOR reel: final, dark+light keyframes build", "891c59c"], ["CHANNEL reel: final with Shlok voice", "7078b99"], ["Keyframes realism pass (A-F): real devices", "49ad964"], ["FREE reel v3: real screenshots", "807893f"]];
+d5.screen.innerHTML = `<div class="gh"><h5>Commits <span>main</span></h5><p class="dt">Commits on Nov 14, 2026</p><div class="bx">${COMMITS.map(c => `<div class="cm"><img src="${L("claude")}"><div><b>${c[0]}</b><small>committed with Claude</small></div><code>${c[1]}</code></div>`).join("")}</div></div>`;
+const cms = [...d5.screen.querySelectorAll(".cm")];
+// S6 Vercel (dark): one sentence → the guide page goes live
+const pb = KF.make("prompt-box", "s6", { text: "Put the connect guide page live", top: 0, w: 900 });
+const dep = KF.make("deploy-list", "s6", { title: "canwe-guides", top: 208, w: 900, rows: [{ name: "canwe-guides /connect", sub: "main · from Claude", at: T.live - 0.5, done: T.live + 0.35, env: "Production" }, { name: "canwe-guides /editor", sub: "main · from Claude", at: S.s6[0], done: S.s6[0], env: "Production" }] });
+const url = KF.el("div", "url", $("s6"), "<i></i>canwe-guides.vercel.app/connect"); url.style.top = "462px"; url.style.zIndex = 6;
+// S7 the catch, part 1: the free plan runs out
+const mt = KF.el("div", "mt", $("s7"), `<h4>Free plan</h4><p>Free Claude has a message limit</p><div class="b"><i></i></div><div class="s"><span class="a">Usage</span><span class="z"></span></div><div class="lg">${CH.map(c => `<span><img src="${L(c.id)}"></span>`).join("")}</div>`); mt.dataset.qa = "ok";
+// S7b part 2: each connector only sees what you allow → read the permission screen
+const perm = KF.make("permission-sheet", "s7b", { top: 6, w: 800, who: "Claude", app: "Google Drive", whoLogo: L("claude"), appLogo: L("googledrive"), account: "you@gmail.com", rows: [{ text: "See your Google Drive files" }, { text: "Search inside your files" }, { text: "All your files, not just one folder", warn: true }] });
+const cta = KF.make("ending-comment", "s8", { size: 92, keyword: "CONNECT", pill: "all 5 + the setup steps", dm: "5 free Claude connectors + setup steps 👇" });
+
+// ---- sound cues ----
+const cues = []; const cue = (type, t, o = {}) => cues.push({ type, t: +t.toFixed(3), ...o });
+cue("riser", 0.02, { t2: 0.4 }); cue("glitch", T.cant + 0.1); cue("swish", T.until); CH.forEach((c, i) => cue(i === 4 ? "impact" : "click", HUBAT(i))); [0, 2, 4].forEach(i => cue("pop", T.free + i * 0.09, { soft: true })); cue("ding", T.two + 0.15); cue("swish", T.run);
+CH.forEach((c, i) => { const a = S[c.k][0]; cue("whoosh", a); cue("land", a + 0.35, { soft: true }); cue("impact", c.seat); cue("ding", c.seat + 0.18, { soft: true }); });
+[0, 1, 2, 3].forEach(i => cue("tick", T.reads + i * 0.36)); cue("pop", T.answers);
+cue("type", T.finds, { t2: T.finds + 0.5 }); cue("pop", T.finds + 0.6, { soft: true }); cue("swish", T.writes - 0.15); cue("type", T.writes, { t2: T.writes + 0.8 });
+cue("type", T.type, { t2: T.poster + 0.3 }); cue("click", T.designs - 0.12); [0, 1, 2, 3].forEach(i => cue("pop", T.designs + i * 0.16, { soft: i % 2 === 1 }));
+[0, 1, 2, 3].forEach(i => cue("pop", T.every + i * 0.34, { soft: i % 2 === 1 })); cue("ding", T.saved + 0.1, { soft: true });
+cue("type", T.puts, { t2: T.live - 0.25 }); cue("click", T.live - 0.15); cue("ding", T.live + 0.35); cue("swell", T.sentence - 0.2); cue("pop", T.sentence + 0.1);
+cue("impact", T.now); cue("tick", T.freeP, { soft: true }); cue("glitch", T.limits + 0.25); cue("whoosh", S.s7b[0]); cue("land", S.s7b[0] + 0.35); [T.read, T.read + 0.42, T.screen + 0.05].forEach((x, i) => cue(i === 2 ? "ding" : "tick", x)); cue("click", T.screen + 0.3);
+cue("swell", T.cta - 0.1); cue("type", T.cta + 0.4, { t2: T.cta + 0.9 }); cue("click", T.cta + 1.05); cue("ding", T.dm + 0.25);
+window.__cues = cues;
+
+// ---- the frame ----
+const spr = (e, q, extra = "") => { e.style.opacity = Math.min(1, q * 2); e.style.transform = `${extra} scale(${(0.6 + 0.4 * q).toFixed(3)})`; };
+window.seek = t => {
+  const on = k => t >= S[k][0] && t < S[k][1];
+  Object.keys(S).forEach(k => { const e = $(k), a = S[k][0], b = S[k][1], v = on(k); e.style.display = v ? "" : "none";
+    if (v) { const pin = k === "s1" ? 1 : E.out(P(t, a, 0.35)), pout = P(t, b - 0.22, 0.22); e.style.opacity = Math.min(pin * 1.4, 1 - pout); e.style.transform = `translateY(${((1 - pin) * 60 - pout * 40).toFixed(1)}px)`; } });
+  let fp = 0; LIGHT.forEach(([a, b]) => { fp = Math.max(fp, E.inOut(P(t, a - 0.1, 0.5)) * (1 - E.inOut(P(t, b - 0.3, 0.4)))); }); flip.frame(t, { p: fp, origin: t < S.s3[0] ? [940, 600] : [140, 600] });
+  const Lt = isL(t); $("capD").style.display = Lt ? "none" : ""; $("capL").style.display = Lt ? "" : "none"; $("railD").style.display = Lt ? "none" : ""; $("railL").style.display = Lt ? "" : "none"; $("fn").style.color = Lt ? "#6b7280" : "#8b8f98";
+  $("red").style.opacity = P(t, T.now - 0.15, 0.3) * (1 - P(t, T.cta - 0.2, 0.3));
+  // S1 hub
+  if (on("s1")) { const two = t >= T.two - 0.05; hub.frame(t, { show: 1, blind: P(t, T.cant, 0.25) * (1 - P(t, T.until, 0.2)), badgeAt: T.free, badge: "FREE", hot: two ? ["github", "vercel"] : [], hotAt: T.two, dim: two ? ["googledrive", "notion", "canva"] : [] });
+    spr(blindPill, KF.spring(t, T.cant + 0.05, { f: 2.6, z: 0.55 }) * (1 - P(t, T.until - 0.1, 0.2)), "translateX(-50%)"); spr(twoPill, KF.spring(t, T.run - 0.1, { f: 2.6, z: 0.55 }), "translateX(-50%)"); }
+  // the link strip
+  const ci = CH.findIndex(c => on(c.k)); lk.style.display = ci < 0 ? "none" : "";
+  if (ci >= 0) { const c = CH[ci], a = S[c.k][0], b = S[c.k][1], lit = t >= c.seat, st = { show: P(t, S.s2[0], 0.3) * (1 - P(t, S.s6[1] - 0.25, 0.25)), at: c.seat, out: ci < 4 ? b + 0.02 : undefined, color: c.col === "#ffffff" && Lt ? "#16181d" : c.col };
+    $("lcD").style.display = Lt ? "none" : ""; $("lcL").style.display = Lt ? "" : "none"; (Lt ? cabL : cabD).frame(t, st); lk.style.opacity = st.show;
+    tiles.forEach((e, i) => { e.style.display = i === ci ? "" : "none"; }); const q = KF.spring(t, a + 0.05, { f: 2.8, z: 0.5 }), hit = lit ? KF.spring(t, c.seat, { f: 3.2, z: 0.4 }) : 0, e = tiles[ci];
+    e.style.transform = `scale(${(0.5 + 0.5 * q + 0.08 * (hit > 0 ? 1 - Math.abs(1 - hit) * 4 > 0 ? Math.max(0, 1 - (t - c.seat) / 0.3) : 0 : 0)).toFixed(3)})`; e.style.opacity = Math.min(1, q * 2) * (1 - P(t, b - 0.2, 0.2) * (ci < 4 ? 1 : 0)); e.style.filter = lit ? "none" : "grayscale(1) brightness(.75)";
+    e.style.boxShadow = lit ? `0 22px 40px -18px rgba(0,0,0,.5),0 0 0 5px ${c.col === "#ffffff" ? "#3ECF8E" : c.col}` : ""; tileC.style.boxShadow = lit ? `0 22px 40px -18px rgba(0,0,0,.5),0 0 0 5px #D97757` : "";
+    $("lname").innerHTML = `<i style="background:${lit ? "#3ECF8E" : "#ff5a5a"}"></i>${c.name} · ${lit ? "connected" : "not connected"}`; $("lname").style.color = Lt ? "#4b5563" : "#c9ccd3"; $("lname").style.opacity = P(t, a + 0.2, 0.25) * (1 - P(t, b - 0.2, 0.2));
+    // the app screen wakes up when the plug seats
+    const w = P(t, c.seat, 0.3); $(c.k).style.filter = w >= 1 ? "" : `grayscale(${(1 - w).toFixed(2)}) brightness(${(0.72 + 0.28 * w).toFixed(2)})`; }
+  if (on("s2")) { const r = KF.keys(t, [[T.reads, 0], [T.reads + 1.5, 4]]); gdRows.forEach((e, i) => { const cur = r > i && r <= i + 1, done = r > i + 1; e.style.background = cur ? "#c2e7ff" : done ? "#eef6ff" : "transparent"; });
+    const q = KF.spring(t, T.answers - 0.05, { f: 2.4, z: 0.6 }); ans.style.opacity = Math.min(1, q * 2); ans.style.transform = `translateY(${((1 - q) * 80).toFixed(1)}px)`; }
+  if (on("s3")) { const wr = P(t, T.writes - 0.2, 0.3); nt.se.style.opacity = P(t, T.finds - 0.25, 0.2) * (1 - wr); nt.se.style.transform = `translateY(${(-wr * 30).toFixed(1)}px)`; nt.q.textContent = KF.typed(SEARCH, t, T.finds - 0.05, 20) || " "; nt.rs.forEach((e, i) => (e.style.opacity = P(t, T.finds + 0.3 + i * 0.12, 0.2)));
+    nt.pg.style.opacity = wr; nt.h.textContent = KF.typed(TITLE, t, T.writes, 26) || " "; nt.ps.forEach((e, i) => { e.style.opacity = P(t, T.writes + 0.75 + i * 0.22, 0.2); e.style.transform = `translateX(${((1 - E.out(P(t, T.writes + 0.75 + i * 0.22, 0.3))) * 30).toFixed(1)}px)`; }); nt.nw.style.opacity = P(t, T.writes + 0.1, 0.25); }
+  if (on("s4")) { cvQ.textContent = KF.typed(ASK, t, T.type, 22) || " "; const drop = (e, x, i, rot) => { const q = KF.spring(t, x, { f: 3, z: 0.55 }); e.style.opacity = Math.min(1, q * 2.5); e.style.transform = `translateY(${((1 - q) * (i % 2 ? 40 : -40)).toFixed(1)}px) scale(${(0.7 + 0.3 * q).toFixed(3)})`; };
+    partsA.forEach((e, i) => drop(e, T.designs - 0.1 + i * 0.035, i)); partsB.forEach((e, i) => drop(e, T.designs + 0.25 + i * 0.07, i));
+    cvA.style.outline = t < T.designs - 0.1 ? "3px dashed #b9bdc7" : "none"; cvB.style.outline = t < T.designs + 0.25 ? "3px dashed #b9bdc7" : "none"; }
+  if (on("s5")) cms.forEach((e, i) => { const q = E.out(P(t, T.every + (3 - i) * 0.34, 0.3)); e.style.opacity = q; e.style.transform = `translateY(${((1 - q) * -30).toFixed(1)}px)`; e.style.background = i === 0 && t > T.saved ? "#12261b" : "#0d1117"; });
+  if (on("s6")) { pb.frame(t, { show: P(t, S.s6[0] + 0.1, 0.35), typed: P(t, T.puts, T.live - 0.3 - T.puts), send: P(t, T.live - 0.2, 0.25) }); dep.frame(t, {}); spr(url, KF.spring(t, T.sentence - 0.1, { f: 2.6, z: 0.5 }), "translateX(-50%)"); }
+  if (on("s7")) { const f = E.inOut(P(t, T.freeP - 0.1, T.limits + 0.25 - T.freeP)), full = f >= 1, bar = mt.querySelector(".b i"); bar.style.width = (f * 100).toFixed(1) + "%"; bar.style.background = full ? "#ff5a5a" : "linear-gradient(90deg,#3ECF8E,#f5a524)"; mt.querySelector(".z").textContent = full ? "Limit reached" : Math.round(f * 100) + "%"; mt.querySelector(".z").style.color = full ? "#ff5a5a" : "#F3F1EC";
+    const sh = full ? Math.max(0, 1 - (t - T.limits - 0.25) / 0.4) : 0; mt.style.transform = `translateX(${(Math.sin(t * 60) * 12 * sh).toFixed(1)}px) scale(1.22)`; mt.querySelector(".lg").style.filter = `grayscale(${full ? 1 : 0})`; mt.querySelector(".lg").style.opacity = full ? 0.45 : 1; }
+  if (on("s7b")) perm.frame(t, { show: P(t, S.s7b[0], 0.45), read: KF.keys(t, [[T.sees - 0.1, 0], [T.sees, 0.5], [T.allow - 0.1, 0.5], [T.allow, 0], [T.read - 0.05, 0], [T.read, 1], [T.read + 0.42, 1], [T.read + 0.43, 2], [T.screen, 2], [T.screen + 0.05, 3]]), allow: P(t, T.screen + 0.25, 0.28) });
+  if (on("s8")) cta.frame(t, { show: P(t, S.s8[0], 0.6), typed: P(t, T.cta + 0.4, 0.5), sent: P(t, T.cta + 1.0, 0.3), dm: P(t, T.dm + 0.15, 0.9) });
+  wipe.frame(t, { p: P(t, S.s5[0] - 0.3, 0.55) });
+  // camera: slow handheld drift + a small punch on every plug hit
+  let kick = 0; HITS.forEach(h => { const d = t - h; if (d >= 0 && d < 0.3) kick = Math.max(kick, 1 - d / 0.3); }); const zoom = on("s1") ? 1 + 0.035 * E.inOut(P(t, T.two - 0.1, 0.5)) : 1;
+  const dr = fin.drift(t, 0.9); $("world").style.transform = `translate(${dr[0].toFixed(1)}px,${dr[1].toFixed(1)}px) rotate(${dr[2].toFixed(3)}deg) scale(${(zoom + 0.014 * kick).toFixed(4)})`;
+  const lb = KF.loopBack(t, DUR, 1.0); if (lb.mix > 0) { const e = $("s1"); e.style.display = ""; e.style.opacity = lb.mix; e.style.transform = "none"; hub.frame(0, { show: 1 }); blindPill.style.opacity = 0; twoPill.style.opacity = 0; $("s8").style.opacity = 1 - lb.mix; }
+  const n = ci >= 0 ? ci + 1 : 0, ch = on("s1") ? 0.5 : ci >= 0 ? ci + 1.5 : 6.5;
+  const rs = { at: Math.min(ch, 6.9), alert: on("s7") || on("s7b"), value: on("s1") ? hub.count(t) : ci >= 0 ? n : 2, label: on("s1") ? "plugged in" : ci >= 0 ? "of 5" : "catches" };
+  (Lt ? railL : railD).frame(t, rs); $("railD").style.opacity = $("railL").style.opacity = t >= S.s8[0] ? 1 - P(t, S.s8[0], 0.3) : 1;
+  (Lt ? capL : capD).frame(t); pres.frame(t); fin.frame(t, {});
+  $("fn").textContent = on("s1") ? "" : on("s2") || on("s3") || on("s4") ? "Sample screens · connector list can change" : on("s5") ? "Real commit titles from our own repo" : on("s6") ? "Our real guide site, deployed through the connector" : on("s7") ? "Limits depend on your plan and change over time" : on("s7b") ? "Sample screen · the real one lists exact permissions" : "";
+};
+window.seek(0);
+</script></body></html>

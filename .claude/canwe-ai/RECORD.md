@@ -401,3 +401,19 @@ Queue impact: SP reel #1 due within week 1 of onboarding → slots after CRASH p
 - Finals: studio/finals/claude-editor.mp4 (own beat), _nomusic, _notlikeus (drop on "editor.", dip under the catch), editor-cover.png. Sources in studio/reels/editor.
 - Automation #88 EDITOR (OFF, exact, follow gate). Guide /editor/ LIVE + hub line (dpl_GXRhCZswHiZPeiYYfYQu1uDHKmqY; channel page now uploaded by sha too).
 - NEXT: post (Instagram = _notlikeus or _nomusic + IG music; YouTube = claude-editor.mp4) → "uploaded" → lock #88 + ON. Hinglish version later. Then CONNECT.
+
+## CONNECT (14 Nov 2026): "Claude can't see your files or your apps. Until you plug them in." — FINAL, Shlok voice
+- Topic 1 of the production queue (TOPICS.md). Five connectors: Google Drive, Notion, Canva, GitHub, Vercel. GitHub + Vercel are truly ours ("two of them run this page"). Facts + sources: drafts/connect/facts.md. Gmail/Calendar left out (free-plan status disputed).
+- Voice: ElevenLabs flow hf1SAdUN6Sm0UVNYI2t5, ONE take, 696 credits, 36.8 s raw → paced 36.5 s (tempo 1.10, 12 stops @ 0.34). Reel 38.1 s.
+- Owner's brief: "use more keyframes, we are talking about connections, make the animation and keyframes look like that". So THREE NEW KEYFRAMES were added to the library (now 48 folders):
+  - `plug-cable`: a real cable + plug that drives into a socket (slack → wind-up → thrust → recoil, sparks, shock ring, LED goes green, light packets run along the cable). Shared painter `KF.drawCable`, seat curve `KF.plugP(t, at, out)`.
+  - `connector-hub`: hub tile in the middle, app tiles around it on cables; grey + unplugged until each one's time, then pops into colour; FREE badges, hot/dim, a red "can't see" bar. Needs plug-cable loaded first.
+  - `permission-sheet`: the "X wants to access your Y" consent screen; rows can be read one by one (the warn row goes amber), Allow can be pressed.
+  - Real logos in `keyframes/_assets/logos/` (Claude, Drive, Notion, Canva, GitHub, Vercel).
+- Build: hook = the hub with all five apps grey and unplugged ("can't see your files" pill) → all five plug in on "plug them in" → FREE badges → GitHub + Vercel ringed ("these two run @canwe.ai"). Chapters 1–5 share one LINK STRIP (Claude tile ── cable ── app tile): the plug pulls out and a new app plugs in on its name; the app screen below is grey until the plug seats, then wakes up. Screens: Google Drive list + Claude answer with the source file, Notion search → new page typed, Canva prompt → resume + poster build, GitHub commits (REAL titles + hashes from our repo), prompt-box → deploy-list → canwe-guides.vercel.app/connect. LIGHT for Drive/Notion/Canva, DARK for the hub, GitHub, Vercel, catch, CTA (stage-flip + light-wipe). Catch: free-plan meter fills to "Limit reached", then the permission sheet read row by row and Allow. Camera gets a small punch on every plug hit.
+- Lesson: page CSS class names can collide with block CSS (`.nt` Notion vs the sheet's note). Blocks must use scoped / unusual class names.
+- QA 88/100, 0 fails (warns: densest burst at 81 %, SFX density 30.2/10 s, music stop-down not measured).
+- Finals: studio/finals/claude-connect.mp4 (own beat), _nomusic, _notlikeus (drop on the first plug hit at 2.98 s, dip under the catch), connect-cover.png. Sources: studio/reels/connect. Post copy: drafts/connect/post-copy.md.
+- Automation #89 CONNECT (OFF, exact, all reels, follow gate, nudge 3 h). Guide /connect/ LIVE + hub line (dpl_6junTeLnoPzdYo3gUUdcyU6DD2Jp; new hub index sha ee5f4246…, connect d2165f2b…).
+- Seen in the automation list today: #87 CHANNEL is already ON and locked to reel 18106350026200806; #88 EDITOR still OFF on all reels.
+- NEXT: owner posts CONNECT → "uploaded" → lock #89 to the media id + ON. Then EFFECTS (queue item 2).

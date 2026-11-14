@@ -244,3 +244,5 @@ Order: 1 CONNECT (script ready, drafts/connect) · 2 EFFECTS · 3 LEARN · 4 FAC
 Repo checks 14 Nov (api.ossinsight.io + README read): Vibha-Ramprakash/claude-video-effects 931★, no standard licence, 51 free effects, `/effects orbit from 3 to 6 seconds`, needs Claude Code + ffmpeg + Python, upsell to her paid "Hop Studio" · Jakeschincariol/founder-skill 3,562★ MIT, 11 skills, consumer panel = 100 buyer agents, verdict Profitable / Not yet / Incomplete · harry0703/MoneyPrinterTurbo 143,371★ MIT · Jakeschincariol/replica-skill 9,277★ MIT, 11 skills, "rebuilds what an app does, never what it owns" · cloudflare/security-audit-skill 72,072★ MIT · mattpocock/skills 323,976★ MIT.
 Still to find/verify: LEARN (which tool the @igao.ia reel uses), RANK (the other 5 skills: Ponytail, Impeccable, Everything Claude Code, Anatomy, Hallmark), CARTOON (a named skill), FACELESS (the faceless-shorts zip from the owner).
 Budget: ≈ 800 ElevenLabs credits per reel → ≈ 8,800 for 11.
+
+- 14 Nov: **1 CONNECT is BUILT** (final, guide live, automation #89 OFF). Next in the queue: 2 EFFECTS.

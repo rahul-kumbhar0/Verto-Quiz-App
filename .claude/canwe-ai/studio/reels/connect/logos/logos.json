@@ -1,0 +1,56 @@
+{
+ "Claude": {
+  "file": "logos/claude.svg",
+  "white": "logos/claude-white.svg",
+  "word": null,
+  "title": "Claude",
+  "hex": "#D97757",
+  "dark": false,
+  "source": "lobehub:claude-color"
+ },
+ "Google Drive": {
+  "file": "logos/googledrive.svg",
+  "white": "logos/googledrive-white.svg",
+  "word": null,
+  "title": "Google Drive",
+  "hex": "#4285F4",
+  "dark": false,
+  "source": "iconify-logos:googledrive"
+ },
+ "Notion": {
+  "file": "logos/notion.svg",
+  "white": "logos/notion-white.svg",
+  "word": null,
+  "title": "Notion",
+  "hex": "#000000",
+  "dark": true,
+  "source": "iconify-logos:notion-icon"
+ },
+ "Canva": {
+  "file": "logos/canva.svg",
+  "white": "logos/canva-white.svg",
+  "word": null,
+  "title": "Canva",
+  "hex": null,
+  "dark": true,
+  "source": "simple-icons(legacy):canva"
+ },
+ "GitHub": {
+  "file": "logos/github.svg",
+  "white": "logos/github-white.svg",
+  "word": null,
+  "title": "GitHub",
+  "hex": "#181717",
+  "dark": true,
+  "source": "iconify-logos:github-icon"
+ },
+ "Vercel": {
+  "file": "logos/vercel.svg",
+  "white": "logos/vercel-white.svg",
+  "word": null,
+  "title": "Vercel",
+  "hex": "#000000",
+  "dark": true,
+  "source": "iconify-logos:vercel-icon"
+ }
+}

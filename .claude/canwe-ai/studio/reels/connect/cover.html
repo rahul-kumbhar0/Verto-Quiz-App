@@ -1,0 +1,16 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="kf/kf.css"><style>
+body{margin:0;width:1080px;height:1920px;overflow:hidden;background:radial-gradient(90% 55% at 50% 45%,#12301f,#0c0c0f 70%);font-family:Inter}
+.k{position:absolute;left:0;right:0;top:250px;text-align:center}.k span{display:inline-block;padding:12px 26px;border-radius:999px;background:#3ECF8E;color:#062414;font:900 34px Inter;letter-spacing:1px}
+h1{position:absolute;left:4%;right:4%;top:322px;margin:0;text-align:center;font:900 112px/1.02 Inter;letter-spacing:-5px;color:#fff;text-shadow:0 8px 40px rgba(0,0,0,.8)}
+.sel{position:relative;display:inline-block;padding:0 .08em}.sel i{position:absolute;inset:8% -1% 4%;border:3px solid #4b8bff;background:rgba(75,139,255,.18)}.sel em{position:absolute;width:14px;height:14px;border-radius:50%;background:#fff;border:3px solid #4b8bff}.sel b{position:relative;color:#F0A585}
+.foot{position:absolute;left:0;right:0;top:1356px;text-align:center;font:700 30px "JetBrains Mono",monospace;color:#ff8a8a;text-shadow:0 4px 20px #000}
+</style></head><body>
+<div class="k"><span>FREE PLAN · 5 CONNECTORS</span></div>
+<h1>5 free apps that <span class="sel"><i></i><em style="left:-8px;top:2%"></em><em style="right:-8px;bottom:-2%"></em><b>plug into</b></span> Claude</h1>
+<div id="hub" class="kf-host" style="left:0;top:560px;width:1080px;height:800px"></div>
+<div class="foot">the catch is inside</div>
+<div id="pres" style="position:absolute;left:0;top:1340px;width:1080px;height:640px"></div>
+<script src="kf/kf.js"></script><script src="kf/avatar.js"></script><script src="kf/presenter/block.js"></script><script src="kf/plug-cable/block.js"></script><script src="kf/connector-hub/block.js"></script><script>
+const L = n => "logos/" + n + ".svg", A = [["googledrive", "Google Drive", "#4285F4", 165, 190], ["notion", "Notion", "#F2C14E", 915, 190], ["canva", "Canva", "#7D2AE8", 165, 540], ["github", "GitHub", "#3fb950", 915, 540], ["vercel", "Vercel", "#ffffff", 540, 650]];
+const hub = KF.make("connector-hub", "hub", { hub: { logo: L("claude"), y: 340, size: 200 }, tile: 160, apps: A.map(a => ({ id: a[0], label: a[1], color: a[2], x: a[3], y: a[4], logo: L(a[0]), at: -5 })) }); hub.frame(2.33, { show: 1, badgeAt: -3, badge: "FREE" });
+const pr = KF.make("presenter", "pres", { w: 600, y: 10, style: { shirt: "#14532d", shirtLine: "#052e16", print: "#D97757", chain: "#F2C14E", lens1: "#86efac", lens2: "#22c55e" }, poses: [[0, "five"]], talk: [] }); pr.frame(1, { mouth: 0.6, expr: "happy" }); window.seek = () => {};</script></body></html>
